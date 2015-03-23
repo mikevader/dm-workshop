@@ -1,0 +1,66 @@
+<encounters>
+  <monster>
+    <name>Ogre</name>
+    <type>Ogre</type>
+    <reference>MM 155</reference>
+
+    <stats>
+      <size>huge</size>
+      <ac>13 (natural armor)</ac>
+      <hp>105 (10d12 + 40)</hp>
+      <speed>
+        40 ft.
+      </speed>
+      <abilities str="21 (+5)" dex="8 (-1)" con="19 (+4)" int="5 (-3)" wis="9 (-1)" cha="6 (-2)"/>
+      <savingThrows con="+8" cha="+4"/>
+      <skills>
+        <skill name="Athletics">+9</skill>
+      </skills>
+      <dmgVulnerability>
+        <fire/>
+      </dmgVulnerability>
+      <dmgResistance>
+        <thunder/>
+      </dmgResistance>
+      <dmgImmunity>
+        <cold/>
+      </dmgImmunity>
+      <condImmunity>
+        <poisen/>
+      </condImmunity>
+      <senses>
+        <sense name="passive Perception">13</sense>
+      </senses>
+      <cr>8 (3'900 XP)</cr>
+    </stats>
+
+    <actions>
+
+
+    </actions>
+
+    <description>Special Chap ?? .... 111223456</description>
+  </monster>
+  <monster>
+    <name>Goblin</name>
+    <type>Goblin</type>
+    <stats>
+      <size>huge</size>
+      <ac>13 (natural armor)</ac>
+      <hp>105 (10d12 + 40)</hp>
+      <speed>
+        40 ft.
+      </speed>
+      <abilities str="21 (+5)" dex="8 (-1)" con="19 (+4)" int="5 (-3)" wis="9 (-1)" cha="6 (-2)"/>
+      <skills>
+        <skill name="Perception">+3</skill>
+      </skills>
+      <senses>
+        <sense name="passive Perception">13</sense>
+      </senses>
+      <cr>8 (3'900 XP)</cr>
+    </stats>
+    <actions>
+    </actions>
+  </monster>
+</encounters>

@@ -1,0 +1,106 @@
+
+body {
+	width: 300mm;
+	margin: 0px;
+	padding: 0px;
+	font-size: 10pt;
+}
+
+.ability, .stat {
+	margin: 2px;
+}
+
+.name {
+	margin: 2px;
+	font-weight: bold;
+	font-size: 16pt;
+}
+
+.title {
+	font-weight: bold;
+}
+
+.stat .title {
+	padding-right: 5px;
+}
+
+.abilities .title {
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.abilities .value {
+	text-align: center;
+}
+
+.card {
+	height: 105mm;
+	width: 75mm;
+	border: 1px solid black;
+	padding: 3px;
+	margin: 3px;
+	float: left;
+}
+
+.abilities .stretch {
+    width: 100%;
+    display: inline-block;
+    font-size: 0;
+    line-height: 0
+}
+
+.abilities {
+	height: 30px;
+	text-align: justify;
+    -ms-text-justify: distribute-all-lines;
+    text-justify: distribute-all-lines;
+}
+
+.abilities .ability {
+	vertical-align: top;
+	width: 40px;
+	height: 30px;
+	display: inline-block;
+	*display: inline;
+}
+
+.savingThrows, .savingThrows .ability .title, .savingThrows .ability .value {
+	display: inline-block;
+}
+
+.savingThrows .ability .title {
+	font-weight: normal;
+}
+
+.savingThrows .ability, .savingThrows .title {
+	text-align: left;
+	display: inline-block;
+}
+
+.savingThrows .stretch {
+    width: 0px;
+    display: inline-block;
+    font-size: 0;
+    line-height: 0
+}
+
+
+.stat .value, .stat .title {
+	display: inline-block;
+}
+
+@media print {
+	body {
+		margin: 0px;
+		padding: 0px;
+	}
+
+	.card {
+
+	}
+	
+	@page {
+		margin: 0px;
+		padding: 0px;
+	}
+}
