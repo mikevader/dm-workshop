@@ -3,10 +3,17 @@ body {
 	width: 300mm;
 	margin: 0px;
 	padding: 0px;
-	font-size: 10pt;
+	font-size: 8pt;
+	font-family: Helvetica, Arial, sans-serif;
 }
 
-.ability, .stat {
+.description {
+	font-size: 10pt;
+	line-height: 1;
+	font-family: Times New Roman, Times, serif;
+}
+
+.ability, .stat, .savingThrows, .senses, .skills, .description, .list {
 	margin: 2px;
 }
 
@@ -14,14 +21,11 @@ body {
 	margin: 2px;
 	font-weight: bold;
 	font-size: 16pt;
+	font-family: Times New Roman, Times, serif;
 }
 
 .title {
 	font-weight: bold;
-}
-
-.stat .title {
-	padding-right: 5px;
 }
 
 .abilities .title {
@@ -64,29 +68,105 @@ body {
 	*display: inline;
 }
 
-.savingThrows, .savingThrows .ability .title, .savingThrows .ability .value {
-	display: inline-block;
+.savingThrows div {
+	display: inline;
 }
 
 .savingThrows .ability .title {
 	font-weight: normal;
 }
 
-.savingThrows .ability, .savingThrows .title {
+.savingThrows .title {
 	text-align: left;
-	display: inline-block;
+	text-transform: capitalize;
 }
 
 .savingThrows .stretch {
     width: 0px;
-    display: inline-block;
     font-size: 0;
     line-height: 0
 }
 
+.stat div {
+	display: inline;
+}
 
-.stat .value, .stat .title {
-	display: inline-block;
+.list div {
+	display: inline;
+}
+
+.list > .title {
+	font-weight: bold;
+}
+
+.list .listElement:after {
+	content: ", ";
+}
+
+.list .listElement:last-child:after {
+	content: "";
+}
+
+.skills div {
+	display: inline;
+}
+
+.skills > .title {
+	font-weight: bold;
+}
+
+.skill > .title {
+	font-weight: normal;
+}
+
+.skills .skill:after {
+	content: ", ";
+}
+
+.skills .skill:last-child:after {
+	content: "";
+}
+
+.senses div {
+	display: inline;
+}
+
+.senses > .title {
+	font-weight: bold;
+}
+
+.sense > .title {
+	font-weight: normal;
+}
+
+.senses .sense:after {
+	content: ", ";
+}
+
+.senses .sense:last-child:after {
+	content: "";
+}
+
+.attack div {
+	display: inline;
+}
+
+div.attack {
+	margin-bottom: 3pt;
+	margin-top: 3pt;
+}
+
+.actions > div.title {
+	font-size: 12pt;
+	border-bottom: solid 1pt black;
+}
+
+.attack .title {
+	font-style: italic;
+}
+
+.attack .type {
+	font-style: italic;
 }
 
 @media print {

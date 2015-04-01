@@ -15,9 +15,11 @@
       <savingThrows con="+8" cha="+4"/>
       <skills>
         <skill name="Athletics">+9</skill>
+        <skill name="Acrobatics">+3</skill>
       </skills>
       <dmgVulnerability>
         <fire/>
+        <lightning/>
       </dmgVulnerability>
       <dmgResistance>
         <thunder/>
@@ -51,16 +53,27 @@
       <speed>
         40 ft.
       </speed>
-      <abilities str="21 (+5)" dex="8 (-1)" con="19 (+4)" int="5 (-3)" wis="9 (-1)" cha="6 (-2)"/>
+      <abilities str="8 (-1)" dex="14 (+2)" con="10 (+0)" int="10 (+0)" wis="8 (-1)" cha="8 (-1)"/>
       <skills>
-        <skill name="Perception">+3</skill>
+        <skill name="Stealth">+6</skill>
       </skills>
       <senses>
-        <sense name="passive Perception">13</sense>
+        <sense name="darkvision">60 ft</sense>
+        <sense name="passive Perception">9</sense>
       </senses>
-      <cr>8 (3'900 XP)</cr>
+      <languages>Common, Goblin</languages>
+      <cr>1/4 (50 XP)</cr>
     </stats>
     <actions>
+      <meleeWeaponAttack name="Scimitar">
+        <i>Melee Weapon Attack:</i> +4 to hit, reach 5ft., one target. <i>Hit:</i> 1d6 + 2 slashing damage.
+      </meleeWeaponAttack>
+      <rangedWeaponAttack name="Shortbow">
+        <i>Ranged Weapon Attack</i> +4 to hit, range 80/320ft., one target. <i>Hit:</i> 1d6 + 2 piercing damage.
+      </rangedWeaponAttack>
     </actions>
+    <description>
+      Goblins are small, black-hearted humanoids that lair in despoiled dungeons and other dismal settings. Individually weak, they gather in large numbers to torment other creatures.
+    </description>
   </monster>
 </encounters>
