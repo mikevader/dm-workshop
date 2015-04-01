@@ -1,6 +1,6 @@
 
 body {
-	width: 300mm;
+	width: 297mm;
 	margin: 0px;
 	padding: 0px;
 	font-size: 8pt;
@@ -13,7 +13,7 @@ body {
 	font-family: Times New Roman, Times, serif;
 }
 
-.ability, .stat, .savingThrows, .senses, .skills, .description, .list {
+.ability, .stat, .savingThrows, .description, .list {
 	margin: 2px;
 }
 
@@ -39,7 +39,7 @@ body {
 
 .card {
 	height: 105mm;
-	width: 75mm;
+	width: 74mm;
 	border: 1px solid black;
 	padding: 3px;
 	margin: 3px;
@@ -99,6 +99,10 @@ body {
 	font-weight: bold;
 }
 
+.listElement > div.title {
+	font-weight: normal;
+}
+
 .list .listElement:after {
 	content: ", ";
 }
@@ -107,65 +111,25 @@ body {
 	content: "";
 }
 
-.skills div {
+.bulletpoint div {
 	display: inline;
 }
 
-.skills > .title {
-	font-weight: bold;
-}
-
-.skill > .title {
-	font-weight: normal;
-}
-
-.skills .skill:after {
-	content: ", ";
-}
-
-.skills .skill:last-child:after {
-	content: "";
-}
-
-.senses div {
-	display: inline;
-}
-
-.senses > .title {
-	font-weight: bold;
-}
-
-.sense > .title {
-	font-weight: normal;
-}
-
-.senses .sense:after {
-	content: ", ";
-}
-
-.senses .sense:last-child:after {
-	content: "";
-}
-
-.attack div {
-	display: inline;
-}
-
-div.attack {
+div.bulletpoint {
 	margin-bottom: 3pt;
 	margin-top: 3pt;
 }
 
-.actions > div.title {
+.bulletlist > div.title {
 	font-size: 12pt;
 	border-bottom: solid 1pt black;
 }
 
-.attack .title {
+.bulletpoint .title {
 	font-style: italic;
 }
 
-.attack .type {
+.bulletpoint .type {
 	font-style: italic;
 }
 

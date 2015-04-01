@@ -4,7 +4,7 @@ guard :bundler do
 end
 
 guard :shell do
-  watch(%r{^(.+)\.(xslt|xml|css)}) do |m|
+  watch(%r{^(.+)\.(xsl|xml|css)}) do |m|
     `rake`
   end
 end

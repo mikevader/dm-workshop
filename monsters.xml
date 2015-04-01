@@ -1,4 +1,4 @@
-<encounters>
+<cards>
   <monster>
     <name>Ogre</name>
     <type>Ogre</type>
@@ -64,6 +64,11 @@
       <languages>Common, Goblin</languages>
       <cr>1/4 (50 XP)</cr>
     </stats>
+    <traits>
+      <trait name="Keen Smell">
+        The bear has advantage on Wisdom (Perception) checks that rely on smell.
+      </trait>
+    </traits>
     <actions>
       <meleeWeaponAttack name="Scimitar">
         <i>Melee Weapon Attack:</i> +4 to hit, reach 5ft., one target. <i>Hit:</i> 1d6 + 2 slashing damage.
@@ -76,4 +81,90 @@
       Goblins are small, black-hearted humanoids that lair in despoiled dungeons and other dismal settings. Individually weak, they gather in large numbers to torment other creatures.
     </description>
   </monster>
-</encounters>
+
+  <spell>
+    <name>Mage Hand</name>
+    <type>Conjuration cantrip</type>
+    <classes>
+      <class>Bard</class>
+      <class>Sorcerer</class>
+      <class>Warlock</class>
+      <class>Wizard</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>30 ft</range>
+    <components>V, S</components>
+    <duration>1 minute</duration>
+    <description>
+      A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever m ore than 30 feet away from you or if you cast this spell again.<br/>
+      You can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.<br/>
+      The hand can’t attack, activate magic items, or carry more than 10 pounds.<br/>
+    </description>
+  </spell>
+  <spell>
+    <name>Magic Missile</name>
+  </spell>
+  <spell>
+    <name>Shield</name>
+  </spell>
+  <spell>
+    <name>Blur</name>
+  </spell>
+  <spell>
+    <name>Flaming Sphere</name>
+  </spell>
+  <spell>
+    <name>Fireball</name>
+  </spell>
+  <spell>
+    <name>Sacred Flame</name>
+  </spell>
+  <spell>
+    <name>Bless</name>
+  </spell>
+  <spell>
+    <name>Sanctuary</name>
+  </spell>
+  <spell>
+    <name>Misty Step</name>
+  </spell>
+  <spell>
+    <name>Suggestion</name>
+  </spell>
+  <spell>
+    <name>Counterspell</name>
+  </spell>
+  <spell>
+    <name>Fly</name>
+  </spell>
+  <spell>
+    <name>Greater Invisibility</name>
+  </spell>
+  <spell>
+    <name>Ice Storm</name>
+  </spell>
+  <spell>
+    <name>Cone of Cold</name>
+  </spell>
+  <spell>
+    <name>Mage Armor</name>
+  </spell>
+  <spell>
+    <name>Lesser Restoration</name>
+  </spell>
+  <spell>
+    <name>Spiritual Weapon</name>
+  </spell>
+  <spell>
+    <name>Dispel Magic</name>
+  </spell>
+  <spell>
+    <name>Spirit Guardians</name>
+  </spell>
+  <spell>
+    <name></name>
+  </spell>
+
+  <item>
+  </item>
+</cards>

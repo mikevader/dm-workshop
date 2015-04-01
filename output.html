@@ -1,8 +1,8 @@
 <html>
 <head><link rel="stylesheet" type="text/css" href="cards.css"></head>
 <body>
-<h2>Monster</h2>
-  <div class="card">
+<h2>K&auml;rtchen</h2>
+  <div class="card monster">
 <div class="name">Ogre</div>
 <hr>
 <div class="stat">
@@ -60,13 +60,13 @@
 </div>
 <span class="stretch"></span>
 </div>
-<div class="skills">
+<div class="list">
 <div class="title">Skills</div>
-<div class="skill">
+<div class="listElement">
 <div class="title">Athletics</div>
 <div class="value">+9</div>
 </div>
-<div class="skill">
+<div class="listElement">
 <div class="title">Acrobatics</div>
 <div class="value">+3</div>
 </div>
@@ -88,9 +88,9 @@
 <div class="title">Cond Immune</div>
 <div class="listElement">poisen</div>
 </div>
-<div class="senses">
+<div class="list">
 <div class="title">Senses</div>
-<div class="sense">
+<div class="listElement">
 <div class="title">passive Perception</div>
 <div class="value">13</div>
 </div>
@@ -100,11 +100,11 @@
 <div>8 (3'900 XP)</div>
 </div>
 <hr>
-<div class="actions"><div class="title">Actions</div></div>
+<div class="bulletlist"><div class="title">Actions</div></div>
 <hr>
 <div class="description"><description>Special Chap ?? .... 111223456</description></div>
 </div>
-  <div class="card">
+  <div class="card monster">
 <div class="name">Goblin</div>
 <hr>
 <div class="stat">
@@ -150,20 +150,20 @@
 <span class="stretch"></span>
 </div>
 <hr>
-<div class="skills">
+<div class="list">
 <div class="title">Skills</div>
-<div class="skill">
+<div class="listElement">
 <div class="title">Stealth</div>
 <div class="value">+6</div>
 </div>
 </div>
-<div class="senses">
+<div class="list">
 <div class="title">Senses</div>
-<div class="sense">
+<div class="listElement">
 <div class="title">darkvision</div>
 <div class="value">60 ft</div>
 </div>
-<div class="sense">
+<div class="listElement">
 <div class="title">passive Perception</div>
 <div class="value">9</div>
 </div>
@@ -173,16 +173,22 @@
 <div>1/4 (50 XP)</div>
 </div>
 <hr>
-<div class="actions">
+<div class="bulletlist"><div class="bulletpoint">
+<div class="title">Keen Smell.</div>
+<trait name="Keen Smell">
+        The bear has advantage on Wisdom (Perception) checks that rely on smell.
+      </trait>
+</div></div>
+<div class="bulletlist">
 <div class="title">Actions</div>
-<div class="attack">
-<div class="title">Scimitar</div>
+<div class="bulletpoint">
+<div class="title">Scimitar.</div>
 <meleeWeaponAttack name="Scimitar">
         <i>Melee Weapon Attack:</i> +4 to hit, reach 5ft., one target. <i>Hit:</i> 1d6 + 2 slashing damage.
       </meleeWeaponAttack>
 </div>
-<div class="attack">
-<div class="title">Shortbow</div>
+<div class="bulletpoint">
+<div class="title">Shortbow.</div>
 <rangedWeaponAttack name="Shortbow">
         <i>Ranged Weapon Attack</i> +4 to hit, range 80/320ft., one target. <i>Hit:</i> 1d6 + 2 piercing damage.
       </rangedWeaponAttack>
@@ -193,5 +199,52 @@
       Goblins are small, black-hearted humanoids that lair in despoiled dungeons and other dismal settings. Individually weak, they gather in large numbers to torment other creatures.
     </description></div>
 </div>
+
+  <div class="card spell">
+<div class="name">Mage Hand</div>
+<div class="type">Conjuration cantrip</div>
+<div class="list classes">
+<div class="listElement">Bard</div>
+<div class="listElement">Sorcerer</div>
+<div class="listElement">Warlock</div>
+<div class="listElement">Wizard</div>
+</div>
+<div class="castingTime">
+<div class="title">Casting Time</div>1 action</div>
+<div class="range">
+<div class="title">Range</div>30 ft</div>
+<div class="components">
+<div class="title">Components</div>V, S</div>
+<div class="duration">
+<div class="title">Duration</div>1 minute</div>
+<div class="description"><description>
+      A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever m ore than 30 feet away from you or if you cast this spell again.<br>
+      You can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.<br>
+      The hand can&rsquo;t attack, activate magic items, or carry more than 10 pounds.<br>
+    </description></div>
+</div>
+  <div class="card spell"><div class="name">Magic Missile</div></div>
+  <div class="card spell"><div class="name">Shield</div></div>
+  <div class="card spell"><div class="name">Blur</div></div>
+  <div class="card spell"><div class="name">Flaming Sphere</div></div>
+  <div class="card spell"><div class="name">Fireball</div></div>
+  <div class="card spell"><div class="name">Sacred Flame</div></div>
+  <div class="card spell"><div class="name">Bless</div></div>
+  <div class="card spell"><div class="name">Sanctuary</div></div>
+  <div class="card spell"><div class="name">Misty Step</div></div>
+  <div class="card spell"><div class="name">Suggestion</div></div>
+  <div class="card spell"><div class="name">Counterspell</div></div>
+  <div class="card spell"><div class="name">Fly</div></div>
+  <div class="card spell"><div class="name">Greater Invisibility</div></div>
+  <div class="card spell"><div class="name">Ice Storm</div></div>
+  <div class="card spell"><div class="name">Cone of Cold</div></div>
+  <div class="card spell"><div class="name">Mage Armor</div></div>
+  <div class="card spell"><div class="name">Lesser Restoration</div></div>
+  <div class="card spell"><div class="name">Spiritual Weapon</div></div>
+  <div class="card spell"><div class="name">Dispel Magic</div></div>
+  <div class="card spell"><div class="name">Spirit Guardians</div></div>
+  <div class="card spell"><div class="name"></div></div>
+
+  <div class="card item"></div>
 </body>
 </html>

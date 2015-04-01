@@ -2,31 +2,20 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
   <xsl:template match="/">
-    <html>
-      <head>
-        <link rel="stylesheet" type="text/css" href="cards.css"/>
-      </head>
-      <body>
-        <h2>Monster</h2>  
-        <xsl:apply-templates/>  
-      </body>
-    </html>
+    <xsl:apply-templates/>  
   </xsl:template>
 
   <xsl:template match="monster">
-    <div class="card">
+    <div class="card monster">
       <xsl:apply-templates select="name"/>
       <hr/>
       <xsl:apply-templates select="stats"/>
       <hr/>
+      <xsl:apply-templates select="traits"/>
       <xsl:apply-templates select="actions"/>
       <hr/>
       <xsl:apply-templates select="description"/>
     </div>
-  </xsl:template>
-
-  <xsl:template match="name">
-    <div class="name"><xsl:value-of select="."/></div>
   </xsl:template>
 
   <xsl:template match="stats">
@@ -81,13 +70,13 @@
   </xsl:template>
 
   <xsl:template match="skills">
-    <div class="skills">
+    <div class="list">
       <div class="title">Skills</div>
       <xsl:apply-templates select="*"/>
     </div>
   </xsl:template>
   <xsl:template match="skill">
-    <div class="skill">
+    <div class="listElement">
       <div class="title"><xsl:value-of select="@name"/></div>
       <div class="value"><xsl:value-of select="."/></div>
     </div>
@@ -128,13 +117,13 @@
   </xsl:template>
 
   <xsl:template match="senses">
-    <div class="senses">
+    <div class="list">
       <div class="title">Senses</div>
       <xsl:apply-templates select="*"/>
     </div>
   </xsl:template>
   <xsl:template match="sense">
-    <div class="sense">
+    <div class="listElement">
       <div class="title"><xsl:value-of select="@name"/></div>
       <div class="value"><xsl:value-of select="."/></div>
     </div>
@@ -147,30 +136,22 @@
     </div>
   </xsl:template>
 
-  <xsl:template match="description">
-    <div class="description">
-      <xsl:copy-of select="."/>
+  <xsl:template match="traits">
+    <div class="bulletlist">
+      <xsl:apply-templates select="*"/>
     </div>
   </xsl:template>
 
   <xsl:template match="actions">
-    <div class="actions">
+    <div class="bulletlist">
       <div class="title">Actions</div>
       <xsl:apply-templates select="*"/>
     </div>
   </xsl:template>
 
-  <xsl:template match="meleeWeaponAttack">
-    <div class="attack">
-      <div class="title"><xsl:value-of select="@name"/></div>
-      <xsl:copy-of select="."/>
-    </div>
-  </xsl:template>
-
-
-  <xsl:template match="rangedWeaponAttack">
-    <div class="attack">
-      <div class="title"><xsl:value-of select="@name"/></div>
+  <xsl:template match="meleeWeaponAttack | rangedWeaponAttack | trait">
+    <div class="bulletpoint">
+      <div class="title"><xsl:value-of select="@name"/>.</div>
       <xsl:copy-of select="."/>
     </div>
   </xsl:template>
