@@ -11,10 +11,73 @@ body {
 	font-size: 10pt;
 	line-height: 1;
 	font-family: Times New Roman, Times, serif;
+	overflow: hidden;
 }
 
-.ability, .stat, .savingThrows, .description, .list {
+.card > div {
 	margin: 2px;
+}
+
+.card {
+	height: 101mm;
+	width: 70mm;
+	border: 1px solid black;
+	padding: 3px;
+	margin: 3px;
+	float: left;
+}
+
+.card-1 {
+	position: relative;
+}
+.card-2 {
+	position: relative;
+}
+.card-3 {
+	position: relative;
+}
+.card-4 {
+	position: relative;
+}
+.card-5 {
+	position: relative;
+}
+.card-6 {
+	position: relative;
+}
+.card-7 {
+	position: relative;
+}
+.card-8 {
+	position: relative;
+
+	page-break-after: always;
+}
+.cardb-1 {
+	position: relative;
+	top: 105mm;
+}
+.cardb-2 {
+	position: relative;
+}
+.cardb-3 {
+	position: relative;
+}
+.cardb-4 {
+	position: relative;
+}
+.cardb-5 {
+	position: relative;
+}
+.cardb-6 {
+	position: relative;
+}
+.cardb-7 {
+	position: relative;
+}
+.cardb-8 {
+	position: relative;
+	page-break-after: always;
 }
 
 .name {
@@ -22,6 +85,14 @@ body {
 	font-weight: bold;
 	font-size: 16pt;
 	font-family: Times New Roman, Times, serif;
+}
+
+.type {
+	font-style: italic;
+}
+
+.classes {
+	float: right;
 }
 
 .title {
@@ -35,15 +106,6 @@ body {
 
 .abilities .value {
 	text-align: center;
-}
-
-.card {
-	height: 105mm;
-	width: 74mm;
-	border: 1px solid black;
-	padding: 3px;
-	margin: 3px;
-	float: left;
 }
 
 .abilities .stretch {
@@ -62,7 +124,7 @@ body {
 
 .abilities .ability {
 	vertical-align: top;
-	width: 40px;
+	width: 35px;
 	height: 30px;
 	display: inline-block;
 	*display: inline;
@@ -87,11 +149,7 @@ body {
     line-height: 0
 }
 
-.stat div {
-	display: inline;
-}
-
-.list div {
+.stat div, .list div, .castingTime div, .range div, .components div, .duration div {
 	display: inline;
 }
 

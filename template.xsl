@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-  <xsl:import href="monster_template.xsl"/>
-  <xsl:import href="spell_template.xsl"/>
-  <xsl:import href="item_template.xsl"/>
+  <xsl:include href="monster_template.xsl"/>
+  <xsl:include href="spell_template.xsl"/>
+  <xsl:include href="item_template.xsl"/>
 
   <xsl:template match="/">
     <html>
@@ -11,8 +11,7 @@
         <link rel="stylesheet" type="text/css" href="cards.css"/>
       </head>
       <body>
-        <h2>Kärtchen</h2>  
-        <xsl:apply-imports/>
+        <xsl:apply-templates/>
       </body>
     </html>
   </xsl:template>

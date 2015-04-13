@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-  <xsl:template match="/">
-    <xsl:apply-templates/>  
-  </xsl:template>
-
   <xsl:template match="spell">
-    <div class="card spell">
+    <div class="card spell card-{1+count(preceding-sibling::*) mod 8}">
       <xsl:apply-templates select="*"/>
+    </div>
+
+    <div class="card spell cardb-{1+count(preceding-sibling::*) mod 8}">
+      <div class="name"><xsl:value-of select="name"/></div>
     </div>
   </xsl:template>
 
@@ -26,28 +26,28 @@
   <xsl:template match="castingTime">
     <div class="castingTime">
       <div class="title">Casting Time</div>
-      <xsl:value-of select="."/>
+      <div class="value"><xsl:value-of select="."/></div>
     </div>
   </xsl:template>
 
   <xsl:template match="range">
     <div class="range">
       <div class="title">Range</div>
-      <xsl:value-of select="."/>
+      <div class="value"><xsl:value-of select="."/></div>
     </div>
   </xsl:template>
 
   <xsl:template match="components">
     <div class="components">
       <div class="title">Components</div>
-      <xsl:value-of select="."/>
+      <div class="value"><xsl:value-of select="."/></div>
     </div>
   </xsl:template>
 
   <xsl:template match="duration">
     <div class="duration">
       <div class="title">Duration</div>
-      <xsl:value-of select="."/>
+      <div class="value"><xsl:value-of select="."/></div>
     </div>
   </xsl:template>
 </xsl:stylesheet>
