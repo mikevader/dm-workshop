@@ -4,11 +4,11 @@
   <xsl:template match="spell">
     <div class="card spell card-{1+count(preceding-sibling::*) mod 8}">
       <xsl:apply-templates select="*"/>
+      <div class="card spell cardb-{1+count(preceding-sibling::*) mod 8}">
+        <div class="name"><xsl:value-of select="name"/></div>
+      </div>
     </div>
 
-    <div class="card spell cardb-{1+count(preceding-sibling::*) mod 8}">
-      <div class="name"><xsl:value-of select="name"/></div>
-    </div>
   </xsl:template>
 
   <xsl:template match="type">

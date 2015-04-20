@@ -100,6 +100,7 @@
       <b>At Higher Levels.</b> When you cast this spell using a spell slot of 4th level or higher, you animate or reassert control over two additional undead creatures for each slot level above 3rd. Each of the creatures must come from a different corpse or pile of bones.
     </description>
   </spell>
+<!--
   <spell>
     <name>Bane</name>
     <type>1st-level enchantment</type>
@@ -436,6 +437,7 @@
     <description>
     </description>
   </spell>
+-->
 <!--
   <spell>
     <name></name>
@@ -453,7 +455,8 @@
 
 -->
 
-
+<!--
   <item>
   </item>
+-->
 </cards>

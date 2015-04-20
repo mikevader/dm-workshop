@@ -22,7 +22,7 @@
 
   <xsl:template match="description">
     <div class="description">
-      <xsl:copy-of select="."/>
+      <xsl:copy-of select="text()"/>
     </div>
   </xsl:template>
 

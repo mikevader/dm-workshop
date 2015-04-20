@@ -8,7 +8,7 @@ body {
 }
 
 .description {
-	font-size: 10pt;
+	font-size: 8pt;
 	line-height: 1;
 	font-family: Times New Roman, Times, serif;
 	overflow: hidden;
@@ -24,7 +24,6 @@ body {
 	border: 1px solid black;
 	padding: 3px;
 	margin: 3px;
-	float: left;
 }
 
 .card-1 {
@@ -55,7 +54,8 @@ body {
 }
 .cardb-1 {
 	position: relative;
-	top: 105mm;
+	top: 101mm;
+	left: 222mm;
 }
 .cardb-2 {
 	position: relative;
