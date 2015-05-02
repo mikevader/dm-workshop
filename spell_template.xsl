@@ -2,8 +2,10 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
   <xsl:template match="spell">
-    <div class="card spell card-{1+count(preceding-sibling::*) mod 8}">
-      <xsl:apply-templates select="*"/>
+    <div class="spell card-{1+count(preceding-sibling::*) mod 8}">
+      <div class="card">
+        <xsl:apply-templates select="*"/>
+      </div>
       <div class="card spell cardb-{1+count(preceding-sibling::*) mod 8}">
         <div class="name"><xsl:value-of select="name"/></div>
       </div>

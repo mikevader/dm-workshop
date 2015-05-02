@@ -24,13 +24,21 @@ body {
 	border: 1px solid black;
 	padding: 3px;
 	margin: 3px;
+	overflow: hidden;
 }
 
 .card-1 {
 	position: relative;
+	left: 0mm;
+	top: 0mm;
+	float: left;
+
 }
 .card-2 {
 	position: relative;
+	top: 0mm;
+	left: 0mm;
+	float: left;
 }
 .card-3 {
 	position: relative;
@@ -54,11 +62,15 @@ body {
 }
 .cardb-1 {
 	position: relative;
-	top: 101mm;
+	top: 202mm;
 	left: 222mm;
+	float: left;
 }
 .cardb-2 {
 	position: relative;
+	top: 202mm;
+	left: 222mm;
+	float: left;
 }
 .cardb-3 {
 	position: relative;
@@ -195,10 +207,6 @@ div.bulletpoint {
 	body {
 		margin: 0px;
 		padding: 0px;
-	}
-
-	.card {
-
 	}
 	
 	@page {
