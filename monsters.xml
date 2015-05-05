@@ -116,6 +116,15 @@
     </description>
   </spell>
 <!--
+other spells:
+- Animate Objects
+- Beacon of Hope (for every high priest like Ayla)
+- Blight
+- Blinding Smite
+- Blink
+- 
+-->
+
   <spell>
     <name>Bestow Curse</name>
     <type>3rd-level necromancy</type>
@@ -437,6 +446,7 @@
     <description>
     </description>
   </spell>
+  <!--
 -->
 <!--
   <spell>
