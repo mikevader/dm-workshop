@@ -8,13 +8,24 @@ body {
 }
 
 .description {
-	font-size: 10pt;
+	font-size: 8pt;
 	line-height: 1;
 	font-family: Times New Roman, Times, serif;
+	overflow: hidden;
 }
 
-.ability, .stat, .savingThrows, .description, .list {
+.card > div {
 	margin: 2px;
+}
+
+.card {
+	height: 95mm;
+	width: 70.5mm;
+	border: 1px solid black;
+	padding: 3px;
+	margin: 3px;
+	overflow: hidden;
+	float: left;
 }
 
 .name {
@@ -22,6 +33,14 @@ body {
 	font-weight: bold;
 	font-size: 16pt;
 	font-family: Times New Roman, Times, serif;
+}
+
+.type {
+	font-style: italic;
+}
+
+.classes {
+	float: right;
 }
 
 .title {
@@ -35,15 +54,6 @@ body {
 
 .abilities .value {
 	text-align: center;
-}
-
-.card {
-	height: 105mm;
-	width: 74mm;
-	border: 1px solid black;
-	padding: 3px;
-	margin: 3px;
-	float: left;
 }
 
 .abilities .stretch {
@@ -62,7 +72,7 @@ body {
 
 .abilities .ability {
 	vertical-align: top;
-	width: 40px;
+	width: 35px;
 	height: 30px;
 	display: inline-block;
 	*display: inline;
@@ -87,11 +97,7 @@ body {
     line-height: 0
 }
 
-.stat div {
-	display: inline;
-}
-
-.list div {
+.stat div, .list div, .castingTime div, .range div, .components div, .duration div {
 	display: inline;
 }
 
@@ -133,18 +139,20 @@ div.bulletpoint {
 	font-style: italic;
 }
 
-@media print {
+@media all {
 	body {
 		margin: 0px;
 		padding: 0px;
-	}
-
-	.card {
-
 	}
 	
 	@page {
 		margin: 0px;
 		padding: 0px;
+		size: landscape;
+	}
+
+	div.card-8, div.cardb-5 {
+		page-break-after: always;
+		page-break-inside: avoid;
 	}
 }
