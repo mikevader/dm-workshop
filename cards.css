@@ -19,77 +19,13 @@ body {
 }
 
 .card {
-	height: 101mm;
-	width: 70mm;
+	height: 95mm;
+	width: 70.5mm;
 	border: 1px solid black;
 	padding: 3px;
 	margin: 3px;
 	overflow: hidden;
-}
-
-.card-1 {
-	position: relative;
-	left: 0mm;
-	top: 0mm;
 	float: left;
-
-}
-.card-2 {
-	position: relative;
-	top: 0mm;
-	left: 0mm;
-	float: left;
-}
-.card-3 {
-	position: relative;
-}
-.card-4 {
-	position: relative;
-}
-.card-5 {
-	position: relative;
-}
-.card-6 {
-	position: relative;
-}
-.card-7 {
-	position: relative;
-}
-.card-8 {
-	position: relative;
-
-	page-break-after: always;
-}
-.cardb-1 {
-	position: relative;
-	top: 202mm;
-	left: 222mm;
-	float: left;
-}
-.cardb-2 {
-	position: relative;
-	top: 202mm;
-	left: 222mm;
-	float: left;
-}
-.cardb-3 {
-	position: relative;
-}
-.cardb-4 {
-	position: relative;
-}
-.cardb-5 {
-	position: relative;
-}
-.cardb-6 {
-	position: relative;
-}
-.cardb-7 {
-	position: relative;
-}
-.cardb-8 {
-	position: relative;
-	page-break-after: always;
 }
 
 .name {
@@ -203,7 +139,7 @@ div.bulletpoint {
 	font-style: italic;
 }
 
-@media print {
+@media all {
 	body {
 		margin: 0px;
 		padding: 0px;
@@ -212,5 +148,11 @@ div.bulletpoint {
 	@page {
 		margin: 0px;
 		padding: 0px;
+		size: landscape;
+	}
+
+	div.card-8, div.cardb-5 {
+		page-break-after: always;
+		page-break-inside: avoid;
 	}
 }

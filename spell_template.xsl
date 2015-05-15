@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-  <xsl:template match="spell">
-    <div class="spell card-{1+count(preceding-sibling::*) mod 8}">
-      <div class="card">
-        <xsl:apply-templates select="*"/>
-      </div>
-      <div class="card spell cardb-{1+count(preceding-sibling::*) mod 8}">
-        <div class="name"><xsl:value-of select="name"/></div>
-      </div>
+  <xsl:template match="spell" mode="front">
+    <div class="card spell card-{(count(../preceding-sibling::spell) mod $pageSize) + 1}">
+      <xsl:apply-templates select="name"/>
+      <xsl:apply-templates select="type"/>
+      <xsl:apply-templates select="classes"/>
+      <xsl:apply-templates select="castingTime"/>
+      <xsl:apply-templates select="range"/>
+      <xsl:apply-templates select="components"/>
+      <xsl:apply-templates select="duration"/>
     </div>
+  </xsl:template>
 
+  <xsl:template match="spell" mode="back">
+    <div class="card spell cardb-{(count(../preceding-sibling::spell) mod $pageSize) + 1}">
+      <xsl:apply-templates select="name"/>
+      <xsl:apply-templates select="description"/>
+    </div>
   </xsl:template>
 
   <xsl:template match="type">
