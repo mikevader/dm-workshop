@@ -19,13 +19,17 @@ body {
 }
 
 .card {
-	height: 95mm;
-	width: 70.5mm;
+	height: 347px;
+	width: 254px;
 	border: 1px solid black;
-	padding: 3px;
-	margin: 3px;
+	padding: 6px;
+	margin: 6px;
 	overflow: hidden;
-	float: left;
+}
+
+.row {
+	display: -webkit-flex;
+	flex-direction: row;
 }
 
 .name {
@@ -66,7 +70,6 @@ body {
 .abilities {
 	height: 30px;
 	text-align: justify;
-    -ms-text-justify: distribute-all-lines;
     text-justify: distribute-all-lines;
 }
 
@@ -143,6 +146,7 @@ div.bulletpoint {
 	body {
 		margin: 0px;
 		padding: 0px;
+		writing-mode: tb-rl;
 	}
 	
 	@page {
@@ -151,7 +155,9 @@ div.bulletpoint {
 		size: landscape;
 	}
 
-	div.card-8, div.cardb-5 {
+	.card-8,
+	.cardb-5,
+	.page {
 		page-break-after: always;
 		page-break-inside: avoid;
 	}
