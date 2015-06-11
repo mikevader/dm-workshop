@@ -13,6 +13,10 @@
 -->
 
   <xsl:template match="/">
+    <xsl:apply-templates select="" mode="filtered"/>
+  </xsl:template>
+
+  <xsl:template match="/" mode="filtered">
     <html>
       <head>
         <link rel="stylesheet" type="text/css" href="cards.css"/>
