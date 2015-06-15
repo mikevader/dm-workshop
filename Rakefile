@@ -1,4 +1,3 @@
-
 task :default => [:make]
 
 desc "make xlst transform"

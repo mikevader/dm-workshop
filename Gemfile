@@ -7,4 +7,5 @@ group :development do
   gem 'guard-shell'
   gem 'guard-bundler'
   gem 'guard-livereload'
+  gem 'terminal-notifier-guard'
 end

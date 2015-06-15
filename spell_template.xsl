@@ -26,9 +26,9 @@
   </xsl:template>
 
   <xsl:template match="classes">
-    <div class="list classes">
+    <div class="bulletlist classes">
       <xsl:for-each select="*">
-        <div class="listElement"><xsl:value-of select="."/></div>
+        <div class="bulletpoint"><xsl:value-of select="."/></div>
       </xsl:for-each>
     </div>
   </xsl:template>
@@ -60,4 +60,6 @@
       <div class="value"><xsl:value-of select="."/></div>
     </div>
   </xsl:template>
+
+  
 </xsl:stylesheet>

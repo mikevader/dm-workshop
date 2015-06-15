@@ -11,12 +11,7 @@
   <xsl:include href="monster_template.xsl"/>
   <xsl:include href="item_template.xsl"/>
 -->
-
   <xsl:template match="/">
-    <xsl:apply-templates select="" mode="filtered"/>
-  </xsl:template>
-
-  <xsl:template match="/" mode="filtered">
     <html>
       <head>
         <link rel="stylesheet" type="text/css" href="cards.css"/>
@@ -131,6 +126,7 @@
     <div class="description">
       <xsl:copy-of disable-output-escaping="yes" select="*|text()"/>
     </div>
+
   </xsl:template>
 
 </xsl:stylesheet>
