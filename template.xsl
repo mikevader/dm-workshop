@@ -7,8 +7,8 @@
   <xsl:variable name="pageSize" select="$rows * $cols" />
 
   <xsl:include href="spell_template.xsl"/>
-<!--
   <xsl:include href="monster_template.xsl"/>
+<!--
   <xsl:include href="item_template.xsl"/>
 -->
   <xsl:template match="/">
@@ -19,17 +19,20 @@
       <body>
         <div class="container">
           <xsl:apply-templates select="cards/spell[position() mod $pageSize = 1]" />
+          <xsl:apply-templates select="cards/monster[position() mod $pageSize = 1]" />
+          <xsl:apply-templates select="cards/item[position() mod $pageSize = 1]" />
         </div>
       </body>
     </html>
   </xsl:template>
 
-  <xsl:template match="spell">
+  <xsl:template match="spell|monster|item">
     <!-- fronts -->
     <div class="page">
       <xsl:call-template name="printRows">
         <xsl:with-param name="mode" select="'front'"/>
         <xsl:with-param name="order" select="'ascending'" />
+        <xsl:with-param name="type" select="name()" />
       </xsl:call-template>
     </div>
     <!-- backs -->
@@ -44,13 +47,14 @@
   <xsl:template name="printRows">
     <xsl:param name="mode" />
     <xsl:param name="order" />
+
     <xsl:variable name="thePage"
-        select=". | following-sibling::spell[position() &lt; $pageSize]" />
+        select=". | following-sibling::monster[position() &lt; $pageSize]" />
     <!-- split into rows -->
     <xsl:for-each select="$thePage[position() mod $cols = 1]">
       <div class="row">
         <xsl:variable name="theRow"
-            select=". | following-sibling::spell[position() &lt; $cols]" />
+            select=". | following-sibling::monster[position() &lt; $cols]" />
 
         <xsl:if test="$order = 'descending'">
           <!--

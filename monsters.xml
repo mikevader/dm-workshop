@@ -83,7 +83,392 @@
       Goblins are small, black-hearted humanoids that lair in despoiled dungeons and other dismal settings. Individually weak, they gather in large numbers to torment other creatures.
     </description>
   </monster>
-  -->
+-->
+
+  <monster>
+    <name>Schlangenmensch</name>
+    <type>Humanoid</type>
+    <stats>
+      <size>Medium</size>
+      <ac>15 (natural armor)</ac>
+      <hp>105</hp>
+      <speed>
+        30 ft.
+      </speed>
+      <abilities str="18 (+4)" dex="16 (+3)" con="13 (+1)" int="8 (-1)" wis="12 (+1)" cha="14 (+2)"/>
+      <skills>
+        <skill name="Perception">+4</skill>
+        <skill name="Stealth">+6</skill>
+      </skills>
+      <dmgResistance>
+        <cold/>
+      </dmgResistance>        
+      <dmgImmunity>
+        <poisen/>
+      </dmgImmunity>
+      <condImmunity>
+        <poisened/>
+      </condImmunity>
+      <senses>
+        <sense name="darkvision">60 ft</sense>
+        <sense name="passive Perception">12</sense>
+      </senses>
+      <languages>Common, Lizard</languages>
+      <cr>4 (1'100 XP)</cr>
+    </stats>
+    <traits>
+      <trait name="Magic resistence">
+        Der Schlangenmensch hat Vorteil auf Rettungswürfe gegen Sprüche und andere magische Effekte.
+      </trait>
+    </traits>
+    <actions>
+      <action name="Mehrfachattacke">
+        Entweder zwei Nachattacken, zwei Fernattacken oder ein Erdrücken
+      </action>
+      <meleeWeaponAttack name="Biss">
+        +7 to hit, reach 5ft., one target. <i>Hit:</i> 1d6 + 4 piercing damage plus 3d6 poisen damage.
+      </meleeWeaponAttack>
+      <meleeWeaponAttack name="Erdrücken">
+        +7 to hit, reach 10ft., one target. <i>Hit:</i> 2d6 + 4 bludgeoning damage, and the target is grappled (DC 14). Until this grapple ends, the target is restrained, and the Schlangenmensch kann kein weiteres Ziel erdrücken.</meleeWeaponAttack>
+      <meleeWeaponAttack name="Krummschwert">
+        +7 to hit, reach 5ft., one target. <i>Hit:</i> 2d6 + 4 slashing damage plus 3d6 poisen damage.
+      </meleeWeaponAttack>
+      <rangedWeaponAttack name="Crossbow">
+        +6 to hit, range 150/600., one target. <i>Hit:</i> 2d8 + 3 piercing damage plus 3d6 poisen damage.
+      </rangedWeaponAttack>
+    </actions>
+    <description>
+      
+    </description>
+  </monster>
+
+
+  <monster>
+    <name>Ghul</name>
+    <type>Humanoid</type>
+    <stats>
+      <size>Medium</size>
+      <ac>16 (chain mail)</ac>
+      <hp>110</hp>
+      <speed>
+        20 ft.
+      </speed>
+      <abilities str="19 (+4)" dex="11 (+0)" con="16 (+3)" int="10 (+0)" wis="12 (+1)" cha="8 (-1)"/>
+      <savingThrows dex="+3" con="+6"/>
+      <skills>
+        <skill name="Perception">+4</skill>
+      </skills>
+      <dmgResistance>
+        <necrotic/>
+        <bludgeoning/>
+        <slashing/>
+        <piercing/>
+      </dmgResistance>        
+      <dmgImmunity>
+        <poisen/>
+      </dmgImmunity>
+      <condImmunity>
+        <poisened/>
+      </condImmunity>
+      <senses>
+        <sense name="darkvision">60 ft</sense>
+        <sense name="passive Perception">12</sense>
+      </senses>
+      <cr>6 (2'100 XP)</cr>
+    </stats>
+    <traits>
+      <trait name="Regenration">
+        Der Ghul regeneriert 10 hp zu Beginn seiner Runde solange er mehr als 1 hat.
+      </trait>
+    </traits>
+    <actions>
+      <action name="Mehrfachattacke">
+        Entweder zwei Nachattacken, zwei Fernattacken oder ein Erdrücken
+      </action>
+      <meleeWeaponAttack name="Krallen">
+        +7 to hit, reach 5ft., one target. <i>Hit:</i> 1d10 + 4.
+      </meleeWeaponAttack>
+      <meleeWeaponAttack name="Lebensentzug">
+        +7 to hit, reach 5ft., one target. <i>Hit:</i> 4d8 + 3 necrotic damage. Target must succeed on a DC 14 saving thorw or hp max is reduced by damage until next long rest.
+      </meleeWeaponAttack>
+    </actions>
+    <description>
+      
+    </description>
+  </monster>
+
+  <monster>
+    <name>Heshtoth</name>
+    <type>Dämon</type>
+    <stats>
+      <size>Medium</size>
+      <ac>14</ac>
+      <hp>104</hp>
+      <speed>
+        fly 50 ft.
+      </speed>
+      <abilities str="16 (+3)" dex="19 (+4)" con="14 (+2)" int="10 (+0)" wis="15 (+2)" cha="11 (+0)"/>
+      <skills>
+        <skill name="Perception">+8</skill>
+        <skill name="Stealth">+10</skill>
+      </skills>
+      <dmgResistance>
+        <bludgeoning/>
+        <piercing/>
+        <slashing/>
+      </dmgResistance>        
+      <dmgImmunity>
+        <poisen/>
+      </dmgImmunity>
+      <condImmunity>
+        <grappled/>
+        <paralyzed/>
+        <petrified/>
+        <poisened/>
+        <prone/>
+        <restrained/>
+        <unconscious/>
+      </condImmunity>
+      <senses>
+        <sense name="darkvision">60 ft</sense>
+        <sense name="passive Perception">18</sense>
+      </senses>
+      <languages></languages>
+      <cr>6 (2'300 XP)</cr>
+    </stats>
+    <traits>
+      <trait name="Unsichtbarkeit">
+        Ist unsichtbar.
+      </trait>
+    </traits>
+    <actions>
+      <action name="Mehrfachattacke">
+        Entweder zwei Nachattacken, zwei Fernattacken oder ein Erdrücken
+      </action>
+      <meleeWeaponAttack name="Schlag">
+        +6 to hit, reach 5ft., one target. <i>Hit:</i> 2d6 + 3 bludgeoning damage.
+      </meleeWeaponAttack>
+    </actions>
+    <description>
+      
+    </description>
+  </monster>
+
+
+  <monster>
+    <name>Dahari</name>
+    <type>Dämon</type>
+    <stats>
+      <size>Large</size>
+      <ac>14</ac>
+      <hp>104</hp>
+      <speed>
+        fly 50 ft.
+      </speed>
+      <abilities str="16 (+3)" dex="19 (+4)" con="14 (+2)" int="10 (+0)" wis="15 (+2)" cha="11 (+0)"/>
+      <skills>
+        <skill name="Perception">+8</skill>
+        <skill name="Stealth">+10</skill>
+      </skills>
+      <dmgResistance>
+        <bludgeoning/>
+        <piercing/>
+        <slashing/>
+      </dmgResistance>        
+      <dmgImmunity>
+        <poisen/>
+      </dmgImmunity>
+      <condImmunity>
+        <grappled/>
+        <paralyzed/>
+        <petrified/>
+        <poisened/>
+        <prone/>
+        <restrained/>
+        <unconscious/>
+      </condImmunity>
+      <senses>
+        <sense name="darkvision">60 ft</sense>
+        <sense name="passive Perception">18</sense>
+      </senses>
+      <languages></languages>
+      <cr>6 (2'300 XP)</cr>
+    </stats>
+    <traits>
+      <trait name="Unsichtbarkeit">
+        Ist unsichtbar.
+      </trait>
+    </traits>
+    <actions>
+      <action name="Mehrfachattacke">
+        Entweder zwei Nachattacken, zwei Fernattacken oder ein Erdrücken
+      </action>
+      <meleeWeaponAttack name="Schlag">
+        +6 to hit, reach 5ft., one target. <i>Hit:</i> 2d6 + 3 bludgeoning damage.
+      </meleeWeaponAttack>
+    </actions>
+    <description>
+      
+    </description>
+  </monster>
+
+  <monster>
+    <name>Gargoyle</name>
+    <type>Dämon</type>
+    <stats>
+      <size>Large</size>
+      <ac>17</ac>
+      <hp>126</hp>
+      <speed>
+        30 ft.
+      </speed>
+      <abilities str="20 (+5)" dex="8 (-1)" con="20 (+5)" int="5 (-3)" wis="10 (+0)" cha="5 (-3)"/>
+      <dmgVulnerability>
+        <thunder/>
+      </dmgVulnerability>
+      <dmgResistance>
+        <bludgeoning/>
+        <piercing/>
+        <slashing/>
+      </dmgResistance>     
+      <dmgImmunity>
+        <poisen/>
+      </dmgImmunity>
+      <condImmunity>
+        <exhaustion/>
+        <paralyzed/>
+        <petrified/>
+        <poisened/>
+        <unconscious/>
+      </condImmunity>
+      <senses>
+        <sense name="darkvision">60 ft</sense>
+        <sense name="passive Perception">10</sense>
+      </senses>
+      <languages></languages>
+      <cr>5 (1'800 XP)</cr>
+    </stats>
+    <traits>
+      <trait name="Falsche Erscheinung">
+        Solange sich der Gargoyle nicht bewegt, ist er nicht zu unterscheiden von einer leblosen Statue.
+      </trait>
+    </traits>
+    <actions>
+      <action name="Mehrfachattacke">
+        Zwei Nahattacken
+      </action>
+      <meleeWeaponAttack name="Schlag">
+        +8 to hit, reach 10ft., one target. <i>Hit:</i> 2d8 + 5 bludgeoning damage.
+      </meleeWeaponAttack>
+    </actions>
+    <description>
+      
+    </description>
+  </monster>
+
+  <monster>
+    <name>Kuran</name>
+    <type>Zwerg</type>
+    <stats>
+      <size>Medium</size>
+      <ac>18 (chainmail)</ac>
+      <hp>60</hp>
+      <speed>
+        25 ft.
+      </speed>
+      <abilities str="18 (+4)" dex="11 (+0)" con="15 (+3)" int="14 (+2)" wis="13 (+1)" cha="11 (+0)"/>
+      <saving con="+6" wis="+4" />
+      <skills>
+        <skill name="Perception">+4</skill>
+      </skills>
+      <senses>
+        <sense name="darkvision">60 ft</sense>
+        <sense name="passive Perception">14</sense>
+      </senses>
+      <languages>Common, Zwergisch</languages>
+      <cr>5</cr>
+    </stats>
+    <traits>
+      <trait name="Tapfer">
+        Vorteil auf Rettungswürfe auf WIS
+      </trait>
+    </traits>
+    <actions>
+      <action name="Mehrfachattacke">
+        Zwei Nahattacken
+      </action>
+      <action name="Parade">
+        Als reaktion, kann 3 zur AC hinzugefügt werden.
+      </action>
+      <meleeWeaponAttack name="Streitaxt">
+        +7 to hit, reach 5ft., one target. <i>Hit:</i> 2d6 + 4 slashing damage.
+      </meleeWeaponAttack>
+      <rangedWeaponAttack name="Schwere Armbrust">
+        +3 to hit, range 100/400. <i>Hit:</i> 1d10 piercing damage.
+      </rangedWeaponAttack>
+    </actions>
+    <description>
+      
+    </description>
+  </monster>
+
+  <monster>
+    <name>Liscom</name>
+    <type>Humanoid</type>
+    <stats>
+      <size>Medium</size>
+      <ac>12 (15 mit mag. Rüstung)</ac>
+      <hp>99</hp>
+      <speed>
+        30 ft.
+      </speed>
+      <abilities str="10 (+0)" dex="14 (+2)" con="12 (+1)" int="20 (+5)" wis="15 (+2)" cha="16 (+3)"/>
+      <saving int="+9" wis="+6" />
+      <skills>
+        <skill name="Arcana">+13</skill>
+        <skill name="History">+13</skill>
+      </skills>
+      <dmgResistance>
+        <from-spells/>
+        <bludgeoning/>
+        <piercing/>
+        <slashing/>
+      </dmgResistance>        
+      <senses>
+        <sense name="passive Perception">12</sense>
+      </senses>
+      <languages></languages>
+      <cr>12 (8'400 XP)</cr>
+    </stats>
+    <traits>
+      <trait name="Magische Resistenz">
+        Vorteil auf Rettungswürfe gegen Sprüche oder mag. Effekte.
+      </trait>
+      <trait name="Zauber">
+        DC 17, +9 to hit<br/>
+        Cantrib: fire bolt, minor illusion, prestidigitation, shocking grasp<br/>
+        1st level (4): mage armor, magic missile<br/>
+        2nd level (3): mirror image, misty step<br/>
+        3rd level (3): counterspell, lightning bolt<br/>
+        4th level (3): confusion, fire shield, stoneskin<br/>
+        5th level (2): cone of cold, wall of force<br/>
+        6th level (1): globe of invulnerability<br/>
+        7th level (1): teleport<br/>
+      </trait>
+    </traits>
+    <actions>
+      <meleeWeaponAttack name="Dolch">
+        +6 to hit, reach 5ft., one target. <i>Hit:</i> 1d4 + 2 piercing damage.
+      </meleeWeaponAttack>
+    </actions>
+    <description>
+      
+    </description>
+  </monster>
+
+   <!--
+ -->
+    <!--
   <spell>
     <name>Animate Dead</name>
     <type>3rd-level necromancy</type>
@@ -366,6 +751,25 @@
     <description>
     </description>
   </spell>
+-->
+  <spell>
+    <name>Fire Shield</name>
+    <type>4th-level evocation</type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>Self</range>
+    <components>V, S, M (bit of phosphorus)</components>
+    <duration>10 minutes</duration>
+    <shortDescription>
+      Eine dünne Flammenschicht überzieht den Körper. Sobald eine Kreature innerhalb von 1,5m eine Nahkampfattacke macht, erhält dieser 
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+
+<!--
   <spell>
     <name>Flaming Sphere</name>
     <type></type>
@@ -445,7 +849,8 @@
       <b>AtHigherLevels.</b> When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d4 for each slot level above 1st.
     </description>
   </spell>
-    <spell>
+-->
+  <spell>
     <name>Hold Person</name>
     <type>2nd-level enchantment</type>
     <classes>
@@ -462,7 +867,8 @@
       <b>AtHigherLevels.</b> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional humanoid for each slot level above 2nd. The humanoids must be within 30 feet of each other when you target them.
     </description>
   </spell>
-<spell>
+<!--
+  <spell>
     <name>Ice Storm</name>
     <type></type>
     <classes>
@@ -511,6 +917,26 @@
       If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.
     </description>
   </spell>
+-->
+  <spell>
+    <name>Lightning bolt</name>
+    <type>3rd-level evocation</type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>Self (100ft line)</range>
+    <components>V, S, M (a bit of fur and a rod of amber)</components>
+    <duration>Inst</duration>
+    <shortDescription>
+      Blitzschlag 33m weit und 1,5 m breit. Alle Kreaturen in dieser Linie müssen einen Dex-Rettungswurf machen. Fehlgeschlagen nehmen sie 8d6 blitz-Schaden oder halb soviel.<br/>
+      Entflammbare Objekte in dieser Linie entzünden sich.<br/>
+      Für jeden höheren Level +1d6
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+<!--
   <spell>
     <name>Mage Armor</name>
     <type></type>
@@ -789,7 +1215,6 @@
       If you cast this spell multiple times, you can have up to three of its 1-minute effects active at a time, and you can dismiss such an effect as an action.
     </description>
   </spell>
-  <!--
 -->
 <!--
   <spell>

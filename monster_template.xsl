@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-  <xsl:template match="monster">
-    <div class="card monster card-{1+count(preceding-sibling::*) mod 8}">
+  <xsl:template match="monster" mode="front">
+    <div class="card monster card-{(count(preceding-sibling::monster) mod $pageSize) + 1}">
       <xsl:apply-templates select="name"/>
       <hr/>
       <xsl:apply-templates select="stats"/>
       <hr/>
       <xsl:apply-templates select="traits"/>
-      <xsl:apply-templates select="actions"/>
+    </div>
+  </xsl:template>
+
+  <xsl:template match="monster" mode="back">
+    <div class="card monster cardb-{(count(preceding-sibling::monster) mod $pageSize) + 1}">
+      <xsl:apply-templates select="name"/>
       <hr/>
+      <xsl:apply-templates select="actions"/>
       <xsl:apply-templates select="description"/>
     </div>
   </xsl:template>
+
 
   <xsl:template match="stats">
     <div class="stat">
@@ -145,9 +152,15 @@
     </div>
   </xsl:template>
 
-  <xsl:template match="meleeWeaponAttack | rangedWeaponAttack | trait">
+  <xsl:template match="meleeWeaponAttack | rangedWeaponAttack | action | trait">
     <div class="bulletpoint">
       <div class="title"><xsl:value-of select="@name"/>.</div>
+      <xsl:if test="name() = 'meleeWeaponAttack'">
+        <i>Melee Weapon Attack: </i>
+      </xsl:if>
+      <xsl:if test="name() = 'rangedWeaponAttack'">
+        <i>Ranged Weapon Attack: </i>
+      </xsl:if>
       <xsl:copy-of select="."/>
     </div>
   </xsl:template>
