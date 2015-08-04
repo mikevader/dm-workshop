@@ -1,0 +1,769 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cards>
+  <spell>
+    <name>Animate Dead</name>
+    <type>3rd-level necromancy</type>
+    <classes>
+      <class>Cleric</class>
+      <class>Wizard</class>
+    </classes>
+    <castingTime>1 minute</castingTime>
+    <range>10 feet</range>
+    <components>V, S, M (a drop of blood, a piece of flesh, and a pinch of bone dust</components>
+    <duration>Instantaneous</duration>
+    <shortDescription>
+      Erhebt Knochen zu einem Skelet oder ein Leichnam zu einem Zombie. In jeder Runde kann per Bonus Aktion einen Befehl gegeben werden.
+      Für jeden Level über dem 3. kann ein zusätzlicher Untote erhoben werden.
+    </shortDescription>
+    <description>
+      This spell creates an undead servant. Choose a pile of bones or a corpse of a Medium or Small humanoid within range. Your spell imbues the target with a foul mimicry of life, raising it as an undead creature. The target becomes a skeleton if you chose bones or a zombie if you chose a corpse (the DM has the creature’s game statistics).<br/>
+      On each of your turns, you can use a bonus action to mentally command any creature you made with this spell if the creature is within 60 feet of you (if you control multiple creatures, you can command any or all of them at the same time, issuing the same command to each one). You decide what action the creature will take and where it will move during its next turn, or you can issue a general command, such as to guard a particular chamber or corridor. If you issue no commands, the creature only defends itself against hostile creatures. Once given an order, the creature continues to follow it until its task is complete.<br/>
+      The creature is under your control for 24 hours, after which it stops obeying any command you’ve given it. To maintain control of the creature for another 24 hours, you must cast this spell on the creature again before the current 24-hour period ends. This use of the spell reasserts your control over up to four creatures you have animated with this spell, rather than animating a new one.<br/>
+      <b>At Higher Levels.</b> When you cast this spell using a spell slot of 4th level or higher, you animate or reassert control over two additional undead creatures for each slot level above 3rd. Each of the creatures must come from a different corpse or pile of bones.
+    </description>
+  </spell>
+  <spell>
+    <name>Animate Objects</name>
+    <type>5th-level transmutation</type>
+    <classes>
+      <class>Bard</class>
+      <class>Sorcerer</class>
+      <class>Wizard</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>120 feet</range>
+    <components>V, S</components>
+    <duration>Concentration, up to 1 minute</duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+      Objects come to life at your command. Choose up to ten nonmagical objects within range that are not being worn or carried. Medium targets count as two objects, Large targets count as four objects, Huge targets count as eight objects. You can’t animate any object larger than Huge. Each target animates and becomes a creature under your control until the spell ends or until reduced to 0 hit points.<br/>
+      As a bonus action, you can mentally command any creature you made with this spell if the creature is within 500 feet of you (if you control multiple creatures, you can command any or all of them at the same time, issuing the same command to each one). You decide what action the creature will take and where it will move during its next turn, or you can issue a general command, such as to guard a particular chamber or corridor. Ifyou issue no commands, the creature only defends itself against hostile creatures. Once given an order, the creature continues to follow it until its task is complete.<br/>
+
+      are 3, and its Charisma is 1. Its speed is 30 feet; if the object lacks legs or other appendages it can use for locomotion, it instead has a flying speed of 30 feet and can hover. If the object is securely attached to a surface or a larger object, such as a chain bolted to a wall, its speed is 0. It has blindsight with a radius of 30 feet and is blind beyond that distance. When the animated object drops to 0 hit points, it reverts to its original object form, and any remaining damage carries over to its original object form.<br/>
+      If you command an object to attack, it can make a single melee attack against a creature within 5 feet of it. It makes a slam attack with an attack bonus and bludgeoning damage determined by its size. The DM might rule that a specific object inflicts slashing or piercing damage based on its form.
+      <b>AtHigherLevels.</b> Ifyou cast this spell using a spell slot of 6th level or higher, you can animate two additional objects for each slot level above 5th.
+    </description>
+  </spell>
+  <spell>
+    <name>Bane</name>
+    <type>1st-level enchantment</type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>30 feet (sight)</range>
+    <components>V, S, M (a drop of blood)</components>
+    <duration>Concentration, up to 1 minute</duration>
+    <shortDescription>
+      Bis drei Ziele im Sichtfeld müssen einen Charisma-Rettungswurf bestehen. Bei Misslingen muss das Ziel bei jedem Angriffs- oder Rettungswurf einen d4 abziehen.
+      Für jedes zusätzliche Level ein zusätzliches Ziel.
+    </shortDescription>
+    <description>
+      Up to three creatures of your choice that you can see within range must make Charisma saving throws. Whenever a target that fails this saving throw makes an attack roll or a saving throw before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or saving throw.<br/>
+      <b>AtHigherLevels.</b> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.
+    </description>
+  </spell>
+  <spell>
+    <name>Beacon of Hope</name>
+    <type>3rd-level abjuration</type>
+    <classes>
+      <class>Cleric</class>
+      <class>Wizard</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>30 feet</range>
+    <components>V, S</components>
+    <duration>Concentration, up to 1 minute</duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+      This spell bestows hope and vitality. Choose any number of creatures within range. For the duration, each target has advantage on Wisdom saving throws and death saving throws, and regains the maximum number of hit points possible from any healing.
+    </description>
+  </spell>
+  <spell>
+    <name>Bestow Curse</name>
+    <type>3rd-level necromancy</type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>Touch</range>
+    <components>V, S</components>
+    <duration>Concentration, up to 1 minute</duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+      You touch a creature, and that creature must succeed on a W isdom saving throw or becom e cursed for the duration of the spell. When you cast this spell, choose the nature of the curse from the following options:
+      <ul>
+        <li>Choose one ability score. While cursed, the target has disadvantage on ability checks and saving throws made with that ability score.</li>
+        <li>W hile cursed, the target has disadvantage on attack rolls against you.</li>
+        <li>While cursed, the target must make a Wisdom sav ing throw at the start of each of its turns. If it fails, it wastes its action that turn doing nothing.</li>
+        <li>W hile the target is cursed, your attacks and spells deal an extra 1d8 necrotic damage to the target.</li>
+      </ul>
+      A <i>remove curse</i> spell ends this effect. At the DM’s option, you may choose an alternative curse effect, but it should be no more powerful than those described above. The DM has final say on such a curse’s effect.<br/>
+      <b>At Higher Levels.</b> If you cast this spell using a spell slot of 4th level or higher, the duration is concentration, up to 10 minutes. If you use a spell slot of 5th level or higher, the duration is 8 hours. If you use a spell slot of 7th level or higher, the duration is 24 hours. If you use a 9th level spell slot, the spell lasts until it is dispelled. Using a spell slot of 5th level or higher grants a duration that doesn’t require concentration.
+    </description>
+  </spell>
+  <spell>
+    <name>Bless</name>
+    <type>1st-level enchantment</type>
+    <classes>
+      <class>Cleric</class>
+      <class>Wizard</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>30 feet</range>
+    <components>V, S, M (a sprinkling of holy water)</components>
+    <duration>Concentration, up to 1 minute</duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+      You bless up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target can roll a d4 and add the number rolled to the attack roll or saving throw.<br/>
+      <b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.
+    </description>
+  </spell>
+  <spell>
+    <name>Blight</name>
+    <type></type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime></castingTime>
+    <range></range>
+    <components></components>
+    <duration></duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+  <spell>
+    <name>Blinding Smite</name>
+    <type></type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime></castingTime>
+    <range></range>
+    <components></components>
+    <duration></duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+  <spell>
+    <name>Blink</name>
+    <type></type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime></castingTime>
+    <range></range>
+    <components></components>
+    <duration></duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+  <spell>
+    <name>Blur</name>
+    <type>2nd-level illusion</type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>Self</range>
+    <components>V</components>
+    <duration>Concentration, up to 1 minute</duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+      Your body becomes blurred, shifting and wavering to all who can see you. For the duration, any creature has disadvantage on attack rolls against you. An attacker is immune to this effect if it doesn’t rely on sight, as with blindsight, or can see through illusions, as with truesight.
+    </description>
+  </spell>
+  <spell>
+    <name>Call Lightning</name>
+    <type>3rd-level conjuration</type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>120 feet</range>
+    <components>V, S</components>
+    <duration>Concentration, up to 10 minutes</duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+      A storm cloud appears in the shape of a cylinder that is 10 feet tall with a 60-foot radius, centered on a point you can see 100 feet directly above you. The spell fails if you can’t see a point in the air where the storm cloud could appear (for example, if you are in a room that can’t accommodate the cloud).<br/>
+      When you cast the spell, choose a point you can see within range. A bolt of lightning flashes down from the cloud to that point. Each creature within 5 feet of that point must make a Dexterity saving throw. A creature takes 3d10 lightning damage on a failed save, or half as much damage on a successful one. On each of your turns until the spell ends, you can use your action to call down lightning in this way again, targeting the same point or a different one.<br/>
+      If you are outdoors in stormy conditions when you cast this spell, the spell gives you control over the existing storm instead of creating a new one. Under such conditions, the spell’s damage increases by 1d10.<br/>
+      <b>At Higher Levels.</b> When you cast this spell using a spell slot of 4th or higher level, the damage increases by 1d10 for each slot level above 3rd.
+    </description>
+  </spell>
+  <spell>
+    <name>Cone of Cold</name>
+    <type></type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime></castingTime>
+    <range></range>
+    <components></components>
+    <duration></duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+  <spell>
+    <name>Counterspell</name>
+    <type>3rd-level abjuration</type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime>1 reaction, when you see a creature within 60 feet of you casting a spell</castingTime>
+    <range>60 feet</range>
+    <components>S</components>
+    <duration>Inst</duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+      You attempt to interrupt a creature in the process of casting a spell. If the creature is casting a spell of 3rd level or lower, its spell fails and has no effect. If it is casting a spell of 4th level or higher, make an ability check using your spellcasting ability. The DC equals 10 + the spell’s level. On a success, the creature’s spell fails and has no effect.<br/>
+      <b>AtHigherLevels.</b> When you cast this spell using a spell slot of 4th level or higher, the interrupted spell has no effect if its level is less than or equal to the level of the spell slot you used.
+    </description>
+  </spell>
+  <spell>
+    <name>Cure wounds</name>
+    <type>1st-level evocation</type>
+    <classes>
+      <class>Cleric</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>Touch</range>
+    <components>V, S</components>
+    <duration>Instantaneous</duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+      A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.<br/>
+      <b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st.
+    </description>
+  </spell>
+  <spell>
+    <name>Dispel Magic</name>
+    <type></type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime></castingTime>
+    <range></range>
+    <components></components>
+    <duration></duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+  <spell>
+    <name>Fireball</name>
+    <type></type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime></castingTime>
+    <range></range>
+    <components></components>
+    <duration></duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+-->
+  <spell>
+    <name>Fire Shield</name>
+    <type>4th-level evocation</type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>Self</range>
+    <components>V, S, M (bit of phosphorus)</components>
+    <duration>10 minutes</duration>
+    <shortDescription>
+      Eine dünne Flammenschicht überzieht den Körper. Sobald eine Kreature innerhalb von 1,5m eine Nahkampfattacke macht, erhält dieser 
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+
+  <spell>
+    <name>Flaming Sphere</name>
+    <type></type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime></castingTime>
+    <range></range>
+    <components></components>
+    <duration></duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+  <spell>
+    <name>Fly</name>
+    <type></type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime></castingTime>
+    <range></range>
+    <components></components>
+    <duration></duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+  <spell>
+    <name>Greater Invisibility</name>
+    <type></type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime></castingTime>
+    <range></range>
+    <components></components>
+    <duration></duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+  <spell>
+    <name>Guiding Bolt</name>
+    <type>1st-level evocation</type>
+    <classes>
+      <class>Cleric</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>120 feet</range>
+    <components>V, S</components>
+    <duration>1 round</duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+      A flash of light streaks toward a creature of your choice within range. Make a ranged spell attack against the target. On a hit, the target takes 4d6 radiant damage, and the next attack roll made against this target before the end of your next turn has advantage, thanks to the mystical dim light glittering on the target until then.<br/>
+      <b>AtHigherLevels.</b> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.
+    </description>
+  </spell>
+  <spell>
+    <name>Healing Word</name>
+    <type>1st-level evocation</type>
+    <classes>
+      <class>Cleric</class>
+    </classes>
+    <castingTime>1 bonus action</castingTime>
+    <range>60 feet</range>
+    <components>V</components>
+    <duration>Instantaneous</duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+      A creature of your choice that you can see within range regains hit points equal to 1d4 + your spellcasting ability modifier. This spell has no effect on undead or constructs.<br/>
+      <b>AtHigherLevels.</b> When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d4 for each slot level above 1st.
+    </description>
+  </spell>
+-->
+  <spell>
+    <name>Hold Person</name>
+    <type>2nd-level enchantment</type>
+    <classes>
+      <class>Cleric</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>60 feet</range>
+    <components>V, S, M (a small, straight piece of iron)</components>
+    <duration>Concentration, up to 1 minute</duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+      Choose a humanoid that you can see within range. The target must succeed on a W isdom saving throw or be paralyzed for the duration. At the end of each of its turns, the target can make another Wisdom saving throw. On a success, the spell ends on the target.<br/>
+      <b>AtHigherLevels.</b> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional humanoid for each slot level above 2nd. The humanoids must be within 30 feet of each other when you target them.
+    </description>
+  </spell>
+  <spell>
+    <name>Ice Storm</name>
+    <type></type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime></castingTime>
+    <range></range>
+    <components></components>
+    <duration></duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+  <spell>
+    <name>Lesser Restoration</name>
+    <type>2nd-level abjuration</type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>Touch</range>
+    <components>V, S</components>
+    <duration>Instantaneous</duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+      You touch a creature and can end either one disease or one condition afflicting it. The condition can be blinded, deafened, paralyzed, or poisoned.
+    </description>
+  </spell>
+  <spell>
+    <name>Light</name>
+    <type>Evocation cantrip</type>
+    <classes>
+      <class>Cleric</class>
+      <class>Wizard</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>Touch</range>
+    <components>V, M (a firefly of phosphorescent moss)</components>
+    <duration>1 hour</duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+      You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.<br/>
+      If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.
+    </description>
+  </spell>
+-->
+  <spell>
+    <name>Lightning bolt</name>
+    <type>3rd-level evocation</type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>Self (100ft line)</range>
+    <components>V, S, M (a bit of fur and a rod of amber)</components>
+    <duration>Inst</duration>
+    <shortDescription>
+      Blitzschlag 33m weit und 1,5 m breit. Alle Kreaturen in dieser Linie müssen einen Dex-Rettungswurf machen. Fehlgeschlagen nehmen sie 8d6 blitz-Schaden oder halb soviel.<br/>
+      Entflammbare Objekte in dieser Linie entzünden sich.<br/>
+      Für jeden höheren Level +1d6
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+  <spell>
+    <name>Mage Armor</name>
+    <type></type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime></castingTime>
+    <range></range>
+    <components></components>
+    <duration></duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+  <spell>
+    <name>Mage Hand</name>
+    <type>Conjuration cantrip</type>
+    <classes>
+      <class>Bard</class>
+      <class>Sorcerer</class>
+      <class>Warlock</class>
+      <class>Wizard</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>30 ft</range>
+    <components>V, S</components>
+    <duration>1 minute</duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+      A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever m ore than 30 feet away from you or if you cast this spell again.<br/>
+      You can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.<br/>
+      The hand can’t attack, activate magic items, or carry more than 10 pounds.<br/>
+    </description>
+  </spell>
+  <spell>
+    <name>Magic Missile</name>
+    <type></type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime></castingTime>
+    <range></range>
+    <components></components>
+    <duration></duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+  <spell>
+    <name>Mass Healing Word</name>
+    <type>3rd-level evocation</type>
+    <classes>
+      <class>Cleric</class>
+    </classes>
+    <castingTime>1 bonus action</castingTime>
+    <range>60 feet</range>
+    <components>V</components>
+    <duration>Instantaneous</duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+      As you call out words of restoration, up to six creatures of your choice that you can see within range regain hit points equal to 1d4 + your spellcasting ability modifier. This spell has no effect on undead or constructs.<br/>
+      <b>AtHigherLevels.</b> When you cast this spell using a spell slot of 4th level or higher, the healing increases by 1d4 for each slot level above 3rd.
+    </description>
+  </spell>
+  <spell>
+    <name>Misty Step</name>
+    <type></type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime></castingTime>
+    <range></range>
+    <components></components>
+    <duration></duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+  <spell>
+    <name>Prayer of Healing</name>
+    <type>2nd-level evocation</type>
+    <classes>
+      <class>Cleric</class>
+    </classes>
+    <castingTime>10 minutes</castingTime>
+    <range>30 feet</range>
+    <components>V</components>
+    <duration>Instantaneous</duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+      Up to six creatures of your choice that you can see within range each regain hit points equal to 2d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.<br/>
+      <b>AtHigherLevels.</b> When you cast this spell using a spell slot of 3rd level or higher, the healing increases by 1d8 for each slot level above 2nd.
+    </description>
+  </spell>
+  <spell>
+    <name>Protection from Energy</name>
+    <type>3rd-level abjuration</type>
+    <classes>
+      <class>Cleric</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>Touch</range>
+    <components>V, S</components>
+    <duration>Concentration, up to 1 hour</duration>
+    <shortDescription>
+      For the duration, the willing creature you touch has resistance to one damage type of your choice: acid, cold, fire, lightning, or thunder.
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+  <spell>
+    <name>Resistance</name>
+    <type>Abjuration cantrip</type>
+    <classes>
+      <class>Cleric</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>Touch</range>
+    <components>V, S, M (a miniature cloak)</components>
+    <duration>Concentration, up to 1 minute</duration>
+    <shortDescription>
+      You touch one willing creature. Once before the spell ends, the target can roll a d4 and add the number rolled to one saving throw of its choice. It can roll the die before or after making the saving throw. The spell then ends.
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+  <spell>
+    <name>Revivify</name>
+    <type>3rd-level conjuration</type>
+    <classes>
+      <class>Cleric</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>Touch</range>
+    <components>V, S, M (diamonds worth 300gp, which the spell consumes)</components>
+    <duration>Instantaneous</duration>
+    <shortDescription>
+      You touch a creature that has died within the last minute. That creature returns to life with 1 hit point. This spell can’t return to life a creature that has died of old age, nor can it restore any missing body parts.
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+  <spell>
+    <name>Sacred Flame</name>
+    <type>Evocation cantrip</type>
+    <classes>
+      <class>Cleric</class>
+      <class>Wizard</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>60 feet</range>
+    <components>V, S</components>
+    <duration>Instantaneous</duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+      Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 radiant damage. The target gains no benefit from cover for this saving throw.<br/>
+      The spell’s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).
+    </description>
+  </spell>
+  <spell>
+    <name>Sanctuary</name>
+    <type>1st-level abjuration</type>
+    <classes>
+      <class>Cleric</class>
+      <class>Wizard</class>
+    </classes>
+    <castingTime>1 bonus action</castingTime>
+    <range>30 feet</range>
+    <components>V, S, M (a small silver mirror)</components>
+    <duration>1 minute</duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+      You ward a creature within range against attack. Until the spell ends, any creature who targets the warded creature with an attack or a harmful spell must first make a Wisdom saving throw. On a failed save, the creature must choose a new target or lose the attack or spell. This spell doesn’t protect the warded creature from area effects, such as the explosion of a fireball.<br/>
+      If the warded creature makes an attack or casts a spell that affects an enemy creature, this spell ends.
+    </description>
+  </spell>
+  <spell>
+    <name>Shield</name>
+    <type></type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime></castingTime>
+    <range></range>
+    <components></components>
+    <duration></duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+  <spell>
+    <name>Spirit Guardians</name>
+    <type>3rd-level conjuration</type>
+    <classes>
+      <class>Cleric</class>
+      <class>Wizard</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>Self (15-foot radius)</range>
+    <components>V, S, M (a holy symbol)</components>
+    <duration>Concentration, up to 10 minutes</duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+      You call forth spirits to protect you. They flit around you to a distance of 15 feet for the duration. If you are good or neutral, their spectral form appears angelic or fey (your choice). If you are evil, they appear fiendish.<br/>
+      When you cast this spell, you can designate any number of creatures you can see to be unaffected by it. An affected creature’s speed is halved in the area, and when the creature enters the area for the first time on a turn or starts its turn there, it must make a Wisdom saving throw. On a failed save, the creature takes 3d8 radiant damage (if you are good or neutral) or 3d8 necrotic damage (if you are evil). On a successful save, the creature takes half as much damage.<br/>
+      <b>AtHigherLevels.</b> When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d8 for each slot level above 3rd.
+    </description>
+  </spell>
+  <spell>
+    <name>Spiritual Weapon</name>
+    <type>2nd-level evocation</type>
+    <classes>
+      <class>Cleric</class>
+      <class>Wizard</class>
+    </classes>
+    <castingTime>1 bonus action</castingTime>
+    <range>60 feet</range>
+    <components>V, S</components>
+    <duration>1 minute</duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+      You create a floating, spectral weapon within range that lasts for the duration or until you cast this spell again. When you cast the spell, you can make a melee spell attack against a creature within 5 feet of the weapon. On a hit, the target takes force damage equal to 1d8 + your spellcasting ability modifier.<br/>
+      As a bonus action on your turn, you can move the weapon up to 20 feet and repeat the attack against a creature within 5 feet of it.<br/>
+      The weapon can take whatever form you choose. Clerics of deities who are associated with a particular weapon (as St. Cuthbert is known for his mace and Thor for his hammer) make this spell’s effect resemble that weapon.<br/>
+      <b>AtHigherLevels.</b> When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for every two slot levels above the 2nd.
+    </description>
+  </spell>
+  <spell>
+    <name>Suggestion</name>
+    <type></type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime></castingTime>
+    <range></range>
+    <components></components>
+    <duration></duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+  <spell>
+    <name>Thaumaturgy</name>
+    <type>Transmutation cantrip</type>
+    <classes>
+      <class>Cleric</class>
+    </classes>
+    <castingTime>1 action</castingTime>
+    <range>30 feet</range>
+    <components>V</components>
+    <duration>Up to 1 minute</duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+      You manifest a minor wonder, a sign of supernatural power, within range. You create one of the following magical effects within range:
+      <ul>
+        <li>Your voice booms up to three times as loud as normal for 1 minute.</li>
+        <li>You cause flames to flicker, brighten, dim, or change color for 1 minute.</li>
+        <li>You cause harmless tremors in the ground for 1 minute.</li>
+        <li>You create an instantaneous sound that originates from a point of your choice within range, such as a rumble of thunder, the cry of a raven, or ominous whispers.</li>
+        <li>You instantaneously cause an unlocked door or win dow to fly open or slam shut.</li>
+        <li>You alter the appearance of your eyes for 1 minute.</li>
+      </ul>
+      If you cast this spell multiple times, you can have up to three of its 1-minute effects active at a time, and you can dismiss such an effect as an action.
+    </description>
+  </spell>
+<!--
+  <spell>
+    <name></name>
+    <type></type>
+    <classes>
+      <class>Wizard</class>
+    </classes>
+    <castingTime></castingTime>
+    <range></range>
+    <components></components>
+    <duration></duration>
+    <shortDescription>
+    </shortDescription>
+    <description>
+    </description>
+  </spell>
+
+-->
+
+<!--
+  <item>
+  </item>
+-->
+</cards>

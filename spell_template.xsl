@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
+
+  <xsl:param name="rows" select="2" />
+  <xsl:param name="cols" select="4" />
+  <xsl:variable name="pageSize" select="$rows * $cols" />
+  <xsl:variable name="pageFormat" select="'A7'" />
+
+  <xsl:include href="template.xsl"/>
+
   <xsl:template match="spell" mode="front">
     <div class="card spell card-{(count(preceding-sibling::spell) mod $pageSize) + 1}">
       <xsl:apply-templates select="name"/>

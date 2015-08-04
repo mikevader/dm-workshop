@@ -3,13 +3,20 @@ task :default => [:make]
 desc "make xlst transform"
 task :make do
   require 'nokogiri'
+  require 'wicked_pdf'
 
-  document = Nokogiri::XML(File.read('monsters.xml'))
-  template = Nokogiri::XSLT(File.read('template.xsl'))
+  monsterDocument = Nokogiri::XML(File.read('monsters.xml'))
+  monsterTemplate = Nokogiri::XSLT(File.read('monster_template.xsl'))
+  File.open('monsters.html', 'w').write(monsterTemplate.transform(monsterDocument))
 
-  transformed_document = template.transform(document)
+  spellDocument = Nokogiri::XML(File.read('spells.xml'))
+  spellTemplate = Nokogiri::XSLT(File.read('spell_template.xsl'))
+  File.open('spells.html', 'w').write(spellTemplate.transform(spellDocument))
 
-  File.open('output.html', 'w').write(transformed_document)
+  itemDocument = Nokogiri::XML(File.read('items.xml'))
+  itemTemplate = Nokogiri::XSLT(File.read('item_template.xsl'))
+  File.open('items.html', 'w').write(itemTemplate.transform(itemDocument))
+
 end
 
 

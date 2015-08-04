@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gem 'nokogiri'
+gem 'wicked_pdf'
 
 group :development do
   gem 'guard'
