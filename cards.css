@@ -26,8 +26,10 @@ body {
 }
 
 .A6 .card {
-	height: 718px;
-	width: 532px;
+	height: 670px;
+	width: 459px;
+	margin: 25px;
+	padding: 25px;
 }
 
 .A7 .card {
