@@ -1,7 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cards>
-<!--
   <item>
+    <name>Erblindet</name>
+    <background>img/blinded.png</img>
+    <description>
+        <ul>
+          <li>Eine erblindete Kreatur kann nichts sehen und alle Eigenschaftsproben die Sicht benötigen scheitern.</li>
+          <li>Angriffswürfe gegen erblindete Kreaturen haben Vorteil und erblindete Kreaturen haben Nachteil auf ihren Angriffswürfen.</li>
+        </ul>
+    </description>
   </item>
--->
+  <item>
+    <name>Verzaubert</name>
+    <description>
+    </description>
+  </item>
+  <item>
+    <name>Taub</name>
+    <description>
+    </description>
+  </item>
+  <item>
+    <name>Eingeschüchtert</name>
+    <description>
+    </description>
+  </item>
+  <item>
+    <name>Festgehalten</name>
+    <description>
+    </description>
+  </item>
+  <item>
+    <name>Kampfunfähig</name>
+    <description>
+    </description>
+  </item>
+  <item>
+    <name>Unsichtbar</name>
+    <description>
+    </description>
+  </item>
+  <item>
+    <name>Gelähmt</name>
+    <description>
+    </description>
+  </item>
+  <item>
+    <name>Versteinert</name>
+    <description>
+    </description>
+  </item>
+  <item>
+    <name>Vergiftet</name>
+    <description>
+    </description>
+  </item>
+  <item>
+    <name>Am Boden</name>
+    <description>
+    </description>
+  </item>
+  <item>
+    <name>Gefesselt</name>
+    <description>
+    </description>
+  </item>
+  <item>
+    <name>Betäubt</name>
+    <description>
+    </description>
+  </item>
+  <item>
+    <name>Bewusstlos</name>
+    <description>
+    </description>
+  </item>
 </cards>

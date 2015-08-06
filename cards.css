@@ -10,8 +10,21 @@ body {
 .description {
 	font-size: 8pt;
 	line-height: 1;
-	font-family: Times New Roman, Times, serif;
+	font-family: Didot, Times New Roman, Times, serif;
 	overflow: hidden;
+}
+
+.item .description {
+	font-size: 12pt;
+}
+
+.item ul {
+	padding-left: 10px;
+	list-style-type: none;
+}
+
+.item li {
+	margin-bottom: 20px;
 }
 
 .card > div {
@@ -46,7 +59,7 @@ body {
 	margin: 2px;
 	font-weight: bold;
 	font-size: 16pt;
-	font-family: Times New Roman, Times, serif;
+	font-family: Didot, Times New Roman, Times, serif;
 }
 
 .type {

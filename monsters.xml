@@ -98,8 +98,8 @@
       </speed>
       <abilities str="18" dex="16" con="13" int="8" wis="12" cha="14"/>
       <skills>
-        <skill name="Perception">+4</skill>
-        <skill name="Stealth">+6</skill>
+        <skill name="Perception">0</skill>
+        <skill name="Stealth">0</skill>
       </skills>
       <dmgResistance>
         <cold/>
@@ -155,9 +155,9 @@
         20 ft.
       </speed>
       <abilities str="19" dex="11" con="16" int="10" wis="12" cha="8"/>
-      <savingThrows dex="" con=""/>
+      <savingThrows dex="0" con="0"/>
       <skills>
-        <skill name="Perception">+4</skill>
+        <skill name="Perception">0</skill>
       </skills>
       <dmgResistance>
         <necrotic/>
@@ -210,8 +210,8 @@
       </speed>
       <abilities str="16" dex="19" con="14" int="10" wis="15" cha="11"/>
       <skills>
-        <skill name="Perception">+8</skill>
-        <skill name="Stealth">+10</skill>
+        <skill name="Perception">0</skill>
+        <skill name="Stealth" >0</skill>
       </skills>
       <dmgResistance>
         <bludgeoning/>
@@ -268,8 +268,8 @@
       </speed>
       <abilities str="16" dex="19" con="14" int="10" wis="15" cha="11"/>
       <skills>
-        <skill name="Perception">+8</skill>
-        <skill name="Stealth">+10</skill>
+        <skill name="Perception">0</skill>
+        <skill name="Stealth">0</skill>
       </skills>
       <dmgResistance>
         <bludgeoning/>
@@ -378,9 +378,9 @@
         25 ft.
       </speed>
       <abilities str="18" dex="11" con="15" int="14" wis="13" cha="11"/>
-      <savingThrows con="" wis="" />
+      <savingThrows con="0" wis="0" />
       <skills>
-        <skill name="Perception">+4</skill>
+        <skill name="Perception">0</skill>
       </skills>
       <senses>
         <sense name="darkvision">60 ft</sense>
@@ -424,10 +424,10 @@
         30 ft.
       </speed>
       <abilities str="10" dex="14" con="12" int="20" wis="15" cha="16"/>
-      <saving int="+9" wis="+6" />
+      <saving int="0" wis="0" />
       <skills>
-        <skill name="Arcana">+13</skill>
-        <skill name="History">+13</skill>
+        <skill name="Arcana">0</skill>
+        <skill name="History">0</skill>
       </skills>
       <dmgResistance>
         <from-spells/>

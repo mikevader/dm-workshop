@@ -95,17 +95,10 @@
     <div class="name"><xsl:value-of select="."/></div>
   </xsl:template>
 
-  <xsl:template match="description">
+  <xsl:template match="description | shortDescription">
     <div class="description">
       <xsl:copy-of disable-output-escaping="yes" select="*|text()"/>
     </div>
-  </xsl:template>
-
-  <xsl:template match="shortDescription">
-    <div class="description">
-      <xsl:copy-of disable-output-escaping="yes" select="*|text()"/>
-    </div>
-
   </xsl:template>
 
 </xsl:stylesheet>

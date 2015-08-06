@@ -51,7 +51,9 @@
     <xsl:apply-templates select="savingThrows">
       <xsl:with-param name="pb" select="$pb"/>
     </xsl:apply-templates>
-    <xsl:apply-templates select="skills"/>
+    <xsl:apply-templates select="skills">
+      <xsl:with-param name="pb" select="$pb"/>
+    </xsl:apply-templates>
     <xsl:apply-templates select="dmgVulnerability"/>
     <xsl:apply-templates select="dmgResistance"/>
     <xsl:apply-templates select="dmgImmunity"/>
@@ -99,15 +101,43 @@
   </xsl:template>
 
   <xsl:template match="skills">
+    <xsl:param name="pb" />
     <div class="list">
       <div class="title">Skills</div>
-      <xsl:apply-templates select="*"/>
+      <xsl:apply-templates select="*">
+        <xsl:with-param name="pb" select="$pb"/>
+      </xsl:apply-templates>
     </div>
   </xsl:template>
   <xsl:template match="skill">
+    <xsl:param name="pb" />
+    <xsl:variable name="attName">
+      <xsl:choose>
+        <xsl:when test="@name = 'Athletics'">str</xsl:when>
+        <xsl:when test="@name = 'Acrobatics'">dex</xsl:when>
+        <xsl:when test="@name = 'Sleight of Hand'">dex</xsl:when>
+        <xsl:when test="@name = 'Stealth'">dex</xsl:when>
+        <xsl:when test="@name = 'Arcana'">int</xsl:when>
+        <xsl:when test="@name = 'History'">int</xsl:when>
+        <xsl:when test="@name = 'Investigation'">int</xsl:when>
+        <xsl:when test="@name = 'Nature'">int</xsl:when>
+        <xsl:when test="@name = 'Religion'">int</xsl:when>
+        <xsl:when test="@name = 'Animal Handling'">wis</xsl:when>
+        <xsl:when test="@name = 'Insight'">wis</xsl:when>
+        <xsl:when test="@name = 'Medicine'">wis</xsl:when>
+        <xsl:when test="@name = 'Perception'">wis</xsl:when>
+        <xsl:when test="@name = 'Survival'">wis</xsl:when>
+        <xsl:when test="@name = 'Deception'">cha</xsl:when>
+        <xsl:when test="@name = 'Intimidation'">cha</xsl:when>
+        <xsl:when test="@name = 'Performance'">cha</xsl:when>
+        <xsl:when test="@name = 'Persuasion'">cha</xsl:when>
+        <xsl:otherwise><xsl:value-of select="@att"/></xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="modifier" select="floor((../preceding-sibling::abilities/@*[name()=$attName] - 10) div 2)" />
     <div class="listElement">
       <div class="title"><xsl:value-of select="@name"/></div>
-      <div class="value"><xsl:value-of select="."/></div>
+      <div class="value">+<xsl:value-of select="$modifier + $pb + ."/></div>
     </div>
   </xsl:template>
 
@@ -147,7 +177,7 @@
 
   <xsl:template match="senses">
     <xsl:param name="pb" />
-    <xsl:variable name="dexModifier" select="floor((preceding-sibling::abilities/@dex - 10) div 2)" />
+    <xsl:variable name="wisModifier" select="floor((preceding-sibling::abilities/@wis - 10) div 2)" />
     <div class="list">
       <div class="title">Senses</div>
       <xsl:apply-templates select="*"/>
@@ -155,10 +185,10 @@
         <div class="title">passive Perception</div>
         <xsl:choose>
           <xsl:when test="preceding-sibling::skills/skill[@name = 'Perception']">
-            <div class="value"><xsl:value-of select="10 + $dexModifier + $pb"/></div>
+            <div class="value"><xsl:value-of select="10 + $wisModifier + $pb"/></div>
           </xsl:when>
           <xsl:otherwise>
-            <div class="value"><xsl:value-of select="10 + $dexModifier"/></div>
+            <div class="value"><xsl:value-of select="10 + $wisModifier"/></div>
           </xsl:otherwise>
         </xsl:choose>
       </div>
