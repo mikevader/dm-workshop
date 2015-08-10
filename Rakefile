@@ -17,6 +17,10 @@ task :make do
   itemTemplate = Nokogiri::XSLT(File.read('item_template.xsl'))
   File.open('items.html', 'w').write(itemTemplate.transform(itemDocument))
 
+  referenceDocument = Nokogiri::XML(File.read('references.xml'))
+  referenceTemplate = Nokogiri::XSLT(File.read('reference_template.xsl'))
+  File.open('references.html', 'w').write(referenceTemplate.transform(referenceDocument))
+
 end
 
 

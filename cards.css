@@ -14,16 +14,16 @@ body {
 	overflow: hidden;
 }
 
-.item .description {
+.reference .description, .reference .description table {
 	font-size: 12pt;
 }
 
-.item ul {
-	padding-left: 10px;
+.reference ul {
+	padding-left: 0px;
 	list-style-type: none;
 }
 
-.item li {
+.reference li {
 	margin-bottom: 20px;
 }
 

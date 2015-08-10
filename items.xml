@@ -1,77 +1,183 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cards>
   <item>
-    <name>Erblindet</name>
-    <background>img/blinded.png</img>
+    <name>Ring of Swimming</name>
+    <cite>DMH 193</cite>
+    <type>ring</type>
+    <rarity>uncommon</rarity>
+    <requiresAttunement>false</requiresAttunement>
     <description>
-        <ul>
-          <li>Eine erblindete Kreatur kann nichts sehen und alle Eigenschaftsproben die Sicht benötigen scheitern.</li>
-          <li>Angriffswürfe gegen erblindete Kreaturen haben Vorteil und erblindete Kreaturen haben Nachteil auf ihren Angriffswürfen.</li>
-        </ul>
+      You have a swimming speed of 40 feet (12m) while wearing this ring.
     </description>
   </item>
   <item>
-    <name>Verzaubert</name>
-    <description>
-    </description>
-  </item>
-  <item>
-    <name>Taub</name>
-    <description>
-    </description>
-  </item>
-  <item>
-    <name>Eingeschüchtert</name>
+    <name>Ring of Evasion</name>
+    <cite>DMH 191</cite>
+    <type>ring</type>
+    <rarity>rare</rarity>
+    <requiresAttunement>yes</requiresAttunement>
     <description>
     </description>
   </item>
   <item>
-    <name>Festgehalten</name>
+    <name>Ring of Protection</name>
+    <cite>DMH 191</cite>
+    <type>ring</type>
+    <rarity>rare</rarity>
+    <requiresAttunement>yes</requiresAttunement>
     <description>
     </description>
   </item>
   <item>
-    <name>Kampfunfähig</name>
+    <name>Ring of Necrotic Damage Resistance</name>
+    <cite>DMH 192</cite>
+    <type>ring</type>
+    <rarity>rare</rarity>
+    <requiresAttunement>yes</requiresAttunement>
     <description>
     </description>
   </item>
   <item>
-    <name>Unsichtbar</name>
+    <name>Potion of Clairvoyance</name>
+    <cite>DMH 187</cite>
+    <type>potion</type>
+    <rarity>rare</rarity>
+    <requiresAttunement>no</requiresAttunement>
     <description>
     </description>
   </item>
   <item>
-    <name>Gelähmt</name>
+    <name>Potion of Fire Breath</name>
+    <cite>DMH 187</cite>
+    <type>potion</type>
+    <rarity>uncommon</rarity>
+    <requiresAttunement>no</requiresAttunement>
     <description>
     </description>
   </item>
   <item>
-    <name>Versteinert</name>
+    <name>Potion of Growth</name>
+    <cite>DMH 187</cite>
+    <type>potion</type>
+    <rarity>uncommon</rarity>
+    <requiresAttunement>no</requiresAttunement>
     <description>
     </description>
   </item>
   <item>
-    <name>Vergiftet</name>
+    <name>Potion of Healing</name>
+    <cite>DMH 187</cite>
+    <type>potion</type>
+    <rarity>varied</rarity>
+    <requiresAttunement>no</requiresAttunement>
+    <description>
+      Healing , common, 2d4 + 2
+      Greater healing , uncommon , 4d4 + 4
+      Superior healing , rare , 8d4 + 8
+      Supreme healing, very rare , 10d4 + 20
+    </description>
+  </item>
+  <item>
+    <name>Potion of Heroism</name>
+    <cite>DMH 188</cite>
+    <type>potion</type>
+    <rarity>rare</rarity>
+    <requiresAttunement>no</requiresAttunement>
     <description>
     </description>
   </item>
   <item>
-    <name>Am Boden</name>
+    <name>Potion of Poison</name>
+    <cite>DMH 188</cite>
+    <type>potion</type>
+    <rarity>uncommon</rarity>
+    <requiresAttunement>no</requiresAttunement>
     <description>
     </description>
   </item>
   <item>
-    <name>Gefesselt</name>
+    <name>Potion of Psychic Resistance</name>
+    <cite>DMH 188</cite>
+    <type>potion</type>
+    <rarity>uncommon</rarity>
+    <requiresAttunement>no</requiresAttunement>
     <description>
     </description>
   </item>
   <item>
-    <name>Betäubt</name>
+    <name>Potion of Water Breathing</name>
+    <cite>DMH 188</cite>
+    <type>potion</type>
+    <rarity>uncommon</rarity>
+    <requiresAttunement>no</requiresAttunement>
     <description>
     </description>
   </item>
   <item>
-    <name>Bewusstlos</name>
+    <name>Sending Stone</name>
+    <type>Wondrous item</type>
+    <rarity>uncommon</rarity>
+    <cite>DMH 199</cite>
+    <description>
+    </description>
+  </item>
+  <item>
+    <name>Scroll of Protection</name>
+    <cite>DMH 199</cite>
+    <type>Scroll</type>
+    <rarity>rare</rarity>
+    <description>
+    </description>
+  </item>
+  <item>
+    <name>Elemental Gem</name>
+    <cite>DMH 167</cite>
+    <type>Wondrous item</type>
+    <rarity>uncommon</rarity>
+    <description>
+    </description>
+  </item>
+  <item>
+    <name>Javlin of Lightning</name>
+    <cite>DMH 178</cite>
+    <type>Weapon (javlin)</type>
+    <rarity>uncommon</rarity>
+    <requiresAttunement>no</requiresAttunement>
+    <description>
+    </description>
+  </item>
+  <item>
+    <name></name>
+    <type></type>
+    <rarity></rarity>
+    <description>
+    </description>
+  </item>
+  <item>
+    <name></name>
+    <type></type>
+    <rarity></rarity>
+    <description>
+    </description>
+  </item>
+  <item>
+    <name></name>
+    <type></type>
+    <rarity></rarity>
+    <description>
+    </description>
+  </item>
+  <item>
+    <name></name>
+    <type></type>
+    <rarity></rarity>
+    <description>
+    </description>
+  </item>
+  <item>
+    <name></name>
+    <type></type>
+    <rarity></rarity>
     <description>
     </description>
   </item>

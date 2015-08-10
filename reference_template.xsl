@@ -8,17 +8,21 @@
 
   <xsl:include href="template.xsl"/>
 
-  <xsl:template match="item" mode="front">
-    <div class="card item card-{(count(preceding-sibling::item) mod $pageSize) + 1}">
+  <xsl:template match="reference" mode="front">
+    <div class="card reference card-{(count(preceding-sibling::reference) mod $pageSize) + 1}">
+      <xsl:attribute name="style"><xsl:value-of select="backgroundStyle"/></xsl:attribute>
 
       <xsl:apply-templates select="name"/>
       <xsl:apply-templates select="description"/>
     </div>
   </xsl:template>
 
-  <xsl:template match="item" mode="back">
-    <div class="card item cardb-{(count(preceding-sibling::item) mod $pageSize) + 1}">
+  <xsl:template match="reference" mode="back">
+    <div class="card reference cardb-{(count(preceding-sibling::reference) mod $pageSize) + 1}">
       <xsl:attribute name="style"><xsl:value-of select="backgroundStyle"/></xsl:attribute>
+
+      <xsl:apply-templates select="name"/>
+      <xsl:apply-templates select="description"/>
     </div>
   </xsl:template>
 </xsl:stylesheet>

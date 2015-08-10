@@ -19,12 +19,13 @@
           <xsl:apply-templates select="cards/spell[position() mod $pageSize = 1]" />
           <xsl:apply-templates select="cards/monster[position() mod $pageSize = 1]" />
           <xsl:apply-templates select="cards/item[position() mod $pageSize = 1]" />
+          <xsl:apply-templates select="cards/reference[position() mod $pageSize = 1]" />
         </div>
       </body>
     </html>
   </xsl:template>
 
-  <xsl:template match="spell|monster|item">
+  <xsl:template match="spell|monster|item|reference">
     <!-- fronts -->
     <div class="page">
       <xsl:call-template name="printRows">
