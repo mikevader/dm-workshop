@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-  <xsl:key name="traitRef" match="//traits/trait" use="@id" />
+  <xsl:key name="traitRef" match="traits/trait[not(ancestor::monster)]" use="@id" />
 
   <xsl:param name="rows" select="2" />
   <xsl:param name="cols" select="2" />
@@ -100,7 +100,7 @@
     <xsl:param name="pb" />
     <div class="list">
       <div class="title">Skills</div>
-      <xsl:apply-templates select="*">
+      <xsl:apply-templates select="skill">
         <xsl:with-param name="pb" select="$pb"/>
       </xsl:apply-templates>
     </div>
@@ -176,7 +176,7 @@
     <xsl:variable name="wisModifier" select="floor((preceding-sibling::abilities/@wis - 10) div 2)" />
     <div class="list">
       <div class="title">Senses</div>
-      <xsl:apply-templates select="*"/>
+      <xsl:apply-templates select="sense"/>
       <div class="listElement">
         <div class="title">passive Perception</div>
         <xsl:choose>
@@ -206,7 +206,7 @@
 
   <xsl:template match="traits">
     <div class="bulletlist">
-      <xsl:apply-templates select="*"/>
+      <xsl:apply-templates select="trait"/>
     </div>
   </xsl:template>
 
@@ -218,7 +218,7 @@
         </xsl:if>
         <xsl:value-of select="@title"/>
       </div>
-      <xsl:apply-templates select="*"/>
+      <xsl:apply-templates select="action | meleeWeaponAttack | rangedWeaponAttack"/>
     </div>
   </xsl:template>
 
@@ -235,7 +235,7 @@
     </div>
   </xsl:template>
 
-  <xsl:template match="trait">
+  <xsl:template match="monster//trait">
     <div class="bulletpoint">
       <xsl:choose>
         <xsl:when test="@id">

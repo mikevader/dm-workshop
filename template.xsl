@@ -11,7 +11,7 @@
   <xsl:include href="item_template.xsl"/>
 -->
 
-  <xsl:template match="/">
+  <xsl:template match="cards">
     <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
 
     <html>
@@ -20,10 +20,10 @@
       </head>
       <body class="{$pageFormat}">
         <div class="container {$pageFormat}">
-          <xsl:apply-templates select="cards/spell[position() mod $pageSize = 1]" />
-          <xsl:apply-templates select="cards/monster[position() mod $pageSize = 1]" />
-          <xsl:apply-templates select="cards/item[position() mod $pageSize = 1]" />
-          <xsl:apply-templates select="cards/reference[position() mod $pageSize = 1]" />
+          <xsl:apply-templates select="spells/spell[position() mod $pageSize = 1]" />
+          <xsl:apply-templates select="monsters/monster[position() mod $pageSize = 1]" />
+          <xsl:apply-templates select="items/item[position() mod $pageSize = 1]" />
+          <xsl:apply-templates select="references/reference[position() mod $pageSize = 1]" />
         </div>
       </body>
     </html>
@@ -56,8 +56,9 @@
     <!-- split into rows -->
     <xsl:for-each select="$thePage[position() mod $cols = 1]">
       <div class="row">
+        <xsl:variable name="elementName" select="name(.)"/>
         <xsl:variable name="theRow"
-            select=". | following-sibling::*[position() &lt; $cols]" />
+            select=". | following-sibling::node()[name() = $elementName][position() &lt; $cols]" />
 
         <xsl:if test="$order = 'descending'">
           <!--
