@@ -11,53 +11,61 @@
 
   <xsl:template match="monster" mode="front">
     <div class="card monster card-{(count(preceding-sibling::monster) mod $pageSize) + 1}">
-      <xsl:apply-templates select="name"/>
-      <hr/>
-      <xsl:apply-templates select="stats"/>
-      <hr/>
-      <xsl:apply-templates select="traits"/>
+      <xsl:apply-templates select="*[@side = 'front'] | *[not(@side = 'back')]" />
+<!--       <xsl:apply-templates select="traits"/>
       <xsl:apply-templates select="actions"/>
       <xsl:apply-templates select="description"/>
+ -->    
     </div>
   </xsl:template>
 
   <xsl:template match="monster" mode="back">
     <div class="card monster cardb-{(count(preceding-sibling::monster) mod $pageSize) + 1}">
-      <xsl:apply-templates select="name"/>
+      <xsl:apply-templates select="name" />
+
+      <xsl:apply-templates select="*[@side = 'back'] | *[@side = 'both']" />
     </div>
+  </xsl:template>
+
+  <xsl:template match="type">
+    <div class="type"><xsl:value-of select="." /></div>
+  </xsl:template>
+
+  <xsl:template match="cite">
+    <div class="cite"><xsl:value-of select="." /></div>
   </xsl:template>
 
   <xsl:template match="stats">
     <xsl:variable name="pb" select="proficiency" />
-    <div class="stat">
-      <div class="title">Armor Class</div>
-      <div class="value"><xsl:value-of select="ac"/></div>
+    <div class="stats">
+      <div class="stat">
+        <div class="title">Armor Class</div>
+        <div class="value"><xsl:value-of select="ac"/></div>
+      </div>
+      <div class="stat">
+        <div class="title">Hip Points</div>
+        <div class="value"><xsl:value-of select="hp"/></div>
+      </div>
+      <div class="stat">
+        <div class="title">Speed</div>
+        <div class="value"><xsl:value-of select="speed"/></div>
+      </div>
+      <xsl:apply-templates select="abilities"/>
+      <xsl:apply-templates select="savingThrows">
+        <xsl:with-param name="pb" select="$pb"/>
+      </xsl:apply-templates>
+      <xsl:apply-templates select="skills">
+        <xsl:with-param name="pb" select="$pb"/>
+      </xsl:apply-templates>
+      <xsl:apply-templates select="dmgVulnerability"/>
+      <xsl:apply-templates select="dmgResistance"/>
+      <xsl:apply-templates select="dmgImmunity"/>
+      <xsl:apply-templates select="condImmunity"/>
+      <xsl:apply-templates select="senses">
+        <xsl:with-param name="pb" select="$pb"/>
+      </xsl:apply-templates>
+      <xsl:apply-templates select="cr"/>
     </div>
-    <div class="stat">
-      <div class="title">Hip Points</div>
-      <div class="value"><xsl:value-of select="hp"/></div>
-    </div>
-    <div class="stat">
-      <div class="title">Speed</div>
-      <div class="value"><xsl:value-of select="speed"/></div>
-    </div>
-    <hr/>
-    <xsl:apply-templates select="abilities"/>
-    <hr/>
-    <xsl:apply-templates select="savingThrows">
-      <xsl:with-param name="pb" select="$pb"/>
-    </xsl:apply-templates>
-    <xsl:apply-templates select="skills">
-      <xsl:with-param name="pb" select="$pb"/>
-    </xsl:apply-templates>
-    <xsl:apply-templates select="dmgVulnerability"/>
-    <xsl:apply-templates select="dmgResistance"/>
-    <xsl:apply-templates select="dmgImmunity"/>
-    <xsl:apply-templates select="condImmunity"/>
-    <xsl:apply-templates select="senses">
-      <xsl:with-param name="pb" select="$pb"/>
-    </xsl:apply-templates>
-    <xsl:apply-templates select="cr"/>
   </xsl:template>
 
   <xsl:template match="abilities">

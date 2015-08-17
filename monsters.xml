@@ -266,7 +266,7 @@
     <monster>
       <name>Dahari</name>
       <type>Dämon</type>
-      <cite></cite>
+      <cite>MM 234</cite>
       <stats>
         <proficiency>4</proficiency>
         <size>Large</size>
@@ -314,12 +314,12 @@
           The pudding can eat through 2-inch-thick, nonmagical wood or metal in 1 round.
         </trait>
       </traits>
-      <actions title="Actions">
+      <actions title="Actions" side="back">
         <meleeWeaponAttack name="Pseudopod">
           +5 to hit, reach 5ft., one target. <i>Hit:</i> 1d6 + 3 bludgeoning damage plus 4d8 acid damage. In addition, nonmagical armor worn by the target is partly dissolved and takes a permanent and cumulative -1 penalty to the AC it offers. The armor is destoyed if the penalty reduces its AC to 10.
         </meleeWeaponAttack>
       </actions>
-      <actions title="Reactions">
+      <actions title="Reactions" side="back">
         <action name="Split">
           When a pudding that is medium or larger is subjected to lightning or slashing damage, it splits into two new puddings if it has at least 10 hps. Each new pudding has hps equal to half the original pudding's, rounded down. New puddings are one size smaller than the original pudding.
         </action>

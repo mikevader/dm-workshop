@@ -43,7 +43,8 @@ div.container.A7 {
   margin: 2px;
 }
 
-.card {
+div.card {
+  position: relative;
   border: 1px solid black;
   overflow: hidden;
 }
@@ -74,8 +75,17 @@ div.container.A7 {
   font-family: Didot, Times New Roman, Times, serif;
 }
 
-.type {
+div.type {
+  position: relative;
   font-style: italic;
+  top: -5px;
+  margin-bottom: 5px;
+}
+
+div.cite {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
 }
 
 .classes {
@@ -103,15 +113,17 @@ div.container.A7 {
 }
 
 .abilities {
-  height: 30px;
+  height: 24px;
   text-align: justify;
   text-justify: distribute-all-lines;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .abilities .ability {
   vertical-align: top;
   width: 38px;
-  height: 30px;
+  height: 24px;
   display: inline-block;
   *display: inline;
 }
@@ -173,9 +185,25 @@ div.bulletpoint {
   font-style: italic;
 }
 
-.bulletpoint .type {
-  font-style: italic;
+.stats > div {
+  margin: 2px;
 }
+
+.monster div.type {
+  border-bottom: solid 1pt black;
+}
+
+.monster div.stats {
+  border-bottom: solid 1pt black;
+}
+
+.monster div.abilities {
+  border-top: solid 1pt black;
+  border-bottom: solid 1pt black;
+}
+
+
+
 
 @media all {
   body {
