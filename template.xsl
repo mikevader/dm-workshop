@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="html" encoding="UTF-8" indent="yes" omit-xml-declaration="yes" />
 
 <!--
   <xsl:param name="rows" select="2" />
@@ -9,12 +10,15 @@
   <xsl:include href="monster_template.xsl"/>
   <xsl:include href="item_template.xsl"/>
 -->
+
   <xsl:template match="/">
+    <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
+
     <html>
       <head>
         <link rel="stylesheet" type="text/css" href="cards.css"/>
       </head>
-      <body>
+      <body class="{$pageFormat}">
         <div class="container {$pageFormat}">
           <xsl:apply-templates select="cards/spell[position() mod $pageSize = 1]" />
           <xsl:apply-templates select="cards/monster[position() mod $pageSize = 1]" />

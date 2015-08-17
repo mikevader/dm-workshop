@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-  <xsl:output method="html" encoding="UTF-8" indent="yes" />
-
+  <xsl:key name="traitRef" match="//traits/trait" use="@id" />
 
   <xsl:param name="rows" select="2" />
   <xsl:param name="cols" select="2" />
@@ -10,7 +9,6 @@
 
   <xsl:include href="template.xsl"/>
 
-
   <xsl:template match="monster" mode="front">
     <div class="card monster card-{(count(preceding-sibling::monster) mod $pageSize) + 1}">
       <xsl:apply-templates select="name"/>
@@ -18,7 +16,6 @@
       <xsl:apply-templates select="stats"/>
       <hr/>
       <xsl:apply-templates select="traits"/>
-      <hr/>
       <xsl:apply-templates select="actions"/>
       <xsl:apply-templates select="description"/>
     </div>
@@ -29,7 +26,6 @@
       <xsl:apply-templates select="name"/>
     </div>
   </xsl:template>
-
 
   <xsl:template match="stats">
     <xsl:variable name="pb" select="proficiency" />
@@ -216,12 +212,17 @@
 
   <xsl:template match="actions">
     <div class="bulletlist">
-      <div class="title">Actions</div>
+      <div class="title">
+        <xsl:if test="not(@title)">
+          Actions
+        </xsl:if>
+        <xsl:value-of select="@title"/>
+      </div>
       <xsl:apply-templates select="*"/>
     </div>
   </xsl:template>
 
-  <xsl:template match="meleeWeaponAttack | rangedWeaponAttack | action | trait">
+  <xsl:template match="meleeWeaponAttack | rangedWeaponAttack | action">
     <div class="bulletpoint">
       <div class="title"><xsl:value-of select="@name"/>.</div>
       <xsl:if test="name() = 'meleeWeaponAttack'">
@@ -231,6 +232,23 @@
         <i>Ranged Weapon Attack: </i>
       </xsl:if>
       <xsl:copy-of select="."/>
+    </div>
+  </xsl:template>
+
+  <xsl:template match="trait">
+    <div class="bulletpoint">
+      <xsl:choose>
+        <xsl:when test="@id">
+          <xsl:for-each select="key('traitRef', @id)">
+            <div class="title"><xsl:value-of select="@name"/>.</div>
+            <xsl:copy-of select="."/>
+          </xsl:for-each>
+        </xsl:when>
+        <xsl:otherwise>
+          <div class="title"><xsl:value-of select="@name"/>.</div>
+          <xsl:copy-of select="."/>
+        </xsl:otherwise>
+      </xsl:choose>
     </div>
   </xsl:template>
 

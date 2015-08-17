@@ -198,69 +198,12 @@
   </monster>
 
   <monster>
+    <cite>MM 192</cite>
     <name>Heshtoth</name>
     <type>Dämon</type>
     <stats>
       <proficiency>3</proficiency>
       <size>Medium</size>
-      <ac>14</ac>
-      <hp>104</hp>
-      <speed>
-        fly 50 ft.
-      </speed>
-      <abilities str="16" dex="19" con="14" int="10" wis="15" cha="11"/>
-      <skills>
-        <skill name="Perception">0</skill>
-        <skill name="Stealth" >0</skill>
-      </skills>
-      <dmgResistance>
-        <bludgeoning/>
-        <piercing/>
-        <slashing/>
-      </dmgResistance>        
-      <dmgImmunity>
-        <poisen/>
-      </dmgImmunity>
-      <condImmunity>
-        <grappled/>
-        <paralyzed/>
-        <petrified/>
-        <poisened/>
-        <prone/>
-        <restrained/>
-        <unconscious/>
-      </condImmunity>
-      <senses>
-        <sense name="darkvision">60 ft</sense>
-      </senses>
-      <languages></languages>
-      <cr>6 (2'300 XP)</cr>
-    </stats>
-    <traits>
-      <trait name="Unsichtbarkeit">
-        Ist unsichtbar.
-      </trait>
-    </traits>
-    <actions>
-      <action name="Mehrfachattacke">
-        Entweder zwei Nachattacken, zwei Fernattacken oder ein Erdrücken
-      </action>
-      <meleeWeaponAttack name="Schlag">
-        +6 to hit, reach 5ft., one target. <i>Hit:</i> 2d6 + 3 bludgeoning damage.
-      </meleeWeaponAttack>
-    </actions>
-    <description>
-      
-    </description>
-  </monster>
-
-
-  <monster>
-    <name>Dahari</name>
-    <type>Dämon</type>
-    <stats>
-      <proficiency>4</proficiency>
-      <size>Large</size>
       <ac>14</ac>
       <hp>104</hp>
       <speed>
@@ -298,14 +241,87 @@
       <trait name="Unsichtbarkeit">
         Ist unsichtbar.
       </trait>
+      <trait name="Avoidance" cite="MM 81">
+        Wenn der Heshtoth Ziel eines Effekts wird, welches im einen Rettungswurf erlaubt um nur halben Schaden zu nehmen, nimmt er stattdessen keinen Schaden bei einem erfolgreichen Rettungswurf und halben Schaden bei einem Misserfolg.
+      </trait>
     </traits>
     <actions>
       <action name="Mehrfachattacke">
-        Entweder zwei Nachattacken, zwei Fernattacken oder ein Erdrücken
+        Kann zwei Attacken ausführen.
       </action>
-      <meleeWeaponAttack name="Schlag">
-        +6 to hit, reach 5ft., one target. <i>Hit:</i> 2d6 + 3 bludgeoning damage.
+      <meleeWeaponAttack name="Schwert">
+        +7 to hit, reach 5ft., one target. <i>Hit:</i> 2d6 + 3 slashing damage.
       </meleeWeaponAttack>
+      <rangedWeaponAttack name="Peitsche">
+        +6 to hit, range 5/15., one target. <i>Hit:</i> target is restrained until it is freed: action for a DC 10 Strenght check, itself or another creature within 5 feet, or deal 5 damage slashing damage to the whip (AC 10).
+      </rangedWeaponAttack>
+    </actions>
+    <description>
+      
+    </description>
+  </monster>
+
+
+  <monster>
+    <name>Dahari</name>
+    <type>Dämon</type>
+    <cite></cite>
+    <stats>
+      <proficiency>4</proficiency>
+      <size>Large</size>
+      <ac>14</ac>
+      <hp>104</hp>
+      <speed>
+        fly 50 ft.
+      </speed>
+      <abilities str="16" dex="5" con="16" int="1" wis="6" cha="1"/>
+      <skills>
+      </skills>
+      <dmgResistance>
+        <bludgeoning/>
+        <piercing/>
+        <slashing/>
+      </dmgResistance>        
+      <dmgImmunity>
+        <acid/>
+        <cold/>
+        <lightning/>
+        <poisen/>
+        <slashing/>
+      </dmgImmunity>
+      <condImmunity>
+        <blinded/>
+        <charmed/>
+        <deafened/>
+        <exhaustion/>
+        <frightened/>
+        <prone/>
+      </condImmunity>
+      <senses>
+        <sense name="darkvision">60 ft (blind beyond)</sense>
+      </senses>
+      <languages></languages>
+      <cr>6 (2'300 XP)</cr>
+    </stats>
+    <traits>
+      <trait id="amorphous" />
+      <trait name="Spider Climb">
+        can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.
+      </trait>
+      <trait name="Corrosive Form">
+        A creature that touches the pudding or hits it with a melee attack while within 5 feet of it takes 4 (1d8) acid damage. Any nonmagical weapon made of metal or wood that hits the pudding corrodes. After dealing damage, the weapon takes a permanent and cumulative −1 penalty to damage rolls. If its penalty drops to −5, the weapon is destroyed. Nonmagical ammunition made of metal or wood that hits the pudding is destroyed after dealing damage.
+        The pudding can eat through 2-inch-thick, nonmagical wood or metal in 1 round.
+      </trait>
+    </traits>
+    <actions title="Actions">
+      <meleeWeaponAttack name="Pseudopod">
+        +5 to hit, reach 5ft., one target. <i>Hit:</i> 1d6 + 3 bludgeoning damage plus 4d8 acid damage. In addition, nonmagical armor worn by the target is partly dissolved and takes a permanent and cumulative -1 penalty to the AC it offers. The armor is destoyed if the penalty reduces its AC to 10.
+      </meleeWeaponAttack>
+    </actions>
+    <actions title="Reactions">
+      <action name="Split">
+        When a pudding that is medium or larger is subjected to lightning or slashing damage, it splits into two new puddings if it has at least 10 hps. Each new pudding has hps equal to half the original pudding's, rounded down. New puddings are one size smaller than the original pudding.
+      </action>
     </actions>
     <description>
       
@@ -465,9 +481,11 @@
       
     </description>
   </monster>
-
-<!--
-  <item>
-  </item>
--->
 </cards>
+
+<traits>
+  <trait id="amorphous" name="Gestaltlos">
+    Can move through a space as narrow as 1 inch wide without squeezing.
+  </trait>
+</traits>
+
