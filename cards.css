@@ -88,10 +88,6 @@ div.cite {
   right: 20px;
 }
 
-.classes {
-  float: right;
-}
-
 .title {
   font-weight: bold;
 }
@@ -186,7 +182,14 @@ div.bulletpoint {
 }
 
 .stats > div {
-  margin: 2px;
+  margin: 2px 0px 2px 0px;
+}
+
+
+.spell div.classes {
+  position: absolute;
+  top: 6px;
+  right: 6px;
 }
 
 .monster div.type {
