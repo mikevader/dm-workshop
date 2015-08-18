@@ -2,17 +2,17 @@
 <cards>
   <items>
     <item>
-      <name>Ring of Swimming</name>
+      <name>Ring des Schwimmens</name>
       <cite>DMH 193</cite>
       <type>ring</type>
       <rarity>uncommon</rarity>
       <requiresAttunement>false</requiresAttunement>
       <description>
-        You have a swimming speed of 40 feet (12m) while wearing this ring.
+        Du hast eine Schwimmgeschwindigkeit von 12 Schritt (40 ft) solange du diesen Ring trägst.
       </description>
     </item>
     <item>
-      <name>Ring of Evasion</name>
+      <name>Ring des Ausweichens</name>
       <cite>DMH 191</cite>
       <type>ring</type>
       <rarity>rare</rarity>
@@ -21,7 +21,7 @@
       </description>
     </item>
     <item>
-      <name>Ring of Protection</name>
+      <name>Schutzring</name>
       <cite>DMH 191</cite>
       <type>ring</type>
       <rarity>rare</rarity>
@@ -30,7 +30,7 @@
       </description>
     </item>
     <item>
-      <name>Ring of Necrotic Damage Resistance</name>
+      <name>Widerstandsring gegen Necrotic Schaden</name>
       <cite>DMH 192</cite>
       <type>ring</type>
       <rarity>rare</rarity>
@@ -39,7 +39,7 @@
       </description>
     </item>
     <item>
-      <name>Potion of Clairvoyance</name>
+      <name>Hellsichttrank</name>
       <cite>DMH 187</cite>
       <type>potion</type>
       <rarity>rare</rarity>
@@ -48,7 +48,7 @@
       </description>
     </item>
     <item>
-      <name>Potion of Fire Breath</name>
+      <name>Feueratemtrank</name>
       <cite>DMH 187</cite>
       <type>potion</type>
       <rarity>uncommon</rarity>
@@ -57,7 +57,7 @@
       </description>
     </item>
     <item>
-      <name>Potion of Growth</name>
+      <name>Wachstumstrank</name>
       <cite>DMH 187</cite>
       <type>potion</type>
       <rarity>uncommon</rarity>
@@ -66,7 +66,7 @@
       </description>
     </item>
     <item>
-      <name>Potion of Healing</name>
+      <name>Heiltrank</name>
       <cite>DMH 187</cite>
       <type>potion</type>
       <rarity>varied</rarity>
@@ -79,7 +79,7 @@
       </description>
     </item>
     <item>
-      <name>Potion of Heroism</name>
+      <name>Heldentrank</name>
       <cite>DMH 188</cite>
       <type>potion</type>
       <rarity>rare</rarity>
@@ -88,7 +88,7 @@
       </description>
     </item>
     <item>
-      <name>Potion of Poison</name>
+      <name>Gift</name>
       <cite>DMH 188</cite>
       <type>potion</type>
       <rarity>uncommon</rarity>
@@ -97,7 +97,7 @@
       </description>
     </item>
     <item>
-      <name>Potion of Psychic Resistance</name>
+      <name>Widerstandstrank gegen Psychic Schaden</name>
       <cite>DMH 188</cite>
       <type>potion</type>
       <rarity>uncommon</rarity>
@@ -106,7 +106,7 @@
       </description>
     </item>
     <item>
-      <name>Potion of Water Breathing</name>
+      <name>Wasseratmungstrank</name>
       <cite>DMH 188</cite>
       <type>potion</type>
       <rarity>uncommon</rarity>
@@ -139,7 +139,7 @@
       </description>
     </item>
     <item>
-      <name>Javlin of Lightning</name>
+      <name>Speer des Blitzes</name>
       <cite>DMH 178</cite>
       <type>Weapon (javlin)</type>
       <rarity>uncommon</rarity>
