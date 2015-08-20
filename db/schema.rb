@@ -11,7 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150820193801) do
+ActiveRecord::Schema.define(version: 20150820205930) do
+
+  create_table "spells", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "level"
+    t.string   "school"
+    t.string   "classes"
+    t.string   "casting_time"
+    t.string   "range"
+    t.string   "components"
+    t.string   "duration"
+    t.text     "short_description"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "spells", ["level"], name: "index_spells_on_level"
+  add_index "spells", ["name"], name: "index_spells_on_name"
+  add_index "spells", ["user_id", "created_at"], name: "index_spells_on_user_id_and_created_at"
+  add_index "spells", ["user_id"], name: "index_spells_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
