@@ -16,5 +16,8 @@
 !/log/.keep
 /tmp
 
-# Ignore Sprint files
+# Ignore Sprint files.
 /spring/*.pid
+
+# Ignore uploaded test images.
+/public/uploads

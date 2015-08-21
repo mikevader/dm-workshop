@@ -4,7 +4,7 @@ class SpellTest < ActiveSupport::TestCase
   
   def setup
     @user = users(:michael)
-    @spell = @user.spells.build(name: "Fireball", level: 3, school: "evocation")
+    @spell = @user.spells.build(name: "Speak with Plants", level: 3, school: "transmutation")
   end
   
   test "should be valid" do

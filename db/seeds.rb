@@ -21,3 +21,13 @@ User.create!(name:  "Example User",
                activated: true,
                activated_at: Time.zone.now)
 end
+
+
+users = User.order(:created_at).take(6)
+30.times do |n|
+  name = Faker::Hacker.noun
+  level = Faker::Number.between(0, 9)
+  school = Faker::Hacker.noun
+  description = Faker::Lorem.sentence(5)
+  users.each { |user| user.spells.create!(name: name, level: level, school: school, description: description) }
+end

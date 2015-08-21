@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150820205930) do
+ActiveRecord::Schema.define(version: 20150821092030) do
 
   create_table "spells", force: :cascade do |t|
     t.string   "name"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20150820205930) do
     t.integer  "user_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.string   "picture"
   end
 
   add_index "spells", ["level"], name: "index_spells_on_level"
