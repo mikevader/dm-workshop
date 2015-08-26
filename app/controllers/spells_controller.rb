@@ -1,6 +1,14 @@
 class SpellsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
+  before_action :logged_in_user, only: [:index, :edit, :update, :create, :destroy]
   before_action :correct_user, only: :destroy
+  
+  def index
+    @spell = current_user.spells.build
+    @spells = Spell.paginate(page: params[:page])
+  end
+
+  def new
+  end
   
   def create
     @spell = current_user.spells.build(spell_params)
@@ -10,6 +18,20 @@ class SpellsController < ApplicationController
     else
       @feed_items = []
       render 'static_pages/home'
+    end
+  end
+    
+  def edit
+    @spell = Spell.find(params[:id])
+  end
+  
+  def update
+    @spell = Spell.find(params[:id])
+    if @spell.update_attributes(spell_params)
+      flash[:success] = "Spell updated"
+      redirect_to spells_path
+    else
+      render 'edit'
     end
   end
   

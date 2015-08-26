@@ -1,0 +1,118 @@
+
+div.spells {
+  display: flex;
+  display: -webkit-flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  padding: 0;
+}
+
+div.card {
+  color: maroon;
+  border-color: maroon;
+  background-color: maroon;
+}
+
+.card {
+  border: 2mm solid;
+  border-radius: 4px;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  font-family: 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+  font-size: 8pt;
+}
+
+.card-content-container {
+  padding:2mm;
+  padding-top:1mm;
+  border-radius: 2mm;
+  margin-top:0px;
+  background-color: white;
+  border-color: inherit;
+  flex: 1;
+  font-size: inherit;
+}
+
+.card-title {
+  font-size: 13pt;
+  line-height: 7mm;
+
+  height: 8mm;
+  padding-left: 2mm;
+  font-family: Lora, 'Calisto MT', 'Bookman Old Style', Bookman, 'Goudy Old Style', Garamond, 'Hoefler Text', 'Bitstream Charter', Georgia, serif;
+  font-variant: small-caps;
+  font-weight: bold;
+  background-color: inherit;
+  color: white;
+}
+
+.card-subtitle {
+  height: 18px;
+  line-height: 18px;
+  margin-bottom: 0.0em;
+  font-family: 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+  font-size: 10pt;
+  font-style: italic;
+}
+
+.card-property-line {
+  text-indent: -1em;
+  margin-left: 1em;
+  font-size: inherit;
+  color: black;
+}
+
+.card-property-name {
+  display: inline;
+  font-size: inherit;
+  font-weight: bold;
+}
+.card-property-text {
+  display: inline;
+}
+
+.card-section {
+  border-bottom: 1px solid;
+  font-size: 10pt;
+  font-variant: small-caps;
+  font-weight: normal;
+  letter-spacing: 1px;
+  margin: 0;
+  border-color: inherit;
+}
+
+.card-section + .card-element {
+  margin-top: 0.3em;
+}
+
+.card-p {
+
+}
+
+.card-description-line {
+  margin-top: 0.5em;
+  margin-bottom: 0.0em;
+  font-size: inherit;
+  color: black;
+}
+.card-description-name {
+  display: inline;
+  font-size: inherit;
+  font-style: italic;
+  font-weight: bold;
+}
+.card-description-name::after {
+  content: ".";
+}
+.card-description-text {
+  display: inline;
+}
+

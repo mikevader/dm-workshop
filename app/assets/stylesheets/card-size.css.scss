@@ -1,0 +1,15 @@
+/* Default card size */
+.card {
+    width:2.5in;
+    height:3.5in;
+}
+
+/* Poker / Magic card size */
+.card-size-25x35 {
+    width:2.5in;
+    height:3.5in;
+}
+.card-size-25x35 .card-back-icon {
+    width: 1in;
+    height: 1in;
+}

@@ -1,15 +1,35 @@
-<li id="spell-<%= spell.id %>">
-  <%= link_to gravatar_for(spell.user, size:30), spell.user
-%>
-  <span class="name"><%= spell.name %></span>
-  <span class="level"><%= spell.level %></span>
-  <span class="school"><%= spell.school %></span>
-  <span class="description">
-    <%= spell.description %>
-    <%= image_tag spell.picture.url if spell.picture? %>
-  </span>
-  <span class="user"><%= link_to spell.user.name, spell.user %></span>
-  <% if current_user?(spell.user) %>
+<div id="spell-<%= spell.id %>" class="card .card-size-25x35">
+  <div class="card-title"><%= spell.name %></div>
+  <div class="card-content-container">
+    <div class="card-element card-subtitle"><%= "#{spell.level} level #{spell.school}" %></div>
+    <div class="card-subtitle"><%= spell.classes %></div>
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Casting Time</h4>
+      <p class="card-property-text"><%= spell.casting_time %></p>
+    </div>
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Range</h4>
+      <p class="card-property-text"><%= spell.range %></p>
+    </div>
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Components</h4>
+      <p class="card-property-text"><%= spell.components %></p>
+    </div>
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Duration</h4>
+      <p class="card-property-text"><%= spell.duration %></p>
+    </div>
+    <div class="card-element card-description-line">
+      <p class="card-description-text"><%= spell.short_description %></p>
+    </div>
+    <div class="card-element card-description-line">
+      <p class="card-description-text"><%= spell.description %></p>
+    </div>
+  </div>
+</div>
+<div class="card-actions">
+  <% if current_user?(spell.user) || current_user.admin? %>
+  <%= link_to "edit", edit_spell_path(spell) %><br/>
   <%= link_to "delete", spell, method: :delete, data: { confirm: "You sure?" } %>
   <% end %>
-</li>
+</div>
