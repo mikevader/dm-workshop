@@ -1,13 +1,40 @@
 
-div.spells {
-  display: flex;
+@mixin flexbox {
   display: -webkit-flex;
+  display: flex;
+}
+
+@mixin justify-content($values) {
+  -webkit-justify-content: $values;
+  justify-content: $values;
+}
+
+@mixin align-content($values) {
+  -webkit-align-content: center;
   align-content: center;
-  justify-content: center;
-  flex-direction: row;
-  -webkit-flex-direction: row;
-  flex-wrap: wrap;
-  -webkit-flex-wrap: wrap;
+}
+
+@mixin flex-direction($values) {
+  -webkit-flex-direction: $values;
+  flex-direction: $values;
+}
+
+@mixin flex-wrap($values) {
+  -webkit-flex-wrap: $values;
+  flex-wrap: $values;
+}
+
+@mixin flex($values) {
+  -webkit-flex: 1;
+  flex: 1;
+}
+
+div.spells {
+  @include flexbox();
+  @include align-content(center);
+  @include justify-content(center);
+  @include flex-direction(row);
+  @include flex-wrap(wrap);
   padding: 0;
 }
 
@@ -17,15 +44,17 @@ div.card {
   background-color: maroon;
 }
 
+.card-element {
+  @include flex(1);
+}
+
 .card {
   border: 2mm solid;
   border-radius: 4px;
   box-sizing: border-box;
   position: relative;
-  display: flex;
-  display: -webkit-flex;
-  flex-direction: column;
-  -webkit-flex-direction: column;
+  @include flexbox();
+  @include flex-direction(column);
   font-family: 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
   font-size: 8pt;
 }
@@ -37,7 +66,7 @@ div.card {
   margin-top:0px;
   background-color: white;
   border-color: inherit;
-  flex: 1;
+  @include flex(1);
   font-size: inherit;
 }
 
@@ -95,6 +124,10 @@ div.card {
 
 .card-p {
 
+}
+
+.card-fill {
+  @include flex(1);
 }
 
 .card-description-line {

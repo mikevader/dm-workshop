@@ -20,7 +20,7 @@ class SpellsInterfaceTest < ActionDispatch::IntegrationTest
     assert_difference 'Spell.count', 1 do
       post spells_path, spell: { name: "Slow", level: 3, school: "transmutation", description: description }
     end
-    assert_redirected_to root_url
+    assert_redirected_to spells_url
     follow_redirect!
     assert_match description, response.body
     # Delete a post.

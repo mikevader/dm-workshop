@@ -1,32 +1,52 @@
 <%= render 'shared/error_messages', object: f.object %>
 
-<%= f.label :name %>
-<%= f.text_field :name, class: 'form-control' %>
+<%= content_tag :div, class: 'form-group' do -%>
+  <%= f.label :name, class: 'control-label col-sm-3' %>
+  <%= content_tag(:div, f.text_field(:name, class: 'form-control'), class: 'col-sm-9') %>
+<% end -%>
 
-<%= f.label :level %>
-<%= f.text_field :level, class: 'form-control' %>
+<%= content_tag :div, class: 'form-group' do -%>
+  <%= f.label :level, class: 'control-label col-sm-3'  %>
+  <%= content_tag(:div, f.text_field(:level, class: 'form-control'), class: 'col-sm-3') %>
+<% end -%>
 
-<%= f.label :school %>
-<%= f.text_field :school, class: 'form-control' %>
+<%= content_tag :div, class: 'form-group' do -%>
+  <%= f.label :school, class: 'control-label col-sm-3'  %>
+  <%= content_tag(:div, f.text_field(:school, class: 'form-control'), class: 'col-sm-9') %>
+<% end -%>
 
-<%= f.label :classes %>
-<%= f.text_field :classes, class: 'form-control' %>
+<%= content_tag :div, class: 'form-group' do -%>
+  <%= f.label :classes, class: 'control-label col-sm-3'  %>
+  <%= content_tag(:div, f.text_field(:classes, class: 'form-control'), class: 'col-sm-9') %>
+<% end -%>
 
-<%= f.label :casting_time %>
-<%= f.text_field :casting_time, class: 'form-control' %>
+<%= content_tag :div, class: 'form-group' do -%>
+  <%= f.label :casting_time, class: 'control-label col-sm-3'  %>
+  <%= content_tag(:div, f.text_field(:casting_time, class: 'form-control'), class: 'col-sm-6') %>
+<% end -%>
 
-<%= f.label :range %>
-<%= f.text_field :range, class: 'form-control' %>
+<%= content_tag :div, class: 'form-group' do -%>
+  <%= f.label :range, class: 'control-label col-sm-3'  %>
+  <%= content_tag(:div, f.text_field(:range, class: 'form-control'), class: 'col-sm-6') %>
+<% end -%>
 
-<%= f.label :components %>
-<%= f.text_field :components, class: 'form-control' %>
+<%= content_tag :div, class: 'form-group' do -%>
+  <%= f.label :components, class: 'control-label col-sm-3'  %>
+  <%= content_tag(:div, f.text_field(:components, class: 'form-control'), class: 'col-sm-9') %>
+<% end -%>
 
-<%= f.label :duration %>
-<%= f.text_field :duration, class: 'form-control' %>
+<%= content_tag :div, class: 'form-group' do -%>
+  <%= f.label :duration, class: 'control-label col-sm-3'  %>
+  <%= content_tag(:div, f.text_field(:duration, class: 'form-control'), class: 'col-sm-9') %>
+<% end -%>
 
-<%= f.label :short_description %>
-<%= f.text_area :short_description, class: 'form-control' %>
+<%= content_tag :div, class: 'form-group' do -%>
+  <%= f.label :short_description, class: 'control-label col-sm-3'  %>
+  <%= content_tag(:div, f.text_area(:short_description, class: 'form-control'), class: 'col-sm-9') %>
+<% end -%>
 
-<%= f.label :description %>
-<%= f.text_area :description, class: 'form-control' %>
+<%= content_tag :div, class: 'form-group' do -%>
+  <%= f.label :description, class: 'control-label col-sm-3'  %>
+  <%= content_tag(:div, f.text_area(:description, class: 'form-control'), class: 'col-sm-9') %>
+<% end -%>
 
