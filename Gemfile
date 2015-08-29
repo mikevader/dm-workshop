@@ -39,6 +39,10 @@ gem 'bootstrap-will_paginate', '~> 0.0.10'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+group :development do
+  gem 'guard-livereload', '~> 2.4', require: false
+end
+
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
