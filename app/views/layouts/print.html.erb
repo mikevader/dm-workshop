@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= stylesheet_link_tag    'print', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'print', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <%= render 'layouts/shim' %>
+    <%= render 'layouts/livereload' if Rails.env.development?%>
+  </head>
+  <body class="page-background">
+    <% flash.each do |message_type, message| %>
+    <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+    <% end %>
+    <div class="output-container" id="output-container">
+      <%= yield %>
+    </div>
+    <%= debug(params) if Rails.env.development? %>
+  </body>
+</html>

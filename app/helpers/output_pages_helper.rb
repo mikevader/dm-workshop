@@ -1,0 +1,2 @@
+module OutputPagesHelper
+end

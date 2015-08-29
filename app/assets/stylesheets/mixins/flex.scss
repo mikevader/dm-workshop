@@ -1,0 +1,29 @@
+@mixin flexbox {
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin justify-content($values) {
+  -webkit-justify-content: $values;
+  justify-content: $values;
+}
+
+@mixin align-content($values) {
+  -webkit-align-content: center;
+  align-content: center;
+}
+
+@mixin flex-direction($values) {
+  -webkit-flex-direction: $values;
+  flex-direction: $values;
+}
+
+@mixin flex-wrap($values) {
+  -webkit-flex-wrap: $values;
+  flex-wrap: $values;
+}
+
+@mixin flex($values) {
+  -webkit-flex: 1;
+  flex: 1;
+}

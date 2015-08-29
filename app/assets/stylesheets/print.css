@@ -12,6 +12,6 @@
  *
  *= require cards
  *= require card-size
- *= require custom
+ *= require output
  *= require_self
  */
