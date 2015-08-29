@@ -17,6 +17,11 @@ module SessionsHelper
     user == current_user
   end
   
+  # Returns true if the current user is an admin
+  def admin_user?
+    current_user.admin? if logged_in?
+  end
+    
   # Returns the user corresponding to the remember token cookie.
   def current_user
     if (user_id = session[:user_id])
@@ -29,7 +34,7 @@ module SessionsHelper
       end
     end
   end
-  
+
   # Returns true if the user is logged in, false otherwise.
   def logged_in?
     !current_user.nil?

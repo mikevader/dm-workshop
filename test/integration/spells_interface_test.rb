@@ -20,7 +20,7 @@ class SpellsInterfaceTest < ActionDispatch::IntegrationTest
     assert_difference 'Spell.count', 1 do
       post spells_path, spell: { name: "Slow", level: 3, school: "transmutation", description: description }
     end
-    assert_redirected_to root_url
+    assert_redirected_to spells_url
     follow_redirect!
     assert_match description, response.body
     # Delete a post.
@@ -31,6 +31,6 @@ class SpellsInterfaceTest < ActionDispatch::IntegrationTest
     end
     # Visit a different user.
     get user_path(users(:archer))
-    assert_select 'a', text: 'delete', count: 0
+    assert_select 'a', text: 'delete', count: 1
   end
 end

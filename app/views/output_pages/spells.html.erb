@@ -1,0 +1,8 @@
+
+<% @spells.each_slice(9) do |slice| -%>
+<page class="page page-preview" size="A4" style="background-color:white;">
+  <% slice.each do |spell| -%>
+    <%= render spell %>
+  <% end -%>
+</page>
+<% end -%>

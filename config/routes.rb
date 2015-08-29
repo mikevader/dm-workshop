@@ -6,11 +6,13 @@ Rails.application.routes.draw do
   get     'login'   => 'sessions#new'
   post    'login'   => 'sessions#create'
   delete  'logout'  => 'sessions#destroy'
+  
+  get     'print'   => 'output_pages#spells'
 
   resources :users
+  resources :spells
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
-  resources :spells, only: [:create, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

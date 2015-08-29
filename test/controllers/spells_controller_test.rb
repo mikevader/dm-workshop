@@ -20,9 +20,18 @@ class SpellsControllerTest < ActionController::TestCase
     assert_redirected_to login_url
   end
 
-  test "should redirect destroy for wrong micropost" do
+  test "should redirect to index after destory" do
     log_in_as(users(:michael))
     spell = spells(:fireball)
+    assert_difference 'Spell.count', -1 do
+      delete :destroy, id: spell
+    end
+    assert_redirected_to spells_url
+  end
+
+  test "should redirect destroy for wrong spell" do
+    log_in_as(users(:archer))
+    spell = spells(:bane)
     assert_no_difference 'Spell.count' do
       delete :destroy, id: spell
     end

@@ -1,0 +1,15 @@
+<% provide(:title, 'All spells') %>
+<h1>All spells</h1>
+
+<div class="row">
+  <div class="col-md-8">
+    <h3>Spell Feed</h3>
+    <%= will_paginate %>
+
+    <div class="spells">
+      <%= render @spells %>
+    </div>
+
+    <%= will_paginate %>
+  </div>
+</div>
