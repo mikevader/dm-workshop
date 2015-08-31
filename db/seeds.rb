@@ -2,7 +2,9 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
 
-User.create!(name:  "Example User",
+require 'Nokogiri'
+
+default = User.create!(name:  "Example User",
              email: "example@railstutorial.org",
              password:              "foobar",
              password_confirmation: "foobar",
@@ -10,24 +12,44 @@ User.create!(name:  "Example User",
              activated: true,
              activated_at: Time.zone.now)
 
-99.times do |n|
-  name  = Faker::Name.name
-  email = "example-#{n+1}@railstutorial.org"
-  password = "password"
-  User.create!(name:  name,
-               email: email,
-               password:              password,
-               password_confirmation: password,
-               activated: true,
-               activated_at: Time.zone.now)
-end
 
 
-users = User.order(:created_at).take(6)
-30.times do |n|
-  name = Faker::Hacker.noun
-  level = Faker::Number.between(0, 9)
-  school = Faker::Hacker.noun
-  description = Faker::Lorem.sentence(5)
-  users.each { |user| user.spells.create!(name: name, level: level, school: school, description: description) }
+f = File.open("/Users/michael/Documents/Hobbies/Cards/spells.xml")
+doc = Nokogiri::Slop(f)
+
+puts "new spells"
+doc.xpath('//cards/spells/spell').each do |spell|
+  #puts "#{spell}"
+  
+  name = spell.xpath('name').text
+  puts "inscribe spell: #{name}"
+  type = spell.xpath('type').text
+  match = /(?<school>\w*) cantrip|(?<level>\d*)[a-z-]* (?<school>\w*)/.match(type)
+  level = match[:level].nil? ? 0 : match[:level]
+  puts "    level: #{level}"
+  school = match[:school]
+  puts "    school: #{school}"
+  classes = spell.classes.xpath('class').map { |node| node.text }.join(', ')
+  puts "    classes: #{classes}"
+  casting_time = spell.castingtime.text
+  puts "    casting_time: #{casting_time}"
+  components = spell.components.text
+  puts "    components: #{components}"
+  range = spell.range.text
+  puts "    range: #{range}"
+  duration = spell.duration.text
+  puts "    duration: #{duration}"
+  description = spell.description.text unless spell.description.nil?
+  puts "    description: #{description}"
+  short_description = spell.shortdescription.text unless spell.shortdescription.nil?
+  puts "    short_description: #{short_description}"
+  new_spell = default.spells.create!(name: name, level: level, school: school, description: description)
+  
+  new_spell.classes = classes
+  new_spell.casting_time = casting_time
+  new_spell.components = components
+  new_spell.range = range
+  new_spell.duration = duration
+  new_spell.short_description = short_description
+  new_spell.save
 end
