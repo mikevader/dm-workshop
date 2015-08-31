@@ -150,7 +150,7 @@
     </spell>
     <spell>
       <name>Blinding Smite</name>
-      <type>3rd-level</type>
+      <type>3rd-level evocation</type>
       <classes>
         <class>Paladin</class>
       </classes>
