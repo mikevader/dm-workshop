@@ -1,4 +1,4 @@
-== Dungeon Master Workshop ==
+# Dungeon Master Workshop #
 
 This rails app is meant as a help tool for Dungeons & Dragons Dungeon Masters
 for creating the usual paperwork at the table like: Spell cards for the dm or
@@ -8,7 +8,8 @@ to loot in the feature.
 At the moment and unfinished version can be accessed at 
 [dm-workshop.herokuapp.com].
 
-In the final first version the idea is to be able to:
+### In the final first version the idea is to be able to: ###
+
 * inscribe spells, which list all relevant attributes including required classes
 * create creatures with all stats and as many calculated stats as possible
 ** an image would be great but not required
@@ -22,9 +23,11 @@ In the final first version the idea is to be able to:
 * (optional) Multilingual for at least english and german
 * 
 
-Cool features but not in scope for a first release are:
+
+### Cool features but not in scope for a first release are: ###
+
 * Calculate CR from creature stats
 * DB with all possible traits
 * Reference creature's spells and display/print the according cards.
 * Group a list of creatures, spells, treasures as encounters or for episodes in an adventure
-* 
+*
