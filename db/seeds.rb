@@ -14,7 +14,7 @@ default = User.create!(name:  "Example User",
 
 
 
-f = File.open("/Users/michael/Documents/Hobbies/Cards/spells.xml")
+f = File.open("cards/spells.xml")
 doc = Nokogiri::Slop(f)
 
 puts "new spells"
@@ -24,11 +24,18 @@ doc.xpath('//cards/spells/spell').each do |spell|
   name = spell.xpath('name').text
   puts "inscribe spell: #{name}"
   type = spell.xpath('type').text
-  match = /(?<school>\w*) cantrip|(?<level>\d*)[a-z-]* (?<school>\w*)/.match(type)
-  level = match[:level].nil? ? 0 : match[:level]
+  debugger if name == "Blinding Smite"
+  match = /((?<school>\w*) cantrip|(?<level>\d*)[a-z]{2}-level (?<school_with_level>\w*))/.match(type)
+  if match[:level].nil?
+    level = 0
+    school = match[:school]
+  else
+    level = match[:level]
+    school = match[:school_with_level]
+  end
   puts "    level: #{level}"
-  school = match[:school]
   puts "    school: #{school}"
+
   classes = spell.classes.xpath('class').map { |node| node.text }.join(', ')
   puts "    classes: #{classes}"
   casting_time = spell.castingtime.text
