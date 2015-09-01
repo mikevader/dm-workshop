@@ -14,10 +14,9 @@
       <duration>Instantaneous</duration>
       <shortDescription>
         Erhebt Knochen zu einem Skelet oder ein Leichnam zu einem Zombie. In jeder Runde kann per Bonus Aktion einen Befehl gegeben werden.
-        Für jeden Level über dem 3. kann ein zusätzlicher Untote erhoben werden.
       </shortDescription>
       <atHigherLevel>
-        When you cast this spell using a spell slot of 4th level or higher, you animate or reassert control over two additional undead creatures for each slot level above 3rd. Each of the creatures must come from a different corpse or pile of bones.
+        Für jeden Level über dem 3. kann ein zusätzlicher Untote erhoben werden.
       </atHigherLevel>
       <description>
         This spell creates an undead servant. Choose a pile of bones or a corpse of a Medium or Small humanoid within range. Your spell imbues the target with a foul mimicry of life, raising it as an undead creature. The target becomes a skeleton if you chose bones or a zombie if you chose a corpse (the DM has the creature’s game statistics).<br/>
@@ -117,14 +116,23 @@
       <components>V, S</components>
       <duration>Concentration, up to 1 minute</duration>
       <shortDescription>
+        Das berührte Wesen muss einen Weisheits-Rettungswurf bestehen oder wird verflucht von einer der folgenden Optionen:
+        <ul>
+          <li>Eine Eigenschaft wählen: Nachteil auf allen Eigenschaftsproben oder Rettungswürfen mit dieser Eigenschaft.</li>
+          <li>Nachteil auf Attackwürfen.</li>
+          <li>Weisheits-Rettungswurf bestehen zu Beginn jedes Zuges oder Aktionen sind verloren</li>
+          <li>Deine Angriffe und Sprüche gegen dieses Wesen verursachen zusätzliche 1d8 necrotic Schaden.</li>
+        </ul>
+        Der <i>Remove Curse</i> Spruch beendet den Effekt.
       </shortDescription>
+      <atHigherLevel>4: bis 10min, 5: bis 8h, 7: bis 24h, 9: bis dispelled, über 5. brauchen keine Concentration.</atHigherLevel>
       <description>
-        You touch a creature, and that creature must succeed on a W isdom saving throw or becom e cursed for the duration of the spell. When you cast this spell, choose the nature of the curse from the following options:
+        You touch a creature, and that creature must succeed on a Wisdom saving throw or become cursed for the duration of the spell. When you cast this spell, choose the nature of the curse from the following options:
         <ul>
           <li>Choose one ability score. While cursed, the target has disadvantage on ability checks and saving throws made with that ability score.</li>
-          <li>W hile cursed, the target has disadvantage on attack rolls against you.</li>
-          <li>While cursed, the target must make a Wisdom sav ing throw at the start of each of its turns. If it fails, it wastes its action that turn doing nothing.</li>
-          <li>W hile the target is cursed, your attacks and spells deal an extra 1d8 necrotic damage to the target.</li>
+          <li>While cursed, the target has disadvantage on attack rolls against you.</li>
+          <li>While cursed, the target must make a Wisdom saving throw at the start of each of its turns. If it fails, it wastes its action that turn doing nothing.</li>
+          <li>While the target is cursed, your attacks and spells deal an extra 1d8 necrotic damage to the target.</li>
         </ul>
         A <i>remove curse</i> spell ends this effect. At the DM’s option, you may choose an alternative curse effect, but it should be no more powerful than those described above. The DM has final say on such a curse’s effect.<br/>
         <b>At Higher Levels.</b> If you cast this spell using a spell slot of 4th level or higher, the duration is concentration, up to 10 minutes. If you use a spell slot of 5th level or higher, the duration is 8 hours. If you use a spell slot of 7th level or higher, the duration is 24 hours. If you use a 9th level spell slot, the spell lasts until it is dispelled. Using a spell slot of 5th level or higher grants a duration that doesn’t require concentration.
@@ -142,7 +150,9 @@
       <components>V, S, M (a sprinkling of holy water)</components>
       <duration>Concentration, up to 1 minute</duration>
       <shortDescription>
+        Bis zu drei Wesen erhalten: Füge zu allen Angriffs- und Rettungswürfen einen d4 hinzu.
       </shortDescription>
+      <atHigherLevel>Pro Level ein zusätzliches Wesen.</atHigherLevel>
       <description>
         You bless up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target can roll a d4 and add the number rolled to the attack roll or saving throw.<br/>
         <b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.
@@ -162,12 +172,15 @@
       <components>V, S</components>
       <duration>Instantaneous</duration>
       <shortDescription>
+        Wesen muss ein Konstitutions-Rettungswurf machen und nimmt 8d8 necrotic Schaden bei einem Misserfolg und halb so viel bei einem erfolgreichen. Hat keinen Effekt bei Untoten oder Konstrukten.<br/>
+        Planzenwesen oder magischen Pflanzen haben Nachteil auf dem Rettungswurf und nichtmagische Pflanzen versagen automatisch und sterben.
+        <b>At Higher Levels.</b> When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d8 for each slot level above 4th.
+      </shortDescription>
+      <description>
         Necromantic energy washes over a creature of your choice that you can see within range, draining moisture and vitality from it. The target must make a Constitution saving throw. The target takes 8d8 necrotic damage on a failed save, or half as much damage on a successful one. This spell has no effect on undead or constructs.<br/>
         If you target a plant creature or a magical plant, it makes the saving throw with disadvantage, and the spell deals maximum damage to it.<br/>
         If you target a nonmagical plant that isn’t a creature, such as a tree or shrub, it doesn’t make a saving throw; it simply withers and dies.<br/>
         <b>At Higher Levels.</b> When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d8 for each slot level above 4th.
-      </shortDescription>
-      <description>
       </description>
     </spell>
     <spell>
@@ -181,8 +194,6 @@
       <components>V</components>
       <duration>Concentration, up to 1 minute</duration>
       <shortDescription>
-        The next time you hit a creature with a melee weapon attack during this spell’s duration, your weapon flares with bright light, and the attack deals an extra 3d8 radiant damage to the target. Additionally, the target must succeed on a Constitution saving throw or be blinded until the spell ends.<br/>
-        A creature blinded by this spell makes another Constitution saving throw at the end of each of its turns. On a successful save, it is no longer blinded.
       </shortDescription>
       <atHigherLevel></atHigherLevel>
       <description>
@@ -257,6 +268,8 @@
       <components>V, S</components>
       <duration>1 round</duration>
       <shortDescription>
+        Du erstellst eine geisterhafte Skeletthand im Bereich eines Wesens innhalb der Reichweite. Mach eine Fernkampfattacke gegen dieses Wesen um es mit Grabeskälte anzufallen. Bei einem Treffer nimmt das Ziel 1d8 necrotic Schaden, welches es nicht zurückerhalten kann bis zu Beginn deines nächsten Zuges. Bis dann hängt die Hand am Ziel.<br/>
+        Der Schaden dieses Spruchs nimmt um 1d9 zu beim erreichen vom 5. Level (2d8), 11. Level (3d8) und 17. Level (4d8).
       </shortDescription>
       <atHigherLevel></atHigherLevel>
       <description>
@@ -278,8 +291,9 @@
       <components>V, S, M (the powder of a crushed black pearl worth at least 500gp)</components>
       <duration>Instantaneous</duration>
       <shortDescription>
+        A sphere of negative energy ripples out in a 60-foot- radius sphere from a point within range. Each creature in that area must make a Constitution saving throw. A target takes 8d6 necrotic damage on a failed save, or half as much damage on a successful one.
       </shortDescription>
-      <atHigherLevel></atHigherLevel>
+      <atHigherLevel>When you cast this spell using a spell slot of 7th level or higher, the damage increases by 2d6 for each slot level above 6th.</atHigherLevel>
       <description>
         A sphere of negative energy ripples out in a 60-foot- radius sphere from a point within range. Each creature in that area must make a Constitution saving throw. A target takes 8d6 necrotic damage on a failed save, or half as much damage on a successful one.
         <b>At Higher Levels</b>. When you cast this spell using a spell slot of 7th level or higher, the damage increases by 2d6 for each slot level above 6th.
@@ -387,7 +401,9 @@
       <components>S</components>
       <duration>Inst</duration>
       <shortDescription>
+        You attempt to interrupt a creature in the process of casting a spell. If the creature is casting a spell of 3rd level or lower, its spell fails and has no effect. If it is casting a spell of 4th level or higher, make an ability check using your spellcasting ability. The DC equals 10 + the spell’s level. On a success, the creature’s spell fails and has no effect.
       </shortDescription>
+      <atHigherLevel>When you cast this spell using a spell slot of 4th level or higher, the interrupted spell has no effect if its level is less than or equal to the level of the spell slot you used.</atHigherLevel>
       <description>
         You attempt to interrupt a creature in the process of casting a spell. If the creature is casting a spell of 3rd level or lower, its spell fails and has no effect. If it is casting a spell of 4th level or higher, make an ability check using your spellcasting ability. The DC equals 10 + the spell’s level. On a success, the creature’s spell fails and has no effect.<br/>
         <b>At Higher Levels.</b> When you cast this spell using a spell slot of 4th level or higher, the interrupted spell has no effect if its level is less than or equal to the level of the spell slot you used.
@@ -547,7 +563,7 @@
       <components>V, S, M (bit of phosphorus)</components>
       <duration>10 minutes</duration>
       <shortDescription>
-        Eine dünne Flammenschicht überzieht den Körper. Sobald eine Kreature innerhalb von 1,5m eine Nahkampfattacke macht, erhält dieser 
+        Eine dünne Flammen- oder Eisschicht überzieht den Körper. Sobald eine Kreature innerhalb von 1,5m eine Nahkampfattacke macht, erhält dieser 2d8 fire bzw cold Schaden. Zusätzlich erhälst du Resistenz gegen cold Schaden beim Feuerschild bzw gegen fire Schaden beim Eisschild.
       </shortDescription>
       <description>
         Thin and wispy flames wreathe your body for the duration, shedding bright light in a 10-foot radius and dim light for an additional 10 feet. You can end the spell early by using an action to dismiss it.<br/>
@@ -606,7 +622,10 @@
       <components>V, S, M (a glass or crystal bead that shatters when the spell ends)</components>
       <duration>Concentration, up to 1 minute</duration>
       <shortDescription>
+        An immobile, faintly shimmering barrier springs into existence in a 10-foot radius around you and remains for the duration.<br/>
+        Any spell of 5th level or lower cast from outside the barrier can't affect creatures or objects within it, even if the spell is cast using a higher level spell slot. Such a spell can target creatures and objects within the barrier, but the spell has no effect on them. Similarly, the area within the barrier is excluded from the areas affected by such spells.<br/>
       </shortDescription>
+      <atHigherLevel>When you cast this spell using a spell slot of 7th level or higher, the barrier blocks spells of one level higher for each slot level above 6th.</atHigherLevel>
       <description>
         An immobile, faintly shimmering barrier springs into existence in a 10-foot radius around you and remains for the duration.<br/>
         Any spell of 5th level or lower cast from outside the barrier can't affect creatures or objects within it, even if the spell is cast using a higher level spell slot. Such a spell can target creatures and objects within the barrier, but the spell has no effect on them. Similarly, the area within the barrier is excluded from the areas affected by such spells.<br/>
@@ -700,7 +719,11 @@
       <components>V, S, M (a small, straight piece of iron)</components>
       <duration>Concentration, up to 1 minute</duration>
       <shortDescription>
+        Choose a humanoid that you can see within range. The target must succeed on a W isdom saving throw or be paralyzed for the duration. At the end of each of its turns, the target can make another Wisdom saving throw. On a success, the spell ends on the target.
       </shortDescription>
+      <atHigherLevel>
+        When you cast this spell using a spell slot of 3rd level or higher, you can target one additional humanoid for each slot level above 2nd. The humanoids must be within 30 feet of each other when you target them.
+      </atHigherLevel>
       <description>
         Choose a humanoid that you can see within range. The target must succeed on a W isdom saving throw or be paralyzed for the duration. At the end of each of its turns, the target can make another Wisdom saving throw. On a success, the spell ends on the target.<br/>
         <b>At Higher Levels.</b> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional humanoid for each slot level above 2nd. The humanoids must be within 30 feet of each other when you target them.
@@ -723,7 +746,7 @@
       </shortDescription>
       <atHigherLevel></atHigherLevel>
       <description>
-        You create a twisting pattern of colors that weaves through the air inside a 30-foot cube within range. The pattern appears for a moment and vanishes. Each creature in the area who sees the pattern must make a W isdom saving throw. On a failed save, the creature becomes charmed for the duration. While charmed by this spell, the creature is incapacitated and has a speed of 0.<br/>
+        You create a twisting pattern of colors that weaves through the air inside a 30-foot cube within range. The pattern appears for a moment and vanishes. Each creature in the area who sees the pattern must make a Wisdom saving throw. On a failed save, the creature becomes charmed for the duration. While charmed by this spell, the creature is incapacitated and has a speed of 0.<br/>
         The spell ends for an affected creature if it takes any damage or if someone else uses an action to shake the creature out of its stupor.
       </description>
     </spell>
@@ -957,7 +980,7 @@
       <atHigherLevel></atHigherLevel>
       <description>
         You tap into the nightmares of a creature you can see within range and create an illusory manifestation of its deepest fears, visible only to that creature. The target must make a Wisdom saving throw. On a failed save, the target becomes frightened for the duration. At the start of each of the target’s turns before the spell ends, the target must succeed on a Wisdom saving throw or take 4d10 psychic damage. On a successful save, the spell ends.<br/>
-        <b>At Higher Levels.</b> When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1dlO for each slot level above 4th.
+        <b>At Higher Levels.</b> When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d10 for each slot level above 4th.
       </description>
     </spell>
     <spell>
