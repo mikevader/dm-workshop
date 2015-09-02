@@ -19,12 +19,9 @@ doc = Nokogiri::Slop(f)
 
 puts "new spells"
 doc.xpath('//cards/spells/spell').each do |spell|
-  #puts "#{spell}"
-  
   name = spell.xpath('name').text
   puts "inscribe spell: #{name}"
   type = spell.xpath('type').text
-  debugger if name == "Blinding Smite"
   match = /((?<school>\w*) cantrip|(?<level>\d*)[a-z]{2}-level (?<school_with_level>\w*))/.match(type)
   if match[:level].nil?
     level = 0
