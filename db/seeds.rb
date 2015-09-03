@@ -43,9 +43,12 @@ doc.xpath('//cards/spells/spell').each do |spell|
   puts "    range: #{range}"
   duration = spell.duration.text
   puts "    duration: #{duration}"
-  description = spell.description.text unless spell.description.nil?
+  debugger
+  athigherlevel = spell.athigherlevel.text unless spell.athigherlevel.nil?
+  puts "    athigherlevel: #{athigherlevel}"
+  description = spell.xpath('description').children unless spell.description.nil?
   puts "    description: #{description}"
-  short_description = spell.shortdescription.text unless spell.shortdescription.nil?
+  short_description = spell.xpath('shortdescription').children unless spell.shortdescription.nil?
   puts "    short_description: #{short_description}"
   new_spell = default.spells.create!(name: name, level: level, school: school, description: description)
   
@@ -55,5 +58,6 @@ doc.xpath('//cards/spells/spell').each do |spell|
   new_spell.range = range
   new_spell.duration = duration
   new_spell.short_description = short_description
+  new_spell.description = description
   new_spell.save
 end

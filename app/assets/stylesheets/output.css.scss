@@ -23,6 +23,10 @@ body {
 }
 
 @media print {
+  @page {
+    size: portrait;
+  }
+  
   .page-preview {
     margin: 0;
     padding: 0;

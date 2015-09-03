@@ -14,10 +14,19 @@
 
 <!-- Modal -->
 <div class="modal fade" id="myModal-<%= spell.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-sm" role="dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-body">
-        <%= render 'shared/spell', spell: spell %>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-4">
+              <%= render 'shared/spell_card', spell: spell %>
+            </div>
+            <div class="col-md-8">
+              <%= render 'shared/spell_detail', spell: spell %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
