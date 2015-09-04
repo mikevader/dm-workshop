@@ -15,10 +15,6 @@ div.card {
   background-color: maroon;
 }
 
-.card-element {
-  @include flex(1);
-}
-
 .card {
   border: 2mm solid;
   border-radius: 4px;
@@ -37,8 +33,79 @@ div.card {
   margin-top:0px;
   background-color: white;
   border-color: inherit;
+  @include flexbox();
+  @include flex-direction(column);
   @include flex(1);
   font-size: inherit;
+}
+
+.card-back {
+    background-color: white;
+    border-radius: 4mm;
+    border-color: inherit;
+    margin: 3mm;
+    @include flex(1);
+    @include flexbox();
+}
+
+.card-back-inner {
+    margin: 3mm;
+    border: 1mm solid;
+    border-color: inherit;
+    border-radius: 4mm;
+    @include flex(1);
+    @include flexbox();
+  @include flex-direction(row);
+  @include flex-wrap(wrap);
+  @include justify-content(center);
+    @include align-items(center);
+    @include align-content(center);
+}
+
+.card-back-icon {
+    width: 1in;
+    height: 1in;
+    border: 4mm solid;
+    border-color: inherit;
+    border-radius: 4mm;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.card-title-icon {
+    width: 12mm;
+    height: 12mm;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: inherit;
+    border-color: inherit;
+}
+.card-title-icon-container {
+    position: absolute;
+    right: -1mm;
+    top: -1mm;
+    border: 1mm solid;
+    border-radius: 1mm;
+    background-color: inherit;
+    border-color: inherit;
+}
+
+.card-title-inlineicon {
+    width: 7mm;
+    height: 7mm;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: inherit;
+    border-color: inherit;
+}
+.card-title-inlineicon-container {
+    position: absolute;
+    right: -1mm;
+    top: -1mm;
+    border: 1mm solid;
+    border-radius: 1mm;
+    background-color: inherit;
+    border-color: inherit;
 }
 
 .card-title {
@@ -73,8 +140,8 @@ div.card {
 .card-property-name {
   display: inline;
   font-size: inherit;
-  font-weight: bold;
 }
+
 .card-property-text {
   display: inline;
 }
@@ -95,7 +162,6 @@ div.card {
 }
 
 .card-p {
-
 }
 
 .card-fill {
