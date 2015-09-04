@@ -108,6 +108,24 @@ div.card {
     border-color: inherit;
 }
 
+.card-class-icon {
+    width: 7mm;
+    height: 7mm;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: inherit;
+    border-color: inherit;
+}
+.card-class-icon-container {
+    position: absolute;
+    right: -2mm;
+    top: 10mm;
+    border: 1mm solid;
+    border-radius: 1mm;
+    background-color: inherit;
+    border-color: inherit;
+}
+
 .card-title {
   font-size: 13pt;
   line-height: 7mm;
