@@ -66,6 +66,8 @@ doc.xpath('//cards/spells/spell').each do |spell|
   components = load_element(spell, 'components', true)
   range = load_element(spell, 'range', true)
   duration = load_element(spell, 'duration', true)
+  concentration = duration.downcase.include? 'concentration'
+  puts "    concentration: #{concentration}"
   athigherlevel = load_element(spell, 'athigherlevel')
   short_description = load_element(spell, 'shortdescription')
   description = load_element(spell, 'description')
@@ -76,6 +78,7 @@ doc.xpath('//cards/spells/spell').each do |spell|
   new_spell.components = components
   new_spell.range = range
   new_spell.duration = duration
+  new_spell.concentration = concentration
   new_spell.short_description = short_description
   new_spell.athigherlevel = athigherlevel
   new_spell.description = description
