@@ -46,6 +46,11 @@
 <% end -%>
 
 <%= content_tag :div, class: 'form-group' do -%>
+  <%= f.label :athigherlevel, class: 'control-label col-sm-3'  %>
+  <%= content_tag(:div, f.text_field(:athigherlevel, class: 'form-control'), class: 'col-sm-9') %>
+<% end -%>
+
+<%= content_tag :div, class: 'form-group' do -%>
   <%= f.label :description, class: 'control-label col-sm-3'  %>
   <%= content_tag(:div, f.text_area(:description, class: 'form-control'), class: 'col-sm-9') %>
 <% end -%>

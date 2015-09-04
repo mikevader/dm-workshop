@@ -32,6 +32,8 @@
       <% end %>
     </div>
     <span class="card-fill" style="-webkit-flex:3; flex:3;"></span>
+    <% unless spell.athigherlevel.nil? || spell.athigherlevel.empty? %>
+    <h3 class="card-section">At higher levels</h3>
     <div class="card-element card-description-line">
       <p class="card-p card-description-text"><%= spell.athigherlevel %></p>
     </div>

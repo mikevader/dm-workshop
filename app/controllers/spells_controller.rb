@@ -43,7 +43,7 @@ class SpellsController < ApplicationController
   
   private
   def spell_params
-    params.require(:spell).permit(:name, :level, :school, :classes, :casting_time, :range, :components, :duration,  :short_description, :description, :picture)
+    params.require(:spell).permit(:name, :level, :school, :classes, :casting_time, :range, :components, :duration,  :short_description, :athigherlevel, :description, :picture)
   end
   
   def correct_user

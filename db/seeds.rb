@@ -58,6 +58,7 @@ doc.xpath('//cards/spells/spell').each do |spell|
   new_spell.range = range
   new_spell.duration = duration
   new_spell.short_description = short_description
+  new_spell.athigherlevel = athigherlevel
   new_spell.description = description
   new_spell.save
 end
