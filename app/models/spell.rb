@@ -1,5 +1,8 @@
 class Spell < ActiveRecord::Base
   belongs_to :user
+  has_many :spellclasses, class_name: "Spellclass", foreign_key: "spell_id", dependent: :destroy
+  has_many :hero_classes, through: :spellclasses, source: :hero_class
+  
   default_scope -> { order(name: :asc) }
   mount_uploader :picture, PictureUploader
 

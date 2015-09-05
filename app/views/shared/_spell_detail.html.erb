@@ -4,7 +4,7 @@
     <div class="card-element card-subtitle"><%= "#{spell.level} level #{spell.school}" %></div>
     <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="black"></polyline></svg>
     
-    <div class="card-subtitle"><%= spell.classes %></div>
+    <div class="card-subtitle"><%= spell.hero_classes.map(&:name).join(', ') %></div>
     <div class="card-element card-property-line">
       <h4 class="card-property-name">Casting Time</h4>
       <p class="card-property-text"><%= spell.casting_time %></p>

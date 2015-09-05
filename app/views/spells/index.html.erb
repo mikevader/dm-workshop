@@ -20,10 +20,10 @@
             <th>Classes</th>
             <th colspan="99"></th>
           </tr>
-          <%= render @spells %>
+          <%= render partial: 'spell', collection: @spells, as: :spell, cache: true %>
         </table>
         
-        <%= render partial: 'modal', collection: @spells, as: :spell %>
+        <%= render partial: 'modal', collection: @spells, as: :spell, cache: true %>
       </div>
 
       <%= will_paginate %>

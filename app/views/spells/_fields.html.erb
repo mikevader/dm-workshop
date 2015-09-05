@@ -20,6 +20,8 @@
   <%= content_tag(:div, f.text_field(:classes, class: 'form-control'), class: 'col-sm-9') %>
 <% end -%>
 
+<%= f.collection_check_boxes(:hero_class_ids, HeroClass.all, :id, :name) %>
+
 <%= content_tag :div, class: 'form-group' do -%>
   <%= f.label :casting_time, class: 'control-label col-sm-3'  %>
   <%= content_tag(:div, f.text_field(:casting_time, class: 'form-control'), class: 'col-sm-6') %>
