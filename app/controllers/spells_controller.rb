@@ -4,7 +4,7 @@ class SpellsController < ApplicationController
   before_action :admin_user, only: :destroy
   
   def index
-    @spells = Spell.paginate(page: params[:page])
+    @spells = Spell.search(params[:search]).paginate(page: params[:page])
   end
 
   def new
@@ -43,7 +43,7 @@ class SpellsController < ApplicationController
   
   private
   def spell_params
-    params.require(:spell).permit(:name, :level, :school, :classes, :casting_time, :range, :components, :duration,  :short_description, :description, :picture)
+    params.require(:spell).permit(:name, :level, :school, :classes, :casting_time, :range, :components, :duration,  :short_description, :athigherlevel, :description, :picture)
   end
   
   def correct_user

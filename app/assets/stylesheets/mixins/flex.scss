@@ -9,8 +9,8 @@
 }
 
 @mixin align-content($values) {
-  -webkit-align-content: center;
-  align-content: center;
+  -webkit-align-content: $values;
+  align-content: $values;
 }
 
 @mixin flex-direction($values) {
@@ -24,6 +24,11 @@
 }
 
 @mixin flex($values) {
-  -webkit-flex: 1;
-  flex: 1;
+  -webkit-flex: $values;
+  flex: $values;
+}
+
+@mixin align-items($values) {
+  -webkit-align-items: $values;
+  align-items: $values;
 }

@@ -1,15 +1,33 @@
 <% provide(:title, 'All spells') %>
-<h1>All spells</h1>
 
 <div class="row">
-  <div class="col-md-8">
-    <h3>Spell Feed</h3>
-    <%= will_paginate %>
+  <div class="col-md-offset-2 col-md-8">
+    <div class="row"><h1>Spells</h1></div>
+    <div class="row">
+      <%= form_tag spells_path, method: 'get', id: "spells_search" do %>
 
-    <div class="spells">
-      <%= render @spells %>
+      <%= text_field_tag :search, params[:search], class: "form-control" %>
+      <%= submit_tag "Search", class: "btn btn-primary", name: nil %>
     </div>
+    <div class="row">
+      <div class="spells">
+        <table class="table table-striped">
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Level</th>
+            <th>School</th>
+            <th>Classes</th>
+            <th colspan="99"></th>
+          </tr>
+          <%= render @spells %>
+        </table>
+        
+        <%= render partial: 'modal', collection: @spells, as: :spell %>
+      </div>
 
-    <%= will_paginate %>
+      <%= will_paginate %>
+    </div>
+    <% end %>
   </div>
 </div>

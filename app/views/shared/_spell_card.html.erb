@@ -1,0 +1,55 @@
+<div id="spell-<%= spell.id %>" class="card card-size-25x35">
+  <div class="card-title-inlineicon-container">
+    <div class="card-title-inlineicon icon-white-book-<%= spell.level %>"></div>
+  </div>
+  <div class="card-class-icon-container">
+    <% unless spell.classes.nil? -%>
+    <% spell.classes.split(', ').each do |classname| -%>    
+    <div class="card-class-icon icon-class-<%= classname.downcase %>"></div>
+    <% end -%>
+    <% end -%>
+  </div>
+  <div class="card-title card-title-13"><%= spell.name %></div>
+  <div class="card-content-container">
+    <% if spell.level > 0 %>
+      <div class="card-element card-subtitle"><%= "#{spell.level.ordinalize}-level #{spell.school}" %></div>
+    <% else %>
+      <div class="card-element card-subtitle"><%= "#{spell.school} cantrip" %></div>
+    <% end %>
+    <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="maroon"></polyline></svg>
+    
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Casting Time</h4>
+      <p class="card-p card-property-text"><%= spell.casting_time %></p>
+    </div>
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Range</h4>
+      <p class="card-p card-property-text"><%= spell.range %></p>
+    </div>
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Components</h4>
+      <p class="card-p card-property-text"><%= spell.components %></p>
+    </div>
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Duration</h4>
+      <p class="card-p card-property-text"><%= spell.duration %></p>
+    </div>
+    <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="maroon"></polyline></svg>
+    <span class="card-fill" style="-webkit-flex:2; flex:2;">
+    </span>
+    <div class="card-element card-description-line">
+      <% unless spell.short_description.nil? || spell.short_description.empty? %>
+      <p class="card-p card-description-text"><%= raw(spell.short_description) %></p>
+      <% else %>
+      <p class="card-p card-description-text"><%= raw(spell.description) %></p>
+      <% end %>
+    </div>
+    <span class="card-fill" style="-webkit-flex:3; flex:3;"></span>
+    <% unless spell.athigherlevel.nil? || spell.athigherlevel.empty? %>
+    <h3 class="card-section">At higher levels</h3>
+    <div class="card-element card-description-line">
+      <p class="card-p card-description-text"><%= spell.athigherlevel %></p>
+    </div>
+    <% end %>
+  </div>
+</div>
