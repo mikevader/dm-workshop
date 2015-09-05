@@ -28,7 +28,7 @@
     <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="black"></polyline></svg>
     <div class="card-element card-description-line">
       <h4 class="card-description-name">Short description</h4>
-      <p class="card-description-text"><%= spell.short_description %></p>
+      <p class="card-description-text"><%= raw(spell.short_description) %></p>
     </div>
     <div class="card-element card-description-line">
       <h4 class="card-description-name">At higher level</h4>
@@ -36,7 +36,7 @@
     </div>
     <div class="card-element card-description-line">
       <h4 class="card-description-name">Long description</h4>
-      <p class="card-description-text"><%= spell.description %></p>
+      <p class="card-description-text"><%= raw(spell.description) %></p>
     </div>
   </div>
 </div>

@@ -39,9 +39,9 @@
     </span>
     <div class="card-element card-description-line">
       <% unless spell.short_description.nil? || spell.short_description.empty? %>
-      <p class="card-p card-description-text"><%= spell.short_description %></p>
+      <p class="card-p card-description-text"><%= raw(spell.short_description) %></p>
       <% else %>
-      <p class="card-p card-description-text"><%= spell.description %></p>
+      <p class="card-p card-description-text"><%= raw(spell.description) %></p>
       <% end %>
     </div>
     <span class="card-fill" style="-webkit-flex:3; flex:3;"></span>

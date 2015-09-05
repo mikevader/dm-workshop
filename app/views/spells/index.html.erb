@@ -22,6 +22,8 @@
           </tr>
           <%= render @spells %>
         </table>
+        
+        <%= render partial: 'modal', collection: @spells, as: :spell %>
       </div>
 
       <%= will_paginate %>
