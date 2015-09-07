@@ -11,7 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150904132256) do
+ActiveRecord::Schema.define(version: 20150905150418) do
+
+  create_table "hero_classes", force: :cascade do |t|
+    t.string   "name"
+    t.string   "cssclass"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "hero_classes", ["name"], name: "index_hero_classes_on_name"
+
+  create_table "spellclasses", force: :cascade do |t|
+    t.integer  "spell_id"
+    t.integer  "hero_class_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "spellclasses", ["hero_class_id"], name: "index_spellclasses_on_hero_class_id"
+  add_index "spellclasses", ["spell_id", "hero_class_id"], name: "index_spellclasses_on_spell_id_and_hero_class_id", unique: true
+  add_index "spellclasses", ["spell_id"], name: "index_spellclasses_on_spell_id"
 
   create_table "spells", force: :cascade do |t|
     t.string   "name"

@@ -3,10 +3,8 @@
     <div class="card-title-inlineicon icon-white-book-<%= spell.level %>"></div>
   </div>
   <div class="card-class-icon-container">
-    <% unless spell.classes.nil? -%>
-    <% spell.classes.split(', ').each do |classname| -%>    
-    <div class="card-class-icon icon-class-<%= classname.downcase %>"></div>
-    <% end -%>
+    <% spell.hero_classes.each do |hero_class| -%>    
+    <div class="card-class-icon <%= hero_class.cssclass %>"></div>
     <% end -%>
   </div>
   <div class="card-title card-title-13"><%= spell.name %></div>

@@ -1,0 +1,6 @@
+<li>
+  <%= link_to hero_class.name, hero_class %>
+  <% if current_user.admin? %>
+  | <%= link_to "edit", edit_hero_class_path(hero_class) %> | <%= link_to "delete", hero_class, method: :delete, data: { confirm: "You sure?" } %>
+  <% end %>
+</li>

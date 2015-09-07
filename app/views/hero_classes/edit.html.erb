@@ -1,0 +1,11 @@
+<% provide(:title, "Edit hero class") %>
+<h1>Update hero class <%= @hero_class.name %></h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@hero_class) do |f| %>
+      <%= render 'fields', f: f %>
+      <%= f.submit "Save changes", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

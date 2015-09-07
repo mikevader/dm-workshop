@@ -4,7 +4,7 @@ class SpellsController < ApplicationController
   before_action :admin_user, only: :destroy
   
   def index
-    @spells = Spell.search(params[:search]).paginate(page: params[:page])
+    @spells = Spell.search(params[:search]).paginate(page: params[:page]).order('name')
   end
 
   def new
@@ -22,11 +22,11 @@ class SpellsController < ApplicationController
   end
     
   def edit
-    @spell = Spell.find(params[:id])
+    @spell = Spell.includes(:hero_classes).find(params[:id])
   end
   
   def update
-    @spell = Spell.find(params[:id])
+    @spell = Spell.includes(:hero_classes).find(params[:id])
     if @spell.update_attributes(spell_params)
       flash[:success] = "Spell updated"
       redirect_to spells_path
@@ -43,7 +43,7 @@ class SpellsController < ApplicationController
   
   private
   def spell_params
-    params.require(:spell).permit(:name, :level, :school, :classes, :casting_time, :range, :components, :duration,  :short_description, :athigherlevel, :description, :picture)
+    params.require(:spell).permit(:name, :level, :school, :classes, :casting_time, :range, :components, :duration,  :short_description, :athigherlevel, :description, :picture, :concentration, :hero_classes, :spellclasses, :hero_class_ids => [])
   end
   
   def correct_user
