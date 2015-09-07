@@ -1,0 +1,15 @@
+<% provide(:title, @hero_class.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>Name: <%= @hero_class.name %></h1>
+      <h2>CSS: <%= @hero_class.cssclass %></h2>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <% if @hero_class.spells.any? %>
+    <h3>Spells (<%= @hero_class.spells.count %>)</h3>
+      <%= render 'shared/spells' %>
+    <% end %>
+  </div>
+</div>

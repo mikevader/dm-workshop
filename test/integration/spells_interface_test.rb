@@ -8,7 +8,7 @@ class SpellsInterfaceTest < ActionDispatch::IntegrationTest
 
   test "spell interface" do
     log_in_as(@user)
-    get root_path
+    get spells_path
     assert_select 'div.pagination'
     # Invalid submission
     assert_no_difference 'Spell.count' do

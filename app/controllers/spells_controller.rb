@@ -4,7 +4,7 @@ class SpellsController < ApplicationController
   before_action :admin_user, only: :destroy
   
   def index
-    @spells = Spell.search(params[:search]).paginate(page: params[:page])
+    @spells = Spell.search(params[:search]).paginate(page: params[:page]).order('name')
   end
 
   def new

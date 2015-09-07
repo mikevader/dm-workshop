@@ -11,10 +11,7 @@
   <div class="col-md-8">
     <% if @user.spells.any? %>
       <h3>Spells (<%= @user.spells.count %>)</h3>
-      <ol class="spells">
-        <%= render @spells %>
-      </ol>
-      <%= will_paginate @spells %>
+      <%= render 'shared/spells' %>
     <% end %>
   </div>
 </div>

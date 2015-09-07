@@ -1,0 +1,13 @@
+<% provide(:title, 'All hero classes') %>
+<h1>All hero classes</h1>
+
+
+<%= link_to "New", new_hero_class_path, class: 'btn btn-default', role: 'button' %>
+
+<%= will_paginate %>
+
+<ul class="hero_classes">
+  <%= render @hero_classes %>
+</ul>
+
+<%= will_paginate %>
