@@ -1,17 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  category_id: 
-  rarity_id: 
+sting:
+  name: Sting
+  category: armor
+  rarity: uncommon 
   attunement: false
   description: MyText
-  user_id: 
+  user: michael 
 
-two:
-  name: MyString
-  category_id: 
-  rarity_id: 
-  attunement: false
+glamdring:
+  name: Glamdring
+  category: weapon 
+  rarity: very_rare
+  attunement: true
   description: MyText
-  user_id: 
+  user: michael

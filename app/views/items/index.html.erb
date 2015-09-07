@@ -1,2 +1,13 @@
-<h1>Items#index</h1>
-<p>Find me in app/views/items/index.html.erb</p>
+<% provide(:title, 'All items') %>
+<h1>All items</h1>
+
+
+<%= link_to "New", new_item_path, class: 'btn btn-default', role: 'button' %>
+
+<%= will_paginate %>
+
+<ul class="items">
+  <%= render @items %>
+</ul>
+
+<%= will_paginate %>

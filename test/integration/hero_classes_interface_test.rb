@@ -6,7 +6,7 @@ class HeroClassesInterfaceTest < ActionDispatch::IntegrationTest
     @user = users(:michael)
   end
 
-  test "spell interface" do
+  test "hero classes interface" do
     log_in_as(@user)
     get hero_classes_path
     #assert_select 'div.pagination'
@@ -26,9 +26,9 @@ class HeroClassesInterfaceTest < ActionDispatch::IntegrationTest
     assert_match name, response.body
     # Delete a post.
     assert_select 'a', text: 'delete'
-    first_spell = HeroClass.paginate(page: 1).first
+    first_hero_class = HeroClass.paginate(page: 1).first
     assert_difference 'HeroClass.count', -1 do
-      delete hero_class_path(first_spell)
+      delete hero_class_path(first_hero_class)
     end
   end
 end

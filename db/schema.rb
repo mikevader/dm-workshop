@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20150907211831) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "categories", ["name"], name: "index_categories_on_name"
+
   create_table "hero_classes", force: :cascade do |t|
     t.string   "name"
     t.string   "cssclass"
@@ -40,6 +42,7 @@ ActiveRecord::Schema.define(version: 20150907211831) do
   end
 
   add_index "items", ["category_id"], name: "index_items_on_category_id"
+  add_index "items", ["name"], name: "index_items_on_name"
   add_index "items", ["rarity_id"], name: "index_items_on_rarity_id"
   add_index "items", ["user_id"], name: "index_items_on_user_id"
 
@@ -48,6 +51,8 @@ ActiveRecord::Schema.define(version: 20150907211831) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "rarities", ["name"], name: "index_rarities_on_name"
 
   create_table "spellclasses", force: :cascade do |t|
     t.integer  "spell_id"

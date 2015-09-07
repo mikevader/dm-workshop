@@ -1,2 +1,11 @@
-<h1>Items#new</h1>
-<p>Find me in app/views/items/new.html.erb</p>
+<% provide(:title, 'New item') %>
+
+<h1>Item</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@item) do |f| %>
+      <%= render 'fields', f: f %>
+      <%= f.submit "Create new item", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

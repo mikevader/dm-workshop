@@ -1,0 +1,6 @@
+<li>
+  <%= link_to item.name, item %>
+  <% if current_user.admin? %>
+  | <%= link_to "edit", edit_item_path(item) %> | <%= link_to "delete", item, method: :delete, data: { confirm: "You sure?" } %>
+  <% end %>
+</li>

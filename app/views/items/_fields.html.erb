@@ -1,0 +1,16 @@
+<%= render 'shared/error_messages', object: f.object %>
+
+<%= f.label :name %>
+<%= f.text_field :name, class: 'form-control' %>
+
+<%= f.label :category %>
+<%= f.collection_select :category_id, Category.all, :id, :name, class: 'form-control' %>
+
+<%= f.label :rarity %>
+<%= f.collection_select :rarity_id, Rarity.all, :id, :name, class: 'form-control' %>
+
+<%= f.label :attunement %>
+<%= f.check_box :attunement, class: 'form-control' %>
+
+<%= f.label :description %>
+<%= f.text_area :description, class: 'form-control' %>
