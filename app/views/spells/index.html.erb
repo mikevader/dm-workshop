@@ -7,7 +7,8 @@
       <%= form_tag spells_path, method: 'get', id: "spells_search" do %>
 
       <%= text_field_tag :search, params[:search], class: "form-control" %>
-      <%= submit_tag "Search", class: "btn btn-primary", name: nil %>
+      <%= submit_tag "Search", class: "btn btn-primary", name: nil -%>
+      <%= link_to "Print", print_path(query: params[:search]), class: 'btn btn-default', target: '_blank', role: 'button' %>
     </div>
     <div class="row">
       <div class="spells">
@@ -20,10 +21,10 @@
             <th>Classes</th>
             <th colspan="99"></th>
           </tr>
-          <%= render partial: 'spell', collection: @spells, as: :spell, cache: true %>
+          <%= render partial: 'spell', collection: @spells, as: :spell %>
         </table>
         
-        <%= render partial: 'modal', collection: @spells, as: :spell, cache: true %>
+        <%= render partial: 'modal', collection: @spells, as: :spell %>
       </div>
 
       <%= will_paginate %>

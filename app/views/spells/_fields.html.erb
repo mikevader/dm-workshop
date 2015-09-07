@@ -20,7 +20,20 @@
   <%= content_tag(:div, f.text_field(:classes, class: 'form-control'), class: 'col-sm-9') %>
 <% end -%>
 
-<%= f.collection_check_boxes(:hero_class_ids, HeroClass.all, :id, :name) %>
+<%= content_tag :div, class: 'form-group' do -%>
+<%= f.label :hero_class_ids, class: 'control-label col-sm-3' %>
+<%= content_tag :div, class: 'form-inline col-sm-9' do -%>
+<%= content_tag :div, class: 'form-group' do -%>
+
+<%= f.collection_check_boxes(:hero_class_ids, HeroClass.all, :id, :name) do |b| -%>
+<%= content_tag :div, class: 'checkbox' do -%>
+<%= b.label {b.check_box + b.text} %>
+<% end -%>
+<% end -%>
+
+<% end -%>
+<% end -%>
+<% end -%>
 
 <%= content_tag :div, class: 'form-group' do -%>
   <%= f.label :casting_time, class: 'control-label col-sm-3'  %>
@@ -51,16 +64,16 @@
 
 <%= content_tag :div, class: 'form-group' do -%>
   <%= f.label :short_description, class: 'control-label col-sm-3'  %>
-  <%= content_tag(:div, f.text_area(:short_description, class: 'form-control'), class: 'col-sm-9') %>
+  <%= content_tag(:div, f.text_area(:short_description, class: 'form-control', rows: '4'), class: 'col-sm-9') %>
 <% end -%>
 
 <%= content_tag :div, class: 'form-group' do -%>
   <%= f.label :athigherlevel, class: 'control-label col-sm-3'  %>
-  <%= content_tag(:div, f.text_field(:athigherlevel, class: 'form-control'), class: 'col-sm-9') %>
+<%= content_tag(:div, f.text_area(:athigherlevel, class: 'form-control', rows: '2'), class: 'col-sm-9') %>
 <% end -%>
 
 <%= content_tag :div, class: 'form-group' do -%>
   <%= f.label :description, class: 'control-label col-sm-3'  %>
-  <%= content_tag(:div, f.text_area(:description, class: 'form-control'), class: 'col-sm-9') %>
+  <%= content_tag(:div, f.text_area(:description, class: 'form-control', rows: '6'), class: 'col-sm-9') %>
 <% end -%>
 
