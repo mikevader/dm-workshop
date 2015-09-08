@@ -3,6 +3,13 @@
 <%= f.label :name %>
 <%= f.text_field :name, class: 'form-control' %>
 
+<%= f.label :cssclass %>
+<% if @item.category -%>
+<%= f.text_field :cssclass, class: 'form-control', placeholder: @item.category.cssclass  %>
+<% else -%>
+<%= f.text_field :cssclass, class: 'form-control' %>
+<% end -%>
+
 <%= f.label :category %>
 <%= f.collection_select :category_id, Category.all, :id, :name, class: 'form-control' %>
 

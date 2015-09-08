@@ -16,12 +16,12 @@ warlock = HeroClass.create!(name: "Warlock", cssclass: "icon-class-warlock")
 wizard = HeroClass.create!(name: "Wizard", cssclass: "icon-class-wizard")
 
 # Categories
-armor = Category.create!(name: 'Armor')
-potion = Category.create!(name: 'Potion')
-ring = Category.create!(name: 'Ring')
-staff = Category.create!(name: 'Staff')
-weapon = Category.create!(name: 'Weapon')
-wondrous_item = Category.create!(name: 'Wondrous item')
+armor = Category.create!(name: 'Armor', cssclass: 'icon-custom-armor-heavy')
+potion = Category.create!(name: 'Potion', cssclass: 'icon-custom-potion')
+ring = Category.create!(name: 'Ring', cssclass: 'icon-custom-item')
+staff = Category.create!(name: 'Staff', cssclass: 'icon-custom-wand')
+weapon = Category.create!(name: 'Weapon', cssclass: 'icon-custom-swordarrow')
+wondrous_item = Category.create!(name: 'Wondrous item', cssclass: 'icon-custom-item')
 
 # Rarities
 common = Rarity.create!(name: 'Common')

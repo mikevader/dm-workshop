@@ -74,6 +74,7 @@ div.spells {
     background-color: inherit;
     border-color: inherit;
 }
+
 .card-title-icon-container {
     position: absolute;
     right: -1mm;
@@ -92,6 +93,7 @@ div.spells {
     background-color: inherit;
     border-color: inherit;
 }
+
 .card-title-inlineicon-container {
     position: absolute;
     right: -1mm;
@@ -158,7 +160,6 @@ div.spells {
   display: inline;
 }
 
-
 .card-section {
   border-bottom: 1px solid;
   font-size: 10pt;
@@ -186,15 +187,24 @@ div.spells {
   font-size: inherit;
   color: black;
 }
+
+.card-description-line ul {
+  padding-left: 15px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
 .card-description-name {
   display: inline;
   font-size: inherit;
   font-style: italic;
   font-weight: bold;
 }
+
 .card-description-name::after {
   content: ".";
 }
+
 .card-description-text {
   display: inline;
 }

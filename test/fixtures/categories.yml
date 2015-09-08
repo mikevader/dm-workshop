@@ -2,9 +2,11 @@
 
 armor:
   name: Armor
+  cssclass: icon-armor
 
 weapon:
   name: Weapon
+  cssclass: icon-sword
 
 wand:
   name: Wand
