@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150905150418) do
+ActiveRecord::Schema.define(version: 20150908212920) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "cssclass"
+  end
+
+  add_index "categories", ["name"], name: "index_categories_on_name"
 
   create_table "hero_classes", force: :cascade do |t|
     t.string   "name"
@@ -21,6 +30,31 @@ ActiveRecord::Schema.define(version: 20150905150418) do
   end
 
   add_index "hero_classes", ["name"], name: "index_hero_classes_on_name"
+
+  create_table "items", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "category_id"
+    t.integer  "rarity_id"
+    t.boolean  "attunement"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "cssclass"
+  end
+
+  add_index "items", ["category_id"], name: "index_items_on_category_id"
+  add_index "items", ["name"], name: "index_items_on_name"
+  add_index "items", ["rarity_id"], name: "index_items_on_rarity_id"
+  add_index "items", ["user_id"], name: "index_items_on_user_id"
+
+  create_table "rarities", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "rarities", ["name"], name: "index_rarities_on_name"
 
   create_table "spellclasses", force: :cascade do |t|
     t.integer  "spell_id"

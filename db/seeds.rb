@@ -1,17 +1,7 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
-
-default = User.create!(name:  "Michael Mühlebach",
-             email: "michael@anduin.ch",
-             password:              "foobar",
-             password_confirmation: "foobar",
-             admin: true,
-             activated: true,
-             activated_at: Time.zone.now)
-
-
-
+# Hero classes
 barbarian = HeroClass.create!(name: "Barbarian", cssclass: "icon-class-barbarian")
 bard = HeroClass.create!(name: "Bard", cssclass: "icon-class-bard")
 cleric = HeroClass.create!(name: "Cleric", cssclass: "icon-class-cleric")
@@ -24,6 +14,34 @@ rogue = HeroClass.create!(name: "Rogue", cssclass: "icon-class-rogue")
 sorcerer = HeroClass.create!(name: "Sorcerer", cssclass: "icon-class-sorcerer")
 warlock = HeroClass.create!(name: "Warlock", cssclass: "icon-class-warlock")
 wizard = HeroClass.create!(name: "Wizard", cssclass: "icon-class-wizard")
+
+# Categories
+armor = Category.create!(name: 'Armor', cssclass: 'icon-custom-armor-heavy')
+potion = Category.create!(name: 'Potion', cssclass: 'icon-custom-potion')
+ring = Category.create!(name: 'Ring', cssclass: 'icon-custom-item')
+staff = Category.create!(name: 'Staff', cssclass: 'icon-custom-wand')
+weapon = Category.create!(name: 'Weapon', cssclass: 'icon-custom-swordarrow')
+wondrous_item = Category.create!(name: 'Wondrous item', cssclass: 'icon-custom-item')
+
+# Rarities
+common = Rarity.create!(name: 'Common')
+uncommon = Rarity.create!(name: 'Uncommon')
+rare = Rarity.create!(name: 'Rare')
+very_rare = Rarity.create!(name: 'Very rare')
+legendary = Rarity.create!(name: 'Legendary')
+
+
+
+default = User.create!(name:  "Michael Mühlebach",
+             email: "michael@anduin.ch",
+             password:              "foobar",
+             password_confirmation: "foobar",
+             admin: true,
+             activated: true,
+             activated_at: Time.zone.now)
+
+
+default.items.create!(name: "Armor +1", category_id: armor.id, rarity_id: rare.id, description: "You have a bonus of +1 to AC while wearing this armor.")
 
 
 

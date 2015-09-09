@@ -1,6 +1,6 @@
 class HeroClassesController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
-  before_action :admin_user, only: [:index, :edit, :update, :destroy]
+  before_action :admin_user, only: [:edit, :update, :destroy]
 
   def index
     @hero_classes = HeroClass.paginate(page: params[:page]).order('name')

@@ -1,0 +1,10 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+uncommon:
+  name: Uncommon
+
+rare:
+  name: Rare
+
+very_rare:
+  name: Very rare

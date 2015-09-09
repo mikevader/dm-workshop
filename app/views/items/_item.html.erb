@@ -1,0 +1,13 @@
+<tr>
+  <td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal-<%= item.id %>">
+  o
+</button></td>
+  <td><%= item.name %></td>
+  <td><%= item.category.name %></td>
+  <td><%= item.rarity.name %></td>
+  <td><%= item.attunement %></td>
+  <% if admin_user? %>
+  <td><%= link_to "edit", edit_item_path(item) %></td>
+  <td><%= link_to "delete", item, method: :delete, data: { confirm: "You sure?" } %></td>
+  <% end %>
+</tr>

@@ -1,0 +1,12 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+armor:
+  name: Armor
+  cssclass: icon-armor
+
+weapon:
+  name: Weapon
+  cssclass: icon-sword
+
+wand:
+  name: Wand

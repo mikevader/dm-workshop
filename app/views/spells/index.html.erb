@@ -9,7 +9,7 @@
       <%= text_field_tag :search, params[:search], class: "form-control" %>
       <%= submit_tag "Search", class: "btn btn-primary", name: nil -%>
       <%= link_to "New", new_spell_path, class: 'btn btn-default', role: 'button' -%>
-      <%= link_to "Print", print_path(query: params[:search]), class: 'btn btn-default', target: '_blank', role: 'button' %>
+      <%= link_to "Print", print_spells_path(query: params[:search]), class: 'btn btn-default', target: '_blank', role: 'button' %>
     </div>
     <div class="row">
       <div class="spells">

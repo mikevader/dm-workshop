@@ -13,13 +13,13 @@ class HeroClassesControllerTest < ActionController::TestCase
 
   test "should redirect edit when not logged in" do
     post :edit, id: @hero_class
-    #assert_not flash.empty?
+    assert_not flash.empty?
     assert_redirected_to login_url
   end
   
   test "should redirect update when not logged in" do
     patch :update, id: @hero_class, name: { name: 'gunser', cssclass: 'foo' }
-    #assert_not flash.empty?
+    assert_not flash.empty?
     assert_redirected_to login_url
   end
 
@@ -51,7 +51,6 @@ class HeroClassesControllerTest < ActionController::TestCase
 
   test "create should add new hero class" do
     log_in_as(users(:michael))
-    hero = hero_classes(:goliath)
     assert_difference 'HeroClass.count', +1 do
       post :create, hero_class: { name: 'Nerd', cssclass: 'nerd-icons' }
     end

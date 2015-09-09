@@ -9,12 +9,6 @@ div.spells {
   padding: 0;
 }
 
-div.card {
-  color: maroon;
-  border-color: maroon;
-  background-color: maroon;
-}
-
 .card {
   border: 2mm solid;
   border-radius: 4px;
@@ -80,6 +74,7 @@ div.card {
     background-color: inherit;
     border-color: inherit;
 }
+
 .card-title-icon-container {
     position: absolute;
     right: -1mm;
@@ -98,6 +93,7 @@ div.card {
     background-color: inherit;
     border-color: inherit;
 }
+
 .card-title-inlineicon-container {
     position: absolute;
     right: -1mm;
@@ -164,7 +160,6 @@ div.card {
   display: inline;
 }
 
-
 .card-section {
   border-bottom: 1px solid;
   font-size: 10pt;
@@ -187,20 +182,29 @@ div.card {
 }
 
 .card-description-line {
-  margin-top: 0.5em;
+  margin-top: 0.0em;
   margin-bottom: 0.0em;
   font-size: inherit;
   color: black;
 }
+
+.card-description-line ul {
+  padding-left: 15px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
 .card-description-name {
   display: inline;
   font-size: inherit;
   font-style: italic;
   font-weight: bold;
 }
+
 .card-description-name::after {
   content: ".";
 }
+
 .card-description-text {
   display: inline;
 }
