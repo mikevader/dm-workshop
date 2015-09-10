@@ -46,7 +46,7 @@ class ItemsController < ApplicationController
 
   private
   def item_params
-    params.require(:item).permit(:name, :category_id, :rarity_id, :attunement, :description)
+    params.require(:item).permit(:name, :cssclass, :category_id, :rarity_id, :attunement, :description, properties_attributes: [:id, :name, :value, :_destroy])
   end
 
   # Before filters

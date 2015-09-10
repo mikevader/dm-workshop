@@ -19,5 +19,11 @@
 <%= f.label :attunement %>
 <%= f.check_box :attunement, class: 'form-control' %>
 
+<%= f.fields_for :properties do |property| %>
+<%= render 'property_fields', f: property %>
+<% end %>
+<%= link_to_add_fields 'Add Attribute', f, :properties %>
+
+
 <%= f.label :description %>
 <%= f.text_area :description, class: 'form-control' %>

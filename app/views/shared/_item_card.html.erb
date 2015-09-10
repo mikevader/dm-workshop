@@ -11,6 +11,14 @@
       <h4 class="card-property-name">Attunement</h4>
       <p class="card-p card-property-text"><%= item.attunement %></p>
     </div>
+
+    <% item.properties.each do |property| -%>
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name"><%= property.name %></h4>
+      <p class="card-p card-property-text"><%= property.value %></p>
+    </div>
+    <% end -%>
+    
     <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="grey"></polyline></svg>
     <span class="card-fill" style="-webkit-flex:2; flex:2;">
     </span>
