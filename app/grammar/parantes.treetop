@@ -1,0 +1,7 @@
+grammar ParenLanguage
+  rule parenthesized_letter
+    "(" parenthesized_letter ")"
+    /
+    [a-z]
+  end
+end
