@@ -1,10 +1,27 @@
+
+
 class SpellsController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :create, :destroy]
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: :destroy
   
   def index
-    @spells = Spell.search(params[:search]).paginate(page: params[:page]).order('name')
+    begin
+      if params[:search].blank?
+        @spells = Spell.all
+      else
+        @spells = Spell.search(params[:search])
+      end
+
+      @spells = @spells.paginate(page: params[:page]).order(:name)
+      
+    rescue ParseSearchError => e
+      logger.error e.message
+      logger.error e.backtrace.join("\n")
+      @error = e.parse_error#.gsub(/\n/, "<br/>")
+      #@error = @error.gsub(/ /, "&nbsp;")
+      @spells = Spell.none.paginate(page: params[:page])
+    end
   end
 
   def new

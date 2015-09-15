@@ -6,10 +6,11 @@
     <div class="row">
       <%= form_tag spells_path, method: 'get', id: "spells_search" do %>
 
-      <%= text_field_tag :search, params[:search], class: "form-control" %>
+      <%= text_field_tag :search, params[:search], class: "form-control", autocomplete: 'off' %>
+      <%= content_tag :div, @error.html_safe, class: 'alert alert-danger' if @error %>
       <%= submit_tag "Search", class: "btn btn-primary", name: nil -%>
       <%= link_to "New", new_spell_path, class: 'btn btn-default', role: 'button' -%>
-      <%= link_to "Print", print_spells_path(query: params[:search]), class: 'btn btn-default', target: '_blank', role: 'button' %>
+      <%= link_to "Print", print_spells_path(search: params[:search]), class: 'btn btn-default', target: '_blank', role: 'button' %>
     </div>
     <div class="row">
       <div class="spells">
