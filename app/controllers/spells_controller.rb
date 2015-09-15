@@ -1,5 +1,3 @@
-
-
 class SpellsController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :create, :destroy]
   before_action :correct_user, only: [:edit, :update]

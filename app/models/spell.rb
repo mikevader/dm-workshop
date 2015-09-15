@@ -12,7 +12,6 @@ class Spell < ActiveRecord::Base
   validates :school, presence: true
   validate :picture_size
   
-  
   def self.search(search)
     if search
       builder = new_builder
@@ -20,11 +19,11 @@ class Spell < ActiveRecord::Base
       
       query = self
       builder.joins.each do |join|
-        query = query.joins(join)
+        query = query.joins(join.to_sym)
       end
       query = query.where(search)
       builder.orders.each do |join|
-        query = query.order(join)
+        query = query.order(join.to_sym)
       end
       query.distinct
     else
