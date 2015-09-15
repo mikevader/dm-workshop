@@ -3,7 +3,21 @@ class ItemsController < ApplicationController
   before_action :admin_user, only: [:edit, :update, :destroy]
 
   def index
-    @items = Item.paginate(page: params[:page]).order('name')
+    begin
+      if params[:search].blank?
+        @items = Item.all
+      else
+        @items = Item.search(params[:search])
+      end
+      
+      @items = @items.paginate(page: params[:page]).order(:name)
+      
+    rescue ParseSearchError => e
+      logger.error e.message
+      logger.error e.backtrace.join("\n")
+      @error = e.parse_error
+      @items = Item.none.paginate(page: params[:page])
+    end
   end
 
   def show
