@@ -12,7 +12,7 @@ class SearchBuilder
   end
   
   def add_relation(relation_name, substitution, join_table)
-    @relations[relation_name.to_sym] = {substitution: substitution, join_table: join_table}
+    @relations[relation_name.to_sym] = {substitution: substitution, join_table: join_table.to_sym}
   end
   
   def add_ordering(order_name)

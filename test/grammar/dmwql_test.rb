@@ -57,7 +57,7 @@ class DmwqlTest < ActiveSupport::TestCase
     assert_equal "hero_classes.name in ('Bard')",
     @parser.parse("classes in ('Bard')", builder)
     
-    assert builder.joins.first == "hero_classes"
+    assert builder.joins.first == :hero_classes
   end
 
 end

@@ -19,11 +19,11 @@ class Item < ActiveRecord::Base
       
       query = self
       builder.joins.each do |join|
-        query = query.joins(join.to_sym)
+        query = query.joins(join)
       end
       query = query.where(search)
-      builder.orders.each do |join|
-        query = query.order(join.to_sym)
+      builder.orders.each do |order|
+        query = query.order(order)
       end
       query.distinct
     else
