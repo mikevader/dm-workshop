@@ -18,8 +18,10 @@ wizard = HeroClass.create!(name: "Wizard", cssclass: "icon-class-wizard")
 # Categories
 armor = Category.create!(name: 'Armor', cssclass: 'icon-custom-armor-heavy')
 potion = Category.create!(name: 'Potion', cssclass: 'icon-custom-potion')
-ring = Category.create!(name: 'Ring', cssclass: 'icon-custom-item')
-staff = Category.create!(name: 'Staff', cssclass: 'icon-custom-wand')
+ring = Category.create!(name: 'Ring', cssclass: 'icon-custom-ring')
+scroll = Category.create!(name: 'Scroll', cssclass: 'icon-custom-scroll')
+staff = Category.create!(name: 'Staff', cssclass: 'icon-custom-staff')
+wand = Category.create!(name: 'Wand', cssclass: 'icon-custom-wand')
 weapon = Category.create!(name: 'Weapon', cssclass: 'icon-custom-swordarrow')
 wondrous_item = Category.create!(name: 'Wondrous item', cssclass: 'icon-custom-item')
 
@@ -82,11 +84,11 @@ def parse_school_and_level type_string
 end
 
 
-f = File.open("cards/spells.xml")
-doc = Nokogiri::Slop(f)
+spell_file = File.open("cards/spells.xml")
+spell_doc = Nokogiri::Slop(spell_file)
 
 puts "new spells"
-doc.xpath('//cards/spells/spell').each do |spell|
+spell_doc.xpath('//cards/spells/spell').each do |spell|
   name = load_element spell, 'name', true, "inscribe spell: %{value}"
   type = load_element spell, 'type', true
   level, school = parse_school_and_level type
@@ -121,5 +123,27 @@ doc.xpath('//cards/spells/spell').each do |spell|
   new_spell.athigherlevel = athigherlevel
   new_spell.description = description
   new_spell.save
+end
+
+
+item_file = File.open("cards/items.xml")
+item_doc = Nokogiri::Slop(item_file)
+
+puts "new items"
+item_doc.xpath('//cards/items/item').each do |spell|
+  name = load_element spell, 'name', true, "craft item: %{value}"
+  cite = load_element(spell, 'cite', true)
+  category = Category.where("name LIKE ?", load_element(spell, 'type', true))
+  rarity = Rarity.where("name LIKE ?", load_element(spell, 'rarity', true))
+  attunement = load_element(spell, 'requiresAttunement', false) | false
+  description = load_element(spell, 'description', false)
+  
+  
+  new_item = default.items.create(name: name)
+  new_item.category = category.take!
+  new_item.rarity = rarity.take!
+  new_item.attunement = attunement
+  new_item.description = description
+  new_item.save
 end
 

@@ -13,16 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20150910004652) do
 
-  create_table "attributes", force: :cascade do |t|
-    t.string   "name"
-    t.string   "value"
-    t.integer  "item_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "attributes", ["item_id"], name: "index_attributes_on_item_id"
-
   create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
