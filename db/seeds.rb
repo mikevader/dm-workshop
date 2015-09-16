@@ -1,6 +1,17 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
+
+
+module StringToBoolean
+  def to_b
+    return true if self == true || self =~ (/^(true|t|yes|y|1)$/i)
+    return false if self == false || self.blank? || self =~ (/^(false|f|no|n|0)$/i)
+    raise ArgumentError.new("invalid value for Boolean: \"#{self}\"")
+  end
+end
+class String; include StringToBoolean; end
+
+
 # Hero classes
 barbarian = HeroClass.create!(name: "Barbarian", cssclass: "icon-class-barbarian")
 bard = HeroClass.create!(name: "Bard", cssclass: "icon-class-bard")
@@ -33,7 +44,6 @@ very_rare = Rarity.create!(name: 'Very rare')
 legendary = Rarity.create!(name: 'Legendary')
 
 
-
 default = User.create!(name:  "Michael Mühlebach",
              email: "michael@anduin.ch",
              password:              "foobar",
@@ -49,6 +59,7 @@ default.items.create!(name: "Armor +1", category_id: armor.id, rarity_id: rare.i
 
 
 def load_element(node, name, required = false, description = "    %{name}: %{value}")
+  name.downcase!
   value_node = node.xpath(name)
   if value_node.empty?
     raise RuntimeError, "element #{name} is required." if required
@@ -130,20 +141,21 @@ item_file = File.open("cards/items.xml")
 item_doc = Nokogiri::Slop(item_file)
 
 puts "new items"
-item_doc.xpath('//cards/items/item').each do |spell|
-  name = load_element spell, 'name', true, "craft item: %{value}"
-  cite = load_element(spell, 'cite', true)
-  category = Category.where("name LIKE ?", load_element(spell, 'type', true))
-  rarity = Rarity.where("name LIKE ?", load_element(spell, 'rarity', true))
-  attunement = load_element(spell, 'requiresAttunement', false) | false
-  description = load_element(spell, 'description', false)
+item_doc.xpath('//cards/items/item').each do |item|
+  name = load_element item, 'name', true, "craft item: %{value}"
+  cite = load_element(item, 'cite', true)
+  category = Category.where("name LIKE ?", load_element(item, 'type', true))
+  rarity = Rarity.where("name LIKE ?", load_element(item, 'rarity', true))
+  attunement = load_element(item, 'requiresAttunement', false) || 'false'
+  description = load_element(item, 'description', false)
   
   
   new_item = default.items.create(name: name)
   new_item.category = category.take!
   new_item.rarity = rarity.take!
-  new_item.attunement = attunement
+  new_item.attunement = attunement.to_b
   new_item.description = description
+  new_item.cite = cite
   new_item.save
 end
 
