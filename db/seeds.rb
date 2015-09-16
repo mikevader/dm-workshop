@@ -1,6 +1,17 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
+
+
+module StringToBoolean
+  def to_b
+    return true if self == true || self =~ (/^(true|t|yes|y|1)$/i)
+    return false if self == false || self.blank? || self =~ (/^(false|f|no|n|0)$/i)
+    raise ArgumentError.new("invalid value for Boolean: \"#{self}\"")
+  end
+end
+class String; include StringToBoolean; end
+
+
 # Hero classes
 barbarian = HeroClass.create!(name: "Barbarian", cssclass: "icon-class-barbarian")
 bard = HeroClass.create!(name: "Bard", cssclass: "icon-class-bard")
@@ -18,8 +29,10 @@ wizard = HeroClass.create!(name: "Wizard", cssclass: "icon-class-wizard")
 # Categories
 armor = Category.create!(name: 'Armor', cssclass: 'icon-custom-armor-heavy')
 potion = Category.create!(name: 'Potion', cssclass: 'icon-custom-potion')
-ring = Category.create!(name: 'Ring', cssclass: 'icon-custom-item')
-staff = Category.create!(name: 'Staff', cssclass: 'icon-custom-wand')
+ring = Category.create!(name: 'Ring', cssclass: 'icon-custom-ring')
+scroll = Category.create!(name: 'Scroll', cssclass: 'icon-custom-scroll')
+staff = Category.create!(name: 'Staff', cssclass: 'icon-custom-staff')
+wand = Category.create!(name: 'Wand', cssclass: 'icon-custom-wand')
 weapon = Category.create!(name: 'Weapon', cssclass: 'icon-custom-swordarrow')
 wondrous_item = Category.create!(name: 'Wondrous item', cssclass: 'icon-custom-item')
 
@@ -29,7 +42,6 @@ uncommon = Rarity.create!(name: 'Uncommon')
 rare = Rarity.create!(name: 'Rare')
 very_rare = Rarity.create!(name: 'Very rare')
 legendary = Rarity.create!(name: 'Legendary')
-
 
 
 default = User.create!(name:  "Michael Mühlebach",
@@ -47,6 +59,7 @@ default.items.create!(name: "Armor +1", category_id: armor.id, rarity_id: rare.i
 
 
 def load_element(node, name, required = false, description = "    %{name}: %{value}")
+  name.downcase!
   value_node = node.xpath(name)
   if value_node.empty?
     raise RuntimeError, "element #{name} is required." if required
@@ -82,11 +95,11 @@ def parse_school_and_level type_string
 end
 
 
-f = File.open("cards/spells.xml")
-doc = Nokogiri::Slop(f)
+spell_file = File.open("cards/spells.xml")
+spell_doc = Nokogiri::Slop(spell_file)
 
 puts "new spells"
-doc.xpath('//cards/spells/spell').each do |spell|
+spell_doc.xpath('//cards/spells/spell').each do |spell|
   name = load_element spell, 'name', true, "inscribe spell: %{value}"
   type = load_element spell, 'type', true
   level, school = parse_school_and_level type
@@ -121,5 +134,28 @@ doc.xpath('//cards/spells/spell').each do |spell|
   new_spell.athigherlevel = athigherlevel
   new_spell.description = description
   new_spell.save
+end
+
+
+item_file = File.open("cards/items.xml")
+item_doc = Nokogiri::Slop(item_file)
+
+puts "new items"
+item_doc.xpath('//cards/items/item').each do |item|
+  name = load_element item, 'name', true, "craft item: %{value}"
+  cite = load_element(item, 'cite', true)
+  category = Category.where("name LIKE ?", load_element(item, 'type', true))
+  rarity = Rarity.where("name LIKE ?", load_element(item, 'rarity', true))
+  attunement = load_element(item, 'requiresAttunement', false) || 'false'
+  description = load_element(item, 'description', false)
+  
+  
+  new_item = default.items.create(name: name)
+  new_item.category = category.take!
+  new_item.rarity = rarity.take!
+  new_item.attunement = attunement.to_b
+  new_item.description = description
+  new_item.cite = cite
+  new_item.save
 end
 
