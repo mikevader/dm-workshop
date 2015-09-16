@@ -31,7 +31,7 @@ class ItemsController < ApplicationController
   def create
     @item = current_user.items.build(item_params)
     if @item.save
-      flash[:success] = "Item created!"
+      flash[:success] = "Item crafted!"
       redirect_to items_url
     else
       render 'new'

@@ -29,7 +29,7 @@ class SpellsController < ApplicationController
   def create
     @spell = current_user.spells.build(spell_params)
     if @spell.save
-      flash[:success] = "Spell created!"
+      flash[:success] = "Spell inscribed!"
       redirect_to spells_path
     else
       render 'new'
