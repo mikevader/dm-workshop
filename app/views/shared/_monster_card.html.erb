@@ -1,11 +1,11 @@
-<div id="monster-<%= monster.id %>" class="card card-size-35x50" style="color: grey; border-color: grey; background-color: grey;">
+<div id="monster-<%= monster.id %>" class="card card-size-35x50" style="color: black; border-color: black; background-color: black;">
   <div class="card-title-inlineicon-container">
-    <div class="card-title-inlineicon <%= "" %>"></div>
+    <div class="card-title-inlineicon icon-custom-monster"></div>
   </div>
   <div class="card-title card-title-13"><%= monster.name %></div>
   <div class="card-content-container">
     <div class="card-element card-subtitle"><%= "#{monster.size.capitalize} #{monster.monster_type}, #{monster.alignment}" %></div>
-    <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="grey"></polyline></svg>
+    <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="black"></polyline></svg>
     
     <div class="card-element card-property-line">
       <h4 class="card-property-name">Armor Class</h4>
@@ -22,7 +22,7 @@
       <p class="card-p card-property-text"><%= monster.speed %></p>
     </div>
     
-    <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="grey"></polyline></svg>
+    <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="black"></polyline></svg>
     
     <table class="card-stats">
       <tbody>
@@ -45,7 +45,7 @@
       </tbody>
     </table>
 
-    <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="grey"></polyline></svg>
+    <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="black"></polyline></svg>
 
     <div class="card-element card-description-line">
       <p class="card-p card-description-text"><%= raw(monster.description) %></p>

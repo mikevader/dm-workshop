@@ -64,6 +64,12 @@ class Monster < ActiveRecord::Base
   def self.new_builder
     builder = SearchBuilder.new
     builder.add_field 'name', 'monsters.name'
+    builder.add_field 'str', 'monsters.strength'
+    builder.add_field 'dex', 'monsters.dexterity'
+    builder.add_field 'con', 'monsters.constitution'
+    builder.add_field 'int', 'monsters.intelligence'
+    builder.add_field 'wis', 'monsters.wisdom'
+    builder.add_field 'cha', 'monsters.charisma'
   end
   
   def calc_modifier_for ability = 10

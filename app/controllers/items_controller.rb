@@ -1,23 +1,20 @@
+require 'search_engine'
+
 class ItemsController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
   before_action :admin_user, only: [:edit, :update, :destroy]
 
+  before_action :init_search_engine, only: [:index]
+  
+  def init_search_engine
+    @search_engine = SearchEngine2.new(Item)
+  end
+  
   def index
-    begin
-      if params[:search].blank?
-        @items = Item.all
-      else
-        @items = Item.search(params[:search])
-      end
-      
-      @items = @items.paginate(page: params[:page]).order(:name)
-      
-    rescue ParseSearchError => e
-      logger.error e.message
-      logger.error e.backtrace.join("\n")
-      @error = e.parse_error
-      @items = Item.none.paginate(page: params[:page])
-    end
+    result, error = @search_engine.search(params[:search])
+    
+    @items = result.paginate(page: params[:page])
+    @error = error
   end
 
   def show

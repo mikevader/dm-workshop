@@ -1,25 +1,21 @@
+require 'search_engine'
+
 class SpellsController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :create, :destroy]
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: :destroy
   
+  before_action :init_search_engine, only: [:index]
+  
+  def init_search_engine
+    @search_engine = SearchEngine2.new(Spell)
+  end
+  
   def index
-    begin
-      if params[:search].blank?
-        @spells = Spell.all
-      else
-        @spells = Spell.search(params[:search])
-      end
-
-      @spells = @spells.paginate(page: params[:page]).order(:name)
-      
-    rescue ParseSearchError => e
-      logger.error e.message
-      logger.error e.backtrace.join("\n")
-      @error = e.parse_error#.gsub(/\n/, "<br/>")
-      #@error = @error.gsub(/ /, "&nbsp;")
-      @spells = Spell.none.paginate(page: params[:page])
-    end
+    result, error = @search_engine.search(params[:search])
+    
+    @spells = result.paginate(page: params[:page])
+    @error = error
   end
 
   def new

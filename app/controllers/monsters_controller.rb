@@ -1,25 +1,21 @@
+require 'search_engine'
+
 class MonstersController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :create, :destroy]
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: :destroy
 
+  before_action :init_search_engine, only: [:index]
+  
+  def init_search_engine
+    @search_engine = SearchEngine2.new(Monster)
+  end
+  
   def index
-    begin
-      if params[:search].blank?
-        @monsters = Monster.all
-      else
-        @monsters = Monster.search(params[:search])
-      end
-      
-      @monsters = @monsters.paginate(page: params[:page]).order(:name)
-      
-    rescue ParseSearchError => e
-      logger.error e.message
-      logger.error e.backtrace.join("\n")
-      @error = e.parse_error
-      @monsters = Monster.none.paginate(page: params[:page])
-    end
-
+    result, error = @search_engine.search(params[:search])
+    
+    @monsters = result.paginate(page: params[:page])
+    @error = error
   end
 
   def show
