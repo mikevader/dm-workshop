@@ -29,7 +29,23 @@ class OutputPagesController < ApplicationController
       logger.error e.message
       logger.error e.backtrace.join("\n")
       flash.now[:danger] = e.message
-      @spells = Spells.none.paginate(page: params[:page])
+      @items = Item.none.paginate(page: params[:page])
+    end
+  end
+
+  def monsters
+    begin
+      if params[:search].blank?
+        @monsters = Monster.all
+      else
+        @monsters = Monster.search(params[:search])
+      end
+      @monsters = @monsters.paginate(page: params[:page]).order(:name)
+    rescue ParseSearchError => e
+      logger.error e.message
+      logger.error e.backtrace.join("\n")
+      flash.now[:danger] = e.message
+      @monsters = Monster.none.paginate(page: params[:page])
     end
   end
 end

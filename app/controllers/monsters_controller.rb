@@ -4,7 +4,22 @@ class MonstersController < ApplicationController
   before_action :admin_user, only: :destroy
 
   def index
-    @monsters = Monster.all.paginate(page: params[:page]).order(:name)
+    begin
+      if params[:search].blank?
+        @monsters = Monster.all
+      else
+        @monsters = Monster.search(params[:search])
+      end
+      
+      @monsters = @monsters.paginate(page: params[:page]).order(:name)
+      
+    rescue ParseSearchError => e
+      logger.error e.message
+      logger.error e.backtrace.join("\n")
+      @error = e.parse_error
+      @monsters = Monster.none.paginate(page: params[:page])
+    end
+
   end
 
   def show
@@ -16,7 +31,7 @@ class MonstersController < ApplicationController
   end
   
   def create
-    @monster = curent_user.monsters.build(monster_params)
+    @monster = current_user.monsters.build(monster_params)
     if @monster.save
       flash[:success] = "Monster bread!"
       redirect_to monsters_path
@@ -47,12 +62,12 @@ class MonstersController < ApplicationController
 
   private
   def monster_params
-    params.require(:spell).permit(:name, :cite, :size, :monster_type, :alignment, :armor_class, :hit_points, :speed,  :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :saving_throws, :skills, :damage_vulnerabilities, :damage_resistences, :damage_immunities, :condition_immunities, :senses, :languages, :challenge, :description)
+    params.require(:monster).permit(:name, :cite, :size, :monster_type, :alignment, :armor_class, :hit_points, :speed,  :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :saving_throws, :skills, :damage_vulnerabilities, :damage_resistences, :damage_immunities, :condition_immunities, :senses, :languages, :challenge, :description)
   end
   
   def correct_user
-    @spell = Spell.find_by(id: params[:id])
-    redirect_to root_url unless current_user?(@spell.user) || admin_user?
+    @monster = Monster.find_by(id: params[:id])
+    redirect_to root_url unless current_user?(@monster.user) || admin_user?
   end
   
   def admin_user

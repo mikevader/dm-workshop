@@ -1,0 +1,12 @@
+<tr>
+  <td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal-<%= monster.id %>">
+  o
+</button></td>
+  <td><%= monster.name %></td>
+  <td><%= "#{monster.size} #{monster.monster_type}" %></td>
+  <td><%= monster.challenge %></td>
+  <% if admin_user? %>
+  <td><%= link_to "edit", edit_monster_path(monster) %></td>
+  <td><%= link_to "delete", monster, method: :delete, data: { confirm: "You sure?" } %></td>
+  <% end %>
+</tr>

@@ -35,9 +35,38 @@ class Monster < ActiveRecord::Base
     end
   end
   
+  def strength_modifier
+    calc_modifier_for strength
+  end
+
+  def dexterity_modifier
+    calc_modifier_for dexterity
+  end
+
+  def constitution_modifier
+    calc_modifier_for constitution
+  end
+
+  def intelligence_modifier
+    calc_modifier_for intelligence
+  end
+
+  def wisdom_modifier
+    calc_modifier_for wisdom
+  end
+
+  def charisma_modifier
+    calc_modifier_for charisma
+  end
+
+  
   private
   def self.new_builder
     builder = SearchBuilder.new
     builder.add_field 'name', 'monsters.name'
+  end
+  
+  def calc_modifier_for ability = 10
+    return (ability - 10) / 2
   end
 end

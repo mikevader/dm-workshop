@@ -7,8 +7,9 @@ Rails.application.routes.draw do
   post    'login'   => 'sessions#create'
   delete  'logout'  => 'sessions#destroy'
   
-  get     'print/spells'   => 'output_pages#spells', as: :print_spells
-  get     'print/items'   => 'output_pages#items', as: :print_items
+  get     'print/spells'    => 'output_pages#spells',   as: :print_spells
+  get     'print/items'     => 'output_pages#items',    as: :print_items
+  get     'print/monsters'  => 'output_pages#monsters', as: :print_monsters
 
   resources :users
   resources :spells
