@@ -27,6 +27,18 @@ body {
     size: portrait;
   }
   
+  
+  /*
+  page {
+    width: 191mm;
+    height: 267mm;
+  }
+  */
+
+  html {
+    zoom: 100%;
+  }
+  
   .page-preview {
     margin: 0;
     padding: 0;

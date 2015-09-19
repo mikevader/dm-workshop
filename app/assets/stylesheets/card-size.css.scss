@@ -28,32 +28,34 @@
 /* A4 paper area */
 /* Chrome has problems with page sizes given in metric units. Make the paper area slightly smaller to work around this. */
 page[size="A4"] {
-    width:  210mm; /* full: 210.0mm */
-    height: 294mm; /* full: 297.0mm */
+  width:  197mm; // 191mm; /* full: 210.0mm */
+  height: 275mm; // 267mm; /* full: 297.0mm */
 }
+
 
 /* US letter area */
 page[size="Letter"] {
-    width:  8.5in;
-    height: 11.0in;
+  width:  8.5in;
+  height: 11.0in;
 }
 
 page[size="25x35"] {
-    width: 2.5in;
-    height: 3.5in;
+    width: 63mm;
+    height: 88mm;
 }
 
 /* Default card size */
 .card {
-    width:2.5in;
-    height:3.5in;
+    width:63mm;
+    height:88mm;
 }
 
 /* Bridge card size */
 .card-size-225x35 {
     width:2.25in;
-    height:3.5in;
+    height:88mm;
 }
+
 .card-size-225x35 .card-back-icon {
     width: 1in;
     height: 1in;
@@ -61,9 +63,10 @@ page[size="25x35"] {
 
 /* Poker / Magic card size */
 .card-size-25x35 {
-    width:2.5in;
-    height:3.5in;
+    width: 63mm;
+    height: 88mm;
 }
+
 .card-size-25x35 .card-back-icon {
     width: 1in;
     height: 1in;
@@ -71,10 +74,11 @@ page[size="25x35"] {
 
 /* Poker / Magic card size */
 .card-size-35x50 {
-    width:3.5in;
-    min-width:3.5in;
-    height:5.0in;
+    width:88mm;
+    min-width:88mm;
+    height:126mm;
 }
+
 .card-size-35x50 .card-back-icon {
     width: 1.5in;
     height: 1.5in;
@@ -85,6 +89,7 @@ page[size="25x35"] {
     width:7.5in;
     height:5.0in;
 }
+
 .card-size-75x50 .card-back-icon {
     width: 2in;
     height: 2in;
