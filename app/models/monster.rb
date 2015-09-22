@@ -1,10 +1,15 @@
 class Monster < ActiveRecord::Base
   belongs_to :user
+  has_and_belongs_to_many :skills
+  #accepts_nested_attributes_for :skills, reject_if: proc { |skill|
+  #  skill['name'].blank?
+  #  }, allow_destroy: true
   
   default_scope -> { order(name: :asc) }
 
   validates :user_id, presence: true
   validates :name, presence: true
+  validates :bonus, presence: true
   validates :size, presence: true
   validates :monster_type, presence: true
   validates :armor_class, presence: true

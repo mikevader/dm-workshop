@@ -47,9 +47,54 @@
 
     <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="black"></polyline></svg>
 
-    <div class="card-element card-description-line">
-      <p class="card-p card-description-text"><%= raw(monster.description) %></p>
+    
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Skills</h4>
+      <p class="card-p card-property-text"><%= monster.skills.map {|skill| "#{skill.name} #{'%+d' % skill_modifier(monster, skill)}"}.join(', ') %></p>
     </div>
+
+    <% unless monster.damage_vulnerabilities.blank? %>
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Damage Vulnerabilities</h4>
+      <p class="card-p card-property-text"><%= monster.damage_vulnerabilities.html_safe %></p>
+    </div>
+    <% end %>
+
+    <% unless monster.damage_resistances.blank? %>
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Damage Resistances</h4>
+      <p class="card-p card-property-text"><%= monster.damage_resistances.html_safe %></p>
+    </div>
+    <% end %>
+
+    <% unless monster.damage_immunities.blank? %>
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Damage Immunities</h4>
+      <p class="card-p card-property-text"><%= monster.damage_immunities.html_safe %></p>
+    </div>
+    <% end %>
+
+    <% unless monster.condition_immunities.blank? %>
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Condition Immunities</h4>
+      <p class="card-p card-property-text"><%= monster.condition_immunities.html_safe %></p>
+    </div>
+    <% end %>
+
+    <% unless monster.senses.blank? %>
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Senses</h4>
+      <p class="card-p card-property-text"><%= monster.senses.html_safe %></p>
+    </div>
+    <% end %>
+
+    <% unless monster.languages.blank? %>
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Languages</h4>
+      <p class="card-p card-property-text"><%= monster.languages.html_safe %></p>
+    </div>
+    <% end %>
+
     <span class="card-fill" style="-webkit-flex:2; flex:2;"></span>
     <h3 class="card-section" style="color:black">Actions</h3>
     <div class="card-element card-description-line">

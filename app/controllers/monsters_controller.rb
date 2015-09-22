@@ -58,7 +58,7 @@ class MonstersController < ApplicationController
 
   private
   def monster_params
-    params.require(:monster).permit(:name, :cite, :size, :monster_type, :alignment, :armor_class, :hit_points, :speed,  :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :saving_throws, :skills, :damage_vulnerabilities, :damage_resistences, :damage_immunities, :condition_immunities, :senses, :languages, :challenge, :description)
+    params.require(:monster).permit(:name, :cite, :size, :monster_type, :alignment, :armor_class, :hit_points, :speed,  :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :saving_throws, :damage_vulnerabilities, :damage_resistences, :damage_immunities, :condition_immunities, :senses, :languages, :challenge, :description, :bonus, :monsters_skills, :skills, :monsters_skills_ids => [], :skill_ids => [])
   end
   
   def correct_user

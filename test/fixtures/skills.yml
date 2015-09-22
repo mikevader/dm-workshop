@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+stealth:
+  name: Stealth
+  ability: Dex
+
+insight:
+  name: Insight
+  ability: Wis
+
+arcana:
+  name: Arcana
+  ability: Int

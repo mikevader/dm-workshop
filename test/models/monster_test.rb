@@ -20,6 +20,14 @@ class MonsterTest < ActiveSupport::TestCase
     @monster.name = "    "
     assert_not @monster.valid?
   end
+
+  test "skills should be addible" do
+    @monster.skills << skills(:insight)
+    @monster.skills << skills(:arcana)
+    assert @monster.valid?
+    assert_equal 2, @monster.skills.size
+  end
+
   
   test "ability should be between 0 and 100" do
     @monster.dexterity = 0

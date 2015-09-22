@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150916215441) do
+ActiveRecord::Schema.define(version: 20150921215128) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -74,13 +74,23 @@ ActiveRecord::Schema.define(version: 20150916215441) do
     t.string   "languages"
     t.integer  "challenge"
     t.text     "description"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.integer  "user_id"
+    t.integer  "bonus",                  default: 0, null: false
   end
 
   add_index "monsters", ["name"], name: "index_monsters_on_name"
   add_index "monsters", ["user_id"], name: "index_monsters_on_user_id"
+
+  create_table "monsters_skills", id: false, force: :cascade do |t|
+    t.integer "monster_id"
+    t.integer "skill_id"
+  end
+
+  add_index "monsters_skills", ["monster_id", "skill_id"], name: "index_monsters_skills_on_monster_id_and_skill_id", unique: true
+  add_index "monsters_skills", ["monster_id"], name: "index_monsters_skills_on_monster_id"
+  add_index "monsters_skills", ["skill_id"], name: "index_monsters_skills_on_skill_id"
 
   create_table "properties", force: :cascade do |t|
     t.string   "name"
@@ -99,6 +109,15 @@ ActiveRecord::Schema.define(version: 20150916215441) do
   end
 
   add_index "rarities", ["name"], name: "index_rarities_on_name"
+
+  create_table "skills", force: :cascade do |t|
+    t.string   "name"
+    t.string   "ability"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "skills", ["name"], name: "index_skills_on_name"
 
   create_table "spellclasses", force: :cascade do |t|
     t.integer  "spell_id"

@@ -6,6 +6,9 @@
 <%= f.label :cite %>
 <%= f.text_field :cite, class: 'form-control' %>
 
+<%= f.label :bonus %>
+<%= f.text_field :bonus, class: 'form-control', type: 'number' %>
+
 <%= f.label :size %>
 <%= f.text_field :size, class: 'form-control' %>
 
@@ -45,9 +48,14 @@
 <%= f.label :saving_throws %>
 <%= f.text_field :saving_throws, class: 'form-control' %>
 
-<%= f.label :skills %>
-<%= f.text_field :skills, class: 'form-control' %>
+<%= f.label :skill_ids %>
+<%= f.collection_select :skill_ids, Skill.all, :id, :name, {}, {multiple: true} %>
 
+<%#= f.fields_for :skills do |skill| %>
+  <%#= render 'skill_fields', f: skill %>
+<%# end %>
+<%#= link_to_add_fields 'Add skill', f, :skills %>
+<br/>
 <%= f.label :damage_vulnerabilities %>
 <%= f.text_field :damage_vulnerabilities, class: 'form-control' %>
 
