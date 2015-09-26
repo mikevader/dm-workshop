@@ -6,7 +6,9 @@ class Monster < ActiveRecord::Base
   #  }, allow_destroy: true
   
   default_scope -> { order(name: :asc) }
-
+  
+  #scope :with_saving_throw, lambda { |saving_throw| {:conditions => "saving_throws_mask & #{2**ABILITIES.index(saving_throw.to_s)} > 0"} }
+  
   validates :user_id, presence: true
   validates :name, presence: true
   validates :bonus, presence: true
@@ -20,6 +22,20 @@ class Monster < ActiveRecord::Base
   validates :intelligence, presence: true, numericality: { only_integer: true, greater_than: 0, less_than: 100}
   validates :wisdom, presence: true, numericality: { only_integer: true, greater_than: 0, less_than: 100}
   validates :charisma, presence: true, numericality: { only_integer: true, greater_than: 0, less_than: 100}
+  
+  ABILITIES = %w[str dex con int wis cha]
+  
+  def saving_throws=(saving_throws)
+    self.saving_throws_mask = (saving_throws & ABILITIES).map { |r| 2**ABILITIES.index(r) }.sum
+  end
+  
+  def saving_throws
+    ABILITIES.reject { |r| ((self.saving_throws_mask || 0) & 2**ABILITIES.index(r)).zero? }
+  end
+  
+  def saving_throws_symbols
+    saving_throws.map(&:to_sym)
+  end
   
   def self.search(search)
     if search

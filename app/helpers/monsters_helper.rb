@@ -4,7 +4,23 @@ module MonstersHelper
     raise ArgumentError if monster.nil?
     raise ArgumentError if skill.nil?
     
-    modifier = case skill.ability.downcase
+    modifier = ability_modifier(monster, skill.ability)
+    
+    modifier += monster.bonus if monster.skills.include? skill
+    
+    return modifier
+  end
+  
+  def saving_throw_modifier(monster, saving_throw)
+    modifier = ability_modifier(monster, saving_throw)
+    
+    modifier += monster.bonus if monster.saving_throws.include? saving_throw
+    
+    return modifier
+  end
+  
+  def ability_modifier(monster, ability)
+    case ability.downcase
     when 'str'
       monster.strength_modifier
     when 'dex'
@@ -18,9 +34,5 @@ module MonstersHelper
     when 'cha'
       monster.charisma_modifier
     end
-    
-    modifier += monster.bonus if monster.skills.include? skill
-    
-    return modifier
   end
 end

@@ -16,7 +16,7 @@ shadow_demon:
   intelligence: 14
   wisdom: 13
   charisma: 14
-  saving_throws: Dex +5, Cha +4
+  saving_throws_mask: 3
   skills:
     - stealth
   damage_vulnerabilities: radiant

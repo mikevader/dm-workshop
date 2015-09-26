@@ -27,6 +27,27 @@ class MonstersHelperTest < ActionView::TestCase
       skill_modifier(nil, skill)
     end
   end
+  
+  test "should calculate saving throws modifier" do
+    monster = monsters(:shadow_demon)
+    monster.saving_throws = ["dex"]
+    
+    assert_equal 5, saving_throw_modifier(monster, "dex")
+  end
 
+  test "should calculate proficient saving throws modifier" do
+    monster = monsters(:shadow_demon)
+    assert_equal 1, saving_throw_modifier(monster, "con")
+  end
+
+  test "saving throws list should include abilities abbr." do
+    monster = monsters(:shadow_demon)
+    assert monster.saving_throws.include?("str")
+    assert monster.saving_throws.include?("dex")
+    assert_not monster.saving_throws.include?("con")
+    assert_not monster.saving_throws.include?("int")
+    assert_not monster.saving_throws.include?("wis")
+    assert_not monster.saving_throws.include?("cha")
+  end
 
 end

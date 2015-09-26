@@ -108,4 +108,9 @@ class MonsterTest < ActiveSupport::TestCase
     assert_equal 10, @monster.strength_modifier
   end
   
+  test "adding saving throws ability should add bonus to modifier" do
+    @monster.saving_throws = ['str']
+    assert_includes @monster.saving_throws, 'str'
+  end
+  
 end

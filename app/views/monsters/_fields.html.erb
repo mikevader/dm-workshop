@@ -45,11 +45,19 @@
 <%= f.label :charisma %>
 <%= f.text_field :charisma, class: 'form-control', type: 'number' %>
 
-<%= f.label :saving_throws %>
-<%= f.text_field :saving_throws, class: 'form-control' %>
+<%#= f.label :saving_throws %>
+<%#= f.text_field :saving_throws, class: 'form-control' %>
 
 <%= f.label :skill_ids %>
 <%= f.collection_select :skill_ids, Skill.all, :id, :name, {}, {multiple: true} %>
+
+<%= f.label :saving_throws %>
+<%= f.collection_select :saving_throws, Monster::ABILITIES, :to_s, :titleize, {}, {multiple: true} %>
+
+<%# for saving_throw in Monster::ABILITIES %>
+<%#= check_box_tag "monster[saving_throws][]", saving_throw, f.object.saving_throws.include?(saving_throw) %>
+<%# end %>
+<%#= hidden_field_tag "monster[saving_throws][]", "" %>
 
 <%#= f.fields_for :skills do |skill| %>
   <%#= render 'skill_fields', f: skill %>
