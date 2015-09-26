@@ -216,3 +216,39 @@ div.spells {
     margin-top: 0.3em;
     margin-bottom: 0.3em;
 }
+.card-box {
+    display: inline;
+    height: 10mm;
+    width: 10mm;
+    margin-right: 0.3em;
+}
+
+.card-stats {
+    width: 100%
+}
+
+.card-stats-header {
+    text-align: center;
+    padding: 0;
+    width: 16.6%;
+}
+
+.card-stats-cell {
+    text-align: center;
+    padding: 0;
+}
+
+.card-bullet-line {
+    font-size: inherit;
+    color: black;
+    padding-left: 16px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.card-bullet {
+    margin-bottom: 0;
+    margin-top: 0;
+    font-size: inherit;
+}

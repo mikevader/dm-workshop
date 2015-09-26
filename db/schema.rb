@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150916175611) do
+ActiveRecord::Schema.define(version: 20150922200525) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -49,6 +49,49 @@ ActiveRecord::Schema.define(version: 20150916175611) do
   add_index "items", ["rarity_id"], name: "index_items_on_rarity_id"
   add_index "items", ["user_id"], name: "index_items_on_user_id"
 
+  create_table "monsters", force: :cascade do |t|
+    t.string   "name"
+    t.string   "cite"
+    t.string   "size"
+    t.string   "monster_type"
+    t.string   "alignment"
+    t.string   "armor_class"
+    t.integer  "hit_points"
+    t.string   "speed"
+    t.integer  "strength"
+    t.integer  "dexterity"
+    t.integer  "constitution"
+    t.integer  "intelligence"
+    t.integer  "wisdom"
+    t.integer  "charisma"
+    t.string   "skills"
+    t.string   "damage_vulnerabilities"
+    t.string   "damage_resistances"
+    t.string   "damage_immunities"
+    t.string   "condition_immunities"
+    t.string   "senses"
+    t.string   "languages"
+    t.integer  "challenge"
+    t.text     "description"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "user_id"
+    t.integer  "bonus",                  default: 0, null: false
+    t.integer  "saving_throws_mask"
+  end
+
+  add_index "monsters", ["name"], name: "index_monsters_on_name"
+  add_index "monsters", ["user_id"], name: "index_monsters_on_user_id"
+
+  create_table "monsters_skills", id: false, force: :cascade do |t|
+    t.integer "monster_id"
+    t.integer "skill_id"
+  end
+
+  add_index "monsters_skills", ["monster_id", "skill_id"], name: "index_monsters_skills_on_monster_id_and_skill_id", unique: true
+  add_index "monsters_skills", ["monster_id"], name: "index_monsters_skills_on_monster_id"
+  add_index "monsters_skills", ["skill_id"], name: "index_monsters_skills_on_skill_id"
+
   create_table "properties", force: :cascade do |t|
     t.string   "name"
     t.string   "value"
@@ -66,6 +109,15 @@ ActiveRecord::Schema.define(version: 20150916175611) do
   end
 
   add_index "rarities", ["name"], name: "index_rarities_on_name"
+
+  create_table "skills", force: :cascade do |t|
+    t.string   "name"
+    t.string   "ability"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "skills", ["name"], name: "index_skills_on_name"
 
   create_table "spellclasses", force: :cascade do |t|
     t.integer  "spell_id"

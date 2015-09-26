@@ -12,6 +12,28 @@ end
 class String; include StringToBoolean; end
 
 
+# Skills
+acrobatics      = Skill.create!(name: "Acrobatics",       ability: "Dex")
+animal_handling = Skill.create!(name: "Animal Handling",  ability: "Wis")
+arcana          = Skill.create!(name: "Arcana",           ability: "Int")
+athletics       = Skill.create!(name: "Athletics",        ability: "Str")
+deception       = Skill.create!(name: "Deception",        ability: "Cha")
+history         = Skill.create!(name: "History",          ability: "Int")
+insight         = Skill.create!(name: "Insight",          ability: "Wis")
+intimidation    = Skill.create!(name: "Intimidation",     ability: "Cha")
+investigation   = Skill.create!(name: "Investigation",    ability: "Int")
+medicine        = Skill.create!(name: "Medicine",         ability: "Wis")
+nature          = Skill.create!(name: "Nature",           ability: "Int")
+perception      = Skill.create!(name: "Perception",       ability: "Wis")
+performance     = Skill.create!(name: "Performance",      ability: "Cha")
+persuasion      = Skill.create!(name: "Persuasion",       ability: "Cha")
+religion        = Skill.create!(name: "Religion",         ability: "Int")
+sleight_of_hand = Skill.create!(name: "Sleight of Hand",  ability: "Dex")
+stealth         = Skill.create!(name: "Stealth",          ability: "Dex")
+survival        = Skill.create!(name: "Survival",         ability: "Wis")
+
+
+
 # Hero classes
 barbarian = HeroClass.create!(name: "Barbarian", cssclass: "icon-class-barbarian")
 bard = HeroClass.create!(name: "Bard", cssclass: "icon-class-bard")

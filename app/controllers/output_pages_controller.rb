@@ -1,35 +1,39 @@
+require 'search_engine'
+
 class OutputPagesController < ApplicationController
   layout 'print'
-  def spells
-    begin
-      if params[:search].blank?
-        @spells = Spell.all
-      else
-        @spells = Spell.search(params[:search])
-      end
 
-      @spells = @spells.paginate(page: params[:page]).order(:name)
-    rescue ParseSearchError => e
-      logger.error e.message
-      logger.error e.backtrace.join("\n")
-      flash.now[:danger] = e.message
-      @spells = Spell.none.paginate(page: params[:page])
-    end
+  before_action :init_search_engine_spells, only: [:spells]
+  before_action :init_search_engine_items, only: [:items]
+  before_action :init_search_engine_monsters, only: [:monsters]
+  
+  def init_search_engine_spells
+    @search_engine = SearchEngine2.new(Spell)
+  end
+  
+  def init_search_engine_items
+    @search_engine = SearchEngine2.new(Item)
+  end
+  
+  def init_search_engine_monsters
+    @search_engine = SearchEngine2.new(Monster)
+  end
+  
+  def spells
+    result, error = @search_engine.search(params[:search])
+    
+    @spells = result
   end
   
   def items
-    begin
-      if params[:search].blank?
-        @items = Item.all
-      else
-        @items = Item.search(params[:search])
-      end
-      @items = @items.paginate(page: params[:page]).order(:name)
-    rescue ParseSearchError => e
-      logger.error e.message
-      logger.error e.backtrace.join("\n")
-      flash.now[:danger] = e.message
-      @spells = Spells.none.paginate(page: params[:page])
-    end
+    result, error = @search_engine.search(params[:search])
+    
+    @items = result
+  end
+
+  def monsters
+    result, error = @search_engine.search(params[:search])
+    
+    @monsters = result
   end
 end

@@ -1,0 +1,109 @@
+<div id="monster-<%= monster.id %>" class="card card-size-35x50" style="color: black; border-color: black; background-color: black;">
+  <div class="card-title-inlineicon-container">
+    <div class="card-title-inlineicon icon-custom-monster"></div>
+  </div>
+  <div class="card-title card-title-13"><%= monster.name %></div>
+  <div class="card-content-container">
+    <div class="card-element card-subtitle"><%= "#{monster.size.capitalize} #{monster.monster_type}, #{monster.alignment}" %></div>
+    <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="black"></polyline></svg>
+    
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Armor Class</h4>
+      <p class="card-p card-property-text"><%= monster.armor_class %></p>
+    </div>
+    
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Hit Points</h4>
+      <p class="card-p card-property-text"><%= monster.hit_points %></p>
+    </div>
+    
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Speed</h4>
+      <p class="card-p card-property-text"><%= monster.speed %></p>
+    </div>
+    
+    <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="black"></polyline></svg>
+    
+    <table class="card-stats">
+      <tbody>
+        <tr>
+          <th class="card-stats-header">STR</th>
+          <th class="card-stats-header">DEX</th>
+          <th class="card-stats-header">CON</th>
+          <th class="card-stats-header">INT</th>
+          <th class="card-stats-header">WIS</th>
+          <th class="card-stats-header">CHA</th>
+        </tr>
+        <tr>
+          <td class="card-stats-cell"><%= "#{monster.strength}&nbsp;(#{'%+d' % monster.strength_modifier})".html_safe %></td>
+          <td class="card-stats-cell"><%= "#{monster.dexterity}&nbsp;(#{'%+d' % monster.dexterity_modifier})".html_safe %></td>
+          <td class="card-stats-cell"><%= "#{monster.constitution}&nbsp;(#{'%+d' % monster.constitution_modifier})".html_safe %></td>
+          <td class="card-stats-cell"><%= "#{monster.intelligence}&nbsp;(#{'%+d' % monster.intelligence_modifier})".html_safe %></td>
+          <td class="card-stats-cell"><%= "#{monster.wisdom}&nbsp;(#{'%+d' % monster.wisdom_modifier})".html_safe %></td>
+          <td class="card-stats-cell"><%= "#{monster.charisma}&nbsp;(#{'%+d' % monster.charisma_modifier})".html_safe %></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="black"></polyline></svg>
+
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Saving throws</h4>
+      <p class="card-p card-property-text"><%= monster.saving_throws.map {|saving_throw| "#{saving_throw.titleize} #{'%+d' % saving_throw_modifier(monster, saving_throw)}"}.join(', ') %></p>
+    </div>
+    
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Skills</h4>
+      <p class="card-p card-property-text"><%= monster.skills.map {|skill| "#{skill.name} #{'%+d' % skill_modifier(monster, skill)}"}.join(', ') %></p>
+    </div>
+
+    <% unless monster.damage_vulnerabilities.blank? %>
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Damage Vulnerabilities</h4>
+      <p class="card-p card-property-text"><%= monster.damage_vulnerabilities.html_safe %></p>
+    </div>
+    <% end %>
+
+    <% unless monster.damage_resistances.blank? %>
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Damage Resistances</h4>
+      <p class="card-p card-property-text"><%= monster.damage_resistances.html_safe %></p>
+    </div>
+    <% end %>
+
+    <% unless monster.damage_immunities.blank? %>
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Damage Immunities</h4>
+      <p class="card-p card-property-text"><%= monster.damage_immunities.html_safe %></p>
+    </div>
+    <% end %>
+
+    <% unless monster.condition_immunities.blank? %>
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Condition Immunities</h4>
+      <p class="card-p card-property-text"><%= monster.condition_immunities.html_safe %></p>
+    </div>
+    <% end %>
+
+    <% unless monster.senses.blank? %>
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Senses</h4>
+      <p class="card-p card-property-text"><%= monster.senses.html_safe %></p>
+    </div>
+    <% end %>
+
+    <% unless monster.languages.blank? %>
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Languages</h4>
+      <p class="card-p card-property-text"><%= monster.languages.html_safe %></p>
+    </div>
+    <% end %>
+
+    <span class="card-fill" style="-webkit-flex:2; flex:2;"></span>
+    <h3 class="card-section" style="color:black">Actions</h3>
+    <div class="card-element card-description-line">
+      <h4 class="card-description-name">Scimitar</h4>
+      <p class="card-p card-description-text">Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) slashing damage</p>
+    </div>
+  </div>
+</div>
