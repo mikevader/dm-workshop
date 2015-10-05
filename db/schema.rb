@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922200525) do
+ActiveRecord::Schema.define(version: 20151005185216) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -65,19 +65,19 @@ ActiveRecord::Schema.define(version: 20150922200525) do
     t.integer  "wisdom"
     t.integer  "charisma"
     t.string   "skills"
-    t.string   "damage_vulnerabilities"
-    t.string   "damage_resistances"
-    t.string   "damage_immunities"
-    t.string   "condition_immunities"
     t.string   "senses"
     t.string   "languages"
     t.integer  "challenge"
     t.text     "description"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.integer  "user_id"
-    t.integer  "bonus",                  default: 0, null: false
+    t.integer  "bonus",                       default: 0, null: false
     t.integer  "saving_throws_mask"
+    t.integer  "damage_vulnerabilities_mask"
+    t.integer  "damage_resistances_mask"
+    t.integer  "damage_immunities_mask"
+    t.integer  "cond_immunities_mask"
   end
 
   add_index "monsters", ["name"], name: "index_monsters_on_name"

@@ -23,20 +23,81 @@ class Monster < ActiveRecord::Base
   validates :wisdom, presence: true, numericality: { only_integer: true, greater_than: 0, less_than: 100}
   validates :charisma, presence: true, numericality: { only_integer: true, greater_than: 0, less_than: 100}
   
+  # str   1
+  # dex   2
+  # con   4
+  # int   8
+  # wis  16
+  # cha  32
   ABILITIES = %w[str dex con int wis cha]
+  
+  # acid =        1
+  # bludgeoning   2
+  # cold          4
+  # fire          8
+  # force        16
+  # lightning    32
+  # necrotic     64
+  # piercing    128
+  # poison      256
+  # psychic     512
+  # radiant    1024
+  # slashing   2048
+  # thunder    4096
+  DAMAGE_TYPES = %w[acid bludgeoning cold fire force lightning necrotic piercing poison psychic radiant slashing thunder]
+  
+  # exhaustion        1
+  # blinded           2
+  # charmed           4
+  # deafened          8
+  # frightened       16
+  # grappled         32
+  # incapacitated    64
+  # invisible       128
+  # paralyzed       256
+  # petrified       512
+  # poisonded      1024
+  # prone          2048
+  # restrained     4096
+  # stunned        8192
+  # unconscious   16384
+  CONDITIONS = %w[exhaustion blinded charmed deafened frightened grappled incapacitated invisible paralyzed petrified poisoned prone restrained stunned unconscious]
   
   def saving_throws=(saving_throws)
     self.saving_throws_mask = (saving_throws & ABILITIES).map { |r| 2**ABILITIES.index(r) }.sum
   end
-  
   def saving_throws
     ABILITIES.reject { |r| ((self.saving_throws_mask || 0) & 2**ABILITIES.index(r)).zero? }
   end
-  
-  def saving_throws_symbols
-    saving_throws.map(&:to_sym)
+
+  def damage_vulnerabilities=(damage_vulnerabilities)
+    self.damage_vulnerabilities_mask = (damage_vulnerabilities & DAMAGE_TYPES).map { |r| 2**DAMAGE_TYPES.index(r) }.sum
   end
-  
+  def damage_vulnerabilities
+    DAMAGE_TYPES.reject { |r| ((self.damage_vulnerabilities_mask || 0) & 2**DAMAGE_TYPES.index(r)).zero? }
+  end
+
+  def damage_resistances=(damage_resistances)
+    self.damage_resistances_mask = (damage_resistances & DAMAGE_TYPES).map { |r| 2**DAMAGE_TYPES.index(r) }.sum
+  end
+  def damage_resistances
+    DAMAGE_TYPES.reject { |r| ((self.damage_resistances_mask || 0) & 2**DAMAGE_TYPES.index(r)).zero? }
+  end
+
+  def damage_immunities=(damage_immunities)
+    self.damage_immunities_mask = (damage_immunities & DAMAGE_TYPES).map { |r| 2**DAMAGE_TYPES.index(r) }.sum
+  end
+  def damage_immunities
+    DAMAGE_TYPES.reject { |r| ((self.damage_immunities_mask || 0) & 2**DAMAGE_TYPES.index(r)).zero? }
+  end
+
+  def cond_immunities=(cond_immunities)
+    self.cond_immunities_mask = (cond_immunities & CONDITIONS).map { |r| 2**CONDITIONS.index(r) }.sum
+  end
+  def cond_immunities
+    CONDITIONS.reject { |r| ((self.cond_immunities_mask || 0) & 2**CONDITIONS.index(r)).zero? }
+  end
+
   def self.search(search)
     if search
       builder = new_builder

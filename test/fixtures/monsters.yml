@@ -16,13 +16,13 @@ shadow_demon:
   intelligence: 14
   wisdom: 13
   charisma: 14
-  saving_throws_mask: 3
+  saving_throws_mask: 3 # str dex
   skills:
     - stealth
-  damage_vulnerabilities: radiant
-  damage_resistances: acid, fire, necrotic, thunder
-  damage_immunities: cold, lightning, poison
-  condition_immunities: exhaustion, grappled, paralyzed, petrified, poisoned, prone, restrained
+  damage_vulnerabilities_mask: 1024 # radiant
+  damage_resistances_mask: 4169 # acid, fire, necrotic, thunder
+  damage_immunities_mask: 292 # cold, lightning, poison
+  cond_immunities_mask: 7969 # exhaustion, grappled, paralyzed, petrified, poisoned, prone, restrained
   senses: darkvision 120ft, passive Perception 11
   languages: Abyssal, telepathy 120ft
   challenge: 4

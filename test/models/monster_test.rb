@@ -112,5 +112,32 @@ class MonsterTest < ActiveSupport::TestCase
     @monster.saving_throws = ['str']
     assert_includes @monster.saving_throws, 'str'
   end
-  
+
+  test "adding damage vulnerabilities" do
+    @monster.damage_vulnerabilities = ['fire']
+    assert_includes @monster.damage_vulnerabilities, 'fire'    
+  end
+
+  test "shadow deamon should have correct damange and condition attributes" do
+    shadow_demon = monsters(:shadow_demon)
+    
+    assert_includes shadow_demon.saving_throws, 'str'
+    assert_includes shadow_demon.saving_throws, 'dex'
+    assert_includes shadow_demon.damage_vulnerabilities, 'radiant'
+    assert_includes shadow_demon.damage_resistances, 'acid'
+    assert_includes shadow_demon.damage_resistances, 'fire'
+    assert_includes shadow_demon.damage_resistances, 'necrotic'
+    assert_includes shadow_demon.damage_resistances, 'thunder'
+    assert_includes shadow_demon.damage_immunities, 'cold'
+    assert_includes shadow_demon.damage_immunities, 'lightning'
+    assert_includes shadow_demon.damage_immunities, 'poison'
+    assert_includes shadow_demon.cond_immunities, 'exhaustion'
+    assert_includes shadow_demon.cond_immunities, 'grappled'
+    assert_includes shadow_demon.cond_immunities, 'paralyzed'
+    assert_includes shadow_demon.cond_immunities, 'petrified'
+    assert_includes shadow_demon.cond_immunities, 'poisoned'
+    assert_includes shadow_demon.cond_immunities, 'prone'
+    assert_includes shadow_demon.cond_immunities, 'restrained'
+  end
+
 end

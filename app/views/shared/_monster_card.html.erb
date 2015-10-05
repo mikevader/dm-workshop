@@ -60,28 +60,28 @@
     <% unless monster.damage_vulnerabilities.blank? %>
     <div class="card-element card-property-line">
       <h4 class="card-property-name">Damage Vulnerabilities</h4>
-      <p class="card-p card-property-text"><%= monster.damage_vulnerabilities.html_safe %></p>
+      <p class="card-p card-property-text"><%= monster.damage_vulnerabilities.join(", ").html_safe %></p>
     </div>
     <% end %>
 
     <% unless monster.damage_resistances.blank? %>
     <div class="card-element card-property-line">
       <h4 class="card-property-name">Damage Resistances</h4>
-      <p class="card-p card-property-text"><%= monster.damage_resistances.html_safe %></p>
+      <p class="card-p card-property-text"><%= monster.damage_resistances.join(", ").html_safe %></p>
     </div>
     <% end %>
 
     <% unless monster.damage_immunities.blank? %>
     <div class="card-element card-property-line">
       <h4 class="card-property-name">Damage Immunities</h4>
-      <p class="card-p card-property-text"><%= monster.damage_immunities.html_safe %></p>
+      <p class="card-p card-property-text"><%= monster.damage_immunities.join(", ").html_safe %></p>
     </div>
     <% end %>
 
-    <% unless monster.condition_immunities.blank? %>
+    <% unless monster.cond_immunities.blank? %>
     <div class="card-element card-property-line">
       <h4 class="card-property-name">Condition Immunities</h4>
-      <p class="card-p card-property-text"><%= monster.condition_immunities.html_safe %></p>
+      <p class="card-p card-property-text"><%= monster.cond_immunities.join(", ").html_safe %></p>
     </div>
     <% end %>
 
