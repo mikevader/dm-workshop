@@ -100,10 +100,14 @@
     <% end %>
 
     <span class="card-fill" style="-webkit-flex:2; flex:2;"></span>
+    <% unless monster.actions.empty? %>
     <h3 class="card-section" style="color:black">Actions</h3>
     <div class="card-element card-description-line">
-      <h4 class="card-description-name">Scimitar</h4>
-      <p class="card-p card-description-text">Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) slashing damage</p>
+      <% monster.actions.each do |action| %>
+      <h4 class="card-description-name"><%= action.title %></h4>
+      <p class="card-p card-description-text"><%= action.description %></p>
+      <% end %>
     </div>
+    <% end %>
   </div>
 </div>

@@ -140,4 +140,16 @@ class MonsterTest < ActiveSupport::TestCase
     assert_includes shadow_demon.cond_immunities, 'restrained'
   end
 
+  test "monster should have no action initially" do
+    assert @monster.actions.empty?
+  end
+
+  
+  test "monster should have shortsword action" do
+    action = actions(:shortsword)
+    @monster.actions << action
+    
+    assert_equal 1, @monster.actions.size
+    assert_includes @monster.actions, action
+  end
 end

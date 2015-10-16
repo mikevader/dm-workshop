@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+shortsword:
+  title: Shortsword
+  description: "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+  monster: shadow_demon
+
+shortbow:
+  title: Shortbow
+  description: "Ranged Weapon Attack: +4 to hit, range 80f320 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+  monster: shadow_demon
