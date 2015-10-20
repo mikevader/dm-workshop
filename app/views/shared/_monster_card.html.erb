@@ -47,15 +47,19 @@
 
     <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="black"></polyline></svg>
 
+    <% unless monster.saving_throws.empty? %>
     <div class="card-element card-property-line">
       <h4 class="card-property-name">Saving throws</h4>
       <p class="card-p card-property-text"><%= monster.saving_throws.map {|saving_throw| "#{saving_throw.titleize} #{'%+d' % saving_throw_modifier(monster, saving_throw)}"}.join(', ') %></p>
     </div>
+    <% end %>
     
+    <% unless monster.skills.empty? %>
     <div class="card-element card-property-line">
       <h4 class="card-property-name">Skills</h4>
       <p class="card-p card-property-text"><%= monster.skills.map {|skill| "#{skill.name} #{'%+d' % skill_modifier(monster, skill)}"}.join(', ') %></p>
     </div>
+    <% end %>
 
     <% unless monster.damage_vulnerabilities.blank? %>
     <div class="card-element card-property-line">
@@ -99,15 +103,33 @@
     </div>
     <% end %>
 
+    <% unless monster.challenge.blank? %>
+    <div class="card-element card-property-line">
+      <h4 class="card-property-name">Challenge</h4>
+      <p class="card-p card-property-text"><%= monster.challenge %></p>
+    </div>
+    <% end %>
+
+    <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="black"></polyline></svg>
+
+    <% unless monster.traits.empty? %>
+    <% monster.traits.each do |trait| %>
+    <div class="card-element card-description-line">
+      <h4 class="card-description-name"><%= trait.title %></h4>
+      <p class="card-p card-description-text"><%= trait.description.html_safe %></p>
+    </div>
+    <% end %>
+    <% end %>
+    
     <span class="card-fill" style="-webkit-flex:2; flex:2;"></span>
     <% unless monster.actions.empty? %>
     <h3 class="card-section" style="color:black">Actions</h3>
+    <% monster.actions.each do |action| %>
     <div class="card-element card-description-line">
-      <% monster.actions.each do |action| %>
       <h4 class="card-description-name"><%= action.title %></h4>
-      <p class="card-p card-description-text"><%= action.description %></p>
-      <% end %>
+      <p class="card-p card-description-text"><%= action.description.html_safe %></p>
     </div>
+    <% end %>
     <% end %>
   </div>
 </div>

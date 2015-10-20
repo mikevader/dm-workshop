@@ -117,10 +117,11 @@ def parse_school_and_level type_string
 end
 
 
+# Import spells.xml
+puts "new spells"
 spell_file = File.open("cards/spells.xml")
 spell_doc = Nokogiri::Slop(spell_file)
 
-puts "new spells"
 spell_doc.xpath('//cards/spells/spell').each do |spell|
   name = load_element spell, 'name', true, "inscribe spell: %{value}"
   type = load_element spell, 'type', true
@@ -158,11 +159,11 @@ spell_doc.xpath('//cards/spells/spell').each do |spell|
   new_spell.save
 end
 
+# Import items.xml
+puts "new items"
 
 item_file = File.open("cards/items.xml")
 item_doc = Nokogiri::Slop(item_file)
-
-puts "new items"
 item_doc.xpath('//cards/items/item').each do |item|
   name = load_element item, 'name', true, "craft item: %{value}"
   cite = load_element(item, 'cite', true)
@@ -181,3 +182,136 @@ item_doc.xpath('//cards/items/item').each do |item|
   new_item.save
 end
 
+# Import monsters.xml
+puts "New Monsters"
+
+monster_file = File.open("cards/monsters.xml")
+monster_doc = Nokogiri::Slop(monster_file)
+
+prepared_traits = {}
+monster_doc.xpath('//traits/trait[not(ancestor::monster)]').each do |trait|
+  prepared_traits[trait.attributes['id'].value] = OpenStruct.new(title: trait.attributes['name'].value, description: trait.children.to_s.squish)
+end
+
+monster_doc.xpath('//cards/monsters/monster').each do |monster|
+  name = load_element monster, 'name', true, "bread monster: %{value}"
+  type = load_element monster, 'type', true
+  cite = load_element monster, 'cite', false
+  description = load_element monster, 'description', false
+
+  proficiency = nil
+  size = nil
+  ac = nil
+  hp = nil
+  speed = nil
+  strength = nil
+  dexterity = nil
+  constitution = nil
+  intelligence = nil
+  wisdom = nil
+  charisma = nil
+  languages = nil
+  cr = nil
+  
+  savingThrows = []
+  skills = []
+  dmgResistance = []
+  dmgImmunity = []
+  condImmunity = []
+  senses = []
+  
+  monster.xpath('stats').each do |stat|
+    proficiency = load_element stat, 'proficiency', true
+    size = load_element stat, 'size', true
+    ac = load_element stat, 'ac', true
+    hp = load_element stat, 'hp', true
+    speed = load_element stat, 'speed', true
+    strength = load_element stat, 'abilities/@str', true
+    dexterity = load_element stat, 'abilities/@dex', true
+    constitution = load_element stat, 'abilities/@con', true
+    intelligence = load_element stat, 'abilities/@int', true
+    wisdom = load_element stat, 'abilities/@wis', true
+    charisma = load_element stat, 'abilities/@cha', true
+    languages = load_element stat, 'languages', false
+    cr = load_element stat, 'cr', false
+    
+    savingThrows = load_element stat, 'savingThrows/@*' do |node, name|
+      node.map { |ability| ability.name }
+    end
+
+    skills = load_element stat, 'skills' do |node, name|
+      node.xpath('skill/@name').map { |node| node.text }
+    end
+    dmgResistance = load_element stat, 'dmgResistance/*' do |node, name|
+      node.map { |dmg| dmg.name }
+    end
+    dmgImmunity = load_element stat, 'dmgImmunity/*' do |node, name|
+      node.map { |dmg| dmg.name }
+    end
+    condImmunity = load_element stat, 'condImmunity/*' do |node, name|
+      node.map { |cond| cond.name }
+    end
+    senses = load_element stat, 'senses' do |node, name|
+      node.xpath('sense/@name').map { |node| node.text }
+    end
+  end
+  
+  traits = monster.xpath('traits/*').map do |node|
+    unless node.attributes['id'].blank?
+      prepared_traits[node.attributes['id'].value]
+    else
+      OpenStruct.new(title: node.attributes['name'].value, description: node.children.to_s.squish)
+    end
+  end
+  puts "    traits: #{traits}"
+  
+  actions = monster.xpath('actions/*').map do |node|
+    test = ''
+    if node.name == 'meleeweaponattack'
+      test = 'Melee weapon attack: '
+    elsif node.name == 'rangedweaponattack'
+      test = 'Ranged weapon attack: '
+    end
+    OpenStruct.new(title: node.attributes['name'].value, description: "#{test}#{node.children.to_s.squish}")
+  end
+  puts "    actions: #{actions}"
+  
+  new_monster = default.monsters.create(name: name)
+  new_monster.bonus = proficiency
+  new_monster.cite = cite
+  new_monster.size = size
+  new_monster.monster_type = type
+  new_monster.armor_class = ac
+  new_monster.hit_points = hp
+  new_monster.speed = speed
+  new_monster.strength = strength
+  new_monster.dexterity = dexterity
+  new_monster.constitution = constitution
+  new_monster.intelligence = intelligence
+  new_monster.wisdom = wisdom
+  new_monster.charisma = charisma
+  new_monster.languages = languages
+  new_monster.challenge = cr
+  
+  new_monster.saving_throws = savingThrows unless savingThrows.nil?
+  new_monster.skills << skills.map {|skill| Skill.where("name LIKE '#{skill.capitalize}'")} unless skills.nil?
+  new_monster.senses = senses.join(', ') unless senses.nil?
+  
+  new_monster.damage_resistances = dmgResistance unless dmgResistance.nil?
+  new_monster.damage_immunities = dmgImmunity unless dmgImmunity.nil?
+  new_monster.cond_immunities = condImmunity unless condImmunity.nil?
+  
+  new_monster.description = description
+  new_monster.save
+
+  traits.each do |trait|
+    new_trait = new_monster.traits.build title: trait.title, description: trait.description
+    new_trait.save
+  end
+
+  actions.each do |action|
+    new_action = new_monster.actions.build title: action.title, description: action.description
+    new_action.save
+  end
+
+end
