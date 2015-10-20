@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+invisible:
+  title: Unsichtbar
+  description: Ist unsichtbar.
+  monster: shadow_demon
+
+nimble_escape:
+  title: Nimble Escape
+  description: The goblin can take the Disengage or Hide action as a bonus action on each of its turns.
+  monster: shadow_demon
