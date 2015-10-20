@@ -152,4 +152,17 @@ class MonsterTest < ActiveSupport::TestCase
     assert_equal 1, @monster.actions.size
     assert_includes @monster.actions, action
   end
+
+  test "monster should have no traits initially" do
+    assert @monster.traits.empty?
+  end
+
+  
+  test "monster should have nimble escape trait" do
+    trait = traits(:nimble_escape)
+    @monster.traits << trait
+    
+    assert_equal 1, @monster.traits.size
+    assert_includes @monster.traits, trait
+  end
 end

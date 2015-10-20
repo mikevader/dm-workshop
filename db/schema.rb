@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151016134408) do
+ActiveRecord::Schema.define(version: 20151019193037) do
 
   create_table "actions", force: :cascade do |t|
     t.string   "title"
@@ -163,6 +163,17 @@ ActiveRecord::Schema.define(version: 20151016134408) do
   add_index "spells", ["name"], name: "index_spells_on_name"
   add_index "spells", ["user_id", "created_at"], name: "index_spells_on_user_id_and_created_at"
   add_index "spells", ["user_id"], name: "index_spells_on_user_id"
+
+  create_table "traits", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.integer  "monster_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "traits", ["monster_id"], name: "index_traits_on_monster_id"
+  add_index "traits", ["title"], name: "index_traits_on_title"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

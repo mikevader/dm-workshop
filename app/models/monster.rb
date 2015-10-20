@@ -1,6 +1,7 @@
 class Monster < ActiveRecord::Base
   belongs_to :user
   has_and_belongs_to_many :skills
+  has_many :traits
   has_many :actions
   
   accepts_nested_attributes_for :actions, reject_if: proc { |action| action['title'].blank? }, allow_destroy: true
