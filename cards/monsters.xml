@@ -31,7 +31,7 @@
           <cold/>
         </dmgImmunity>
         <condImmunity>
-          <poisen/>
+          <poison/>
         </condImmunity>
         <senses>
           <sense name="passive Perception">13</sense>
@@ -104,12 +104,13 @@
         </skills>
         <dmgResistance>
           <cold/>
+          <fire/>
         </dmgResistance>        
         <dmgImmunity>
-          <poisen/>
+          <poison/>
         </dmgImmunity>
         <condImmunity>
-          <poisened/>
+          <poisoned/>
         </condImmunity>
         <senses>
           <sense name="darkvision">60 ft</sense>
@@ -127,15 +128,15 @@
           Entweder zwei Nachattacken, zwei Fernattacken oder ein Erdrücken
         </action>
         <meleeWeaponAttack name="Biss">
-          +7 to hit, reach 5ft., one target. <i>Hit:</i> 1d6 + 4 piercing damage plus 3d6 poisen damage.
+          +7 to hit, reach 5ft., one target. <i>Hit:</i> 1d6 + 4 piercing damage plus 3d6 poison damage.
         </meleeWeaponAttack>
         <meleeWeaponAttack name="Erdrücken">
           +7 to hit, reach 10ft., one target. <i>Hit:</i> 2d6 + 4 bludgeoning damage, and the target is grappled (DC 14). Until this grapple ends, the target is restrained, and the Schlangenmensch kann kein weiteres Ziel erdrücken.</meleeWeaponAttack>
         <meleeWeaponAttack name="Krummschwert">
-          +7 to hit, reach 5ft., one target. <i>Hit:</i> 2d6 + 4 slashing damage plus 3d6 poisen damage.
+          +7 to hit, reach 5ft., one target. <i>Hit:</i> 2d6 + 4 slashing damage plus 3d6 poison damage.
         </meleeWeaponAttack>
         <rangedWeaponAttack name="Crossbow">
-          +6 to hit, range 150/600., one target. <i>Hit:</i> 2d8 + 3 piercing damage plus 3d6 poisen damage.
+          +6 to hit, range 150/600., one target. <i>Hit:</i> 2d8 + 3 piercing damage plus 3d6 poison damage.
         </rangedWeaponAttack>
       </actions>
       <description>
@@ -167,10 +168,10 @@
           <piercing/>
         </dmgResistance>        
         <dmgImmunity>
-          <poisen/>
+          <poison/>
         </dmgImmunity>
         <condImmunity>
-          <poisened/>
+          <poisoned/>
         </condImmunity>
         <senses>
           <sense name="darkvision">60 ft</sense>
@@ -221,13 +222,13 @@
           <slashing/>
         </dmgResistance>        
         <dmgImmunity>
-          <poisen/>
+          <poison/>
         </dmgImmunity>
         <condImmunity>
           <grappled/>
           <paralyzed/>
           <petrified/>
-          <poisened/>
+          <poisoned/>
           <prone/>
           <restrained/>
           <unconscious/>
@@ -282,7 +283,7 @@
           <acid/>
           <cold/>
           <lightning/>
-          <poisen/>
+          <poison/>
           <slashing/>
           <piercing/>
         </dmgImmunity>
@@ -348,13 +349,13 @@
           <slashing/>
         </dmgResistance>     
         <dmgImmunity>
-          <poisen/>
+          <poison/>
         </dmgImmunity>
         <condImmunity>
           <exhaustion/>
           <paralyzed/>
           <petrified/>
-          <poisened/>
+          <poisoned/>
           <unconscious/>
         </condImmunity>
         <senses>
