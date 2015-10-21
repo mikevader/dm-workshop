@@ -5,7 +5,8 @@ class Monster < ActiveRecord::Base
   has_many :actions
   
   accepts_nested_attributes_for :actions, reject_if: proc { |action| action['title'].blank? }, allow_destroy: true
-  
+  accepts_nested_attributes_for :traits, reject_if: proc { |action| action['title'].blank? }, allow_destroy: true
+
   #accepts_nested_attributes_for :skills, reject_if: proc { |skill|
   #  skill['name'].blank?
   #  }, allow_destroy: true

@@ -72,6 +72,11 @@
 <%= f.label :challenge %>
 <%= f.text_field :challenge, class: 'form-control', type: 'number' %>
 
+<%= f.fields_for :traits do |trait| %>
+<%= render 'trait_fields', f: trait %>
+<% end %>
+<%= link_to_add_fields 'Add Trait', f, :traits %>
+
 <%= f.fields_for :actions do |action| %>
 <%= render 'action_fields', f: action %>
 <% end %>
