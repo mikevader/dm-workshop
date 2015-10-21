@@ -4,6 +4,7 @@ This set of XML files and XSL templates turn monster, spell and item lists into 
 
 ## How do I use it? ##
 Its quite simple:
+
 * Clone the repo
 * Start a terminal and use the command rake
 * Open the generated PDFs
