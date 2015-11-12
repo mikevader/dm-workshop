@@ -247,8 +247,8 @@
         <abilities str="13" dex="18" con="14" int="11" wis="13" cha="12"/>
         <savingThrows dex="0" con="0" wis="0"/>
         <skills>
-          <skill name="Perception"></skill>
-          <skill name="Stealth">10</skill>
+          <skill name="Perception">0</skill>
+          <skill name="Stealth">0</skill>
         </skills>
         <senses>
           <sense name="darkvision">120 ft</sense>
