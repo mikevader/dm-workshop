@@ -6,7 +6,10 @@ players, creature sheets for encounters or npcs, tresure cards for the players
 to loot in the feature.
 
 At the moment and unfinished version can be accessed at 
-(https://dm-workshop.herokuapp.com).
+(https://dm-development.herokuapp.com).
+
+The final version will be accessable under:
+(https://dmw.herokuapp.com).
 
 ### In the final first version the idea is to be able to: ###
 
