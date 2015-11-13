@@ -8,6 +8,7 @@
       <reference>MM 155</reference>
 
       <stats>
+        <proficiency>2</proficiency>
         <size>huge</size>
         <ac>13 (natural armor)</ac>
         <hp>105 (10d12 + 40)</hp>
@@ -36,12 +37,31 @@
         <senses>
           <sense name="passive Perception">13</sense>
         </senses>
+        <languages>Common, Goblin</languages>
         <cr>8 (3'900 XP)</cr>
       </stats>
 
+      <traits>
+        <trait id="fey_ancestry"/>
+        <trait name="Keen Smell">
+          The bear has advantage on Wisdom (Perception) checks that rely on smell.
+        </trait>
+      </traits>
       <actions>
-
-
+        <action name="Multiattack">
+          The drow makes two shortsword attacks.
+        </action>
+        <meleeWeaponAttack name="Shortsword">
+          +7 to hit, reach 5ft., one target. <i>Hit:</i> 7 (1d6 + 4) piercing damage + 10 (3d6) poison damage.
+        </meleeWeaponAttack>
+        <rangedWeaponAttack name="Hand Crossbow">
+          +7 to hit, range 30/120ft., one target. <i>Hit:</i> 7 (1d6 + 4) piercing damage. Target must success DC 13 Const save or be poisoned for 1h. If fails by 5 or more, target is also unconscious until takes dmg or wakend.
+        </rangedWeaponAttack>
+      </actions>
+      <actions title="Reactions" side="back">
+        <action name="Parry">
+          The drow adds 3 to its AC against one melee attack that would hit it. To do so, the drow must see the attacker and be wielding a melee weapon.
+        </action>
       </actions>
 
       <description>Special Chap ?? .... 111223456</description>
@@ -52,6 +72,7 @@
       <name>Goblin</name>
       <type>Goblin</type>
       <stats>
+        <proficiency>2</proficiency>
         <size>huge</size>
         <ac>13 (natural armor)</ac>
         <hp>105 (10d12 + 40)</hp>
@@ -60,7 +81,7 @@
         </speed>
         <abilities str="8 (-1)" dex="14 (+2)" con="10 (+0)" int="10 (+0)" wis="8 (-1)" cha="8 (-1)"/>
         <skills>
-          <skill name="Stealth">+6</skill>
+          <skill name="Stealth"></skill>
         </skills>
         <senses>
           <sense name="darkvision">60 ft</sense>
@@ -101,7 +122,7 @@
         </speed>
         <abilities str="19" dex="11" con="21" int="2" wis="10" cha="5"/>
         <skills>
-          <skill name="Perception">0</skill>
+          <skill name="Perception"></skill>
         </skills>
         <senses>
           <sense name="darkvision">60 ft</sense>
@@ -147,9 +168,6 @@
         <dmgResistance>
           <poison/>
         </dmgResistance>        
-
-        <skills>
-        </skills>
         <senses>
           <sense name="darkvision">120 ft</sense>
         </senses>
@@ -247,8 +265,8 @@
         <abilities str="13" dex="18" con="14" int="11" wis="13" cha="12"/>
         <savingThrows dex="0" con="0" wis="0"/>
         <skills>
-          <skill name="Perception">0</skill>
-          <skill name="Stealth">0</skill>
+          <skill name="Perception"></skill>
+          <skill name="Stealth">10</skill>
         </skills>
         <senses>
           <sense name="darkvision">120 ft</sense>
@@ -355,8 +373,8 @@ lst level (4 slots): mage armor, magic missile, shield, witch bolt<br/>
         </speed>
         <abilities str="18" dex="16" con="13" int="8" wis="12" cha="14"/>
         <skills>
-          <skill name="Perception">0</skill>
-          <skill name="Stealth">0</skill>
+          <skill name="Perception"></skill>
+          <skill name="Stealth"></skill>
         </skills>
         <dmgResistance>
           <cold/>
@@ -415,7 +433,7 @@ lst level (4 slots): mage armor, magic missile, shield, witch bolt<br/>
         <abilities str="19" dex="11" con="16" int="10" wis="12" cha="8"/>
         <savingThrows dex="0" con="0"/>
         <skills>
-          <skill name="Perception">0</skill>
+          <skill name="Perception"></skill>
         </skills>
         <dmgResistance>
           <necrotic/>
@@ -469,8 +487,8 @@ lst level (4 slots): mage armor, magic missile, shield, witch bolt<br/>
         </speed>
         <abilities str="16" dex="19" con="14" int="10" wis="15" cha="11"/>
         <skills>
-          <skill name="Perception">0</skill>
-          <skill name="Stealth">0</skill>
+          <skill name="Perception"></skill>
+          <skill name="Stealth"></skill>
         </skills>
         <dmgResistance>
           <bludgeoning/>
@@ -533,8 +551,6 @@ lst level (4 slots): mage armor, magic missile, shield, witch bolt<br/>
           20 ft., climb 20 ft.
         </speed>
         <abilities str="20" dex="5" con="20" int="1" wis="6" cha="1"/>
-        <skills>
-        </skills>
         <dmgImmunity>
           <acid/>
           <cold/>
@@ -652,7 +668,7 @@ lst level (4 slots): mage armor, magic missile, shield, witch bolt<br/>
         <abilities str="18" dex="11" con="15" int="14" wis="13" cha="11"/>
         <savingThrows con="0" wis="0" />
         <skills>
-          <skill name="Perception">0</skill>
+          <skill name="Perception"></skill>
         </skills>
         <senses>
           <sense name="darkvision">60 ft</sense>
@@ -698,8 +714,8 @@ lst level (4 slots): mage armor, magic missile, shield, witch bolt<br/>
         <abilities str="10" dex="14" con="12" int="20" wis="15" cha="16"/>
         <saving int="0" wis="0" />
         <skills>
-          <skill name="Arcana">0</skill>
-          <skill name="History">0</skill>
+          <skill name="Arcana"></skill>
+          <skill name="History"></skill>
         </skills>
         <dmgResistance>
           <from-spells/>
