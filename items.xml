@@ -208,6 +208,7 @@
         Deine Konstitution ist 19 solange du dieses Amulet trägst. Es hat keinen Effekt, falls deine Konstitution bereits 19 oder höher ist.
       </description>
     </item>
+    <!--
     <item>
       <name></name>
       <type></type>
@@ -215,5 +216,6 @@
       <description>
       </description>
     </item>
+  -->
   </items>
 </cards>
