@@ -36,6 +36,8 @@ gem 'nokogiri'
 
 gem 'treetop'
 
+gem 'rails_admin'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
