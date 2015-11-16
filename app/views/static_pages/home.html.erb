@@ -1,25 +1,190 @@
 <% if logged_in? %>
+    <div class="row">
+      <div class="col-md-4 decorationless-box">
+        <%= link_to monsters_path, style: "a:hover {text-docaration:none;}" do %>
+            <div class="card card-size-25x35" style="color: black; border-color: black; background-color: black;">
+              <div class="card-title-inlineicon-container">
+                <div class="card-title-inlineicon icon-custom-monster"></div>
+              </div>
+              <div class="card-title card-title-13">Monsters</div>
+              <div class="card-content-container">
+                <div class="card-element card-subtitle">Small humanoid (goblinoid)</div>
+                <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="black"></polyline></svg>
 
-<div class="row">
-  <aside class="col-md-4">
-    <section class="spells">
-      <h1>Spells</h1>
-      <ul>
-        <li><%= link_to 'Spells', spells_path %></li>
-        <li><%= link_to 'Classes', hero_classes_path %></li>
-      </ul>
-    </section>
-  </aside>
-</div>
+                <div class="card-element card-property-line">
+                  <h4 class="card-property-name">Armor Class</h4>
+                  <p class="card-p card-property-text">15 (leather armor)</p>
+                </div>
+
+                <div class="card-element card-property-line">
+                  <h4 class="card-property-name">Hit Points</h4>
+                  <p class="card-p card-property-text">7 (2d6)</p>
+                </div>
+
+                <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="black"></polyline></svg>
+
+                <table class="card-stats">
+                  <tbody>
+                  <tr>
+                    <th class="card-stats-header">STR</th>
+                    <th class="card-stats-header">DEX</th>
+                    <th class="card-stats-header">CON</th>
+                    <th class="card-stats-header">INT</th>
+                    <th class="card-stats-header">WIS</th>
+                    <th class="card-stats-header">CHA</th>
+                  </tr>
+                  <tr>
+                    <td class="card-stats-cell">8 (-1)</td>
+                    <td class="card-stats-cell">14 (+2)</td>
+                    <td class="card-stats-cell">10 (+0)</td>
+                    <td class="card-stats-cell">10 (+1)</td>
+                    <td class="card-stats-cell">8 (-1)</td>
+                    <td class="card-stats-cell">8 (-1)</td>
+                  </tr>
+                  </tbody>
+                </table>
+
+                <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="black"></polyline></svg>
+
+                <div class="card-element card-property-line">
+                  <h4 class="card-property-name">Skills</h4>
+                  <p class="card-p card-property-text">Stealth +6</p>
+                </div>
+
+                <div class="card-element card-property-line">
+                  <h4 class="card-property-name">Senses</h4>
+                  <p class="card-p card-property-text">Darkvision 60ft.</p>
+                </div>
+
+                <div class="card-element card-property-line">
+                  <h4 class="card-property-name">Challenge</h4>
+                  <p class="card-p card-property-text">1/4 (50 XP)</p>
+                </div>
+
+                <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="black"></polyline></svg>
+
+                <div class="card-element card-description-line">
+                  <h4 class="card-description-name">Nimble escape</h4>
+                  <p class="card-p card-description-text">Disengage or Hide as bonus action</p>
+                </div>
+
+                <span class="card-fill" style="-webkit-flex:2; flex:2;"></span>
+                <h3 class="card-section" style="color:black">Actions</h3>
+                <div class="card-element card-description-line">
+                  <h4 class="card-description-name">Scimitar</h4>
+                  <p class="card-p card-description-text">Melee Weapon Attack: +4 to hit, reach 5ft, one target. Hit: 5 (1d6 +2) slashing damage</p>
+                </div>
+              </div>
+            </div>
+        <% end %>
+      </div>
+      <div class="col-md-4 decorationless-box">
+        <%= link_to items_path do %>
+            <div class="card card-size-25x35" style="color: grey; border-color: grey; background-color: grey;">
+              <div class="card-title-inlineicon-container">
+                <div class="card-title-inlineicon icon-custom-armor-heavy"></div>
+              </div>
+              <div class="card-title card-title-13">Items</div>
+              <div class="card-content-container">
+                <div class="card-element card-subtitle">Heavy armor</div>
+                <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="grey"></polyline></svg>
+
+                <div class="card-element card-property-line">
+                  <h4 class="card-property-name">Attunement</h4>
+                  <p class="card-p card-property-text">maybe</p>
+                </div>
+
+                <div class="card-element card-property-line">
+                  <h4 class="card-property-name">AC</h4>
+                  <p class="card-p card-property-text">18</p>
+                </div>
+
+                <div class="card-element card-property-line">
+                  <h4 class="card-property-name">Strength required</h4>
+                  <p class="card-p card-property-text">15</p>
+                </div>
+
+                <div class="card-element card-property-line">
+                  <h4 class="card-property-name">Stealth</h4>
+                  <p class="card-p card-property-text">Disadvantage</p>
+                </div>
+
+                <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="grey"></polyline></svg>
+    <span class="card-fill" style="-webkit-flex:2; flex:2;">
+    </span>
+                <div class="card-element card-description-line">
+                  <h4 class="card-description-name">Heavy</h4>
+                  <p class="card-p card-description-text">Unless you have the required strength, your speed is reduced by 10 feet.</p>
+                </div>
+                <div class="card-element card-description-line">
+                  <h4 class="card-description-name">Stealth</h4>
+                  <p class="card-p card-description-text">You have disadvantage on Dexterity (Stealth) checks.</p>
+                </div>
+                <span class="card-fill" style="-webkit-flex:3; flex:3;"></span>
+              </div>
+            </div>
+        <% end %>
+      </div>
+      <%= link_to spells_path do %>
+          <div class="col-md-4 decorationless-box">
+            <div class="card card-size-25x35" style="color: maroon; border-color: maroon; background-color: maroon;">
+              <div class="card-title-inlineicon-container">
+                <div class="card-title-inlineicon icon-white-book-1"></div>
+              </div>
+              <div class="card-class-icon-container">
+                <div class="card-class-icon icon-class-wizard"></div>
+                <div class="card-class-icon icon-class-sorcerer"></div>
+                <div class="card-class-icon icon-class-warlock"></div>
+              </div>
+              <div class="card-title card-title-13">Spells</div>
+              <div class="card-content-container">
+                <div class="card-element card-subtitle">1st level evocation</div>
+                <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="maroon"></polyline></svg>
+
+                <div class="card-element card-property-line">
+                  <h4 class="card-property-name">Casting Time</h4>
+                  <p class="card-p card-property-text">1 action</p>
+                </div>
+                <div class="card-element card-property-line">
+                  <h4 class="card-property-name">Range</h4>
+                  <p class="card-p card-property-text">Self (15ft cone)</p>
+                </div>
+                <div class="card-element card-property-line">
+                  <h4 class="card-property-name">Components</h4>
+                  <p class="card-p card-property-text">V, S</p>
+                </div>
+                <div class="card-element card-property-line">
+                  <h4 class="card-property-name">Duration</h4>
+                  <p class="card-p card-property-text">Instantaneous</p>
+                </div>
+                <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="maroon"></polyline></svg>
+    <span class="card-fill" style="-webkit-flex:2; flex:2;">
+    </span>
+                <div class="card-element card-description-line">
+                  <p class="card-p card-description-text">Each creature in a 15-foot cone must make a Dexterity saving throw. A creature takes <b>3d6 fire damage</b> on a failed save, or half as much damage on a successful one.</p>
+                </div>
+                <div class="card-element card-description-line">
+                  <p class="card-p card-description-text">The fire ignites any flammable objects in the area that aren't being worn or carried.</p>
+                </div>
+                <span class="card-fill" style="-webkit-flex:3; flex:3;"></span>
+                <h3 class="card-section">At higher levels</h3>
+                <div class="card-element card-description-line">
+                  <p class="card-p card-description-text">+1d6 damage for each slot above 1st</p>
+                </div>
+              </div>
+            </div>
+      <% end %>
+      </div>
+    </div>
 
 <% else %>
 
-<div class="center jumbotron">
-  <h1>Dungeon Master Workshop</h1>
-  <h2>
-    Here you will be able to create your enconters, your spells, your treasure for the epic adventures you've come up for your party.
-  </h2>
-  <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
-</div>
+    <div class="center jumbotron">
+      <h1>Dungeon Master Workshop</h1>
+      <h2>
+        Here you will be able to create your enconters, your spells, your treasure for the epic adventures you've come up for your party.
+      </h2>
+      <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+    </div>
 
 <% end %>

@@ -213,6 +213,10 @@ span.picture {
 
 /* miscellaneous */
 
+.decorationless-box a:hover {
+  text-decoration: none;
+}
+
 .debug_dump {
   clear: both;
   float: left;
