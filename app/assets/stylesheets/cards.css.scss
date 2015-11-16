@@ -34,92 +34,92 @@ div.spells {
 }
 
 .card-back {
-    background-color: white;
-    border-radius: 4mm;
-    border-color: inherit;
-    margin: 3mm;
-    @include flex(1);
-    @include flexbox();
+  background-color: white;
+  border-radius: 4mm;
+  border-color: inherit;
+  margin: 3mm;
+  @include flex(1);
+  @include flexbox();
 }
 
 .card-back-inner {
-    margin: 3mm;
-    border: 1mm solid;
-    border-color: inherit;
-    border-radius: 4mm;
-    @include flex(1);
-    @include flexbox();
+  margin: 3mm;
+  border: 1mm solid;
+  border-color: inherit;
+  border-radius: 4mm;
+  @include flex(1);
+  @include flexbox();
   @include flex-direction(row);
   @include flex-wrap(wrap);
   @include justify-content(center);
-    @include align-items(center);
-    @include align-content(center);
+  @include align-items(center);
+  @include align-content(center);
 }
 
 .card-back-icon {
-    width: 1in;
-    height: 1in;
-    border: 4mm solid;
-    border-color: inherit;
-    border-radius: 4mm;
-    background-repeat: no-repeat;
-    background-size: contain;
+  width: 1in;
+  height: 1in;
+  border: 4mm solid;
+  border-color: inherit;
+  border-radius: 4mm;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .card-title-icon {
-    width: 12mm;
-    height: 12mm;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-color: inherit;
-    border-color: inherit;
+  width: 12mm;
+  height: 12mm;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: inherit;
+  border-color: inherit;
 }
 
 .card-title-icon-container {
-    position: absolute;
-    right: -1mm;
-    top: -1mm;
-    border: 1mm solid;
-    border-radius: 1mm;
-    background-color: inherit;
-    border-color: inherit;
+  position: absolute;
+  right: -1mm;
+  top: -1mm;
+  border: 1mm solid;
+  border-radius: 1mm;
+  background-color: inherit;
+  border-color: inherit;
 }
 
 .card-title-inlineicon {
-    width: 7mm;
-    height: 7mm;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-color: inherit;
-    border-color: inherit;
+  width: 7mm;
+  height: 7mm;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: inherit;
+  border-color: inherit;
 }
 
 .card-title-inlineicon-container {
-    position: absolute;
-    right: -1mm;
-    top: -1mm;
-    border: 1mm solid;
-    border-radius: 1mm;
-    background-color: inherit;
-    border-color: inherit;
+  position: absolute;
+  right: -1mm;
+  top: -1mm;
+  border: 1mm solid;
+  border-radius: 1mm;
+  background-color: inherit;
+  border-color: inherit;
 }
 
 .card-class-icon {
-    width: 5mm;
-    height: 5mm;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-color: inherit;
-    border-color: inherit;
+  width: 5mm;
+  height: 5mm;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: inherit;
+  border-color: inherit;
 }
 .card-class-icon-container {
-    position: absolute;
-    right: -2mm;
-    top: 10mm;
-    border: 1mm solid;
-    border-radius: 1mm;
-    background-color: inherit;
-    border-color: inherit;
+  position: absolute;
+  right: -2mm;
+  top: 10mm;
+  border: 1mm solid;
+  border-radius: 1mm;
+  background-color: inherit;
+  border-color: inherit;
 }
 
 .card-title {
@@ -211,44 +211,44 @@ div.spells {
 }
 
 .card-ruler {
-    width: 100%;
-    height: 1.0mm;
-    margin-top: 0.3em;
-    margin-bottom: 0.3em;
+  width: 100%;
+  height: 1.0mm;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
 }
 .card-box {
-    display: inline;
-    height: 10mm;
-    width: 10mm;
-    margin-right: 0.3em;
+  display: inline;
+  height: 10mm;
+  width: 10mm;
+  margin-right: 0.3em;
 }
 
 .card-stats {
-    width: 100%
+  width: 100%
 }
 
 .card-stats-header {
-    text-align: center;
-    padding: 0;
-    width: 16.6%;
+  text-align: center;
+  padding: 0;
+  width: 16.6%;
 }
 
 .card-stats-cell {
-    text-align: center;
-    padding: 0;
+  text-align: center;
+  padding: 0;
 }
 
 .card-bullet-line {
-    font-size: inherit;
-    color: black;
-    padding-left: 16px;
-    padding-bottom: 0;
-    margin-bottom: 0;
-    margin-top: 0;
+  font-size: inherit;
+  color: black;
+  padding-left: 16px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 .card-bullet {
-    margin-bottom: 0;
-    margin-top: 0;
-    font-size: inherit;
+  margin-bottom: 0;
+  margin-top: 0;
+  font-size: inherit;
 }
