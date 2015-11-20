@@ -19,8 +19,20 @@ class DmwqlTest < ActiveSupport::TestCase
     assert_equal "name LIKE 'asdf'", @parser.parse("name = 'asdf'", @builder)
   end
 
+  test "should work with wildcards in string" do
+    assert_equal "name LIKE 'asdf%'", @parser.parse("name = 'asdf*'", @builder)
+  end
+
+  test "should work with fuzzy string comparison" do
+    assert_equal "name LIKE '%asdf%'", @parser.parse("name ~ 'asdf'", @builder)
+  end
+
   test "should work with asterix in string" do
     assert_equal "name LIKE 'hello%'", @parser.parse("name = 'hello*'", @builder)
+  end
+
+  test 'should work with whitespace less string without quotes' do
+    assert_equal "name LIKE 'hello'", @parser.parse("name = hello", @builder)
   end
 
   test "should work with AND and OR" do
@@ -49,7 +61,16 @@ class DmwqlTest < ActiveSupport::TestCase
     assert_equal "class in ('Bard')", @parser.parse("class in ('Bard')", @builder)
     assert_equal "class in ('Cleric', 'Bard')", @parser.parse("class in ('Cleric', 'Bard')", @builder)
   end
-  
+
+  test 'should work with in without quotes' do
+    assert_equal "class in ('Bard')", @parser.parse("class in (Bard)", @builder)
+    assert_equal "school in ('transmutation', 'evocation')", @parser.parse("school in (transmutation, evocation)", @builder)
+  end
+
+  test 'should work with group of numbers' do
+    assert_equal "level in (1, 5)", @parser.parse("level in (1, 5)", @builder)
+  end
+
   test "should work with relations" do
     builder = SearchBuilder.new
     builder.add_relation "classes", "hero_classes.name", "hero_classes"

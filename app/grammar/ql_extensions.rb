@@ -40,16 +40,16 @@ module Dmwql
   
   class Group < Treetop::Runtime::SyntaxNode
     def query_string(builder)
-      query = '(' + literal.text_value
+      query = '(' + surround_string_with_quotes_if_necessary(literal.text_value)
       
       second.elements.each do |node|
-        query = query + ', ' + node.literal.text_value
+        query = query + ', ' + surround_string_with_quotes_if_necessary(node.literal.text_value)
       end
       
       return query + ')'
     end
   end
-  
+
   class Comparison < Treetop::Runtime::SyntaxNode
     def query_string(builder)
       if defined? str_comp
@@ -62,13 +62,27 @@ module Dmwql
   
   class StringComparison < Treetop::Runtime::SyntaxNode
     def query_string(builder)
-      return 'LIKE ' + value.text_value.gsub(/\*/, '%')
+      if op.text_value == '~'
+        return "LIKE '%#{value.text_value.gsub('\'','').strip}%'"
+      else
+        return "LIKE '#{value.text_value.gsub('\'','').strip.gsub(/\*/, '%')}'"
+      end
     end
   end
   
   class NonStringComparison < Treetop::Runtime::SyntaxNode
     def query_string(builder)
       return op.text_value + ' ' + value.text_value.sub('true', "'t'").sub('false', "'f'")
+    end
+  end
+
+  class Treetop::Runtime::SyntaxNode
+    def surround_string_with_quotes_if_necessary(string)
+      unless string =~ /\d/ or string =~ /'.*'/
+        return "'#{string}'"
+      else
+        return string
+      end
     end
   end
 end

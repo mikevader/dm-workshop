@@ -20,7 +20,7 @@ grammar Dmwql
   end
   
   rule string_comparison
-    s comp_op_string s value:string_literal <StringComparison>
+    s op:comp_op_string s value:string_literal <StringComparison>
   end
 
   rule non_string_comparison
@@ -56,7 +56,7 @@ grammar Dmwql
   end
   
   rule comp_op_string
-    '='
+    '=' / '~'
   end
 
   rule comp_op
@@ -92,9 +92,13 @@ grammar Dmwql
   end
   
   rule string
-    "'" (string_char)* "'"
+    "'" alpha (string_char_with_space)* "'" / alpha (string_char)*
   end
-  
+
+  rule string_char_with_space
+    [a-zA-Z_\-\* ]
+  end
+
   rule string_char
     [a-zA-Z_\-\* ]
   end
