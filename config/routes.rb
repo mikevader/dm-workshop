@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root                 'static_pages#home'
   get     'help'    => 'static_pages#help'
   get     'about'   => 'static_pages#about'
@@ -11,6 +12,9 @@ Rails.application.routes.draw do
   get     'print/items'     => 'output_pages#items',    as: :print_items
   get     'print/monsters'  => 'output_pages#monsters', as: :print_monsters
 
+  get     'admin'           => 'admin#home',    as: :admin
+  get     'admin/import'    => 'admin#import',  as: :import_home
+
   resources :users
   resources :spells
   resources :hero_classes
@@ -19,7 +23,7 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
 
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount RailsAdmin::Engine => '/super_admin', as: 'rails_admin'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
