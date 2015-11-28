@@ -1,3 +1,5 @@
+interactor :simple
+
 # Defines the matching rules for Guard.
 guard :minitest, spring: true, all_on_start: false do
   watch(%r{^test/(.*)/?(.*)_test\.rb$})
@@ -23,8 +25,7 @@ guard :minitest, spring: true, all_on_start: false do
     integration_tests << 'test/helpers/sessions_helper_test.rb'
   end
   watch('app/controllers/sessions_controller.rb') do
-    ['test/controllers/sessions_controller_test.rb',
-     'test/integration/users_login_test.rb']
+    ['test/controllers/sessions_controller_test.rb', 'test/integration/users_login_test.rb']
   end
   watch('app/controllers/account_activations_controller.rb') do
     'test/integration/users_signup_test.rb'
