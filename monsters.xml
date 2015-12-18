@@ -810,7 +810,7 @@ lst level (4 slots): Entangle, Cure Wounds, Healing Word, Faerie Fire, Absorb El
   - Fehromon Schwarzblatt
   - Teleria Lotosblick
 -->
-  <monsters>
+  </monsters>
   <traits>
     <trait id="dwarven_resilience" name="Dwarven Resilience">
       Dwarves have adv. on saving throws against poison.
