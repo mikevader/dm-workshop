@@ -5,7 +5,7 @@
       <name>Schutzring</name>
       <cite>DMH 191</cite>
       <type>Ring</type>
-      <rarity>rare</rarity>
+      <rarity>Rare</rarity>
       <requiresAttunement>yes</requiresAttunement>
       <description>
         Du bekommst einen Bonus von +1 auf deine AC und Rettungswürfe solange du den Ring trägst.
@@ -15,7 +15,7 @@
       <name>Speer des Blitzes</name>
       <cite>DMH 178</cite>
       <type>Weapon</type>
-      <rarity>uncommon</rarity>
+      <rarity>Uncommon</rarity>
       <requiresAttunement>no</requiresAttunement>
       <description>
         Wenn du den Speer wirfst und das Losungswort sprichst, transformiert sich der Speer in einen Blitz. Der Blitz betrifft alle Wesen auf einer 1,5m (5 feet) breiten und 40m (120 feet) langen Linie ausser dir und dem Ziel. Alle betroffenen Wesen müssen einen Geschicklichkeits-Rettungswurf gegen DC 13 bestehen oder nehmen 4d6 lightning Schaden beim Misslingen oder halb so viel bei einem erfolgreichen Wurf. Der Blitz verwandelt sich vor dem Ziel zurück in einen Speer<br/>
