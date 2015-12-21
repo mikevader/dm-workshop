@@ -2,7 +2,7 @@ require 'test_helper'
 
 class HeroClassesInterfaceTest < ActionDispatch::IntegrationTest
 
- def setup
+  def setup
     @user = users(:michael)
   end
 
