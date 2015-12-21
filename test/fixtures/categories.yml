@@ -4,6 +4,10 @@ armor:
   name: Armor
   cssclass: icon-armor
 
+ring:
+  name: Ring
+  cssclass: icon-custom-ring
+
 weapon:
   name: Weapon
   cssclass: icon-sword

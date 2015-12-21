@@ -7,3 +7,15 @@ gunslinger:
 goliath:
   name: Goliath
   cssclass: icon-goliath
+
+druid:
+  name: Druid
+  cssclass: icon-druid
+
+sorcerer:
+  name: Sorcerer
+  cssclass: icon-sorcerer
+
+wizard:
+  name: Wizard
+  cssclass: icon-wizard

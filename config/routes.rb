@@ -12,8 +12,11 @@ Rails.application.routes.draw do
   get     'print/items'     => 'output_pages#items',    as: :print_items
   get     'print/monsters'  => 'output_pages#monsters', as: :print_monsters
 
-  get     'admin'           => 'admin#home',    as: :admin
-  get     'admin/import'    => 'admin#import',  as: :import_home
+  namespace :admin do
+    root                  'admin#home',     as: :admin
+    get     'import'   => 'card_imports#new'
+    resources :card_imports
+  end
 
   resources :users
   resources :spells
