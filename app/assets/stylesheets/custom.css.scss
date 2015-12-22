@@ -43,10 +43,6 @@ textarea {
 }
 
 @media(min-width:768px) {
-  #wrapper {
-    padding-left: 225px;
-  }
-
   #page-wrapper {
     padding: 10px;
   }
@@ -90,7 +86,7 @@ p {
   text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
-  padding-left: 5px;
+  padding-left: 10px;
   font-weight: bold;
   &:hover {
     color: white;
@@ -100,7 +96,7 @@ p {
 
 /* top navigation */
 .top-nav {
-  padding: 0 15px;
+  padding: 0 15px !important;
 }
 
 .top-nav>li {
