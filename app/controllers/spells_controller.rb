@@ -14,7 +14,7 @@ class SpellsController < ApplicationController
   def index
     result, error = @search_engine.search(params[:search])
     
-    @spells = result.paginate(page: params[:page])
+    @spells = result
     @error = error
   end
 
