@@ -25,7 +25,7 @@ class SpellsController < ApplicationController
   def create
     @spell = current_user.spells.build(spell_params)
     if @spell.save
-      flash[:success] = "Spell inscribed!"
+      flash[:success] = 'Spell inscribed!'
       redirect_to spells_path
     else
       render 'new'
@@ -39,7 +39,7 @@ class SpellsController < ApplicationController
   def update
     @spell = Spell.includes(:hero_classes).find(params[:id])
     if @spell.update_attributes(spell_params)
-      flash[:success] = "Spell updated"
+      flash[:success] = 'Spell updated'
       redirect_to spells_path
     else
       render 'edit'
@@ -48,7 +48,7 @@ class SpellsController < ApplicationController
   
   def destroy
     Spell.find(params[:id]).destroy
-    flash[:success] = "Spell deleted"
+    flash[:success] = 'Spell deleted'
     redirect_to spells_url
   end
   
