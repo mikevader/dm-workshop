@@ -149,4 +149,26 @@ class CardExport
     builder.to_xml(indent: 2)
   end
 
+  def load_items(items)
+    builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
+      xml.cards {
+        xml.items {
+          items.each do |item|
+            xml.item {
+              xml.name item.name
+              xml.cite item.cite
+              xml.type_ item.category.name
+              xml.rarity item.rarity.name
+              xml.requiresAttunement item.attunement ? 'yes' : 'no'
+              xml.description {
+                xml << "\n#{'  '*4}#{item.description}\n#{'  '*3}"
+              }
+            }
+          end
+        }
+      }
+    end
+
+    builder.to_xml(indent: 2)
+  end
 end

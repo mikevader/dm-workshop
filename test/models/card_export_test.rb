@@ -59,4 +59,28 @@ class CardExportTest < ActiveSupport::TestCase
     end
     assert failure_text.empty?, "Found diffs:\n#{failure_text}"
   end
+
+  test 'export items' do
+    input_path = File.join(fixture_path, 'items.xml')
+    file = Rack::Test::UploadedFile.new(input_path, 'text/xml')
+    importer = CardImport.new items_file: file
+    importer.save(@user)
+
+    exporter = CardExport.new
+    xml = exporter.load_items(Item.where("name = 'Schutzring' or name = 'Speer des Blitzes'"))
+    org_file = Nokogiri::XML(File.open(input_path))
+    new_file = Nokogiri::XML(xml)
+
+    failure_text = ''
+    org_file.diff(new_file, added: true, removed: true) do |change, node|
+      case node.parent.path
+        when '/asdfasdf'
+        else
+          failure_text += "#{change} #{node.to_xml}".ljust(30) + node.parent.path + "\n"
+      end
+
+    end
+    assert failure_text.empty?, "Found diffs:\n#{failure_text}"
+  end
+
 end

@@ -64,5 +64,14 @@ module Admin
       assert_response :success
       assert_equal 'text/xml', response.content_type #response.body
     end
+
+    test 'items card export' do
+      log_in_as(@user)
+
+      get :show, id: 'items'
+      assert_response :success
+      assert_equal 'text/xml', response.content_type #response.body
+    end
+
   end
 end

@@ -20,6 +20,9 @@ module Admin
         when 'spells'
           spells_xml = @card_export.load_spells(Spell.all)
           send_data spells_xml, filename: 'spells.xml', type: 'text/xml'
+        when 'items'
+          items_xml = @card_export.load_items(Item.all)
+          send_data items_xml, filename: 'items.xml', type: 'text/xml'
         else
           render :index
       end
