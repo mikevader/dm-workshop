@@ -1,6 +1,6 @@
+# Defines the matching rules for Guard.
 interactor :simple
 
-# Defines the matching rules for Guard.
 guard :minitest, spring: true, all_on_start: false do
   watch(%r{^test/(.*)/?(.*)_test\.rb$})
   watch('test/test_helper.rb') { 'test' }
