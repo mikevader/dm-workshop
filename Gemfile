@@ -69,6 +69,7 @@ group :test do
   gem 'guard'
   gem 'guard-minitest',     '2.3.1'
   gem 'terminal-notifier-guard'
+  gem 'nokogiri-diff'
 end
 
 group :production do

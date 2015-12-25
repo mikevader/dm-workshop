@@ -20,7 +20,7 @@ module Admin
         post :create, card_import: { monsters_file: fixture_file_upload('monsters.xml', 'text/xml') }
       end
 
-      goblin = Monster.find_by_name 'Goblin'
+      obgam = Monster.find_by_name 'Obgam Sohn des Brogar'
     end
 
     test 'spell card import' do

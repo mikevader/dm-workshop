@@ -4,6 +4,14 @@ stealth:
   name: Stealth
   ability: Dex
 
+perception:
+  name: Perception
+  ability: Wis
+
+deception:
+  name: Deception
+  ability: Cha
+
 insight:
   name: Insight
   ability: Wis

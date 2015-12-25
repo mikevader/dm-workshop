@@ -2,19 +2,19 @@
 <cards>
   <monsters>
     <monster>
+      <cite>MM 123</cite>
       <name>Goblin</name>
       <type>Goblin</type>
       <stats>
         <proficiency>2</proficiency>
         <size>huge</size>
         <ac>13 (natural armor)</ac>
-        <hp>105 (10d12 + 40)</hp>
-        <speed>
-          40 ft.
-        </speed>
+        <hp>105</hp>
+        <speed>40 ft.</speed>
         <abilities str="8" dex="14" con="10" int="10" wis="8" cha="8"/>
         <skills>
           <skill name="Stealth"></skill>
+          <skill name="Perception"></skill>
         </skills>
         <senses>
           <sense name="darkvision">60 ft</sense>
@@ -30,19 +30,15 @@
       </traits>
       <actions>
         <meleeWeaponAttack name="Scimitar">
-          <i>Melee Weapon Attack:</i> +4 to hit, reach 5ft., one target. <i>Hit:</i> 1d6 + 2 slashing damage.
+          +4 to hit, reach 5ft., one target. <i>Hit:</i> 1d6 + 2 slashing damage.
         </meleeWeaponAttack>
         <rangedWeaponAttack name="Shortbow">
-          <i>Ranged Weapon Attack</i> +4 to hit, range 80/320ft., one target. <i>Hit:</i> 1d6 + 2 piercing damage.
+          +4 to hit, range 80/320ft., one target. <i>Hit:</i> 1d6 + 2 piercing damage.
         </rangedWeaponAttack>
       </actions>
-      <description>
-        Goblins are small, black-hearted humanoids that lair in despoiled dungeons and other dismal settings. Individually weak, they gather in large numbers to torment other creatures.
-      </description>
     </monster>
-
     <monster>
-      <cite></cite>
+      <cite/>
       <name>Obgam Sohn des Brogar</name>
       <type>Humanoid (dwarf)</type>
       <stats>
@@ -50,9 +46,7 @@
         <size>Medium</size>
         <ac>16</ac>
         <hp>170</hp>
-        <speed>
-          25 ft.
-        </speed>
+        <speed>25 ft.</speed>
         <abilities str="16" dex="9" con="17" int="12" wis="18" cha="7"/>
         <savingThrows con="" wis="" />
         <skills>
@@ -74,7 +68,7 @@
       <traits>
         <trait id="dwarven_resilience"/>
         <trait name="Spellcasting">
-          Obgam is a l0th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 16, +7 to hit with s pell attacks). Obgam has the following druid spells prepared:<br/> 
+          Obgam is a l0th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 16, +7 to hit with s pell attacks). Obgam has the following druid spells prepared:<br/>
 Cantrips (at will): Shillelagh, Thorn Whip, Frostbite<br/>
 lst level (4 slots): Entangle, Cure Wounds, Healing Word, Faerie Fire, Absorb Elements<br/>
 2nd level (3 slots): Flame Blade, Hold Person, Flaming Sphere<br/>
@@ -89,9 +83,6 @@ lst level (4 slots): Entangle, Cure Wounds, Healing Word, Faerie Fire, Absorb El
           +7 to hit, reach 5ft., one target. <i>Hit:</i> 15 (2d8 + 3) bludgeoning damage.
         </meleeWeaponAttack>
       </actions>
-      <description>
-        
-      </description>
     </monster>
   </monsters>
   <traits>
@@ -99,7 +90,4 @@ lst level (4 slots): Entangle, Cure Wounds, Healing Word, Faerie Fire, Absorb El
       Dwarves have adv. on saving throws against poison.
     </trait>
   </traits>
-
 </cards>
-
-
