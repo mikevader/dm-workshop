@@ -234,8 +234,8 @@ class CardImport
         condImmunity = CardImport.load_element stat, 'condImmunity/*' do |node, name|
           node.map { |cond| cond.name }
         end
-        senses = CardImport.load_element stat, 'senses' do |node, name|
-          node.xpath('sense/@name').map { |node| node.text }
+        senses = CardImport.load_element stat, 'senses/*' do |node, name|
+          node.map { |sense| "#{sense.xpath('@name')}: #{sense.text}" }
         end
       end
 
@@ -251,9 +251,9 @@ class CardImport
       actions = monster.xpath('actions/*').map do |node|
         test = ''
         if node.name == 'meleeweaponattack'
-          test = 'Melee weapon attack: '
+          test = '<i>Melee Weapon Attack:</i> '
         elsif node.name == 'rangedweaponattack'
-          test = 'Ranged weapon attack: '
+          test = '<i>Ranged Weapon Attack:</i> '
         end
         OpenStruct.new(title: node.attributes['name'].value, description: "#{test}#{node.children.to_s.squish}")
       end

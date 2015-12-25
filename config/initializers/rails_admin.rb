@@ -19,7 +19,7 @@ RailsAdmin.config do |config|
   # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
-  config.included_models = ['Category', 'Rarity', 'HeroClass', 'User']
+  config.included_models = %w(Category Rarity HeroClass User Skill)
 
   config.actions do
     dashboard                     # mandatory

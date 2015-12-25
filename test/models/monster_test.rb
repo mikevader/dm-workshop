@@ -165,4 +165,8 @@ class MonsterTest < ActiveSupport::TestCase
     assert_equal 1, @monster.traits.size
     assert_includes @monster.traits, trait
   end
+
+  test 'should calculate XP from challenge rating' do
+    assert_equal '9 (5\'000 XP)', Monster.print_challenge_rating(9)
+  end
 end

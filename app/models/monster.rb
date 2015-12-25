@@ -147,6 +147,11 @@ class Monster < ActiveRecord::Base
     calc_modifier_for charisma
   end
 
+  CR_XP = [100, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 7200, 8400, 10000, 11500, 13000, 15000, 18000, 20000, 22000, 25000, 33000, 41000, 50000, 62000, 75000, 90000, 105000, 120000, 135000, 155000]
+  def self.print_challenge_rating cr
+    xp = CR_XP[cr].to_s.gsub(/(\d)(?=\d{3}+(?:\.|$))(\d{3}\..*)?/,'\1\'\2')
+    "#{cr} (#{xp} XP)"
+  end
   
   private
   def self.new_builder
