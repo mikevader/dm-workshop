@@ -34,3 +34,19 @@ The final version will be accessable under:
 * Reference creature's spells and display/print the according cards.
 * Group a list of creatures, spells, treasures as encounters or for episodes in an adventure
 *
+
+
+## Release notes ##
+We had the following releases:
+
+### Dungeon Master Workshop 0.1 ###
+
+* Create Spells
+
+### Dungeon Master Workshop 0.2
+
+* Create monster cards
+* Create item cards
+* Export cards to PDF
+* Search for monsters, spells and items with all attributes
+* (you don't see it:) Admin interface for manipulating master data and export and import all cards.
