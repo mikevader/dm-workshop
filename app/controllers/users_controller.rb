@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @spells = @user.spells.paginate(page: params[:page])
   end
   
   def new
@@ -71,6 +72,6 @@ class UsersController < ApplicationController
   
     # Confirms an admin user.
     def admin_user
-      redirect_to(root_url) unless current_user.admin?
+      redirect_to(root_url) unless admin_user?
     end
 end

@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+  has_many :spells
+  has_many :items
+  has_many :monsters
+
   attr_accessor   :remember_token, :activation_token, :reset_token
   before_save     :downcase_email
   before_create   :create_activation_digest
@@ -71,6 +75,11 @@ class User < ActiveRecord::Base
     reset_sent_at < 2.hours.ago
   end
   
+  # See "Following users" for the full implementation.
+  def feed
+    Spell.where("user_id = ?", id)
+  end
+
   private
   def downcase_email
     self.email = email.downcase

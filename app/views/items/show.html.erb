@@ -1,0 +1,12 @@
+<% provide(:title, @item.name) %>
+<div class="row">
+  <div class="col-md-12">
+    <ul>
+      <li>Name: <%= @item.name %></li>
+      <li>Category: <%= @item.category.name %></li>
+      <li>Rarity: <%= @item.rarity.name %></li>
+      <li>Attunement: <%= @item.attunement %></li>
+      <li>Description: <%= @item.description %></li>
+    </ul>
+  </div>
+</div>

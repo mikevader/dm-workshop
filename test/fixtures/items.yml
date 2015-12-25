@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+sting:
+  name: Sting
+  category: armor
+  rarity: uncommon 
+  attunement: false
+  description: MyText
+  user: michael 
+
+glamdring:
+  name: Glamdring
+  category: weapon 
+  rarity: very_rare
+  attunement: true
+  description: MyText
+  user: michael

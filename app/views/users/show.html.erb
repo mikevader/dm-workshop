@@ -8,4 +8,10 @@
       </h1>
     </section>
   </aside>
+  <div class="col-md-8">
+    <% if @user.spells.any? %>
+      <h3>Spells (<%= @user.spells.count %>)</h3>
+      <%= render 'shared/spells' %>
+    <% end %>
+  </div>
 </div>

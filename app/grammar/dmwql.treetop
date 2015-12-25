@@ -1,0 +1,105 @@
+
+grammar Dmwql
+  rule search
+    first:expression second:( s union:('AND'i / 'OR'i) s next:expression )* <Search>
+  end
+  
+  rule expression
+    query:query <Expression>
+    / '(' s search:search s ')' <Expression>
+  end
+  
+  rule query
+    comp:query_comparison <Query>
+    / group:query_group <Query>
+  end
+  
+  rule query_comparison
+    id:id s str_comp:string_comparison <Comparison>
+    / id:id s non_str_comp:non_string_comparison <Comparison>
+  end
+  
+  rule string_comparison
+    s op:comp_op_string s value:string_literal <StringComparison>
+  end
+
+  rule non_string_comparison
+    s op:comp_op s value:non_string_literal <NonStringComparison>
+  end
+  
+  rule query_group
+    id S 'in' s group <ArrayComparison>
+  end
+  
+  rule group
+    '(' s literal second:(s ',' s literal )* s ')' <Group>
+  end
+  
+  rule string_literal
+    string s
+  end
+  
+  rule non_string_literal
+    (boolean_literal
+    / number
+    ) s
+  end
+  
+  rule literal
+    ( non_string_literal
+    / string_literal
+    ) s
+  end
+  
+  rule boolean_literal
+    ( 'true'i / 'false'i ) !alphanumeric
+  end
+  
+  rule comp_op_string
+    '=' / '~'
+  end
+
+  rule comp_op
+    '=' / '!=' / '<=' / '>=' / '<' / '>'
+  end
+  
+  rule s # Optional space
+    S?
+  end
+  
+  rule S # Mandatory space
+    [ \t\n\r]+
+  end
+  
+  rule number
+    [-+]? [0-9]+ fraction?
+  end
+  
+  rule fraction
+    '.' [0-9]+
+  end
+  
+  rule id
+    alpha alphanumeric*
+  end
+  
+  rule alpha
+    [A-Za-z_]
+  end
+  
+  rule alphanumeric
+    alpha / [0-9]
+  end
+  
+  rule string
+    "'" alpha (string_char_with_space)* "'" / alpha (string_char)*
+  end
+
+  rule string_char_with_space
+    [a-zA-Z_\-\* ]
+  end
+
+  rule string_char
+    [a-zA-Z_\-\* ]
+  end
+end

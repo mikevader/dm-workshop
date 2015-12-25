@@ -1,0 +1,30 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+shadow_demon:
+  name: Shadow Demon
+  bonus: 2
+  cite: MM 64
+  size: medium
+  monster_type: fiend (demon)
+  alignment: chaotic evil
+  armor_class: 13
+  hit_points: 66
+  speed: 30ft, fly 30ft
+  strength: 1
+  dexterity: 17
+  constitution: 12
+  intelligence: 14
+  wisdom: 13
+  charisma: 14
+  saving_throws_mask: 3 # str dex
+  skills:
+    - stealth
+  damage_vulnerabilities_mask: 1024 # radiant
+  damage_resistances_mask: 4169 # acid, fire, necrotic, thunder
+  damage_immunities_mask: 292 # cold, lightning, poison
+  cond_immunities_mask: 7969 # exhaustion, grappled, paralyzed, petrified, poisoned, prone, restrained
+  senses: darkvision 120ft, passive Perception 11
+  languages: Abyssal, telepathy 120ft
+  challenge: 4
+  description: What ever!
+

@@ -1,0 +1,13 @@
+<tr>
+  <td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal-<%= spell_counter %>">
+  o
+</button></td>
+  <td><%= spell.name %></td>
+  <td><%= spell.level %></td>
+  <td><%= spell.school %></td>
+  <td><%= spell.hero_classes.map(&:name).join(', ') %></td>
+  <% if admin_user? %>
+  <td><%= link_to "edit", edit_spell_path(spell) %></td>
+  <td><%= link_to "delete", spell, method: :delete, data: { confirm: "You sure?" } %></td>
+  <% end %>
+</tr>
