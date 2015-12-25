@@ -13,6 +13,12 @@ module Admin
       assert_response :success
     end
 
+    test 'should get export' do
+      log_in_as @user
+      get :index
+      assert_response :success
+    end
+
     test 'monster card import' do
       log_in_as(@user)
 
@@ -43,5 +49,12 @@ module Admin
       schutzring = Item.find_by_name 'Schutzring'
     end
 
+    test 'monsters card export' do
+      log_in_as(@user)
+
+      get :show, id: 'monsters'
+      assert_response :success
+      assert_equal 'text/xml', response.content_type #response.body
+    end
   end
 end

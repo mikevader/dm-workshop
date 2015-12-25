@@ -16,14 +16,12 @@ class CardExportTest < ActiveSupport::TestCase
 
     exporter = CardExport.new
 
-    xml = exporter.load(Monster.where("name = 'Goblin' or name = 'Obgam Sohn des Brogar'"))
+    xml = exporter.load_monsters(Monster.where("name = 'Goblin' or name = 'Obgam Sohn des Brogar'"))
     org_file = Nokogiri::XML(File.open(input_path))
     new_file = Nokogiri::XML(xml)
 
     failure_text = ''
     org_file.diff(new_file, added: true, removed: true) do |change,node|
-      #failure_text += "#{change} #{node.to_xml}".ljust(30)
-
       case node.parent.path
         when '/cards'
         when '/cards/monsters/monster[1]/stats/cr'

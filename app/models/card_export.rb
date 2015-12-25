@@ -3,7 +3,7 @@ class CardExport
   def initialize()
   end
 
-  def load(monsters)
+  def load_monsters(monsters)
     builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
       xml.cards {
         xml.monsters {
@@ -65,7 +65,7 @@ class CardExport
                   }
                 end
 
-                unless monster.senses.empty?
+                unless monster.senses.blank?
                   xml.senses {
                     monster.senses.split(', ').each do |sense_str|
                       sense = sense_str.split(': ')

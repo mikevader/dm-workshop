@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root                  'admin#home',     as: :admin
     get     'import'   => 'card_imports#new'
+    get     'export'   => 'card_imports#index'
     resources :card_imports
   end
 
