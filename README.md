@@ -24,7 +24,6 @@ The final version will be accessable under:
 ** filter 3rd-level spells and lower
 * layout all items from a filter as cards for two-sided printing
 * (optional) Multilingual for at least english and german
-*
 
 
 ### Cool features but not in scope for a first release are: ###
@@ -33,7 +32,6 @@ The final version will be accessable under:
 * DB with all possible traits
 * Reference creature's spells and display/print the according cards.
 * Group a list of creatures, spells, treasures as encounters or for episodes in an adventure
-*
 
 
 ## Release notes ##
