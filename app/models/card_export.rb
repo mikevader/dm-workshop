@@ -114,4 +114,39 @@ class CardExport
 
     return builder.to_xml(indent: 2)
   end
+
+  def load_spells(spells)
+    builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
+      xml.cards {
+        xml.spells {
+          spells.each do |spell|
+            xml.spell {
+              #xml.cite spell.cite
+              xml.name spell.name
+              xml.type_ "#{spell.level.ordinalize}-level #{spell.school}"
+              xml.classes {
+                spell.hero_classes.each do |class_|
+                  xml.class_ class_.name
+                end
+              }
+              xml.castingTime spell.casting_time
+              xml.range spell.range
+              xml.components spell.components
+              xml.duration spell.duration
+              xml.shortDescription {
+                xml << "\n#{'  '*4 + spell.short_description + "\n" unless spell.short_description.blank?}#{'  '*3}"
+              }
+              xml.atHigherLevel spell.athigherlevel
+              xml.description {
+                xml << "\n#{'  '*4}#{spell.description}\n#{'  '*3}"
+              }
+            }
+          end
+        }
+      }
+    end
+
+    builder.to_xml(indent: 2)
+  end
+
 end
