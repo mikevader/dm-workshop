@@ -7,9 +7,15 @@ module Admin
       @user = users(:michael)
     end
 
-    test "should get import" do
+    test 'should get import' do
       log_in_as @user
       get :new
+      assert_response :success
+    end
+
+    test 'should get export' do
+      log_in_as @user
+      get :index
       assert_response :success
     end
 
@@ -20,7 +26,7 @@ module Admin
         post :create, card_import: { monsters_file: fixture_file_upload('monsters.xml', 'text/xml') }
       end
 
-      goblin = Monster.find_by_name 'Goblin'
+      obgam = Monster.find_by_name 'Obgam Sohn des Brogar'
     end
 
     test 'spell card import' do
@@ -41,6 +47,30 @@ module Admin
       end
 
       schutzring = Item.find_by_name 'Schutzring'
+    end
+
+    test 'monsters card export' do
+      log_in_as(@user)
+
+      get :show, id: 'monsters'
+      assert_response :success
+      assert_equal 'text/xml', response.content_type #response.body
+    end
+
+    test 'spells card export' do
+      log_in_as(@user)
+
+      get :show, id: 'spells'
+      assert_response :success
+      assert_equal 'text/xml', response.content_type #response.body
+    end
+
+    test 'items card export' do
+      log_in_as(@user)
+
+      get :show, id: 'items'
+      assert_response :success
+      assert_equal 'text/xml', response.content_type #response.body
     end
 
   end
