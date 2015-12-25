@@ -7,7 +7,7 @@ module Admin
       @user = users(:michael)
     end
 
-    test "should get import" do
+    test 'should get import' do
       log_in_as @user
       get :new
       assert_response :success

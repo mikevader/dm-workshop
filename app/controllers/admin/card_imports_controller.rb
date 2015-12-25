@@ -25,7 +25,7 @@ module Admin
     def create
       @card_import = CardImport.new(params[:card_import])
       if @card_import.save(current_user)
-        redirect_to admin_import_path, notice: "Imported products successfully."
+        redirect_to admin_import_path, notice: 'Imported products successfully.'
       else
         render :new
       end
