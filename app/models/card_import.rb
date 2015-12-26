@@ -143,8 +143,8 @@ class CardImport
       end
 
       cite = CardImport.load_element(item, 'cite', true)
-      category = Category.where("name LIKE ?", CardImport.load_element(item, 'type', true))
-      rarity = Rarity.where("name LIKE ?", CardImport.load_element(item, 'rarity', true))
+      category = Category.where("lower(name) LIKE ?", CardImport.load_element(item, 'type', true).downcase)
+      rarity = Rarity.where("lower(name) LIKE ?", CardImport.load_element(item, 'rarity', true).downcase)
       attunement = CardImport.load_element(item, 'requiresAttunement', false) || 'false'
       description = CardImport.load_element(item, 'description', false)
 
@@ -277,7 +277,7 @@ class CardImport
       new_monster.challenge = cr
 
       new_monster.saving_throws = savingThrows unless savingThrows.nil?
-      new_monster.skills << skills.map {|skill| Skill.where("name LIKE '#{skill.capitalize}'")} unless skills.nil?
+      new_monster.skills << skills.map {|skill| Skill.where("lower(name) LIKE '#{skill.downcase}'")} unless skills.nil?
       new_monster.senses = senses.join(', ') unless senses.nil?
 
       new_monster.damage_resistances = dmgResistance unless dmgResistance.nil?
