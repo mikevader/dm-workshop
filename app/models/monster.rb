@@ -1,8 +1,8 @@
 class Monster < ActiveRecord::Base
   belongs_to :user
   has_and_belongs_to_many :skills
-  has_many :traits
-  has_many :actions
+  has_many :traits, dependent: :destroy
+  has_many :actions, dependent: :destroy
   
   accepts_nested_attributes_for :actions, reject_if: proc { |action| action['title'].blank? }, allow_destroy: true
   accepts_nested_attributes_for :traits, reject_if: proc { |action| action['title'].blank? }, allow_destroy: true
