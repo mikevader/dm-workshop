@@ -55,12 +55,3 @@ rare = Rarity.create!(name: 'Rare')
 very_rare = Rarity.create!(name: 'Very rare')
 legendary = Rarity.create!(name: 'Legendary')
 
-
-default = User.create!(name:  "Michael Mühlebach",
-             email: "michael@anduin.ch",
-             password:              "foobar",
-             password_confirmation: "foobar",
-             admin: true,
-             activated: true,
-             activated_at: Time.zone.now)
-
