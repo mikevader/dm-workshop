@@ -25,42 +25,44 @@ survival        = Skill.create!(name: "Survival",         ability: "Wis")
 
 
 # Hero classes
-barbarian = HeroClass.create!(name: "Barbarian", cssclass: "icon-class-barbarian")
-bard = HeroClass.create!(name: "Bard", cssclass: "icon-class-bard")
-cleric = HeroClass.create!(name: "Cleric", cssclass: "icon-class-cleric")
-druid = HeroClass.create!(name: "Druid", cssclass: "icon-class-druid")
-figher = HeroClass.create!(name: "Figher", cssclass: "icon-class-figher")
-monk = HeroClass.create!(name: "Monk", cssclass: "icon-class-monk")
-paladin = HeroClass.create!(name: "Paladin", cssclass: "icon-class-paladin")
-ranger = HeroClass.create!(name: "Ranger", cssclass: "icon-class-ranger")
-rogue = HeroClass.create!(name: "Rogue", cssclass: "icon-class-rogue")
-sorcerer = HeroClass.create!(name: "Sorcerer", cssclass: "icon-class-sorcerer")
-warlock = HeroClass.create!(name: "Warlock", cssclass: "icon-class-warlock")
-wizard = HeroClass.create!(name: "Wizard", cssclass: "icon-class-wizard")
+barbarian   = HeroClass.create!(name: "Barbarian",  cssclass: "icon-class-barbarian")
+bard        = HeroClass.create!(name: "Bard",       cssclass: "icon-class-bard")
+cleric      = HeroClass.create!(name: "Cleric",     cssclass: "icon-class-cleric")
+druid       = HeroClass.create!(name: "Druid",      cssclass: "icon-class-druid")
+figher      = HeroClass.create!(name: "Figher",     cssclass: "icon-class-figher")
+monk        = HeroClass.create!(name: "Monk",       cssclass: "icon-class-monk")
+paladin     = HeroClass.create!(name: "Paladin",    cssclass: "icon-class-paladin")
+ranger      = HeroClass.create!(name: "Ranger",     cssclass: "icon-class-ranger")
+rogue       = HeroClass.create!(name: "Rogue",      cssclass: "icon-class-rogue")
+sorcerer    = HeroClass.create!(name: "Sorcerer",   cssclass: "icon-class-sorcerer")
+warlock     = HeroClass.create!(name: "Warlock",    cssclass: "icon-class-warlock")
+wizard      = HeroClass.create!(name: "Wizard",     cssclass: "icon-class-wizard")
 
 # Categories
-armor = Category.create!(name: 'Armor', cssclass: 'icon-custom-armor-heavy')
-potion = Category.create!(name: 'Potion', cssclass: 'icon-custom-potion')
-ring = Category.create!(name: 'Ring', cssclass: 'icon-custom-ring')
-scroll = Category.create!(name: 'Scroll', cssclass: 'icon-custom-scroll')
-staff = Category.create!(name: 'Staff', cssclass: 'icon-custom-staff')
-wand = Category.create!(name: 'Wand', cssclass: 'icon-custom-wand')
-weapon = Category.create!(name: 'Weapon', cssclass: 'icon-custom-swordarrow')
+armor         = Category.create!(name: 'Armor',         cssclass: 'icon-custom-armor-heavy')
+potion        = Category.create!(name: 'Potion',        cssclass: 'icon-custom-potion')
+ring          = Category.create!(name: 'Ring',          cssclass: 'icon-custom-ring')
+scroll        = Category.create!(name: 'Scroll',        cssclass: 'icon-custom-scroll')
+staff         = Category.create!(name: 'Staff',         cssclass: 'icon-custom-staff')
+wand          = Category.create!(name: 'Wand',          cssclass: 'icon-custom-wand')
+weapon        = Category.create!(name: 'Weapon',        cssclass: 'icon-custom-swordarrow')
 wondrous_item = Category.create!(name: 'Wondrous item', cssclass: 'icon-custom-item')
 
 # Rarities
-common = Rarity.create!(name: 'Common')
-uncommon = Rarity.create!(name: 'Uncommon')
-rare = Rarity.create!(name: 'Rare')
+common    = Rarity.create!(name: 'Common')
+uncommon  = Rarity.create!(name: 'Uncommon')
+rare      = Rarity.create!(name: 'Rare')
 very_rare = Rarity.create!(name: 'Very rare')
 legendary = Rarity.create!(name: 'Legendary')
 
 
-default = User.create!(name:  "Michael Mühlebach",
+if User.find_by_email('michael@anduin.ch').nil?
+  User.create!(name:  "Michael Mühlebach",
              email: "michael@anduin.ch",
              password:              "foobar",
              password_confirmation: "foobar",
              admin: true,
              activated: true,
              activated_at: Time.zone.now)
+end
 
