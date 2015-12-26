@@ -12,6 +12,7 @@
   <ul class="nav navbar-nav navbar-right top-nav collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <li><%= link_to "Home", root_path %></li>
     <% if logged_in? %>
+        <li><%= link_to "Cards", cards_path %></li>
         <li><%= link_to "Monsters", monsters_path %></li>
         <li><%= link_to "Items", items_path %></li>
         <li><%= link_to "Spells", spells_path %></li>

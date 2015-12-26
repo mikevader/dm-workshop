@@ -1,0 +1,16 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+cunning_action:
+  name: Cunning Action
+  icon: white-book
+  color: indigo
+  contents:
+  user: michael
+
+action_surge:
+  name: Action Surge
+  icon: white-book
+  color: indigo
+  contents:
+  user: michael
+

@@ -1,0 +1,12 @@
+<tr>
+  <td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal-<%= card_counter %>">
+    o
+  </button></td>
+  <td><%= card.name %></td>
+  <td><%= card.icon %></td>
+  <td><%= card.color %></td>
+  <% if admin_user? %>
+      <td><%= link_to "edit", edit_card_path(card) %></td>
+      <td><%= link_to "delete", card, method: :delete, data: { confirm: "You sure?" } %></td>
+  <% end %>
+</tr>
