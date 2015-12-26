@@ -40,6 +40,7 @@ wizard      = HeroClass.create!(name: "Wizard",     cssclass: "icon-class-wizard
 
 # Categories
 armor         = Category.create!(name: 'Armor',         cssclass: 'icon-custom-armor-heavy')
+poison        = Category.create!(name: 'Poison',        cssclass: 'icon-custom-poison')
 potion        = Category.create!(name: 'Potion',        cssclass: 'icon-custom-potion')
 ring          = Category.create!(name: 'Ring',          cssclass: 'icon-custom-ring')
 scroll        = Category.create!(name: 'Scroll',        cssclass: 'icon-custom-scroll')
