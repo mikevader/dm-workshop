@@ -1,10 +1,20 @@
+require 'search_engine'
+
 class CardsController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :create, :destroy]
   before_action :admin_user, only: [:edit, :update, :destroy]
 
+  before_action :init_search_engine, only: [:index]
+
+  def init_search_engine
+    @search_engine = SearchEngine2.new(Card)
+  end
+
   def index
-    @cards = Card.all
-    @error = nil
+    result, error = @search_engine.search(params[:search])
+
+    @cards = result
+    @error = error
   end
 
   def show

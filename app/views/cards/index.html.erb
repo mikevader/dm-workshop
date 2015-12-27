@@ -9,7 +9,7 @@
           <%= content_tag :div, @error.html_safe, class: 'alert alert-danger' if @error %>
           <%= submit_tag "Search", class: "btn btn-primary", name: nil -%>
           <%= link_to "New", new_card_path, class: 'btn btn-default', role: 'button' -%>
-          <%#= link_to "Print", print_cards_path(search: params[:search]), class: 'btn btn-default', target: '_blank', role: 'button' %>
+          <%= link_to "Print", print_cards_path(search: params[:search]), class: 'btn btn-default', target: '_blank', role: 'button' %>
           </div>
           <div class="row">
             <div class="cards">

@@ -1,16 +1,18 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 cunning_action:
+  id: 1
   name: Cunning Action
   icon: white-book
   color: indigo
-  contents:
+  contents: 'property | faith | it will work'
   user: michael
 
 action_surge:
+  id: 2
   name: Action Surge
   icon: white-book
   color: indigo
-  contents:
+  contents: 'property | faith | it will work'
   user: michael
 
