@@ -51,6 +51,10 @@ class CardData
     @contents << CardElement.new(:fill, params.first)
   end
 
+  def add_unknown(element_name)
+    @contents << CardElement.new(:unknown, element_name)
+  end
+
   class CardElement
     attr_accessor :subtitle
     alias_method :subtitle?, :subtitle
@@ -68,6 +72,8 @@ class CardData
     alias_method :boxes?, :boxes
     attr_accessor :fill
     alias_method :fill?, :fill
+    attr_accessor :unknown
+    alias_method :unknown?, :unknown
 
     def initialize(type, *args)
       send("#{type}=", true)

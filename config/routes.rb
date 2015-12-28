@@ -7,10 +7,12 @@ Rails.application.routes.draw do
   post    'login'   => 'sessions#create'
   delete  'logout'  => 'sessions#destroy'
 
-  get     'print/cards'     => 'output_pages#cards',    as: :print_cards
-  get     'print/spells'    => 'output_pages#spells',   as: :print_spells
-  get     'print/items'     => 'output_pages#items',    as: :print_items
-  get     'print/monsters'  => 'output_pages#monsters', as: :print_monsters
+  get     'print/cards'       => 'output_pages#cards',    as: :print_cards
+  get     'print/spells'      => 'output_pages#spells',   as: :print_spells
+  get     'print/items'       => 'output_pages#items',    as: :print_items
+  get     'print/monsters'    => 'output_pages#monsters', as: :print_monsters
+
+  get     'cards/change_card/:id' => 'cards#change_card'
 
   namespace :admin do
     root                  'admin#home',     as: :admin

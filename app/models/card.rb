@@ -42,6 +42,7 @@ class Card < ActiveRecord::Base
           when 'subsection'
             data.add_subsection element_params
           else
+            data.add_unknown element_name
         end
       end
     end

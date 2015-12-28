@@ -55,6 +55,12 @@ class CardsController < ApplicationController
     redirect_to cards_url
   end
 
+  def change_card
+    card = Card.find(params[:id])
+    card.assign_attributes(card_params)
+    render partial: 'shared/card_card', locals: { card: card.card_data }
+  end
+
   private
   def card_params
     params.require(:card).permit(:name, :icon, :color, :contents)

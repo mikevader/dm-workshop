@@ -1,0 +1,2 @@
+$('#your_div').html("<%= escape_javascript(render(partial: "shared/card_card",
+locals: { card: @card.card_data })).html_safe %>")
