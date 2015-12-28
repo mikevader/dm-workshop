@@ -39,6 +39,8 @@ class Card < ActiveRecord::Base
             data.add_boxes element_params
           when 'fill'
             data.add_fill element_params
+          when 'subsection'
+            data.add_subsection element_params
           else
         end
       end

@@ -33,10 +33,10 @@
               <p class="card-p card-description-text"><%= raw(params.first) %></p>
             </div>
         <% elsif element.subsection? -%>
-            <h3 class="card-section"><%= params.first %></h3>
+            <h3 class="card-section"><%= raw(params.first) %></h3>
         <% elsif element.boxes? -%>
             <div class="card-element card-description-line">
-              <% params.first.times do -%>
+              <% params.first.to_i.times do -%>
                 <svg class="card-box" height="100" width="100" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width:<%= params.second %>em;height:<%= params.second %>em">
                   <rect x="5" y="5" width="90" height="90" fill="none" stroke="dimgray" style="stroke-width:10"></rect>
                 </svg>
