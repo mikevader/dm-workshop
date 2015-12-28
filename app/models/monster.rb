@@ -163,6 +163,7 @@ class Monster < ActiveRecord::Base
     builder.add_field 'int', 'monsters.intelligence'
     builder.add_field 'wis', 'monsters.wisdom'
     builder.add_field 'cha', 'monsters.charisma'
+    return builder
   end
   
   def calc_modifier_for ability = 10
