@@ -23,13 +23,13 @@ class SpellsInterfaceTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_match description, response.body
     # Delete a post.
-    assert_select 'a', text: 'delete'
+    assert_select 'a[aria-label=?]', 'delete'
     first_spell = @user.spells.paginate(page: 1).first
     assert_difference 'Spell.count', -1 do
       delete spell_path(first_spell)
     end
     # Visit a different user.
     get user_path(users(:archer))
-    assert_select 'a', text: 'delete', count: 1
+    assert_select 'a[aria-label=?]', 'delete', count: 1
   end
 end

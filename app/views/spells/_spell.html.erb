@@ -7,12 +7,12 @@
   <td><%= spell.school %></td>
   <td><%= spell.hero_classes.map(&:name).join(', ') %></td>
   <% if admin_user? %>
-      <td><%= link_to edit_spell_path(spell) do -%>
-            <span class="glyphicon glyphicon-pencil" aria-label="edit"></span>
+      <td><%= link_to edit_spell_path(spell), 'aria-label' => 'edit' do -%>
+            <span class="glyphicon glyphicon-pencil"></span>
         <% end -%>
       </td>
-      <td><%= link_to spell, method: :delete, data: { confirm: "You sure?" } do -%>
-            <span class="glyphicon glyphicon-remove" arial-label="delete"></span>
+      <td><%= link_to spell, method: :delete, data: { confirm: "You sure?" }, 'aria-label' => 'delete' do -%>
+            <span class="glyphicon glyphicon-remove"></span>
         <% end -%>
       </td>
   <% end %>
