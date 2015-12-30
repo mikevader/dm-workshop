@@ -6,7 +6,13 @@
   <td><%= "#{monster.size} #{monster.monster_type}" %></td>
   <td><%= monster.challenge %></td>
   <% if admin_user? %>
-  <td><%= link_to "edit", edit_monster_path(monster) %></td>
-  <td><%= link_to "delete", monster, method: :delete, data: { confirm: "You sure?" } %></td>
+      <td><%= link_to edit_monster_path(monster) do -%>
+            <span class="glyphicon glyphicon-pencil" aria-label="edit"></span>
+        <% end -%>
+      </td>
+      <td><%= link_to monster, method: :delete, data: { confirm: "You sure?" } do -%>
+            <span class="glyphicon glyphicon-remove" arial-label="delete"></span>
+        <% end -%>
+      </td>
   <% end %>
 </tr>
