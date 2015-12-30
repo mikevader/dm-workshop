@@ -1,0 +1,6 @@
+
+<% Dir.foreach(File.join(Rails.root, 'app', 'assets', 'images', 'icons')) do |icon_file| %>
+<% unless File.basename(icon_file, '.png') == '.' or File.basename(icon_file, '.*') == '..' %>
+.icon-<%= File.basename(icon_file, '.png') %> { background-image: image-url("icons/<%= icon_file %>") }
+<% end %>
+<% end %>
