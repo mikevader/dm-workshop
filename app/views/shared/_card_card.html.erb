@@ -25,7 +25,7 @@
             </div>
         <% elsif element.description? -%>
             <div class="card-element card-description-line">
-              <h4 class="card-description-name"><%= params.first %>></h4>
+              <h4 class="card-description-name"><%= params.first %></h4>
               <p class="card-p card-description-text"><%= raw(params.second) %></p>
             </div>
         <% elsif element.text? -%>
@@ -44,6 +44,10 @@
             </div>
         <% elsif element.fill? -%>
           <span class="card-fill" style="-webkit-flex:<%= params.first %>; flex:<%= params.first %>;"></span>
+        <% elsif element.bullet? -%>
+            <ul class="card-element card-bullet-line">
+              <li class="card-bullet"><%= params.first %></li>
+            </ul>
         <% else -%>
           <div>Unknown element: <%= params.first %></div>
       <% end -%>

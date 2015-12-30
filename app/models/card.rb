@@ -41,6 +41,8 @@ class Card < ActiveRecord::Base
             data.add_fill element_params
           when 'subsection'
             data.add_subsection element_params
+          when 'bullet'
+            data.add_bullet element_params
           else
             data.add_unknown element_name
         end

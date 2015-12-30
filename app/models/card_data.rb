@@ -51,6 +51,10 @@ class CardData
     @contents << CardElement.new(:fill, params.first)
   end
 
+  def add_bullet(params)
+    @contents << CardElement.new(:bullet, params.first)
+  end
+
   def add_unknown(element_name)
     @contents << CardElement.new(:unknown, element_name)
   end
@@ -72,6 +76,8 @@ class CardData
     alias_method :boxes?, :boxes
     attr_accessor :fill
     alias_method :fill?, :fill
+    attr_accessor :bullet
+    alias_method :bullet?, :bullet
     attr_accessor :unknown
     alias_method :unknown?, :unknown
 
