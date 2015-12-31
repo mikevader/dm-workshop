@@ -1,0 +1,56 @@
+<div id="card-<%= card.id %>" class="card card-size-<%= card.card_size %>" style="color: <%= card.color %>; border-color: <%= card.color %>; background-color: <%= card.color %>;">
+  <div class="card-title-inlineicon-container">
+    <div class="card-title-inlineicon <%= card.icon %>"></div>
+  </div>
+
+  <% unless card.badges.empty? -%>
+    <div class="card-class-icon-container">
+      <% card.badges.each do |badge| -%>
+          <div class="card-class-icon <%= badge %>"></div>
+      <% end -%>
+    </div>
+  <% end -%>
+  <div class="card-title card-title-13"><%= card.name %></div>
+  <div class="card-content-container">
+    <% card.contents.each do |element| -%>
+      <% params = element.params -%>
+        <% if element.subtitle? -%>
+            <div class="card-element card-subtitle"><%= params.first %></div>
+        <% elsif element.rule? -%>
+            <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">    <polyline points="0,0 100,0.5 0,1" fill="<%= card.color %>"></polyline></svg>
+        <% elsif element.property? -%>
+            <div class="card-element card-property-line">
+              <h4 class="card-property-name"><%= params.first %></h4>
+              <p class="card-p card-property-text"><%= raw(params.second) %></p>
+            </div>
+        <% elsif element.description? -%>
+            <div class="card-element card-description-line">
+              <h4 class="card-description-name"><%= params.first %></h4>
+              <p class="card-p card-description-text"><%= raw(params.second) %></p>
+            </div>
+        <% elsif element.text? -%>
+            <div class="card-element card-description-line">
+              <p class="card-p card-description-text"><%= raw(params.first) %></p>
+            </div>
+        <% elsif element.subsection? -%>
+            <h3 class="card-section"><%= raw(params.first) %></h3>
+        <% elsif element.boxes? -%>
+            <div class="card-element card-description-line">
+              <% params.first.to_i.times do -%>
+                <svg class="card-box" height="100" width="100" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width:<%= params.second %>em;height:<%= params.second %>em">
+                  <rect x="5" y="5" width="90" height="90" fill="none" stroke="dimgray" style="stroke-width:10"></rect>
+                </svg>
+              <% end -%>
+            </div>
+        <% elsif element.fill? -%>
+          <span class="card-fill" style="-webkit-flex:<%= params.first %>; flex:<%= params.first %>;"></span>
+        <% elsif element.bullet? -%>
+            <ul class="card-element card-bullet-line">
+              <li class="card-bullet"><%= params.first %></li>
+            </ul>
+        <% else -%>
+          <div>Unknown element: <%= params.first %></div>
+      <% end -%>
+    <% end -%>
+  </div>
+</div>

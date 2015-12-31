@@ -57,8 +57,7 @@ class ItemsControllerTest < ActionController::TestCase
   test "update should change existing item" do
     log_in_as(users(:michael))
     item = items(:glamdring)
-    item.name = 'qua?'
-  
+
     assert_no_difference 'Item.count' do
       patch :update, id: item.id, item: { name: 'Qua?' }
     end

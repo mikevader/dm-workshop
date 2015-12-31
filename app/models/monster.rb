@@ -16,7 +16,7 @@ class Monster < ActiveRecord::Base
   #scope :with_saving_throw, lambda { |saving_throw| {:conditions => "saving_throws_mask & #{2**ABILITIES.index(saving_throw.to_s)} > 0"} }
   
   validates :user_id, presence: true
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 50 }, uniqueness: { case_sensitive: false }
   validates :bonus, presence: true
   validates :size, presence: true
   validates :monster_type, presence: true
@@ -163,6 +163,7 @@ class Monster < ActiveRecord::Base
     builder.add_field 'int', 'monsters.intelligence'
     builder.add_field 'wis', 'monsters.wisdom'
     builder.add_field 'cha', 'monsters.charisma'
+    return builder
   end
   
   def calc_modifier_for ability = 10

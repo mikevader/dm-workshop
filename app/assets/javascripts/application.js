@@ -15,3 +15,4 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require item_properties
+//= require_self

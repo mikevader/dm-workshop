@@ -26,7 +26,7 @@ class ItemsInterfaceTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_match name, response.body
     # Delete a post.
-    assert_select 'a', text: 'delete'
+    assert_select 'a[aria-label=?]', 'delete'
     first_item = Item.paginate(page: 1).first
     assert_difference 'Item.count', -1 do
       delete item_path(first_item)

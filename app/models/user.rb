@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_many :spells
   has_many :items
   has_many :monsters
+  has_many :cards
 
   attr_accessor   :remember_token, :activation_token, :reset_token
   before_save     :downcase_email
