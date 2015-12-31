@@ -55,7 +55,7 @@ class CardsController < ApplicationController
     redirect_to cards_url
   end
 
-  def change_card
+  def preview
     card = Card.find(params[:id])
     card.assign_attributes(card_params)
     render partial: 'shared/card_card', locals: { card: card.card_data }
