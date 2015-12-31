@@ -16,25 +16,3 @@
 //= require turbolinks
 //= require item_properties
 //= require_self
-
-var updateCard = function(event) {
-    var id = $('form.edit_card').attr('action').split('/').pop();
-    var name = $('form.edit_card > input#card_name').val();
-    var icon = $('form.edit_card > input#card_icon').val();
-    var color = escape($('form.edit_card > input#card_color').val());
-    var contents = escape($('form.edit_card > textarea#card_contents').val());
-    var params = 'card[name]=' + name + ';card[icon]=' + icon + ';card[color]=' + color + ';card[contents]=' + contents;
-    $.ajax({
-        url: "/cards/change_card/" + id,
-        data: params,
-        type: "GET",
-        success: function (data) {
-            $("div#card_view").html(data)
-        }
-    })
-};
-
-$(document).on('change', 'textarea#card_contents', updateCard);
-$(document).on('change', 'input#card_name', updateCard);
-$(document).on('change', 'input#card_icon', updateCard);
-$(document).on('change', 'input#card_color', updateCard);
