@@ -48,3 +48,8 @@ We had the following releases:
 * Export cards to PDF
 * Search for monsters, spells and items with all attributes
 * (you don't see it:) Admin interface for manipulating master data and export and import all cards.
+
+### Dungeon Master Workshop 0.3
+
+* Create free form cards
+* Preview for free form cards
