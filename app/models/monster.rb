@@ -152,6 +152,66 @@ class Monster < ActiveRecord::Base
     xp = CR_XP[cr].to_s.gsub(/(\d)(?=\d{3}+(?:\.|$))(\d{3}\..*)?/,'\1\'\2')
     "#{cr} (#{xp} XP)"
   end
+
+  def card_data
+    data = CardData.new
+
+    data.id = id
+    data.name = name
+    data.icon = 'icon-custom-monster'
+    data.color = 'black'
+    data.card_size = '35x50'
+
+    data.add_subtitle ["#{size.capitalize} #{monster_type}, #{alignment}"]
+
+    data.add_rule
+    data.add_property ['Armor Class', armor_class]
+    data.add_property ['Hit Points', hit_points]
+    data.add_property ['Speed', speed]
+    data.add_rule
+    data.add_dndstats [strength, dexterity, constitution, intelligence, wisdom, charisma]
+    data.add_rule
+
+    unless saving_throws.empty?
+      data.add_property ['Saving throws', saving_throws.map {|saving_throw| "#{saving_throw.titleize} #{'%+d' % saving_throw_modifier(saving_throw)}"}.join(', ')]
+    end
+
+    unless skills.empty?
+      data.add_property ['Skills', skills.map {|skill| "#{skill.name} #{'%+d' % skill_modifier(skill)}"}.join(', ')]
+    end
+
+    unless damage_vulnerabilities.blank?
+      data.add_property ['Damage Vulnerabilities', damage_vulnerabilities.join(', ')]
+    end
+    unless damage_resistances.blank?
+      data.add_property ['Damage Resistance', damage_resistances.join(', ')]
+    end
+    unless damage_immunities.blank?
+      data.add_property ['Damage Immunities', damage_immunities.join(', ')]
+    end
+    unless cond_immunities.blank?
+      data.add_property ['Condition Immunities', cond_immunities.join(', ')]
+    end
+
+    data.add_property ['Senses', senses] unless senses.blank?
+    data.add_property ['Languages', languages] unless languages.blank?
+    data.add_property ['Challenge', Monster.print_challenge_rating(challenge)] unless challenge.blank?
+
+    data.add_rule
+
+    traits.each do |trait|
+      data.add_description [trait.title, trait.description]
+    end
+
+    data.add_fill [2]
+
+    data.add_subsection ['Action'] unless actions.empty?
+    actions.each do |action|
+      data.add_description [action.title, action.description]
+    end
+
+    return data
+  end
   
   private
   def self.new_builder
@@ -168,5 +228,40 @@ class Monster < ActiveRecord::Base
   
   def calc_modifier_for ability = 10
     return (ability - 10) / 2
+  end
+
+  def skill_modifier(skill)
+    raise ArgumentError if skill.nil?
+
+    modifier = ability_modifier(skill.ability)
+
+    modifier += bonus if skills.include? skill
+
+    return modifier
+  end
+
+  def saving_throw_modifier(saving_throw)
+    modifier = ability_modifier(saving_throw)
+
+    modifier += bonus if saving_throws.include? saving_throw
+
+    return modifier
+  end
+
+  def ability_modifier(ability)
+    case ability.downcase
+      when 'str'
+        strength_modifier
+      when 'dex'
+        dexterity_modifier
+      when 'con'
+        constitution_modifier
+      when 'int'
+        intelligence_modifier
+      when 'wis'
+        wisdom_modifier
+      when 'cha'
+        charisma_modifier
+    end
   end
 end
