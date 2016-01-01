@@ -48,6 +48,27 @@
             <ul class="card-element card-bullet-line">
               <li class="card-bullet"><%= params.first %></li>
             </ul>
+        <% elsif element.dndstats? -%>
+            <table class="card-stats">
+              <tbody>
+              <tr>
+                <th class="card-stats-header">STR</th>
+                <th class="card-stats-header">DEX</th>
+                <th class="card-stats-header">CON</th>
+                <th class="card-stats-header">INT</th>
+                <th class="card-stats-header">WIS</th>
+                <th class="card-stats-header">CHA</th>
+              </tr>
+              <tr>
+                <td class="card-stats-cell"><%= "#{params.first}&nbsp;(#{'%+d' % ability_modifier_for(params.first)})".html_safe %></td>
+                <td class="card-stats-cell"><%= "#{params.second}&nbsp;(#{'%+d' % ability_modifier_for(params.second)})".html_safe %></td>
+                <td class="card-stats-cell"><%= "#{params.third}&nbsp;(#{'%+d' % ability_modifier_for(params.third)})".html_safe %></td>
+                <td class="card-stats-cell"><%= "#{params.fourth}&nbsp;(#{'%+d' % ability_modifier_for(params.fourth)})".html_safe %></td>
+                <td class="card-stats-cell"><%= "#{params.fifth}&nbsp;(#{'%+d' % ability_modifier_for(params.fifth)})".html_safe %></td>
+                <td class="card-stats-cell"><%= "#{params[5]}&nbsp;(#{'%+d' % ability_modifier_for(params[5])})".html_safe %></td>
+              </tr>
+              </tbody>
+            </table>
         <% else -%>
           <div>Unknown element: <%= params.first %></div>
       <% end -%>

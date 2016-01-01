@@ -18,6 +18,10 @@ module MonstersHelper
     
     return modifier
   end
+
+  def ability_modifier_for(ability_value)
+    return (ability_value.to_i - 10) / 2
+  end
   
   def ability_modifier(monster, ability)
     case ability.downcase
