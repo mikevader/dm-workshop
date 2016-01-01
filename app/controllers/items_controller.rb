@@ -55,6 +55,17 @@ class ItemsController < ApplicationController
     redirect_to items_url
   end
 
+  def preview
+    card_data = nil
+    ActiveRecord::Base.transaction do
+      item = Item.find(params[:id])
+      item.assign_attributes(item_params)
+      card_data = item.card_data
+      raise ActiveRecord::Rollback, "Don't commit preview data changes!"
+    end
+    render partial: 'shared/card_card', locals: { card: card_data}
+  end
+
   private
   def item_params
     params.require(:item).permit(:name, :cssclass, :category_id, :rarity_id, :attunement, :description, properties_attributes: [:id, :name, :value, :_destroy])
