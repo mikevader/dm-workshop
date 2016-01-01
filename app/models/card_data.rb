@@ -3,20 +3,18 @@ class CardData
   attr_accessor :name
   attr_accessor :icon
   attr_accessor :color
+  attr_accessor :card_size
   attr_accessor :badges
 
   def initialize
     @id = -1
     @contents = []
     @badges = []
+    @card_size = '25x35'
   end
 
   def contents
     @contents
-  end
-
-  def card_size
-    '25x35'
   end
 
   def add_subtitle params
