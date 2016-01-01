@@ -1,27 +1,30 @@
 # Dungeon Master Workshop #
 
-This rails app is meant as a help tool for Dungeons & Dragons Dungeon Masters
-for creating the usual paperwork at the table like: Spell cards for the dm or
-players, creature sheets for encounters or npcs, tresure cards for the players
-to loot in the feature.
+This dungeon master support tool is all about cards and managing them: Spell
+card for the dm or players, creature sheets for encounters or NPCs, item cards
+for treasures or loot, or just any card you want to have.
 
-At the moment and unfinished version can be accessed at
-(https://dm-development.herokuapp.com).
+The rails app can help you create and manage those cards and especially print
+them: Except from the monster cards all have the same dimensions as Magic cards
+so you can use the familiar sleeves.
 
-The final version will be accessable under:
+The current in development state can be viewed under:
+(https://dmw-development.herokuapp.com).
+
+The final version is accessible under:
 (https://dmw.herokuapp.com).
 
 ### In the final first version the idea is to be able to: ###
 
-* inscribe spells, which list all relevant attributes including required classes
-* create creatures with all stats and as many calculated stats as possible
+* inscribe spells, which list all relevant attributes including required classes :ballot_box_with_check:
+* create creatures with all stats and as many calculated stats as possible :ballot_box_with_check:
 ** an image would be great but not required
 ** calculated CR would be great but not required
-* create magic items to be used in shops, loot or treasures
+* create magic items to be used in shops, loot or treasures :ballot_box_with_check:
 ** here the image is a must
-* search/filter the items
-** filter all cleric spells for example
-** filter 3rd-level spells and lower
+* search/filter the items :ballot_box_with_check:
+** filter all cleric spells for example :ballot_box_with_check:
+** filter 3rd-level spells and lower :ballot_box_with_check:
 * layout all items from a filter as cards for two-sided printing
 * (optional) Multilingual for at least english and german
 
