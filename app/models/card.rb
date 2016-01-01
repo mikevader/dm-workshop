@@ -9,6 +9,25 @@ class Card < ActiveRecord::Base
   validates :icon, presence: true
   validates :color, presence: true
 
+  def self.search(search)
+    if search
+      builder = new_builder
+      search = Parser.new.parse(search, builder)
+
+      query = self
+      builder.joins.each do |join|
+        query = query.joins(join)
+      end
+      query = query.where(search)
+      builder.orders.each do |order|
+        query = query.order(order)
+      end
+      query.distinct
+    else
+      all
+    end
+  end
+
   def card_data
     data = CardData.new
 
@@ -50,25 +69,6 @@ class Card < ActiveRecord::Base
     end
 
     return data
-  end
-
-  def self.search(search)
-    if search
-      builder = new_builder
-      search = Parser.new.parse(search, builder)
-
-      query = self
-      builder.joins.each do |join|
-        query = query.joins(join)
-      end
-      query = query.where(search)
-      builder.orders.each do |order|
-        query = query.order(order)
-      end
-      query.distinct
-    else
-      all
-    end
   end
 
   private
