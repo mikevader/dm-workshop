@@ -53,3 +53,14 @@ We had the following releases:
 
 * Create free form cards
 * Preview for free form cards
+
+### Dungeon Master Workshop 0.4
+
+* Preview for item cards
+* Preview for spell cards
+* Preview for monster cards
+* Affix behaviour for all previews
+* All cards use the same template
+* Add new card elements
+    * bullet
+    * dndstats
