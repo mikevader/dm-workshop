@@ -2,7 +2,7 @@
 <% @items.each_slice(9) do |slice| -%>
 <page class="page page-preview" size="A4" style="background-color:white;">
   <% slice.each do |item| -%>
-  <%= render 'shared/item_card', item: item %>
+  <%= render 'shared/card_card', card: item.card_data %>
   <% end -%>
 </page>
 <% end -%>

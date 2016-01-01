@@ -3,20 +3,18 @@ class CardData
   attr_accessor :name
   attr_accessor :icon
   attr_accessor :color
+  attr_accessor :card_size
   attr_accessor :badges
 
   def initialize
     @id = -1
     @contents = []
     @badges = []
+    @card_size = '25x35'
   end
 
   def contents
     @contents
-  end
-
-  def card_size
-    '25x35'
   end
 
   def add_subtitle params
@@ -55,6 +53,10 @@ class CardData
     @contents << CardElement.new(:bullet, params.first)
   end
 
+  def add_dndstats(params)
+    @contents << CardElement.new(:dndstats, params.first, params.second, params.third, params.fourth, params.fifth, params[5])
+  end
+
   def add_unknown(element_name)
     @contents << CardElement.new(:unknown, element_name)
   end
@@ -78,6 +80,8 @@ class CardData
     alias_method :fill?, :fill
     attr_accessor :bullet
     alias_method :bullet?, :bullet
+    attr_accessor :dndstats
+    alias_method :dndstats?, :dndstats
     attr_accessor :unknown
     alias_method :unknown?, :unknown
 

@@ -2,7 +2,7 @@
 <% @spells.each_slice(9) do |slice| -%>
 <page class="page page-preview" size="A4" style="background-color:white;">
   <% slice.each do |spell| -%>
-  <%= render 'shared/spell_card', spell: spell %>
+  <%= render 'shared/card_card', card: spell.card_data %>
   <% end -%>
 </page>
 <% end -%>

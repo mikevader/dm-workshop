@@ -56,9 +56,14 @@ class CardsController < ApplicationController
   end
 
   def preview
-    card = Card.find(params[:id])
-    card.assign_attributes(card_params)
-    render partial: 'shared/card_card', locals: { card: card.card_data }
+    card_data = nil
+    ActiveRecord::Base.transaction do
+      card = Card.find(params[:id])
+      card.assign_attributes(card_params)
+      card_data = card.card_data
+      raise ActiveRecord::Rollback, "Don't commit preview data changes!"
+    end
+    render partial: 'shared/card_card', locals: { card: card_data}
   end
 
   private

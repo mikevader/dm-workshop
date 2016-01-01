@@ -31,6 +31,28 @@ class Item < ActiveRecord::Base
     end
   end
 
+  def card_data
+    data = CardData.new
+
+    data.id = id
+    data.name = name
+    data.icon = category.cssclass
+    data.color = 'grey'
+
+    data.add_subtitle ["#{category.name}, #{rarity.name}"]
+    data.add_rule
+    data.add_property ['attunement', attunement.to_s]
+    properties.each do |property|
+      data.add_property [property.name, property.value]
+    end
+    data.add_rule
+    data.add_fill [2]
+    data.add_text [description]
+    data.add_fill [3]
+
+    return data
+  end
+
   private
   def self.new_builder
     builder = SearchBuilder.new
