@@ -55,6 +55,17 @@ class MonstersController < ApplicationController
     redirect_to monsters_url
   end
 
+  def preview
+    card_data = nil
+    ActiveRecord::Base.transaction do
+      monster = Monster.find(params[:id])
+      monster.assign_attributes(monster_params)
+      card_data = monster.card_data
+      raise ActiveRecord::Rollback, "Don't commit preview data changes!"
+    end
+    render partial: 'shared/card_card', locals: { card: card_data}
+  end
+
   private
   def monster_params
     params.require(:monster).permit(:name, :cite, :size, :monster_type, :alignment, :armor_class, :hit_points, :speed,  :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :senses, :languages, :challenge, :description, :bonus, :monsters_skills, :skills, :saving_throws => [], :damage_vulnerabilities => [], :damage_resistances => [], :damage_immunities => [], :cond_immunities => [], :monsters_skills_ids => [], :skill_ids => [], actions_attributes: [:id, :title, :description, :_destroy], traits_attributes: [:id, :title, :description, :_destroy])

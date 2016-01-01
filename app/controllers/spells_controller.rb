@@ -51,7 +51,18 @@ class SpellsController < ApplicationController
     flash[:success] = 'Spell deleted'
     redirect_to spells_url
   end
-  
+
+  def preview
+    card_data = nil
+    ActiveRecord::Base.transaction do
+      spell = Spell.find(params[:id])
+      spell.assign_attributes(spell_params)
+      card_data = spell.card_data
+      raise ActiveRecord::Rollback, "Don't commit preview data changes!"
+    end
+    render partial: 'shared/card_card', locals: { card: card_data }
+  end
+
   private
   def spell_params
     params.require(:spell).permit(:name, :level, :school, :classes, :casting_time, :range, :components, :duration,  :short_description, :athigherlevel, :description, :picture, :concentration, :hero_classes, :spellclasses, :hero_class_ids => [])
