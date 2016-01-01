@@ -16,3 +16,13 @@
 //= require turbolinks
 //= require item_properties
 //= require_self
+
+
+var loaded = function() {
+    $("#card_view").affix({
+        offset: { top: 0 }
+    });
+
+    $('body').scrollspy({ target: '#card_view', offset: 0 });
+}
+$(document).on("page:load ready", loaded);
