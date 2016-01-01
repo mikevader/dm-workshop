@@ -30,6 +30,45 @@ class Spell < ActiveRecord::Base
       all
     end
   end
+
+  def card_data
+    data = CardData.new
+
+    data.id = id
+    data.name = name
+    data.icon = "icon-white-book-#{level}"
+    data.color = 'maroon'
+
+    hero_classes.each do |hero_class|
+      data.badges << hero_class.cssclass
+    end
+
+    unless level = 0
+      data.add_subtitle ["#{level.ordinalize}-level #{school}"]
+    else
+      data.add_subtitle ["#{school} cantrip"]
+    end
+
+    data.add_rule
+    data.add_property ['Casting Time', casting_time]
+    data.add_property ['Range', range]
+    data.add_property ['Components', components]
+    data.add_property ['Duration', duration]
+    data.add_fill [2]
+
+    unless short_description.blank?
+      data.add_text [short_description]
+    else
+      data.add_text [description]
+    end
+
+    unless athigherlevel.blank?
+      data.add_subsection ['At higher levels']
+      data.add_text [athigherlevel]
+    end
+
+    return data
+  end
   
   private
   # Validates the size of an uploaded picture.
