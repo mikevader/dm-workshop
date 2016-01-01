@@ -43,7 +43,7 @@ class Spell < ActiveRecord::Base
       data.badges << hero_class.cssclass
     end
 
-    unless level = 0
+    unless level == 0
       data.add_subtitle ["#{level.ordinalize}-level #{school}"]
     else
       data.add_subtitle ["#{school} cantrip"]
