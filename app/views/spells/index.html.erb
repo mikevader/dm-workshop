@@ -1,34 +1,24 @@
 <% provide(:title, 'All spells') %>
 
-<div class="row">
-  <div class="col-md-offset-2 col-md-8">
-    <div class="row"><h1>Spells</h1></div>
-    <div class="row">
-      <%= form_tag spells_path, method: 'get', id: "spells_search" do %>
+<% provide(:search_path, spells_path) %>
+<% provide(:print_path, print_spells_path(search: params[:search])) %>
+<% provide(:new_path, new_spell_path) %>
+<% provide(:page_title, 'Search spells') %>
 
-      <%= text_field_tag :search, params[:search], class: "form-control", autocomplete: 'off' %>
-      <%= content_tag :div, @error.html_safe, class: 'alert alert-danger' if @error %>
-      <%= submit_tag "Search", class: "btn btn-primary", name: nil -%>
-      <%= link_to "New", new_spell_path, class: 'btn btn-default', role: 'button' -%>
-      <%= link_to "Print", print_spells_path(search: params[:search]), class: 'btn btn-default', target: '_blank', role: 'button' %>
-    </div>
-    <div class="row">
-      <div class="spells">
-        <table class="table table-striped">
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Level</th>
-            <th>School</th>
-            <th>Classes</th>
-            <th colspan="99"></th>
-          </tr>
-          <%= render @spells %>
-        </table>
-        
-        <%= render partial: 'modal', collection: @spells, as: :spell %>
-      </div>
-    </div>
-    <% end %>
+<div class="row">
+  <div class="spells">
+    <table class="table table-striped">
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Level</th>
+        <th>School</th>
+        <th>Classes</th>
+        <th colspan="99"></th>
+      </tr>
+      <%= render @spells %>
+    </table>
+
+    <%= render partial: 'modal', collection: @spells, as: :spell %>
   </div>
 </div>

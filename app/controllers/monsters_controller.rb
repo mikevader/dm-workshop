@@ -1,6 +1,7 @@
 require 'search_engine'
 
 class MonstersController < ApplicationController
+  layout 'card_index', only: [:index]
   before_action :logged_in_user, only: [:index, :edit, :update, :create, :destroy]
   before_action :admin_user, only: [:edit, :update, :destroy]
 
