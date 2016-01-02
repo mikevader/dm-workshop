@@ -18,13 +18,13 @@ The final version is accessible under:
 
 * inscribe spells, which list all relevant attributes including required classes :ballot_box_with_check:
 * create creatures with all stats and as many calculated stats as possible :ballot_box_with_check:
-** an image would be great but not required
-** calculated CR would be great but not required
+    * an image would be great but not required
+    * calculated CR would be great but not required
 * create magic items to be used in shops, loot or treasures :ballot_box_with_check:
-** here the image is a must
+    * here the image is a must
 * search/filter the items :ballot_box_with_check:
-** filter all cleric spells for example :ballot_box_with_check:
-** filter 3rd-level spells and lower :ballot_box_with_check:
+    * filter all cleric spells for example :ballot_box_with_check:
+    * filter 3rd-level spells and lower :ballot_box_with_check:
 * layout all items from a filter as cards for two-sided printing
 * (optional) Multilingual for at least english and german
 
