@@ -1,7 +1,7 @@
 require 'search_engine'
 
 class ItemsController < ApplicationController
-  layout 'card_index', only: [:index]
+  layout :choose_layout
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
   before_action :admin_user, only: [:edit, :update, :destroy]
 
@@ -23,30 +23,30 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = Item.new
+    @card = current_user.items.build
   end
   
   def create
-    @item = current_user.items.build(item_params)
-    if @item.save
+    @card = current_user.items.build(item_params)
+    if @card.save
       flash[:success] = "Item crafted!"
       redirect_to items_url
     else
-      render 'new'
+      render 'new', layout: 'card_new'
     end
   end
 
   def edit
-    @item = Item.find(params[:id])
+    @card = Item.find(params[:id])
   end
   
   def update
-    @item = Item.find(params[:id])
-    if @item.update_attributes(item_params)
+    @card = Item.find(params[:id])
+    if @card.update_attributes(item_params)
       flash[:success] = "Item udpated"
       redirect_to items_url
     else
-      render 'edit'
+      render 'edit', layout: 'card_edit'
     end
   end
   
@@ -59,7 +59,11 @@ class ItemsController < ApplicationController
   def preview
     card_data = nil
     ActiveRecord::Base.transaction do
-      item = Item.find(params[:id])
+      if Item.exists?(params[:id])
+        item = Item.find(params[:id])
+      else
+        item = current_user.items.build
+      end
       item.assign_attributes(item_params)
       card_data = item.card_data
       raise ActiveRecord::Rollback, "Don't commit preview data changes!"

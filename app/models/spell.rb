@@ -44,7 +44,7 @@ class Spell < ActiveRecord::Base
     end
 
     unless level == 0
-      data.add_subtitle ["#{level.ordinalize}-level #{school}"]
+      data.add_subtitle ["#{level.try(:ordinalize)}-level #{school}"]
     else
       data.add_subtitle ["#{school} cantrip"]
     end

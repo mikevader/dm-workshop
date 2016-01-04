@@ -1,86 +1,138 @@
 <%= render 'shared/error_messages', object: f.object %>
 
-<%= f.label :name %>
-<%= f.text_field :name, class: 'form-control' %>
-
-<%= f.label :cite %>
-<%= f.text_field :cite, class: 'form-control' %>
-
-<%= f.label :bonus %>
-<%= f.text_field :bonus, class: 'form-control', type: 'number' %>
-
-<%= f.label :size %>
-<%= f.text_field :size, class: 'form-control' %>
-
-<%= f.label :monster_type %>
-<%= f.text_field :monster_type, class: 'form-control' %>
-
-<%= f.label :alignment %>
-<%= f.text_field :alignment, class: 'form-control' %>
-
-<%= f.label :armor_class %>
-<%= f.text_field :armor_class, class: 'form-control' %>
-
-<%= f.label :hit_points %>
-<%= f.text_field :hit_points, class: 'form-control', type: 'number' %>
-
-<%= f.label :speed %>
-<%= f.text_field :speed, class: 'form-control' %>
-
-<%= f.label :strength %>
-<%= f.text_field :strength, class: 'form-control', type: 'number' %>
-
-<%= f.label :dexterity %>
-<%= f.text_field :dexterity, class: 'form-control', type: 'number' %>
-
-<%= f.label :constitution %>
-<%= f.text_field :constitution, class: 'form-control', type: 'number' %>
-
-<%= f.label :intelligence %>
-<%= f.text_field :intelligence, class: 'form-control', type: 'number' %>
-
-<%= f.label :wisdom %>
-<%= f.text_field :wisdom, class: 'form-control', type: 'number' %>
-
-<%= f.label :charisma %>
-<%= f.text_field :charisma, class: 'form-control', type: 'number' %>
-
-<%= f.label :skill_ids %>
-<%= f.collection_select :skill_ids, Skill.all, :id, :name, {}, {multiple: true} %>
-
-<%= f.label :saving_throws %>
-<%= f.collection_select :saving_throws, Monster::ABILITIES, :to_s, :titleize, {}, {multiple: true} %>
-
-<%= f.label :damage_vulnerabilities %>
-<%= f.collection_select :damage_vulnerabilities, Monster::DAMAGE_TYPES, :to_s, :titleize, {}, {multiple: true} %>
-
-<%= f.label :damage_resistances %>
-<%= f.collection_select :damage_resistances, Monster::DAMAGE_TYPES, :to_s, :titleize, {}, {multiple: true} %>
-
-<%= f.label :damage_immunities %>
-<%= f.collection_select :damage_immunities, Monster::DAMAGE_TYPES, :to_s, :titleize, {}, {multiple: true} %>
-
-<%= f.label :cond_immunities %>
-<%= f.collection_select :cond_immunities, Monster::CONDITIONS, :to_s, :titleize, {}, {multiple: true} %>
-
-<%= f.label :senses %>
-<%= f.text_field :senses, class: 'form-control' %>
-
-<%= f.label :languages %>
-<%= f.text_field :languages, class: 'form-control' %>
-
-<%= f.label :challenge %>
-<%= f.text_field :challenge, class: 'form-control', type: 'number' %>
-
-<%= f.fields_for :traits do |trait| %>
-<%= render 'trait_fields', f: trait %>
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :name, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_field(:name, class: 'form-control'), class: 'col-sm-9') %>
 <% end %>
-<%= link_to_add_fields 'Add Trait', f, :traits %>
 
-<%= f.fields_for :actions do |action| %>
-<%= render 'action_fields', f: action %>
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :cite, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_field(:cite, class: 'form-control'), class: 'col-sm-9') %>
 <% end %>
-<%= link_to_add_fields 'Add Action', f, :actions %>
 
-<%= f.label :description %>
-<%= f.text_area :description, class: 'form-control' %>
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :bonus, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_field(:bonus, class: 'form-control', type: 'number'), class: 'col-sm-9') %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :size, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_field(:size, class: 'form-control'), class: 'col-sm-9') %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :monster_type, 'Type', class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_field(:monster_type, class: 'form-control'), class: 'col-sm-9') %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :alignment, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_field(:alignment, class: 'form-control'), class: 'col-sm-9') %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :armor_class, 'AC', class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_field(:armor_class, class: 'form-control'), class: 'col-sm-9') %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :hit_points, 'HP', class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_field(:hit_points, class: 'form-control', type: 'number'), class: 'col-sm-9') %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :speed, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_field(:speed, class: 'form-control'), class: 'col-sm-9') %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label 'Abilities', class: 'control-label col-sm-3' %>
+    <%= content_tag :div, class: 'col-sm-9' do -%>
+        <%= content_tag :div, class: 'row small-padding' do -%>
+            <%= f.label :strength, 'STR', class: 'control-label col-sm-2' %>
+            <%= f.label :dexterity, 'DEX', class: 'control-label col-sm-2' %>
+            <%= f.label :constitution, 'CON', class: 'control-label col-sm-2' %>
+            <%= f.label :intelligence, 'INT', class: 'control-label col-sm-2' %>
+            <%= f.label :wisdom, 'WIS', class: 'control-label col-sm-2' %>
+            <%= f.label :charisma, 'CHA', class: 'control-label col-sm-2' %>
+        <% end %>
+        <%= content_tag :div, class: 'row small-padding' do -%>
+            <%= content_tag(:div, f.text_field(:strength, class: 'form-control col-sm-3', type: 'number'), class: 'col-sm-2') %>
+            <%= content_tag(:div, f.text_field(:dexterity, class: 'form-control', type: 'number'), class: 'col-sm-2') %>
+            <%= content_tag(:div, f.text_field(:constitution, class: 'form-control', type: 'number'), class: 'col-sm-2') %>
+            <%= content_tag(:div, f.text_field(:intelligence, class: 'form-control', type: 'number'), class: 'col-sm-2') %>
+            <%= content_tag(:div, f.text_field(:wisdom, class: 'form-control', type: 'number'), class: 'col-sm-2') %>
+            <%= content_tag(:div, f.text_field(:charisma, class: 'form-control', type: 'number'), class: 'col-sm-2') %>
+        <% end %>
+    <% end %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :saving_throws, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.collection_select(:saving_throws, Monster::ABILITIES, :to_s, :titleize, {}, {class: 'form-control', size: 6, multiple: true}), class: 'col-sm-9') %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :skill_ids, 'Skills', class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.collection_select(:skill_ids, Skill.all, :id, :name, {}, {class: 'form-control', size: Skill.count, multiple: true}), class: 'col-sm-9') %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :damage_vulnerabilities, 'Vulnerabilities', class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.collection_select(:damage_vulnerabilities, Monster::DAMAGE_TYPES, :to_s, :titleize, {}, {class: 'form-control', size: Monster::DAMAGE_TYPES.count, multiple: true}), class: 'col-sm-9') %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :damage_resistances, 'Resistances', class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.collection_select(:damage_resistances, Monster::DAMAGE_TYPES, :to_s, :titleize, {}, {class: 'form-control', size: Monster::DAMAGE_TYPES.count, multiple: true}), class: 'col-sm-9') %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :damage_immunities, 'Dmg Immunities', class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.collection_select(:damage_immunities, Monster::DAMAGE_TYPES, :to_s, :titleize, {}, {class: 'form-control', size: Monster::DAMAGE_TYPES.count, multiple: true}), class: 'col-sm-9') %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :cond_immunities, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.collection_select(:cond_immunities, Monster::CONDITIONS, :to_s, :titleize, {}, {class: 'form-control', size: Monster::CONDITIONS.count, multiple: true}), class: 'col-sm-9') %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :senses, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_field(:senses, class: 'form-control'), class: 'col-sm-9') %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :languages, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_field(:languages, class: 'form-control'), class: 'col-sm-9') %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :challenge, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_field(:challenge, class: 'form-control', type: 'number'), class: 'col-sm-9') %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :traits, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, class: 'col-sm-9') do %>
+        <%= f.fields_for :traits do |trait| %>
+            <%= render 'trait_fields', f: trait %>
+        <% end %>
+        <%= link_to_add_fields 'Add Trait', f, :traits %>
+    <% end %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :actions, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, class: 'col-sm-9') do %>
+        <%= f.fields_for :actions do |action| %>
+            <%= render 'action_fields', f: action %>
+        <% end %>
+        <%= link_to_add_fields 'Add Action', f, :actions %>
+    <% end %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :description, class: 'control-label col-sm-3'  %>
+    <%= content_tag(:div, f.text_area(:description, class: 'form-control', rows: 10, style: ' white-space: pre-wrap;'), class: 'col-sm-9')  %>
+<% end %>

@@ -5,20 +5,16 @@
 <% provide(:new_path, new_spell_path) %>
 <% provide(:page_title, 'Search spells') %>
 
-<div class="row">
-  <div class="spells">
-    <table class="table table-striped">
-      <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Level</th>
-        <th>School</th>
-        <th>Classes</th>
-        <th colspan="99"></th>
-      </tr>
-      <%= render @spells %>
-    </table>
+<table class="table table-striped">
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Level</th>
+    <th>School</th>
+    <th>Classes</th>
+    <th colspan="99"></th>
+  </tr>
+  <%= render @spells %>
+</table>
 
-    <%= render partial: 'modal', collection: @spells, as: :spell %>
-  </div>
-</div>
+<%= render partial: 'modal', collection: @spells, as: :spell %>

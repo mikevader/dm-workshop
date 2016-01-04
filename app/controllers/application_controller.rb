@@ -13,4 +13,18 @@ class ApplicationController < ActionController::Base
       redirect_to login_url
     end
   end
+
+  # Select the layout depending on the CRUD mode
+  def choose_layout
+    case action_name
+      when 'index'
+        return 'card_index'
+      when 'edit'
+        return 'card_edit'
+      when 'new'
+        return 'card_new'
+      else
+        return nil
+    end
+  end
 end

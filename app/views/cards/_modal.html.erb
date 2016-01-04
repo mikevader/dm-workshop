@@ -3,26 +3,5 @@
   next_index = (index + 1)%@cards.size
   prev_index = (index - 1)%@cards.size
 %>
-<div class="modal" id="myModal-<%= index %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-xs-6">
-              <button type="button" class="btn btn-primary btn-xs pull-left" data-toggle="modal" data-dismiss="modal" data-target="#myModal-<%= prev_index %>">previous</button>
-            </div>
-            <div class="col-xs-6">
-              <button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-dismiss="modal" data-target="#myModal-<%= next_index %>">next</button>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-1">
-              <%= render 'shared/card_card', card: card.card_data %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+<%= render partial: 'shared/modal', locals: { card: card, index: index, next_index: next_index, prev_index: prev_index } %>

@@ -5,19 +5,15 @@
 <% provide(:new_path, new_card_path) %>
 <% provide(:page_title, 'Search cards') %>
 
-<div class="row">
-  <div class="cards">
-    <table class="table table-striped">
-      <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Icon</th>
-        <th>Color</th>
-        <th colspan="99"></th>
-      </tr>
-      <%= render @cards %>
-    </table>
+<table class="table table-striped">
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Icon</th>
+    <th>Color</th>
+    <th colspan="99"></th>
+  </tr>
+  <%= render @cards %>
+</table>
 
-    <%= render partial: 'modal', collection: @cards, as: :card %>
-  </div>
-</div>
+<%= render partial: 'modal', collection: @cards, as: :card %>

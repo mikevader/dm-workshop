@@ -1,29 +1,51 @@
 <%= render 'shared/error_messages', object: f.object %>
 
-<%= f.label :name %>
-<%= f.text_field :name, class: 'form-control' %>
-
-<%= f.label :cssclass %>
-<% if @item.category -%>
-<%= f.text_field :cssclass, class: 'form-control', placeholder: @item.category.cssclass  %>
-<% else -%>
-<%= f.text_field :cssclass, class: 'form-control' %>
-<% end -%>
-
-<%= f.label :category %>
-<%= f.collection_select :category_id, Category.all, :id, :name, class: 'form-control' %>
-
-<%= f.label :rarity %>
-<%= f.collection_select :rarity_id, Rarity.all, :id, :name, class: 'form-control' %>
-
-<%= f.label :attunement %>
-<%= f.check_box :attunement, class: 'form-control' %>
-
-<%= f.fields_for :properties do |property| %>
-<%= render 'property_fields', f: property %>
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :name, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_field(:name, class: 'form-control'), class: 'col-sm-9') %>
 <% end %>
-<%= link_to_add_fields 'Add Attribute', f, :properties %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :cssclass, class: 'control-label col-sm-3' %>
+    <% if @card.category -%>
+        <%= content_tag(:div, f.text_field(:cssclass, class: 'form-control', placeholder: @card.category.cssclass), class: 'col-sm-9') %>
+    <% else -%>
+        <%= content_tag(:div, f.text_field(:cssclass, class: 'form-control'), class: 'col-sm-9') %>
+    <% end -%>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :category, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.collection_select(:category_id, Category.all, :id, :name, {}, {class: 'form-control'}), class: 'col-sm-9') %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :rarity, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.collection_select(:rarity_id, Rarity.all, :id, :name, {}, {class: 'form-control'}), class: 'col-sm-9') %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= content_tag :div, class: 'col-sm-offset-3 col-sm-9' do %>
+        <%= content_tag :div, class: 'checkbox' do %>
+            <%= f.label :attunement do %>
+                <%= f.check_box(:attunement) %>Attunement
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :properties, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, class: 'col-sm-9') do %>
+        <%= f.fields_for :properties do |property| %>
+            <%= render 'property_fields', f: property %>
+        <% end %>
+        <%= link_to_add_fields 'Add Attribute', f, :properties %>
+    <% end %>
+<% end %>
 
 
-<%= f.label :description %>
-<%= f.text_area :description, class: 'form-control' %>
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :description, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_area(:description, class: 'form-control', rows: 10, style: ' white-space: pre-wrap;'), class: 'col-sm-9') %>
+<% end %>

@@ -5,22 +5,18 @@
 <% provide(:new_path, new_item_path) %>
 <% provide(:page_title, 'Search items') %>
 
-<div class="row">
-  <div class="items">
-    <table class="table table-striped">
-      <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Rarity</th>
-        <th>Attunement</th>
-        <th colspan="99"></th>
-      </tr>
-      <%= render @items %>
-    </table>
+<table class="table table-striped">
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Category</th>
+    <th>Rarity</th>
+    <th>Attunement</th>
+    <th colspan="99"></th>
+  </tr>
+  <%= render @items %>
+</table>
 
-    <%= render partial: 'modal', collection: @items, as: :item %>
-  </div>
+<%= render partial: 'modal', collection: @items, as: :item %>
 
-  <%= will_paginate %>
-</div>
+<%= will_paginate %>

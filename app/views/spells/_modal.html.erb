@@ -4,29 +4,12 @@
    next_index = (index + 1)%@spells.size
    prev_index = (index - 1)%@spells.size
 %>
-<div class="modal" id="myModal-<%= index %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-xs-6">
-              <button type="button" class="btn btn-primary btn-xs pull-left" data-toggle="modal" data-dismiss="modal" data-target="#myModal-<%= prev_index %>">previous</button>
-            </div>
-            <div class="col-xs-6">
-              <button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-dismiss="modal" data-target="#myModal-<%= next_index %>">next</button>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <%= render 'shared/card_card', card: spell.card_data %>
-            </div>
-            <div class="col-md-8">
-              <%= render 'shared/spell_detail', spell: spell %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+
+<%= render layout: 'shared/modal', locals: { card: spell, large: true, index: index, next_index: next_index, prev_index: prev_index } do %>
+  <div class="col-md-4">
+    <%= render 'shared/card_card', card: spell.card_data %>
   </div>
-</div>
+  <div class="col-md-8">
+    <%= render 'shared/spell_detail', spell: spell %>
+  </div>
+<% end %>

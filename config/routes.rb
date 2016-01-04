@@ -12,10 +12,10 @@ Rails.application.routes.draw do
   get     'print/items'       => 'output_pages#items',    as: :print_items
   get     'print/monsters'    => 'output_pages#monsters', as: :print_monsters
 
-  get     'cards/:id/preview'     => 'cards#preview'
-  get     'items/:id/preview'     => 'items#preview'
-  patch   'monsters/:id/preview'  => 'monsters#preview'
-  patch   'spells/:id/preview'    => 'spells#preview'
+  patch     'cards/:id/preview'     => 'cards#preview'
+  patch     'items/:id/preview'     => 'items#preview'
+  patch     'monsters/:id/preview'  => 'monsters#preview'
+  patch     'spells/:id/preview'    => 'spells#preview'
 
   namespace :admin do
     root                  'admin#home',     as: :admin

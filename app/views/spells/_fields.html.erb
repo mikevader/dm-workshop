@@ -1,79 +1,85 @@
 <%= render 'shared/error_messages', object: f.object %>
 
 <%= content_tag :div, class: 'form-group' do -%>
-  <%= f.label :name, class: 'control-label col-sm-3' %>
-  <%= content_tag(:div, f.text_field(:name, class: 'form-control'), class: 'col-sm-9') %>
+    <%= f.label :name, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_field(:name, class: 'form-control'), class: 'col-sm-9') %>
 <% end -%>
 
 <%= content_tag :div, class: 'form-group' do -%>
-  <%= f.label :level, class: 'control-label col-sm-3'  %>
-  <%= content_tag(:div, f.text_field(:level, class: 'form-control'), class: 'col-sm-3') %>
+    <%= f.label :level, class: 'control-label col-sm-3'  %>
+    <%= content_tag(:div, f.text_field(:level, class: 'form-control'), class: 'col-sm-3') %>
 <% end -%>
 
 <%= content_tag :div, class: 'form-group' do -%>
-  <%= f.label :school, class: 'control-label col-sm-3'  %>
-  <%= content_tag(:div, f.text_field(:school, class: 'form-control'), class: 'col-sm-9') %>
+    <%= f.label :school, class: 'control-label col-sm-3'  %>
+    <%= content_tag(:div, f.text_field(:school, class: 'form-control'), class: 'col-sm-9') %>
 <% end -%>
 
 <%= content_tag :div, class: 'form-group' do -%>
-  <%= f.label :classes, class: 'control-label col-sm-3'  %>
-  <%= content_tag(:div, f.text_field(:classes, class: 'form-control'), class: 'col-sm-9') %>
+    <%= f.label :classes, class: 'control-label col-sm-3'  %>
+    <%= content_tag(:div, f.text_field(:classes, class: 'form-control'), class: 'col-sm-9') %>
 <% end -%>
 
 <%= content_tag :div, class: 'form-group' do -%>
-<%= f.label :hero_class_ids, class: 'control-label col-sm-3' %>
-<%= content_tag :div, class: 'form-inline col-sm-9' do -%>
-<%= content_tag :div, class: 'form-group' do -%>
-
-<%= f.collection_check_boxes(:hero_class_ids, HeroClass.all, :id, :name) do |b| -%>
-<%= content_tag :div, class: 'checkbox' do -%>
-<%= b.label {b.check_box + b.text} %>
-<% end -%>
-<% end -%>
-
-<% end -%>
-<% end -%>
-<% end -%>
-
-<%= content_tag :div, class: 'form-group' do -%>
-  <%= f.label :casting_time, class: 'control-label col-sm-3'  %>
-  <%= content_tag(:div, f.text_field(:casting_time, class: 'form-control'), class: 'col-sm-6') %>
+    <%= f.label :hero_class_ids, 'Classes', class: 'control-label col-sm-3' %>
+    <%= content_tag :div, class: 'col-sm-9' do -%>
+        <%= content_tag :div, class: 'row' do %>
+            <% per_column = (HeroClass.count/3).ceil %>
+            <% count = 0 %>
+            <%= f.collection_check_boxes(:hero_class_ids, HeroClass.all, :id, :name) do |b| -%>
+                <%= raw '<div class="col-sm-4">' if count%per_column == 0 %>
+                <% count += 1 %>
+                <%= content_tag :div, class: 'checkbox' do -%>
+                    <%= b.label {b.check_box + b.text} %>
+                <% end -%>
+                <%= raw '</div>' if count%per_column == 0 or count == HeroClass.count %>
+            <% end -%>
+        <% end -%>
+    <% end -%>
 <% end -%>
 
 <%= content_tag :div, class: 'form-group' do -%>
-  <%= f.label :range, class: 'control-label col-sm-3'  %>
-  <%= content_tag(:div, f.text_field(:range, class: 'form-control'), class: 'col-sm-6') %>
+    <%= f.label :casting_time, class: 'control-label col-sm-3'  %>
+    <%= content_tag(:div, f.text_field(:casting_time, class: 'form-control'), class: 'col-sm-6') %>
 <% end -%>
 
 <%= content_tag :div, class: 'form-group' do -%>
-  <%= f.label :components, class: 'control-label col-sm-3'  %>
-  <%= content_tag(:div, f.text_field(:components, class: 'form-control'), class: 'col-sm-9') %>
+    <%= f.label :range, class: 'control-label col-sm-3'  %>
+    <%= content_tag(:div, f.text_field(:range, class: 'form-control'), class: 'col-sm-6') %>
 <% end -%>
 
 <%= content_tag :div, class: 'form-group' do -%>
-  <%= f.label :duration, class: 'control-label col-sm-3'  %>
-  <%= content_tag(:div, f.text_field(:duration, class: 'form-control'), class: 'col-sm-9') %>
+    <%= f.label :components, class: 'control-label col-sm-3'  %>
+    <%= content_tag(:div, f.text_field(:components, class: 'form-control'), class: 'col-sm-9') %>
 <% end -%>
 
 <%= content_tag :div, class: 'form-group' do -%>
-<%= content_tag :div, class: 'col-sm-offset-3 col-sm-9' do -%>
-<%= f.label :concentration, class: 'control-label col-sm-3'  %>
-<%= content_tag(:div, f.check_box(:concentration, class: 'checkbox'), class: 'checkbox') %>
-<% end -%>
+    <%= f.label :duration, class: 'control-label col-sm-3'  %>
+    <%= content_tag(:div, f.text_field(:duration, class: 'form-control'), class: 'col-sm-9') %>
 <% end -%>
 
 <%= content_tag :div, class: 'form-group' do -%>
-  <%= f.label :short_description, class: 'control-label col-sm-3'  %>
-  <%= content_tag(:div, f.text_area(:short_description, class: 'form-control', rows: '4'), class: 'col-sm-9') %>
+    <%= content_tag :div, class: 'col-sm-offset-3 col-sm-9' do -%>
+        <%= content_tag :div, class: 'checkbox' do %>
+            <%= f.label :concentration do %>
+                <%= f.check_box(:concentration) %>Concentration
+            <% end -%>
+        <% end -%>
+    <% end -%>
 <% end -%>
 
 <%= content_tag :div, class: 'form-group' do -%>
-  <%= f.label :athigherlevel, class: 'control-label col-sm-3'  %>
-<%= content_tag(:div, f.text_area(:athigherlevel, class: 'form-control', rows: '2'), class: 'col-sm-9') %>
+    <%= f.label :short_description, class: 'control-label col-sm-3'  %>
+    <%= content_tag(:div, f.text_area(:short_description, class: 'form-control', rows: '10', style: ' white-space: pre-wrap;'), class: 'col-sm-9') %>
 <% end -%>
 
 <%= content_tag :div, class: 'form-group' do -%>
-  <%= f.label :description, class: 'control-label col-sm-3'  %>
-  <%= content_tag(:div, f.text_area(:description, class: 'form-control', rows: '6'), class: 'col-sm-9') %>
+    <%= f.label :athigherlevel, class: 'control-label col-sm-3'  %>
+    <%= content_tag(:div, f.text_area(:athigherlevel, class: 'form-control', rows: '4', style: ' white-space: pre-wrap;'), class: 'col-sm-9') %>
+<% end -%>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :description, class: 'control-label col-sm-3'  %>
+    <%= content_tag(:div, f.text_area(:description, class: 'form-control', rows: '10', style: ' white-space: pre-wrap;'), class: 'col-sm-9') %>
 <% end -%>
 

@@ -1,8 +1,23 @@
-<div>
-  <%= f.label :title, 'Action' %>
-  <%= f.check_box :_destroy %>
-  <%= f.label :_destroy, 'remove' %>
-  <%= f.text_field :title %>
-  <%= f.label :description, 'Detail' %>
-  <%= f.text_field :description %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= content_tag :div, class: 'form-group' do -%>
+        <%= f.label :title, class: 'control-label col-sm-2' %>
+        <%= content_tag(:div, f.text_field(:title, class: 'form-control'), class: 'col-sm-10') %>
+    <% end %>
+
+    <%= content_tag :div, class: 'form-group' do -%>
+        <%= f.label :description, class: 'control-label col-sm-2' %>
+        <%= content_tag(:div, f.text_area(:description, class: 'form-control', rows: 4), class: 'col-sm-10') %>
+    <% end %>
+
+    <%= content_tag :div, class: 'form-group' do -%>
+        <%= content_tag :div, class: 'col-sm-offset-2 col-sm-10' do %>
+            <%= content_tag :div, class: 'checkbox' do %>
+                <%= f.label :_destroy do %>
+                    <%= f.check_box(:_destroy) %>Remove
+                <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
+  </div>
 </div>

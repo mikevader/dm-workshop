@@ -191,16 +191,27 @@ aside {
 }
 
 /* forms */
-
-input, textarea, select, .uneditable-input {
-  border: 1px solid #bbb;
-  width: 100%;
-  margin-bottom: 15px;
-  @include box_sizing;
+.small-padding {
+  div[class*="col-"] {
+    padding-left: 3px !important;
+    padding-right: 3px !important;
+  }
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.row-no-padding {
+  div[class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
-input {
-  height: auto !important;
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0px;
 }
 
 #error_explanation {
@@ -216,20 +227,6 @@ input {
   .form-control {
     color: $state-danger-text;
   }
-}
-
-.checkbox {
-  margin-top: -10px;
-  margin-bottom: 10px;
-  span {
-    margin-left: 20px;
-    font-weight: normal;
-  }
-}
-
-#session_remember_me {
-  width: auto;
-  margin-left: 0;
 }
 
 /* Users index */

@@ -1,8 +1,8 @@
 <% if logged_in? %>
     <div class="row">
-      <div class="col-sm-4 decorationless-box center-block">
+      <div class="col-sm-4 decorationless-box">
         <%= link_to monsters_path, style: "a:hover {text-docaration:none;}" do %>
-            <div class="card card-size-25x35" style="color: black; border-color: black; background-color: black;">
+            <div class="card card-size-25x35 center-block" style="color: black; border-color: black; background-color: black;">
               <div class="card-title-inlineicon-container">
                 <div class="card-title-inlineicon icon-custom-monster"></div>
               </div>
@@ -78,9 +78,9 @@
             </div>
         <% end %>
       </div>
-      <div class="col-sm-4 decorationless-box center-block">
+      <div class="col-sm-4 decorationless-box">
         <%= link_to items_path do %>
-            <div class="card card-size-25x35" style="color: grey; border-color: grey; background-color: grey;">
+            <div class="card card-size-25x35 center-block" style="color: grey; border-color: grey; background-color: grey;">
               <div class="card-title-inlineicon-container">
                 <div class="card-title-inlineicon icon-custom-armor-heavy"></div>
               </div>
@@ -126,8 +126,8 @@
         <% end %>
       </div>
       <%= link_to spells_path do %>
-          <div class="col-sm-4 decorationless-box center-block">
-            <div class="card card-size-25x35" style="color: maroon; border-color: maroon; background-color: maroon;">
+          <div class="col-sm-4 decorationless-box">
+            <div class="card card-size-25x35 center-block" style="color: maroon; border-color: maroon; background-color: maroon;">
               <div class="card-title-inlineicon-container">
                 <div class="card-title-inlineicon icon-white-book-1"></div>
               </div>

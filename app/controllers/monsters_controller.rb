@@ -1,7 +1,7 @@
 require 'search_engine'
 
 class MonstersController < ApplicationController
-  layout 'card_index', only: [:index]
+  layout :choose_layout
   before_action :logged_in_user, only: [:index, :edit, :update, :create, :destroy]
   before_action :admin_user, only: [:edit, :update, :destroy]
 
@@ -23,30 +23,30 @@ class MonstersController < ApplicationController
   end
 
   def new
-    @monster = current_user.monsters.build
+    @card = current_user.monsters.build
   end
   
   def create
-    @monster = current_user.monsters.build(monster_params)
-    if @monster.save
+    @card = current_user.monsters.build(monster_params)
+    if @card.save
       flash[:success] = "Monster bread!"
       redirect_to monsters_path
     else
-      render 'new'
+      render 'new', layout: 'card_new'
     end
   end
 
   def edit
-    @monster = Monster.find(params[:id])
+    @card = Monster.find(params[:id])
   end
   
   def update
-    @monster = Monster.find(params[:id])
-    if @monster.update_attributes(monster_params)
+    @card = Monster.find(params[:id])
+    if @card.update_attributes(monster_params)
       flash[:success] = "Monster evolved!"
       redirect_to monsters_path
     else
-      render 'edit'
+      render 'edit', layout: 'card_edit'
     end
   end
   
@@ -59,7 +59,11 @@ class MonstersController < ApplicationController
   def preview
     card_data = nil
     ActiveRecord::Base.transaction do
-      monster = Monster.find(params[:id])
+      if Monster.exists?(params[:id])
+        monster = Monster.find(params[:id])
+      else
+        monster = current_user.monsters.build
+      end
       monster.assign_attributes(monster_params)
       card_data = monster.card_data
       raise ActiveRecord::Rollback, "Don't commit preview data changes!"

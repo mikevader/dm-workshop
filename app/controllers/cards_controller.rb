@@ -1,7 +1,7 @@
 require 'search_engine'
 
 class CardsController < ApplicationController
-  layout 'card_index', only: [:index]
+  layout :choose_layout
   before_action :logged_in_user, only: [:index, :edit, :update, :create, :destroy]
   before_action :admin_user, only: [:edit, :update, :destroy]
 
@@ -32,7 +32,7 @@ class CardsController < ApplicationController
       flash[:success] = 'Card created!'
       redirect_to cards_url
     else
-      render 'new'
+      render 'new', layout: 'card_new'
     end
   end
 
@@ -46,7 +46,7 @@ class CardsController < ApplicationController
       flash[:success] = 'Card updated!'
       redirect_to cards_url
     else
-      render 'edit'
+      render 'edit', layout: 'card_edit'
     end
   end
 
@@ -59,7 +59,12 @@ class CardsController < ApplicationController
   def preview
     card_data = nil
     ActiveRecord::Base.transaction do
-      card = Card.find(params[:id])
+      card = nil
+      if Card.exists?(params[:id])
+        card = Card.find(params[:id])
+      else
+        card = current_user.cards.build
+      end
       card.assign_attributes(card_params)
       card_data = card.card_data
       raise ActiveRecord::Rollback, "Don't commit preview data changes!"
