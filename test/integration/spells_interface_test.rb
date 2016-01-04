@@ -6,7 +6,7 @@ class SpellsInterfaceTest < ActionDispatch::IntegrationTest
     @user = users(:michael)
   end
 
-  test "spell interface" do
+  test "spell interface should handle invalid input" do
     log_in_as(@user)
     get spells_path
     # Invalid submission
@@ -14,6 +14,11 @@ class SpellsInterfaceTest < ActionDispatch::IntegrationTest
       post spells_path, spell: { name: "", level: 0, school: "" }
     end
     assert_select 'div#error_explanation'
+  end
+
+  test 'spell interface should handle valid input' do
+    log_in_as(@user)
+    get spells_path
     # Valid submission
     description = "This spell really ties the room together"
     assert_difference 'Spell.count', 1 do
@@ -22,6 +27,11 @@ class SpellsInterfaceTest < ActionDispatch::IntegrationTest
     assert_redirected_to spells_url
     follow_redirect!
     assert_match description, response.body
+  end
+
+  test 'spell interface should handle deletes' do
+    log_in_as(@user)
+    get spells_path
     # Delete a post.
     assert_select 'a[aria-label=?]', 'delete'
     first_spell = @user.spells.paginate(page: 1).first
