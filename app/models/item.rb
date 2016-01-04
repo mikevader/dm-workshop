@@ -36,10 +36,10 @@ class Item < ActiveRecord::Base
 
     data.id = id
     data.name = name
-    data.icon = category.cssclass
+    data.icon = category.cssclass unless category.nil?
     data.color = 'grey'
 
-    data.add_subtitle ["#{category.name}, #{rarity.name}"]
+    data.add_subtitle ["#{category.name}, #{rarity.name}"] unless category.nil? or rarity.nil?
     data.add_rule
     data.add_property ['attunement', attunement.to_s]
     properties.each do |property|

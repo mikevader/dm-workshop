@@ -1,6 +1,6 @@
 @import "mixins/flex";
 
-div.spells {
+div.cards {
   @include flexbox();
   @include align-content(center);
   @include justify-content(center);

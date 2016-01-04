@@ -1,32 +1,19 @@
-<% provide(:title, 'All free form cards') %>
-<div class="row">
-  <div class="col-md-offset-2 col-md-8">
-    <div class="row"><h1>All cards</h1></div>
-    <div class="row">
-      <%= form_tag cards_path, method: 'get', id: "cards_search" do %>
+<% provide(:title, 'Cards') %>
 
-          <%= text_field_tag :search, params[:search], class: "form-control", autocomplete: 'off' %>
-          <%= content_tag :div, @error.html_safe, class: 'alert alert-danger' if @error %>
-          <%= submit_tag "Search", class: "btn btn-primary", name: nil -%>
-          <%= link_to "New", new_card_path, class: 'btn btn-default', role: 'button' -%>
-          <%= link_to "Print", print_cards_path(search: params[:search]), class: 'btn btn-default', target: '_blank', role: 'button' %>
-          </div>
-          <div class="row">
-            <div class="cards">
-              <table class="table table-striped">
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Icon</th>
-                  <th>Color</th>
-                  <th colspan="99"></th>
-                </tr>
-                <%= render @cards %>
-              </table>
+<% provide(:search_path, cards_path) %>
+<% provide(:print_path, print_cards_path(search: params[:search])) %>
+<% provide(:new_path, new_card_path) %>
+<% provide(:page_title, 'Search cards') %>
 
-              <%= render partial: 'modal', collection: @cards, as: :card %>
-            </div>
-          </div>
-      <% end %>
-      </div>
-</div>
+<table class="table table-striped">
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Icon</th>
+    <th>Color</th>
+    <th colspan="99"></th>
+  </tr>
+  <%= render @cards %>
+</table>
+
+<%= render partial: 'modal', collection: @cards, as: :card %>

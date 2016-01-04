@@ -8,7 +8,7 @@ class ItemsInterfaceTest < ActionDispatch::IntegrationTest
     @rarity = rarities(:rare)
   end
 
-  test "items interface" do
+  test "items interface should handle invalid input" do
     log_in_as(@user)
     get items_path
     #assert_select 'div.pagination'
@@ -17,6 +17,11 @@ class ItemsInterfaceTest < ActionDispatch::IntegrationTest
       post items_path, item: { name: "", category_id: nil, rarity_id: nil, attunement: false, description: ""}
     end
     assert_select 'div#error_explanation'
+  end
+
+  test 'items interface should handle valid input' do
+    log_in_as(@user)
+    get items_path
     # Valid submission
     name = "heroblade"
     assert_difference 'Item.count', 1 do
@@ -25,6 +30,12 @@ class ItemsInterfaceTest < ActionDispatch::IntegrationTest
     assert_redirected_to items_url
     follow_redirect!
     assert_match name, response.body
+    assert_select 'td', text: name
+  end
+
+  test 'items interface should handle delete' do
+    log_in_as(@user)
+    get items_path
     # Delete a post.
     assert_select 'a[aria-label=?]', 'delete'
     first_item = Item.paginate(page: 1).first

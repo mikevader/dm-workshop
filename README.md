@@ -18,13 +18,13 @@ The final version is accessible under:
 
 * inscribe spells, which list all relevant attributes including required classes :ballot_box_with_check:
 * create creatures with all stats and as many calculated stats as possible :ballot_box_with_check:
-** an image would be great but not required
-** calculated CR would be great but not required
+    * an image would be great but not required
+    * calculated CR would be great but not required
 * create magic items to be used in shops, loot or treasures :ballot_box_with_check:
-** here the image is a must
+    * here the image is a must
 * search/filter the items :ballot_box_with_check:
-** filter all cleric spells for example :ballot_box_with_check:
-** filter 3rd-level spells and lower :ballot_box_with_check:
+    * filter all cleric spells for example :ballot_box_with_check:
+    * filter 3rd-level spells and lower :ballot_box_with_check:
 * layout all items from a filter as cards for two-sided printing
 * (optional) Multilingual for at least english and german
 
@@ -40,24 +40,14 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
-### Dungeon Master Workshop 0.1 ###
+### Dungeon Master Workshop 0.4 ###
 
-* Create Spells
+* Preview for for cards during creation of new ones
+* All cards share now the same layout for the index and creating or editing.
+* All cards share the same layout for the modal view
+* Layout has been updated and beautified
 
-### Dungeon Master Workshop 0.2
-
-* Create monster cards
-* Create item cards
-* Export cards to PDF
-* Search for monsters, spells and items with all attributes
-* (you don't see it:) Admin interface for manipulating master data and export and import all cards.
-
-### Dungeon Master Workshop 0.3
-
-* Create free form cards
-* Preview for free form cards
-
-### Dungeon Master Workshop 0.4
+### Dungeon Master Workshop 0.4 ###
 
 * Preview for item cards
 * Preview for spell cards
@@ -67,3 +57,20 @@ We had the following releases:
 * Add new card elements
     * bullet
     * dndstats
+
+### Dungeon Master Workshop 0.3 ###
+
+* Create free form cards
+* Preview for free form cards
+
+### Dungeon Master Workshop 0.2 ###
+
+* Create monster cards
+* Create item cards
+* Export cards to PDF
+* Search for monsters, spells and items with all attributes
+* (you don't see it:) Admin interface for manipulating master data and export and import all cards.
+
+### Dungeon Master Workshop 0.1 ###
+
+* Create Spells

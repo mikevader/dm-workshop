@@ -25,4 +25,19 @@ var loaded = function() {
 
     $('body').scrollspy({ target: '#card_view', offset: 0 });
 }
+
+var updateCard = function(event) {
+    var url = $('form.preview_form').attr('action');
+    var params = $('form.preview_form').serialize();
+    $.ajax({
+        url: (/.*\d$/.test(url)) ? url + "/preview/" : url + "/-1/preview/",
+        data: params,
+        method: "PATCH",
+        success: function (data) {
+            $("div.preview_view").html(data)
+        }
+    })
+};
+
+$(document).on('change', 'form.preview_form', updateCard);
 $(document).on("page:load ready", loaded);

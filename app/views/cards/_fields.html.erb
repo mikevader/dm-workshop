@@ -1,13 +1,21 @@
 <%= render 'shared/error_messages', object: f.object %>
 
-<%= f.label :name %>
-<%= f.text_field :name, class: 'form-control' %>
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :name, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_field(:name, class: 'form-control'), class: 'col-sm-9') %>
+<% end %>
 
-<%= f.label :icon %>
-<%= f.text_field :icon, class: 'form-control' %>
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :icon, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_field(:icon, class: 'form-control'), class: 'col-sm-9') %>
+<% end %>
 
-<%= f.label :color %>
-<%= f.text_field :color, class: 'form-control' %>
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :color, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_field(:color, class: 'form-control'), class: 'col-sm-9') %>
+<% end %>
 
-<%= f.label :contents %>
-<%= f.text_area :contents, class: 'form-control', rows: 10, style: ' white-space: pre-wrap;' %>
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :contents, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_area(:contents, class: 'form-control', rows: 10, style: ' white-space: pre-wrap;'), class: 'col-sm-9') %>
+<% end %>

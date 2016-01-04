@@ -162,7 +162,7 @@ class Monster < ActiveRecord::Base
     data.color = 'black'
     data.card_size = '35x50'
 
-    data.add_subtitle ["#{size.capitalize} #{monster_type}, #{alignment}"]
+    data.add_subtitle ["#{size.try(:capitalize)} #{monster_type}, #{alignment}"]
 
     data.add_rule
     data.add_property ['Armor Class', armor_class]

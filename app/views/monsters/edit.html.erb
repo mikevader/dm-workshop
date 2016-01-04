@@ -1,16 +1,2 @@
 <% provide(:title, "Edit monster") %>
-<h1>Update monster <%= @monster.name %></h1>
-
-<div class="row">
-  <div class="col-sm-6">
-    <div class="col-sm-10 col-sm-offset-1">
-      <%= form_for(@monster, html: { class: 'preview_form' }) do |f| %>
-        <%= render 'fields', f: f %>
-        <%= f.submit "Save changes", class: "btn btn-primary" %>
-      <% end %>
-    </div>
-  </div>
-  <div class="col-sm-6 preview_view" id="card_view">
-    <%= render 'shared/card_card', card: @monster.card_data %>
-  </div>
-</div>
+<% provide(:subtitle, "Update monster #{@card.name}") %>

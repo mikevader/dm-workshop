@@ -1,0 +1,46 @@
+
+<% content_for :content do %>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="page-header">
+          <h1><%= yield(:page_title) %></h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-offset-1 col-sm-10">
+          <%= form_tag yield(:search_path), method: 'get', id: "cards_search" do %>
+            <div class="input-group">
+              <%= text_field_tag :search, params[:search], class: "form-control", autocomplete: 'off', placeholder: 'Search for...' %>
+              <div class="input-group-btn">
+                <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+                    <span class="glyphicon glyphicon-search"></span>
+                <% end %>
+                <%= link_to yield(:print_path), class: 'btn btn-default', target: '_blank' do %>
+                    <span class="glyphicon glyphicon-print"></span>
+                <% end %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= content_tag :div, @error.html_safe, class: 'alert alert-danger' if @error %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-offset-1 col-sm-10">
+          <%= yield %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-offset-1 col-sm-10">
+          <div class="form-group">
+            <%= link_to "New", yield(:new_path), class: 'btn btn-default', role: 'button' -%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= render template: 'layouts/application' %>
