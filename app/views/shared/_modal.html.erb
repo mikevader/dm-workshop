@@ -1,10 +1,12 @@
 <% large ||= false %>
 <% modal_size = (large == true) ? 'modal-lg' : 'modal-sm' %>
 
-<div class="modal" id="myModal-<%= index %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal" id="myModal-<%= index %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     xmlns="http://www.w3.org/1999/html">
   <div class="modal-dialog <%= modal_size %>" role="document">
     <div class="modal-content">
       <div class="modal-body">
+        <button type="button" class="btn btn-default btn-circle close-edge" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
         <div class="container-fluid">
           <div class="row">
             <nav class="col-xs-12">
