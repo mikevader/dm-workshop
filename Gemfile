@@ -47,6 +47,7 @@ gem 'rails_admin', '~> 0.8.0'
 
 group :development do
   gem 'guard-livereload', '~> 2.4', require: false
+  gem 'mechanize'
 end
 
 group :development, :test do

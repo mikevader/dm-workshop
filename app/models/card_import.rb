@@ -333,7 +333,7 @@ class CardImport
   end
 
   def self.parse_school_and_level type_string
-    match = /((?<school>\w*) cantrip|(?<level>\d*)[a-z]{2}-level (?<school_with_level>\w*))/.match(type_string)
+    match = /((?<school>\w*) cantrip|(?<level>\d*)[a-z]{0,2}-level (?<school_with_level>\w*))/.match(type_string)
     if match[:level].nil?
       level = 0
       school = match[:school]
