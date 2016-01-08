@@ -4,7 +4,29 @@ module Admin
     before_action :logged_in_user
 
     def new
+      session[:card_import_params] ||= {}
       @card_import = CardImport.new
+      @card_import.current_step = session[:import_step]
+    end
+
+    def create
+      #session[:card_import_params].deep_merge!(params[:card_import].map {|k,v| [k, (v.is_a? String) ? v.encode('UTF-8', :invalid => :replace, :undef => :replace, :replace => '_') : v]}) if params[:card_import]
+      session[:card_import_params].deep_merge!(params[:card_import]) if params[:card_import]
+      @card_import = CardImport.new(session[:card_import_params])
+      @card_import.current_step = session[:import_step]
+      if @card_import.last_step?
+        @card_import.save(current_user)
+      else
+        @card_import.next_step
+      end
+      session[:import_step] = @card_import.current_step
+
+      if @card_import.new_record?(current_user)
+        render :new
+      else
+        session[:import_step] = session[:card_import_params] = nil
+        redirect_to admin_import_path, notice: 'Imported products successfully.'
+      end
     end
 
     def index
@@ -25,15 +47,6 @@ module Admin
           send_data items_xml, filename: 'items.xml', type: 'text/xml'
         else
           render :index
-      end
-    end
-
-    def create
-      @card_import = CardImport.new(params[:card_import])
-      if @card_import.save(current_user)
-        redirect_to admin_import_path, notice: 'Imported products successfully.'
-      else
-        render :new
       end
     end
   end

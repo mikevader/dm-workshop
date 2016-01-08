@@ -14,6 +14,8 @@ class CardImport
   include ActiveModel::Conversion
   include ActiveModel::Validations
 
+  attr_writer :current_step
+
   attr_accessor :monsters_file
   attr_accessor :spells_file
   attr_accessor :items_file
@@ -25,6 +27,27 @@ class CardImport
 
   def persisted?
     false
+  end
+
+  def current_step
+    @current_step || steps.first
+  end
+
+  def steps
+    %w[import select result]
+  end
+
+  def next_step
+    self.current_step = steps[steps.index(current_step) + 1]
+  end
+
+  def last_step?
+    current_step == steps.last
+  end
+
+  def new_record?(user)
+    @user = user
+    imported_spells.map(&:new_record?).any?
   end
 
   def save(user)
@@ -86,34 +109,34 @@ class CardImport
     spells_doc = open_xmlfile(spells_file)
 
     spells_doc.xpath('//cards/spells/spell').map do |spell|
-      name = CardImport.load_element spell, 'name', true, "inscribe spell: %{value}"
+      name = CardImport.load_element '', spell, 'name', true, "inscribe spell: %{value}"
 
       if existing_spell = Spell.find_by_name(name)
         logger.info "skip because %{name} already inscribed"
         next existing_spell
       end
-      type = CardImport.load_element spell, 'type', true
+      type = CardImport.load_element name, spell, 'type', true
       level, school = CardImport.parse_school_and_level type
       logger.debug "    level: #{level}"
       logger.debug "    school: #{school}"
 
-      classes = CardImport.load_element spell, 'classes' do |node, name|
+      classes = CardImport.load_element name, spell, 'classes' do |node, name|
         node.xpath('class').map { |node| node.text }.join(', ')
       end
-      hero_classes = CardImport.load_element spell, 'classes' do |node, name|
+      hero_classes = CardImport.load_element name, spell, 'classes' do |node, name|
         node.xpath('class').map { |node| HeroClass.find_by(name: node.text) }.to_a
       end
-      casting_time = CardImport.load_element(spell, 'castingtime', true)
-      components = CardImport.load_element(spell, 'components', true)
-      range = CardImport.load_element(spell, 'range', true)
-      duration = CardImport.load_element(spell, 'duration', true)
-      concentration = duration.downcase.include? 'concentration'
+      casting_time = CardImport.load_element(name, spell, 'castingtime', true)
+      components = CardImport.load_element(name, spell, 'components', false)
+      range = CardImport.load_element(name, spell, 'range', false)
+      duration = CardImport.load_element(name, spell, 'duration', false)
+      concentration = (duration || '').downcase.include? 'concentration'
       logger.debug "    concentration: #{concentration}"
-      athigherlevel = CardImport.load_element(spell, 'athigherlevel')
-      short_description = CardImport.load_element(spell, 'shortdescription')
-      description = CardImport.load_element(spell, 'description')
+      athigherlevel = CardImport.load_element(name, spell, 'athigherlevel')
+      short_description = CardImport.load_element(name, spell, 'shortdescription')
+      description = CardImport.load_element(name, spell, 'description')
 
-      new_spell = @user.spells.create(name: name, level: level, school: school, description: description)
+      new_spell = @user.spells.build(name: name, level: level, school: school, description: description)
       new_spell.classes = classes
       new_spell.hero_classes << hero_classes
       new_spell.casting_time = casting_time
@@ -135,18 +158,18 @@ class CardImport
   def load_imported_items
     items_doc = open_xmlfile(items_file)
     items_doc.xpath('//cards/items/item').map do |item|
-      name = CardImport.load_element item, 'name', true, "craft item: %{value}"
+      name = CardImport.load_element '', item, 'name', true, "craft item: %{value}"
 
       if existing_item = Item.find_by_name(name)
         logger.info "skip because %{name} already crafted"
         next existing_item
       end
 
-      cite = CardImport.load_element(item, 'cite', true)
-      category = Category.where("lower(name) LIKE ?", CardImport.load_element(item, 'type', true).downcase)
-      rarity = Rarity.where("lower(name) LIKE ?", CardImport.load_element(item, 'rarity', true).downcase)
-      attunement = CardImport.load_element(item, 'requiresAttunement', false) || 'false'
-      description = CardImport.load_element(item, 'description', false)
+      cite = CardImport.load_element(name, item, 'cite', true)
+      category = Category.where("lower(name) LIKE ?", CardImport.load_element(name, item, 'type', true).downcase)
+      rarity = Rarity.where("lower(name) LIKE ?", CardImport.load_element(name, item, 'rarity', true).downcase)
+      attunement = CardImport.load_element(name, item, 'requiresAttunement', false) || 'false'
+      description = CardImport.load_element(name, item, 'description', false)
 
 
       new_item = @user.items.create(name: name)
@@ -171,16 +194,16 @@ class CardImport
     end
 
     monsters_doc.xpath('//cards/monsters/monster').map do |monster|
-      name = CardImport.load_element monster, 'name', true, "bread monster: %{value}"
+      name = CardImport.load_element '', monster, 'name', true, "bread monster: %{value}"
 
       if existing_monster = Monster.find_by_name(name)
         logger.info "skip because %{name} already bread"
         next existing_monster
       end
 
-      type = CardImport.load_element monster, 'type', true
-      cite = CardImport.load_element monster, 'cite', false
-      description = CardImport.load_element monster, 'description', false
+      type = CardImport.load_element name,  monster, 'type', true
+      cite = CardImport.load_element name, monster, 'cite', false
+      description = CardImport.load_element name, monster, 'description', false
 
       proficiency = nil
       size = nil
@@ -204,37 +227,37 @@ class CardImport
       senses = []
 
       monster.xpath('stats').each do |stat|
-        proficiency = CardImport.load_element stat, 'proficiency', true
-        size = CardImport.load_element stat, 'size', true
-        ac = CardImport.load_element stat, 'ac', true
-        hp = CardImport.load_element stat, 'hp', true
-        speed = CardImport.load_element stat, 'speed', true
-        strength = CardImport.load_element stat, 'abilities/@str', true
-        dexterity = CardImport.load_element stat, 'abilities/@dex', true
-        constitution = CardImport.load_element stat, 'abilities/@con', true
-        intelligence = CardImport.load_element stat, 'abilities/@int', true
-        wisdom = CardImport.load_element stat, 'abilities/@wis', true
-        charisma = CardImport.load_element stat, 'abilities/@cha', true
-        languages = CardImport.load_element stat, 'languages', false
-        cr = CardImport.load_element stat, 'cr', false
+        proficiency = CardImport.load_element name, stat, 'proficiency', true
+        size = CardImport.load_element name, stat, 'size', true
+        ac = CardImport.load_element name, stat, 'ac', true
+        hp = CardImport.load_element name, stat, 'hp', true
+        speed = CardImport.load_element name, stat, 'speed', true
+        strength = CardImport.load_element name, stat, 'abilities/@str', true
+        dexterity = CardImport.load_element name, stat, 'abilities/@dex', true
+        constitution = CardImport.load_element name, stat, 'abilities/@con', true
+        intelligence = CardImport.load_element name, stat, 'abilities/@int', true
+        wisdom = CardImport.load_element name, stat, 'abilities/@wis', true
+        charisma = CardImport.load_element name, stat, 'abilities/@cha', true
+        languages = CardImport.load_element name, stat, 'languages', false
+        cr = CardImport.load_element name, stat, 'cr', false
 
-        savingThrows = CardImport.load_element stat, 'savingThrows/@*' do |node, name|
+        savingThrows = CardImport.load_element name, stat, 'savingThrows/@*' do |node, name|
           node.map { |ability| ability.name }
         end
 
-        skills = CardImport.load_element stat, 'skills' do |node, name|
+        skills = CardImport.load_element name, stat, 'skills' do |node, name|
           node.xpath('skill/@name').map { |node| node.text }
         end
-        dmgResistance = CardImport.load_element stat, 'dmgResistance/*' do |node, name|
+        dmgResistance = CardImport.load_element name, stat, 'dmgResistance/*' do |node, name|
           node.map { |dmg| dmg.name }
         end
-        dmgImmunity = CardImport.load_element stat, 'dmgImmunity/*' do |node, name|
+        dmgImmunity = CardImport.load_element name, stat, 'dmgImmunity/*' do |node, name|
           node.map { |dmg| dmg.name }
         end
-        condImmunity = CardImport.load_element stat, 'condImmunity/*' do |node, name|
+        condImmunity = CardImport.load_element name, stat, 'condImmunity/*' do |node, name|
           node.map { |cond| cond.name }
         end
-        senses = CardImport.load_element stat, 'senses/*' do |node, name|
+        senses = CardImport.load_element name, stat, 'senses/*' do |node, name|
           node.map { |sense| "#{sense.xpath('@name')}: #{sense.text}" }
         end
       end
@@ -309,11 +332,11 @@ class CardImport
     end
   end
 
-  def self.load_element(node, name, required = false, description = "    %{name}: %{value}")
+  def self.load_element(for_card, node, name, required = false, description = "    %{name}: %{value}")
     name.downcase!
     value_node = node.xpath(name)
     if value_node.empty?
-      raise RuntimeError, "element #{name} is required." if required
+      raise RuntimeError, "element #{name} is required for #{for_card}." if required
       return nil
     end
 
@@ -324,7 +347,7 @@ class CardImport
     end
 
     if value.empty?
-      raise RuntimeError, "element #{name} is required." if required
+      raise RuntimeError, "element #{name} is required for #{for_card}." if required
       value = nil
     end
 
