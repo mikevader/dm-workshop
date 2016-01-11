@@ -1,1 +1,18 @@
 <h2>Select</h2>
+
+<table>
+  <tr>
+    <th>Import</th>
+    <th>Existing</th>
+    <th>Valid</th>
+    <th>Name</th>
+  </tr>
+  <% @card_import.selects.each do |spell| %>
+      <tr>
+        <td><%= "#{spell[:selected]}" %></td>
+        <td><%= "#{spell[:id].nil? == false}" %></td>
+        <td><%= "#{spell[:spell].valid?}" %></td>
+        <td><%= "#{spell[:spell].name}" %></td>
+      </tr>
+  <% end %>
+</table>

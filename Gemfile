@@ -32,6 +32,7 @@ gem 'fog', '~> 1.36.0'
 gem 'will_paginate', '~> 3.0.7'
 gem 'bootstrap-will_paginate', '~> 0.0.10'
 gem 'nokogiri', '~> 1.6.6.4'
+gem 'activerecord-session_store', '~> 0.1.2'
 
 gem 'treetop', '~> 1.6.3'
 gem 'net-ssh', '~> 3.0.1'

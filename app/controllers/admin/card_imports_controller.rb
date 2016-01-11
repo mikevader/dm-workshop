@@ -5,26 +5,34 @@ module Admin
 
     def new
       session[:card_import_params] ||= {}
-      @card_import = CardImport.new
+      @card_import = CardImport.new current_user
       @card_import.current_step = session[:import_step]
     end
 
     def create
-      #session[:card_import_params].deep_merge!(params[:card_import].map {|k,v| [k, (v.is_a? String) ? v.encode('UTF-8', :invalid => :replace, :undef => :replace, :replace => '_') : v]}) if params[:card_import]
-      session[:card_import_params].deep_merge!(params[:card_import]) if params[:card_import]
-      @card_import = CardImport.new(session[:card_import_params])
-      @card_import.current_step = session[:import_step]
+      if params[:card_import]
+        @card_import = CardImport.new(current_user, params[:card_import])
+
+        @card_import.load_spells
+
+        session[:card_import_selects] = @card_import.selects
+      else
+        @card_import = CardImport.new(current_user)
+        @card_import.current_step = session[:import_step]
+        @card_import.selects = session[:card_import_selects]
+      end
+
       if @card_import.last_step?
-        @card_import.save(current_user)
+        @card_import.save
       else
         @card_import.next_step
       end
       session[:import_step] = @card_import.current_step
 
-      if @card_import.new_record?(current_user)
+      if @card_import.new_record?
         render :new
       else
-        session[:import_step] = session[:card_import_params] = nil
+        session[:import_step] = session[:card_import_selects] = nil
         redirect_to admin_import_path, notice: 'Imported products successfully.'
       end
     end

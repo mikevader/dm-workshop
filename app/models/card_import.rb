@@ -20,9 +20,12 @@ class CardImport
   attr_accessor :spells_file
   attr_accessor :items_file
   attr_accessor :references_file
+  attr_accessor :selects
 
-  def initialize(attributes = {})
+  def initialize(user, attributes = {})
+    @user = user
     attributes.each { |name, value| send("#{name}=", value) }
+    @selects = []
   end
 
   def persisted?
@@ -34,7 +37,7 @@ class CardImport
   end
 
   def steps
-    %w[import select result]
+    %w[import select]
   end
 
   def next_step
@@ -45,13 +48,26 @@ class CardImport
     current_step == steps.last
   end
 
-  def new_record?(user)
-    @user = user
-    imported_spells.map(&:new_record?).any?
+  def new_record?
+    selects.map {|i| i[:spell].new_record?}.any?
   end
 
-  def save(user)
-    @user = user
+  def save
+    spells = selects.map {|i| i[:spell]}
+    if spells.map(&:valid?).all?
+      spells.each(&:save!)
+      true
+    else
+      spells.each_with_index do |spell, index|
+        spell.errors.full_messages.each do |message|
+          errors.add :base, "Row #{index+1}: #{message}"
+        end
+      end
+      return false
+    end
+
+    return true
+
     unless spells_file.nil?
       if imported_spells.map(&:valid?).all?
         imported_spells.each(&:save!)
@@ -95,6 +111,11 @@ class CardImport
     end
   end
 
+  def load_spells
+    imported_spells.each do |spell|
+      selects << {selected: false, id: spell.id, spell: spell}
+    end
+  end
 
   private
   def logger

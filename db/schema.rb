@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151227114252) do
+ActiveRecord::Schema.define(version: 20160110222722) do
 
   create_table "actions", force: :cascade do |t|
     t.string   "title"
@@ -54,6 +54,16 @@ ActiveRecord::Schema.define(version: 20151227114252) do
   end
 
   add_index "hero_classes", ["name"], name: "index_hero_classes_on_name"
+
+  create_table "hero_classes_spells", force: :cascade, id: false do |t|
+    t.integer  "spell_id"
+    t.integer  "hero_class_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "hero_classes_spells", ["hero_class_id"], name: "index_hero_classes_spells_on_hero_class_id"
+  add_index "hero_classes_spells", ["spell_id"], name: "index_hero_classes_spells_on_spell_id"
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
@@ -134,6 +144,16 @@ ActiveRecord::Schema.define(version: 20151227114252) do
 
   add_index "rarities", ["name"], name: "index_rarities_on_name"
 
+  create_table "sessions", force: :cascade do |t|
+    t.string   "session_id", null: false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
+
   create_table "skills", force: :cascade do |t|
     t.string   "name"
     t.string   "ability"
@@ -142,17 +162,6 @@ ActiveRecord::Schema.define(version: 20151227114252) do
   end
 
   add_index "skills", ["name"], name: "index_skills_on_name"
-
-  create_table "spellclasses", force: :cascade do |t|
-    t.integer  "spell_id"
-    t.integer  "hero_class_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  add_index "spellclasses", ["hero_class_id"], name: "index_spellclasses_on_hero_class_id"
-  add_index "spellclasses", ["spell_id", "hero_class_id"], name: "index_spellclasses_on_spell_id_and_hero_class_id", unique: true
-  add_index "spellclasses", ["spell_id"], name: "index_spellclasses_on_spell_id"
 
   create_table "spells", force: :cascade do |t|
     t.string   "name"

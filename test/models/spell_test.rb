@@ -41,10 +41,17 @@ class SpellTest < ActiveSupport::TestCase
     assert_not @spell.valid?
   end
 
+  test "classes should be unique" do
+    @spell.hero_classes << hero_classes(:gunslinger)
+    @spell.hero_classes << hero_classes(:gunslinger)
+
+    assert_not @spell.valid?
+  end
+
   test "order should be alphabetically" do
     assert_equal spells(:bane), Spell.first
   end
-  
+
   test "should follow and unfollow a user" do
     fireball = spells(:fireball)
     bane = spells(:bane)
