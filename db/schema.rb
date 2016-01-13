@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20160110222722) do
 
   add_index "hero_classes", ["name"], name: "index_hero_classes_on_name"
 
-  create_table "hero_classes_spells", force: :cascade, id: false do |t|
+  create_table "hero_classes_spells", force: :cascade do |t|
     t.integer  "spell_id"
     t.integer  "hero_class_id"
     t.datetime "created_at",    null: false

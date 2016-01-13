@@ -20,12 +20,13 @@ class CardImport
   attr_accessor :spells_file
   attr_accessor :items_file
   attr_accessor :references_file
-  attr_accessor :selects
+  attr_accessor :imports
 
   def initialize(user, attributes = {})
     @user = user
     attributes.each { |name, value| send("#{name}=", value) }
-    @selects = []
+    @imports = []
+    @spells = []
   end
 
   def persisted?
@@ -49,16 +50,16 @@ class CardImport
   end
 
   def new_record?
-    selects.map {|i| i[:spell].new_record?}.any?
+    @spells.empty? || @spells.map {|spell| spell.new_record?}.any?
   end
 
   def save
-    spells = selects.map {|i| i[:spell]}
-    if spells.map(&:valid?).all?
-      spells.each(&:save!)
+    @spells = imports.select{|import_card| import_card.import?}.map {|import_card| create_card(@user, import_card)}
+    if @spells.map(&:valid?).all?
+      @spells.each(&:save!)
       true
     else
-      spells.each_with_index do |spell, index|
+      @spells.each_with_index do |spell, index|
         spell.errors.full_messages.each do |message|
           errors.add :base, "Row #{index+1}: #{message}"
         end
@@ -111,9 +112,9 @@ class CardImport
     end
   end
 
-  def load_spells
+  def import_spells
     imported_spells.each do |spell|
-      selects << {selected: false, id: spell.id, spell: spell}
+      imports << spell
     end
   end
 
@@ -132,9 +133,10 @@ class CardImport
     spells_doc.xpath('//cards/spells/spell').map do |spell|
       name = CardImport.load_element '', spell, 'name', true, "inscribe spell: %{value}"
 
+      id = -1
       if existing_spell = Spell.find_by_name(name)
-        logger.info "skip because %{name} already inscribed"
-        next existing_spell
+        logger.info "Card %{name} already inscribed"
+        id = existing_spell.id
       end
       type = CardImport.load_element name, spell, 'type', true
       level, school = CardImport.parse_school_and_level type
@@ -142,11 +144,9 @@ class CardImport
       logger.debug "    school: #{school}"
 
       classes = CardImport.load_element name, spell, 'classes' do |node, name|
-        node.xpath('class').map { |node| node.text }.join(', ')
+        node.xpath('class').map { |node| node.text }
       end
-      hero_classes = CardImport.load_element name, spell, 'classes' do |node, name|
-        node.xpath('class').map { |node| HeroClass.find_by(name: node.text) }.to_a
-      end
+
       casting_time = CardImport.load_element(name, spell, 'castingtime', true)
       components = CardImport.load_element(name, spell, 'components', false)
       range = CardImport.load_element(name, spell, 'range', false)
@@ -157,19 +157,55 @@ class CardImport
       short_description = CardImport.load_element(name, spell, 'shortdescription')
       description = CardImport.load_element(name, spell, 'description')
 
-      new_spell = @user.spells.build(name: name, level: level, school: school, description: description)
-      new_spell.classes = classes
-      new_spell.hero_classes << hero_classes
-      new_spell.casting_time = casting_time
-      new_spell.components = components
-      new_spell.range = range
-      new_spell.duration = duration
-      new_spell.concentration = concentration
-      new_spell.short_description = short_description
-      new_spell.athigherlevel = athigherlevel
-      new_spell.description = description
-      new_spell
+      import_card = ImportCard.new id
+      import_card.type = :spell
+      import_card.name = name
+      import_card.attributes.level = level
+      import_card.attributes.school = school
+      import_card.attributes.description = description
+      import_card.attributes.classes = classes
+      import_card.attributes.casting_time = casting_time
+      import_card.attributes.components = components
+      import_card.attributes.range = range
+      import_card.attributes.duration = duration
+      import_card.attributes.concentration = concentration
+      import_card.attributes.short_description = short_description
+      import_card.attributes.athigherlevel = athigherlevel
+      import_card.attributes.description = description
+      import_card
     end
+  end
+
+  def create_card(user, import_card)
+    case import_card.type
+      when :spell
+        create_spell(user, import_card)
+    end
+  end
+
+  def create_spell(user, import_card)
+    new_spell = user.spells.create(
+        name: import_card.name,
+        level: import_card.attributes.level,
+        school: import_card.attributes.school,
+        description: import_card.attributes.description)
+
+    new_spell.classes = import_card.attributes.classes
+
+    hero_classes = import_card.attributes.classes.map do |hero_class|
+      HeroClass.find_by(name: hero_class)
+    end
+
+    new_spell.hero_classes << hero_classes
+    new_spell.casting_time = import_card.attributes.casting_time
+    new_spell.components = import_card.attributes.components
+    new_spell.range = import_card.attributes.range
+    new_spell.duration = import_card.attributes.duration
+    new_spell.concentration = import_card.attributes.concentration
+    new_spell.short_description = import_card.attributes.short_description
+    new_spell.athigherlevel = import_card.attributes.athigherlevel
+    new_spell.description = import_card.attributes.description
+    new_spell
   end
 
   def imported_items
@@ -182,7 +218,7 @@ class CardImport
       name = CardImport.load_element '', item, 'name', true, "craft item: %{value}"
 
       if existing_item = Item.find_by_name(name)
-        logger.info "skip because %{name} already crafted"
+        logger.info "Card %{name} already exists."
         next existing_item
       end
 

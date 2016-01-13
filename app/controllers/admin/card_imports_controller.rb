@@ -4,22 +4,23 @@ module Admin
     before_action :logged_in_user
 
     def new
-      session[:card_import_params] ||= {}
+      session[:card_import_params] ||= []
       @card_import = CardImport.new current_user
       @card_import.current_step = session[:import_step]
+      @card_import.imports = session[:card_import_selects]
     end
 
     def create
       if params[:card_import]
         @card_import = CardImport.new(current_user, params[:card_import])
 
-        @card_import.load_spells
+        @card_import.import_spells
 
-        session[:card_import_selects] = @card_import.selects
+        session[:card_import_selects] = @card_import.imports
       else
         @card_import = CardImport.new(current_user)
         @card_import.current_step = session[:import_step]
-        @card_import.selects = session[:card_import_selects]
+        @card_import.imports = session[:card_import_selects]
       end
 
       if @card_import.last_step?

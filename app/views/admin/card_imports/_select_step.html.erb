@@ -3,16 +3,16 @@
 <table>
   <tr>
     <th>Import</th>
-    <th>Existing</th>
+    <th>Id</th>
     <th>Valid</th>
     <th>Name</th>
   </tr>
-  <% @card_import.selects.each do |spell| %>
+  <%= f.fields_for :imports do |ff| %>
       <tr>
-        <td><%= "#{spell[:selected]}" %></td>
-        <td><%= "#{spell[:id].nil? == false}" %></td>
-        <td><%= "#{spell[:spell].valid?}" %></td>
-        <td><%= "#{spell[:spell].name}" %></td>
+        <td><%= ff.check_box :import %></td>
+        <td><%= ff.text_field :id, disabled: true %></td>
+        <td><%= ' -- ' %></td>
+        <td><%= ff.text_field :name, disabled: true %></td>
       </tr>
   <% end %>
 </table>
