@@ -10,6 +10,10 @@
             <span class="glyphicon glyphicon-pencil"></span>
         <% end -%>
       </td>
+      <td><%= link_to duplicate_monster_path(monster), method: :post, 'aria-label' => 'duplicate' do -%>
+            <span class="glyphicon glyphicon-duplicate"></span>
+        <% end -%>
+      </td>
       <td><%= link_to monster, method: :delete, data: { confirm: "You sure?" }, 'aria-label' => 'delete' do -%>
             <span class="glyphicon glyphicon-remove"></span>
         <% end -%>

@@ -27,8 +27,8 @@ class MonstersController < ApplicationController
   end
   
   def create
-    @card = current_user.monsters.build(monster_params)
-    if @card.save
+    @card = current_user.monsters.create(monster_required_params)
+    if @card.update_attributes(monster_params)
       flash[:success] = "Monster bread!"
       redirect_to monsters_path
     else
@@ -36,8 +36,15 @@ class MonstersController < ApplicationController
     end
   end
 
-  def edit
-    @card = Monster.find(params[:id])
+  def duplicate
+    @card = Monster.find(params[:id]).replicate
+    @card.name = @card.name + " (copy)"
+    if @card.save
+      flash[:success] = "Monster cloned!"
+      redirect_to monsters_path
+    else
+      render 'new', layout: 'card_new'
+    end
   end
   
   def update
@@ -56,6 +63,11 @@ class MonstersController < ApplicationController
     redirect_to monsters_url
   end
 
+  def edit
+    @card = Monster.find(params[:id])
+  end
+
+
   def preview
     card_data = nil
     ActiveRecord::Base.transaction do
@@ -72,8 +84,11 @@ class MonstersController < ApplicationController
   end
 
   private
+  def monster_required_params
+    params.require(:monster).permit(:name, :cite, :size, :monster_type, :alignment, :armor_class, :hit_points, :speed, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma)
+  end
   def monster_params
-    params.require(:monster).permit(:name, :cite, :size, :monster_type, :alignment, :armor_class, :hit_points, :speed,  :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :senses, :languages, :challenge, :description, :bonus, :monsters_skills, :skills, :saving_throws => [], :damage_vulnerabilities => [], :damage_resistances => [], :damage_immunities => [], :cond_immunities => [], :monsters_skills_ids => [], :skill_ids => [], actions_attributes: [:id, :title, :description, :_destroy], traits_attributes: [:id, :title, :description, :_destroy])
+    params.require(:monster).permit(:name, :cite, :size, :monster_type, :alignment, :armor_class, :hit_points, :speed, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :senses, :languages, :challenge, :description, :bonus, :monsters_skills, :skills, :saving_throws => [], :damage_vulnerabilities => [], :damage_resistances => [], :damage_immunities => [], :cond_immunities => [], :monsters_skills_ids => [], :skill_ids => [], actions_attributes: [:id, :title, :description, :_destroy], traits_attributes: [:id, :title, :description, :_destroy])
   end
   
   def logged_in_user

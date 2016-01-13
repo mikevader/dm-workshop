@@ -122,7 +122,26 @@ class Monster < ActiveRecord::Base
       all
     end
   end
-  
+
+  def replicate
+    replica = dup
+
+    skills.each do |skill|
+      replica.skills << skill
+    end
+
+    traits.each do |trait|
+      replica.traits << trait.dup
+    end
+
+    actions.each do |action|
+      replica.actions << action.dup
+    end
+
+
+    replica
+  end
+
   def strength_modifier
     calc_modifier_for strength
   end
