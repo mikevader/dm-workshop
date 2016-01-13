@@ -40,7 +40,13 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
-### Dungeon Master Workshop 0.4 ###
+### Dungeon Master Workshop 0.6 ###
+
+* Close button for modal views for better usability on mobile screens
+* Scraper for spells on http://dnd-spells.com
+* Duplication action for Monsters
+
+### Dungeon Master Workshop 0.5 ###
 
 * Preview for for cards during creation of new ones
 * All cards share now the same layout for the index and creating or editing.
