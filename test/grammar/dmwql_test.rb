@@ -42,6 +42,14 @@ class DmwqlTest < ActiveSupport::TestCase
     assert_equal "name LIKE 'Bane' OR level = 5", @parser.parse("name = 'Bane' oR level = 5", @builder)
   end
 
+  test 'should work with several string searches ORed' do
+    assert_equal "name LIKE 'Bane' OR name LIKE 'Quark'", @parser.parse("name = 'Bane' OR name = 'Quark'", @builder)
+    assert_equal "name LIKE 'Bane' OR name LIKE 'Quark'", @parser.parse("name = 'Bane' OR name = Quark", @builder)
+    assert_equal "name LIKE 'Bane' OR name LIKE 'Quark'", @parser.parse("name = Bane OR name = Quark", @builder)
+    assert_equal "name LIKE '%Bane%' OR name LIKE '%Quark%'", @parser.parse("name ~ Bane OR name ~ Quark", @builder)
+  end
+
+
   test 'should work with groups' do
     assert_equal "name LIKE 'Bane' AND (level = 5 OR school LIKE 'necromancy')",
       @parser.parse("name = 'Bane' and ( level = 5 or school = 'necromancy')", @builder)
