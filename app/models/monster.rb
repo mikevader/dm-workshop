@@ -138,7 +138,6 @@ class Monster < ActiveRecord::Base
       replica.actions << action.dup
     end
 
-
     replica
   end
 

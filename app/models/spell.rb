@@ -31,6 +31,16 @@ class Spell < ActiveRecord::Base
     end
   end
 
+  def replicate
+    replica = dup
+
+    hero_classes.each do |hero_class|
+      replica.hero_classes << hero_class
+    end
+
+    replica
+  end
+
   def card_data
     data = CardData.new
 

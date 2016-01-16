@@ -152,6 +152,22 @@ footer {
   }
 }
 
+/* card index */
+table {
+  .last {
+    width: 1px;
+    white-space: nowrap;
+  }
+
+  tr ul.actions {
+    margin: 0px;
+    li {
+      display: inline;
+      margin-right: 5px;
+    }
+  }
+}
+
 
 /* sidebar */
 

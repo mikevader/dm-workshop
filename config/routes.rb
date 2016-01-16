@@ -24,7 +24,10 @@ Rails.application.routes.draw do
     resources :card_imports
   end
 
-  post      'monsters/:id/duplicate'      =>  'monsters#duplicate',    as: :duplicate_monster
+  post      'cards/:id/duplicate'         =>  'cards#duplicate',      as: :duplicate_card
+  post      'items/:id/duplicate'         =>  'items#duplicate',      as: :duplicate_item
+  post      'monsters/:id/duplicate'      =>  'monsters#duplicate',   as: :duplicate_monster
+  post      'spells/:id/duplicate'        =>  'spells#duplicate',     as: :duplicate_spell
 
   resources :users
   resources :spells

@@ -31,6 +31,16 @@ class Item < ActiveRecord::Base
     end
   end
 
+  def replicate
+    replica = dup
+
+    properties.each do |property|
+      replica.properties << property.dup
+    end
+
+    replica
+  end
+
   def card_data
     data = CardData.new
 

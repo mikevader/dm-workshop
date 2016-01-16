@@ -1,22 +1,26 @@
 <tr>
   <td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal-<%= monster_counter %>">
-  o
-</button></td>
+    o
+  </button></td>
   <td><%= monster.name %></td>
   <td><%= "#{monster.size} #{monster.monster_type}" %></td>
   <td><%= monster.challenge %></td>
-  <% if admin_user? %>
-      <td><%= link_to edit_monster_path(monster), 'aria-label' => 'edit' do -%>
-            <span class="glyphicon glyphicon-pencil"></span>
-        <% end -%>
-      </td>
-      <td><%= link_to duplicate_monster_path(monster), method: :post, 'aria-label' => 'duplicate' do -%>
-            <span class="glyphicon glyphicon-duplicate"></span>
-        <% end -%>
-      </td>
-      <td><%= link_to monster, method: :delete, data: { confirm: "You sure?" }, 'aria-label' => 'delete' do -%>
-            <span class="glyphicon glyphicon-remove"></span>
-        <% end -%>
-      </td>
-  <% end %>
+  <td class="last">
+    <% if admin_user? %>
+        <ul class="actions">
+          <li><%= link_to edit_monster_path(monster), 'aria-label' => 'edit' do -%>
+                <span class="glyphicon glyphicon-pencil"></span>
+            <% end -%>
+          </li>
+          <li><%= link_to duplicate_monster_path(monster), method: :post, 'aria-label' => 'duplicate' do -%>
+                <span class="glyphicon glyphicon-duplicate"></span>
+            <% end -%>
+          </li>
+          <li><%= link_to monster, method: :delete, data: { confirm: "You sure?" }, 'aria-label' => 'delete' do -%>
+                <span class="glyphicon glyphicon-remove"></span>
+            <% end -%>
+          </li>
+        </ul>
+    <% end %>
+  </td>
 </tr>
