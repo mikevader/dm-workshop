@@ -3,18 +3,18 @@ class Monster < ActiveRecord::Base
   has_and_belongs_to_many :skills
   has_many :traits, dependent: :destroy
   has_many :actions, dependent: :destroy
-  
+
   accepts_nested_attributes_for :actions, reject_if: proc { |action| action['title'].blank? }, allow_destroy: true
   accepts_nested_attributes_for :traits, reject_if: proc { |action| action['title'].blank? }, allow_destroy: true
 
   #accepts_nested_attributes_for :skills, reject_if: proc { |skill|
   #  skill['name'].blank?
   #  }, allow_destroy: true
-  
+
   default_scope -> { order(name: :asc) }
-  
+
   #scope :with_saving_throw, lambda { |saving_throw| {:conditions => "saving_throws_mask & #{2**ABILITIES.index(saving_throw.to_s)} > 0"} }
-  
+
   validates :user_id, presence: true
   validates :name, presence: true, length: { maximum: 50 }, uniqueness: { case_sensitive: false }
   validates :bonus, presence: true
@@ -28,7 +28,7 @@ class Monster < ActiveRecord::Base
   validates :intelligence, presence: true, numericality: { only_integer: true, greater_than: 0, less_than: 100}
   validates :wisdom, presence: true, numericality: { only_integer: true, greater_than: 0, less_than: 100}
   validates :charisma, presence: true, numericality: { only_integer: true, greater_than: 0, less_than: 100}
-  
+
   # str   1
   # dex   2
   # con   4
@@ -36,7 +36,7 @@ class Monster < ActiveRecord::Base
   # wis  16
   # cha  32
   ABILITIES = %w[str dex con int wis cha]
-  
+
   # acid =        1
   # bludgeoning   2
   # cold          4
@@ -51,7 +51,7 @@ class Monster < ActiveRecord::Base
   # slashing   2048
   # thunder    4096
   DAMAGE_TYPES = %w[acid bludgeoning cold fire force lightning necrotic piercing poison psychic radiant slashing thunder]
-  
+
   # exhaustion        1
   # blinded           2
   # charmed           4
@@ -68,7 +68,7 @@ class Monster < ActiveRecord::Base
   # stunned        8192
   # unconscious   16384
   CONDITIONS = %w[exhaustion blinded charmed deafened frightened grappled incapacitated invisible paralyzed petrified poisoned prone restrained stunned unconscious]
-  
+
   def saving_throws=(saving_throws)
     self.saving_throws_mask = (saving_throws & ABILITIES).map { |r| 2**ABILITIES.index(r) }.sum
   end
@@ -108,7 +108,7 @@ class Monster < ActiveRecord::Base
     if search
       builder = new_builder
       search = Parser.new.parse(search, builder)
-      
+
       query = self
       builder.joins.each do |join|
         query = query.joins(join)
@@ -165,10 +165,50 @@ class Monster < ActiveRecord::Base
     calc_modifier_for charisma
   end
 
-  CR_XP = [100, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 7200, 8400, 10000, 11500, 13000, 15000, 18000, 20000, 22000, 25000, 33000, 41000, 50000, 62000, 75000, 90000, 105000, 120000, 135000, 155000]
-  def self.print_challenge_rating cr
-    xp = CR_XP[cr].to_s.gsub(/(\d)(?=\d{3}+(?:\.|$))(\d{3}\..*)?/,'\1\'\2')
-    "#{cr} (#{xp} XP)"
+  CR_XP = {
+      0 => 0,
+      0.125 => 25,
+      0.25 => 50,
+      0.5 => 100,
+      1 => 200,
+      2 => 450,
+      3 => 700,
+      4 => 1100,
+      5 => 1800,
+      6 => 2300,
+      7 => 2900,
+      8 => 3900,
+      9 => 5000,
+      10 => 5900,
+      11 => 7200,
+      12 => 8400,
+      13 => 10000,
+      14 => 11500,
+      15 => 13000,
+      16 => 15000,
+      17 => 18000,
+      18 => 20000,
+      19 => 22000,
+      20 => 25000,
+      21 => 33000,
+      22 => 41000,
+      23 => 50000,
+      24 => 62000,
+      25 => 75000,
+      26 => 90000,
+      27 => 105000,
+      28 => 120000,
+      29 => 135000,
+      30 => 155000}
+  def self.xp_for_cr cr
+    cr = cr.to_i if cr.denominator == 1
+    return CR_XP[cr].to_s.gsub(/(\d)(?=\d{3}+(?:\.|$))(\d{3}\..*)?/,'\1\'\2')
+  end
+
+  def self.challenge_pretty cr
+    return '' if cr.nil?
+    return cr.to_r.to_s unless cr.denominator == 1
+    return cr.to_i.to_s
   end
 
   def card_data
@@ -213,7 +253,7 @@ class Monster < ActiveRecord::Base
 
     data.add_property ['Senses', senses] unless senses.blank?
     data.add_property ['Languages', languages] unless languages.blank?
-    data.add_property ['Challenge', Monster.print_challenge_rating(challenge)] unless challenge.blank?
+    data.add_property ['Challenge', "#{Monster.challenge_pretty(challenge)} (#{Monster.xp_for_cr(challenge)} XP)"] unless challenge.blank?
 
     data.add_rule
 
@@ -230,7 +270,7 @@ class Monster < ActiveRecord::Base
 
     return data
   end
-  
+
   private
   def self.new_builder
     builder = SearchBuilder.new
@@ -243,7 +283,7 @@ class Monster < ActiveRecord::Base
     builder.add_field 'cha', 'monsters.charisma'
     return builder
   end
-  
+
   def calc_modifier_for ability = 10
     return (ability - 10) / 2
   end

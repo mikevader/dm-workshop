@@ -87,7 +87,7 @@ class CardImportTest < ActiveSupport::TestCase
     assert_equal 10, goblin.intelligence
     assert_equal 8, goblin.wisdom
     assert_equal 8, goblin.charisma
-    assert_equal 1, goblin.challenge
+    assert_equal 0.25, goblin.challenge
     assert_equal 'Common, Goblin', goblin.languages
 
     skills_expected = %w(Stealth Perception)

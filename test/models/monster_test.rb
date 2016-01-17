@@ -167,6 +167,19 @@ class MonsterTest < ActiveSupport::TestCase
   end
 
   test 'should calculate XP from challenge rating' do
-    assert_equal '9 (5\'000 XP)', Monster.print_challenge_rating(9)
+    assert_equal '5\'000', Monster.xp_for_cr(9)
+    assert_equal '100', Monster.xp_for_cr(0.5)
+    assert_equal '200', Monster.xp_for_cr(1)
+    assert_equal '200', Monster.xp_for_cr(1.0)
+    assert_equal '50', Monster.xp_for_cr(0.25)
+    assert_equal '25', Monster.xp_for_cr(0.125)
+    assert_equal '155\'000', Monster.xp_for_cr(30)
+    assert_equal '18\'000', Monster.xp_for_cr(17)
+    assert_equal '0', Monster.xp_for_cr(0)
+  end
+
+  test 'should print pretty challenge rating' do
+    assert_equal '9', Monster.challenge_pretty(9)
+    assert_equal '1/2', Monster.challenge_pretty(0.5)
   end
 end
