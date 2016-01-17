@@ -201,6 +201,7 @@ class Monster < ActiveRecord::Base
       29 => 135000,
       30 => 155000}
   def self.xp_for_cr cr
+    cr = cr.to_i if cr.denominator == 1
     return CR_XP[cr].to_s.gsub(/(\d)(?=\d{3}+(?:\.|$))(\d{3}\..*)?/,'\1\'\2')
   end
 

@@ -24,7 +24,6 @@ class CardExportTest < ActiveSupport::TestCase
     org_file.diff(new_file, added: true, removed: true) do |change,node|
       case node.parent.path
         when '/cards'
-        when '/cards/monsters/monster[1]/stats/cr'
         when '/cards/monsters/monster[2]/stats/skills/skill[1]'
         when '/cards/monsters/monster[2]/stats/skills/skill[2]'
         when '/cards/monsters/monster[2]/traits/trait[1]'

@@ -170,6 +170,7 @@ class MonsterTest < ActiveSupport::TestCase
     assert_equal '5\'000', Monster.xp_for_cr(9)
     assert_equal '100', Monster.xp_for_cr(0.5)
     assert_equal '200', Monster.xp_for_cr(1)
+    assert_equal '200', Monster.xp_for_cr(1.0)
     assert_equal '50', Monster.xp_for_cr(0.25)
     assert_equal '25', Monster.xp_for_cr(0.125)
     assert_equal '155\'000', Monster.xp_for_cr(30)
