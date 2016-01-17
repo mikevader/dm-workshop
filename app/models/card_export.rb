@@ -76,7 +76,7 @@ class CardExport
                   }
                 end
                 xml.languages monster.languages
-                xml.cr Monster.print_challenge_rating(monster.challenge)
+                xml.cr "#{Monster.challenge_pretty(monster.challenge)} (#{Monster.xp_for_cr(monster.challenge)} XP)"
               }
 
               unless monster.traits.empty?

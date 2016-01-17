@@ -4,7 +4,7 @@
   </button></td>
   <td><%= monster.name %></td>
   <td><%= "#{monster.size} #{monster.monster_type}" %></td>
-  <td><%= monster.challenge %></td>
+  <td><%= Monster.challenge_pretty(monster.challenge) %></td>
   <td class="last">
     <% if admin_user? %>
         <ul class="actions">
