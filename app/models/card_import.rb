@@ -311,6 +311,7 @@ class CardImport
         charisma = CardImport.load_element name, stat, 'abilities/@cha', true
         languages = CardImport.load_element name, stat, 'languages', false
         cr = CardImport.load_element name, stat, 'cr', false
+        cr = Rational(%r{([0-9\/]+)( \([\d']+ XP\))?}.match(cr)[1]).to_f
 
         savingThrows = CardImport.load_element name, stat, 'savingThrows/@*' do |node, name|
           node.map { |ability| ability.name }
