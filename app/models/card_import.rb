@@ -20,6 +20,7 @@ class CardImport
   attr_accessor :spells_file
   attr_accessor :items_file
   attr_accessor :references_file
+  attr_accessor :cards_file
   attr_accessor :imports
 
 
@@ -27,7 +28,7 @@ class CardImport
     @user = user
     attributes.each { |name, value| send("#{name}=", value) }
     @imports = []
-    @spells = []
+    @cards = []
   end
 
   def persisted?
@@ -51,65 +52,46 @@ class CardImport
   end
 
   def new_record?
-    @spells.empty? || @spells.map {|spell| spell.new_record?}.any?
+    @cards.empty? || @cards.map {|card| card.new_record?}.any?
   end
 
   def save
-    @spells = imports.select{|import_card| import_card.import?}.map {|import_card| create_card(@user, import_card)}
-    if @spells.map(&:valid?).all?
-      @spells.each(&:save!)
+    @cards = imports.select{|import_card| import_card.import?}.map {|import_card| create_new_card(@user, import_card)}
+    if @cards.map(&:valid?).all?
+      @cards.each(&:save!)
       true
     else
-      @spells.each_with_index do |spell, index|
-        spell.errors.full_messages.each do |message|
+      @cards.each_with_index do |card, index|
+        card.errors.full_messages.each do |message|
           errors.add :base, "Row #{index+1}: #{message}"
         end
       end
       return false
     end
+  end
 
-    return true
+  def import_files
+    import_monsters unless monsters_file.nil?
+    import_spells unless spells_file.nil?
+    import_items unless items_file.nil?
+    import_cards unless cards_file.nil?
+  end
 
-    unless spells_file.nil?
-      if imported_spells.map(&:valid?).all?
-        imported_spells.each(&:save!)
-        true
-      else
-        imported_spells.each_with_index do |spell, index|
-          spell.errors.full_messages.each do |message|
-            errors.add :base, "Row #{index+1}: #{message}"
-          end
-        end
-        return false
-      end
+  def import_monsters
+    imported_monsters.each do |monster|
+      imports << monster
     end
+  end
 
-    unless items_file.nil?
-      if imported_items.map(&:valid?).all?
-        imported_items.each(&:save!)
-        true
-      else
-        imported_items.each_with_index do |item, index|
-          item.errors.full_messages.each do |message|
-            errors.add :base, "Row #{index+1}: #{message}"
-          end
-        end
-        return false
-      end
+  def import_items
+    imported_items.each do |item|
+      imports << item
     end
+  end
 
-    unless monsters_file.nil?
-      if imported_monsters.map(&:valid?).all?
-        imported_monsters.each(&:save!)
-        true
-      else
-        imported_monsters.each_with_index do |monster, index|
-          monster.errors.full_messages.each do |message|
-            errors.add :base, "Row #{index+1}: #{message}"
-          end
-        end
-        return false
-      end
+  def import_cards
+    imported_items.each do |item|
+      imports << item
     end
   end
 
@@ -132,9 +114,8 @@ class CardImport
     spells_doc = open_xmlfile(spells_file)
 
     spells_doc.xpath('//cards/spells/spell').map do |spell|
-      name = CardImport.load_element '', spell, 'name', true, "inscribe spell: %{value}"
+      name = CardImport.load_element '', spell, 'name', true, "inscribe card: %{value}"
 
-      id = -1
       if existing_spell = Spell.find_by_name(name)
         logger.info "Card %{name} already inscribed"
         id = existing_spell.id
@@ -158,9 +139,7 @@ class CardImport
       short_description = CardImport.load_element(name, spell, 'shortdescription')
       description = CardImport.load_element(name, spell, 'description')
 
-      import_card = ImportCard.new id
-      import_card.import = true if id < 0
-      import_card.type = :spell
+      import_card = ImportCard.new(id, :spell)
       import_card.name = %r{^([a-zA-Z'’/\- ]*)( \(Ritual\))?.*$}.match(name)[1]
 
       import_card.attributes.ritual = name.downcase.include? 'ritual'
@@ -180,27 +159,32 @@ class CardImport
     end
   end
 
-  def create_card(user, import_card)
+  def create_new_card(user, import_card)
     case import_card.type
       when :spell
         create_spell(user, import_card)
+      when :monster
+        create_monster(user, import_card)
+      when :item
+        create_item(user, import_card)
+      when :card
+        create_card(user, import_card)
     end
   end
 
   def create_spell(user, import_card)
-
-    if import_card.id > 0
-      new_spell = Spell.find(import_card.id)
-      new_spell.name = import_card.name
-      new_spell.level = import_card.attributes.level
-      new_spell.school = import_card.attributes.school
-      new_spell.description = import_card.attributes.description
-    else
+    if import_card.new_record?
       new_spell = user.spells.create(
           name: import_card.name,
           level: import_card.attributes.level,
           school: import_card.attributes.school,
           description: import_card.attributes.description)
+    else
+      new_spell = Spell.find(import_card.id)
+      new_spell.name = import_card.name
+      new_spell.level = import_card.attributes.level
+      new_spell.school = import_card.attributes.school
+      new_spell.description = import_card.attributes.description
     end
 
     hero_classes = import_card.attributes.classes.map do |hero_class|
@@ -230,7 +214,7 @@ class CardImport
 
       if existing_item = Item.find_by_name(name)
         logger.info "Card %{name} already exists."
-        next existing_item
+        id = existing_item.id
       end
 
       cite = CardImport.load_element(name, item, 'cite', true)
@@ -239,16 +223,34 @@ class CardImport
       attunement = CardImport.load_element(name, item, 'requiresAttunement', false) || 'false'
       description = CardImport.load_element(name, item, 'description', false)
 
+      import_card = ImportCard.new(id, :item)
 
-      new_item = @user.items.create(name: name)
-      new_item.category = category.take!
-      new_item.rarity = rarity.take!
-      new_item.attunement = attunement.to_b
-      new_item.description = description
-      new_item.cite = cite
-      new_item
+      import_card.name = name
+      import_card.attributes.cite = cite
+      import_card.attributes.category = category.take!
+      import_card.attributes.rarity = rarity.take!
+      import_card.attributes.attunement = attunement.to_b
+      import_card.attributes.description = description
+      import_card
     end
   end
+
+  def create_item(user, import_card)
+    if import_card.new_record?
+      new_item = user.items.create(name: import_card.name)
+    else
+      new_item = Item.find(import_card.id)
+      new_item.name = import_card.name
+    end
+
+    new_item.cite = import_card.attributes.cite
+    new_item.category = import_card.attributes.category
+    new_item.rarity = import_card.attributes.rarity
+    new_item.attunement = import_card.attributes.attunement
+    new_item.description = import_card.attributes.description
+    new_item
+  end
+
 
   def imported_monsters
     @imported_monsters ||= load_imported_monsters
@@ -266,7 +268,7 @@ class CardImport
 
       if existing_monster = Monster.find_by_name(name)
         logger.info "skip because %{name} already bread"
-        next existing_monster
+        id = existing_monster.id
       end
 
       type = CardImport.load_element name,  monster, 'type', true
@@ -289,6 +291,7 @@ class CardImport
 
       savingThrows = []
       skills = []
+      dmgVulnerability = []
       dmgResistance = []
       dmgImmunity = []
       condImmunity = []
@@ -315,6 +318,9 @@ class CardImport
 
         skills = CardImport.load_element name, stat, 'skills' do |node, name|
           node.xpath('skill/@name').map { |node| node.text }
+        end
+        dmgVulnerability = CardImport.load_element name, stat, 'dmgVulnerability/*' do |node, name|
+          node.map { |dmg| dmg.name }
         end
         dmgResistance = CardImport.load_element name, stat, 'dmgResistance/*' do |node, name|
           node.map { |dmg| dmg.name }
@@ -350,45 +356,131 @@ class CardImport
       end
       logger.debug "    actions: #{actions}"
 
-      new_monster = @user.monsters.create(name: name)
-      new_monster.bonus = proficiency
-      new_monster.cite = cite
-      new_monster.size = size
-      new_monster.monster_type = type
-      new_monster.armor_class = ac
-      new_monster.hit_points = hp
-      new_monster.speed = speed
-      new_monster.strength = strength
-      new_monster.dexterity = dexterity
-      new_monster.constitution = constitution
-      new_monster.intelligence = intelligence
-      new_monster.wisdom = wisdom
-      new_monster.charisma = charisma
-      new_monster.languages = languages
-      new_monster.challenge = cr
+      import_card = ImportCard.new(id, :monster)
 
-      new_monster.saving_throws = savingThrows unless savingThrows.nil?
-      new_monster.skills << skills.map {|skill| Skill.where("lower(name) LIKE '#{skill.downcase}'")} unless skills.nil?
-      new_monster.senses = senses.join(', ') unless senses.nil?
+      import_card.name = name
+      import_card.attributes.bonus = proficiency
+      import_card.attributes.cite = cite
+      import_card.attributes.size = size
+      import_card.attributes.monster_type = type
+      import_card.attributes.armor_class = ac
+      import_card.attributes.hit_points = hp
+      import_card.attributes.speed = speed
+      import_card.attributes.strength = strength
+      import_card.attributes.dexterity = dexterity
+      import_card.attributes.constitution = constitution
+      import_card.attributes.intelligence = intelligence
+      import_card.attributes.wisdom = wisdom
+      import_card.attributes.charisma = charisma
+      import_card.attributes.languages = languages
+      import_card.attributes.challenge = cr
 
-      new_monster.damage_resistances = dmgResistance unless dmgResistance.nil?
-      new_monster.damage_immunities = dmgImmunity unless dmgImmunity.nil?
-      new_monster.cond_immunities = condImmunity unless condImmunity.nil?
+      import_card.attributes.saving_throws = savingThrows
+      import_card.attributes.skills = skills
+      import_card.attributes.senses = senses.join(', ') unless senses.nil?
 
-      new_monster.description = description
-      new_monster.save
+      import_card.attributes.damage_vulnerabilities = dmgVulnerability
+      import_card.attributes.damage_resistances = dmgResistance
+      import_card.attributes.damage_immunities = dmgImmunity
+      import_card.attributes.cond_immunities = condImmunity
 
-      traits.each do |trait|
-        new_trait = new_monster.traits.build title: trait.title, description: trait.description
-        new_trait.save
-      end
+      import_card.attributes.description = description
+      import_card.attributes.traits = traits
+      import_card.attributes.actions = actions
 
-      actions.each do |action|
-        new_action = new_monster.actions.build title: action.title, description: action.description
-        new_action.save
-      end
-      new_monster
+      import_card
     end
+  end
+
+  def create_monster(user, import_card)
+    if import_card.new_record?
+      new_monster = user.monsters.create(name: import_card.name)
+    else
+      new_monster = Monster.find(import_card.id)
+      new_monster.name = import_card.name
+    end
+
+    new_monster.bonus = import_card.attributes.bonus
+    new_monster.cite = import_card.attributes.cite
+    new_monster.size = import_card.attributes.size
+    new_monster.monster_type = import_card.attributes.monster_type
+    new_monster.armor_class = import_card.attributes.armor_class
+    new_monster.hit_points = import_card.attributes.hit_points
+    new_monster.speed = import_card.attributes.speed
+    new_monster.strength = import_card.attributes.strength
+    new_monster.dexterity = import_card.attributes.dexterity
+    new_monster.constitution = import_card.attributes.constitution
+    new_monster.intelligence = import_card.attributes.intelligence
+    new_monster.wisdom = import_card.attributes.wisdom
+    new_monster.charisma = import_card.attributes.charisma
+    new_monster.languages = import_card.attributes.languages
+    new_monster.challenge = import_card.attributes.challenge
+
+    new_monster.saving_throws = import_card.attributes.saving_throws unless import_card.attributes.saving_throws.nil?
+    new_monster.skills << import_card.attributes.skills.map {|skill| Skill.where("lower(name) LIKE '#{skill.downcase}'")} unless import_card.attributes.skills.nil?
+    new_monster.senses = import_card.attributes.senses
+
+    new_monster.damage_vulnerabilities = import_card.attributes.damage_vulnerabilities unless import_card.attributes.damage_vulnerabilities.nil?
+    new_monster.damage_resistances = import_card.attributes.damage_resistances unless import_card.attributes.damage_resistances.nil?
+    new_monster.damage_immunities = import_card.attributes.damage_immunities unless import_card.attributes.damage_immunities.nil?
+    new_monster.cond_immunities = import_card.attributes.cond_immunities unless import_card.attributes.cond_immunities.nil?
+
+    new_monster.description = import_card.attributes.description
+    new_monster.save!
+
+    import_card.attributes.traits.each do |trait|
+      new_monster.traits.create title: trait.title, description: trait.description
+    end
+
+    import_card.attributes.actions.each do |action|
+      new_monster.actions.create title: action.title, description: action.description
+    end
+
+    new_monster
+  end
+
+  def imported_cards
+    @imported_card ||= load_imported_cards
+  end
+
+  def load_imported_cards
+    cards_doc = open_xmlfile(cards_file)
+    cards_doc.xpath('//cards/cards/card').map do |card|
+      name = CardImport.load_element '', card, 'name', true, "craft card: %{value}"
+
+      if existing_card = Card.find_by_name(name)
+        id = existing_card.id
+      end
+
+      color = CardImport.load_element name, card, 'color', false
+      icon = CardImport.load_element name, card, 'icon', false
+      badges = CardImport.load_element name, card, 'badges', false
+      contents = CardImport.load_element name, card, 'contents', false
+
+      import_card = ImportCard.new(id, :card)
+      import_card.name = name
+      import_card.attributes.color = color
+      import_card.attributes.icon = icon
+      import_card.attributes.badges = badges
+      import_card.attributes.contents = contents
+      import_card
+    end
+  end
+
+  def create_card(user, import_card)
+    if import_card.new_record?
+      card = user.cards.create(name: import_card.name)
+    else
+      card = Card.find(import_card.id)
+      card.name = import_card.name
+    end
+
+    card.color = import_card.attributes.color
+    card.icon = import_card.attributes.icon
+    card.badges = import_card.attributes.badges
+    card.contents = import_card.attributes.contents
+
+    card
   end
 
   def open_xmlfile(file)

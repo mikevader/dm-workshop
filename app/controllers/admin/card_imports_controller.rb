@@ -14,7 +14,7 @@ module Admin
       if params[:card_import]
         @card_import = CardImport.new(current_user, params[:card_import])
 
-        @card_import.import_spells
+        @card_import.import_files
 
         session[:card_import_selects] = @card_import.imports
       else

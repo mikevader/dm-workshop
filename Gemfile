@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2.5'
 # Use bootstrap with sass
-gem 'bootstrap-sass', '~> 3.3.5.1'
+gem 'bootstrap-sass', '~> 3.3.6'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0.4'
 # Use Uglifier as compressor for JavaScript assets
@@ -14,11 +14,11 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 4.0.5'
+gem 'jquery-rails', '~> 4.1.0'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks', '~> 2.5.3'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.3.2'
+gem 'jbuilder', '~> 2.4.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.1', group: :doc
 
@@ -28,10 +28,10 @@ gem 'bcrypt', '~> 3.1.10'
 gem 'faker', '~> 1.6.0'
 gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.3.6'
-gem 'fog', '~> 1.36.0'
-gem 'will_paginate', '~> 3.0.7'
+gem 'fog', '~> 1.37.0'
+gem 'will_paginate', '~> 3.1.0'
 gem 'bootstrap-will_paginate', '~> 0.0.10'
-gem 'nokogiri', '~> 1.6.6.4'
+gem 'nokogiri', '~> 1.6.7.1'
 gem 'activerecord-session_store', '~> 0.1.2'
 
 gem 'treetop', '~> 1.6.3'
@@ -49,6 +49,9 @@ gem 'rails_admin', '~> 0.8.0'
 group :development do
   gem 'guard-livereload', '~> 2.4', require: false
   gem 'mechanize'
+
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 3.0.0'
 end
 
 group :development, :test do
@@ -58,18 +61,15 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
 
 group :test do
-  gem 'minitest-reporters', '~> 1.0.5'
+  gem 'minitest-reporters', '~> 1.1.7'
   gem 'mini_backtrace',     '~> 0.1.3'
   gem 'guard'
-  gem 'guard-minitest',     '~> 2.3.1'
+  gem 'guard-minitest',     '~> 2.4.4'
   gem 'terminal-notifier-guard'
   gem 'nokogiri-diff'
 end

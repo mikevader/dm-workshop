@@ -4,7 +4,7 @@ class SpellTest < ActiveSupport::TestCase
   
   def setup
     @user = users(:michael)
-    @spell = @user.spells.build(name: "Speak with Plants", level: 3, school: "transmutation")
+    @spell = @user.spells.create(name: "Speak with Plants", level: 3, school: "transmutation")
   end
   
   test "should be valid" do
@@ -42,10 +42,12 @@ class SpellTest < ActiveSupport::TestCase
   end
 
   test "classes should be unique" do
-    @spell.hero_classes << hero_classes(:gunslinger)
-    @spell.hero_classes << hero_classes(:gunslinger)
+    assert_difference '@spell.hero_classes.count', 1 do
+      @spell.hero_classes << hero_classes(:gunslinger)
+      @spell.hero_classes << hero_classes(:gunslinger)
+    end
 
-    assert_not @spell.valid?
+    assert @spell.valid?
   end
 
   test "order should be alphabetically" do
