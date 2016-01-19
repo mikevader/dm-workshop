@@ -1,6 +1,6 @@
 <h1>Import from cards</h1>
 
-<%= form_for [:admin, @card_import] do |f| %>
+<%= form_for [:admin, @card_import], enforce_utf8: true do |f| %>
     <% if @card_import.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@card_import.errors.count, "error") %> prohibited this import from completing:</h2>
@@ -12,21 +12,10 @@
         </div>
     <% end %>
 
-    <div class="field">
-      <%= f.label :monsters_file %>
-      <%= f.file_field :monsters_file %>
+    <%= render "#{@card_import.current_step}_step", f: f %>
+
+    <div class="buttons">
+      <%= f.submit "Import", class: 'btn btn-primary' %>
+      <%= link_to 'Cancel', 'card_imports', method: :delete, class: 'btn btn-default' %>
     </div>
-    <div class="field">
-      <%= f.label :spells_file %>
-      <%= f.file_field :spells_file %>
-    </div>
-    <div class="field">
-      <%= f.label :items_file %>
-      <%= f.file_field :items_file %>
-    </div>
-    <div class="field">
-      <%= f.label :references_file %>
-      <%= f.file_field :references_file %>
-    </div>
-    <div class="buttons"><%= f.submit "Import" %></div>
 <% end %>

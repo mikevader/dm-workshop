@@ -4,7 +4,47 @@ module Admin
     before_action :logged_in_user
 
     def new
-      @card_import = CardImport.new
+      session[:card_import_params] ||= []
+      @card_import = CardImport.new current_user
+      @card_import.current_step = session[:import_step]
+      @card_import.imports = session[:card_import_selects]
+    end
+
+    def create
+      if params[:card_import]
+        @card_import = CardImport.new(current_user, params[:card_import])
+
+        @card_import.import_files
+
+        session[:card_import_selects] = @card_import.imports
+      else
+        @card_import = CardImport.new(current_user)
+        @card_import.current_step = session[:import_step]
+        @card_import.imports = session[:card_import_selects]
+
+        if params[:imports]
+
+          params[:imports].zip(@card_import.imports) .each do |imp, card|
+            card.import = imp[:import]
+            #card.id = imp[:id]
+            card.name = imp[:name]
+          end
+        end
+      end
+
+      if @card_import.last_step?
+        @card_import.save
+      else
+        @card_import.next_step
+      end
+      session[:import_step] = @card_import.current_step
+
+      if @card_import.new_record?
+        render :new
+      else
+        session[:import_step] = session[:card_import_selects] = nil
+        redirect_to admin_import_path, notice: 'Imported products successfully.'
+      end
     end
 
     def index
@@ -28,13 +68,10 @@ module Admin
       end
     end
 
-    def create
-      @card_import = CardImport.new(params[:card_import])
-      if @card_import.save(current_user)
-        redirect_to admin_import_path, notice: 'Imported products successfully.'
-      else
-        render :new
-      end
+    def destroy
+      session[:import_step] = nil
+      session[:card_import_selects] = nil
+      redirect_to admin_import_path
     end
   end
 end

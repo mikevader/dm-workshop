@@ -1,6 +1,6 @@
 class CardExport
 
-  def initialize()
+  def initialize
   end
 
   def load_monsters(monsters)
@@ -163,6 +163,36 @@ class CardExport
               xml.description {
                 xml << "\n#{'  '*4}#{item.description}\n#{'  '*3}"
               }
+            }
+          end
+        }
+      }
+    end
+
+    builder.to_xml(indent: 2)
+  end
+
+=begin
+    t.string   "name"
+    t.string   "icon"
+    t.string   "color"
+    t.text     "contents"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.string   "badges"
+=end
+  def load_cards(cards)
+    builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
+      xml.cards {
+        xml.cards {
+          cards.each do |card|
+            xml.card {
+              xml.name card.name
+              xml.icon card.icon
+              xml.color card.color
+              xml.badges card.badges
+              xml.contents card.contents
             }
           end
         }

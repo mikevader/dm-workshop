@@ -1,0 +1,19 @@
+<h2>Select</h2>
+
+<table class="table table-striped table-condensed">
+  <tr>
+    <th><label class="checkbox-inline"><%= check_box_tag 'selectAll', 'selectAll', false %></label></th>
+    <th>Id</th>
+    <th>Valid</th>
+    <th>Name</th>
+  </tr>
+  <%# fields_for :imports, @card_import.imports do |ff| %>
+    <% @card_import.imports.each do |import| %>
+      <tr>
+        <td><label class="checkbox-inline"><%= check_box_tag 'imports[][import]', 'true', import.import? %></label></td>
+        <td><label><%= import.id %></label></td>
+        <td><%= ' -- ' %></td>
+        <td><%= text_field_tag 'imports[][name]', import.name, class: 'form-control' %></td>
+      </tr>
+    <% end %>
+</table>

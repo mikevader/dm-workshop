@@ -1,3 +1,5 @@
+require 'test_helper'
+
 class CardImportTest < ActiveSupport::TestCase
 
   setup do
@@ -7,11 +9,12 @@ class CardImportTest < ActiveSupport::TestCase
   test 'should import obgam' do
     path = File.join(fixture_path, 'monsters.xml')
     file = Rack::Test::UploadedFile.new(path, 'text/xml')
-    importer = CardImport.new monsters_file: file
-    importer.save(@user)
+    importer = CardImport.new(@user, monsters_file: file)
+    importer.import_monsters
+    importer.save
 
-    obgam = Monster.find_by_name 'Obgam Sohn des Brogar'
-
+    obgam = Monster.find_by_name('Obgam Sohn des Brogar')
+    assert obgam
 
     assert_equal 'Humanoid (dwarf)', obgam.monster_type
     assert_equal 'Medium', obgam.size
@@ -69,11 +72,12 @@ class CardImportTest < ActiveSupport::TestCase
   test 'should import goblin' do
     path = File.join(fixture_path, 'monsters.xml')
     file = Rack::Test::UploadedFile.new(path, 'text/xml')
-    importer = CardImport.new monsters_file: file
-    importer.save(@user)
+    importer = CardImport.new(@user, monsters_file: file)
+    importer.import_monsters
+    importer.save
 
     goblin = Monster.find_by_name 'Goblin'
-
+    assert goblin
 
     assert_equal 'Goblin', goblin.monster_type
     assert_equal 'huge', goblin.size
