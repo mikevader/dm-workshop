@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160110222722) do
+ActiveRecord::Schema.define(version: 20160118195324) do
 
   create_table "actions", force: :cascade do |t|
     t.string   "title"
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 20160110222722) do
     t.string   "skills"
     t.string   "senses"
     t.string   "languages"
-    t.integer  "challenge"
+    t.float    "challenge"
     t.text     "description"
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
@@ -175,11 +175,12 @@ ActiveRecord::Schema.define(version: 20160110222722) do
     t.text     "short_description"
     t.text     "description"
     t.integer  "user_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.string   "picture"
     t.string   "athigherlevel"
     t.boolean  "concentration"
+    t.boolean  "ritual",            default: false
   end
 
   add_index "spells", ["level"], name: "index_spells_on_level"

@@ -22,6 +22,7 @@ class CardImport
   attr_accessor :references_file
   attr_accessor :imports
 
+
   def initialize(user, attributes = {})
     @user = user
     attributes.each { |name, value| send("#{name}=", value) }
@@ -158,8 +159,11 @@ class CardImport
       description = CardImport.load_element(name, spell, 'description')
 
       import_card = ImportCard.new id
+      import_card.import = true if id < 0
       import_card.type = :spell
-      import_card.name = name
+      import_card.name = %r{^([a-zA-Z'’/\- ]*)( \(Ritual\))?.*$}.match(name)[1]
+
+      import_card.attributes.ritual = name.downcase.include? 'ritual'
       import_card.attributes.level = level
       import_card.attributes.school = school
       import_card.attributes.description = description
@@ -184,19 +188,26 @@ class CardImport
   end
 
   def create_spell(user, import_card)
-    new_spell = user.spells.create(
-        name: import_card.name,
-        level: import_card.attributes.level,
-        school: import_card.attributes.school,
-        description: import_card.attributes.description)
 
-    new_spell.classes = import_card.attributes.classes
+    if import_card.id > 0
+      new_spell = Spell.find(import_card.id)
+      new_spell.name = import_card.name
+      new_spell.level = import_card.attributes.level
+      new_spell.school = import_card.attributes.school
+      new_spell.description = import_card.attributes.description
+    else
+      new_spell = user.spells.create(
+          name: import_card.name,
+          level: import_card.attributes.level,
+          school: import_card.attributes.school,
+          description: import_card.attributes.description)
+    end
 
     hero_classes = import_card.attributes.classes.map do |hero_class|
       HeroClass.find_by(name: hero_class)
     end
-
     new_spell.hero_classes << hero_classes
+    new_spell.ritual = import_card.attributes.ritual
     new_spell.casting_time = import_card.attributes.casting_time
     new_spell.components = import_card.attributes.components
     new_spell.range = import_card.attributes.range

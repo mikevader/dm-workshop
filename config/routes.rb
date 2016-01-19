@@ -18,9 +18,10 @@ Rails.application.routes.draw do
   patch     'spells/:id/preview'    => 'spells#preview'
 
   namespace :admin do
-    root                  'admin#home',     as: :admin
-    get     'import'   => 'card_imports#new'
-    get     'export'   => 'card_imports#index'
+    root                      'admin#home',     as: :admin
+    get     'import'       => 'card_imports#new'
+    get     'export'       => 'card_imports#index'
+    delete  'card_imports' => 'card_imports#destroy'
     resources :card_imports
   end
 

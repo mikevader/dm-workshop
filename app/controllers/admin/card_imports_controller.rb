@@ -21,6 +21,15 @@ module Admin
         @card_import = CardImport.new(current_user)
         @card_import.current_step = session[:import_step]
         @card_import.imports = session[:card_import_selects]
+
+        if params[:imports]
+
+          params[:imports].zip(@card_import.imports) .each do |imp, card|
+            card.import = imp[:import]
+            #card.id = imp[:id]
+            card.name = imp[:name]
+          end
+        end
       end
 
       if @card_import.last_step?
@@ -57,6 +66,12 @@ module Admin
         else
           render :index
       end
+    end
+
+    def destroy
+      session[:import_step] = nil
+      session[:card_import_selects] = nil
+      redirect_to admin_import_path
     end
   end
 end
