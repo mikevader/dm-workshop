@@ -51,7 +51,7 @@ group :development do
   gem 'mechanize'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 3.0.0'
+  gem 'web-console', '~> 2.2'
 end
 
 group :development, :test do
