@@ -1,6 +1,6 @@
 class Spell < ActiveRecord::Base
   belongs_to :user
-  has_and_belongs_to_many :hero_classes, -> { distinct }, uniq: true
+  has_and_belongs_to_many :hero_classes, -> { distinct }, uniq: true, order: :name
 
   default_scope -> { order(name: :asc) }
   mount_uploader :picture, PictureUploader
