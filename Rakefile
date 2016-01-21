@@ -99,7 +99,24 @@ task :scrape do
 end
 
 
-# (prepare) heroku plugins:install heroku-pipelines
+task :prepare_dev_from_stage do
+  ruby "heroku"
+  #sh %x(heroku pg:backups capture --app dmw-staging)
+  #backup_url = sh %{heroku pg:backups public-url --app dmw-staging | cat}
+  #puts "Backup file can be found under: #{backup_url}"
+
+  #sh "heroku pg:backups restore '#{backup_url}' DATABASE --app dmw-development  --confirm dmw-development"
+  #sh "heroku run rake db:migrate --app dmw-development"
+end
+
+
+# (prepare heroku to have pipeline tools) heroku plugins:install heroku-pipelines
+
+task :release_from_stage do
+  `heroku pg:backups capture --app dmw`
+  `heroku pipelines:promote --app dmw-staging`
+  `heroku run rake db:migrate --app dmw`
+end
 
 # heroku pg:backups capture --app dmw
 
