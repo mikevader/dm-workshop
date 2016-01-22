@@ -192,7 +192,9 @@ class CardExport
               xml.icon card.icon
               xml.color card.color
               xml.badges card.badges
-              xml.contents card.contents
+              xml.contents {
+                xml << "\n#{'  '*4}#{card.contents}\n#{'  '*3}"
+              }
             }
           end
         }

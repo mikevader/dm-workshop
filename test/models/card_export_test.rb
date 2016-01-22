@@ -87,7 +87,6 @@ class CardExportTest < ActiveSupport::TestCase
   end
 
   test 'export cards' do
-    skip 'Not implemented yet!'
     input_path = File.join(fixture_path, 'cards.xml')
     file = Rack::Test::UploadedFile.new(input_path, 'text/xml')
     importer = CardImport.new(@user, cards_file: file)
@@ -95,7 +94,7 @@ class CardExportTest < ActiveSupport::TestCase
     importer.save
 
     exporter = CardExport.new
-    xml = exporter.load_cards(Card.where("name = 'Frenzy Rage' or name = 'Reckless Attack'"))
+    xml = exporter.load_cards(Card.where("name = 'Frenzy' or name = 'Wand of Iseth'"))
     org_file = Nokogiri::XML(File.open(input_path))
     new_file = Nokogiri::XML(xml)
 

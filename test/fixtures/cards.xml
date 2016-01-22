@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cards>
+  <cards>
+    <card>
+      <name>Frenzy</name>
+      <icon>icon-white-book</icon>
+      <color>indigo</color>
+      <badges>icon-class-barbarian</badges>
+      <contents>
+        subtitle | Barbarian feature
+        rule
+        fill | 1
+        text | You can go into a frenzy when you rage. If you do so, for the duration of your rage you can make a single melee weapon attack as a bonus action on each of your turns after this one. When your rage ends, you suffer one level of exhaustion.
+        fill | 2
+      </contents>
+    </card>
+    <card>
+      <name>Wand of Iseth</name>
+      <icon>icon-custom-staff</icon>
+      <color>grey</color>
+      <badges></badges>
+      <contents>
+        subtitle | Staff, Legendary
+        rule
+        bullet | +2 to modifier
+        bullet | Some spell slots
+        bullet | Some protection or melee bonus
+      </contents>
+    </card>
+  </cards>
+</cards>

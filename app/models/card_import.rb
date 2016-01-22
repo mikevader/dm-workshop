@@ -90,7 +90,7 @@ class CardImport
   end
 
   def import_cards
-    imported_items.each do |item|
+    imported_cards.each do |item|
       imports << item
     end
   end
