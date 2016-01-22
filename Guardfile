@@ -18,6 +18,12 @@ guard :minitest, spring: true, all_on_start: false do
   watch(%r{^app/helpers/(.*?)_helper\.rb$}) do |matches|
     integration_tests(matches[1])
   end
+  watch(%r{^app/grammar/(.*?).treetop$}) do |matches|
+    "test/grammar/#{matches[1]}_test.rb"
+  end
+  watch('app/grammar/parser.rb') do
+    'test/grammar/dmwql_test.rb'
+  end
   watch('app/views/layouts/application.html.erb') do
     'test/integration/site_layout_test.rb'
   end

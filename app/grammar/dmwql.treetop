@@ -1,12 +1,14 @@
 
 grammar Dmwql
   rule search
-    first:expression second:( s union:('AND'i / 'OR'i) s next:expression )* <Search>
+    first:expression second:( s union:union_keyword s next:expression )* <Search>
   end
   
   rule expression
+    (!union_keyword
     query:query <Expression>
     / '(' s search:search s ')' <Expression>
+    )
   end
   
   rule query
@@ -33,6 +35,10 @@ grammar Dmwql
   
   rule group
     '(' s literal second:(s ',' s literal )* s ')' <Group>
+  end
+
+  rule union_keyword
+    'AND'i / 'OR'i
   end
   
   rule string_literal
@@ -90,9 +96,10 @@ grammar Dmwql
   rule alphanumeric
     alpha / [0-9]
   end
-  
+
   rule string
-    "'" alpha (string_char_with_space)* "'" / alpha (string_char)*
+#    "'" (string_char / s)+ "'" / (string_char)+
+    "'" string_char (string_char_with_space)* "'" / (string_char)+
   end
 
   rule string_char_with_space
@@ -100,6 +107,6 @@ grammar Dmwql
   end
 
   rule string_char
-    [a-zA-Z_\-\* ]
+    [a-zA-Z_\-\*]
   end
 end

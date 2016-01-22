@@ -24,7 +24,7 @@ class SpellsController < ApplicationController
   end
   
   def create
-    @card = current_user.spells.build(spell_params)
+    @card = current_user.spells.create(spell_params)
     if @card.save
       flash[:success] = 'Spell inscribed!'
       redirect_to spells_path
@@ -32,7 +32,18 @@ class SpellsController < ApplicationController
       render 'new', layout: 'card_new'
     end
   end
-    
+
+  def duplicate
+    @card = Spell.find(params[:id]).replicate
+    @card.name = @card.name + " (copy)"
+    if @card.save
+      flash[:success] = "Spell copied!"
+      redirect_to spells_path
+    else
+      render 'new', layout: 'card_new'
+    end
+  end
+
   def edit
     @card = Spell.includes(:hero_classes).find(params[:id])
   end
@@ -70,7 +81,7 @@ class SpellsController < ApplicationController
 
   private
   def spell_params
-    params.require(:spell).permit(:name, :level, :school, :classes, :casting_time, :range, :components, :duration,  :short_description, :athigherlevel, :description, :picture, :concentration, :hero_classes, :spellclasses, :hero_class_ids => [])
+    params.require(:spell).permit(:name, :cite, :ritual, :level, :school, :casting_time, :range, :components, :duration, :short_description, :athigherlevel, :description, :picture, :concentration, :hero_classes, :hero_class_ids => [])
   end
   
   def correct_user

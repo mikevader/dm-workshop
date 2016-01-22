@@ -18,13 +18,17 @@ Rails.application.routes.draw do
   patch     'spells/:id/preview'    => 'spells#preview'
 
   namespace :admin do
-    root                  'admin#home',     as: :admin
-    get     'import'   => 'card_imports#new'
-    get     'export'   => 'card_imports#index'
+    root                      'admin#home',     as: :admin
+    get     'import'       => 'card_imports#new'
+    get     'export'       => 'card_imports#index'
+    delete  'card_imports' => 'card_imports#destroy'
     resources :card_imports
   end
 
-  post      'monsters/:id/duplicate'      =>  'monsters#duplicate',    as: :duplicate_monster
+  post      'cards/:id/duplicate'         =>  'cards#duplicate',      as: :duplicate_card
+  post      'items/:id/duplicate'         =>  'items#duplicate',      as: :duplicate_item
+  post      'monsters/:id/duplicate'      =>  'monsters#duplicate',   as: :duplicate_monster
+  post      'spells/:id/duplicate'        =>  'spells#duplicate',     as: :duplicate_spell
 
   resources :users
   resources :spells

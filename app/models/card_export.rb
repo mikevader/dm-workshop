@@ -1,6 +1,6 @@
 class CardExport
 
-  def initialize()
+  def initialize
   end
 
   def load_monsters(monsters)
@@ -76,7 +76,7 @@ class CardExport
                   }
                 end
                 xml.languages monster.languages
-                xml.cr Monster.print_challenge_rating(monster.challenge)
+                xml.cr "#{Monster.challenge_pretty(monster.challenge)} (#{Monster.xp_for_cr(monster.challenge)} XP)"
               }
 
               unless monster.traits.empty?
@@ -121,8 +121,8 @@ class CardExport
         xml.spells {
           spells.each do |spell|
             xml.spell {
-              #xml.cite spell.cite
-              xml.name spell.name
+              xml.name "#{spell.name}#{' (Ritual)' if spell.ritual?}"
+              xml.cite spell.cite unless spell.cite.nil?
               xml.type_ "#{spell.level.ordinalize}-level #{spell.school}"
               xml.classes {
                 spell.hero_classes.each do |class_|
@@ -135,7 +135,7 @@ class CardExport
               xml.duration spell.duration
               xml.shortDescription {
                 xml << "\n#{'  '*4 + spell.short_description + "\n" unless spell.short_description.blank?}#{'  '*3}"
-              }
+              } unless spell.short_description.nil?
               xml.atHigherLevel spell.athigherlevel
               xml.description {
                 xml << "\n#{'  '*4}#{spell.description}\n#{'  '*3}"
@@ -162,6 +162,38 @@ class CardExport
               xml.requiresAttunement item.attunement ? 'yes' : 'no'
               xml.description {
                 xml << "\n#{'  '*4}#{item.description}\n#{'  '*3}"
+              }
+            }
+          end
+        }
+      }
+    end
+
+    builder.to_xml(indent: 2)
+  end
+
+=begin
+    t.string   "name"
+    t.string   "icon"
+    t.string   "color"
+    t.text     "contents"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.string   "badges"
+=end
+  def load_cards(cards)
+    builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
+      xml.cards {
+        xml.cards {
+          cards.each do |card|
+            xml.card {
+              xml.name card.name
+              xml.icon card.icon
+              xml.color card.color
+              xml.badges card.badges
+              xml.contents {
+                xml << "\n#{'  '*4}#{card.contents}\n#{'  '*3}"
               }
             }
           end

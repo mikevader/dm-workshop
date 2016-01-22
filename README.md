@@ -40,6 +40,13 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
+### Dungeon Master Workshop 0.7 ###
+* Challenge ratings can now be fractions as well like .5, .25, .124 and are rendered as 1/2, 1/4, 1/8.
+* Search queries work now with multiple AND/ORs
+* Duplication work for all cards
+* Spells have now a dedicated flag for being rituals
+
+
 ### Dungeon Master Workshop 0.6 ###
 
 * Close button for modal views for better usability on mobile screens

@@ -31,6 +31,10 @@ GEM
       activemodel (= 4.2.5)
       activesupport (= 4.2.5)
       arel (~> 6.0)
+    activerecord-session_store (0.1.2)
+      actionpack (>= 4.0.0, < 5)
+      activerecord (>= 4.0.0, < 5)
+      railties (>= 4.0.0, < 5)
     activesupport (4.2.5)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
@@ -39,15 +43,15 @@ GEM
       tzinfo (~> 1.1)
     ansi (1.5.0)
     arel (6.0.3)
-    autoprefixer-rails (6.2.1)
+    autoprefixer-rails (6.3.1)
       execjs
       json
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.3.5.1)
-      autoprefixer-rails (>= 5.0.0.1)
-      sass (>= 3.3.0)
+    bootstrap-sass (3.3.6)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     bootstrap-will_paginate (0.0.10)
       will_paginate
     builder (3.2.2)
@@ -73,7 +77,7 @@ GEM
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
     erubis (2.7.0)
-    eventmachine (1.0.8)
+    eventmachine (1.0.9.1)
     excon (0.45.4)
     execjs (2.6.0)
     faker (1.6.1)
@@ -81,7 +85,7 @@ GEM
     ffi (1.9.10)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
-    fog (1.36.0)
+    fog (1.37.0)
       fog-aliyun (>= 0.1.0)
       fog-atmos
       fog-aws (>= 0.6.0)
@@ -103,10 +107,10 @@ GEM
       fog-terremark
       fog-vmfusion
       fog-voxel
+      fog-vsphere (>= 0.4.0)
       fog-xenserver
       fog-xml (~> 0.1.1)
       ipaddress (~> 0.5)
-      nokogiri (~> 1.5, >= 1.5.11)
     fog-aliyun (0.1.0)
       fog-core (~> 1.27)
       fog-json (~> 1.0)
@@ -115,7 +119,7 @@ GEM
     fog-atmos (0.1.0)
       fog-core
       fog-xml
-    fog-aws (0.7.6)
+    fog-aws (0.8.1)
       fog-core (~> 1.27)
       fog-json (~> 1.0)
       fog-xml (~> 0.1)
@@ -152,7 +156,7 @@ GEM
       fog-core
       fog-xml
       nokogiri
-    fog-radosgw (0.0.4)
+    fog-radosgw (0.0.5)
       fog-core (>= 1.21.0)
       fog-json
       fog-xml (>= 0.0.1)
@@ -160,13 +164,13 @@ GEM
       fog-core
       fog-json
       fog-xml
-    fog-sakuracloud (1.7.3)
+    fog-sakuracloud (1.7.5)
       fog-core
       fog-json
     fog-serverlove (0.1.2)
       fog-core
       fog-json
-    fog-softlayer (1.0.2)
+    fog-softlayer (1.0.3)
       fog-core
       fog-json
     fog-storm_on_demand (0.1.1)
@@ -181,7 +185,10 @@ GEM
     fog-voxel (0.1.0)
       fog-core
       fog-xml
-    fog-xenserver (0.2.2)
+    fog-vsphere (0.5.0)
+      fog-core
+      rbvmomi (~> 1.8)
+    fog-xenserver (0.2.3)
       fog-core
       fog-xml
     fog-xml (0.1.2)
@@ -207,8 +214,8 @@ GEM
       guard (~> 2.8)
       guard-compat (~> 1.0)
       multi_json (~> 1.8)
-    guard-minitest (2.3.1)
-      guard (~> 2.0)
+    guard-minitest (2.4.4)
+      guard-compat (~> 1.2)
       minitest (>= 3.0)
     haml (4.0.7)
       tilt
@@ -217,11 +224,11 @@ GEM
     http_parser.rb (0.6.0)
     i18n (0.7.0)
     inflecto (0.0.2)
-    ipaddress (0.8.0)
-    jbuilder (2.3.2)
-      activesupport (>= 3.0.0, < 5)
+    ipaddress (0.8.2)
+    jbuilder (2.4.0)
+      activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
-    jquery-rails (4.0.5)
+    jquery-rails (4.1.0)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
@@ -236,7 +243,7 @@ GEM
       rb-inotify (>= 0.9)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
-    lumberjack (1.0.9)
+    lumberjack (1.0.10)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mechanize (2.7.4)
@@ -254,9 +261,9 @@ GEM
       minitest (> 1.2.0)
       rails (>= 2.3.3)
     mini_magick (4.3.6)
-    mini_portile (0.6.2)
+    mini_portile2 (2.0.0)
     minitest (5.8.3)
-    minitest-reporters (1.0.5)
+    minitest-reporters (1.1.7)
       ansi
       builder
       minitest (>= 5.0)
@@ -266,9 +273,9 @@ GEM
     nested_form (0.3.2)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9.4)
-    net-ssh (3.0.1)
-    nokogiri (1.6.6.4)
-      mini_portile (~> 0.6.0)
+    net-ssh (3.0.2)
+    nokogiri (1.6.7.1)
+      mini_portile2 (~> 2.0.0.rc2)
     nokogiri-diff (0.2.0)
       nokogiri (~> 1.5)
       tdiff (~> 0.3, >= 0.3.2)
@@ -332,16 +339,20 @@ GEM
       activesupport (= 4.2.5)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (10.4.2)
-    rb-fsevent (0.9.6)
+    rake (10.5.0)
+    rb-fsevent (0.9.7)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
+    rbvmomi (1.8.2)
+      builder
+      nokogiri (>= 1.4.1)
+      trollop
     rdoc (4.2.1)
       json (~> 1.4)
     remotipart (1.2.1)
     ruby-progressbar (1.7.5)
     safe_yaml (1.0.4)
-    sass (3.4.20)
+    sass (3.4.21)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
@@ -353,7 +364,7 @@ GEM
       rdoc (~> 4.0)
     shellany (0.0.1)
     slop (3.6.0)
-    spring (1.6.1)
+    spring (1.6.2)
     sprockets (3.5.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -366,9 +377,10 @@ GEM
     terminal-notifier-guard (1.6.4)
     thor (0.19.1)
     thread_safe (0.3.5)
-    tilt (2.0.1)
+    tilt (2.0.2)
     treetop (1.6.3)
       polyglot (~> 0.3)
+    trollop (2.1.2)
     turbolinks (2.5.3)
       coffee-rails
     tzinfo (1.2.2)
@@ -385,32 +397,33 @@ GEM
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
     webrobots (0.1.2)
-    will_paginate (3.0.7)
+    will_paginate (3.1.0)
     xml-simple (1.1.5)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-session_store (~> 0.1.2)
   bcrypt (~> 3.1.10)
-  bootstrap-sass (~> 3.3.5.1)
+  bootstrap-sass (~> 3.3.6)
   bootstrap-will_paginate (~> 0.0.10)
   byebug
   carrierwave (~> 0.10.0)
   coffee-rails (~> 4.1.0)
   faker (~> 1.6.0)
-  fog (~> 1.36.0)
+  fog (~> 1.37.0)
   guard
   guard-livereload (~> 2.4)
-  guard-minitest (= 2.3.1)
-  jbuilder (~> 2.3.2)
-  jquery-rails (~> 4.0.5)
+  guard-minitest (~> 2.4.4)
+  jbuilder (~> 2.4.0)
+  jquery-rails (~> 4.1.0)
   mechanize
-  mini_backtrace (= 0.1.3)
+  mini_backtrace (~> 0.1.3)
   mini_magick (~> 4.3.6)
-  minitest-reporters (= 1.0.5)
+  minitest-reporters (~> 1.1.7)
   net-ssh (~> 3.0.1)
-  nokogiri (~> 1.6.6.4)
+  nokogiri (~> 1.6.7.1)
   nokogiri-diff
   pg (= 0.18.4)
   puma (= 2.15.3)
@@ -425,8 +438,8 @@ DEPENDENCIES
   treetop (~> 1.6.3)
   turbolinks (~> 2.5.3)
   uglifier (>= 1.3.0)
-  web-console (~> 2.0)
-  will_paginate (~> 3.0.7)
+  web-console (~> 2.2)
+  will_paginate (~> 3.1.0)
 
 BUNDLED WITH
    1.10.6

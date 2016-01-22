@@ -11,11 +11,9 @@
     <th>Name</th>
     <th>Type</th>
     <th>CR</th>
-    <th colspan="99"></th>
+    <th class="last"></th>
   </tr>
   <%= render @monsters %>
 </table>
 
 <%= render partial: 'modal', collection: @monsters, as: :monster %>
-
-<%= will_paginate %>

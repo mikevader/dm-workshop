@@ -14,3 +14,20 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require turbolinks
+//= require_self
+
+var selectAll =  function() {
+    $('#selectAll').click(function() {
+        if (this.checked) {
+            $(':checkbox').each(function() {
+                this.checked = true;
+            });
+        } else {
+            $(':checkbox').each(function() {
+                this.checked = false;
+            });
+        }
+    });
+}
+
+$(document).on("page:load ready", selectAll);

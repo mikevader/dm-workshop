@@ -36,6 +36,17 @@ class ItemsController < ApplicationController
     end
   end
 
+  def duplicate
+    @card = Item.find(params[:id]).replicate
+    @card.name = @card.name + " (copy)"
+    if @card.save
+      flash[:success] = "Item replicated!"
+      redirect_to items_path
+    else
+      render 'new', layout: 'card_new'
+    end
+  end
+
   def edit
     @card = Item.find(params[:id])
   end

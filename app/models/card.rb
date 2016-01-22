@@ -28,6 +28,12 @@ class Card < ActiveRecord::Base
     end
   end
 
+  def replicate
+    replica = dup
+
+    replica
+  end
+
   def card_data
     data = CardData.new
 

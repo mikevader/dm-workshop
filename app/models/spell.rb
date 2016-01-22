@@ -1,8 +1,7 @@
 class Spell < ActiveRecord::Base
   belongs_to :user
-  has_many :spellclasses, class_name: "Spellclass", foreign_key: "spell_id", dependent: :destroy
-  has_many :hero_classes, through: :spellclasses, source: :hero_class
-  
+  has_and_belongs_to_many :hero_classes
+
   default_scope -> { order(name: :asc) }
   mount_uploader :picture, PictureUploader
 
@@ -10,6 +9,7 @@ class Spell < ActiveRecord::Base
   validates :name, presence: true
   validates :level, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 9}
   validates :school, presence: true
+  # validate :spell_unique_per_class
   validate :picture_size
   
   def self.search(search)
@@ -31,11 +31,21 @@ class Spell < ActiveRecord::Base
     end
   end
 
+  def replicate
+    replica = dup
+
+    hero_classes.each do |hero_class|
+      replica.hero_classes << hero_class
+    end
+
+    replica
+  end
+
   def card_data
     data = CardData.new
 
     data.id = id
-    data.name = name
+    data.name = "#{name}#{' (Ritual)' if ritual?}"
     data.icon = "icon-white-book-#{level}"
     data.color = 'maroon'
 
@@ -77,10 +87,18 @@ class Spell < ActiveRecord::Base
       errors.add(:picture, "should be less than 5MB")
     end
   end
+
+  # Validates the uniqueness of a spell in a class
+  def spell_unique_per_class
+    if hero_classes.select {|c| hero_classes.select {|q| q == c }.size > 1 }.any?
+      errors.add :spell, 'tried to add a class multiple times'
+    end
+  end
   
   def self.new_builder
     builder = SearchBuilder.new
     builder.add_field 'name', 'spells.name'
+    builder.add_field 'ritual', 'spells.ritual'
     builder.add_field 'school', 'spells.school'
     builder.add_field 'level', 'spells.level'
     builder.add_field 'concentration', 'spells.concentration'
