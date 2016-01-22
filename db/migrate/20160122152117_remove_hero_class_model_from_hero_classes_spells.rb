@@ -1,8 +1,8 @@
 class RemoveHeroClassModelFromHeroClassesSpells < ActiveRecord::Migration
   def up
     change_table :hero_classes_spells, id: false do |t|
-      t.remove :updated_at, :datetime
-      t.remove :created_at, :datetime
+      t.remove :updated_at
+      t.remove :created_at
     end
     remove_column :hero_classes_spells, :id, :primary_key
   end
