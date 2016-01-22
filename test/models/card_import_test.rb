@@ -119,4 +119,60 @@ class CardImportTest < ActiveSupport::TestCase
     assert_equal '<i>Ranged Weapon Attack:</i> +4 to hit, range 80/320ft., one target. <i>Hit:</i> 1d6 + 2 piercing damage.', shortbow.description
   end
 
+  test 'should import Alarm' do
+    path = File.join(fixture_path, 'spells.xml')
+    file = Rack::Test::UploadedFile.new(path, 'text/xml')
+    importer = CardImport.new(@user, spells_file: file)
+    importer.import_spells
+    importer.save
+
+    alarm = Spell.find_by_name 'Alarm'
+    assert alarm
+
+    assert_equal 'Alarm', alarm.name
+    assert alarm.ritual?
+    assert_equal 'Page: 211  Players Handbook', alarm.cite
+    assert_equal 1, alarm.level
+    assert_equal 'Abjuration', alarm.school
+    assert_equal 2, alarm.hero_classes.size
+    assert_includes alarm.hero_classes.first.name, 'Ranger'
+    assert_includes alarm.hero_classes.second.name, 'Wizard'
+    assert_equal '1 Minute', alarm.casting_time
+    assert_equal '30 feet', alarm.range
+    assert_equal 'V, S, M (a tiny bell and a piece of fine silver wire)', alarm.components
+    assert_equal '8 hours', alarm.duration
+    assert_equal 'You set an alarm against unwanted intrusion.
+        Choose a door, a window, or an area within range that is no larger than a 20-foot cube. Until the spell ends, an alarm alerts you whenever a tiny or larger creature touches or enters the warded area. When you cast the spell, you can designate creatures that won’t set off the alarm. You also choose whether the alarm is mental or audible.
+
+        A mental alarm alerts you with a ping in your mind if you are within 1 mile of the warded area. This ping awakens you if you are sleeping.
+        An audible alarm produces the sound of a hand bell for 10 seconds within 60 feet.', alarm.description
+  end
+
+  test 'should import Magic Missile' do
+    path = File.join(fixture_path, 'spells.xml')
+    file = Rack::Test::UploadedFile.new(path, 'text/xml')
+    importer = CardImport.new(@user, spells_file: file)
+    importer.import_spells
+    importer.save
+
+    magic_missile = Spell.find_by_name 'Magic Missile'
+    assert magic_missile
+
+    assert_equal 'Magic Missile', magic_missile.name
+    assert_not magic_missile.ritual?
+    assert_nil magic_missile.cite
+    assert_equal 1, magic_missile.level
+    assert_equal 'evocation', magic_missile.school
+    assert_equal 2, magic_missile.hero_classes.size
+    assert_includes magic_missile.hero_classes.first.name, 'Sorcerer'
+    assert_includes magic_missile.hero_classes.second.name, 'Wizard'
+    assert_equal '1 action', magic_missile.casting_time
+    assert_equal '120 feet', magic_missile.range
+    assert_equal 'V, S', magic_missile.components
+    assert_equal 'Instantaneous', magic_missile.duration
+    assert_equal 'You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.<br>', magic_missile.short_description
+    assert_equal 'When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.', magic_missile.athigherlevel
+    assert_equal 'You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.<br>
+        <b>At Higher Levels.</b> When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.', magic_missile.description
+  end
 end

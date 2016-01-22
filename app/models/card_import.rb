@@ -120,6 +120,7 @@ class CardImport
         logger.info "Card %{name} already inscribed"
         id = existing_spell.id
       end
+      cite = CardImport.load_element name, spell, 'cite', false
       type = CardImport.load_element name, spell, 'type', true
       level, school = CardImport.parse_school_and_level type
       logger.debug "    level: #{level}"
@@ -140,9 +141,10 @@ class CardImport
       description = CardImport.load_element(name, spell, 'description')
 
       import_card = ImportCard.new(id, :spell)
-      import_card.name = %r{^([a-zA-Z'’/\- ]*)( \(Ritual\))?.*$}.match(name)[1]
+      import_card.name = %r{^([a-zA-Z'’/\- ]*)( \(Ritual\))?.*$}.match(name)[1].squish
 
       import_card.attributes.ritual = name.downcase.include? 'ritual'
+      import_card.attributes.cite = cite
       import_card.attributes.level = level
       import_card.attributes.school = school
       import_card.attributes.description = description
@@ -187,6 +189,7 @@ class CardImport
       new_spell.description = import_card.attributes.description
     end
 
+    new_spell.cite = import_card.attributes.cite
     hero_classes = import_card.attributes.classes.map do |hero_class|
       HeroClass.find_by(name: hero_class)
     end
@@ -509,7 +512,6 @@ class CardImport
 
     if value.empty?
       raise RuntimeError, "element #{name} is required for #{for_card}." if required
-      value = nil
     end
 
     #logger.debug description % {name: name, value: value}

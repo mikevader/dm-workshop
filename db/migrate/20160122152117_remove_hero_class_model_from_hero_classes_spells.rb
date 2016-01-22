@@ -1,0 +1,18 @@
+class RemoveHeroClassModelFromHeroClassesSpells < ActiveRecord::Migration
+  def up
+    change_table :hero_classes_spells, id: false do |t|
+      t.remove :updated_at, :datetime
+      t.remove :created_at, :datetime
+    end
+    remove_column :hero_classes_spells, :id, :primary_key
+  end
+
+  def down
+    change_table :hero_classes_spells, id: true do |t|
+
+    end
+    add_column :hero_classes_spells, :updated_at, :datetime, null: false, default: Time.now
+    add_column :hero_classes_spells, :created_at, :datetime, null: false, default: Time.now
+    add_column :hero_classes_spells, :id, :primary_key
+  end
+end

@@ -1,6 +1,6 @@
 class Spell < ActiveRecord::Base
   belongs_to :user
-  has_and_belongs_to_many :hero_classes, -> { distinct }, uniq: true, order: :name
+  has_and_belongs_to_many :hero_classes
 
   default_scope -> { order(name: :asc) }
   mount_uploader :picture, PictureUploader
@@ -45,7 +45,7 @@ class Spell < ActiveRecord::Base
     data = CardData.new
 
     data.id = id
-    data.name = name
+    data.name = "#{name}#{' (Ritual)' if ritual?}"
     data.icon = "icon-white-book-#{level}"
     data.color = 'maroon'
 
@@ -98,6 +98,7 @@ class Spell < ActiveRecord::Base
   def self.new_builder
     builder = SearchBuilder.new
     builder.add_field 'name', 'spells.name'
+    builder.add_field 'ritual', 'spells.ritual'
     builder.add_field 'school', 'spells.school'
     builder.add_field 'level', 'spells.level'
     builder.add_field 'concentration', 'spells.concentration'

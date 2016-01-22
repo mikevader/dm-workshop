@@ -1,5 +1,5 @@
 class HeroClass < ActiveRecord::Base
-  has_and_belongs_to_many :spells, -> { distinct }, uniq: true, order: name
+  has_and_belongs_to_many :spells
 
   default_scope -> { order(name: :asc) }
 

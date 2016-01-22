@@ -4,7 +4,9 @@ fireball:
   name: Fireball
   level: 3
   school: evocation
-  classes: Sorcerer, Wizard
+  hero_classes:
+    - sorcerer
+    - wizard
   casting_time: 1 action
   range: 150 feet
   components: V, S, M (a tiny ball of bat guano and sulfur)
@@ -20,7 +22,9 @@ bane:
   name: Bane
   level: 1
   school: enchantment
-  classes: Bard, Cleric
+  hero_classes:
+    - bard
+    - cleric
   casting_time: 1 action
   range: 30 feet (sight)
   components: V, S, M (a drop of blood)
@@ -28,12 +32,3 @@ bane:
   short_description: Bis drei Ziele im Sichtfeld müssen einen Charisma-Rettungswurf bestehen. Bei Misslingen muss das Ziel bei jedem Angriffs- oder Rettungswurf einen d4 abziehen.
   description: MyText
   user: michael
-
-<% 30.times do |n| %>
-spell_<%= n %>:
-  name: <%= "Z" + Faker::Hacker.noun %>
-  level: <%= Faker::Number.between(0, 9) %>
-  school: <%= Faker::Hacker.noun %>
-  description: <%= Faker::Lorem.sentence(5) %>
-  user: michael
-<% end %>

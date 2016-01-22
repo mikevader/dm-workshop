@@ -14,8 +14,7 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     assert_select 'h1', text: @user.name
     assert_select 'h1>img.gravatar'
     assert_match @user.spells.count.to_s, response.body
-    assert_select 'div.pagination'
-    @user.spells.paginate(page: 1).each do |spell|
+    @user.spells.each do |spell|
       assert_match spell.name, response.body
     end
   end

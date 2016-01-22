@@ -121,8 +121,8 @@ class CardExport
         xml.spells {
           spells.each do |spell|
             xml.spell {
-              #xml.cite spell.cite
-              xml.name spell.name
+              xml.name "#{spell.name}#{' (Ritual)' if spell.ritual?}"
+              xml.cite spell.cite unless spell.cite.nil?
               xml.type_ "#{spell.level.ordinalize}-level #{spell.school}"
               xml.classes {
                 spell.hero_classes.each do |class_|
@@ -135,7 +135,7 @@ class CardExport
               xml.duration spell.duration
               xml.shortDescription {
                 xml << "\n#{'  '*4 + spell.short_description + "\n" unless spell.short_description.blank?}#{'  '*3}"
-              }
+              } unless spell.short_description.nil?
               xml.atHigherLevel spell.athigherlevel
               xml.description {
                 xml << "\n#{'  '*4}#{spell.description}\n#{'  '*3}"

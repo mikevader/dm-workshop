@@ -46,7 +46,7 @@ class CardExportTest < ActiveSupport::TestCase
     importer.save
 
     exporter = CardExport.new
-    xml = exporter.load_spells(Spell.where("name = 'Antilife Shell' or name = 'Magic Missile'"))
+    xml = exporter.load_spells(Spell.where("name = 'Antilife Shell' or name = 'Magic Missile' or name = 'Alarm'"))
     org_file = Nokogiri::XML(File.open(input_path))
     new_file = Nokogiri::XML(xml)
 

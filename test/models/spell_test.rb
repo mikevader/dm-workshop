@@ -42,12 +42,10 @@ class SpellTest < ActiveSupport::TestCase
   end
 
   test "classes should be unique" do
-    assert_difference '@spell.hero_classes.count', 1 do
-      @spell.hero_classes << hero_classes(:gunslinger)
+    @spell.hero_classes << hero_classes(:gunslinger)
+    assert_raises(ActiveRecord::RecordNotUnique) do
       @spell.hero_classes << hero_classes(:gunslinger)
     end
-
-    assert @spell.valid?
   end
 
   test "order should be alphabetically" do

@@ -38,7 +38,7 @@ module Admin
 
       assert_difference 'Spell.count', 2 do
         post :create, card_import: { spells_file: fixture_file_upload('spells.xml', 'text/xml') }
-        post :create, imports: [{import: true, name: 'Antilife Shell'}, {import: true, name: 'Magic Missile'}]
+        post :create, imports: [{import: true, name: 'Antilife Shell'}, {import: true, name: 'Magic Missile'}, {import: false, name: 'Alarm'}]
       end
 
       magic_missile = Spell.find_by_name 'Magic Missile'

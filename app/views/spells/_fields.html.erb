@@ -6,6 +6,16 @@
 <% end -%>
 
 <%= content_tag :div, class: 'form-group' do -%>
+    <%= content_tag :div, class: 'col-sm-offset-3 col-sm-9' do %>
+        <%= content_tag :div, class: 'checkbox' do %>
+            <%= f.label :ritual do %>
+                <%= f.check_box(:ritual) %>Ritual
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
     <%= f.label :level, class: 'control-label col-sm-3'  %>
     <%= content_tag(:div, f.text_field(:level, class: 'form-control'), class: 'col-sm-3') %>
 <% end -%>
@@ -13,11 +23,6 @@
 <%= content_tag :div, class: 'form-group' do -%>
     <%= f.label :school, class: 'control-label col-sm-3'  %>
     <%= content_tag(:div, f.text_field(:school, class: 'form-control'), class: 'col-sm-9') %>
-<% end -%>
-
-<%= content_tag :div, class: 'form-group' do -%>
-    <%= f.label :classes, class: 'control-label col-sm-3'  %>
-    <%= content_tag(:div, f.text_field(:classes, class: 'form-control'), class: 'col-sm-9') %>
 <% end -%>
 
 <%= content_tag :div, class: 'form-group' do -%>

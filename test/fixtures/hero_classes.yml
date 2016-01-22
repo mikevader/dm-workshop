@@ -8,9 +8,21 @@ goliath:
   name: Goliath
   cssclass: icon-goliath
 
+bard:
+  name: Bard
+  cssclass: icon-bard
+
+cleric:
+  name: Cleric
+  cssclass: icon-cleric
+
 druid:
   name: Druid
   cssclass: icon-druid
+
+ranger:
+  name: Ranger
+  cssclass: icon-ranger
 
 sorcerer:
   name: Sorcerer
@@ -19,3 +31,4 @@ sorcerer:
 wizard:
   name: Wizard
   cssclass: icon-wizard
+
