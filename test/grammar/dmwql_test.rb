@@ -8,6 +8,7 @@ class DmwqlTest < ActiveSupport::TestCase
     @builder.add_field 'level'
     @builder.add_field 'class'
     @builder.add_field 'school'
+    @builder.add_field 'ritual'
     @parser = Parser.new
   end
   
@@ -87,6 +88,11 @@ class DmwqlTest < ActiveSupport::TestCase
     @parser.parse("classes in ('Bard')", builder)
     
     assert builder.joins.first == :hero_classes
+  end
+
+  test 'should work with booleans' do
+    assert_equal "ritual = 't'", @parser.parse("ritual = true", @builder)
+    assert_equal "ritual = 'f'", @parser.parse("ritual = false", @builder)
   end
 
 end

@@ -42,7 +42,7 @@ grammar Dmwql
   end
   
   rule string_literal
-    string s
+    !non_string_literal string s
   end
   
   rule non_string_literal

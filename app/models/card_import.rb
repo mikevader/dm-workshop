@@ -114,7 +114,9 @@ class CardImport
     spells_doc = open_xmlfile(spells_file)
 
     spells_doc.xpath('//cards/spells/spell').map do |spell|
-      name = CardImport.load_element '', spell, 'name', true, "inscribe card: %{value}"
+      complete_name = CardImport.load_element '', spell, 'name', true, "inscribe card: %{value}"
+      name = %r{^([a-zA-Z'’/\- ]*)( \(Ritual\))?.*$}.match(complete_name)[1].squish
+      ritual = complete_name.downcase.include? 'ritual'
 
       if existing_spell = Spell.find_by_name(name)
         logger.info "Card %{name} already inscribed"
@@ -141,9 +143,9 @@ class CardImport
       description = CardImport.load_element(name, spell, 'description')
 
       import_card = ImportCard.new(id, :spell)
-      import_card.name = %r{^([a-zA-Z'’/\- ]*)( \(Ritual\))?.*$}.match(name)[1].squish
+      import_card.name = name
 
-      import_card.attributes.ritual = name.downcase.include? 'ritual'
+      import_card.attributes.ritual = ritual
       import_card.attributes.cite = cite
       import_card.attributes.level = level
       import_card.attributes.school = school
