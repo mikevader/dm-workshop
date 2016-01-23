@@ -69,7 +69,7 @@ task :scrape do
             xml.cite reference
             xml.name name
 
-            xml.type_ "#{level.ordinalize}-level #{school}" if level.is_number?
+            xml.type_ "#{level}-level #{school}" if level.is_number?
             xml.type_ "#{school.capitalize} cantrip" unless level.is_number?
 
             xml.classes {
