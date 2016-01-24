@@ -53,10 +53,10 @@ class Spell < ActiveRecord::Base
       data.badges << hero_class.cssclass
     end
 
-    unless level == 0
-      data.add_subtitle ["#{level.try(:ordinalize)}-level #{school}"]
-    else
+    if level == 0
       data.add_subtitle ["#{school} cantrip"]
+    else
+      data.add_subtitle ["#{level.try(:ordinalize)}-level #{school}"]
     end
 
     data.add_rule
@@ -66,10 +66,10 @@ class Spell < ActiveRecord::Base
     data.add_property ['Duration', duration]
     data.add_fill [2]
 
-    unless short_description.blank?
-      data.add_text [short_description]
-    else
+    if short_description.blank?
       data.add_text [description]
+    else
+      data.add_text [short_description]
     end
 
     unless athigherlevel.blank?
@@ -77,7 +77,7 @@ class Spell < ActiveRecord::Base
       data.add_text [athigherlevel]
     end
 
-    return data
+    data
   end
   
   private
