@@ -1,17 +1,12 @@
 Rails.application.routes.draw do
-  get 'filter/index'
-
-  get 'filter/show'
-
-  get 'filter/new'
-
-  get 'filter/create'
-
-  get 'filter/edit'
-
-  get 'filter/update'
-
-  get 'filter/delete'
+  #get 'filters/index'
+  #get 'filters/show'
+  #get 'filters/new'
+  #get 'filters/create'
+  #get 'filters/edit'
+  #get 'filters/update'
+  #get 'filters/destroy'
+  resources :filters
 
   root                 'static_pages#home'
   get     'help'    => 'static_pages#help'

@@ -9,6 +9,6 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
-%w(print admin cards monsters items spells static_pages filter).each do |controller|
+%w(print admin cards monsters items spells static_pages filters).each do |controller|
   Rails.application.config.assets.precompile += %W(#{controller}.js #{controller}.css)
 end
