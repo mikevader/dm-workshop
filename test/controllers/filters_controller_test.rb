@@ -65,10 +65,13 @@ class FiltersControllerTest < ActionController::TestCase
 
   test 'should get create' do
     log_in_as(users(:michael))
-    #assert_difference 'Filter.count', +1 do
-      post :create, filter: { name: 'AAA', query: 'name ~ wow' }
-    #end
-    assert_redirected_to filters_path
+    assert_difference 'Filter.count', +1 do
+      post :create, filter: { name: 'AAA', query: 'name ~ end' }
+    end
+
+    new_filter = Filter.find_by_name('AAA')
+
+    assert_redirected_to filter_path(new_filter)
   end
 
   test 'should get edit' do
@@ -85,10 +88,10 @@ class FiltersControllerTest < ActionController::TestCase
 
   test 'should get destory' do
     log_in_as(users(:michael))
-    #assert_difference 'Filter.count', -1 do
+    assert_difference 'Filter.count', -1 do
       delete :destroy, id: @filter
-    #end
-    assert_response :success
+    end
+    assert_redirected_to filters_url
   end
 
 end

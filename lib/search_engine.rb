@@ -3,12 +3,16 @@ class SearchEngine2
     @entity_class = entity_class
   end
   
-  def search(search_string)
+  def search(search_string, all_on_empty = true)
     result = @entity_class.none
     error = nil
     begin
       if search_string.blank?
-        result = @entity_class.all
+        if all_on_empty
+          result = @entity_class.all
+        else
+          result = []
+        end
       else
         result = @entity_class.search(search_string)
       end

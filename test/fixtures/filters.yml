@@ -2,10 +2,10 @@
 
 one:
   name: MyString1
-  query: MyText
+  query: name ~ wow
   user: michael
 
 two:
   name: MyString2
-  query: MyText
+  query: name ~ hero
   user: michael
