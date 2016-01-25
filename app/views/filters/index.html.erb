@@ -51,12 +51,13 @@
           <div class="col-sm-12">
             <%= form_tag filters_path, method: 'get', id: 'filter_search' do %>
                 <div class="input-group">
-                  <%= text_field_tag :search, (@filter.nil?) ? params[:search] : @filter.query, class: 'form-control', autocomplete: 'off', placeholder: 'Search for...' %>
+                  <% search = (@filter.nil?) ? params[:search] : @filter.query %>
+                  <%= text_field_tag :search, search, class: 'form-control', autocomplete: 'off', placeholder: 'Search for...' %>
                   <div class="input-group-btn">
                     <%= button_tag(type: 'submit', class: 'btn btn-primary') do %>
                         <span class="glyphicon glyphicon-search"></span>
                     <% end %>
-                    <%= link_to filters_path, class: 'btn btn-default', target: '_blank' do %>
+                    <%= link_to print_path(search: search), class: 'btn btn-default', target: '_blank' do %>
                         <span class="glyphicon glyphicon-print"></span>
                     <% end %>
                   </div>
