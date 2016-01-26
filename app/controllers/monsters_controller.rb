@@ -14,7 +14,7 @@ class MonstersController < ApplicationController
   def index
     result, error = @search_engine.search(params[:search])
     
-    @monsters = result.paginate(page: params[:page])
+    @monsters = result
     @error = error
   end
 

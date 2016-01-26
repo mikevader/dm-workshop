@@ -40,7 +40,7 @@ class OutputPagesController < ApplicationController
       result, error = engine.search(params[:search], false)
 
       unless error
-        results += result.to_a
+        results += result
       end
     end
 

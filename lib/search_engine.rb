@@ -24,6 +24,6 @@ class SearchEngine2
       error = e.parse_error
     end
 
-    return result, error
+    return result.to_a, error
   end
 end

@@ -74,7 +74,7 @@ class FiltersController < ApplicationController
       result, error = engine.search(query, false)
 
       unless error
-        results += result.to_a
+        results += result
       end
       #@error ||= error
     end
