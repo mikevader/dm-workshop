@@ -2,7 +2,7 @@ require 'search_engine'
 
 class MonstersController < ApplicationController
   layout :choose_layout
-  before_action :logged_in_user, only: [:index, :edit, :update, :create, :destroy]
+  before_action :logged_in_user, only: [:index, :show, :new, :edit, :update, :create, :destroy]
   before_action :admin_user, only: [:edit, :update, :destroy]
 
   before_action :init_search_engine, only: [:index]
