@@ -14,12 +14,12 @@ class MonstersController < ApplicationController
   def index
     result, error = @search_engine.search(params[:search])
     
-    @monsters = result
+    @cards = result
     @error = error
   end
 
   def show
-    @monster = Monster.find(params[:id])
+    @card = Monster.find(params[:id])
   end
 
   def new
@@ -100,8 +100,8 @@ class MonstersController < ApplicationController
   end
 
   def correct_user
-    @monster = Monster.find_by(id: params[:id])
-    redirect_to root_url unless current_user?(@monster.user) || admin_user?
+    @card = Monster.find_by(id: params[:id])
+    redirect_to root_url unless current_user?(@card.user) || admin_user?
   end
   
   def admin_user

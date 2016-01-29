@@ -1,8 +1,5 @@
-<% large ||= false %>
-<% modal_size = (large == true) ? 'modal-lg' : 'modal-sm' %>
 
-<div class="modal" id="myModal-<%= index %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     xmlns="http://www.w3.org/1999/html">
+<div class="modal" id="<%= index %>" tabindex="-1" role="dialog" data-previd="<%= prev_index %>" data-nextid="<%= next_index %>" data-card="<%= "/#{card.class.model_name.human.downcase.pluralize}/#{card.id}/modal" %>" aria-labelledby="myModalLabel">
   <div class="modal-dialog <%= modal_size %>" role="document">
     <div class="modal-content">
       <div class="modal-body">
@@ -11,18 +8,18 @@
           <div class="row">
             <nav class="col-xs-12">
               <ul class="pager">
-                <li class="previous"><a href="#" data-toggle="modal" data-dismiss="modal" data-target="#myModal-<%= prev_index %>"><span aria-hidden="true">&larr;</span> Older</a></li>
-                <li class="next"><a href="#" data-toggle="modal" data-dismiss="modal" data-target="#myModal-<%= next_index %>">Newer <span aria-hidden="true">&rarr;</span></a></li>
+                <li class="previous"><a href="#" data-toggle="modal" data-dismiss="modal" data-target="<%= prev_index %>"><span aria-hidden="true">&larr;</span> Older</a></li>
+                <li class="next"><a href="#" data-toggle="modal" data-dismiss="modal" data-target="<%= next_index %>">Newer <span aria-hidden="true">&rarr;</span></a></li>
               </ul>
             </nav>
           </div>
           <div class="row">
             <% unless yield.present? %>
-              <div class="col-xs-12">
-                <%= render 'shared/card_card', card: card.card_data %>
-              </div>
+                <div class="col-xs-12">
+                  <%= render 'shared/card_card', card: card.card_data %>
+                </div>
             <% else %>
-              <%= yield %>
+                <%= yield %>
             <% end %>
           </div>
         </div>

@@ -14,12 +14,12 @@ class ItemsController < ApplicationController
   def index
     result, error = @search_engine.search(params[:search])
     
-    @items = result
+    @cards = result
     @error = error
   end
 
   def show
-    @item = Item.find(params[:id])
+    @card = Item.find(params[:id])
   end
 
   def new

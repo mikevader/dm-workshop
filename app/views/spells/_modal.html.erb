@@ -1,15 +1,20 @@
-<!-- Modal -->
 <%
-   index = spell_counter
-   next_index = (index + 1)%@spells.size
-   prev_index = (index - 1)%@spells.size
+  index = card_counter
+  next_index = (index + 1)%@cards.size
+  prev_index = (index - 1)%@cards.size
+  large ||= true
+  modal_size = if large
+                 'modal-lg'
+               else
+                 'modal-sm'
+               end
 %>
 
-<%= render layout: 'shared/modal', locals: { card: spell, large: true, index: index, next_index: next_index, prev_index: prev_index } do %>
+<%= render layout: 'shared/modal', locals: { card: card, index: "myModal-#{index}", modal_size: modal_size, prev_index: "#myModal-#{prev_index}", next_index: "#myModal-#{next_index}" } do %>
   <div class="col-md-4">
-    <%= render 'shared/card_card', card: spell.card_data %>
+    <%= render 'shared/card_card', card: card.card_data %>
   </div>
   <div class="col-md-8">
-    <%= render 'shared/spell_detail', spell: spell %>
+    <%= render 'shared/spell_detail', spell: card %>
   </div>
 <% end %>

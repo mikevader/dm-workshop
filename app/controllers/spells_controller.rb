@@ -15,7 +15,7 @@ class SpellsController < ApplicationController
   def index
     result, error = @search_engine.search(params[:search])
     
-    @spells = result
+    @cards = result
     @error = error
   end
 
@@ -45,11 +45,11 @@ class SpellsController < ApplicationController
   end
 
   def edit
-    @card = Spell.includes(:hero_classes).find(params[:id])
+    @card = Spell.find(params[:id])
   end
   
   def update
-    @card = Spell.includes(:hero_classes).find(params[:id])
+    @card = Spell.find(params[:id])
     if @card.update_attributes(spell_params)
       flash[:success] = 'Spell updated'
       redirect_to spells_path
@@ -85,8 +85,8 @@ class SpellsController < ApplicationController
   end
   
   def correct_user
-    @spell = Spell.find_by(id: params[:id])
-    redirect_to root_url unless current_user?(@spell.user) || admin_user?
+    @card = Spell.find_by(id: params[:id])
+    redirect_to root_url unless current_user?(@card.user) || admin_user?
   end
   
   def admin_user

@@ -76,7 +76,7 @@
                 <th>Name</th>
                 <th class="last"></th>
               </tr>
-              <%= render @cards %>
+              <%= render partial: @cards, collection: @cards, as: :card %>
             </table>
           </div>
         </div>

@@ -13,7 +13,9 @@
     <th>Color</th>
     <th class="last"></th>
   </tr>
-  <%= render @cards %>
+  <%= render partial: @cards, collection: @cards, as: :card %>
 </table>
 
-<%= render partial: 'modal', collection: @cards, as: :card %>
+<div id="modals">
+  <%= render partial: 'modal', collection: @cards, as: :card %>
+</div>

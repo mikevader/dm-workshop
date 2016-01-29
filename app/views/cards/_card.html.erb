@@ -1,5 +1,13 @@
+<%
+  index = card_counter
+  next_index = (index + 1)%@cards.size
+  prev_index = (index - 1)%@cards.size
+  large ||= false
+  modal_size = (large == true) ? 'modal-lg' : 'modal-sm'
+%>
+
 <tr>
-  <td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal-<%= card_counter %>">
+  <td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal-<%= index %>" data-size="<%= modal_size %>" data-previd="#myModal-<%= prev_index %>" data-nextid="#myModal-<%= next_index %>" data-card="<%= "/#{card.class.model_name.human.downcase.pluralize}/#{card.id}/modal" %>">
     o
   </button></td>
   <td><%= card.name %></td>

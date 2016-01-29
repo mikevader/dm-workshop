@@ -1,4 +1,4 @@
-<% if @spells.any? %>
+<% if @cards.any? %>
 <table class="table table-striped">
   <tr>
     <th>#</th>
@@ -8,11 +8,11 @@
     <th>Classes</th>
     <th colspan="99"></th>
   </tr>
-  <%= render @spells %>
+  <%= render @cards %>
 </table>
-<%= render partial: 'spells/modal', collection: @spells, as: :spell %>
+<%= render partial: 'spells/modal', collection: @cards, as: :card %>
 
 
-<%= will_paginate @spells %>
+<%= will_paginate @cards %>
 
 <% end %>
