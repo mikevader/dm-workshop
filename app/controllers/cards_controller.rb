@@ -85,7 +85,7 @@ class CardsController < ApplicationController
 
   private
   def card_params
-    params.require(:card).permit(:name, :icon, :color, :contents)
+    params.require(:card).permit(:name, :tag_list, :icon, :color, :contents)
   end
 
   def logged_in_user

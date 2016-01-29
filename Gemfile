@@ -40,6 +40,8 @@ gem 'net-ssh', '~> 3.0.1'
 
 gem 'rails_admin', '~> 0.8.0'
 
+gem 'acts-as-taggable-on', '~>3.5.0'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

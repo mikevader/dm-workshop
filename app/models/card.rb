@@ -1,4 +1,5 @@
 class Card < ActiveRecord::Base
+  acts_as_taggable
   serialize :badges
   belongs_to :user
 

@@ -136,3 +136,5 @@
     <%= f.label :description, class: 'control-label col-sm-3'  %>
     <%= content_tag(:div, f.text_area(:description, class: 'form-control', rows: 10, style: ' white-space: pre-wrap;'), class: 'col-sm-9')  %>
 <% end %>
+
+<%= render 'shared/tag_field', f: f %>
