@@ -34,7 +34,7 @@ module Dmwql
   
   class ArrayComparison < Treetop::Runtime::SyntaxNode
     def query_string(builder)
-      return builder.query_id(id.text_value) + ' in ' + group.query_string(builder)
+      return "#{builder.query_id(id.text_value)} in #{group.query_string(builder)}"
     end
   end
   
@@ -53,7 +53,7 @@ module Dmwql
   class Comparison < Treetop::Runtime::SyntaxNode
     def query_string(builder)
       if defined? str_comp
-        return builder.query_id(id.text_value) + ' ' + str_comp.query_string(builder)
+        return "LOWER(#{builder.query_id(id.text_value)}) #{str_comp.query_string(builder)}"
       else
         return builder.query_id(id.text_value) + ' ' + non_str_comp.query_string(builder)
       end
@@ -63,9 +63,9 @@ module Dmwql
   class StringComparison < Treetop::Runtime::SyntaxNode
     def query_string(builder)
       if op.text_value == '~'
-        return "LIKE '%#{value.text_value.gsub('\'','').strip}%'"
+        return "LIKE '%#{value.text_value.downcase.gsub('\'','').strip}%'"
       else
-        return "LIKE '#{value.text_value.gsub('\'','').strip.gsub(/\*/, '%')}'"
+        return "LIKE '#{value.text_value.downcase.gsub('\'','').strip.gsub(/\*/, '%')}'"
       end
     end
   end
