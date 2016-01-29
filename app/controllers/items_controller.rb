@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
   def index
     result, error = @search_engine.search(params[:search])
     
-    @items = result.paginate(page: params[:page])
+    @items = result
     @error = error
   end
 

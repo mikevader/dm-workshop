@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  #get 'filters/index'
+  #get 'filters/show'
+  #get 'filters/new'
+  #get 'filters/create'
+  #get 'filters/edit'
+  #get 'filters/update'
+  #get 'filters/destroy'
+  resources :filters
+
   root                 'static_pages#home'
   get     'help'    => 'static_pages#help'
   get     'about'   => 'static_pages#about'
@@ -7,6 +16,7 @@ Rails.application.routes.draw do
   post    'login'   => 'sessions#create'
   delete  'logout'  => 'sessions#destroy'
 
+  get     'print/all'         => 'output_pages#all',      as: :print
   get     'print/cards'       => 'output_pages#cards',    as: :print_cards
   get     'print/spells'      => 'output_pages#spells',   as: :print_spells
   get     'print/items'       => 'output_pages#items',    as: :print_items
