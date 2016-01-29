@@ -34,12 +34,12 @@ class SpellsInterfaceTest < ActionDispatch::IntegrationTest
     get spells_path
     # Delete a post.
     assert_select 'a[aria-label=?]', 'delete'
-    first_spell = @user.spells.paginate(page: 1).first
+    first_spell = @user.spells.first
     assert_difference 'Spell.count', -1 do
       delete spell_path(first_spell)
     end
     # Visit a different user.
     get user_path(users(:archer))
-    assert_select 'a[aria-label=?]', 'delete', count: 1
+    assert_select 'a[aria-label=?]', 'delete', count: 0
   end
 end

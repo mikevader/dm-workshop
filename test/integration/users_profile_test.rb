@@ -13,9 +13,10 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     assert_select 'title', full_title(@user.name)
     assert_select 'h1', text: @user.name
     assert_select 'h1>img.gravatar'
-    assert_match @user.spells.count.to_s, response.body
-    @user.spells.each do |spell|
-      assert_match spell.name, response.body
-    end
+    assert_match "Filters (#{@user.filters.count})", response.body
+    assert_match "Cards (#{@user.cards.count})", response.body
+    assert_match "Items (#{@user.items.count})", response.body
+    assert_match "Monsters (#{@user.monsters.count})", response.body
+    assert_match "Spells (#{@user.spells.count})", response.body
   end
 end
