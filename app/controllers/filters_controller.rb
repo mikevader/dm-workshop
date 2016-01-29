@@ -17,14 +17,14 @@ class FiltersController < ApplicationController
 
   def index
     @filters = Filter.all
-    @results = search(params[:search])
+    @cards, @error = search(params[:search])
   end
 
   def show
     @filter = Filter.find(params[:id])
     @filters = Filter.all
 
-    @results = search(@filter.query)
+    @cards, @error = search(@filter.query)
 
     render :index
   end
@@ -69,6 +69,7 @@ class FiltersController < ApplicationController
 
   def search(query)
     results = []
+    errors = ''
 
     @search_engines.each do |type, engine|
       result, error = engine.search(query, false)
@@ -76,9 +77,9 @@ class FiltersController < ApplicationController
       unless error
         results += result
       end
-      #@error ||= error
+      errors += error unless error.nil?
     end
 
-    results
+    return results, errors
   end
 end
