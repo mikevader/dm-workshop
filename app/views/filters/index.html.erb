@@ -49,6 +49,7 @@
         </div>
         <div class="row">
           <div class="col-sm-12">
+
             <%= form_tag filters_path, method: 'get', id: 'filter_search' do %>
                 <div class="input-group">
                   <% search = (@filter.nil?) ? params[:search] : @filter.query %>
@@ -78,6 +79,9 @@
               </tr>
               <%= render partial: @cards, collection: @cards, as: :card %>
             </table>
+            <div id="modals">
+              <%= render partial: 'shared/modal', collection: @cards, as: :card %>
+            </div>
           </div>
         </div>
       </div>

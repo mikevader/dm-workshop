@@ -22,6 +22,11 @@ Rails.application.routes.draw do
   get     'print/items'       => 'output_pages#items',    as: :print_items
   get     'print/monsters'    => 'output_pages#monsters', as: :print_monsters
 
+  get     'cards/:id/modal'       => 'cards#modal'
+  get     'items/:id/modal'       => 'items#modal'
+  get     'monsters/:id/modal'       => 'monsters#modal'
+  get     'spells/:id/modal'       => 'spells#modal'
+
   patch     'cards/:id/preview'     => 'cards#preview'
   patch     'items/:id/preview'     => 'items#preview'
   patch     'monsters/:id/preview'  => 'monsters#preview'

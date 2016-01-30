@@ -1,4 +1,4 @@
-var modal = function() {
+var saveDialogLoader = function() {
     $('#saveFilterDialog').on('show.bs.modal', function (event) {
         var filterString = $('#search').val()
 
@@ -7,7 +7,7 @@ var modal = function() {
     })
 }
 
-$(document).on("page:load ready", modal)
+$(document).on("page:load ready", saveDialogLoader)
 
 
 var updateCard = function(event) {

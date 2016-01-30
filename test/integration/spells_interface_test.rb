@@ -21,12 +21,13 @@ class SpellsInterfaceTest < ActionDispatch::IntegrationTest
     get spells_path
     # Valid submission
     description = "This spell really ties the room together"
+    spell_name = "Slow"
     assert_difference 'Spell.count', 1 do
-      post spells_path, spell: { name: "Slow", level: 3, school: "transmutation", description: description }
+      post spells_path, spell: {name: spell_name, level: 3, school: "transmutation", description: description }
     end
     assert_redirected_to spells_url
     follow_redirect!
-    assert_match description, response.body
+    assert_match spell_name, response.body
   end
 
   test 'spell interface should handle deletes' do

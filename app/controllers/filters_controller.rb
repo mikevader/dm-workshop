@@ -77,8 +77,10 @@ class FiltersController < ApplicationController
       unless error
         results += result
       end
-      errors += error unless error.nil?
+      errors << error unless error.nil?
     end
+
+    errors = nil if errors.blank?
 
     return results, errors
   end

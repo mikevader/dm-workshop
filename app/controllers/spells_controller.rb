@@ -79,6 +79,12 @@ class SpellsController < ApplicationController
     render partial: 'shared/card_card', locals: { card: card_data }
   end
 
+  def modal
+    card = Spell.find(params[:id])
+
+    render partial: 'shared/modal_body', locals: { card: card, index: params[:index], modal_size: params[:modal_size], prev_index: params[:previd], next_index: params[:nextid] }
+  end
+
   private
   def spell_params
     params.require(:spell).permit(:name, :tag_list, :cite, :ritual, :level, :school, :casting_time, :range, :components, :duration, :short_description, :athigherlevel, :description, :picture, :concentration, :hero_classes, :hero_class_ids => [])

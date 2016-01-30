@@ -83,6 +83,12 @@ class MonstersController < ApplicationController
     render partial: 'shared/card_card', locals: { card: card_data}
   end
 
+  def modal
+    card = Monster.find(params[:id])
+
+    render partial: 'shared/modal_body', locals: { card: card, index: params[:index], modal_size: params[:modal_size], prev_index: params[:previd], next_index: params[:nextid] }
+  end
+
   private
   def monster_required_params
     params.require(:monster).permit(:name, :tag_list, :cite, :size, :monster_type, :alignment, :armor_class, :hit_points, :speed, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma)
