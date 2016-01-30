@@ -44,6 +44,12 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
+### Dungeon Master Workshop 0.8 ###
+* Savable filters
+* Tags or labels for all cards (do not work in searches atm)
+* Ritual is now correctly usable in searches and gets imported correctly
+* Fixes for import
+
 ### Dungeon Master Workshop 0.7 ###
 * Challenge ratings can now be fractions as well like .5, .25, .124 and are rendered as 1/2, 1/4, 1/8.
 * Search queries work now with multiple AND/ORs
