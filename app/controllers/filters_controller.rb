@@ -35,10 +35,10 @@ class FiltersController < ApplicationController
   def create
     @filter = current_user.filters.build(filter_params)
     if @filter.save
-      flash[:success] = 'Card created!'
+      flash[:success] = 'Filter created!'
       redirect_to filter_path(@filter)
     else
-      redirect_to filters_url
+      render :index
     end
   end
 
@@ -46,6 +46,13 @@ class FiltersController < ApplicationController
   end
 
   def update
+    @filter = Filter.find(params[:id])
+    if @filter.update_attributes(filter_params)
+      flash[:success] = 'Filter updated!'
+      redirect_to filter_path(@filter)
+    else
+      render :index
+    end
   end
 
   def destroy

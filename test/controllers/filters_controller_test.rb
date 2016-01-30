@@ -65,11 +65,14 @@ class FiltersControllerTest < ActionController::TestCase
 
   test 'should get create' do
     log_in_as(users(:michael))
+    query = 'name ~ end'
     assert_difference 'Filter.count', +1 do
-      post :create, filter: { name: 'AAA', query: 'name ~ end' }
+      post :create, filter: { name: 'AAA', query: query}
     end
 
     new_filter = Filter.find_by_name('AAA')
+    assert new_filter
+    assert_equal query, new_filter.query
 
     assert_redirected_to filter_path(new_filter)
   end
@@ -82,8 +85,19 @@ class FiltersControllerTest < ActionController::TestCase
 
   test 'should get update' do
     log_in_as(users(:michael))
-    patch :update, id: @filter.id, filter: { name: @filter.name, query: @filter.query }
-    assert_response :success
+    filter_name = 'aaaa'
+    filter_query = 'labels in (jdf, jdg)'
+    id = @filter.id
+    assert_no_difference 'Filter.count' do
+      patch :update, id: id, filter: { name: filter_name, query: filter_query }
+    end
+
+    filter = Filter.find(id)
+    assert filter
+    assert_equal filter_name, filter.name
+    assert_equal filter_query, filter.query
+
+    assert_redirected_to filter_path(@filter)
   end
 
   test 'should get destory' do

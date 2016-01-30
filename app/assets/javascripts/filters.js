@@ -4,6 +4,9 @@ var saveDialogLoader = function() {
 
         var modal = $(this)
         modal.find('#filter_query').val(filterString)
+        var filterName = $('.search-header > #filter_title').text()
+
+        modal.find('#filter_name').val(filterName)
     })
 }
 
