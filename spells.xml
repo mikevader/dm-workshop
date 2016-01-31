@@ -6420,7 +6420,7 @@ An affected creature is aware of the spell and can thus avoid answering question
     </spell>
     <spell>
       <cite>Page: 22  from EE Players Companion</cite>
-      <name>Thunderclap   A Elemental Evil spell</name>
+      <name>Thunderclap</name>
       <type>Evocation cantrip</type>
       <classes>
         <class>Bard</class>
@@ -6442,7 +6442,7 @@ The spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level
     </spell>
     <spell>
       <cite>Page: 17  from EE Players Companion</cite>
-      <name>Earth Tremor    A Elemental Evil spell</name>
+      <name>Earth Tremor </name>
       <type>1-level Evocation</type>
       <classes>
         <class>Bard</class>
@@ -6461,7 +6461,7 @@ The spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level
     </spell>
     <spell>
       <cite>Page: 21  from EE Players Companion</cite>
-      <name>Pyrotechnics   A Elemental Evil spell</name>
+      <name>Pyrotechnics</name>
       <type>2-level Transmutation</type>
       <classes>
         <class>Bard</class>
@@ -6479,7 +6479,7 @@ The spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level
     </spell>
     <spell>
       <cite>Page: 22  from EE Players Companion</cite>
-      <name>Skywrite (Ritual)   A Elemental Evil spell</name>
+      <name>Skywrite (Ritual)</name>
       <type>2-level Transmutation</type>
       <classes>
         <class>Bard</class>
@@ -6497,7 +6497,7 @@ The spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level
     </spell>
     <spell>
       <cite>Page: 23  from EE Players Companion</cite>
-      <name>Warding Wind   A Elemental Evil spell</name>
+      <name>Warding Wind</name>
       <type>2-level Evocation</type>
       <classes>
         <class>Bard</class>
@@ -6521,7 +6521,7 @@ The wind has the following effects:
     </spell>
     <spell>
       <cite>Page: 16  from EE Players Companion</cite>
-      <name>Create Bonfire   A Elemental Evil spell</name>
+      <name>Create Bonfire</name>
       <type>Conjuration cantrip</type>
       <classes>
         <class>Druid</class>
@@ -6541,7 +6541,7 @@ The spell’s damage increases by 1d8 when you reach 5th level (2d8), 11th level
     </spell>
     <spell>
       <cite>Page: 16  from EE Players Companion</cite>
-      <name>Control Flames   A Elemental Evil spell</name>
+      <name>Control Flames</name>
       <type>Transmutation cantrip</type>
       <classes>
         <class>Druid</class>
@@ -6564,7 +6564,7 @@ If you cast this spell multiple times, you can have up to three of its non-insta
     </spell>
     <spell>
       <cite>Page: 18  from EE Players Companion</cite>
-      <name>Frostbite   A Elemental Evil spell</name>
+      <name>Frostbite</name>
       <type>Evocation cantrip</type>
       <classes>
         <class>Druid</class>
@@ -6584,7 +6584,7 @@ The spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level
     </spell>
     <spell>
       <cite>Page: 19  from EE Players Companion</cite>
-      <name>Gust   A Elemental Evil spell</name>
+      <name>Gust</name>
       <type>Transmutation cantrip</type>
       <classes>
         <class>Druid</class>
@@ -6605,7 +6605,7 @@ The spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level
     </spell>
     <spell>
       <cite>Page: 20  from EE Players Companion</cite>
-      <name>Magic Stone   A Elemental Evil spell</name>
+      <name>Magic Stone</name>
       <type>Transmutation cantrip</type>
       <classes>
         <class>Druid</class>
@@ -6623,7 +6623,7 @@ If you cast this spell again, the spell ends early on any pebbles still affected
     </spell>
     <spell>
       <cite>Page: 21  from EE Players Companion</cite>
-      <name>Mold earth   A Elemental Evil spell</name>
+      <name>Mold earth</name>
       <type>Transmutation cantrip</type>
       <classes>
         <class>Druid</class>
@@ -6644,7 +6644,7 @@ If you cast this spell again, the spell ends early on any pebbles still affected
     </spell>
     <spell>
       <cite>Page: 21  from EE Players Companion</cite>
-      <name>Shape Water   A Elemental Evil spell</name>
+      <name>Shape Water</name>
       <type>Transmutation cantrip</type>
       <classes>
         <class>Druid</class>
@@ -6672,7 +6672,7 @@ If you cast this spell multiple times, you can have no more than two of its non-
     </spell>
     <spell>
       <cite>Page: 15  from EE Players Companion</cite>
-      <name>Absorb Elements    A Elemental Evil spell</name>
+      <name>Absorb Elements </name>
       <type>1-level Abjuration</type>
       <classes>
         <class>Druid</class>
@@ -6693,7 +6693,7 @@ At Higher Levels. When you cast this spell using a spell slot of 2nd level or hi
     </spell>
     <spell>
       <cite>Page: 15  from EE Players Companion</cite>
-      <name>Beast Bond   A Elemental Evil spell</name>
+      <name>Beast Bond</name>
       <type>1-level Divination</type>
       <classes>
         <class>Druid</class>
@@ -6713,7 +6713,7 @@ the beast gains advantage on attack rolls against any creature within 5 feet of 
     </spell>
     <spell>
       <cite>Page: 19  from EE Players Companion</cite>
-      <name>Ice Knife   A Elemental Evil spell</name>
+      <name>Ice Knife</name>
       <type>1-level Conjuration</type>
       <classes>
         <class>Druid</class>
@@ -6733,7 +6733,7 @@ At Higher Levels. When you cast this spell using a spell slot of 2nd level or hi
     </spell>
     <spell>
       <cite>Page: 17  from EE Players Companion</cite>
-      <name>Dust Devil   A Elemental Evil spell</name>
+      <name>Dust Devil</name>
       <type>2-level Conjuration</type>
       <classes>
         <class>Druid</class>
@@ -6755,7 +6755,7 @@ At Higher Levels. When you cast this spell using a spell slot of 3rd level or hi
     </spell>
     <spell>
       <cite>Page: 17  from EE Players Companion</cite>
-      <name>Earthbind   A Elemental Evil spell</name>
+      <name>Earthbind</name>
       <type>2-level Transmutation</type>
       <classes>
         <class>Druid</class>
@@ -6774,7 +6774,7 @@ At Higher Levels. When you cast this spell using a spell slot of 3rd level or hi
     </spell>
     <spell>
       <cite>Page: 17  from EE Players Companion</cite>
-      <name>Erupting Earth   A Elemental Evil spell</name>
+      <name>Erupting Earth</name>
       <type>3-level Transmutation</type>
       <classes>
         <class>Druid</class>
@@ -6795,7 +6795,7 @@ At Higher Levels. When you cast this spell using a spell slot of 3rd level or hi
     </spell>
     <spell>
       <cite>Page: 18  from EE Players Companion</cite>
-      <name>Flame Arrows   A Elemental Evil spell</name>
+      <name>Flame Arrows</name>
       <type>3-level Transmutation</type>
       <classes>
         <class>Druid</class>
@@ -6815,7 +6815,7 @@ At Higher Levels. When you cast this spell using a spell slot of 4th level or hi
     </spell>
     <spell>
       <cite>Page: 22  from EE Players Companion</cite>
-      <name>Tidal Wave   A Elemental Evil spell</name>
+      <name>Tidal Wave</name>
       <type>3-level Conjuration</type>
       <classes>
         <class>Druid</class>
@@ -6833,7 +6833,7 @@ You conjure up a wave of water that crashes down on an area within range. The ar
     </spell>
     <spell>
       <cite>Page: 23  from EE Players Companion</cite>
-      <name>Wall of Water   A Elemental Evil spell</name>
+      <name>Wall of Water</name>
       <type>3-level Evocation</type>
       <classes>
         <class>Druid</class>
@@ -6854,7 +6854,7 @@ is halved if the fire effect passes through the wall to reach its target. Spells
     </spell>
     <spell>
       <cite>Page: 17  from EE Players Companion</cite>
-      <name>Elemental Bane   A Elemental Evil spell</name>
+      <name>Elemental Bane</name>
       <type>4-level Transmutation</type>
       <classes>
         <class>Druid</class>
@@ -6873,7 +6873,7 @@ The target must succeed on a Constitution saving throw or be affected by the spe
     </spell>
     <spell>
       <cite>Page: 23  from EE Players Companion</cite>
-      <name>Watery Sphere   A Elemental Evil spell</name>
+      <name>Watery Sphere</name>
       <type>4-level Conjuration</type>
       <classes>
         <class>Druid</class>
@@ -6896,7 +6896,7 @@ When the spell ends, the sphere falls to the ground and extinguishes all normal 
     </spell>
     <spell>
       <cite>Page: 16  from EE Players Companion</cite>
-      <name>Control Winds   A Elemental Evil spell</name>
+      <name>Control Winds</name>
       <type>5-level Transmutation</type>
       <classes>
         <class>Druid</class>
@@ -6920,7 +6920,7 @@ Updraft. You cause a sustained updraft within the cube, rising upward from the c
     </spell>
     <spell>
       <cite>Page: 20  from EE Players Companion</cite>
-      <name>Maelstrom   A Elemental Evil spell</name>
+      <name>Maelstrom</name>
       <type>5-level Evocation</type>
       <classes>
         <class>Druid</class>
@@ -6937,7 +6937,7 @@ A mass of 5-foot-deep water appears and swirls in a 30-foot radius centered on a
     </spell>
     <spell>
       <cite>Page: 22  from EE Players Companion</cite>
-      <name>Transmute Rock   A Elemental Evil spell</name>
+      <name>Transmute Rock</name>
       <type>5-level Transmutation</type>
       <classes>
         <class>Druid</class>
@@ -6961,7 +6961,7 @@ Transmute Mud to Rock. Nonmagical mud or quicksand in the area no more than 10 f
     </spell>
     <spell>
       <cite>Page: 15  from EE Players Companion</cite>
-      <name>Bones of the Earth   A Elemental Evil spell</name>
+      <name>Bones of the Earth</name>
       <type>6-level Transmutation</type>
       <classes>
         <class>Druid</class>
@@ -6980,7 +6980,7 @@ At Higher Levels. When you cast this spell using a spell slot of 7th level or hi
     </spell>
     <spell>
       <cite>Page: 19  from EE Players Companion</cite>
-      <name>Investiture of Flame   A Elemental Evil spell</name>
+      <name>Investiture of Flame</name>
       <type>6-level Transmutation</type>
       <classes>
         <class>Druid</class>
@@ -7002,7 +7002,7 @@ At Higher Levels. When you cast this spell using a spell slot of 7th level or hi
     </spell>
     <spell>
       <cite>Page: 19  from EE Players Companion</cite>
-      <name>Investiture of Ice   A Elemental Evil spell</name>
+      <name>Investiture of Ice</name>
       <type>6-level Transmutation</type>
       <classes>
         <class>Druid</class>
@@ -7025,7 +7025,7 @@ At Higher Levels. When you cast this spell using a spell slot of 7th level or hi
     </spell>
     <spell>
       <cite>Page: 19  from EE Players Companion</cite>
-      <name>Investiture of Stone   A Elemental Evil spell</name>
+      <name>Investiture of Stone</name>
       <type>6-level Transmutation</type>
       <classes>
         <class>Druid</class>
@@ -7047,7 +7047,7 @@ At Higher Levels. When you cast this spell using a spell slot of 7th level or hi
     </spell>
     <spell>
       <cite>Page: 20  from EE Players Companion</cite>
-      <name>Investiture of Wind   A Elemental Evil spell</name>
+      <name>Investiture of Wind</name>
       <type>6-level Transmutation</type>
       <classes>
         <class>Druid</class>
@@ -7069,7 +7069,7 @@ At Higher Levels. When you cast this spell using a spell slot of 7th level or hi
     </spell>
     <spell>
       <cite>Page: 21  from EE Players Companion</cite>
-      <name>Primordial Ward   A Elemental Evil spell</name>
+      <name>Primordial Ward</name>
       <type>6-level Abjuration</type>
       <classes>
         <class>Druid</class>
@@ -7087,7 +7087,7 @@ of damage, including against the triggering damage. If you do so, the resistance
     </spell>
     <spell>
       <cite>Page: 27  from EE Players Companion</cite>
-      <name>Whirlwind   A Elemental Evil spell</name>
+      <name>Whirlwind</name>
       <type>7-level Evocation</type>
       <classes>
         <class>Druid</class>
@@ -7108,7 +7108,7 @@ A restrained creature can use an action to make a Strength or Dexterity check ag
     </spell>
     <spell>
       <cite>Page: 15  from EE Players Companion</cite>
-      <name>Catapult   A Elemental Evil spell</name>
+      <name>Catapult</name>
       <type>1-level Transmutation</type>
       <classes>
         <class>Sorcerer</class>
@@ -7126,7 +7126,7 @@ At Higher Levels. When you cast this spell using a spell slot of 2nd level or hi
     </spell>
     <spell>
       <cite>Page: 15  from EE Players Companion</cite>
-      <name>Aganazzar’s Scorcher   A Elemental Evil spell</name>
+      <name>Aganazzar’s Scorcher</name>
       <type>2-level Evocation</type>
       <classes>
         <class>Sorcerer</class>
@@ -7144,7 +7144,7 @@ At Higher Levels. When you cast this spell using a spell slot of 3rd level or hi
     </spell>
     <spell>
       <cite>Page: 20  from EE Players Companion</cite>
-      <name>Maximilian’s Earthen Grasp   A Elemental Evil spell</name>
+      <name>Maximilian’s Earthen Grasp</name>
       <type>2-level Transmutation</type>
       <classes>
         <class>Sorcerer</class>
@@ -7165,7 +7165,7 @@ As an action, you can cause the hand to reach for a different creature or to mov
     </spell>
     <spell>
       <cite>Page: 22  from EE Players Companion</cite>
-      <name>Snilloc’s Snowball Swarm   A Elemental Evil spell</name>
+      <name>Snilloc’s Snowball Swarm</name>
       <type>2-level Evocation</type>
       <classes>
         <class>Sorcerer</class>
@@ -7184,7 +7184,7 @@ At Higher Levels. When you cast this spell using a spell slot of 3rd level or hi
     </spell>
     <spell>
       <cite>Page: 20  from EE Players Companion</cite>
-      <name>Melf’s Minute Meteors    A Elemental Evil spell</name>
+      <name>Melf’s Minute Meteors </name>
       <type>3-level Evocation</type>
       <classes>
         <class>Sorcerer</class>
@@ -7203,7 +7203,7 @@ At Higher Levels. When you cast this spell using a spell slot of 4th level or hi
     </spell>
     <spell>
       <cite>Page: 22  from EE Players Companion</cite>
-      <name>Storm Sphere   A Elemental Evil spell</name>
+      <name>Storm Sphere</name>
       <type>4-level Evocation</type>
       <classes>
         <class>Sorcerer</class>
@@ -7223,7 +7223,7 @@ At Higher Levels. When you cast this spell using a spell slot of 5th level or hi
     </spell>
     <spell>
       <cite>Page: 23  from EE Players Companion</cite>
-      <name>Vitriolic Sphere   A Elemental Evil spell</name>
+      <name>Vitriolic Sphere</name>
       <type>4-level Evocation</type>
       <classes>
         <class>Sorcerer</class>
@@ -7243,7 +7243,7 @@ At Higher Levels. When you cast this spell using a spell slot of 5th level or hi
     </spell>
     <spell>
       <cite>Page: 19  from EE Players Companion</cite>
-      <name>Immolation   A Elemental Evil spell</name>
+      <name>Immolation</name>
       <type>5-level Evocation</type>
       <classes>
         <class>Sorcerer</class>
@@ -7261,7 +7261,7 @@ If damage from this spell reduces a target to 0 hit points, the target is turned
     </spell>
     <spell>
       <cite>Page: 15  from EE Players Companion</cite>
-      <name>Abi-Dalzim’s Horrid Wilting   A Elemental Evil spell</name>
+      <name>Abi-Dalzim’s Horrid Wilting</name>
       <type>8-level Necromancy</type>
       <classes>
         <class>Sorcerer</class>
@@ -7279,7 +7279,7 @@ You draw the moisture from every creature in a 30-foot cube centered on a point 
     </spell>
     <spell>
       <cite>Page: 23  from EE Players Companion</cite>
-      <name>Wall of Sand   A Elemental Evil spell</name>
+      <name>Wall of Sand</name>
       <type>3-level Evocation</type>
       <classes>
         <class>Wizard</class>
@@ -7295,7 +7295,7 @@ You draw the moisture from every creature in a 30-foot cube centered on a point 
     </spell>
     <spell>
       <cite>Page: 143  from Sword Coast Adventure's Guide</cite>
-      <name>Booming Blade    A spell from Sword Coast Adventure's Guide</name>
+      <name>Booming Blade</name>
       <type>Evocation cantrip</type>
       <classes>
         <class>Sorcerer</class>
@@ -7315,7 +7315,7 @@ This spell's damage increases when you reach higher levels. 
     </spell>
     <spell>
       <cite>Page: 143  from Sword Coast Adventure's Guide</cite>
-      <name>Green-Flame Blade    A spell from Sword Coast Adventure's Guide</name>
+      <name>Green-Flame Blade</name>
       <type>Evocation cantrip</type>
       <classes>
         <class>Sorcerer</class>
@@ -7335,7 +7335,7 @@ This spell's damage increases when you reach higher levels. 
     </spell>
     <spell>
       <cite>Page: 143  from Sword Coast Adventure's Guide</cite>
-      <name>Lightning Lure    A spell from Sword Coast Adventure's Guide</name>
+      <name>Lightning Lure</name>
       <type>Evocation cantrip</type>
       <classes>
         <class>Sorcerer</class>
@@ -7354,7 +7354,7 @@ The target must succeed on a Strength saving throw or be pulled up to 10 feet in
     </spell>
     <spell>
       <cite>Page: 143  from Sword Coast Adventure's Guide</cite>
-      <name>Sword Burst    A spell from Sword Coast Adventure's Guide</name>
+      <name>Sword Burst</name>
       <type>Conjuration cantrip</type>
       <classes>
         <class>Sorcerer</class>
