@@ -24,7 +24,7 @@ module Admin
 
       assert_difference 'Monster.count', 2 do
         post :create, card_import: { monsters_file: fixture_file_upload('monsters.xml', 'text/xml') }
-        post :create, imports: [{import: true, name: 'Goblin'}, {import: true, name: 'Obgam Sohn des Brogar'}]
+        post :create, imports: {'0' => {import: true, name: 'Goblin'}, '1' => {import: true, name: 'Obgam Sohn des Brogar'}}
       end
 
       goblin = Monster.find_by_name 'Goblin'
@@ -38,7 +38,7 @@ module Admin
 
       assert_difference 'Spell.count', 2 do
         post :create, card_import: { spells_file: fixture_file_upload('spells.xml', 'text/xml') }
-        post :create, imports: [{import: true, name: 'Antilife Shell'}, {import: true, name: 'Magic Missile'}, {import: false, name: 'Alarm'}]
+        post :create, imports: {'0' => {import: true, name: 'Antilife Shell'}, '1' => {import: true, name: 'Magic Missile'}, '2' => {import: false, name: 'Alarm'}}
       end
 
       magic_missile = Spell.find_by_name 'Magic Missile'
@@ -52,7 +52,7 @@ module Admin
 
       assert_difference 'Item.count', 2 do
         post :create, card_import: { items_file: fixture_file_upload('items.xml', 'text/xml') }
-        post :create, imports: [{import: true, name: 'Schutzring'}, {import: true, name: 'Speer des Blitzes'}]
+        post :create, imports: {'0' => {import: true, name: 'Schutzring'}, '1' => {import: true, name: 'Speer des Blitzes'}}
       end
 
       schutzring = Item.find_by_name 'Schutzring'

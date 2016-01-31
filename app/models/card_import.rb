@@ -119,7 +119,7 @@ class CardImport
       ritual = complete_name.downcase.include? 'ritual'
 
       if existing_spell = Spell.find_by_name(name)
-        logger.info "Card %{name} already inscribed"
+        logger.info "Spell #{name} already inscribed"
         id = existing_spell.id
       end
       cite = CardImport.load_element name, spell, 'cite', false
@@ -185,6 +185,7 @@ class CardImport
           description: import_card.attributes.description)
     else
       new_spell = Spell.find(import_card.id)
+      new_spell.hero_classes.delete_all
       new_spell.name = import_card.name
       new_spell.level = import_card.attributes.level
       new_spell.school = import_card.attributes.school
@@ -218,7 +219,7 @@ class CardImport
       name = CardImport.load_element '', item, 'name', true, "craft item: %{value}"
 
       if existing_item = Item.find_by_name(name)
-        logger.info "Card %{name} already exists."
+        logger.info "Item #{name} already exists."
         id = existing_item.id
       end
 
@@ -272,7 +273,7 @@ class CardImport
       name = CardImport.load_element '', monster, 'name', true, "bread monster: %{value}"
 
       if existing_monster = Monster.find_by_name(name)
-        logger.info "skip because %{name} already bread"
+        logger.info "Monster #{name} already bread"
         id = existing_monster.id
       end
 
@@ -403,6 +404,9 @@ class CardImport
       new_monster = user.monsters.create(name: import_card.name)
     else
       new_monster = Monster.find(import_card.id)
+      new_monster.skills.delete_all
+      new_monster.traits.delete_all
+      new_monster.actions.delete_all
       new_monster.name = import_card.name
     end
 
@@ -455,6 +459,7 @@ class CardImport
       name = CardImport.load_element '', card, 'name', true, "craft card: %{value}"
 
       if existing_card = Card.find_by_name(name)
+        logger.info "Card #{name} already printed"
         id = existing_card.id
       end
 

@@ -8,12 +8,14 @@
     <th>Name</th>
   </tr>
   <%# fields_for :imports, @card_import.imports do |ff| %>
-  <% @card_import.imports.each do |import| %>
+  <% @card_import.imports.each_with_index do |import, index| %>
       <tr>
-        <td><%= check_box_tag 'imports[][import]', 'true', import.import?, class: 'input-sm' %></td>
+        <td>
+          <%= check_box_tag "imports[#{index}][import]", 'true', import.import?, class: 'input-sm' %>
+        </td>
         <td><label><%= import.id %></label></td>
         <td><label><%= ' -- ' %></label></td>
-        <td><%= text_field_tag 'imports[][name]', import.name, class: 'form-control input-sm' %></td>
+        <td><%= text_field_tag "imports[#{index}][name]", import.name, class: 'form-control input-sm' %></td>
       </tr>
   <% end %>
 </table>

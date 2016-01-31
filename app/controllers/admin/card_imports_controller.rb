@@ -16,15 +16,18 @@ module Admin
 
         @card_import.import_files
 
-        session[:card_import_selects] = @card_import.imports
+        session[:card_import_selects] = @card_import.imports.sort! { |a, b| a.name.downcase <=> b.name.downcase }
+
       else
         @card_import = CardImport.new(current_user)
         @card_import.current_step = session[:import_step]
         @card_import.imports = session[:card_import_selects]
 
         if params[:imports]
+          existing = @card_import.imports.sort { |a, b| a.name.downcase <=> b.name.downcase }
+          imports = params[:imports].values.sort { |a, b| a[:name].downcase <=> b[:name].downcase }
 
-          params[:imports].zip(@card_import.imports) .each do |imp, card|
+          imports.zip(existing).each do |imp, card|
             card.import = imp[:import]
             #card.id = imp[:id]
             card.name = imp[:name]
