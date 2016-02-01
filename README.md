@@ -40,6 +40,17 @@ The final version is accessible under:
 * Reference creature's spells and display/print the according cards.
 * Group a list of creatures, spells, treasures as encounters or for episodes in an adventure
 
+## Planned Features:
+* Overridable skill value
+* Overridable saving throw value
+* Labels usable in search
+* Search help
+* Auto complete for search
+* Access rights
+* Private cards
+*
+
+
 
 ## Release notes ##
 We had the following releases:
