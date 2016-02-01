@@ -1,5 +1,361 @@
 <% provide(:title, "Help") %>
 <h1>Help</h1>
 <p>
-  Get help here ... somewhen in the future.
+  Here you will find help to several topics:
 </p>
+<ul>
+  <li>
+    <a href="#search">How can I search for cards?</a>
+    <ul>
+      <li><a href="#keywords">Keywords Reference</a></li>
+      <li><a href="#operators">Operators Reference</a></li>
+      <li><a href="#fields">Fields Reference</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="#card">How do free form cards work?</a>
+    <ul>
+      <li><a href="#card_elements">Card template elements</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="search">How can I search for cards?</h2>
+<p>
+  You can search for the name and labels of every card. Apart from that every card has some special fields over which to
+  search for them.
+</p>
+
+
+<h3 id="keywords">Keywords Reference</h3>
+<p>
+  A keyword in DMWQL is a word or phrase that does any of the following:
+</p>
+<ul>
+  <li>joins two or more clauses together to form a complex DMWQL query</li>
+  <li>alters the logic of one or more clauses</li>
+  <li>alters the logic of <a href="#operators">operators</a></li>
+  <li>has an explicit definition in a DMWQL query</li>
+  <li>performs a specific function that alters the results of a DMWQL query.</li>
+</ul>
+<p>
+  <b>List of keywords:</b>
+</p>
+<ul>
+  <li><a href="#keyword_and">AND</a></li>
+  <li><a href="#keyword_or">OR</a></li>
+</ul>
+
+<h4 id="keyword_and">AND</h4>
+<p>
+  Used to combine multiple clauses, allowing you to refine your search. Note that you can use parentheses.
+</p>
+<h5>Examples</h5>
+<ul>
+  <li>
+    <p>Find all spells which contain the word "fire" and are of level 7 or above</p>
+    <div>
+      <pre>name ~ fire AND level >= 7</pre>
+    </div>
+  </li>
+  <li>
+    <p>Find all bard and druid spells which require concentration</p>
+    <div>
+      <pre>classes in (Bard, Druid) AND concentration = true</pre>
+    </div>
+  </li>
+  <li>
+    <p>Find all bard and druid spells which require concentration</p>
+    <div>
+      <pre>classes in (Bard, Druid) AND concentration = true</pre>
+    </div>
+  </li>
+  <li>
+    <p>Find all monsters with their strength between 18 and 26 </p>
+    <div>
+      <pre>strength > 18 AND strength < 26</pre>
+    </div>
+  </li>
+</ul>
+
+<h4 id="keyword_or">OR</h4>
+<p>
+  Used to combine multiple clauses, allowing you to refine your search. Note that you can use parentheses.
+</p>
+<h5>Examples</h5>
+<ul>
+  <li>
+    <p>Find items with attunement or are uncommon</p>
+    <div>
+      <pre>attunement = true OR rarity = Uncommon</pre>
+    </div>
+  </li>
+  <li>
+    <p>Find all spells of level zero or can be cast as ritual.</p>
+    <div>
+      <pre>ritual = true OR level = 0</pre>
+    </div>
+  </li>
+</ul>
+
+<h3 id="operators">Operators Reference</h3>
+<p>
+  An operator in DMWQL is one or more symbols or words which compares the value of a field on its left with one or more
+  values on its right, such that only true results are retrieved by the clause.
+</p>
+<p>
+  <b>List of Operators:</b>
+</p>
+<ul>
+  <li><a href="#operator_equals">EQUALS: =</a></li>
+  <li><a href="#operator_not_equals">NOT EQUALS: !=</a></li>
+  <li><a href="#operator_greater_than">GREATER THAN: &gt;</a></li>
+  <li><a href="#operator_greater_than_equals">GREATER THAN EQUALS: &gt;=</a></li>
+  <li><a href="#operator_less_than">LESS THAN: &lt;</a></li>
+  <li><a href="#operator_less_than_equals">LESS THAN EQUALS: &lt;=</a></li>
+  <li><a href="#operator_in">IN</a></li>
+  <li><a href="#operator_contains">CONTAINS: ~</a></li>
+</ul>
+
+
+
+<h4 id="operator_equals">EQUALS: =</h4>
+<p>
+  The "=" operator is used to search for cards where the value of the specified field exaclty matches the specified
+  value.
+</p>
+<h5>Examples</h5>
+<ul>
+  <li>
+    <p>Find items with attunement</p>
+    <div>
+      <pre>attuenment = true</pre>
+    </div>
+  </li>
+  <li>
+    <p>Find all paladin spells</p>
+    <div>
+      <pre>classes = Paladin</pre>
+    </div>
+  </li>
+</ul>
+
+<h4 id="operator_not_equals">NOT EQUALS: !=</h4>
+<p>
+  The "!=" operator is used to search for cards where the value of the specified field does not match the specified
+  value.
+</p>
+<h5>Examples</h5>
+<ul>
+  <li>
+    <p>Find all non armor items</p>
+    <div>
+      <pre>category != Armor</pre>
+    </div>
+  </li>
+  <li>
+    <p>Find all non cantrip spells.</p>
+    <div>
+      <pre>level != 0</pre>
+    </div>
+  </li>
+</ul>
+
+<h4 id="operator_greater_than">GREATER THAN: &gt;</h4>
+<p>
+  The "&gt;" operator is used to search for cards where the value of the specified field is greater than the specified
+  value.
+</p>
+<h5>Examples</h5>
+<ul>
+  <li>
+    <p>Find spells of level 6 to 9</p>
+    <div>
+      <pre>level > 5</pre>
+    </div>
+  </li>
+</ul>
+
+<h4 id="operator_greater_than_equals">GREATER THAN EQUALS: &gt;=</h4>
+<p>
+  The "&gt;=" operator is used to search for cards where the value of the specified field is greater than or equal to
+  the specified value.
+</p>
+<h5>Examples</h5>
+<ul>
+  <li>
+    <p>Find spells of level 8 and above</p>
+    <div>
+      <pre>level >= 8</pre>
+    </div>
+  </li>
+</ul>
+
+<h4 id="operator_less_than">LESS THAN: &lt;</h4>
+<p>
+  The "&lt;" operator is used to search for cards where the value of the specified field is less than the specified
+  value.
+</p>
+<h5>Examples</h5>
+<ul>
+  <li>
+    <p>Find spells of non level 9 spells</p>
+    <div>
+      <pre>level < 9</pre>
+    </div>
+  </li>
+</ul>
+
+<h4 id="operator_less_than_equals">LESS THAN EQUALS: &lt;=</h4>
+<p>
+  The "&lt;=" operator is used to search for cards where the value of the specified field is less than or equal to the
+  specified value.
+</p>
+<h5>Examples</h5>
+<ul>
+  <li>
+    <p>Find spells of level 0 and 1</p>
+    <div>
+      <pre>level <= 1</pre>
+    </div>
+  </li>
+</ul>
+
+<h4 id="operator_in">IN</h4>
+<p>
+  The "IN" operator is used to search for cards where the value of the specified field is one of multiple specified
+  values. The values are specified as a comma-delimited list, surrounded by parentheses.
+</p>
+<p>
+  Using "IN" is equivalent to using multiple EQUALS statements, but is shorter and more convenient.
+</p>
+<h5>Examples</h5>
+<ul>
+  <li>
+    <p>Find all spells of the abjuration, illusion and necromancy school</p>
+    <div>
+      <pre>school in (abjuration, illusion, necromancy)</pre>
+    </div>
+  </li>
+  <li>
+    <p>Find weapons and armors</p>
+    <div>
+      <pre>category in (Armor, Weapon)</pre>
+    </div>
+  </li>
+</ul>
+
+<h4 id="operator_contains">CONTAINS: ~</h4>
+<p>
+  The "~" operator is used to search for cards where the value of the specified field matches the specified value
+  (either an exact match or a "fuzzy" match). Can only be used for text fields.
+</p>
+<h5>Examples</h5>
+<ul>
+  <li>
+    <p>Find all cards with "fire" in their name.</p>
+    <div>
+      <pre>name ~ fire</pre>
+    </div>
+  </li>
+</ul>
+
+<h3 id="fields">Fields Reference</h3>
+<p>
+  A field in DMWQL is a word that represents a card field. In a clause, a field is followed by an operator, which in
+  turn is followed by one ore more values.
+</p>
+<p>
+  <b>List of general fields:</b>
+</p>
+<ul>
+  <li>Name</li>
+  <li><strike>Label</strike> (coming soon)</li>
+</ul>
+
+<h4 id="fields_card">Card fields</h4>
+<p>
+  Beside the general fields the free form cards provide no additional fields which could be used in a search.
+</p>
+
+<h4 id="fields_item">Item fields</h4>
+<p>
+  Items have some additional fields:
+</p>
+<ul>
+  <li>attunement</li>
+  <li>category</li>
+  <li>rarity</li>
+</ul>
+
+<h4 id="fields_monster">Monster fields</h4>
+<p>
+  Monsters have some additional fields:
+</p>
+<ul>
+  <li>str</li>
+  <li>dex</li>
+  <li>con</li>
+  <li>int</li>
+  <li>wis</li>
+  <li>cha</li>
+</ul>
+
+<h4 id="fields_spell">Spell fields</h4>
+<p>
+  Spells have some additional fields:
+</p>
+<ul>
+  <li>ritual</li>
+  <li>school</li>
+  <li>level</li>
+  <li>level</li>
+  <li>concentration</li>
+  <li>duration</li>
+  <li>castingTime</li>
+  <li>classes</li>
+</ul>
+
+
+<h2 id="card">How do free form cards work?</h2>
+<p>
+  Usually the cards have a predefined format like spells where you can add explicitly set all specific information like
+  the level, the additional text for higher levels, etc. You can use standard HTML do format those text blocks.
+</p>
+<p>
+  But with the plain cards you can use a simple template language to format your card. This is by the way the same
+  language the specific card types are using to define their cards. So you can so the same (and more) as items, monsters
+  and spells. I have to reference <a href="http://crobi.github.io/rpg-cards/" target="_blank">RPG Card Generator</a>
+  from where I copied heavily for this template language and card layout.
+</p>
+
+<h3 id="card_elements">Card template elements</h3>
+<p>
+  Beside the actual card content there are some required and optional fields:
+</p>
+<ul>
+  <li><code>name</code> Name of the card which will be displayed on the top</li>
+  <li><code>color</code> Name of the card color. You can use all <a href="http://www.w3schools.com/cssref/css_colornames.asp" target="_blank">CSS color names.</a></li>
+  <li><code>icon</code> Name of the card icon. You can use all icons from <a href="http://game-icons.net/" target="_blank">game-icons.net</a>. Just use the name of the file without extension.</li>
+  <li><strike><code>size</code> Size of the card</strike> Not available atm but will come soon.</li>
+  <li><code>bagdes</code> (Optional) Comma separated list of icons which are used as badges on the right side of the card like the character classes on the spell cards.</li>
+</ul>
+<p>
+  The rest of the card content is a list of elements where each card element is of the following format:
+</p>
+<pre>"element | param1 | param2 | ..."</pre>
+<p>
+  You can use the following elements:
+</p>
+<ul>
+  <li><code>subtitle</code> Larger italic text. <b>param1:</b> subtitle text</li>
+  <li><code>rule</code> A horizontal separator.</li>
+  <li><code>property</code> Property line. The property's description is indented if it spans over multiple lines. <b>param1:</b> property name (bold). <b>param2:</b> description</li>
+  <li><code>description</code> Same as the property line but the description isn't indented.</li>
+  <li><code>text</code> Simple paragraph. <b>param1:</b> text</li>
+  <li><code>subsection</code> Subsection header with a horizontal rule beneath the subsection name. <b>param1:</b> subsecion name</li>
+  <li><code>boxes</code> Creates a line of empty boxes, ideal for charges on wands or any other situation with limited uses. <b>param1:</b> number of boxes. <b>param2:</b> size of the box (with the unit <i>em</i> aka 1.0 is the height of the letter 'e')</li>
+  <li><code>dndstats</code> Stat block of a Dungeons&Dragons creature. <b>param1:</b> Strength score. <b>param2:</b> Dexterity score. <b>param3:</b> Constitution score. <b>param4:</b> Intelligence score. <b>param5:</b> Wisdom score. <b>param6:</b> Charisma score.</li>
+  <li><code>fill</code> Dynamic space filler which uses the unused space on the card. To center an element vertically you can place a fill before and after the element with the same number. <b>param1:</b> number of units of empty space to use.</li>
+  <li><code>bullet</code> Bullet point to create a list. <b>param1:</b> text</li>
+</ul>

@@ -44,11 +44,12 @@ The final version is accessible under:
 * Overridable skill value
 * Overridable saving throw value
 * Labels usable in search
-* Search help
 * Auto complete for search
 * Access rights
 * Private cards
-*
+* Dynamic calculation of card per sheet to allow mix of card sizes
+* Backside of cards
+* Working SSL over anduin.ch
 
 
 
@@ -60,6 +61,7 @@ We had the following releases:
 * Tags or labels for all cards (do not work in searches atm)
 * Ritual is now correctly usable in searches and gets imported correctly
 * Fixes for import
+* Help for search and card formatting
 
 ### Dungeon Master Workshop 0.7 ###
 * Challenge ratings can now be fractions as well like .5, .25, .124 and are rendered as 1/2, 1/4, 1/8.

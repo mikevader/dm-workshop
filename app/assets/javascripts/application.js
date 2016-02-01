@@ -64,6 +64,11 @@ var modal = function(event) {
 
 var loader = function() {
     $('div.modal.card-dialog').on('show.bs.modal', modal)
+
 }
 
 $(document).on("page:load ready", loader)
+
+$(function () {
+    $('[data-toggle="popover"]').popover({html: true})
+})

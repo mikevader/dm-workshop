@@ -53,9 +53,12 @@
         </div>
         <div class="row">
           <div class="col-sm-12">
-
             <%= form_tag filters_path, method: 'get', id: 'filter_search' do %>
                 <div class="input-group">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-default" data-toggle="popover" data-container="body" data-placement="bottom"
+                            data-content="The search works on all card types but might return errors for those types the query is not applicable. For more details look in the <a href='<%= help_path(anchor: 'search') %>'>help</a>"><span class="glyphicon glyphicon-question-sign"></span></button>
+                  </div>
                   <% search = (@filter.nil?) ? params[:search] : @filter.query %>
                   <%= text_field_tag :search, search, class: 'form-control', autocomplete: 'off', placeholder: 'Search for...' %>
                   <div class="input-group-btn">
