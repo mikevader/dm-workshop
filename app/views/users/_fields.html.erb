@@ -1,21 +1,21 @@
 <%= render 'shared/error_messages', object: f.object %>
 
-<div class="form-group col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+<div class="form-group">
     <%= f.label :name %>
     <%= f.text_field :name, class: 'form-control' %>
 </div>
 
-<div class="form-group col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+<div class="form-group">
     <%= f.label :email %>
     <%= f.email_field :email, class: 'form-control' %>
 </div>
 
-<div class="form-group col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+<div class="form-group">
     <%= f.label :password %>
     <%= f.password_field :password, class: 'form-control' %>
 </div>
 
-<div class="form-group col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+<div class="form-group">
     <%= f.label :password_confirmation, "Confirmation" %>
     <%= f.password_field :password_confirmation, class: 'form-control' %>
 </div>
