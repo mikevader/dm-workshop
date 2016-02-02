@@ -38,7 +38,7 @@ class ItemsInterfaceTest < ActionDispatch::IntegrationTest
     get items_path
     # Delete a post.
     assert_select 'a[aria-label=?]', 'delete'
-    first_item = Item.paginate(page: 1).first
+    first_item = Item.first
     assert_difference 'Item.count', -1 do
       delete item_path(first_item)
     end

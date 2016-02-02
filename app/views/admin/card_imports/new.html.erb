@@ -11,9 +11,7 @@
           </ul>
         </div>
     <% end %>
-
     <%= render "#{@card_import.current_step}_step", f: f %>
-
     <div class="buttons">
       <%= f.submit "Import", class: 'btn btn-primary' %>
       <%= link_to 'Cancel', 'card_imports', method: :delete, class: 'btn btn-default' %>

@@ -126,6 +126,17 @@ ul.alert-dropdown {
   width: 200px;
 }
 
+.table{
+  input[type="checkbox"], input[type="radio"] {
+    line-height: normal;
+    margin: 0px;
+    vertical-align: middle;
+  }
+  label {
+    vertical-align: middle;
+  }
+}
+
 /* Side Navigation */
 
 @media(min-width:768px) {

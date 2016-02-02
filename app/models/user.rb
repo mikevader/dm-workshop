@@ -1,8 +1,10 @@
 class User < ActiveRecord::Base
+  acts_as_tagger
   has_many :spells
   has_many :items
   has_many :monsters
   has_many :cards
+  has_many :filters
 
   attr_accessor   :remember_token, :activation_token, :reset_token
   before_save     :downcase_email

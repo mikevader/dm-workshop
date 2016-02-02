@@ -2,7 +2,7 @@ require 'search_engine'
 
 class MonstersController < ApplicationController
   layout :choose_layout
-  before_action :logged_in_user, only: [:index, :edit, :update, :create, :destroy]
+  before_action :logged_in_user, only: [:index, :show, :new, :edit, :update, :create, :destroy]
   before_action :admin_user, only: [:edit, :update, :destroy]
 
   before_action :init_search_engine, only: [:index]
@@ -14,12 +14,12 @@ class MonstersController < ApplicationController
   def index
     result, error = @search_engine.search(params[:search])
     
-    @monsters = result.paginate(page: params[:page])
+    @cards = result
     @error = error
   end
 
   def show
-    @monster = Monster.find(params[:id])
+    @card = Monster.find(params[:id])
   end
 
   def new
@@ -83,12 +83,18 @@ class MonstersController < ApplicationController
     render partial: 'shared/card_card', locals: { card: card_data}
   end
 
+  def modal
+    card = Monster.find(params[:id])
+
+    render partial: 'shared/modal_body', locals: { card: card, index: params[:index], modal_size: params[:modal_size], prev_index: params[:previd], next_index: params[:nextid] }
+  end
+
   private
   def monster_required_params
-    params.require(:monster).permit(:name, :cite, :size, :monster_type, :alignment, :armor_class, :hit_points, :speed, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma)
+    params.require(:monster).permit(:name, :tag_list, :cite, :size, :monster_type, :alignment, :armor_class, :hit_points, :speed, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma)
   end
   def monster_params
-    params.require(:monster).permit(:name, :cite, :size, :monster_type, :alignment, :armor_class, :hit_points, :speed, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :senses, :languages, :challenge, :description, :bonus, :monsters_skills, :skills, :saving_throws => [], :damage_vulnerabilities => [], :damage_resistances => [], :damage_immunities => [], :cond_immunities => [], :monsters_skills_ids => [], :skill_ids => [], actions_attributes: [:id, :title, :description, :_destroy], traits_attributes: [:id, :title, :description, :_destroy])
+    params.require(:monster).permit(:name, :tag_list, :cite, :size, :monster_type, :alignment, :armor_class, :hit_points, :speed, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :senses, :languages, :challenge, :description, :bonus, :monsters_skills, :skills, :saving_throws => [], :damage_vulnerabilities => [], :damage_resistances => [], :damage_immunities => [], :cond_immunities => [], :monsters_skills_ids => [], :skill_ids => [], actions_attributes: [:id, :title, :description, :_destroy], traits_attributes: [:id, :title, :description, :_destroy])
   end
   
   def logged_in_user
@@ -100,8 +106,8 @@ class MonstersController < ApplicationController
   end
 
   def correct_user
-    @monster = Monster.find_by(id: params[:id])
-    redirect_to root_url unless current_user?(@monster.user) || admin_user?
+    @card = Monster.find_by(id: params[:id])
+    redirect_to root_url unless current_user?(@card.user) || admin_user?
   end
   
   def admin_user

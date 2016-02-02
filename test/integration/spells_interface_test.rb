@@ -21,12 +21,13 @@ class SpellsInterfaceTest < ActionDispatch::IntegrationTest
     get spells_path
     # Valid submission
     description = "This spell really ties the room together"
+    spell_name = "Slow"
     assert_difference 'Spell.count', 1 do
-      post spells_path, spell: { name: "Slow", level: 3, school: "transmutation", description: description }
+      post spells_path, spell: {name: spell_name, level: 3, school: "transmutation", description: description }
     end
     assert_redirected_to spells_url
     follow_redirect!
-    assert_match description, response.body
+    assert_match spell_name, response.body
   end
 
   test 'spell interface should handle deletes' do
@@ -34,12 +35,12 @@ class SpellsInterfaceTest < ActionDispatch::IntegrationTest
     get spells_path
     # Delete a post.
     assert_select 'a[aria-label=?]', 'delete'
-    first_spell = @user.spells.paginate(page: 1).first
+    first_spell = @user.spells.first
     assert_difference 'Spell.count', -1 do
       delete spell_path(first_spell)
     end
     # Visit a different user.
     get user_path(users(:archer))
-    assert_select 'a[aria-label=?]', 'delete', count: 1
+    assert_select 'a[aria-label=?]', 'delete', count: 0
   end
 end

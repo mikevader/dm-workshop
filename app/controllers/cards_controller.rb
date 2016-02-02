@@ -83,9 +83,15 @@ class CardsController < ApplicationController
     render partial: 'shared/card_card', locals: { card: card_data}
   end
 
+  def modal
+    card = Card.find(params[:id])
+
+    render partial: 'shared/modal_body', locals: { card: card, index: params[:index], modal_size: params[:modal_size], prev_index: params[:previd], next_index: params[:nextid] }
+  end
+
   private
   def card_params
-    params.require(:card).permit(:name, :icon, :color, :contents)
+    params.require(:card).permit(:name, :tag_list, :icon, :color, :contents)
   end
 
   def logged_in_user

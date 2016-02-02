@@ -13,7 +13,9 @@
     <th>CR</th>
     <th class="last"></th>
   </tr>
-  <%= render @monsters %>
+  <%= render partial: @cards, collection: @cards, as: :card %>
 </table>
 
-<%= render partial: 'modal', collection: @monsters, as: :monster %>
+<div id="modals">
+  <%= render partial: 'shared/modal', collection: @cards, as: :card %>
+</div>

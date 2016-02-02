@@ -41,3 +41,34 @@ var updateCard = function(event) {
 
 $(document).on('change', 'form.preview_form', updateCard);
 $(document).on("page:load ready", loaded);
+
+var modal = function(event) {
+    var modal = $(this)
+    var cardPath = modal.data('card')
+    var modal_size = modal.data('size')
+    var target = '#' + modal.attr('id')
+    var nextid = modal.data('nextid')
+    var previd = modal.data('previd')
+
+    if ($(target).find('.modal-body').length == 0) {
+        $.ajax({
+            url: cardPath,
+            data: {index: target.substring(1), nextid: nextid, previd: previd, modal_size: modal_size},
+            method: "GET",
+            success: function(data) {
+                $(target).find('.modal-content').append(data)
+            }
+        })
+    }
+}
+
+var loader = function() {
+    $('div.modal.card-dialog').on('show.bs.modal', modal)
+
+}
+
+$(document).on("page:load ready", loader)
+
+$(function () {
+    $('[data-toggle="popover"]').popover({html: true})
+})

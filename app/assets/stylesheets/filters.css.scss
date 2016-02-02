@@ -1,0 +1,34 @@
+// Place all the styles related to the filter controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.filter-operations {
+  padding-left: 2px;
+}
+
+ul.filter-operations {
+  display: inline-block;
+  margin-top: 0;
+}
+
+.filter-operations > li {
+  display: inline;
+  padding: 0 5px;
+
+  &:first-child {
+    padding-left: 0;
+    border-left: none;
+  }
+}
+
+
+.search-header h1 {
+  float: left;
+  margin-right: 12px;
+  font-size: 24px;
+  line-height: 1.25;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}

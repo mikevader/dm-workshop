@@ -11,6 +11,10 @@
         <div class="col-sm-offset-1 col-sm-10">
           <%= form_tag yield(:search_path), method: 'get', id: "cards_search" do %>
             <div class="input-group">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-default" data-toggle="popover" data-container="body" data-placement="bottom"
+                        data-content="You can search here like this:<pre>(name ~ fire OR level > 5) AND classes in (Bard, Cleric)</pre> For more details look in the <a href='<%= help_path(anchor: 'search') %>'>help</a>"><span class="glyphicon glyphicon-question-sign"></span></button>
+              </div>
               <%= text_field_tag :search, params[:search], class: "form-control", autocomplete: 'off', placeholder: 'Search for...' %>
               <div class="input-group-btn">
                 <%= button_tag(type: 'submit', class: "btn btn-primary") do %>

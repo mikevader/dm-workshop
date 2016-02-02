@@ -14,12 +14,12 @@ class ItemsController < ApplicationController
   def index
     result, error = @search_engine.search(params[:search])
     
-    @items = result.paginate(page: params[:page])
+    @cards = result
     @error = error
   end
 
   def show
-    @item = Item.find(params[:id])
+    @card = Item.find(params[:id])
   end
 
   def new
@@ -82,9 +82,15 @@ class ItemsController < ApplicationController
     render partial: 'shared/card_card', locals: { card: card_data}
   end
 
+  def modal
+    card = Item.find(params[:id])
+
+    render partial: 'shared/modal_body', locals: { card: card, index: params[:index], modal_size: params[:modal_size], prev_index: params[:previd], next_index: params[:nextid] }
+  end
+
   private
   def item_params
-    params.require(:item).permit(:name, :cssclass, :category_id, :rarity_id, :attunement, :description, properties_attributes: [:id, :name, :value, :_destroy])
+    params.require(:item).permit(:name, :tag_list, :cssclass, :category_id, :rarity_id, :attunement, :description, properties_attributes: [:id, :name, :value, :_destroy])
   end
 
   # Before filters

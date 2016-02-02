@@ -1,5 +1,8 @@
 # Dungeon Master Workshop #
 
+Master: ![Master Build State](https://codeship.com/projects/4b06b2b0-2940-0133-4c3b-76c73dc375da/status?branch=master)
+Dev: ![Dev Build State](https://codeship.com/projects/4b06b2b0-2940-0133-4c3b-76c73dc375da/status?branch=develop)
+
 This dungeon master support tool is all about cards and managing them: Spell
 card for the dm or players, creature sheets for encounters or NPCs, item cards
 for treasures or loot, or just any card you want to have.
@@ -13,6 +16,7 @@ The current in development state can be viewed under:
 
 The final version is accessible under:
 (https://dmw.herokuapp.com).
+
 
 ### In the final first version the idea is to be able to: ###
 
@@ -36,9 +40,28 @@ The final version is accessible under:
 * Reference creature's spells and display/print the according cards.
 * Group a list of creatures, spells, treasures as encounters or for episodes in an adventure
 
+## Planned Features:
+* Overridable skill value
+* Overridable saving throw value
+* Labels usable in search
+* Auto complete for search
+* Access rights
+* Private cards
+* Dynamic calculation of card per sheet to allow mix of card sizes
+* Backside of cards
+* Working SSL over anduin.ch
+
+
 
 ## Release notes ##
 We had the following releases:
+
+### Dungeon Master Workshop 0.8 ###
+* Savable filters
+* Tags or labels for all cards (do not work in searches atm)
+* Ritual is now correctly usable in searches and gets imported correctly
+* Fixes for import
+* Help for search and card formatting
 
 ### Dungeon Master Workshop 0.7 ###
 * Challenge ratings can now be fractions as well like .5, .25, .124 and are rendered as 1/2, 1/4, 1/8.

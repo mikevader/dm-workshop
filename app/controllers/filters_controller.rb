@@ -1,0 +1,94 @@
+require 'search_engine'
+
+class FiltersController < ApplicationController
+  #layout :choose_layout
+  before_action :logged_in_user, only: [:index, :show, :new, :edit, :update, :create, :destroy]
+
+  before_action :init_search_engine, only: [:show, :index]
+
+  def init_search_engine
+    @search_engines = {
+        cards: SearchEngine2.new(Card),
+        items: SearchEngine2.new(Item),
+        spells: SearchEngine2.new(Spell),
+        monsters: SearchEngine2.new(Monster)
+    }
+  end
+
+  def index
+    @filters = Filter.all
+    @cards, @error = search(params[:search])
+  end
+
+  def show
+    @filter = Filter.find(params[:id])
+    @filters = Filter.all
+
+    @cards, @error = search(@filter.query)
+
+    render :index
+  end
+
+  def new
+  end
+
+  def create
+    @filter = current_user.filters.build(filter_params)
+    if @filter.save
+      flash[:success] = 'Filter created!'
+      redirect_to filter_path(@filter)
+    else
+      render :index
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    @filter = Filter.find(params[:id])
+    if @filter.update_attributes(filter_params)
+      flash[:success] = 'Filter updated!'
+      redirect_to filter_path(@filter)
+    else
+      render :index
+    end
+  end
+
+  def destroy
+    Filter.find(params[:id]).destroy
+    flash[:success] = 'Filter removed!'
+    redirect_to filters_url
+  end
+
+  private
+  def filter_params
+    params.require(:filter).permit(:name, :query)
+  end
+
+  def logged_in_user
+    unless logged_in?
+      store_location
+      flash[:danger] = 'Please log in.'
+      redirect_to login_url
+    end
+  end
+
+  def search(query)
+    results = []
+    errors = ''
+
+    @search_engines.each do |type, engine|
+      result, error = engine.search(query, false)
+
+      unless error
+        results += result
+      end
+      errors << error unless error.nil?
+    end
+
+    errors = nil if errors.blank?
+
+    return results, errors
+  end
+end

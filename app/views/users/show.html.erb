@@ -10,8 +10,11 @@
   </aside>
   <div class="col-md-8">
     <% if @user.spells.any? %>
+      <h3>Filters (<%= @user.filters.count %>)</h3>
+      <h3>Cards (<%= @user.cards.count %>)</h3>
+      <h3>Items (<%= @user.items.count %>)</h3>
+      <h3>Monsters (<%= @user.monsters.count %>)</h3>
       <h3>Spells (<%= @user.spells.count %>)</h3>
-      <%= render 'shared/spells' %>
     <% end %>
   </div>
 </div>

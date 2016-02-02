@@ -1,4 +1,5 @@
 class Item < ActiveRecord::Base
+  acts_as_taggable
   belongs_to :category
   belongs_to :rarity
   belongs_to :user

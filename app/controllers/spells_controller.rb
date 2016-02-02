@@ -15,7 +15,7 @@ class SpellsController < ApplicationController
   def index
     result, error = @search_engine.search(params[:search])
     
-    @spells = result
+    @cards = result
     @error = error
   end
 
@@ -45,11 +45,11 @@ class SpellsController < ApplicationController
   end
 
   def edit
-    @card = Spell.includes(:hero_classes).find(params[:id])
+    @card = Spell.find(params[:id])
   end
   
   def update
-    @card = Spell.includes(:hero_classes).find(params[:id])
+    @card = Spell.find(params[:id])
     if @card.update_attributes(spell_params)
       flash[:success] = 'Spell updated'
       redirect_to spells_path
@@ -79,14 +79,20 @@ class SpellsController < ApplicationController
     render partial: 'shared/card_card', locals: { card: card_data }
   end
 
+  def modal
+    card = Spell.find(params[:id])
+
+    render partial: 'shared/modal_body', locals: { card: card, index: params[:index], modal_size: params[:modal_size], prev_index: params[:previd], next_index: params[:nextid] }
+  end
+
   private
   def spell_params
-    params.require(:spell).permit(:name, :cite, :ritual, :level, :school, :casting_time, :range, :components, :duration, :short_description, :athigherlevel, :description, :picture, :concentration, :hero_classes, :hero_class_ids => [])
+    params.require(:spell).permit(:name, :tag_list, :cite, :ritual, :level, :school, :casting_time, :range, :components, :duration, :short_description, :athigherlevel, :description, :picture, :concentration, :hero_classes, :hero_class_ids => [])
   end
   
   def correct_user
-    @spell = Spell.find_by(id: params[:id])
-    redirect_to root_url unless current_user?(@spell.user) || admin_user?
+    @card = Spell.find_by(id: params[:id])
+    redirect_to root_url unless current_user?(@card.user) || admin_user?
   end
   
   def admin_user
