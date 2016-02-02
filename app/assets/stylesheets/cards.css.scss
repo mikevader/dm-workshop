@@ -20,6 +20,12 @@ div.cards {
   font-size: 8pt;
 }
 
+.card p {
+  font-family: 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+  font-size: 8pt;
+}
+
+
 .card-content-container {
   padding:2mm;
   padding-top:1mm;
@@ -159,6 +165,7 @@ div.cards {
 
 .card-property-text {
   display: inline;
+  font-size: inherit;
 }
 
 .card-section {

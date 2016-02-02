@@ -1,30 +1,42 @@
 <% provide(:title, "Log in") %>
-<h1>Log in</h1>
-
 <div class="row">
-  <div class="col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+  <div class="col-xs-12">
+    <div class="page-header">
+        <h1>Log in</h1>
+    </div>
+  </div>
+</div>
+<div class="row">
     <%= form_for(:session, url: login_path) do |f| %>
 
-        <%= content_tag :div, class: 'form-group' do -%>
+        <%= content_tag :div, class: 'form-group col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1' do -%>
             <%= f.label :email %>
             <%= f.email_field :email, class: 'form-control' %>
         <% end %>
 
-        <%= content_tag :div, class: 'form-group' do -%>
+        <%= content_tag :div, class: 'form-group col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1' do -%>
             <%= f.label :password %>
             <%= link_to "(forgot password)", new_password_reset_path %>
             <%= f.password_field :password, class: 'form-control' %>
         <% end %>
 
-        <%= content_tag :div, class: 'checkbox' do -%>
-            <%= f.label :remember_me do %>
-                <%= f.check_box :remember_me %>Remember me on this computer
+        <%= content_tag :div, class: 'form-group' do -%>
+            <%= content_tag :div, class: 'col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1' do -%>
+                <%= content_tag :div, class: 'checkbox' do -%>
+                    <%= f.label :remember_me do %>
+                        <%= f.check_box :remember_me %>Remember me on this computer
+                    <% end %>
+                <% end %>
             <% end %>
         <% end %>
-
-        <%= f.submit "Log in", class: "btn btn-primary" %>
+        <div class="form-group col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+            <%= f.submit "Log in", class: "btn btn-primary" %>
+        </div>
     <% end %>
-
-    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
-  </div>
 </div>
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+        <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    </div>
+</div>
+    

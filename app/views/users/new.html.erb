@@ -1,11 +1,21 @@
 <% provide(:title, 'Sign up') %>
 
-<h1>Sign up</h1>
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-xs-12">
+    <div class="page-header">
+      <h1>Sign up</h1>
+        <small>Because I pay the whole infrastructure myself I want to limit 
+        access at least a little bit through a registration process. You will not
+        receive any kind of ad mails and your data will not be used somewhere
+        else.</small>
+    </div>
+  </div>
+</div>
+<div class="row">
     <%= form_for(@user) do |f| %>
       <%= render 'fields', f: f %>
-      <%= f.submit "Create my account", class: "btn btn-primary" %>
+      <div class="form-group col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+        <%= f.submit "Create my account", class: "btn btn-primary" %>
+      </div>
     <% end %>
-  </div>
 </div>

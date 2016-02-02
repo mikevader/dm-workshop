@@ -18,6 +18,7 @@
 
 # Ignore Sprint files.
 /spring/*.pid
+/spring-1000/*.pid
 
 # Ignore uploaded test images.
 /public/uploads
