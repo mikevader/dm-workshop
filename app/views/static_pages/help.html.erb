@@ -333,13 +333,13 @@
 <p>
   Beside the actual card content there are some required and optional fields:
 </p>
-<ul>
-  <li><code>name</code> Name of the card which will be displayed on the top</li>
-  <li><code>color</code> Name of the card color. You can use all <a href="http://www.w3schools.com/cssref/css_colornames.asp" target="_blank">CSS color names.</a></li>
-  <li><code>icon</code> Name of the card icon. You can use all icons from <a href="http://game-icons.net/" target="_blank">game-icons.net</a>. Just use the name of the file without extension.</li>
-  <li><strike><code>size</code> Size of the card</strike> Not available atm but will come soon.</li>
-  <li><code>bagdes</code> (Optional) Comma separated list of icons which are used as badges on the right side of the card like the character classes on the spell cards.</li>
-</ul>
+<dl class="dl-horizontal">
+  <dt><code>name</code></dt><dd>Name of the card which will be displayed on the top</dd>
+  <dt><code>color</code></dt><dd>Name of the card color. You can use all <a href="http://www.w3schools.com/cssref/css_colornames.asp" target="_blank">CSS color names.</a></dd>
+  <dt><code>icon</code></dt><dd>Name of the card icon. You can use all icons from <a href="http://game-icons.net/" target="_blank">game-icons.net</a>. Just use the name of the file without extension.</dd>
+  <dt><strike><code>size</code></strike></dt><dd><strike>Size of the card.</strike> Not available atm but will come soon.</dd>
+  <dt><code>bagdes</code></dt><dd>(Optional) Comma separated list of icons which are used as badges on the right side of the card like the character classes on the spell cards.</dd>
+</dl>
 <p>
   The rest of the card content is a list of elements where each card element is of the following format:
 </p>
@@ -347,15 +347,15 @@
 <p>
   You can use the following elements:
 </p>
-<ul>
-  <li><code>subtitle</code> Larger italic text. <b>param1:</b> subtitle text</li>
-  <li><code>rule</code> A horizontal separator.</li>
-  <li><code>property</code> Property line. The property's description is indented if it spans over multiple lines. <b>param1:</b> property name (bold). <b>param2:</b> description</li>
-  <li><code>description</code> Same as the property line but the description isn't indented.</li>
-  <li><code>text</code> Simple paragraph. <b>param1:</b> text</li>
-  <li><code>subsection</code> Subsection header with a horizontal rule beneath the subsection name. <b>param1:</b> subsecion name</li>
-  <li><code>boxes</code> Creates a line of empty boxes, ideal for charges on wands or any other situation with limited uses. <b>param1:</b> number of boxes. <b>param2:</b> size of the box (with the unit <i>em</i> aka 1.0 is the height of the letter 'e')</li>
-  <li><code>dndstats</code> Stat block of a Dungeons&Dragons creature. <b>param1:</b> Strength score. <b>param2:</b> Dexterity score. <b>param3:</b> Constitution score. <b>param4:</b> Intelligence score. <b>param5:</b> Wisdom score. <b>param6:</b> Charisma score.</li>
-  <li><code>fill</code> Dynamic space filler which uses the unused space on the card. To center an element vertically you can place a fill before and after the element with the same number. <b>param1:</b> number of units of empty space to use.</li>
-  <li><code>bullet</code> Bullet point to create a list. <b>param1:</b> text</li>
-</ul>
+<dl class="dl-horizontal">
+  <dt><code>subtitle</code></dt><dd>Larger italic text. <b>param1:</b> subtitle text</dd>
+  <dt><code>rule</code></dt><dd>A horizontal separator.</dd>
+  <dt><code>property</code></dt><dd>Property line. The property's description is indented if it spans over multiple lines. <b>param1:</b> property name (bold). <b>param2:</b> description</dd>
+  <dt><code>description</code></dt><dd>roperty>Same as the property line but the description isn't indented.</dd>
+  <dt><code>text</code></dt><dd>Simple paragraph. <b>param1:</b> text</dd>
+  <dt><code>subsection</code></dt><dd>Subsection header with a horizontal rule beneath the subsection name. <b>param1:</b> subsecion name</dd>
+  <dt><code>boxes</code></dt><dd>Creates a line of empty boxes, ideal for charges on wands or any other situation with limited uses. <b>param1:</b> number of boxes. <b>param2:</b> size of the box (with the unit <i>em</i> aka 1.0 is the height of the letter 'e')</dd>
+  <dt><code>dndstats</code></dt><dd>Stat block of a Dungeons&Dragons creature. <b>param1:</b> Strength score. <b>param2:</b> Dexterity score. <b>param3:</b> Constitution score. <b>param4:</b> Intelligence score. <b>param5:</b> Wisdom score. <b>param6:</b> Charisma score.</dd>
+  <dt><code>fill</code></dt><dd>Dynamic space filler which uses the unused space on the card. To center an element vertically you can place a fill before and after the element with the same number. <b>param1:</b> number of units of empty space to use.</dd>
+  <dt><code>bullet</code></dt><dd>Bullet point to create a list. <b>param1:</b> text</dd>
+</dl>
