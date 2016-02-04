@@ -2,6 +2,7 @@
 module Dmwql
   class Search < Treetop::Runtime::SyntaxNode
     def query_string(builder)
+      builder
       text = first.query_string(builder)
       second.elements.each do |node|
         text += " " + node.union.text_value.upcase + " "

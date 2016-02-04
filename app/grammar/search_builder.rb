@@ -2,6 +2,7 @@ class SearchBuilder
   
   def initialize
     @fields = {}
+    @tags = {}
     @relations = {}
     @joins = []
     @orders = []
@@ -9,6 +10,10 @@ class SearchBuilder
   
   def add_field(field_name, substitution = field_name)
     @fields[field_name.to_sym] = substitution
+  end
+
+  def add_tag(field_name, substitution = field_name)
+    @tags[field_name.to_sym] = substitution
   end
   
   def add_relation(relation_name, substitution, join_table)
@@ -41,4 +46,7 @@ class SearchBuilder
     
     return @orders
   end
+
+
+
 end

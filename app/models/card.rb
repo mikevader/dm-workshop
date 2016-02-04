@@ -82,6 +82,7 @@ class Card < ActiveRecord::Base
   def self.new_builder
     builder = SearchBuilder.new
     builder.add_field 'name', 'cards.name'
+    builder.add_tag 'tags'
     return builder
   end
 
