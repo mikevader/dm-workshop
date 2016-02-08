@@ -56,6 +56,9 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
+### Dungeon Master Workshop 0.9.1 ###
+* Fix: Empty tag result search produce exception on postgres.
+
 ### Dungeon Master Workshop 0.9 ###
 * Searchable tags in the form of 'tags in (jdf)'
 * reCaptcha added for the register screen
