@@ -51,10 +51,12 @@ class SearchBuilder
   end
 
   def add_str_comp_clause(field, operator, value)
+    value = value.downcase.gsub('\'', '').strip
+
     if operator == '~'
-      value = "%#{value.downcase.gsub('\'', '').strip}%"
+      value = "%#{value}%"
     else
-      value = "#{value.downcase.gsub('\'', '').strip.gsub(/\*/, '%')}"
+      value = "#{value.gsub(/\*/, '%')}"
     end
 
     @tree_root = lambda { return "LOWER(#{query_id(field)}) LIKE '#{value}'" }
@@ -69,16 +71,15 @@ class SearchBuilder
   end
 
   def add_group_clause(field, values)
+    values.tr!('()', '')
 
     if is_tag? field.to_sym
-      values.tr!('()', '')
       tags = values.split(',').map(&:strip)
       clazz = @tags[field.to_sym]
       ids = clazz.tagged_with(tags, any: true).to_a.map(&:id)
 
       @tree_root = lambda { return "id IN (#{ids.join(', ')})" }
     else
-      values.tr!('()', '')
       query = values.split(',').map(&:strip).map { |x| surround_string_with_quotes_if_necessary(x) }.join(', ')
       query = '(' + query + ')'
 
