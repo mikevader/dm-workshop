@@ -78,6 +78,10 @@ class SearchBuilder
       clazz = @tags[field.to_sym]
       ids = clazz.tagged_with(tags, any: true).to_a.map(&:id)
 
+      if ids.empty?
+        ids << -1
+      end
+
       @tree_root = lambda { return "id IN (#{ids.join(', ')})" }
     else
       query = values.split(',').map(&:strip).map { |x| surround_string_with_quotes_if_necessary(x) }.join(', ')
