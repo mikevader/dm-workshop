@@ -14,7 +14,7 @@ class SearchEngine2
           result = []
         end
       else
-        result = @entity_class.search(search_string)
+        result = search_entities(search_string)
       end
     rescue ParseSearchError => e
       puts e.message
@@ -26,4 +26,24 @@ class SearchEngine2
 
     return result.to_a, error
   end
+
+  def search_entities(search)
+    if search
+      builder = @entity_class.new_search_builder
+      search = Parser.new.parse(search, builder)
+
+      query = @entity_class
+      builder.joins.each do |join|
+        query = query.joins(join)
+      end
+      query = query.where(search)
+      builder.orders.each do |order|
+        query = query.order(order)
+      end
+      query.distinct
+    else
+      all
+    end
+  end
+
 end

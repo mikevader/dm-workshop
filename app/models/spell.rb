@@ -8,29 +8,10 @@ class Spell < ActiveRecord::Base
 
   validates :user_id, presence: true
   validates :name, presence: true
-  validates :level, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 9}
+  validates :level, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 9}
   validates :school, presence: true
   # validate :spell_unique_per_class
   validate :picture_size
-  
-  def self.search(search)
-    if search
-      builder = new_builder
-      search = Parser.new.parse(search, builder)
-      
-      query = self
-      builder.joins.each do |join|
-        query = query.joins(join)
-      end
-      query = query.where(search)
-      builder.orders.each do |order|
-        query = query.order(order)
-      end
-      query.distinct
-    else
-      all
-    end
-  end
 
   def replicate
     replica = dup
@@ -80,7 +61,22 @@ class Spell < ActiveRecord::Base
 
     data
   end
-  
+
+  def self.new_search_builder
+    builder = SearchBuilder.new do
+      configure_field 'name', 'spells.name'
+      configure_field 'ritual', 'spells.ritual'
+      configure_field 'school', 'spells.school'
+      configure_field 'level', 'spells.level'
+      configure_field 'concentration', 'spells.concentration'
+      configure_field 'duration', 'spells.duration'
+      configure_field 'castingTime', 'spells.casting_time'
+      configure_tag 'tags', Spell
+      configure_relation 'classes', 'hero_classes.name', :hero_classes
+    end
+    return builder
+  end
+
   private
   # Validates the size of an uploaded picture.
   def picture_size
@@ -91,21 +87,9 @@ class Spell < ActiveRecord::Base
 
   # Validates the uniqueness of a spell in a class
   def spell_unique_per_class
-    if hero_classes.select {|c| hero_classes.select {|q| q == c }.size > 1 }.any?
+    if hero_classes.select { |c| hero_classes.select { |q| q == c }.size > 1 }.any?
       errors.add :spell, 'tried to add a class multiple times'
     end
   end
-  
-  def self.new_builder
-    builder = SearchBuilder.new
-    builder.add_field 'name', 'spells.name'
-    builder.add_field 'ritual', 'spells.ritual'
-    builder.add_field 'school', 'spells.school'
-    builder.add_field 'level', 'spells.level'
-    builder.add_field 'concentration', 'spells.concentration'
-    builder.add_field 'duration', 'spells.duration'
-    builder.add_field 'castingTime', 'spells.casting_time'
-    builder.add_relation 'classes', 'hero_classes.name', :hero_classes
-    return builder
-  end
+
 end

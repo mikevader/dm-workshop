@@ -105,25 +105,6 @@ class Monster < ActiveRecord::Base
     CONDITIONS.reject { |r| ((self.cond_immunities_mask || 0) & 2**CONDITIONS.index(r)).zero? }
   end
 
-  def self.search(search)
-    if search
-      builder = new_builder
-      search = Parser.new.parse(search, builder)
-
-      query = self
-      builder.joins.each do |join|
-        query = query.joins(join)
-      end
-      query = query.where(search)
-      builder.orders.each do |order|
-        query = query.order(order)
-      end
-      query.distinct
-    else
-      all
-    end
-  end
-
   def replicate
     replica = dup
 
@@ -272,18 +253,20 @@ class Monster < ActiveRecord::Base
     return data
   end
 
-  private
-  def self.new_builder
-    builder = SearchBuilder.new
-    builder.add_field 'name', 'monsters.name'
-    builder.add_field 'str', 'monsters.strength'
-    builder.add_field 'dex', 'monsters.dexterity'
-    builder.add_field 'con', 'monsters.constitution'
-    builder.add_field 'int', 'monsters.intelligence'
-    builder.add_field 'wis', 'monsters.wisdom'
-    builder.add_field 'cha', 'monsters.charisma'
+  def self.new_search_builder
+    builder = SearchBuilder.new do
+      configure_field 'name', 'monsters.name'
+      configure_field 'str', 'monsters.strength'
+      configure_field 'dex', 'monsters.dexterity'
+      configure_field 'con', 'monsters.constitution'
+      configure_field 'int', 'monsters.intelligence'
+      configure_field 'wis', 'monsters.wisdom'
+      configure_field 'cha', 'monsters.charisma'
+      configure_tag 'tags', Monster
+    end
     return builder
   end
+  private
 
   def calc_modifier_for ability = 10
     return (ability - 10) / 2
