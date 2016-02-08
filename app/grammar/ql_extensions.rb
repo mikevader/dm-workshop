@@ -1,22 +1,24 @@
 module Dmwql
   class Search < Treetop::Runtime::SyntaxNode
     def query_string(builder)
-      text = first.query_string(builder)
+      first_operand = first.query_string(builder)
       second.elements.each do |node|
-        text += " " + node.union.text_value.upcase + " "
-        text += node.next.query_string(builder)
+        if node.union.text_value.upcase == 'AND'
+          first_operand.and(node.next.query_string(builder.clone))
+        else
+          first_operand.or(node.next.query_string(builder.clone))
+        end
       end
-      
-      return text
+      first_operand
     end
   end
   
   class Expression < Treetop::Runtime::SyntaxNode
     def query_string(builder)
       if defined? query
-        return query.query_string(builder)
+        query.query_string(builder)
       else
-        return '(' + search.query_string(builder) + ')'
+        builder.clone.parenthesis(search.query_string(builder.clone))
       end
     end
   end
@@ -24,28 +26,29 @@ module Dmwql
   class Query < Treetop::Runtime::SyntaxNode
     def query_string(builder)
       if defined? comp
-        return comp.query_string(builder)
+        comp.query_string(builder)
       else
-        return group.query_string(builder)
+        group.query_string(builder)
       end
     end
   end
   
   class ArrayComparison < Treetop::Runtime::SyntaxNode
     def query_string(builder)
-      return "#{builder.query_id(id.text_value)} in #{group.query_string(builder)}"
+      #return "#{builder.query_id(id.text_value)} in #{group.query_string(builder)}"
+      builder.add_group_clause id.text_value, group.query_string
     end
   end
   
   class Group < Treetop::Runtime::SyntaxNode
-    def query_string(builder)
+    def query_string
       query = '(' + surround_string_with_quotes_if_necessary(literal.text_value)
       
       second.elements.each do |node|
         query = query + ', ' + surround_string_with_quotes_if_necessary(node.literal.text_value)
       end
-      
-      return query + ')'
+
+      query + ')'
     end
   end
 
@@ -55,7 +58,8 @@ module Dmwql
         str_comp.query_string(id.text_value, builder)
         # return "LOWER(#{builder.query_id(id.text_value)}) #{str_comp.query_string(builder)}"
       else
-        return builder.query_id(id.text_value) + ' ' + non_str_comp.query_string(builder)
+        non_str_comp.query_string(id.text_value, builder)
+        # return builder.query_id(id.text_value) + ' ' + non_str_comp.query_string(builder)
       end
     end
   end
@@ -68,7 +72,7 @@ module Dmwql
                    '='
                  end
 
-      builder.add_comp_clause field, operator, value.text_value
+      builder.add_str_comp_clause field, operator, value.text_value
       # if op.text_value == '~'
       #   return "LIKE '%#{value.text_value.downcase.gsub('\'','').strip}%'"
       # else
@@ -78,8 +82,11 @@ module Dmwql
   end
   
   class NonStringComparison < Treetop::Runtime::SyntaxNode
-    def query_string(builder)
-      return op.text_value + ' ' + value.text_value.sub('true', "'t'").sub('false', "'f'")
+    def query_string(field, builder)
+      operator = op.text_value
+      value2 = value.text_value
+
+      builder.add_non_str_comp_clause field, operator, value2
     end
   end
 

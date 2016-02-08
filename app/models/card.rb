@@ -15,8 +15,6 @@ class Card < ActiveRecord::Base
       builder = new_builder
       search = Parser.new.parse(search, builder)
 
-      return builder.query
-
       query = self
       builder.joins.each do |join|
         query = query.joins(join)
@@ -84,7 +82,7 @@ class Card < ActiveRecord::Base
   def self.new_builder
     builder = SearchBuilder.new
     builder.configure_field 'name', 'cards.name'
-    builder.configure_tag 'tags'
+    builder.configure_tag 'tags', Card
     return builder
   end
 

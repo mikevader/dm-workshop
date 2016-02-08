@@ -105,6 +105,7 @@ class Spell < ActiveRecord::Base
     builder.configure_field 'concentration', 'spells.concentration'
     builder.configure_field 'duration', 'spells.duration'
     builder.configure_field 'castingTime', 'spells.casting_time'
+    builder.configure_tag 'tags', Spell
     builder.configure_relation 'classes', 'hero_classes.name', :hero_classes
     return builder
   end

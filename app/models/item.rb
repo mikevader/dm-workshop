@@ -69,6 +69,7 @@ class Item < ActiveRecord::Base
     builder = SearchBuilder.new
     builder.configure_field 'name', 'items.name'
     builder.configure_field 'attunement', 'items.attunement'
+    builder.configure_tag 'tags', Item
     builder.configure_relation 'category', 'categories.name', 'category'
     builder.configure_relation 'rarity', 'rarities.name', 'rarity'
     return builder

@@ -16,8 +16,8 @@ class SearchBuilder
     @fields[field_name.to_sym] = substitution
   end
 
-  def configure_tag(field_name, substitution = field_name)
-    @tags[field_name.to_sym] = substitution
+  def configure_tag(field_name, clazz)
+    @tags[field_name.to_sym] = clazz
   end
 
   def configure_relation(relation_name, substitution, join_table)
@@ -46,7 +46,11 @@ class SearchBuilder
     @orders
   end
 
-  def add_comp_clause(field, operator, value)
+  def is_tag?(id)
+    @tags.include? id
+  end
+
+  def add_str_comp_clause(field, operator, value)
     if operator == '~'
       value = "%#{value.downcase.gsub('\'', '').strip}%"
     else
@@ -57,12 +61,30 @@ class SearchBuilder
     self
   end
 
-  def add_group_clause(field, values)
-    values.tr!('()', '')
-    query = values.split(',').map(&:strip).map { |x| surround_string_with_quotes_if_necessary(x) }.join(', ')
-    query = '(' + query + ')'
+  def add_non_str_comp_clause(field, operator, value)
+    value = value.sub('true', "'t'").sub('false', "'f'")
 
-    @tree_root = lambda { return "#{query_id(field)} IN #{query}" }
+    @tree_root = lambda { return "#{query_id(field)} #{operator} #{value}" }
+    self
+  end
+
+  def add_group_clause(field, values)
+
+    if is_tag? field.to_sym
+      values.tr!('()', '')
+      tags = values.split(',').map(&:strip)
+      clazz = @tags[field.to_sym]
+      ids = clazz.tagged_with(tags, any: true).to_a.map(&:id)
+
+      @tree_root = lambda { return "id IN (#{ids.join(', ')})" }
+    else
+      values.tr!('()', '')
+      query = values.split(',').map(&:strip).map { |x| surround_string_with_quotes_if_necessary(x) }.join(', ')
+      query = '(' + query + ')'
+
+      @tree_root = lambda { return "#{query_id(field)} IN #{query}" }
+    end
+
     self
   end
 

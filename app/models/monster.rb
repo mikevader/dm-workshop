@@ -282,6 +282,7 @@ class Monster < ActiveRecord::Base
     builder.configure_field 'int', 'monsters.intelligence'
     builder.configure_field 'wis', 'monsters.wisdom'
     builder.configure_field 'cha', 'monsters.charisma'
+    builder.configure_tag 'tags', Monster
     return builder
   end
 

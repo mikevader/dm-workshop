@@ -24,6 +24,13 @@ guard :minitest, spring: true, all_on_start: false do
   watch(%r{^app/grammar/(.*?).treetop$}) do |matches|
     "test/grammar/#{matches[1]}_test.rb"
   end
+
+  watch('app/grammar/dmwql.treetop') do
+    %w(test/grammar/parser_test.rb test/grammar/search_builder_test.rb)
+  end
+  watch('app/grammar/ql_extensions.rb') do
+    %w(test/grammar/parser_test.rb test/grammar/search_builder_test.rb)
+  end
   watch('app/views/layouts/application.html.erb') do
     'test/integration/site_layout_test.rb'
   end
