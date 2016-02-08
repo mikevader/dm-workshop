@@ -56,6 +56,11 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
+### Dungeon Master Workshop 0.9 ###
+* Searchable tags in the form of 'tags in (jdf)'
+* reCaptcha added for the register screen
+* Adapted a fixed width style for all the login, user profile and registration views.
+
 ### Dungeon Master Workshop 0.8 ###
 * Savable filters
 * Tags or labels for all cards (do not work in searches atm)
