@@ -67,10 +67,10 @@ class Item < ActiveRecord::Base
   private
   def self.new_builder
     builder = SearchBuilder.new
-    builder.add_field 'name', 'items.name'
-    builder.add_field 'attunement', 'items.attunement'
-    builder.add_relation 'category', 'categories.name', 'category'
-    builder.add_relation 'rarity', 'rarities.name', 'rarity'
+    builder.configure_field 'name', 'items.name'
+    builder.configure_field 'attunement', 'items.attunement'
+    builder.configure_relation 'category', 'categories.name', 'category'
+    builder.configure_relation 'rarity', 'rarities.name', 'rarity'
     return builder
   end
 

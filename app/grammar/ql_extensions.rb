@@ -1,8 +1,6 @@
-
 module Dmwql
   class Search < Treetop::Runtime::SyntaxNode
     def query_string(builder)
-      builder
       text = first.query_string(builder)
       second.elements.each do |node|
         text += " " + node.union.text_value.upcase + " "
@@ -54,7 +52,8 @@ module Dmwql
   class Comparison < Treetop::Runtime::SyntaxNode
     def query_string(builder)
       if defined? str_comp
-        return "LOWER(#{builder.query_id(id.text_value)}) #{str_comp.query_string(builder)}"
+        str_comp.query_string(id.text_value, builder)
+        # return "LOWER(#{builder.query_id(id.text_value)}) #{str_comp.query_string(builder)}"
       else
         return builder.query_id(id.text_value) + ' ' + non_str_comp.query_string(builder)
       end
@@ -62,12 +61,19 @@ module Dmwql
   end
   
   class StringComparison < Treetop::Runtime::SyntaxNode
-    def query_string(builder)
-      if op.text_value == '~'
-        return "LIKE '%#{value.text_value.downcase.gsub('\'','').strip}%'"
-      else
-        return "LIKE '#{value.text_value.downcase.gsub('\'','').strip.gsub(/\*/, '%')}'"
-      end
+    def query_string(field, builder)
+      operator = if op.text_value == '~'
+                   '~'
+                 else
+                   '='
+                 end
+
+      builder.add_comp_clause field, operator, value.text_value
+      # if op.text_value == '~'
+      #   return "LIKE '%#{value.text_value.downcase.gsub('\'','').strip}%'"
+      # else
+      #   return "LIKE '#{value.text_value.downcase.gsub('\'','').strip.gsub(/\*/, '%')}'"
+      # end
     end
   end
   

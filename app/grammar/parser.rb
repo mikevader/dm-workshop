@@ -12,7 +12,6 @@ class ParseSearchError < ArgumentError
 end
 
 class Parser
-
   def initialize
     grammar_file = File.join(File.expand_path(Rails.root), 'app', 'grammar', 'dmwql.treetop')
     Treetop.load grammar_file
@@ -29,9 +28,8 @@ class Parser
       cursorline = ' ' * (@parser.failure_column-1) + '^'
       raise ParseSearchError.new(parser_error), "Parse error occured: #{@parser.failure_reason}\n#{data}\n#{cursorline}"
     else
-      query_string = tree.query_string(builder).squish
-      
-      return query_string
+      tree.query_string(builder)
+      builder.query.squish
     end
   end
 

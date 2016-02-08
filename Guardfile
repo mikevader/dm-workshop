@@ -8,6 +8,9 @@ guard :minitest, spring: true, all_on_start: false do
   watch(%r{^app/models/(.*?)\.rb$}) do |matches|
     "test/models/#{matches[1]}_test.rb"
   end
+  watch(%r{^app/grammar/(.*?)\.rb$}) do |matches|
+    "test/grammar/#{matches[1]}_test.rb"
+  end
   watch(%r{^app/controllers/(.*?)_controller\.rb$}) do |matches|
     resource_tests(matches[1])
   end
@@ -20,9 +23,6 @@ guard :minitest, spring: true, all_on_start: false do
   end
   watch(%r{^app/grammar/(.*?).treetop$}) do |matches|
     "test/grammar/#{matches[1]}_test.rb"
-  end
-  watch('app/grammar/parser.rb') do
-    'test/grammar/dmwql_test.rb'
   end
   watch('app/views/layouts/application.html.erb') do
     'test/integration/site_layout_test.rb'

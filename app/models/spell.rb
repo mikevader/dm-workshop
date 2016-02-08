@@ -98,14 +98,14 @@ class Spell < ActiveRecord::Base
   
   def self.new_builder
     builder = SearchBuilder.new
-    builder.add_field 'name', 'spells.name'
-    builder.add_field 'ritual', 'spells.ritual'
-    builder.add_field 'school', 'spells.school'
-    builder.add_field 'level', 'spells.level'
-    builder.add_field 'concentration', 'spells.concentration'
-    builder.add_field 'duration', 'spells.duration'
-    builder.add_field 'castingTime', 'spells.casting_time'
-    builder.add_relation 'classes', 'hero_classes.name', :hero_classes
+    builder.configure_field 'name', 'spells.name'
+    builder.configure_field 'ritual', 'spells.ritual'
+    builder.configure_field 'school', 'spells.school'
+    builder.configure_field 'level', 'spells.level'
+    builder.configure_field 'concentration', 'spells.concentration'
+    builder.configure_field 'duration', 'spells.duration'
+    builder.configure_field 'castingTime', 'spells.casting_time'
+    builder.configure_relation 'classes', 'hero_classes.name', :hero_classes
     return builder
   end
 end

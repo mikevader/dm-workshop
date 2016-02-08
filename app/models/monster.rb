@@ -275,13 +275,13 @@ class Monster < ActiveRecord::Base
   private
   def self.new_builder
     builder = SearchBuilder.new
-    builder.add_field 'name', 'monsters.name'
-    builder.add_field 'str', 'monsters.strength'
-    builder.add_field 'dex', 'monsters.dexterity'
-    builder.add_field 'con', 'monsters.constitution'
-    builder.add_field 'int', 'monsters.intelligence'
-    builder.add_field 'wis', 'monsters.wisdom'
-    builder.add_field 'cha', 'monsters.charisma'
+    builder.configure_field 'name', 'monsters.name'
+    builder.configure_field 'str', 'monsters.strength'
+    builder.configure_field 'dex', 'monsters.dexterity'
+    builder.configure_field 'con', 'monsters.constitution'
+    builder.configure_field 'int', 'monsters.intelligence'
+    builder.configure_field 'wis', 'monsters.wisdom'
+    builder.configure_field 'cha', 'monsters.charisma'
     return builder
   end
 

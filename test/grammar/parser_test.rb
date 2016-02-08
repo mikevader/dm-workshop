@@ -1,14 +1,14 @@
 require 'test_helper'
 
-class DmwqlTest < ActiveSupport::TestCase
+class ParserTest < ActiveSupport::TestCase
   
   def setup
     @builder = SearchBuilder.new
-    @builder.add_field 'name'
-    @builder.add_field 'level'
-    @builder.add_field 'class'
-    @builder.add_field 'school'
-    @builder.add_field 'ritual'
+    @builder.configure_field 'name'
+    @builder.configure_field 'level'
+    @builder.configure_field 'class'
+    @builder.configure_field 'school'
+    @builder.configure_field 'ritual'
     @parser = Parser.new
   end
   
@@ -82,7 +82,7 @@ class DmwqlTest < ActiveSupport::TestCase
 
   test 'should work with relations' do
     builder = SearchBuilder.new
-    builder.add_relation "classes", "hero_classes.name", "hero_classes"
+    builder.configure_relation "classes", "hero_classes.name", "hero_classes"
     
     assert_equal "hero_classes.name in ('Bard')",
     @parser.parse("classes in ('Bard')", builder)
@@ -94,5 +94,4 @@ class DmwqlTest < ActiveSupport::TestCase
     assert_equal "ritual = 't'", @parser.parse("ritual = true", @builder)
     assert_equal "ritual = 'f'", @parser.parse("ritual = false", @builder)
   end
-
 end
