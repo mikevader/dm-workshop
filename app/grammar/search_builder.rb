@@ -7,8 +7,7 @@ class SearchBuilder
     @joins = []
     @orders = []
 
-    @tree_root = lambda { return @current_node.call }
-    @current_node = lambda { return "" }
+    @tree_root = nil
 
     self.instance_eval(&block) if block_given?
   end
@@ -54,8 +53,7 @@ class SearchBuilder
       value = "#{value.downcase.gsub('\'', '').strip.gsub(/\*/, '%')}"
     end
 
-    @current_node = lambda { return "LOWER(#{query_id(field)}) LIKE '#{value}'" }
-
+    @tree_root = lambda { return "LOWER(#{query_id(field)}) LIKE '#{value}'" }
     self
   end
 
@@ -64,29 +62,36 @@ class SearchBuilder
     query = values.split(',').map(&:strip).map { |x| surround_string_with_quotes_if_necessary(x) }.join(', ')
     query = '(' + query + ')'
 
-    @current_node = lambda { return "#{query_id(field)} IN #{query}" }
+    @tree_root = lambda { return "#{query_id(field)} IN #{query}" }
+    self
   end
 
   def and(and_second)
-    and_first = @current_node
-    and_second = and_second.instance_variable_get(:@current_node)
+    and_first = @tree_root
+    and_second = and_second.instance_variable_get(:@tree_root)
     @tree_root = lambda { return "#{and_first.call} AND #{and_second.call}" }
+    self
   end
 
   def or(or_second)
-    or_first = @current_node
-    or_second = or_second.instance_variable_get(:@current_node)
+    or_first = @tree_root
+    or_second = or_second.instance_variable_get(:@tree_root)
     @tree_root = lambda { return "#{or_first.call} OR #{or_second.call}" }
+    self
   end
 
   def parenthesis(search)
-    prev_root = @tree_root
-    @tree_root = lambda { return "( #{prev_root.call} )" }
+    search_root = search.instance_variable_get(:@tree_root)
+    @tree_root = lambda { return "( #{search_root.call} )" }
     self
   end
 
   def query
-    @tree_root.call
+    unless @tree_root.nil?
+      @tree_root.call
+    else
+      ''
+    end
   end
 
   private

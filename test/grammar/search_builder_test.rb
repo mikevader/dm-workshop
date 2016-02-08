@@ -17,12 +17,20 @@ class SearchBuilderTest < ActiveSupport::TestCase
     assert_equal '', query
   end
 
+  test 'should work with or - and chains' do
+    @builder.add_comp_clause('class', '=', 'foo').or(@builder.clone.add_comp_clause('name', '=', 'hello')).and(@builder.clone.add_comp_clause('class', '=', 'world'))
+
+    query = @builder.query
+
+    assert_equal "LOWER(class) LIKE 'foo' OR LOWER(name) LIKE 'hello' AND LOWER(class) LIKE 'world'", query
+  end
+
   test 'should work with parenthesis' do
     @builder.add_comp_clause('class', '=', 'foo').or(@builder.clone.parenthesis(@builder.clone.add_comp_clause('name', '=', 'hello').and(@builder.clone.add_comp_clause('class', '=', 'world'))))
 
     query = @builder.query
 
-    assert_equal "LOWER(class) LIKE 'foo' OR (LOWER(name) LIKE 'hello' AND LOWER(class) LIKE 'world')", query
+    assert_equal "LOWER(class) LIKE 'foo' OR ( LOWER(name) LIKE 'hello' AND LOWER(class) LIKE 'world' )", query
   end
 
   test 'should work with AND union' do
