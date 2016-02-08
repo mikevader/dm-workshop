@@ -1,19 +1,19 @@
-
 <% content_for :content do %>
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="row">
+    <div class="row">
+      <div class="col-xs-12">
         <div class="page-header">
           <h1><%= yield(:page_title) %></h1>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-offset-1 col-sm-10">
-          <%= form_tag yield(:search_path), method: 'get', id: "cards_search" do %>
+    </div>
+    <div class="row">
+      <div class="col-sm-offset-1 col-sm-10 col-xs-12">
+        <%= form_tag yield(:search_path), method: 'get', id: "cards_search" do %>
             <div class="input-group">
               <div class="input-group-btn">
                 <button type="button" class="btn btn-default" data-toggle="popover" data-container="body" data-placement="bottom"
-                        data-content="You can search here like this:<pre>(name ~ fire OR level > 5) AND classes in (Bard, Cleric)</pre> For more details look in the <a href='<%= help_path(anchor: 'search') %>'>help</a>"><span class="glyphicon glyphicon-question-sign"></span></button>
+                        data-content="You can search here like this:<pre>(name ~ fire OR level > 5) AND classes in (Bard, Cleric)</pre> For more details look in the <a href='<%= help_path(anchor: 'search') %>'>help</a>">
+                  <span class="glyphicon glyphicon-question-sign"></span></button>
               </div>
               <%= text_field_tag :search, params[:search], class: "form-control", autocomplete: 'off', placeholder: 'Search for...' %>
               <div class="input-group-btn">
@@ -28,23 +28,21 @@
             <div class="form-group">
               <%= content_tag :div, @error.html_safe, class: 'alert alert-danger' if @error %>
             </div>
-          <% end %>
-        </div>
+        <% end %>
       </div>
-      <div class="row">
-        <div class="col-sm-offset-1 col-sm-10">
-            <%= yield %>
-        </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-offset-1 col-sm-10">
+        <%= yield %>
       </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-offset-1 col-sm-10">
-          <div class="form-group">
-            <%= link_to "New", yield(:new_path), class: 'btn btn-default', role: 'button' -%>
-          </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-offset-1 col-sm-10">
+        <div class="form-group">
+          <%= link_to "New", yield(:new_path), class: 'btn btn-default', role: 'button' -%>
         </div>
       </div>
     </div>
-  </div>
 <% end %>
 
 <%= render template: 'layouts/application' %>

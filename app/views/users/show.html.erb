@@ -1,6 +1,6 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-  <aside class="col-md-4">
+  <aside class="col-sm-4">
     <section class="user_info">
       <h1>
         <%= gravatar_for @user %>
@@ -8,13 +8,22 @@
       </h1>
     </section>
   </aside>
-  <div class="col-md-8">
-    <% if @user.spells.any? %>
-      <h3>Filters (<%= @user.filters.count %>)</h3>
-      <h3>Cards (<%= @user.cards.count %>)</h3>
-      <h3>Items (<%= @user.items.count %>)</h3>
-      <h3>Monsters (<%= @user.monsters.count %>)</h3>
-      <h3>Spells (<%= @user.spells.count %>)</h3>
-    <% end %>
+  <div class="col-sm-8">
+    <% %i{filters cards items monsters spells}.each do |type| -%>
+        <div class="col-sm-8">
+          <div class="row">
+            <div class="col-xs-12">
+              <h3><%= type.capitalize %> <small>(<%= @user.send(type).count %>)</small></h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-offset-1 col-xs-11">
+              <p>
+                <%= @user.send(type).map(&:name).join(', ') %>
+              </p>
+            </div>
+          </div>
+        </div>
+    <% end -%>
   </div>
 </div>

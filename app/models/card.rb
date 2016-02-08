@@ -6,7 +6,7 @@ class Card < ActiveRecord::Base
   default_scope -> { order(name: :asc) }
 
   validates :user_id, presence: true
-  validates :name, presence: true, length: { maximum: 50 }, uniqueness: { case_sensitive: false }
+  validates :name, presence: true, length: {maximum: 50}, uniqueness: {case_sensitive: false}
   validates :icon, presence: true
   validates :color, presence: true
 
@@ -78,11 +78,11 @@ class Card < ActiveRecord::Base
     return data
   end
 
-  private
-  def self.new_builder
-    builder = SearchBuilder.new
-    builder.add_field 'name', 'cards.name'
+  def self.new_search_builder
+    builder = SearchBuilder.new do
+      configure_field 'name', 'cards.name'
+      configure_tag 'tags', Card
+    end
     return builder
   end
-
 end
