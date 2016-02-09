@@ -1,7 +1,8 @@
 class Monster < ActiveRecord::Base
   acts_as_taggable
   belongs_to :user
-  has_and_belongs_to_many :skills
+  has_many :monsters_skills
+  has_many :skills, through: :monsters_skills
   has_many :traits, dependent: :destroy
   has_many :actions, dependent: :destroy
 

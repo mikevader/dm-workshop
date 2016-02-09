@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160124115504) do
+ActiveRecord::Schema.define(version: 20160209095058) do
 
   create_table "actions", force: :cascade do |t|
     t.string   "title"
@@ -108,7 +108,6 @@ ActiveRecord::Schema.define(version: 20160124115504) do
     t.integer  "intelligence"
     t.integer  "wisdom"
     t.integer  "charisma"
-    t.string   "skills"
     t.string   "senses"
     t.string   "languages"
     t.float    "challenge"
@@ -127,9 +126,12 @@ ActiveRecord::Schema.define(version: 20160124115504) do
   add_index "monsters", ["name"], name: "index_monsters_on_name"
   add_index "monsters", ["user_id"], name: "index_monsters_on_user_id"
 
-  create_table "monsters_skills", id: false, force: :cascade do |t|
-    t.integer "monster_id"
-    t.integer "skill_id"
+  create_table "monsters_skills", force: :cascade do |t|
+    t.integer  "monster_id"
+    t.integer  "skill_id"
+    t.integer  "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "monsters_skills", ["monster_id", "skill_id"], name: "index_monsters_skills_on_monster_id_and_skill_id", unique: true

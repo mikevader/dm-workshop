@@ -17,8 +17,6 @@ shadow_demon:
   wisdom: 13
   charisma: 14
   saving_throws_mask: 3 # str dex
-  skills:
-    - stealth
   damage_vulnerabilities_mask: 1024 # radiant
   damage_resistances_mask: 4169 # acid, fire, necrotic, thunder
   damage_immunities_mask: 292 # cold, lightning, poison
