@@ -8,13 +8,7 @@ class Monster < ActiveRecord::Base
   accepts_nested_attributes_for :actions, reject_if: proc { |action| action['title'].blank? }, allow_destroy: true
   accepts_nested_attributes_for :traits, reject_if: proc { |action| action['title'].blank? }, allow_destroy: true
 
-  #accepts_nested_attributes_for :skills, reject_if: proc { |skill|
-  #  skill['name'].blank?
-  #  }, allow_destroy: true
-
   default_scope -> { order(name: :asc) }
-
-  #scope :with_saving_throw, lambda { |saving_throw| {:conditions => "saving_throws_mask & #{2**ABILITIES.index(saving_throw.to_s)} > 0"} }
 
   validates :user_id, presence: true
   validates :name, presence: true, length: { maximum: 50 }, uniqueness: { case_sensitive: false }
@@ -304,6 +298,8 @@ class Monster < ActiveRecord::Base
         wisdom_modifier
       when 'cha'
         charisma_modifier
+      else
+        # type code here
     end
   end
 end
