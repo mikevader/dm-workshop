@@ -11,9 +11,10 @@
 <% end %>
 
 <%= content_tag :div, class: 'form-group' do -%>
-    <%= f.label :bonus, class: 'control-label col-sm-3' %>
-    <%= content_tag(:div, f.text_field(:bonus, class: 'form-control', type: 'number'), class: 'col-sm-9') %>
-<% end %>
+    <%= content_tag :div, class: ' col-sm-offset-3 col-sm-9' do -%>
+        <%= f.select(:challenge, Monster.cr_xp.collect{|key, value| ["#{Monster.challenge_pretty(key)} (#{value} XP)", key.to_f]}, {}, {class: 'form-control input-sm'}) %>
+    <% end -%>
+<% end -%>
 
 <%= content_tag :div, class: 'form-group' do -%>
     <%= f.label :size, class: 'control-label col-sm-3' %>
@@ -73,13 +74,15 @@
 <% end %>
 
 <%= content_tag :div, class: 'form-group' do -%>
-    <% collapse_in = !f.object.skill_ids.empty? %>
-    <% collapse_in_class = (collapse_in) ? ' in' : '' %>
-    <%= f.label :skill_ids, class: 'control-label col-sm-3' do -%>
-        <%= link_to 'Skills', '#collapseSkill', role: 'button', 'data-toggle' => 'collapse', 'aria-controls' => 'collapseSkill', 'aria-expanded' => collapse_in %>
-    <% end -%>
-    <%= content_tag(:div, f.collection_select(:skill_ids, Skill.all, :id, :name, {}, {class: 'form-control', size: Skill.count, multiple: true}), class: "col-sm-9 collapse#{collapse_in_class}", id: 'collapseSkill') %>
+    <%= f.label :monsters_skills, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, class: 'col-sm-9') do %>
+        <%= f.fields_for :monsters_skills do |monsters_skill| %>
+            <%= render 'monsters_skill_fields', f: monsters_skill %>
+        <% end %>
+        <%= link_to_add_fields 'Add Skill', f, :monsters_skills %>
+    <% end %>
 <% end %>
+
 
 <%= content_tag :div, class: 'form-group' do -%>
     <% collapse_in = !f.object.damage_vulnerabilities.empty? %>
@@ -125,11 +128,6 @@
 <%= content_tag :div, class: 'form-group' do -%>
     <%= f.label :languages, class: 'control-label col-sm-3' %>
     <%= content_tag(:div, f.text_field(:languages, class: 'form-control'), class: 'col-sm-9') %>
-<% end %>
-
-<%= content_tag :div, class: 'form-group' do -%>
-    <%= f.label :challenge, class: 'control-label col-sm-3' %>
-    <%= content_tag(:div, f.text_field(:challenge, class: 'form-control', type: 'number'), class: 'col-sm-9') %>
 <% end %>
 
 <%= content_tag :div, class: 'form-group' do -%>

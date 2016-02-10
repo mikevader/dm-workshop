@@ -56,6 +56,15 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
+### Dungeon Master Workshop 0.10 ###
+* Improved skills
+    * Add new skills individually over drop down and add button
+    * Ability to override the calculated value
+* Improved skills
+    * Ability to define the category of actions aka actions, reactions or legendary actions
+    * Flag for melee or ranged weapon attack which generates the prefix in the description
+* Removed explicit field for bonus and calculate it from challenge rating.
+
 ### Dungeon Master Workshop 0.9.1 ###
 * Fix: Empty tag result search produce exception on postgres.
 

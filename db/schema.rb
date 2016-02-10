@@ -11,14 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160209095058) do
+ActiveRecord::Schema.define(version: 20160210194631) do
 
   create_table "actions", force: :cascade do |t|
     t.string   "title"
     t.string   "description"
     t.integer  "monster_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "action_type", default: 0, null: false
+    t.boolean  "melee"
+    t.boolean  "ranged"
   end
 
   add_index "actions", ["monster_id"], name: "index_actions_on_monster_id"
@@ -110,12 +113,11 @@ ActiveRecord::Schema.define(version: 20160209095058) do
     t.integer  "charisma"
     t.string   "senses"
     t.string   "languages"
-    t.float    "challenge"
+    t.float    "challenge",                   default: 0.0, null: false
     t.text     "description"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.integer  "user_id"
-    t.integer  "bonus",                       default: 0, null: false
     t.integer  "saving_throws_mask"
     t.integer  "damage_vulnerabilities_mask"
     t.integer  "damage_resistances_mask"

@@ -410,7 +410,6 @@ class CardImport
       new_monster.name = import_card.name
     end
 
-    new_monster.bonus = import_card.attributes.bonus
     new_monster.cite = import_card.attributes.cite
     new_monster.size = import_card.attributes.size
     new_monster.monster_type = import_card.attributes.monster_type

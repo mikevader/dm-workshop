@@ -2,7 +2,6 @@
 
 shadow_demon:
   name: Shadow Demon
-  bonus: 2
   cite: MM 64
   size: medium
   monster_type: fiend (demon)
@@ -25,4 +24,3 @@ shadow_demon:
   languages: Abyssal, telepathy 120ft
   challenge: 4
   description: What ever!
-
