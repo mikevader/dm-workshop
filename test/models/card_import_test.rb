@@ -18,7 +18,8 @@ class CardImportTest < ActiveSupport::TestCase
 
     assert_equal 'Humanoid (dwarf)', obgam.monster_type
     assert_equal 'Medium', obgam.size
-    assert_equal 9, obgam.bonus
+    assert_equal 9, obgam.challenge
+    assert_equal 4, obgam.bonus # calculated value from cr
     assert_equal '16', obgam.armor_class
     assert_equal 170, obgam.hit_points
     assert_equal '25 ft.', obgam.speed
@@ -33,7 +34,6 @@ class CardImportTest < ActiveSupport::TestCase
     assert_not_includes obgam.saving_throws, 'str'
     assert_includes obgam.damage_resistances, 'poison'
     assert_includes obgam.cond_immunities, 'charmed'
-    assert_equal 9, obgam.challenge
     assert_equal 'Rogolan, Undercommon', obgam.languages
 
     skills_expected = %w(Deception Perception)

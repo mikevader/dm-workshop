@@ -11,9 +11,11 @@
 <% end %>
 
 <%= content_tag :div, class: 'form-group' do -%>
-    <%= f.label :bonus, class: 'control-label col-sm-3' %>
-    <%= content_tag(:div, f.text_field(:bonus, class: 'form-control', type: 'number'), class: 'col-sm-9') %>
-<% end %>
+    <%= f.label :challenge, class: 'control-label col-sm-3' %>
+    <%= content_tag :div, class: 'col-sm-9' do -%>
+        <%= f.select(:challenge, Monster.cr_xp.collect{|key, value| ["#{Monster.challenge_pretty(key)} (#{value} XP)", key.to_f]}, {}, {class: 'form-control'}) %>
+    <% end -%>
+<% end -%>
 
 <%= content_tag :div, class: 'form-group' do -%>
     <%= f.label :size, class: 'control-label col-sm-3' %>
@@ -73,28 +75,50 @@
 <% end %>
 
 <%= content_tag :div, class: 'form-group' do -%>
-    <%= f.label :skill_ids, 'Skills', class: 'control-label col-sm-3' %>
-    <%= content_tag(:div, f.collection_select(:skill_ids, Skill.all, :id, :name, {}, {class: 'form-control', size: Skill.count, multiple: true}), class: 'col-sm-9') %>
+    <%= f.label :monsters_skills, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, class: 'col-sm-9') do %>
+        <%= f.fields_for :monsters_skills do |monsters_skill| %>
+            <%= render 'monsters_skill_fields', f: monsters_skill %>
+        <% end %>
+        <%= link_to_add_fields 'Add Skill', f, :monsters_skills %>
+    <% end %>
+<% end %>
+
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <% collapse_in = !f.object.damage_vulnerabilities.empty? %>
+    <% collapse_in_class = (collapse_in) ? ' in' : '' %>
+    <%= f.label :damage_vulnerabilities, class: 'control-label col-sm-3' do -%>
+        <%= link_to 'Vulnerabilities', '#collapseVulnerabilities', role: 'button', 'data-toggle' => 'collapse', 'aria-controls' => 'collapseVulnerabilities', 'aria-expanded' => collapse_in %>
+    <% end -%>
+    <%= content_tag(:div, f.collection_select(:damage_vulnerabilities, Monster::DAMAGE_TYPES, :to_s, :titleize, {}, {class: 'form-control', size: Monster::DAMAGE_TYPES.count, multiple: true}), class: "col-sm-9 collapse#{collapse_in_class}", id: 'collapseVulnerabilities') %>
 <% end %>
 
 <%= content_tag :div, class: 'form-group' do -%>
-    <%= f.label :damage_vulnerabilities, 'Vulnerabilities', class: 'control-label col-sm-3' %>
-    <%= content_tag(:div, f.collection_select(:damage_vulnerabilities, Monster::DAMAGE_TYPES, :to_s, :titleize, {}, {class: 'form-control', size: Monster::DAMAGE_TYPES.count, multiple: true}), class: 'col-sm-9') %>
+    <% collapse_in = !f.object.damage_resistances.empty? %>
+    <% collapse_in_class = (collapse_in) ? ' in' : '' %>
+    <%= f.label :damage_resistances, class: 'control-label col-sm-3' do -%>
+        <%= link_to 'Resistances', '#collapseResistances', role: 'button', 'data-toggle' => 'collapse', 'aria-controls' => 'collapseResistances', 'aria-expanded' => collapse_in %>
+    <% end -%>
+    <%= content_tag(:div, f.collection_select(:damage_resistances, Monster::DAMAGE_TYPES, :to_s, :titleize, {}, {class: 'form-control', size: Monster::DAMAGE_TYPES.count, multiple: true}), class: "col-sm-9 collapse#{collapse_in_class}", id: 'collapseResistances') %>
 <% end %>
 
 <%= content_tag :div, class: 'form-group' do -%>
-    <%= f.label :damage_resistances, 'Resistances', class: 'control-label col-sm-3' %>
-    <%= content_tag(:div, f.collection_select(:damage_resistances, Monster::DAMAGE_TYPES, :to_s, :titleize, {}, {class: 'form-control', size: Monster::DAMAGE_TYPES.count, multiple: true}), class: 'col-sm-9') %>
+    <% collapse_in = !f.object.damage_immunities.empty? %>
+    <% collapse_in_class = (collapse_in) ? ' in' : '' %>
+    <%= f.label :damage_immunities, class: 'control-label col-sm-3' do -%>
+        <%= link_to 'Dmg Immunities', '#collapseDmgImmunities', role: 'button', 'data-toggle' => 'collapse', 'aria-controls' => 'collapseDmgImmunities', 'aria-expanded' => collapse_in %>
+    <% end -%>
+    <%= content_tag(:div, f.collection_select(:damage_immunities, Monster::DAMAGE_TYPES, :to_s, :titleize, {}, {class: 'form-control', size: Monster::DAMAGE_TYPES.count, multiple: true}), class: "col-sm-9 collapse#{collapse_in_class}", id: 'collapseDmgImmunities') %>
 <% end %>
 
 <%= content_tag :div, class: 'form-group' do -%>
-    <%= f.label :damage_immunities, 'Dmg Immunities', class: 'control-label col-sm-3' %>
-    <%= content_tag(:div, f.collection_select(:damage_immunities, Monster::DAMAGE_TYPES, :to_s, :titleize, {}, {class: 'form-control', size: Monster::DAMAGE_TYPES.count, multiple: true}), class: 'col-sm-9') %>
-<% end %>
-
-<%= content_tag :div, class: 'form-group' do -%>
-    <%= f.label :cond_immunities, class: 'control-label col-sm-3' %>
-    <%= content_tag(:div, f.collection_select(:cond_immunities, Monster::CONDITIONS, :to_s, :titleize, {}, {class: 'form-control', size: Monster::CONDITIONS.count, multiple: true}), class: 'col-sm-9') %>
+    <% collapse_in = !f.object.cond_immunities.empty? %>
+    <% collapse_in_class = (collapse_in) ? ' in' : '' %>
+    <%= f.label :cond_immunities, class: 'control-label col-sm-3' do -%>
+        <%= link_to 'Cond Immunities', '#collapseCondImmunities', role: 'button', 'data-toggle' => 'collapse', 'aria-controls' => 'collapseCondImmunities', 'aria-expanded' => collapse_in %>
+    <% end -%>
+    <%= content_tag(:div, f.collection_select(:cond_immunities, Monster::CONDITIONS, :to_s, :titleize, {}, {class: 'form-control', size: Monster::CONDITIONS.count, multiple: true}), class: "col-sm-9 collapse#{collapse_in_class}", id: 'collapseCondImmunities') %>
 <% end %>
 
 <%= content_tag :div, class: 'form-group' do -%>
@@ -105,11 +129,6 @@
 <%= content_tag :div, class: 'form-group' do -%>
     <%= f.label :languages, class: 'control-label col-sm-3' %>
     <%= content_tag(:div, f.text_field(:languages, class: 'form-control'), class: 'col-sm-9') %>
-<% end %>
-
-<%= content_tag :div, class: 'form-group' do -%>
-    <%= f.label :challenge, class: 'control-label col-sm-3' %>
-    <%= content_tag(:div, f.text_field(:challenge, class: 'form-control', type: 'number'), class: 'col-sm-9') %>
 <% end %>
 
 <%= content_tag :div, class: 'form-group' do -%>
@@ -133,8 +152,8 @@
 <% end %>
 
 <%= content_tag :div, class: 'form-group' do -%>
-    <%= f.label :description, class: 'control-label col-sm-3'  %>
-    <%= content_tag(:div, f.text_area(:description, class: 'form-control', rows: 10, style: ' white-space: pre-wrap;'), class: 'col-sm-9')  %>
+    <%= f.label :description, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_area(:description, class: 'form-control', rows: 10, style: ' white-space: pre-wrap;'), class: 'col-sm-9') %>
 <% end %>
 
 <%= render 'shared/tag_field', f: f %>

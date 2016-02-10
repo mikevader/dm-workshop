@@ -2,7 +2,6 @@
 
 shadow_demon:
   name: Shadow Demon
-  bonus: 2
   cite: MM 64
   size: medium
   monster_type: fiend (demon)
@@ -17,8 +16,6 @@ shadow_demon:
   wisdom: 13
   charisma: 14
   saving_throws_mask: 3 # str dex
-  skills:
-    - stealth
   damage_vulnerabilities_mask: 1024 # radiant
   damage_resistances_mask: 4169 # acid, fire, necrotic, thunder
   damage_immunities_mask: 292 # cold, lightning, poison
@@ -27,4 +24,3 @@ shadow_demon:
   languages: Abyssal, telepathy 120ft
   challenge: 4
   description: What ever!
-
