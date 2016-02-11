@@ -1,18 +1,9 @@
 require 'search_engine'
 
-class MonstersController < ApplicationController
-  layout :choose_layout
-  before_action :logged_in_user, only: [:index, :show, :new, :edit, :update, :create, :destroy]
-  before_action :admin_user, only: [:edit, :update, :destroy]
+class MonstersController < GenericCardController
 
-  before_action :init_search_engine, only: [:index]
-  
-  def init_search_engine
-    @search_engine = SearchEngine2.new(Monster)
-  end
-  
   def index
-    result, error = @search_engine.search(params[:search])
+    result, error = search_engine.search(params[:search])
     
     @cards = result
     @error = error
@@ -96,21 +87,9 @@ class MonstersController < ApplicationController
   def monster_params
     params.require(:monster).permit(:name, :tag_list, :cite, :size, :monster_type, :alignment, :armor_class, :hit_points, :speed, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :senses, :languages, :challenge, :description, :skills, :saving_throws => [], :damage_vulnerabilities => [], :damage_resistances => [], :damage_immunities => [], :cond_immunities => [], :monsters_skills_ids => [], :skill_ids => [], actions_attributes: [:id, :title, :description, :action_type, :melee, :ranged, :_destroy], traits_attributes: [:id, :title, :description, :_destroy], monsters_skills_attributes: [:id, :skill_id, :value, :_destroy])
   end
-  
-  def logged_in_user
-    unless logged_in?
-      store_location
-      flash[:danger] = "Please log in."
-      redirect_to login_url
-    end
-  end
 
   def correct_user
     @card = Monster.find_by(id: params[:id])
     redirect_to root_url unless current_user?(@card.user) || admin_user?
-  end
-  
-  def admin_user
-    redirect_to root_url unless admin_user?
   end
 end

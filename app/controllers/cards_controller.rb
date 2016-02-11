@@ -1,18 +1,9 @@
 require 'search_engine'
 
-class CardsController < ApplicationController
-  layout :choose_layout
-  before_action :logged_in_user, only: [:index, :edit, :update, :create, :destroy]
-  before_action :admin_user, only: [:edit, :update, :destroy]
-
-  before_action :init_search_engine, only: [:index]
-
-  def init_search_engine
-    @search_engine = SearchEngine2.new(Card)
-  end
+class CardsController < GenericCardController
 
   def index
-    result, error = @search_engine.search(params[:search])
+    result, error = search_engine.search(params[:search])
 
     @cards = result
     @error = error
@@ -92,17 +83,5 @@ class CardsController < ApplicationController
   private
   def card_params
     params.require(:card).permit(:name, :tag_list, :icon, :color, :contents)
-  end
-
-  def logged_in_user
-    unless logged_in?
-      store_location
-      flash[:danger] = "Please log in."
-      redirect_to login_url
-    end
-  end
-
-  def admin_user
-    redirect_to root_url unless admin_user?
   end
 end

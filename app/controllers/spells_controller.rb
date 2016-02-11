@@ -1,19 +1,10 @@
 require 'search_engine'
 
-class SpellsController < ApplicationController
-  layout :choose_layout
-  before_action :logged_in_user, only: [:index, :edit, :update, :create, :destroy]
+class SpellsController < GenericCardController
   before_action :correct_user, only: [:edit, :update]
-  before_action :admin_user, only: :destroy
-  
-  before_action :init_search_engine, only: [:index]
-  
-  def init_search_engine
-    @search_engine = SearchEngine2.new(Spell)
-  end
   
   def index
-    result, error = @search_engine.search(params[:search])
+    result, error = search_engine.search(params[:search])
     
     @cards = result
     @error = error
@@ -93,10 +84,6 @@ class SpellsController < ApplicationController
   def correct_user
     @card = Spell.find_by(id: params[:id])
     redirect_to root_url unless current_user?(@card.user) || admin_user?
-  end
-  
-  def admin_user
-    redirect_to root_url unless admin_user?
   end
 end
 

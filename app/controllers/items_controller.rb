@@ -1,18 +1,9 @@
 require 'search_engine'
 
-class ItemsController < ApplicationController
-  layout :choose_layout
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
-  before_action :admin_user, only: [:edit, :update, :destroy]
+class ItemsController < GenericCardController
 
-  before_action :init_search_engine, only: [:index]
-  
-  def init_search_engine
-    @search_engine = SearchEngine2.new(Item)
-  end
-  
   def index
-    result, error = @search_engine.search(params[:search])
+    result, error = search_engine.search(params[:search])
     
     @cards = result
     @error = error
@@ -93,25 +84,9 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:name, :tag_list, :cssclass, :category_id, :rarity_id, :attunement, :description, properties_attributes: [:id, :name, :value, :_destroy])
   end
 
-  # Before filters
-
-  # Confirms a logged-in user.
-  def logged_in_user
-    unless logged_in?
-      store_location
-      flash[:danger] = "Please log in."
-      redirect_to login_url
-    end
-  end
-
   # Confirms the correct user.
   def correct_user
     @user = User.find(params[:id])
     redirect_to(root_url) unless current_user?(@user)
-  end
-
-  # Confirms an admin user.
-  def admin_user
-    redirect_to(root_url) unless admin_user?
   end
 end

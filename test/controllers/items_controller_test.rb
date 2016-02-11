@@ -30,11 +30,17 @@ class ItemsControllerTest < ActionController::TestCase
     assert_redirected_to login_url
   end
 
+  test "show should redirect to login if not logged in" do
+    get :show, id: @item
+    assert_redirected_to login_url
+  end
+
   test "should get show" do
+    log_in_as(users(:michael))
     get :show, id: @item
     assert_response :success
   end
-  
+
   test "delete should remove item" do
     log_in_as(users(:michael))
     item = items(:sting)
