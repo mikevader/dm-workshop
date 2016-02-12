@@ -1,4 +1,4 @@
-class SpellPolicy < ApplicationPolicy
+class ItemPolicy < ApplicationPolicy
 
   def create?
     user.admin?

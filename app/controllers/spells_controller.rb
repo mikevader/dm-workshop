@@ -2,20 +2,10 @@ require 'search_engine'
 
 class SpellsController < GenericCardController
   before_action :correct_user, only: [:edit, :update]
-  
-  def index
-    result, error = search_engine.search(params[:search])
-    
-    @cards = result
-    @error = error
-  end
 
-  def new
-    @card = current_user.spells.build
-  end
-  
   def create
     @card = current_user.spells.create(spell_params)
+    authorize @card
     if @card.save
       flash[:success] = 'Spell inscribed!'
       redirect_to spells_path
@@ -26,6 +16,7 @@ class SpellsController < GenericCardController
 
   def duplicate
     @card = Spell.find(params[:id]).replicate
+    authorize @card
     @card.name = @card.name + " (copy)"
     if @card.save
       flash[:success] = "Spell copied!"
@@ -35,12 +26,9 @@ class SpellsController < GenericCardController
     end
   end
 
-  def edit
-    @card = Spell.find(params[:id])
-  end
-  
   def update
     @card = Spell.find(params[:id])
+    authorize @card
     if @card.update_attributes(spell_params)
       flash[:success] = 'Spell updated'
       redirect_to spells_path
@@ -50,7 +38,9 @@ class SpellsController < GenericCardController
   end
   
   def destroy
-    Spell.find(params[:id]).destroy
+    card = Spell.find(params[:id])
+    authorize card
+    card.destroy
     flash[:success] = 'Spell deleted'
     redirect_to spells_url
   end
@@ -63,6 +53,7 @@ class SpellsController < GenericCardController
       else
         spell = current_user.spells.build
       end
+      authorize spell
       spell.assign_attributes(spell_params)
       card_data = spell.card_data
       raise ActiveRecord::Rollback, "Don't commit preview data changes!"
@@ -72,7 +63,7 @@ class SpellsController < GenericCardController
 
   def modal
     card = Spell.find(params[:id])
-
+    authorize card
     render partial: 'shared/modal_body', locals: { card: card, index: params[:index], modal_size: params[:modal_size], prev_index: params[:previd], next_index: params[:nextid] }
   end
 

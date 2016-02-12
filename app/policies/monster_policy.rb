@@ -1,4 +1,4 @@
-class SpellPolicy < ApplicationPolicy
+class MonsterPolicy < ApplicationPolicy
 
   def create?
     user.admin?

@@ -2,23 +2,9 @@ require 'search_engine'
 
 class ItemsController < GenericCardController
 
-  def index
-    result, error = search_engine.search(params[:search])
-    
-    @cards = result
-    @error = error
-  end
-
-  def show
-    @card = Item.find(params[:id])
-  end
-
-  def new
-    @card = current_user.items.build
-  end
-  
   def create
     @card = current_user.items.build(item_params)
+    authorize @card
     if @card.save
       flash[:success] = "Item crafted!"
       redirect_to items_url
@@ -29,6 +15,7 @@ class ItemsController < GenericCardController
 
   def duplicate
     @card = Item.find(params[:id]).replicate
+    authorize @card
     @card.name = @card.name + " (copy)"
     if @card.save
       flash[:success] = "Item replicated!"
@@ -38,12 +25,9 @@ class ItemsController < GenericCardController
     end
   end
 
-  def edit
-    @card = Item.find(params[:id])
-  end
-  
   def update
     @card = Item.find(params[:id])
+    authorize @card
     if @card.update_attributes(item_params)
       flash[:success] = "Item udpated"
       redirect_to items_url
@@ -53,7 +37,9 @@ class ItemsController < GenericCardController
   end
   
   def destroy
-    Item.find(params[:id]).destroy
+    card = Item.find(params[:id])
+    authorize card
+    card.destroy
     flash[:success] = "Item deleted"
     redirect_to items_url
   end
@@ -66,6 +52,7 @@ class ItemsController < GenericCardController
       else
         item = current_user.items.build
       end
+      authorize item
       item.assign_attributes(item_params)
       card_data = item.card_data
       raise ActiveRecord::Rollback, "Don't commit preview data changes!"
@@ -75,7 +62,7 @@ class ItemsController < GenericCardController
 
   def modal
     card = Item.find(params[:id])
-
+    authorize card
     render partial: 'shared/modal_body', locals: { card: card, index: params[:index], modal_size: params[:modal_size], prev_index: params[:previd], next_index: params[:nextid] }
   end
 

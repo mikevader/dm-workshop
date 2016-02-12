@@ -3,7 +3,10 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   include SessionsHelper
-  
+  include Pundit
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   private
   # Confirms a logged-in user.
   def logged_in_user
@@ -15,5 +18,15 @@ class ApplicationController < ActionController::Base
   end
   def admin_user
     redirect_to root_url unless admin_user?
+  end
+  def user_not_authorized
+    if logged_in?
+      flash[:alert] = "You are not authorized to perform this action."
+      redirect_to(request.referrer || root_path)
+    else
+      store_location
+      flash[:danger] = "Please log in."
+      redirect_to login_url
+    end
   end
 end

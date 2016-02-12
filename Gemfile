@@ -27,6 +27,9 @@ gem 'sdoc', '~> 0.4.1', group: :doc
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.10'
+# For the authorization
+gem 'pundit', '~> 1.1.0'
+
 
 gem 'faker', '~> 1.6.0'
 gem 'carrierwave', '~> 0.10.0'

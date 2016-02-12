@@ -2,23 +2,9 @@ require 'search_engine'
 
 class MonstersController < GenericCardController
 
-  def index
-    result, error = search_engine.search(params[:search])
-    
-    @cards = result
-    @error = error
-  end
-
-  def show
-    @card = Monster.find(params[:id])
-  end
-
-  def new
-    @card = current_user.monsters.build
-  end
-  
   def create
     @card = current_user.monsters.create(monster_required_params)
+    authorize @card
     if @card.update_attributes(monster_params)
       flash[:success] = "Monster bread!"
       redirect_to monsters_path
@@ -29,6 +15,7 @@ class MonstersController < GenericCardController
 
   def duplicate
     @card = Monster.find(params[:id]).replicate
+    authorize @card
     @card.name = @card.name + " (copy)"
     if @card.save
       flash[:success] = "Monster cloned!"
@@ -40,6 +27,7 @@ class MonstersController < GenericCardController
   
   def update
     @card = Monster.find(params[:id])
+    authorize @card
     if @card.update_attributes(monster_params)
       flash[:success] = "Monster evolved!"
       redirect_to monsters_path
@@ -49,15 +37,12 @@ class MonstersController < GenericCardController
   end
   
   def destroy
-    Monster.find(params[:id]).destroy
+    card = Monster.find(params[:id])
+    authorize card
+    card.destroy
     flash[:success] = "Monster killed!"
     redirect_to monsters_url
   end
-
-  def edit
-    @card = Monster.find(params[:id])
-  end
-
 
   def preview
     card_data = nil
@@ -67,6 +52,7 @@ class MonstersController < GenericCardController
       else
         monster = current_user.monsters.build
       end
+      authorize monster
       monster.assign_attributes(monster_params)
       card_data = monster.card_data
       raise ActiveRecord::Rollback, "Don't commit preview data changes!"
@@ -76,7 +62,7 @@ class MonstersController < GenericCardController
 
   def modal
     card = Monster.find(params[:id])
-
+    authorize card
     render partial: 'shared/modal_body', locals: { card: card, index: params[:index], modal_size: params[:modal_size], prev_index: params[:previd], next_index: params[:nextid] }
   end
 

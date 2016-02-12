@@ -2,23 +2,9 @@ require 'search_engine'
 
 class CardsController < GenericCardController
 
-  def index
-    result, error = search_engine.search(params[:search])
-
-    @cards = result
-    @error = error
-  end
-
-  def show
-    @card = Card.find(params[:id])
-  end
-
-  def new
-    @card = current_user.cards.build
-  end
-
   def create
     @card = current_user.cards.build(card_params)
+    authorize @card
     if @card.save
       flash[:success] = 'Card created!'
       redirect_to cards_url
@@ -29,6 +15,7 @@ class CardsController < GenericCardController
 
   def duplicate
     @card = Card.find(params[:id]).replicate
+    authorize @card
     @card.name = @card.name + " (copy)"
     if @card.save
       flash[:success] = "Card duplicated!"
@@ -38,12 +25,9 @@ class CardsController < GenericCardController
     end
   end
 
-  def edit
-    @card = Card.find(params[:id])
-  end
-
   def update
     @card = Card.find(params[:id])
+    authorize @card
     if @card.update_attributes(card_params)
       flash[:success] = 'Card updated!'
       redirect_to cards_url
@@ -53,7 +37,9 @@ class CardsController < GenericCardController
   end
 
   def destroy
-    Card.find(params[:id]).destroy
+    card = Card.find(params[:id])
+    authorize card
+    card.destroy
     flash[:success] = 'Card removed!'
     redirect_to cards_url
   end
@@ -67,6 +53,7 @@ class CardsController < GenericCardController
       else
         card = current_user.cards.build
       end
+      authorize card
       card.assign_attributes(card_params)
       card_data = card.card_data
       raise ActiveRecord::Rollback, "Don't commit preview data changes!"
@@ -76,7 +63,7 @@ class CardsController < GenericCardController
 
   def modal
     card = Card.find(params[:id])
-
+    authorize card
     render partial: 'shared/modal_body', locals: { card: card, index: params[:index], modal_size: params[:modal_size], prev_index: params[:previd], next_index: params[:nextid] }
   end
 
