@@ -4,18 +4,3 @@
 <% provide(:print_path, print_cards_path(search: params[:search])) %>
 <% provide(:new_path, new_card_path) %>
 <% provide(:page_title, 'Search cards') %>
-
-<table class="table table-striped">
-  <tr>
-    <th>#</th>
-    <th>Name</th>
-    <th>Icon</th>
-    <th>Color</th>
-    <th class="last"></th>
-  </tr>
-  <%= render partial: @cards, collection: @cards, as: :card %>
-</table>
-
-<div id="modals">
-  <%= render partial: 'shared/modal', collection: @cards, as: :card %>
-</div>

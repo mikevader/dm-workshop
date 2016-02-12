@@ -1,6 +1,8 @@
 require 'search_engine'
 
 class GenericCardController < ApplicationController
+  include ColumnsHelper
+
   layout :choose_layout
   before_action :logged_in_user, only: [:new, :edit, :update, :create, :destroy]
   before_action :admin_user, only: [:edit, :update, :destroy]

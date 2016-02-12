@@ -58,13 +58,13 @@ class CardsController < GenericCardController
       card_data = card.card_data
       raise ActiveRecord::Rollback, "Don't commit preview data changes!"
     end
-    render partial: 'shared/card_card', locals: { card: card_data}
+    render partial: 'shared/card_card', locals: {card: card_data}
   end
 
   def modal
     card = Card.find(params[:id])
     authorize card
-    render partial: 'shared/modal_body', locals: { card: card, index: params[:index], modal_size: params[:modal_size], prev_index: params[:previd], next_index: params[:nextid] }
+    render partial: 'shared/modal_body', locals: {card: card, index: params[:index], modal_size: params[:modal_size], prev_index: params[:previd], next_index: params[:nextid]}
   end
 
   private
