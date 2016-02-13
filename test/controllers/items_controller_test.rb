@@ -69,4 +69,19 @@ class ItemsControllerTest < ActionController::TestCase
     end
     assert_redirected_to items_url
   end
+
+  test "should get duplicate" do
+    log_in_as(users(:archer))
+    item = items(:glamdring)
+    assert_difference 'Item.count', +1 do
+      post :duplicate, id: item.id
+    end
+    assert_redirected_to items_url
+
+    duplicate = Item.find_by_name "#{item.name} (copy)"
+    assert duplicate
+    assert_equal users(:archer), duplicate.user
+    assert_equal users(:michael), item.user
+  end
+
 end

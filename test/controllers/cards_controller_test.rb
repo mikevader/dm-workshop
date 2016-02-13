@@ -61,4 +61,18 @@ class CardsControllerTest < ActionController::TestCase
     assert_redirected_to cards_url
   end
 
+  test "should get duplicate" do
+    log_in_as(users(:archer))
+    card = cards(:cunning_action)
+    assert_difference 'Card.count', +1 do
+      post :duplicate, id: card.id
+    end
+    assert_redirected_to cards_url
+
+    duplicate = Card.find_by_name "#{card.name} (copy)"
+    assert duplicate
+    assert_equal users(:archer), duplicate.user
+    assert_equal users(:michael), card.user
+  end
+
 end

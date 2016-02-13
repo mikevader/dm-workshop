@@ -1,7 +1,7 @@
 class FilterPolicy < ApplicationPolicy
 
   def create?
-    user.admin?
+    user.admin? or user.player? or user.dm?
   end
 
   def index?
@@ -13,11 +13,15 @@ class FilterPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin?
+    return true if user.admin?
+
+    user.filters.include? record
   end
 
   def destroy?
-    user.admin?
+    return true if user.admin?
+
+    user.filters.include? record
   end
 
   class Scope < Scope

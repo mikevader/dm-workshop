@@ -78,8 +78,10 @@ class MonstersControllerTest < ActionController::TestCase
 
   test 'should get update' do
     log_in_as(users(:michael))
-    patch :update, id: @monster.id, monster: { name: 'ABCD' }
-    assert_response :success
+    assert_no_difference 'Monster.count' do
+      patch :update, id: @monster.id, monster: { name: 'ABCD' }
+    end
+    assert_redirected_to monsters_url
   end
 
   test 'should get destory' do
@@ -89,4 +91,19 @@ class MonstersControllerTest < ActionController::TestCase
     end
     assert_redirected_to monsters_url
   end
+
+  test "should get duplicate" do
+    log_in_as(users(:archer))
+    monster = monsters(:shadow_demon)
+    assert_difference 'Monster.count', +1 do
+      post :duplicate, id: monster.id
+    end
+    assert_redirected_to monsters_url
+
+    duplicate = Monster.find_by_name "#{monster.name} (copy)"
+    assert duplicate
+    assert_equal users(:archer), duplicate.user
+    assert_equal users(:michael), monster.user
+  end
+
 end

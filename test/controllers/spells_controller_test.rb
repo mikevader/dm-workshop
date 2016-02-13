@@ -37,4 +37,18 @@ class SpellsControllerTest < ActionController::TestCase
     end
     assert_redirected_to root_url
   end
+
+  test "should get duplicate" do
+    log_in_as(users(:michael))
+    spell = spells(:fireball)
+    assert_difference 'Spell.count', +1 do
+      post :duplicate, id: spell.id
+    end
+    assert_redirected_to spells_url
+
+    duplicate = Spell.find_by_name "#{spell.name} (copy)"
+    assert duplicate
+    assert_equal users(:michael), duplicate.user
+    assert_equal users(:archer), spell.user
+  end
 end

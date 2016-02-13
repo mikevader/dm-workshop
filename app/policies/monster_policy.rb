@@ -1,7 +1,7 @@
 class MonsterPolicy < ApplicationPolicy
 
   def create?
-    user.admin?
+    user.admin? or user.dm?
   end
 
   def duplicate?
@@ -25,11 +25,15 @@ class MonsterPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin?
+    return true if user.admin?
+
+    user.monsters.include? record
   end
 
   def destroy?
-    user.admin?
+    return true if user.admin?
+
+    user.monsters.include? record
   end
 
   class Scope < Scope

@@ -54,7 +54,9 @@
     <div class="row">
       <div class="col-xs-12 col-sm-offset-1 col-sm-10">
         <div class="form-group">
-          <%= link_to "New", yield(:new_path), class: 'btn btn-default', role: 'button' -%>
+          <% if policy(card_model).new? -%>
+              <%= link_to "New", yield(:new_path), class: 'btn btn-default', role: 'button' -%>
+          <% end -%>
         </div>
       </div>
     </div>

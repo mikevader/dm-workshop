@@ -16,6 +16,7 @@ class ItemsController < GenericCardController
   def duplicate
     @card = Item.find(params[:id]).replicate
     authorize @card
+    @card.user = current_user
     @card.name = @card.name + " (copy)"
     if @card.save
       flash[:success] = "Item replicated!"

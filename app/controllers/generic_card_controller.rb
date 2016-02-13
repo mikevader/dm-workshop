@@ -4,8 +4,9 @@ class GenericCardController < ApplicationController
   include ColumnsHelper
 
   layout :choose_layout
+  helper_method :card_model
   before_action :logged_in_user, only: [:new, :edit, :update, :create, :destroy]
-  before_action :admin_user, only: [:edit, :update, :destroy]
+  #before_action :admin_user, only: [:edit, :update, :destroy]
   before_action :init_search_engine, only: [:index]
   after_action :verify_authorized
 

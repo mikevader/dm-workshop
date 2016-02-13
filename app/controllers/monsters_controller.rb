@@ -1,5 +1,3 @@
-require 'search_engine'
-
 class MonstersController < GenericCardController
 
   def create
@@ -16,6 +14,7 @@ class MonstersController < GenericCardController
   def duplicate
     @card = Monster.find(params[:id]).replicate
     authorize @card
+    @card.user = current_user
     @card.name = @card.name + " (copy)"
     if @card.save
       flash[:success] = "Monster cloned!"

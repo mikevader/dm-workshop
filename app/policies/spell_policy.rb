@@ -1,7 +1,7 @@
 class SpellPolicy < ApplicationPolicy
 
   def create?
-    user.admin?
+    user.admin? unless user.nil?
   end
 
   def duplicate?
@@ -9,11 +9,11 @@ class SpellPolicy < ApplicationPolicy
   end
 
   def index?
-    !user.nil?
+    true
   end
 
   def show?
-    !user.nil?
+    true
   end
 
   def preview?
@@ -25,11 +25,11 @@ class SpellPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin?
+    user.admin? unless user.nil?
   end
 
   def destroy?
-    user.admin?
+    user.admin? unless user.nil?
   end
 
   class Scope < Scope

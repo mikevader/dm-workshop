@@ -1,7 +1,7 @@
 class CardPolicy < ApplicationPolicy
 
   def create?
-    user.admin?
+    user.admin? or user.dm?
   end
 
   def duplicate?
@@ -25,11 +25,15 @@ class CardPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin?
+    return true if user.admin?
+
+    user.cards.include? record
   end
 
   def destroy?
-    user.admin?
+    return true if user.admin?
+
+    user.cards.include? record
   end
 
   class Scope < Scope

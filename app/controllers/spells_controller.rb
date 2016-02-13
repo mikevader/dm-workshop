@@ -17,6 +17,7 @@ class SpellsController < GenericCardController
   def duplicate
     @card = Spell.find(params[:id]).replicate
     authorize @card
+    @card.user = current_user
     @card.name = @card.name + " (copy)"
     if @card.save
       flash[:success] = "Spell copied!"
