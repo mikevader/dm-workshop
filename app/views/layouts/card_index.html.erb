@@ -37,7 +37,7 @@
         <table class="table table-striped">
           <tr>
             <th>#</th>
-            <% columns_definition(controller_name).each do |column| %>
+            <% columns_definition(controller_name, @cards).each do |column| %>
                 <th><%= column[:title] %></th>
             <% end %>
             <th class="last"></th>

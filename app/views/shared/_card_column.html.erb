@@ -12,7 +12,7 @@
       o
     </button>
   </td>
-  <% columns_definition(controller_name).each do |column| %>
+  <% columns_definition(controller_name, card).each do |column| %>
       <td><%= column[:field].call(card) %></td>
   <% end %>
   <td class="last">
