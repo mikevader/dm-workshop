@@ -1,47 +1,111 @@
 require 'test_helper'
 
 class ItemsControllerTest < ActionController::TestCase
-  
-  def setup
+
+  setup do
     @item = items(:sting)
   end
 
-  test "should redirect index when not logged in" do
-    get :index
+  test 'show should redirect to login if not logged in' do
+    get :show, id: @item
+    assert_not flash.empty?
     assert_redirected_to login_url
   end
 
-  test "should redirect edit when not logged in" do
+  test 'create should redirect to login if not logged in' do
+    get :create, item: {name: ''}
+    assert_not flash.empty?
+    assert_redirected_to login_url
+  end
+
+  test 'should redirect edit when not logged in' do
     post :edit, id: @item
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
-  test "should redirect update when not logged in" do
-    patch :update, id: @item, name: { name: 'gun' }
+  test 'should redirect update when not logged in' do
+    patch :update, id: @item, name: {name: 'gun'}
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
-  test "should redirect destroy when not logged in" do
+  test 'should redirect destroy when not logged in' do
     assert_no_difference 'Item.count' do
       delete :destroy, id: @item
     end
+    assert_not flash.empty?
     assert_redirected_to login_url
   end
 
-  test "show should redirect to login if not logged in" do
-    get :show, id: @item
+  test 'index should redirect index when not logged in' do
+    get :index
+    assert_not flash.empty?
     assert_redirected_to login_url
   end
 
-  test "should get show" do
+  test 'new should redirect index when not logged in' do
+    get :new
+    assert_not flash.empty?
+    assert_redirected_to login_url
+  end
+
+  test 'should get index' do
+    log_in_as(users(:michael))
+    get :index
+    assert_response :success
+  end
+
+  test 'should get show' do
     log_in_as(users(:michael))
     get :show, id: @item
     assert_response :success
   end
 
-  test "delete should remove item" do
+  test 'should get new' do
+    log_in_as(users(:michael))
+    get :new
+    assert_response :success
+  end
+
+  test 'create should add new item' do
+    log_in_as(users(:michael))
+    category = categories(:armor)
+    rarity = rarities(:uncommon)
+    assert_difference 'Item.count', +1 do
+      post :create, item: {name: 'Nerd', category_id: category.id, rarity_id: rarity.id, attunement: true, description: 'the nerdster'}
+    end
+
+    new_item = Item.find_by_name('Nerd')
+    assert new_item
+    assert_equal category, new_item.category
+    assert_equal rarity, new_item.rarity
+
+    assert_redirected_to items_url
+  end
+
+  test 'should get edit' do
+    log_in_as(users(:michael))
+    post :edit, id: @item
+    assert_response :success
+  end
+
+  test 'update should change existing item' do
+    log_in_as(users(:michael))
+    item = items(:glamdring)
+
+    assert_no_difference 'Item.count' do
+      patch :update, id: item.id, item: {name: 'Qua?'}
+    end
+
+    updated_item = Item.find(item.id)
+    assert updated_item
+    assert_equal 'Qua?', updated_item.name
+
+    assert_redirected_to items_url
+  end
+
+  test 'delete should remove item' do
     log_in_as(users(:michael))
     item = items(:sting)
     assert_difference 'Item.count', -1 do
@@ -50,27 +114,7 @@ class ItemsControllerTest < ActionController::TestCase
     assert_redirected_to items_url
   end
 
-  test "create should add new item" do
-    log_in_as(users(:michael))
-    category = categories(:armor)
-    rarity = rarities(:uncommon)
-    assert_difference 'Item.count', +1 do
-      post :create, item: { name: 'Nerd', category_id: category.id, rarity_id: rarity.id, attunement: true, description: 'the nerdster' }
-    end
-    assert_redirected_to items_url
-  end
-  
-  test "update should change existing item" do
-    log_in_as(users(:michael))
-    item = items(:glamdring)
-
-    assert_no_difference 'Item.count' do
-      patch :update, id: item.id, item: { name: 'Qua?' }
-    end
-    assert_redirected_to items_url
-  end
-
-  test "should get duplicate" do
+  test 'should get duplicate' do
     log_in_as(users(:archer))
     item = items(:glamdring)
     assert_difference 'Item.count', +1 do
