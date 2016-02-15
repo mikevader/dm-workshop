@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  helper_method :edit_path, :duplicate_path
   include SessionsHelper
   include Pundit
 
@@ -28,5 +29,15 @@ class ApplicationController < ActionController::Base
       flash[:danger] = "Please log in."
       redirect_to login_url
     end
+  end
+
+  def edit_path card
+    name = card.class.name.downcase
+    send("edit_#{name}_path", card)
+  end
+
+  def duplicate_path card
+    name = card.class.name.downcase
+    send("duplicate_#{name}_path", card)
   end
 end

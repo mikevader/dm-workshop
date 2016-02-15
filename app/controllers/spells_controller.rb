@@ -77,5 +77,9 @@ class SpellsController < GenericCardController
     @card = Spell.find_by(id: params[:id])
     redirect_to root_url unless current_user?(@card.user) || admin_user?
   end
+
+  def new_path
+    new_spell_path
+  end
 end
 

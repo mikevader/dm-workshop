@@ -77,4 +77,8 @@ class MonstersController < GenericCardController
     @card = Monster.find_by(id: params[:id])
     redirect_to root_url unless current_user?(@card.user) || admin_user?
   end
+
+  def new_path
+    new_monster_path
+  end
 end

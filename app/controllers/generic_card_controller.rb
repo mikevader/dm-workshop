@@ -4,7 +4,7 @@ class GenericCardController < ApplicationController
   include ColumnsHelper
 
   layout :choose_layout
-  helper_method :card_model
+  helper_method :card_model, :new_path, :edit_path, :destroy_path, :duplicate_path
   before_action :logged_in_user, only: [:new, :edit, :update, :create, :destroy]
   #before_action :admin_user, only: [:edit, :update, :destroy]
   before_action :init_search_engine, only: [:index]
@@ -45,6 +45,21 @@ class GenericCardController < ApplicationController
 
 
   private
+  def new_path
+  end
+
+  def edit_path card
+    name = card.class.name.downcase
+    send("edit_#{name}_path", card)
+  end
+
+  def destroy_path card
+  end
+
+  def duplicate_path card
+    name = card.class.name.downcase
+    send("duplicate_#{name}_path", card)
+  end
 
   def user_collection
     current_user.send(controller_name)

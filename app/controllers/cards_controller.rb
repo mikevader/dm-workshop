@@ -72,4 +72,8 @@ class CardsController < GenericCardController
   def card_params
     params.require(:card).permit(:name, :tag_list, :icon, :color, :contents)
   end
+
+  def new_path
+    new_card_path
+  end
 end

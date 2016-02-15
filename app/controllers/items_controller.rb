@@ -77,4 +77,8 @@ class ItemsController < GenericCardController
     @user = User.find(params[:id])
     redirect_to(root_url) unless current_user?(@user)
   end
+
+  def new_path
+    new_item_path
+  end
 end

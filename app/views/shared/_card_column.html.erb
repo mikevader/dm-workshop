@@ -18,13 +18,13 @@
   <td class="last">
     <ul class="actions">
       <% if policy(card).edit? -%>
-          <li><%= link_to edit_card_path(card), 'aria-label' => 'edit' do -%>
+          <li><%= link_to edit_path(card), 'aria-label' => 'edit' do -%>
                 <span class="glyphicon glyphicon-pencil"></span>
             <% end -%>
           </li>
       <% end -%>
       <% if policy(card).duplicate? -%>
-          <li><%= link_to duplicate_card_path(card), method: :post, 'aria-label' => 'duplicate' do -%>
+          <li><%= link_to duplicate_path(card), method: :post, 'aria-label' => 'duplicate' do -%>
                 <span class="glyphicon glyphicon-duplicate"></span>
             <% end -%>
           </li>
