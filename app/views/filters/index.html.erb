@@ -4,10 +4,14 @@
       <div class="col-xs-12">
         <h2>Filters</h2>
         <ul class="nav nav-sidebar">
-          <% @filters.each do |filter| %>
-              <li><span><a href="<%= filter_path(filter) %>"><%= filter.name %></a><%= link_to filter, method: :delete, data: {confirm: 'You sure?'}, 'aria-label' => 'delete' do -%>
-                  <span class="glyphicon glyphicon-remove"></span>
-              <% end -%></span></li>
+          <% @filters.each do |filter| -%>
+              <li><span><a href="<%= filter_path(filter) %>"><%= filter.name %></a>
+                <% if policy(filter).destroy? -%>
+                    <%= link_to filter, method: :delete, data: {confirm: 'You sure?'}, 'aria-label' => 'delete' do -%>
+                        <span class="glyphicon glyphicon-remove"></span>
+                    <% end -%>
+                <% end -%>
+              </span></li>
           <% end %>
         </ul>
       </div>
@@ -91,7 +95,7 @@
             <th></th>
             <th class="last"></th>
           </tr>
-          <%= render partial: @cards, collection: @cards, as: :card %>
+          <%= render partial: 'shared/card_column', collection: @cards, as: :card %>
         </table>
         <div id="modals">
           <%= render partial: 'shared/modal', collection: @cards, as: :card %>

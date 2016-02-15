@@ -11,15 +11,25 @@
 
   <ul class="nav navbar-nav navbar-right top-nav collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <li><%= link_to 'Home', root_path %></li>
-    <% if logged_in? %>
+    <% if policy(Filter).index? -%>
         <li><%= link_to 'Filters', filters_path %></li>
+    <% end -%>
+    <% if policy(Card).index? -%>
         <li><%= link_to 'Cards', cards_path %></li>
+    <% end -%>
+    <% if policy(Monster).index? -%>
         <li><%= link_to 'Monsters', monsters_path %></li>
+    <% end -%>
+    <% if policy(Item).index? -%>
         <li><%= link_to 'Items', items_path %></li>
+    <% end -%>
+    <% if policy(Spell).index? -%>
         <li><%= link_to 'Spells', spells_path %></li>
-        <li><%= link_to help_path do %>
+    <% end -%>
+    <li><%= link_to help_path do %>
           <span class="glyphicon glyphicon-question-sign"></span>
-          <% end %></li>
+      <% end %></li>
+    <% if logged_in? %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <%= gravatar_for current_user, size: 20 %><b class="caret"></b>

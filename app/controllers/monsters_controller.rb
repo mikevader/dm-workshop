@@ -1,33 +1,8 @@
-require 'search_engine'
+class MonstersController < GenericCardController
 
-class MonstersController < ApplicationController
-  layout :choose_layout
-  before_action :logged_in_user, only: [:index, :show, :new, :edit, :update, :create, :destroy]
-  before_action :admin_user, only: [:edit, :update, :destroy]
-
-  before_action :init_search_engine, only: [:index]
-  
-  def init_search_engine
-    @search_engine = SearchEngine2.new(Monster)
-  end
-  
-  def index
-    result, error = @search_engine.search(params[:search])
-    
-    @cards = result
-    @error = error
-  end
-
-  def show
-    @card = Monster.find(params[:id])
-  end
-
-  def new
-    @card = current_user.monsters.build
-  end
-  
   def create
     @card = current_user.monsters.create(monster_required_params)
+    authorize @card
     if @card.update_attributes(monster_params)
       flash[:success] = "Monster bread!"
       redirect_to monsters_path
@@ -38,6 +13,8 @@ class MonstersController < ApplicationController
 
   def duplicate
     @card = Monster.find(params[:id]).replicate
+    authorize @card
+    @card.user = current_user
     @card.name = @card.name + " (copy)"
     if @card.save
       flash[:success] = "Monster cloned!"
@@ -49,6 +26,7 @@ class MonstersController < ApplicationController
   
   def update
     @card = Monster.find(params[:id])
+    authorize @card
     if @card.update_attributes(monster_params)
       flash[:success] = "Monster evolved!"
       redirect_to monsters_path
@@ -58,15 +36,12 @@ class MonstersController < ApplicationController
   end
   
   def destroy
-    Monster.find(params[:id]).destroy
+    card = Monster.find(params[:id])
+    authorize card
+    card.destroy
     flash[:success] = "Monster killed!"
     redirect_to monsters_url
   end
-
-  def edit
-    @card = Monster.find(params[:id])
-  end
-
 
   def preview
     card_data = nil
@@ -76,6 +51,7 @@ class MonstersController < ApplicationController
       else
         monster = current_user.monsters.build
       end
+      authorize monster
       monster.assign_attributes(monster_params)
       card_data = monster.card_data
       raise ActiveRecord::Rollback, "Don't commit preview data changes!"
@@ -85,7 +61,7 @@ class MonstersController < ApplicationController
 
   def modal
     card = Monster.find(params[:id])
-
+    authorize card
     render partial: 'shared/modal_body', locals: { card: card, index: params[:index], modal_size: params[:modal_size], prev_index: params[:previd], next_index: params[:nextid] }
   end
 
@@ -96,21 +72,13 @@ class MonstersController < ApplicationController
   def monster_params
     params.require(:monster).permit(:name, :tag_list, :cite, :size, :monster_type, :alignment, :armor_class, :hit_points, :speed, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :senses, :languages, :challenge, :description, :skills, :saving_throws => [], :damage_vulnerabilities => [], :damage_resistances => [], :damage_immunities => [], :cond_immunities => [], :monsters_skills_ids => [], :skill_ids => [], actions_attributes: [:id, :title, :description, :action_type, :melee, :ranged, :_destroy], traits_attributes: [:id, :title, :description, :_destroy], monsters_skills_attributes: [:id, :skill_id, :value, :_destroy])
   end
-  
-  def logged_in_user
-    unless logged_in?
-      store_location
-      flash[:danger] = "Please log in."
-      redirect_to login_url
-    end
-  end
 
   def correct_user
     @card = Monster.find_by(id: params[:id])
     redirect_to root_url unless current_user?(@card.user) || admin_user?
   end
-  
-  def admin_user
-    redirect_to root_url unless admin_user?
+
+  def new_path
+    new_monster_path
   end
 end

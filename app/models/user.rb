@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   has_many :cards
   has_many :filters
 
+  enum role: {dm: 2, player: 4}
+
   attr_accessor   :remember_token, :activation_token, :reset_token
   before_save     :downcase_email
   before_create   :create_activation_digest
@@ -21,6 +23,8 @@ class User < ActiveRecord::Base
               uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+
+  after_initialize :set_default_role, :if => :new_record?
 
   # Returns the hash digest of the given string.
   def User.digest(string)
@@ -84,6 +88,10 @@ class User < ActiveRecord::Base
   end
 
   private
+  def set_default_role
+    self.role ||= :player
+  end
+
   def downcase_email
     self.email = email.downcase
   end

@@ -1,10 +1,9 @@
 require 'search_engine'
 
 class FiltersController < ApplicationController
-  #layout :choose_layout
   before_action :logged_in_user, only: [:index, :show, :new, :edit, :update, :create, :destroy]
-
   before_action :init_search_engine, only: [:show, :index]
+  after_action :verify_authorized
 
   def init_search_engine
     @search_engines = {
@@ -18,6 +17,7 @@ class FiltersController < ApplicationController
   def index
     @filters = Filter.all
     @cards, @error = search(params[:search])
+    authorize @filters
   end
 
   def show
@@ -25,15 +25,19 @@ class FiltersController < ApplicationController
     @filters = Filter.all
 
     @cards, @error = search(@filter.query)
+    authorize @filters
+    @cards.each {|card| authorize card}
 
     render :index
   end
 
   def new
+    authorize Filter
   end
 
   def create
     @filter = current_user.filters.build(filter_params)
+    authorize @filter
     if @filter.save
       flash[:success] = 'Filter created!'
       redirect_to filter_path(@filter)
@@ -43,10 +47,12 @@ class FiltersController < ApplicationController
   end
 
   def edit
+    authorize Filter
   end
 
   def update
     @filter = Filter.find(params[:id])
+    authorize @filter
     if @filter.update_attributes(filter_params)
       flash[:success] = 'Filter updated!'
       redirect_to filter_path(@filter)
@@ -56,7 +62,9 @@ class FiltersController < ApplicationController
   end
 
   def destroy
-    Filter.find(params[:id]).destroy
+    card = Filter.find(params[:id])
+    authorize card
+    card.destroy
     flash[:success] = 'Filter removed!'
     redirect_to filters_url
   end

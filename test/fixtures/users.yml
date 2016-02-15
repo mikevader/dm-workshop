@@ -12,6 +12,7 @@ archer:
   email: duchess@example.gov
   password_digest: <%= User.digest('password') %>
   admin: false
+  role: 2 # DM
   activated: true
   activated_at: <%= Time.zone.now %>
 
@@ -20,6 +21,7 @@ lana:
   email: hands@example.gov
   password_digest: <%= User.digest('password') %>
   admin: false
+  role: 4 # Player
   activated: true
   activated_at: <%= Time.zone.now %>
 
