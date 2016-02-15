@@ -56,6 +56,12 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
+### Dungeon Master Workshop 0.11 ###
+* Add authorization with roles for DM, Players and Admins
+    * DMs can create new cards, duplicate existing and edit or delete their own. (restricted to free-form, item and monster cards)
+    * Players can view all type of cards and can create their own filters.
+    * Anonymous users can just view spell cards.
+
 ### Dungeon Master Workshop 0.10 ###
 * Improved skills
     * Add new skills individually over drop down and add button
