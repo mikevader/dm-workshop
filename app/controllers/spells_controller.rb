@@ -49,7 +49,7 @@ class SpellsController < GenericCardController
   def preview
     card_data = nil
     ActiveRecord::Base.transaction do
-      if Spell.exists?(params[:id])
+      if Spell.exists?(params[:id].to_i)
         spell = Spell.find(params[:id])
       else
         spell = current_user.spells.build

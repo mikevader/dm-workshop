@@ -48,7 +48,7 @@ class ItemsController < GenericCardController
   def preview
     card_data = nil
     ActiveRecord::Base.transaction do
-      if Item.exists?(params[:id])
+      if Item.exists?(params[:id].to_i)
         item = Item.find(params[:id])
       else
         item = current_user.items.build

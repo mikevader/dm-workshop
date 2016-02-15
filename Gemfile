@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 ruby '2.2.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.5'
+gem 'rails', '~> 4.2.5.1'
 # Use bootstrap with sass
 gem 'bootstrap-sass', '~> 3.3.6'
 # Use SCSS for stylesheets
@@ -61,6 +61,10 @@ group :development do
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.2'
+
+  # Security check
+  gem 'brakeman', require: false
+  gem 'guard-brakeman', require: false
 end
 
 group :development, :test do

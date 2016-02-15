@@ -61,6 +61,7 @@ We had the following releases:
     * DMs can create new cards, duplicate existing and edit or delete their own. (restricted to free-form, item and monster cards)
     * Players can view all type of cards and can create their own filters.
     * Anonymous users can just view spell cards.
+* Add security scan (brakeman) and enable it with the default guard execution.
 
 ### Dungeon Master Workshop 0.10 ###
 * Improved skills

@@ -46,7 +46,7 @@ class MonstersController < GenericCardController
   def preview
     card_data = nil
     ActiveRecord::Base.transaction do
-      if Monster.exists?(params[:id])
+      if Monster.exists?(params[:id].to_i)
         monster = Monster.find(params[:id])
       else
         monster = current_user.monsters.build
