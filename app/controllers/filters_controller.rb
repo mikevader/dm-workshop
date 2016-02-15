@@ -7,10 +7,10 @@ class FiltersController < ApplicationController
 
   def init_search_engine
     @search_engines = {
-        cards: SearchEngine2.new(Card),
-        items: SearchEngine2.new(Item),
-        spells: SearchEngine2.new(Spell),
-        monsters: SearchEngine2.new(Monster)
+        cards: SearchEngine2.new(Card, current_user),
+        items: SearchEngine2.new(Item, current_user),
+        spells: SearchEngine2.new(Spell, current_user),
+        monsters: SearchEngine2.new(Monster, current_user)
     }
   end
 

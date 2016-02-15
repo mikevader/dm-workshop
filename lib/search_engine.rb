@@ -1,6 +1,7 @@
 class SearchEngine2
-  def initialize(entity_class)
-    @entity_class = entity_class
+  def initialize(entity_class, current_user)
+    name_space = "#{entity_class}Policy::Scope".constantize
+    @entity_class = name_space.new(current_user, entity_class).resolve
   end
   
   def search(search_string, all_on_empty = true)

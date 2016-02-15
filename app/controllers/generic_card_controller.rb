@@ -11,7 +11,7 @@ class GenericCardController < ApplicationController
   after_action :verify_authorized
 
   def init_search_engine
-    @search_engine = SearchEngine2.new(card_model)
+    @search_engine = SearchEngine2.new(card_model, current_user)
   end
 
 

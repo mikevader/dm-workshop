@@ -38,7 +38,13 @@ class ItemPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope
+      if user.nil?
+        scope.where('shared = ?', true)
+      elsif user.admin?
+        scope.all
+      else
+        scope.where('shared = ? OR user_id = ?', true, user.id)
+      end
     end
   end
 end
