@@ -8,6 +8,16 @@
 <%= content_tag :div, class: 'form-group' do -%>
     <%= content_tag :div, class: 'col-sm-offset-3 col-sm-9' do %>
         <%= content_tag :div, class: 'checkbox' do %>
+            <%= f.label :shared do %>
+                <%= f.check_box(:shared) %>Shared
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= content_tag :div, class: 'col-sm-offset-3 col-sm-9' do %>
+        <%= content_tag :div, class: 'checkbox' do %>
             <%= f.label :ritual do %>
                 <%= f.check_box(:ritual) %>Ritual
             <% end %>

@@ -70,7 +70,7 @@ class SpellsController < GenericCardController
 
   private
   def spell_params
-    params.require(:spell).permit(:name, :tag_list, :cite, :ritual, :level, :school, :casting_time, :range, :components, :duration, :short_description, :athigherlevel, :description, :picture, :concentration, :hero_classes, :hero_class_ids => [])
+    params.require(:spell).permit(:name, :shared, :tag_list, :cite, :ritual, :level, :school, :casting_time, :range, :components, :duration, :short_description, :athigherlevel, :description, :picture, :concentration, :hero_classes, :hero_class_ids => [])
   end
   
   def correct_user
