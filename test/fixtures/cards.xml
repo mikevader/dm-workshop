@@ -3,6 +3,7 @@
   <cards>
     <card>
       <name>Frenzy</name>
+      <cite>PH 49</cite>
       <icon>icon-white-book</icon>
       <color>indigo</color>
       <badges>icon-class-barbarian</badges>

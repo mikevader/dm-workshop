@@ -6,6 +6,11 @@
 <% end %>
 
 <%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :cite, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_field(:cite, class: 'form-control'), class: 'col-sm-9') %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
     <%= f.label :icon, class: 'control-label col-sm-3' %>
     <%= content_tag(:div, f.text_field(:icon, class: 'form-control'), class: 'col-sm-9') %>
 <% end %>

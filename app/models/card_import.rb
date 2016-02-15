@@ -462,6 +462,7 @@ class CardImport
         id = existing_card.id
       end
 
+      cite = CardImport.load_element name, card, 'cite', false
       color = CardImport.load_element name, card, 'color', false
       icon = CardImport.load_element name, card, 'icon', false
       badges = CardImport.load_element name, card, 'badges', false
@@ -469,6 +470,7 @@ class CardImport
 
       import_card = ImportCard.new(id, :card)
       import_card.name = name
+      import_card.attributes.cite = cite
       import_card.attributes.color = color
       import_card.attributes.icon = icon
       import_card.attributes.badges = badges
@@ -485,6 +487,7 @@ class CardImport
       card.name = import_card.name
     end
 
+    card.cite = import_card.attributes.cite
     card.color = import_card.attributes.color
     card.icon = import_card.attributes.icon
     card.badges = import_card.attributes.badges
