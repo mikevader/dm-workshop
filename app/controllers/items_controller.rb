@@ -69,7 +69,7 @@ class ItemsController < GenericCardController
 
   private
   def item_params
-    params.require(:item).permit(:name, :tag_list, :cssclass, :category_id, :rarity_id, :attunement, :description, properties_attributes: [:id, :name, :value, :_destroy])
+    params.require(:item).permit(:name, :shared, :tag_list, :cssclass, :category_id, :rarity_id, :attunement, :description, properties_attributes: [:id, :name, :value, :_destroy])
   end
 
   # Confirms the correct user.

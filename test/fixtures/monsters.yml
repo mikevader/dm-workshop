@@ -25,3 +25,4 @@ shadow_demon:
   challenge: 4
   description: What ever!
   user: michael
+  shared: true

@@ -9,29 +9,32 @@ class GenericCardController < ApplicationController
   #before_action :admin_user, only: [:edit, :update, :destroy]
   before_action :init_search_engine, only: [:index]
   after_action :verify_authorized
+  after_action :verify_policy_scoped, only: [:index]
 
   def init_search_engine
-    @search_engine = SearchEngine2.new(card_model)
+    @search_engine = SearchEngine2.new(policy_scope(card_model))
   end
 
 
   # Create actions
   def new
+    authorize card_model
     @card = user_collection.build
-    authorize @card
   end
 
 
   # Read actions
   def index
+    authorize card_model
     result, error = search_engine.search(params[:search])
 
     @cards = result
     @error = error
-    authorize card_model
+    @cards.each {|card| authorize card}
   end
 
   def show
+    authorize card_model
     @card = card_model.find(params[:id])
     authorize @card
   end
