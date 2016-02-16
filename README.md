@@ -63,6 +63,7 @@ We had the following releases:
     * Anonymous users can just view spell cards.
 * Add security scan (brakeman) and enable it with the default guard execution.
 * Add cite field to free form card and extend import/export.
+* Cards and filters can be marked shared so other users are able to see them.
 
 ### Dungeon Master Workshop 0.10 ###
 * Improved skills
