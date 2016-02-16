@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160215205311) do
+ActiveRecord::Schema.define(version: 20160216190102) do
 
   create_table "actions", force: :cascade do |t|
     t.string   "title"
@@ -55,8 +55,9 @@ ActiveRecord::Schema.define(version: 20160215205311) do
     t.string   "name"
     t.text     "query"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "shared",     default: false, null: false
   end
 
   add_index "filters", ["name"], name: "index_filters_on_name", unique: true

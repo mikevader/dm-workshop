@@ -1,7 +1,7 @@
 class CardPolicy < ApplicationPolicy
 
   def create?
-    user.admin? or user.dm?
+    user.admin? or user.dm? unless user.nil?
   end
 
   def duplicate?

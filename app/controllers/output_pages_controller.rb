@@ -10,27 +10,27 @@ class OutputPagesController < ApplicationController
   before_action :init_search_engine_monsters, only: [:monsters]
 
   def init_search_engine_cards
-    @search_engine = SearchEngine2.new(Card, current_user)
+    @search_engine = SearchEngine2.new(policy_scope(Card))
   end
 
   def init_search_engine_spells
-    @search_engine = SearchEngine2.new(Spell, current_user)
+    @search_engine = SearchEngine2.new(policy_scope(Spell))
   end
   
   def init_search_engine_items
-    @search_engine = SearchEngine2.new(Item, current_user)
+    @search_engine = SearchEngine2.new(policy_scope(Item))
   end
   
   def init_search_engine_monsters
-    @search_engine = SearchEngine2.new(Monster, current_user)
+    @search_engine = SearchEngine2.new(policy_scope(Monster))
   end
 
   def init_search_engine_all
     @search_engines = {
-        cards: SearchEngine2.new(Card, current_user),
-        items: SearchEngine2.new(Item, current_user),
-        spells: SearchEngine2.new(Spell, current_user),
-        monsters: SearchEngine2.new(Monster, current_user)
+        cards: SearchEngine2.new(policy_scope(Card)),
+        items: SearchEngine2.new(policy_scope(Item)),
+        spells: SearchEngine2.new(policy_scope(Spell)),
+        monsters: SearchEngine2.new(policy_scope(Monster))
     }
   end
 

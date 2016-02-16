@@ -12,6 +12,9 @@
                 <%= f.check_box(:shared) %>Shared
             <% end %>
         <% end %>
+        <%= content_tag(:span, id: 'content_help', class: 'help-block') do -%>
+            Will be shared with other users.
+        <% end %>
     <% end %>
 <% end %>
 

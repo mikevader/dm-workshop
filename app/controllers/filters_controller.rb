@@ -3,29 +3,33 @@ require 'search_engine'
 class FiltersController < ApplicationController
   before_action :logged_in_user, only: [:index, :show, :new, :edit, :update, :create, :destroy]
   before_action :init_search_engine, only: [:show, :index]
-  after_action :verify_authorized
+  after_action :verify_authorized, except: [:index]
+  after_action :verify_policy_scoped, only: [:index]
 
   def init_search_engine
     @search_engines = {
-        cards: SearchEngine2.new(Card, current_user),
-        items: SearchEngine2.new(Item, current_user),
-        spells: SearchEngine2.new(Spell, current_user),
-        monsters: SearchEngine2.new(Monster, current_user)
+        card: SearchEngine2.new(policy_scope(Card)),
+        item: SearchEngine2.new(policy_scope(Item)),
+        spell: SearchEngine2.new(policy_scope(Spell)),
+        monster: SearchEngine2.new(policy_scope(Monster))
     }
   end
 
   def index
-    @filters = Filter.all
+    @filters = policy_scope(Filter).all
     @cards, @error = search(params[:search])
-    authorize @filters
+    @filters.each {|filter| authorize filter}
+    @cards.each {|card| authorize card}
+    @filter = current_user.filters.build
   end
 
   def show
     @filter = Filter.find(params[:id])
-    @filters = Filter.all
+    @filters = policy_scope(Filter).all
+    authorize @filter
+    @filters.each {|filter| authorize filter}
 
     @cards, @error = search(@filter.query)
-    authorize @filters
     @cards.each {|card| authorize card}
 
     render :index
@@ -71,7 +75,7 @@ class FiltersController < ApplicationController
 
   private
   def filter_params
-    params.require(:filter).permit(:name, :query)
+    params.require(:filter).permit(:name, :query, :shared)
   end
 
   def logged_in_user
