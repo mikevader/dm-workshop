@@ -426,7 +426,7 @@ class CardImport
     new_monster.challenge = import_card.attributes.challenge
 
     new_monster.saving_throws = import_card.attributes.saving_throws unless import_card.attributes.saving_throws.nil?
-    new_monster.skills << import_card.attributes.skills.map {|skill| Skill.where("lower(name) LIKE '#{skill.downcase}'")} unless import_card.attributes.skills.nil?
+    new_monster.skills << import_card.attributes.skills.map {|skill| Skill.where("lower(name) LIKE ?", skill.downcase)} unless import_card.attributes.skills.nil?
     new_monster.senses = import_card.attributes.senses
 
     new_monster.damage_vulnerabilities = import_card.attributes.damage_vulnerabilities unless import_card.attributes.damage_vulnerabilities.nil?
@@ -462,6 +462,7 @@ class CardImport
         id = existing_card.id
       end
 
+      cite = CardImport.load_element name, card, 'cite', false
       color = CardImport.load_element name, card, 'color', false
       icon = CardImport.load_element name, card, 'icon', false
       badges = CardImport.load_element name, card, 'badges', false
@@ -469,6 +470,7 @@ class CardImport
 
       import_card = ImportCard.new(id, :card)
       import_card.name = name
+      import_card.attributes.cite = cite
       import_card.attributes.color = color
       import_card.attributes.icon = icon
       import_card.attributes.badges = badges
@@ -485,6 +487,7 @@ class CardImport
       card.name = import_card.name
     end
 
+    card.cite = import_card.attributes.cite
     card.color = import_card.attributes.color
     card.icon = import_card.attributes.icon
     card.badges = import_card.attributes.badges

@@ -17,6 +17,7 @@ fireball:
                 The fire spreads around corners. It ignites flammable objects in the area that aren't being worn or carried.<br/>
                 <b>At Higher Levels.</b> When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.
   user: archer
+  shared: true
 
 bane:
   name: Bane
@@ -32,3 +33,4 @@ bane:
   short_description: Bis drei Ziele im Sichtfeld müssen einen Charisma-Rettungswurf bestehen. Bei Misslingen muss das Ziel bei jedem Angriffs- oder Rettungswurf einen d4 abziehen.
   description: MyText
   user: michael
+  shared: true

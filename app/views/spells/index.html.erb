@@ -4,18 +4,3 @@
 <% provide(:print_path, print_spells_path(search: params[:search])) %>
 <% provide(:new_path, new_spell_path) %>
 <% provide(:page_title, 'Search spells') %>
-
-<table class="table table-striped">
-  <tr>
-    <th>#</th>
-    <th>Name</th>
-    <th>Level</th>
-    <th>School</th>
-    <th class="last"></th>
-  </tr>
-  <%= render partial: @cards, collection: @cards, as: :card %>
-</table>
-
-<div id="modals">
-  <%= render partial: 'shared/modal', collection: @cards, as: :card %>
-</div>

@@ -6,6 +6,24 @@
 <% end %>
 
 <%= content_tag :div, class: 'form-group' do -%>
+    <%= content_tag :div, class: 'col-sm-offset-3 col-sm-9' do %>
+        <%= content_tag :div, class: 'checkbox' do %>
+            <%= f.label :shared do %>
+                <%= f.check_box(:shared) %>Shared
+            <% end %>
+        <% end %>
+        <%= content_tag(:span, id: 'content_help', class: 'help-block') do -%>
+            Will be shared with other users.
+        <% end %>
+    <% end %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :cite, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_field(:cite, class: 'form-control'), class: 'col-sm-9') %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
     <%= f.label :icon, class: 'control-label col-sm-3' %>
     <%= content_tag(:div, f.text_field(:icon, class: 'form-control'), class: 'col-sm-9') %>
 <% end %>

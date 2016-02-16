@@ -174,6 +174,7 @@ class CardExport
 
 =begin
     t.string   "name"
+    t.string   "cite"
     t.string   "icon"
     t.string   "color"
     t.text     "contents"
@@ -189,6 +190,7 @@ class CardExport
           cards.each do |card|
             xml.card {
               xml.name card.name
+              xml.cite card.cite unless card.cite.nil?
               xml.icon card.icon
               xml.color card.color
               xml.badges card.badges

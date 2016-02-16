@@ -67,3 +67,23 @@ if User.find_by_email('michael@anduin.ch').nil?
              activated_at: Time.zone.now)
 end
 
+if User.find_by_email('dm@anduin.ch').nil?
+  User.create!(name:  "Dungeon Master",
+               email: "dm@anduin.ch",
+               password:              "foobar",
+               password_confirmation: "foobar",
+               admin: false,
+               role: :dm,
+               activated: true,
+               activated_at: Time.zone.now)
+end
+if User.find_by_email('player@anduin.ch').nil?
+  User.create!(name:  "Player",
+               email: "player@anduin.ch",
+               password:              "foobar",
+               password_confirmation: "foobar",
+               admin: false,
+               role: :player,
+               activated: true,
+               activated_at: Time.zone.now)
+end

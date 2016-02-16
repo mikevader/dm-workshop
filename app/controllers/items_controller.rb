@@ -1,33 +1,10 @@
 require 'search_engine'
 
-class ItemsController < ApplicationController
-  layout :choose_layout
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
-  before_action :admin_user, only: [:edit, :update, :destroy]
+class ItemsController < GenericCardController
 
-  before_action :init_search_engine, only: [:index]
-  
-  def init_search_engine
-    @search_engine = SearchEngine2.new(Item)
-  end
-  
-  def index
-    result, error = @search_engine.search(params[:search])
-    
-    @cards = result
-    @error = error
-  end
-
-  def show
-    @card = Item.find(params[:id])
-  end
-
-  def new
-    @card = current_user.items.build
-  end
-  
   def create
     @card = current_user.items.build(item_params)
+    authorize @card
     if @card.save
       flash[:success] = "Item crafted!"
       redirect_to items_url
@@ -38,6 +15,8 @@ class ItemsController < ApplicationController
 
   def duplicate
     @card = Item.find(params[:id]).replicate
+    authorize @card
+    @card.user = current_user
     @card.name = @card.name + " (copy)"
     if @card.save
       flash[:success] = "Item replicated!"
@@ -47,12 +26,9 @@ class ItemsController < ApplicationController
     end
   end
 
-  def edit
-    @card = Item.find(params[:id])
-  end
-  
   def update
     @card = Item.find(params[:id])
+    authorize @card
     if @card.update_attributes(item_params)
       flash[:success] = "Item udpated"
       redirect_to items_url
@@ -62,7 +38,9 @@ class ItemsController < ApplicationController
   end
   
   def destroy
-    Item.find(params[:id]).destroy
+    card = Item.find(params[:id])
+    authorize card
+    card.destroy
     flash[:success] = "Item deleted"
     redirect_to items_url
   end
@@ -70,11 +48,12 @@ class ItemsController < ApplicationController
   def preview
     card_data = nil
     ActiveRecord::Base.transaction do
-      if Item.exists?(params[:id])
+      if Item.exists?(params[:id].to_i)
         item = Item.find(params[:id])
       else
         item = current_user.items.build
       end
+      authorize item
       item.assign_attributes(item_params)
       card_data = item.card_data
       raise ActiveRecord::Rollback, "Don't commit preview data changes!"
@@ -84,24 +63,13 @@ class ItemsController < ApplicationController
 
   def modal
     card = Item.find(params[:id])
-
+    authorize card
     render partial: 'shared/modal_body', locals: { card: card, index: params[:index], modal_size: params[:modal_size], prev_index: params[:previd], next_index: params[:nextid] }
   end
 
   private
   def item_params
-    params.require(:item).permit(:name, :tag_list, :cssclass, :category_id, :rarity_id, :attunement, :description, properties_attributes: [:id, :name, :value, :_destroy])
-  end
-
-  # Before filters
-
-  # Confirms a logged-in user.
-  def logged_in_user
-    unless logged_in?
-      store_location
-      flash[:danger] = "Please log in."
-      redirect_to login_url
-    end
+    params.require(:item).permit(:name, :shared, :tag_list, :cssclass, :category_id, :rarity_id, :attunement, :description, properties_attributes: [:id, :name, :value, :_destroy])
   end
 
   # Confirms the correct user.
@@ -110,8 +78,7 @@ class ItemsController < ApplicationController
     redirect_to(root_url) unless current_user?(@user)
   end
 
-  # Confirms an admin user.
-  def admin_user
-    redirect_to(root_url) unless admin_user?
+  def new_path
+    new_item_path
   end
 end

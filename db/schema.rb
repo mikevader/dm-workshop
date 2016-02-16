@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160210194631) do
+ActiveRecord::Schema.define(version: 20160216190102) do
 
   create_table "actions", force: :cascade do |t|
     t.string   "title"
@@ -31,10 +31,12 @@ ActiveRecord::Schema.define(version: 20160210194631) do
     t.string   "icon"
     t.string   "color"
     t.text     "contents"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "user_id"
     t.string   "badges"
+    t.string   "cite"
+    t.boolean  "shared",     default: false, null: false
   end
 
   add_index "cards", ["name"], name: "index_cards_on_name"
@@ -53,8 +55,9 @@ ActiveRecord::Schema.define(version: 20160210194631) do
     t.string   "name"
     t.text     "query"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "shared",     default: false, null: false
   end
 
   add_index "filters", ["name"], name: "index_filters_on_name", unique: true
@@ -85,10 +88,11 @@ ActiveRecord::Schema.define(version: 20160210194631) do
     t.boolean  "attunement"
     t.text     "description"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "cssclass"
     t.string   "cite"
+    t.boolean  "shared",      default: false, null: false
   end
 
   add_index "items", ["category_id"], name: "index_items_on_category_id"
@@ -113,16 +117,17 @@ ActiveRecord::Schema.define(version: 20160210194631) do
     t.integer  "charisma"
     t.string   "senses"
     t.string   "languages"
-    t.float    "challenge",                   default: 0.0, null: false
+    t.float    "challenge",                   default: 0.0,   null: false
     t.text     "description"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.integer  "user_id"
     t.integer  "saving_throws_mask"
     t.integer  "damage_vulnerabilities_mask"
     t.integer  "damage_resistances_mask"
     t.integer  "damage_immunities_mask"
     t.integer  "cond_immunities_mask"
+    t.boolean  "shared",                      default: false, null: false
   end
 
   add_index "monsters", ["name"], name: "index_monsters_on_name"
@@ -195,6 +200,7 @@ ActiveRecord::Schema.define(version: 20160210194631) do
     t.boolean  "concentration"
     t.boolean  "ritual",            default: false
     t.string   "cite"
+    t.boolean  "shared",            default: false, null: false
   end
 
   add_index "spells", ["level"], name: "index_spells_on_level"
@@ -246,6 +252,7 @@ ActiveRecord::Schema.define(version: 20160210194631) do
     t.datetime "activated_at"
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
+    t.integer  "role",              default: 0,     null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

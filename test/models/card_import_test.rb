@@ -14,8 +14,9 @@ class CardImportTest < ActiveSupport::TestCase
     importer.save
 
     obgam = Monster.find_by_name('Obgam Sohn des Brogar')
-    assert obgam
+    assert obgam, 'Did not find Obgam.'
 
+    assert_empty obgam.cite
     assert_equal 'Humanoid (dwarf)', obgam.monster_type
     assert_equal 'Medium', obgam.size
     assert_equal 9, obgam.challenge
@@ -77,8 +78,9 @@ class CardImportTest < ActiveSupport::TestCase
     importer.save
 
     goblin = Monster.find_by_name 'Goblin'
-    assert goblin
+    assert goblin, 'Did not find Goblin.'
 
+    assert_equal 'MM 123', goblin.cite
     assert_equal 'Goblin', goblin.monster_type
     assert_equal 'huge', goblin.size
     assert_equal 2, goblin.bonus
@@ -127,7 +129,7 @@ class CardImportTest < ActiveSupport::TestCase
     importer.save
 
     alarm = Spell.find_by_name 'Alarm'
-    assert alarm
+    assert alarm, 'Did not find Alarm spell.'
 
     assert_equal 'Alarm', alarm.name
     assert alarm.ritual?
@@ -156,7 +158,7 @@ class CardImportTest < ActiveSupport::TestCase
     importer.save
 
     magic_missile = Spell.find_by_name 'Magic Missile'
-    assert magic_missile
+    assert magic_missile, 'Did not find Magic Missile spell'
 
     assert_equal 'Magic Missile', magic_missile.name
     assert_not magic_missile.ritual?
@@ -180,4 +182,40 @@ class CardImportTest < ActiveSupport::TestCase
 
   end
 
+  test 'should import free form card frenzy' do
+    path = File.join(fixture_path, 'cards.xml')
+    file = Rack::Test::UploadedFile.new(path, 'text/xml')
+    importer = CardImport.new(@user, cards_file: file)
+    importer.import_cards
+    importer.save
+
+    frenzy = Card.find_by_name 'Frenzy'
+    assert frenzy, 'Did not find Frenzy card'
+    assert_equal 'PH 49', frenzy.cite
+    assert_equal 'icon-white-book', frenzy.icon
+    assert_equal 'indigo', frenzy.color
+    assert_equal 'icon-class-barbarian', frenzy.badges
+    assert_equal 'subtitle | Barbarian feature
+        rule
+        fill | 1
+        text | You can go into a frenzy when you rage. If you do so, for the duration of your rage you can make a single melee weapon attack as a bonus action on each of your turns after this one. When your rage ends, you suffer one level of exhaustion.
+        fill | 2', frenzy.contents
+  end
+
+  test 'should import item Schutzring' do
+    path = File.join(fixture_path, 'items.xml')
+    file = Rack::Test::UploadedFile.new(path, 'text/xml')
+    importer = CardImport.new(@user, items_file: file)
+    importer.import_items
+    importer.save
+
+    schutzring = Item.find_by_name 'Schutzring'
+    assert schutzring, 'Did not find Schutzring'
+    assert_equal 'DMH 191', schutzring.cite
+    assert_equal 'Ring', schutzring.category.name
+    assert_equal 'Rare', schutzring.rarity.name
+    assert_equal true, schutzring.attunement?
+    assert_equal 'Du bekommst einen Bonus von +1 auf deine AC und Rettungswürfe solange du den Ring trägst.', schutzring.description
+
+  end
 end

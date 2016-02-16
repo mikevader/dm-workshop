@@ -7,6 +7,7 @@ cunning_action:
   color: indigo
   contents: 'property | faith | it will work'
   user: michael
+  shared: true
 
 action_surge:
   id: 2
@@ -15,4 +16,5 @@ action_surge:
   color: indigo
   contents: 'property | faith | it will work'
   user: michael
+  shared: true
 
