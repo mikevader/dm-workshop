@@ -20,7 +20,7 @@ class FiltersController < ApplicationController
     @cards, @error = search(params[:search])
     @filters.each {|filter| authorize filter}
     @cards.each {|card| authorize card}
-    @filter = current_user.filters.build
+    @filter = current_user.filters.build(query: params[:search])
   end
 
   def show
