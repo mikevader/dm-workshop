@@ -56,6 +56,9 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
+### Dungeon Master Workshop 0.12 ###
+* Added color picker to the card background.
+
 ### Dungeon Master Workshop 0.11 ###
 * Add authorization with roles for DM, Players and Admins
     * DMs can create new cards, duplicate existing and edit or delete their own. (restricted to free-form, item and monster cards)
