@@ -1,4 +1,4 @@
 <%= content_tag :div, class: 'form-group' do -%>
     <%= f.label :tag_list, class: 'control-label col-sm-3' %>
-    <%= content_tag(:div, f.text_field(:tag_list, value: f.object.tag_list.to_s, class: 'form-control'), class: 'col-sm-9') %>
+    <%= content_tag(:div, f.text_field(:tag_list, value: f.object.tag_list.to_s, autocomplete: 'off', autocorrect: 'off', autocapitalize: 'off', spellcheck: 'false', class: 'form-control'), class: 'col-sm-9') %>
 <% end %>
