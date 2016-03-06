@@ -26,7 +26,7 @@
 <%= content_tag :div, class: 'form-group' do -%>
     <%= f.label :challenge, class: 'control-label col-sm-3' %>
     <%= content_tag :div, class: 'col-sm-9' do -%>
-        <%= f.select(:challenge, Monster.cr_xp.collect{|key, value| ["#{Monster.challenge_pretty(key)} (#{value} XP)", key.to_f]}, {}, {class: 'form-control'}) %>
+        <%= f.select(:challenge, Monster.cr_xp_bonus.collect{|key, value| [raw(sprintf("%4s (%7d XP, %+2d bonus )", Monster.challenge_pretty(key), value[:xp], value[:bonus]).gsub(/ /, '&nbsp;')), key.to_f]}, {}, {class: 'form-control'}) %>
     <% end -%>
 <% end -%>
 
