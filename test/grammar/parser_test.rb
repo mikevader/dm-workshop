@@ -20,9 +20,11 @@ class ParserTest < ActiveSupport::TestCase
   test 'should work with tags' do
     spell = spells('fireball')
     spell.tag_list.add('jdf')
+    spell.tag_list.add('7g')
     spell.save
 
     assert_equal "id IN (#{spell.id})", @parser.parse('tags in (jdf)', @builder.clone)
+    assert_equal "id IN (#{spell.id})", @parser.parse("tags in (7g)", @builder.clone)
   end
 
   test 'should work with string' do
@@ -83,6 +85,12 @@ class ParserTest < ActiveSupport::TestCase
   test 'should work with in without quotes' do
     assert_equal "class IN ('Bard')", @parser.parse("class in (Bard)", @builder.clone)
     assert_equal "school IN ('transmutation', 'evocation')", @parser.parse("school in (transmutation, evocation)", @builder.clone)
+    assert_equal "level IN (1, 2)",
+                 @parser.parse("level IN (1, 2)", @builder.clone)
+  end
+
+  test 'should work with just a string' do
+    assert_equal "LOWER(name) LIKE '%bard%'", @parser.parse("Bard", @builder.clone)
   end
 
   test 'should work with group of numbers' do

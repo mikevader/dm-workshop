@@ -58,6 +58,7 @@ We had the following releases:
 
 ### Dungeon Master Workshop 0.12 ###
 * Added color picker to the card background.
+* Entering a string defaults in a "name ~ " search.
 
 ### Dungeon Master Workshop 0.11 ###
 * Add authorization with roles for DM, Players and Admins
