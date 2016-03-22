@@ -2,7 +2,7 @@
 grammar Dmwql
   rule search
     first:expression second:( s union:union_keyword s next:expression )* <Search>
-    / string:string <StringSearch>
+    / string:string_with_spaces <StringSearch>
   end
   
   rule expression
@@ -83,6 +83,10 @@ grammar Dmwql
 
   rule string
     "'" string_char (" " / string_char)* "'" / (string_char)+
+  end
+
+  rule string_with_spaces
+    string_char (" " / string_char)*
   end
 
   rule string_char
