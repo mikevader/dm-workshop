@@ -43,4 +43,13 @@ class ItemTest < ActiveSupport::TestCase
     assert_not duplicate_item.valid?
   end
 
+  test 'replicate should work with tags as well' do
+    @item.tag_list.add('dsa')
+    @item.save
+    @item.reload
+
+    replicate = @item.replicate
+    assert_includes replicate.tag_list, 'dsa'
+  end
+
 end

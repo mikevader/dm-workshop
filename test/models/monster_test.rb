@@ -166,6 +166,15 @@ class MonsterTest < ActiveSupport::TestCase
     assert_includes @monster.traits, trait
   end
 
+  test 'replicate should work with tags as well' do
+    @monster.tag_list.add('dsa')
+    @monster.save
+    @monster.reload
+
+    replicate = @monster.replicate
+    assert_includes replicate.tag_list, 'dsa'
+  end
+
   test 'should calculate XP from challenge rating' do
     assert_equal '5\'000', Monster.xp_for_cr(9)
     assert_equal '100', Monster.xp_for_cr(0.5)
