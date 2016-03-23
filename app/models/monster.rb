@@ -121,6 +121,10 @@ class Monster < ActiveRecord::Base
       replica.actions << action.dup
     end
 
+    self.tag_list.each do |tag|
+      replica.tag_list.add(tag)
+    end
+
     replica
   end
 

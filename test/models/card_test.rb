@@ -31,6 +31,15 @@ class CardTest < ActiveSupport::TestCase
     assert_not @card.valid?
   end
 
+  test 'replicate should work with tags as well' do
+    @card.tag_list.add('dsa')
+    @card.save
+    @card.reload
+
+    replicate = @card.replicate
+    assert_includes replicate.tag_list, 'dsa'
+  end
+
   test 'should generate card data' do
     card_data = @card.card_data
 

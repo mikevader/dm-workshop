@@ -56,6 +56,14 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
+### Dungeon Master Workshop 0.12 ###
+* Added color picker to the card background.
+* Entering a string defaults in a "name ~ " search.
+* Added cite field to Spells.
+* Disable autocorrect for tags field.
+* Challenge rating contains now all related infos like bonus and XP.
+* Fixed wobbling of the preview card in the edit form.
+
 ### Dungeon Master Workshop 0.11 ###
 * Add authorization with roles for DM, Players and Admins
     * DMs can create new cards, duplicate existing and edit or delete their own. (restricted to free-form, item and monster cards)

@@ -18,6 +18,13 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~> 4.1.0'
+
+gem 'will_paginate', '~> 3.1.0'
+gem 'bootstrap-will_paginate', '~> 0.0.10'
+gem 'bootstrap-colorselector-rails'
+
+
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks', '~> 2.5.3'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -35,8 +42,7 @@ gem 'faker', '~> 1.6.0'
 gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.3.6'
 gem 'fog', '~> 1.37.0'
-gem 'will_paginate', '~> 3.1.0'
-gem 'bootstrap-will_paginate', '~> 0.0.10'
+
 gem 'nokogiri', '~> 1.6.7.1'
 gem 'activerecord-session_store', '~> 0.1.2'
 

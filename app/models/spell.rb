@@ -20,6 +20,10 @@ class Spell < ActiveRecord::Base
       replica.hero_classes << hero_class
     end
 
+    self.tag_list.each do |tag|
+      replica.tag_list.add(tag)
+    end
+
     replica
   end
 

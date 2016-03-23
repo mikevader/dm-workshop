@@ -16,10 +16,12 @@
  *= require custom-icons
  *= require class-icons
  *= require icons
+ *= require bootstrap-colorselector
  *= require_self
  */
 
-
+.preview_view.affix-top,
 .preview_view.affix {
   right: 0px;
+  position: fixed;
 }

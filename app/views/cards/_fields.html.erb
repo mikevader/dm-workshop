@@ -30,7 +30,27 @@
 
 <%= content_tag :div, class: 'form-group' do -%>
     <%= f.label :color, class: 'control-label col-sm-3' %>
-    <%= content_tag(:div, f.text_field(:color, class: 'form-control'), class: 'col-sm-9') %>
+    <%= content_tag(:div, class: 'col-sm-9') do -%>
+        <%= content_tag(:div, class: 'input-group') do -%>
+            <%= content_tag(:span, class: 'input-group-addon') do -%>
+                <select id='colorselector'>
+                  <option value="" data-color="">white</option>
+                  <option value="dimgray" data-color="dimgray">dimgray</option>
+                  <option value="black" data-color="black">black</option>
+                  <option value="darkgoldenrod" data-color="darkgoldenrod">darkgoldenrod</option>
+                  <option value="saddlebrown" data-color="saddlebrown">saddlebrown</option>
+                  <option value="indianred" data-color="indianred">indianred</option>
+                  <option value="maroon" data-color="maroon">maroon</option>
+                  <option value="indigo" data-color="indigo">indigo</option>
+                  <option value="darkblue" data-color="darkblue">darkblue</option>
+                  <option value="royalblue" data-color="royalblue">royalblue</option>
+                  <option value="darkgreen" data-color="darkgreen">darkgreen</option>
+                </select>
+            <% end -%>
+            <%= f.text_field(:color, class: 'form-control') %>
+        <% end -%>
+    <% end -%>
+
 <% end %>
 
 <%= content_tag :div, class: 'form-group' do -%>
@@ -38,7 +58,8 @@
     <%= content_tag(:div, class: 'col-sm-9') do -%>
         <%= f.text_area(:contents, class: 'form-control', rows: 10, style: ' white-space: pre-wrap;', 'aria-describedby' => 'content_help') %>
         <%= content_tag(:span, id: 'content_help', class: 'help-block') do -%>
-            Use the card template language. You can find more information in the <a href="<%= help_path(anchor: 'card') %>" target="_blank">help</a>.
+            Use the card template language. You can find more information in the
+            <a href="<%= help_path(anchor: 'card') %>" target="_blank">help</a>.
         <% end %>
     <% end %>
 <% end %>

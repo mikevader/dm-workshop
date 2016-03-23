@@ -2,6 +2,7 @@
 grammar Dmwql
   rule search
     first:expression second:( s union:union_keyword s next:expression )* <Search>
+    / string:string_with_spaces <StringSearch>
   end
   
   rule expression
@@ -17,47 +18,26 @@ grammar Dmwql
   end
   
   rule query_comparison
-    id:id s str_comp:string_comparison <Comparison>
-    / id:id s non_str_comp:non_string_comparison <Comparison>
-  end
-  
-  rule string_comparison
-    s op:comp_op_string s value:string_literal <StringComparison>
+    id:id s op:comp_op s value:number <NumberComparison>
+    / id:id s op:comp_op s value:boolean <BooleanComparison>
+    / id:id s op:comp_op_string s value:string <StringComparison>
   end
 
-  rule non_string_comparison
-    s op:comp_op s value:non_string_literal <NonStringComparison>
-  end
-  
   rule query_group
-    id S 'in' s group <ArrayComparison>
+    id S 'IN'i S '(' s literal second:(s ',' s literal )* s ')' <Group>
   end
   
-  rule group
-    '(' s literal second:(s ',' s literal )* s ')' <Group>
-  end
-
   rule union_keyword
     'AND'i / 'OR'i
   end
-  
-  rule string_literal
-    !non_string_literal string s
-  end
-  
-  rule non_string_literal
-    (boolean_literal
-    / number
-    ) s
-  end
-  
+
   rule literal
-    ( non_string_literal
-    / string_literal
-    ) s
+    string
+    / boolean
+    / number
   end
   
-  rule boolean_literal
+  rule boolean
     ( 'true'i / 'false'i ) !alphanumeric
   end
   
@@ -88,7 +68,11 @@ grammar Dmwql
   rule id
     alpha alphanumeric*
   end
-  
+
+  rule alphas
+    alpha+
+  end
+
   rule alpha
     [A-Za-z_]
   end
@@ -98,15 +82,14 @@ grammar Dmwql
   end
 
   rule string
-#    "'" (string_char / s)+ "'" / (string_char)+
-    "'" string_char (string_char_with_space)* "'" / (string_char)+
+    "'" string_char (" " / string_char)* "'" / (string_char)+
   end
 
-  rule string_char_with_space
-    [a-zA-Z_\-\* ]
+  rule string_with_spaces
+    string_char (" " / string_char)*
   end
 
   rule string_char
-    [a-zA-Z_\-\*]
+    [0-9a-zA-Z_\-\*]
   end
 end

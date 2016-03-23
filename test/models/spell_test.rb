@@ -52,6 +52,15 @@ class SpellTest < ActiveSupport::TestCase
     assert_equal spells(:bane), Spell.first
   end
 
+  test 'replicate should work with tags as well' do
+    @spell.tag_list.add('dsa')
+    @spell.save
+    @spell.reload
+
+    replicate = @spell.replicate
+    assert_includes replicate.tag_list, 'dsa'
+  end
+
   test "should follow and unfollow a user" do
     fireball = spells(:fireball)
     bane = spells(:bane)
