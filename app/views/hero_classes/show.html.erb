@@ -9,7 +9,20 @@
   <div class="col-md-8">
     <% if @hero_class.spells.any? %>
     <h3>Spells (<%= @hero_class.spells.count %>)</h3>
-      <%= render 'shared/spells' %>
+        <table class="table table-striped">
+          <tr>
+            <th>#</th>
+            <% columns_definition(controller_name, @cards).each do |column| %>
+                <th><%= column[:title] %></th>
+            <% end %>
+            <th class="last"></th>
+          </tr>
+          <%= render partial: 'shared/card_column', collection: @cards, as: :card %>
+        </table>
+
+        <div id="modals">
+          <%= render partial: 'shared/modal', collection: @cards, as: :card %>
+        </div>
     <% end %>
   </div>
 </div>
