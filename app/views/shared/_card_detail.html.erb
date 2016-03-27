@@ -1,0 +1,12 @@
+<div id="card-<%= card.id %>" class="detail">
+  <div class="card-title card-title-13"><%= card.name %></div>
+  <div class="card-content-container">
+    <div class="card-element card-subtitle">Description</div>
+    <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <polyline points="0,0 100,0.5 0,1" fill="black"></polyline>
+    </svg>
+    <div class="card-element card-description-line">
+      <p class="card-p card-description-text"><%= raw(card.description) %></p>
+    </div>
+  </div>
+</div>

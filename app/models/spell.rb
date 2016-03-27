@@ -34,6 +34,7 @@ class Spell < ActiveRecord::Base
     data.name = "#{name}#{' (Ritual)' if ritual?}"
     data.icon = "icon-white-book-#{level}"
     data.color = 'maroon'
+    data.description = description
 
     hero_classes.each do |hero_class|
       data.badges << hero_class.cssclass

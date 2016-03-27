@@ -5,12 +5,14 @@ class CardData
   attr_accessor :color
   attr_accessor :card_size
   attr_accessor :badges
+  attr_accessor :description
 
   def initialize
     @id = -1
     @contents = []
     @badges = []
     @card_size = '25x35'
+    @description = ''
   end
 
   def contents
