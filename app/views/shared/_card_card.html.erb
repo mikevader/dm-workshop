@@ -29,8 +29,8 @@
               <p class="card-p card-description-text"><%= raw(params.second) %></p>
             </div>
         <% elsif element.text? -%>
-            <div class="card-element card-description-line">
-              <p class="card-p card-description-text"><%= raw(params.first) %></p>
+            <div class="card-element card-text-line">
+              <p class="card-p card-text"><%= raw(params.first) %></p>
             </div>
         <% elsif element.subsection? -%>
             <h3 class="card-section"><%= raw(params.first) %></h3>
