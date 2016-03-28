@@ -56,6 +56,9 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
+### Dungeon Master Workshop 0.13 ###
+* Admin section can now export and import free form cards.
+
 ### Dungeon Master Workshop 0.12 ###
 * Added color picker to the card background.
 * Entering a string defaults in a "name ~ " search.

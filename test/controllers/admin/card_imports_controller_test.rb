@@ -61,6 +61,20 @@ module Admin
       assert speer
     end
 
+    test 'free form card import' do
+      log_in_as(@user)
+
+      assert_difference 'Card.count', 2 do
+        post :create, card_import: { cards_file: fixture_file_upload('cards.xml', 'text/xml') }
+        post :create, imports: {'0' => {import: true, name: 'Frenzy'}, '1' => {import: true, name: 'Wand of Iseth'}}
+      end
+
+      frenzy = Card.find_by_name 'Frenzy'
+      assert frenzy
+      wand = Card.find_by_name 'Wand of Iseth'
+      assert wand
+    end
+
     test 'monsters card export' do
       log_in_as(@user)
 
@@ -81,6 +95,14 @@ module Admin
       log_in_as(@user)
 
       get :show, id: 'items'
+      assert_response :success
+      assert_equal 'text/xml', response.content_type #response.body
+    end
+
+    test 'free form card export' do
+      log_in_as(@user)
+
+      get :show, id: 'cards'
       assert_response :success
       assert_equal 'text/xml', response.content_type #response.body
     end

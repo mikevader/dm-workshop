@@ -66,6 +66,9 @@ module Admin
         when 'items'
           items_xml = @card_export.load_items(Item.all)
           send_data items_xml, filename: 'items.xml', type: 'text/xml'
+        when 'cards'
+          cards_xml = @card_export.load_cards(Card.all)
+          send_data cards_xml, filename: 'cards.xml', type: 'text/xml'
         else
           render :index
       end
