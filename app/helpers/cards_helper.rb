@@ -1,7 +1,7 @@
 module CardsHelper
   def modal_size(cards)
     card_size = largest(cards)
-    has_description = cards.reduce { |r, e| r || has_description?(e) }
+    has_description = cards.reduce(false) { |r, e| r || has_description?(e) }
 
     if has_description
       'modal-lg'
