@@ -22,3 +22,8 @@
 
 # Ignore uploaded test images.
 /public/uploads
+.byebug_history
+.rbenv-gemsets
+certificate.pem
+security_report.html
+server.key
