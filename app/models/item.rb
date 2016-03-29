@@ -53,6 +53,7 @@ class Item < ActiveRecord::Base
     data.name = name
     data.icon = category.cssclass unless category.nil?
     data.color = 'grey'
+    data.description = description
 
     data.add_subtitle ["#{category.name}, #{rarity.name}"] unless category.nil? or rarity.nil?
     data.add_rule

@@ -143,6 +143,10 @@ div.cards {
   color: white;
 }
 
+.detail .card-title {
+  color: inherit;
+}
+
 .card-subtitle {
   height: 18px;
   line-height: 18px;
@@ -191,7 +195,7 @@ div.cards {
   @include flex(1);
 }
 
-.card-description-line {
+.card-description-line, .card-text-line {
   margin-top: 0.0em;
   margin-bottom: 0.0em;
   font-size: inherit;
@@ -217,6 +221,12 @@ div.cards {
 
 .card-description-text {
   display: inline;
+}
+
+.card-text {
+  display: inline;
+  text-indent: -10px;
+  margin-left: 10px;
 }
 
 .card-ruler {

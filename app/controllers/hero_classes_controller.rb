@@ -8,7 +8,7 @@ class HeroClassesController < ApplicationController
 
   def show
     @hero_class = HeroClass.find(params[:id])
-    @spells = @hero_class.spells.paginate(page: params[:page])
+    @cards = @hero_class.spells.paginate(page: params[:page])
   end
 
   def new
