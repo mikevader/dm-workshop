@@ -48,7 +48,6 @@ class CardsController < GenericCardController
   def preview
     card_data = nil
     ActiveRecord::Base.transaction do
-      card = nil
       if Card.exists?(params[:id].to_i)
         card = Card.find(params[:id])
       else

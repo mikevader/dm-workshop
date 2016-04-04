@@ -1,46 +1,24 @@
-class Item < ActiveRecord::Base
+class Item < Card
   acts_as_taggable
   belongs_to :category
   belongs_to :rarity
-  belongs_to :user
   has_many :properties, dependent: :destroy
   accepts_nested_attributes_for :properties, reject_if: proc { |attributes| attributes['name'].blank? }, allow_destroy: true
 
-  default_scope -> { order(name: :asc) }
-
-  validates :user_id, presence: true
-  validates :name, presence: true, length: {maximum: 50}, uniqueness: {case_sensitive: false}
   validates :category_id, presence: true
   validates :rarity_id, presence: true
 
-  def self.search(search)
-    if search
-      builder = new_builder
-      search = Parser.new.parse(search, builder)
-
-      query = self
-      builder.joins.each do |join|
-        query = query.joins(join)
-      end
-      query = query.where(search)
-      builder.orders.each do |order|
-        query = query.order(order)
-      end
-      query.distinct
-    else
-      all
-    end
+  after_initialize do |user|
+    self.color = 'grey'
+    self.icon = 'dirty-icon'
   end
 
   def replicate
-    replica = dup
+    replica = super
+
 
     properties.each do |property|
       replica.properties << property.dup
-    end
-
-    self.tag_list.each do |tag|
-      replica.tag_list.add(tag)
     end
 
     replica
@@ -71,8 +49,8 @@ class Item < ActiveRecord::Base
 
   def self.new_search_builder
     builder = SearchBuilder.new do
-      configure_field 'name', 'items.name'
-      configure_field 'attunement', 'items.attunement'
+      configure_field 'name', 'cards.name'
+      configure_field 'attunement', 'cards.attunement'
       configure_tag 'tags', Item
       configure_relation 'category', 'categories.name', 'category'
       configure_relation 'rarity', 'rarities.name', 'rarity'

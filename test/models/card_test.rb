@@ -4,7 +4,7 @@ class CardTest < ActiveSupport::TestCase
 
   def setup
     @user = users(:michael)
-    @card = @user.cards.build(name: 'Frenzy', icon: 'white-book', color: 'indigo', contents: 'subtitle|Rogue feature')
+    @card = @user.cards.build(type: 'Card', name: 'Frenzy', icon: 'white-book', color: 'indigo', contents: 'subtitle|Rogue feature')
   end
 
   test 'should be valid' do

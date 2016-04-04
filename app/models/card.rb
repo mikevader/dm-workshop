@@ -10,6 +10,10 @@ class Card < ActiveRecord::Base
   validates :icon, presence: true
   validates :color, presence: true
 
+  def self.types
+    %w(item card)
+  end
+
   def self.search(search)
     if search
       builder = new_builder

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160216190102) do
+ActiveRecord::Schema.define(version: 20160401213940) do
 
   create_table "actions", force: :cascade do |t|
     t.string   "title"
@@ -31,15 +31,23 @@ ActiveRecord::Schema.define(version: 20160216190102) do
     t.string   "icon"
     t.string   "color"
     t.text     "contents"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "user_id"
     t.string   "badges"
     t.string   "cite"
-    t.boolean  "shared",     default: false, null: false
+    t.boolean  "shared",      default: false, null: false
+    t.string   "type"
+    t.string   "cssclass"
+    t.boolean  "attunement"
+    t.text     "description"
+    t.integer  "category_id"
+    t.integer  "rarity_id"
   end
 
+  add_index "cards", ["category_id"], name: "index_cards_on_category_id"
   add_index "cards", ["name"], name: "index_cards_on_name"
+  add_index "cards", ["rarity_id"], name: "index_cards_on_rarity_id"
   add_index "cards", ["user_id"], name: "index_cards_on_user_id"
 
   create_table "categories", force: :cascade do |t|
@@ -80,25 +88,6 @@ ActiveRecord::Schema.define(version: 20160216190102) do
   add_index "hero_classes_spells", ["hero_class_id"], name: "index_hero_classes_spells_on_hero_class_id"
   add_index "hero_classes_spells", ["spell_id", "hero_class_id"], name: "index_hero_classes_spells_on_spell_id_and_hero_class_id", unique: true
   add_index "hero_classes_spells", ["spell_id"], name: "index_hero_classes_spells_on_spell_id"
-
-  create_table "items", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "category_id"
-    t.integer  "rarity_id"
-    t.boolean  "attunement"
-    t.text     "description"
-    t.integer  "user_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.string   "cssclass"
-    t.string   "cite"
-    t.boolean  "shared",      default: false, null: false
-  end
-
-  add_index "items", ["category_id"], name: "index_items_on_category_id"
-  add_index "items", ["name"], name: "index_items_on_name"
-  add_index "items", ["rarity_id"], name: "index_items_on_rarity_id"
-  add_index "items", ["user_id"], name: "index_items_on_user_id"
 
   create_table "monsters", force: :cascade do |t|
     t.string   "name"

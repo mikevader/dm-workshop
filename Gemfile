@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
 # Use specific ruby version
-ruby '2.2.4'
+ruby '2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.5.1'
+gem 'rails', '~> 4.2.6'
 # Use bootstrap with sass
 gem 'bootstrap-sass', '~> 3.3.6'
 # Use SCSS for stylesheets

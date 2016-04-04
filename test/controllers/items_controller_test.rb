@@ -3,7 +3,7 @@ require 'test_helper'
 class ItemsControllerTest < ActionController::TestCase
 
   setup do
-    @item = items(:sting)
+    @item = cards(:sting)
   end
 
   test 'show should redirect to login if not logged in' do
@@ -92,7 +92,7 @@ class ItemsControllerTest < ActionController::TestCase
 
   test 'update should change existing item' do
     log_in_as(users(:michael))
-    item = items(:glamdring)
+    item = cards(:glamdring)
 
     assert_no_difference 'Item.count' do
       patch :update, id: item.id, item: {name: 'Qua?'}
@@ -107,7 +107,7 @@ class ItemsControllerTest < ActionController::TestCase
 
   test 'delete should remove item' do
     log_in_as(users(:michael))
-    item = items(:sting)
+    item = cards(:sting)
     assert_difference 'Item.count', -1 do
       delete :destroy, id: item
     end
@@ -116,7 +116,7 @@ class ItemsControllerTest < ActionController::TestCase
 
   test 'should get duplicate' do
     log_in_as(users(:archer))
-    item = items(:glamdring)
+    item = cards(:glamdring)
     assert_difference 'Item.count', +1 do
       post :duplicate, id: item.id
     end
