@@ -22,10 +22,14 @@ class CardsInterfaceTest < ActionDispatch::IntegrationTest
     get cards_path
     # Valid submission
     name = "heroblade"
+    session[:return_to] = cards_url
     assert_difference 'Card.count', 1 do
-      post cards_path, card: { name: name, icon: 'white-book', color: 'indigo', contents: 'subtitle|Rogue feature'}
+      get new_card_path, nil, referer: cards_url
+      post cards_path, card: { name: name, icon: 'white-book', color: 'indigo', contents: 'subtitle | Rogue feature' }
     end
+
     assert_redirected_to cards_url
+    assert_equal cards_path, path
     follow_redirect!
     assert_match name, response.body
     assert_select 'td', text: name

@@ -73,6 +73,7 @@ class ItemsControllerTest < ActionController::TestCase
     category = categories(:armor)
     rarity = rarities(:uncommon)
     assert_difference 'Item.count', +1 do
+      session[:return_to] = 'http://test.host/items'
       post :create, item: {name: 'Nerd', category_id: category.id, rarity_id: rarity.id, attunement: true, description: 'the nerdster'}
     end
 
@@ -95,6 +96,7 @@ class ItemsControllerTest < ActionController::TestCase
     item = cards(:glamdring)
 
     assert_no_difference 'Item.count' do
+      session[:return_to] = 'http://test.host/items'
       patch :update, id: item.id, item: {name: 'Qua?'}
     end
 
@@ -109,6 +111,7 @@ class ItemsControllerTest < ActionController::TestCase
     log_in_as(users(:michael))
     item = cards(:sting)
     assert_difference 'Item.count', -1 do
+      @request.env['HTTP_REFERER'] = items_path
       delete :destroy, id: item
     end
     assert_redirected_to items_url
@@ -118,6 +121,7 @@ class ItemsControllerTest < ActionController::TestCase
     log_in_as(users(:archer))
     item = cards(:glamdring)
     assert_difference 'Item.count', +1 do
+      @request.env['HTTP_REFERER'] = items_path
       post :duplicate, id: item.id
     end
     assert_redirected_to items_url

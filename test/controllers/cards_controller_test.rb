@@ -69,6 +69,7 @@ class CardsControllerTest < ActionController::TestCase
   test 'should get create' do
     log_in_as(users(:michael))
     assert_difference 'Card.count', +1 do
+      session[:return_to] = 'http://test.host/cards'
       post :create, card: {name: 'Frenzy', icon: 'white-book', color: 'black', contents: ''}
     end
 
@@ -90,6 +91,7 @@ class CardsControllerTest < ActionController::TestCase
     card = cards(:action_surge)
 
     assert_no_difference 'Card.count' do
+      session[:return_to] = 'http://test.host/cards'
       patch :update, id: card.id, card: {name: 'Qua?'}
     end
 
@@ -104,6 +106,7 @@ class CardsControllerTest < ActionController::TestCase
     log_in_as(users(:michael))
     card = cards(:cunning_action)
     assert_difference 'Card.count', -1 do
+      @request.env['HTTP_REFERER'] = cards_path
       delete :destroy, id: card
     end
     assert_redirected_to cards_url
@@ -113,6 +116,7 @@ class CardsControllerTest < ActionController::TestCase
     log_in_as(users(:archer))
     card = cards(:cunning_action)
     assert_difference 'Card.count', +1 do
+      @request.env['HTTP_REFERER'] = cards_path
       post :duplicate, id: card.id
     end
     assert_redirected_to cards_url

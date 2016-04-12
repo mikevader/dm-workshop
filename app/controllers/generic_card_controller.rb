@@ -20,8 +20,59 @@ class GenericCardController < ApplicationController
   def new
     authorize card_model
     @card = user_collection.build
+    session[:return_to] ||= request.referer
   end
 
+  def create
+    ttt = card_params
+    ttt[:type] = card_model.to_s
+    @card = current_user.cards.build(ttt)
+    authorize @card
+    if @card.save
+      flash[:success] = 'Card created!'
+      redirect_to session.delete(:return_to) || root_path
+    else
+      render 'new', layout: 'card_new'
+    end
+  end
+
+  def preview
+    card_data = nil
+    ActiveRecord::Base.transaction do
+      if Card.exists?(params[:id].to_i)
+        ttt = card_params
+        card = Card.find(params[:id])
+      else
+        ttt = card_params
+        ttt[:type] = card_model.to_s
+        card = current_user.cards.build
+      end
+      authorize card
+      card.assign_attributes(ttt)
+      card_data = card.card_data
+      raise ActiveRecord::Rollback, "Don't commit preview data changes!"
+    end
+    render partial: 'shared/card_card', locals: {card: card_data}
+  end
+
+  def modal
+    card = Card.find(params[:id])
+    authorize card
+    render partial: 'shared/modal_body', locals: {card: card, index: params[:index], modal_size: params[:modal_size], prev_index: params[:previd], next_index: params[:nextid]}
+  end
+
+  def duplicate
+    @card = Card.find(params[:id]).replicate
+    authorize @card
+    @card.user = current_user
+    @card.name = @card.name + " (copy)"
+    if @card.save
+      flash[:success] = "Card duplicated!"
+      redirect_to request.referer || root_path
+    else
+      render 'new', layout: 'card_new'
+    end
+  end
 
   # Read actions
   def index
@@ -44,11 +95,34 @@ class GenericCardController < ApplicationController
   def edit
     @card = card_model.find(params[:id])
     authorize @card
+    session[:return_to] ||= request.referer
+  end
+
+  def update
+    @card = Card.find(params[:id])
+    authorize @card
+    if @card.update_attributes(card_params)
+      flash[:success] = 'Card updated!'
+      redirect_to session.delete(:return_to) || root_path
+    else
+      render 'edit', layout: 'card_edit'
+    end
+  end
+
+  # Delete actions
+  def destroy
+    card = Card.find(params[:id])
+    authorize card
+    card.destroy
+    flash[:success] = "Card deleted"
+    redirect_to request.referer || root_path
   end
 
 
   private
   def new_path
+    name = card_model.name.downcase
+    send("new_#{name}_path")
   end
 
   def edit_path card
@@ -70,6 +144,11 @@ class GenericCardController < ApplicationController
 
   def card_model
     controller_name.classify.constantize
+    #params[:type].constantize
+  end
+
+  def card_type
+    controller_name.classify.parameterize.underscore.to_sym
   end
 
   def search_engine
@@ -87,6 +166,15 @@ class GenericCardController < ApplicationController
         return 'card_new'
       else
         return nil
+    end
+  end
+
+  def card_params(type = card_type)
+    case type
+      when :card
+        params.require(:card).permit(:name, :shared, :cite, :icon, :color, :contents, :tag_list)
+      when :item
+        params.require(:item).permit(:name, :shared, :tag_list, :cssclass, :category_id, :rarity_id, :attunement, :description, properties_attributes: [:id, :name, :value, :_destroy])
     end
   end
 end

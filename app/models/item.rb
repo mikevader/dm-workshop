@@ -51,6 +51,7 @@ class Item < Card
     builder = SearchBuilder.new do
       configure_field 'name', 'cards.name'
       configure_field 'attunement', 'cards.attunement'
+      configure_field 'type', 'cards.type'
       configure_tag 'tags', Item
       configure_relation 'category', 'categories.name', 'category'
       configure_relation 'rarity', 'rarities.name', 'rarity'

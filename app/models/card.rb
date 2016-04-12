@@ -89,6 +89,7 @@ class Card < ActiveRecord::Base
   def self.new_search_builder
     builder = SearchBuilder.new do
       configure_field 'name', 'cards.name'
+      configure_field 'type', 'cards.type'
       configure_tag 'tags', Card
     end
     return builder

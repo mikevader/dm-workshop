@@ -25,6 +25,7 @@ class ItemsInterfaceTest < ActionDispatch::IntegrationTest
     # Valid submission
     name = "heroblade"
     assert_difference 'Item.count', 1 do
+      get new_item_path, nil, referer: items_url
       post items_path, item: { name: name, category_id: @category.id, rarity_id: @rarity.id, attunement: false, description: "some stuff"}
     end
     assert_redirected_to items_url

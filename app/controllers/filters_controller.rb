@@ -9,7 +9,6 @@ class FiltersController < ApplicationController
   def init_search_engine
     @search_engines = {
         card: SearchEngine2.new(policy_scope(Card)),
-        item: SearchEngine2.new(policy_scope(Item)),
         spell: SearchEngine2.new(policy_scope(Spell)),
         monster: SearchEngine2.new(policy_scope(Monster))
     }
