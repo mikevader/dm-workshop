@@ -1,4 +1,4 @@
-module CardsHelper
+module FreeFormsHelper
   def modal_size(cards)
     card_size = largest(cards)
     has_description = cards.reduce(false) { |r, e| r || has_description?(e) }

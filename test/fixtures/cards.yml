@@ -2,7 +2,7 @@
 
 cunning_action:
   id: 21
-  type: Card
+  type: FreeForm
   name: Cunning Action
   icon: white-book
   color: indigo
@@ -12,7 +12,7 @@ cunning_action:
 
 action_surge:
   id: 22
-  type: Card
+  type: FreeForm
   name: Action Surge
   icon: white-book
   color: indigo

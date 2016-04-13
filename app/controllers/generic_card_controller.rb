@@ -120,24 +120,6 @@ class GenericCardController < ApplicationController
 
 
   private
-  def new_path
-    name = card_model.name.downcase
-    send("new_#{name}_path")
-  end
-
-  def edit_path card
-    name = card.class.name.downcase
-    send("edit_#{name}_path", card)
-  end
-
-  def destroy_path card
-  end
-
-  def duplicate_path card
-    name = card.class.name.downcase
-    send("duplicate_#{name}_path", card)
-  end
-
   def user_collection
     current_user.send(controller_name)
   end
@@ -171,8 +153,8 @@ class GenericCardController < ApplicationController
 
   def card_params(type = card_type)
     case type
-      when :card
-        params.require(:card).permit(:name, :shared, :cite, :icon, :color, :contents, :tag_list)
+      when :freeform
+        params.require(:free_form).permit(:name, :shared, :cite, :icon, :color, :contents, :tag_list)
       when :item
         params.require(:item).permit(:name, :shared, :tag_list, :cssclass, :category_id, :rarity_id, :attunement, :description, properties_attributes: [:id, :name, :value, :_destroy])
     end

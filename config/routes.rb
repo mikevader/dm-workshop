@@ -1,11 +1,4 @@
 Rails.application.routes.draw do
-  #get 'filters/index'
-  #get 'filters/show'
-  #get 'filters/new'
-  #get 'filters/create'
-  #get 'filters/edit'
-  #get 'filters/update'
-  #get 'filters/destroy'
   resources :filters
 
   root                 'static_pages#home'
@@ -18,17 +11,19 @@ Rails.application.routes.draw do
 
   get     'print/all'         => 'output_pages#all',      as: :print
   get     'print/cards'       => 'output_pages#cards',    as: :print_cards
+  get     'print/free_forms'       => 'output_pages#free_forms',    as: :print_free_forms
   get     'print/spells'      => 'output_pages#spells',   as: :print_spells
   get     'print/items'       => 'output_pages#items',    as: :print_items
   get     'print/monsters'    => 'output_pages#monsters', as: :print_monsters
 
-  get     'cards/:id/modal'       => 'cards#modal'
+  get     'free_forms/:id/modal'       => 'free_forms#modal'
   get     'items/:id/modal'       => 'items#modal'
   get     'monsters/:id/modal'       => 'monsters#modal'
   get     'spells/:id/modal'       => 'spells#modal'
 
-  patch     'cards/:id/preview'     => 'cards#preview'
+  patch     'free_forms/:id/preview'     => 'free_forms#preview'
   patch     'items/:id/preview'     => 'items#preview'
+  patch     'cards/:id/preview'     => 'cards#preview'
   patch     'monsters/:id/preview'  => 'monsters#preview'
   patch     'spells/:id/preview'    => 'spells#preview'
 
@@ -40,8 +35,9 @@ Rails.application.routes.draw do
     resources :card_imports
   end
 
-  post      'cards/:id/duplicate'         =>  'cards#duplicate',      as: :duplicate_card
+  post      'free_forms/:id/duplicate'         =>  'free_forms#duplicate',      as: :duplicate_free_form
   post      'items/:id/duplicate'         =>  'items#duplicate',      as: :duplicate_item
+  post      'cards/:id/duplicate'         =>  'cards#duplicate',      as: :duplicate_card
   post      'monsters/:id/duplicate'      =>  'monsters#duplicate',   as: :duplicate_monster
   post      'spells/:id/duplicate'        =>  'spells#duplicate',     as: :duplicate_spell
 
@@ -51,6 +47,7 @@ Rails.application.routes.draw do
   resources :items
   #resources :items, controller: 'cards', type: 'Item'
   resources :monsters
+  resources :free_forms
   resources :cards
   #resources :cards, controller: 'cards', type: 'Card'
   resources :account_activations, only: [:edit]

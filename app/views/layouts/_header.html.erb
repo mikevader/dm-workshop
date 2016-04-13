@@ -14,8 +14,8 @@
     <% if policy(Filter).index? -%>
         <li><%= link_to 'Filters', filters_path %></li>
     <% end -%>
-    <% if policy(Card).index? -%>
-        <li><%= link_to 'Cards', cards_path %></li>
+    <% if policy(FreeForm).index? -%>
+        <li><%= link_to 'Cards', free_forms_path %></li>
     <% end -%>
     <% if policy(Monster).index? -%>
         <li><%= link_to 'Monsters', monsters_path %></li>

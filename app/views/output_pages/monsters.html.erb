@@ -1,8 +1,8 @@
 
 <% @monsters.each_slice(4) do |slice| -%>
 <page class="page page-preview" size="A4" style="background-color:white;">
-  <% slice.each do |monster| -%>
-  <%= render 'shared/card_card', card: monster.card_data %>
+  <% slice.each do |card| -%>
+  <%= render 'shared/card_card', card: card.card_data %>
   <% end -%>
 </page>
 <% end -%>

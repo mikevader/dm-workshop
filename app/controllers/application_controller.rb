@@ -31,13 +31,21 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def new_path
+    name = card_model.name.underscore
+    send("new_#{name}_path")
+  end
+
   def edit_path card
-    name = card.class.name.downcase
+    name = card.class.name.underscore
     send("edit_#{name}_path", card)
   end
 
+  def destroy_path card
+  end
+
   def duplicate_path card
-    name = card.class.name.downcase
+    name = card.class.name.underscore
     send("duplicate_#{name}_path", card)
   end
 end

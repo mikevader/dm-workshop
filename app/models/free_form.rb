@@ -1,44 +1,11 @@
-class Card < ActiveRecord::Base
+class FreeForm < Card
   acts_as_taggable
-  serialize :badges
-  belongs_to :user
 
-  default_scope -> { order(name: :asc) }
-
-  validates :user_id, presence: true
-  validates :name, presence: true, length: {maximum: 50}, uniqueness: {case_sensitive: false}
   validates :icon, presence: true
   validates :color, presence: true
 
-  def self.types
-    %w(Item FreeForm)
-  end
-
-  def self.search(search)
-    if search
-      builder = new_builder
-      search = Parser.new.parse(search, builder)
-
-      query = self
-      builder.joins.each do |join|
-        query = query.joins(join)
-      end
-      query = query.where(search)
-      builder.orders.each do |order|
-        query = query.order(order)
-      end
-      query.distinct
-    else
-      all
-    end
-  end
-
   def replicate
-    replica = dup
-
-    self.tag_list.each do |tag|
-      replica.tag_list.add(tag)
-    end
+    replica = super
 
     replica
   end
@@ -90,7 +57,7 @@ class Card < ActiveRecord::Base
     builder = SearchBuilder.new do
       configure_field 'name', 'cards.name'
       configure_field 'type', 'cards.type'
-      configure_tag 'tags', Card
+      configure_tag 'tags', FreeForm
     end
     return builder
   end
