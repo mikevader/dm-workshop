@@ -40,7 +40,7 @@ class CardsInterfaceTest < ActionDispatch::IntegrationTest
     get cards_path
     # Delete a post.
     assert_select 'a[aria-label=?]', 'delete'
-    first_item = Card.paginate(page: 1).first
+    first_item = Card.first
     assert_difference 'Card.count', -1 do
       delete card_path(first_item)
     end
