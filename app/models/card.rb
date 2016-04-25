@@ -90,6 +90,9 @@ class Card < ActiveRecord::Base
     builder = SearchBuilder.new do
       configure_field 'name', 'cards.name'
       configure_field 'type', 'cards.type'
+      configure_field 'attunement', 'cards.attunement'
+      configure_relation 'category', 'categories.name', 'category'
+      configure_relation 'rarity', 'rarities.name', 'rarity'
       configure_tag 'tags', Card
     end
     return builder

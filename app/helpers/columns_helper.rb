@@ -11,7 +11,7 @@ module ColumnsHelper
     end
 
     case card_type
-      when 'Card'
+      when 'FreeForm'
         [{title: 'Name', field: lambda { |card| card.name }},
          {title: 'Icon', field: lambda { |card| card.icon }},
          {title: 'Color', field: lambda { |card| card.color }}]

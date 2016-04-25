@@ -28,8 +28,7 @@ class OutputPagesController < ApplicationController
 
   def init_search_engine_all
     @search_engines = {
-        free_forms: SearchEngine2.new(policy_scope(FreeForm)),
-        items: SearchEngine2.new(policy_scope(Item)),
+        cards: SearchEngine2.new(policy_scope(Card)),
         spells: SearchEngine2.new(policy_scope(Spell)),
         monsters: SearchEngine2.new(policy_scope(Monster))
     }
@@ -56,19 +55,19 @@ class OutputPagesController < ApplicationController
 
   def spells
     result, error = @search_engine.search(params[:search])
-    
-    @spells = result
+
+    @cards = result
   end
   
   def items
     result, error = @search_engine.search(params[:search])
-    
-    @items = result
+
+    @cards = result
   end
 
   def monsters
     result, error = @search_engine.search(params[:search])
-    
-    @monsters = result
+
+    @cards = result
   end
 end

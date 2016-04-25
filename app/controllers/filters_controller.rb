@@ -8,8 +8,7 @@ class FiltersController < ApplicationController
 
   def init_search_engine
     @search_engines = {
-        free_form: SearchEngine2.new(policy_scope(FreeForm)),
-        item: SearchEngine2.new(policy_scope(Item)),
+        card: SearchEngine2.new(policy_scope(Card)),
         spell: SearchEngine2.new(policy_scope(Spell)),
         monster: SearchEngine2.new(policy_scope(Monster))
     }
