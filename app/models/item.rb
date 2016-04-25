@@ -8,14 +8,13 @@ class Item < Card
   validates :category_id, presence: true
   validates :rarity_id, presence: true
 
-  after_initialize do |user|
+  after_initialize do
     self.color = 'grey'
     self.icon = 'dirty-icon'
   end
 
   def replicate
     replica = super
-
 
     properties.each do |property|
       replica.properties << property.dup

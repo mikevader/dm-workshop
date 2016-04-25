@@ -89,7 +89,7 @@ class FiltersController < ApplicationController
     results = []
     errors = ''
 
-    @search_engines.each do |type, engine|
+    @search_engines.each do |_type, engine|
       result, error = engine.search(query, false)
 
       unless error

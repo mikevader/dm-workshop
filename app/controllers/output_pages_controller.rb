@@ -36,7 +36,7 @@ class OutputPagesController < ApplicationController
 
   def all
     results = []
-    @search_engines.each do |type, engine|
+    @search_engines.each do |_type, engine|
       result, error = engine.search(params[:search], false)
 
       unless error
@@ -48,25 +48,25 @@ class OutputPagesController < ApplicationController
   end
 
   def free_forms
-    result, error = @search_engine.search(params[:search])
+    result, _error = @search_engine.search(params[:search])
 
     @cards = result
   end
 
   def spells
-    result, error = @search_engine.search(params[:search])
+    result, _error = @search_engine.search(params[:search])
 
     @cards = result
   end
   
   def items
-    result, error = @search_engine.search(params[:search])
+    result, _error = @search_engine.search(params[:search])
 
     @cards = result
   end
 
   def monsters
-    result, error = @search_engine.search(params[:search])
+    result, _error = @search_engine.search(params[:search])
 
     @cards = result
   end

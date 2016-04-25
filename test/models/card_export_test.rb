@@ -23,7 +23,7 @@ class CardExportTest < ActiveSupport::TestCase
     new_file = Nokogiri::XML(xml)
 
     failure_text = ''
-    org_file.diff(new_file, added: true, removed: true) do |change,node|
+    org_file.diff(new_file, added: true, removed: true) do |change, node|
       case node.parent.path
         when '/cards'
         when '/cards/monsters/monster[2]/stats/skills/skill[1]'

@@ -4,7 +4,11 @@ class FreeFormTest < ActiveSupport::TestCase
 
   def setup
     @user = users(:michael)
-    @card = @user.cards.build(type: 'FreeForm', name: 'Frenzy', icon: 'white-book', color: 'indigo', contents: 'subtitle|Rogue feature')
+    @card = @user.cards.build(type: 'FreeForm',
+                              name: 'Frenzy',
+                              icon: 'white-book',
+                              color: 'indigo',
+                              contents: 'subtitle|Rogue feature')
   end
 
   test 'should be valid' do
@@ -54,5 +58,4 @@ class FreeFormTest < ActiveSupport::TestCase
     assert first.subtitle?
     assert_equal 'Rogue feature', first.args.first
   end
-
 end
