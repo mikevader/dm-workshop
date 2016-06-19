@@ -6,6 +6,7 @@
   modal_size = (large == true) ? 'modal-lg' : 'modal-sm'
 %>
 
+<% cache(card) do %>
 <tr>
   <td>
     <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal-<%= index %>" data-size="<%= modal_size %>" data-previd="#myModal-<%= prev_index %>" data-nextid="#myModal-<%= next_index %>" data-card="<%= "/#{card.class.name.underscore.pluralize}/#{card.id}/modal" %>">
@@ -38,3 +39,4 @@
     </ul>
   </td>
 </tr>
+<% end %>

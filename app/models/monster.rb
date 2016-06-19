@@ -1,6 +1,5 @@
-class Monster < ActiveRecord::Base
+class Monster < Card
   acts_as_taggable
-  belongs_to :user
   has_many :monsters_skills, -> { order(skill_id: :asc) }
   has_many :skills, through: :monsters_skills
   has_many :traits, dependent: :destroy
@@ -10,10 +9,7 @@ class Monster < ActiveRecord::Base
   accepts_nested_attributes_for :traits, reject_if: proc { |trait| trait['title'].blank? }, allow_destroy: true
   accepts_nested_attributes_for :monsters_skills, reject_if: proc { |monsters_skill| monsters_skill['skill_id'].blank? }, allow_destroy: true
 
-  default_scope -> { order(name: :asc) }
 
-  validates :user_id, presence: true
-  validates :name, presence: true, length: {maximum: 50}, uniqueness: {case_sensitive: false}
   validates :challenge, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 50}
   validates :size, presence: true
   validates :monster_type, presence: true
@@ -107,7 +103,7 @@ class Monster < ActiveRecord::Base
   end
 
   def replicate
-    replica = dup
+    replica = super
 
     skills.each do |skill|
       replica.skills << skill
@@ -290,7 +286,7 @@ class Monster < ActiveRecord::Base
 
   def self.new_search_builder
     builder = SearchBuilder.new do
-      configure_field 'name', 'monsters.name'
+      configure_field 'name', 'cards.name'
       configure_field 'str', 'monsters.strength'
       configure_field 'dex', 'monsters.dexterity'
       configure_field 'con', 'monsters.constitution'

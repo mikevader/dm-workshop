@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Use specific ruby version
-ruby '2.3.0'
+ruby '2.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2.6'
@@ -40,16 +40,16 @@ gem 'pundit', '~> 1.1.0'
 gem 'faker', '~> 1.6.1'
 
 # Upload files to Rails and map them to ORM frameworks
-gem 'carrierwave', '~> 0.10.0'
+gem 'carrierwave', '~> 0.10'
 # Manipulate images via ImageMagick or GraphicsMagick
-gem 'mini_magick', '~> 4.3.6'
+gem 'mini_magick', '~> 4.3'
 # Cloud service library which supports most of cloud providers
-gem 'fog', '~> 1.37.0'
+gem 'fog', '~> 1.37'
 
 # Producing and parsing XML used for import/export of cards
 gem 'nokogiri', '~> 1.6.7.2'
 # Store session data in active records aka database
-gem 'activerecord-session_store', '~> 0.1.2'
+gem 'activerecord-session_store', '~> 1.0.0'
 
 # Use for easy parsing the search expression
 gem 'treetop', '~> 1.6.3'
@@ -92,17 +92,20 @@ end
 
 group :test do
   # Modify output of minitest
-  gem 'minitest-reporters', '~> 1.1.8'
+  gem 'minitest-reporters', '~> 1.1'
   # Adds support of ActiveRecord::backtrace_cleaner in minitest framework
-  gem 'mini_backtrace',     '~> 0.1.3'
+  gem 'mini_backtrace',     '~> 0.1'
   # File system change tracker used for executing tests of changed files
-  gem 'guard',              '~> 2.13.0'
+  gem 'guard',              '~> 2.13'
   # Extension for guard to run tests with minitest framework
-  gem 'guard-minitest',     '~> 2.4.4'
+  gem 'guard-minitest',     '~> 2.4'
   # Extension for guard to send user notification on OSX
-  gem 'terminal-notifier-guard', '~> 1.7.0'
+  gem 'terminal-notifier-guard', '~> 1.7'
   # Extension for nokogiri to calculate differences between two XML documents
   gem 'nokogiri-diff', '~> 0.2.0'
+  # Performance test for optimizing cards display
+  gem 'rails-perftest'
+  gem 'ruby-prof'
 end
 
 group :production do

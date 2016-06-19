@@ -41,9 +41,6 @@ class ApplicationController < ActionController::Base
     send("edit_#{name}_path", card)
   end
 
-  def destroy_path card
-  end
-
   def duplicate_path card
     name = card.class.name.underscore
     send("duplicate_#{name}_path", card)

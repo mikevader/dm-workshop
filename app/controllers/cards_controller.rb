@@ -1,10 +1,10 @@
 require 'search_engine'
 
-class GenericCardController < ApplicationController
+class CardsController < ApplicationController
   include ColumnsHelper
 
-  layout :choose_layout
-  helper_method :card_model, :new_path, :edit_path, :destroy_path, :duplicate_path
+  #layout :choose_layout
+  helper_method :card_model, :print_path, :search_path, :new_path, :edit_path, :duplicate_path
   before_action :logged_in_user, only: [:new, :edit, :update, :create, :destroy]
   #before_action :admin_user, only: [:edit, :update, :destroy]
   before_action :init_search_engine, only: [:index]
@@ -14,7 +14,6 @@ class GenericCardController < ApplicationController
   def init_search_engine
     @search_engine = SearchEngine2.new(policy_scope(card_model))
   end
-
 
   # Create actions
   def new
@@ -32,7 +31,7 @@ class GenericCardController < ApplicationController
       flash[:success] = 'Card created!'
       redirect_to session.delete(:return_to) || root_path
     else
-      render 'new', layout: 'card_new'
+      render 'new'
     end
   end
 
@@ -65,12 +64,12 @@ class GenericCardController < ApplicationController
     @card = Card.find(params[:id]).replicate
     authorize @card
     @card.user = current_user
-    @card.name = @card.name + " (copy)"
+    @card.name = @card.name + ' (copy)'
     if @card.save
-      flash[:success] = "Card duplicated!"
+      flash[:success] = 'Card duplicated!'
       redirect_to request.referer || root_path
     else
-      render 'new', layout: 'card_new'
+      render 'new'
     end
   end
 
@@ -81,7 +80,7 @@ class GenericCardController < ApplicationController
 
     @cards = result
     @error = error
-    @cards.each {|card| authorize card}
+    #@cards.each {|card| authorize card}
   end
 
   def show
@@ -89,7 +88,6 @@ class GenericCardController < ApplicationController
     @card = card_model.find(params[:id])
     authorize @card
   end
-
 
   # Update actions
   def edit
@@ -105,7 +103,7 @@ class GenericCardController < ApplicationController
       flash[:success] = 'Card updated!'
       redirect_to session.delete(:return_to) || root_path
     else
-      render 'edit', layout: 'card_edit'
+      render 'edit'
     end
   end
 
@@ -114,10 +112,9 @@ class GenericCardController < ApplicationController
     card = Card.find(params[:id])
     authorize card
     card.destroy
-    flash[:success] = "Card deleted"
+    flash[:success] = 'Card deleted'
     redirect_to request.referer || root_path
   end
-
 
   private
   def user_collection
@@ -137,26 +134,14 @@ class GenericCardController < ApplicationController
     @search_engine
   end
 
-  # Select the layout depending on the CRUD mode
-  def choose_layout
-    case action_name
-      when 'index'
-        return 'card_index'
-      when 'edit'
-        return 'card_edit'
-      when 'new'
-        return 'card_new'
-      else
-        return nil
-    end
-  end
-
   def card_params(type = card_type)
     case type
       when :freeform
         params.require(:free_form).permit(:name, :shared, :cite, :icon, :color, :contents, :tag_list)
       when :item
         params.require(:item).permit(:name, :shared, :tag_list, :cssclass, :category_id, :rarity_id, :attunement, :description, properties_attributes: [:id, :name, :value, :_destroy])
+      when :monster
+        params.require(:monster).permit(:name, :shared, :tag_list, :cite, :size, :monster_type, :alignment, :armor_class, :hit_points, :speed, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :senses, :languages, :challenge, :description, :skills, :saving_throws => [], :damage_vulnerabilities => [], :damage_resistances => [], :damage_immunities => [], :cond_immunities => [], :monsters_skills_ids => [], :skill_ids => [], actions_attributes: [:id, :title, :description, :action_type, :melee, :ranged, :_destroy], traits_attributes: [:id, :title, :description, :_destroy], monsters_skills_attributes: [:id, :skill_id, :value, :_destroy])
     end
   end
 end

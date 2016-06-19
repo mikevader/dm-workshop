@@ -1,6 +1,6 @@
 require 'search_engine'
 
-class SpellsController < GenericCardController
+class SpellsController < CardsController
   before_action :correct_user, only: [:edit, :update]
 
   def create
@@ -80,6 +80,14 @@ class SpellsController < GenericCardController
 
   def new_path
     new_spell_path
+  end
+
+  def search_path
+    spells_path
+  end
+
+  def print_path(*search_args)
+    print_spells_path(search_args)
   end
 end
 
