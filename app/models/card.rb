@@ -7,11 +7,11 @@ class Card < ActiveRecord::Base
 
   validates :user_id, presence: true
   validates :name, presence: true, length: {maximum: 50}, uniqueness: {case_sensitive: false}
-  validates :icon, presence: true
-  validates :color, presence: true
+  #validates :icon, presence: true
+  #validates :color, presence: true
 
   def self.types
-    %w(Item FreeForm)
+    %w(Item FreeForm Monster Spell)
   end
 
   def self.search(search)

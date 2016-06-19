@@ -142,6 +142,8 @@ class CardsController < ApplicationController
         params.require(:item).permit(:name, :shared, :tag_list, :cssclass, :category_id, :rarity_id, :attunement, :description, properties_attributes: [:id, :name, :value, :_destroy])
       when :monster
         params.require(:monster).permit(:name, :shared, :tag_list, :cite, :size, :monster_type, :alignment, :armor_class, :hit_points, :speed, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :senses, :languages, :challenge, :description, :skills, :saving_throws => [], :damage_vulnerabilities => [], :damage_resistances => [], :damage_immunities => [], :cond_immunities => [], :monsters_skills_ids => [], :skill_ids => [], actions_attributes: [:id, :title, :description, :action_type, :melee, :ranged, :_destroy], traits_attributes: [:id, :title, :description, :_destroy], monsters_skills_attributes: [:id, :skill_id, :value, :_destroy])
+      when :spell
+        params.require(:spell).permit(:name, :shared, :tag_list, :cite, :ritual, :level, :school, :casting_time, :range, :components, :duration, :short_description, :athigherlevel, :description, :picture, :concentration, :hero_classes, :hero_class_ids => [])
     end
   end
 end

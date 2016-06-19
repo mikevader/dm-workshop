@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160413161147) do
+ActiveRecord::Schema.define(version: 20160619134557) do
 
   create_table "actions", force: :cascade do |t|
     t.string   "title"
@@ -31,24 +31,44 @@ ActiveRecord::Schema.define(version: 20160413161147) do
     t.string   "icon"
     t.string   "color"
     t.text     "contents"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "user_id"
     t.string   "badges"
     t.string   "cite"
-    t.boolean  "shared",      default: false, null: false
+    t.boolean  "shared",            default: false, null: false
     t.string   "type"
     t.string   "cssclass"
     t.boolean  "attunement"
     t.text     "description"
     t.integer  "category_id"
     t.integer  "rarity_id"
+    t.integer  "level"
+    t.string   "school"
+    t.string   "casting_time"
+    t.string   "range"
+    t.string   "components"
+    t.string   "duration"
+    t.text     "short_description"
+    t.string   "picture"
+    t.string   "athigherlevel"
+    t.boolean  "concentration"
+    t.boolean  "ritual",            default: false
   end
 
   add_index "cards", ["category_id"], name: "index_cards_on_category_id"
   add_index "cards", ["name"], name: "index_cards_on_name"
   add_index "cards", ["rarity_id"], name: "index_cards_on_rarity_id"
   add_index "cards", ["user_id"], name: "index_cards_on_user_id"
+
+  create_table "cards_hero_classes", id: false, force: :cascade do |t|
+    t.integer "hero_class_id", null: false
+    t.integer "card_id",       null: false
+  end
+
+  add_index "cards_hero_classes", ["card_id"], name: "index_cards_hero_classes_on_card_id"
+  add_index "cards_hero_classes", ["hero_class_id", "card_id"], name: "index_cards_hero_classes_on_hero_class_id_and_card_id", unique: true
+  add_index "cards_hero_classes", ["hero_class_id"], name: "index_cards_hero_classes_on_hero_class_id"
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -79,15 +99,6 @@ ActiveRecord::Schema.define(version: 20160413161147) do
   end
 
   add_index "hero_classes", ["name"], name: "index_hero_classes_on_name"
-
-  create_table "hero_classes_spells", id: false, force: :cascade do |t|
-    t.integer "spell_id"
-    t.integer "hero_class_id"
-  end
-
-  add_index "hero_classes_spells", ["hero_class_id"], name: "index_hero_classes_spells_on_hero_class_id"
-  add_index "hero_classes_spells", ["spell_id", "hero_class_id"], name: "index_hero_classes_spells_on_spell_id_and_hero_class_id", unique: true
-  add_index "hero_classes_spells", ["spell_id"], name: "index_hero_classes_spells_on_spell_id"
 
   create_table "monsters", force: :cascade do |t|
     t.string   "name"
@@ -170,32 +181,6 @@ ActiveRecord::Schema.define(version: 20160413161147) do
   end
 
   add_index "skills", ["name"], name: "index_skills_on_name"
-
-  create_table "spells", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "level"
-    t.string   "school"
-    t.string   "casting_time"
-    t.string   "range"
-    t.string   "components"
-    t.string   "duration"
-    t.text     "short_description"
-    t.text     "description"
-    t.integer  "user_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.string   "picture"
-    t.string   "athigherlevel"
-    t.boolean  "concentration"
-    t.boolean  "ritual",            default: false
-    t.string   "cite"
-    t.boolean  "shared",            default: false, null: false
-  end
-
-  add_index "spells", ["level"], name: "index_spells_on_level"
-  add_index "spells", ["name"], name: "index_spells_on_name"
-  add_index "spells", ["user_id", "created_at"], name: "index_spells_on_user_id_and_created_at"
-  add_index "spells", ["user_id"], name: "index_spells_on_user_id"
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"

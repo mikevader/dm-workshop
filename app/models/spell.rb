@@ -1,20 +1,17 @@
-class Spell < ActiveRecord::Base
+class Spell < Card
   acts_as_taggable
-  belongs_to :user
-  has_and_belongs_to_many :hero_classes
+  has_and_belongs_to_many :hero_classes, foreign_key: :card_id
 
   default_scope -> { order(name: :asc) }
   mount_uploader :picture, PictureUploader
 
-  validates :user_id, presence: true
-  validates :name, presence: true
   validates :level, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 9}
   validates :school, presence: true
   # validate :spell_unique_per_class
   validate :picture_size
 
   def replicate
-    replica = dup
+    replica = super
 
     hero_classes.each do |hero_class|
       replica.hero_classes << hero_class
@@ -69,13 +66,13 @@ class Spell < ActiveRecord::Base
 
   def self.new_search_builder
     builder = SearchBuilder.new do
-      configure_field 'name', 'spells.name'
-      configure_field 'ritual', 'spells.ritual'
-      configure_field 'school', 'spells.school'
-      configure_field 'level', 'spells.level'
-      configure_field 'concentration', 'spells.concentration'
-      configure_field 'duration', 'spells.duration'
-      configure_field 'castingTime', 'spells.casting_time'
+      configure_field 'name', 'cards.name'
+      configure_field 'ritual', 'cards.ritual'
+      configure_field 'school', 'cards.school'
+      configure_field 'level', 'cards.level'
+      configure_field 'concentration', 'cards.concentration'
+      configure_field 'duration', 'cards.duration'
+      configure_field 'castingTime', 'cards.casting_time'
       configure_tag 'tags', Spell
       configure_relation 'classes', 'hero_classes.name', :hero_classes
     end
