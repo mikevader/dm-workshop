@@ -11,32 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160619134557) do
+ActiveRecord::Schema.define(version: 20160619152804) do
 
   create_table "actions", force: :cascade do |t|
     t.string   "title"
     t.string   "description"
-    t.integer  "monster_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "action_type", default: 0, null: false
     t.boolean  "melee"
     t.boolean  "ranged"
+    t.integer  "card_id"
   end
 
-  add_index "actions", ["monster_id"], name: "index_actions_on_monster_id"
+  add_index "actions", ["card_id"], name: "index_actions_on_card_id"
 
   create_table "cards", force: :cascade do |t|
     t.string   "name"
     t.string   "icon"
     t.string   "color"
     t.text     "contents"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.integer  "user_id"
     t.string   "badges"
     t.string   "cite"
-    t.boolean  "shared",            default: false, null: false
+    t.boolean  "shared",                      default: false, null: false
     t.string   "type"
     t.string   "cssclass"
     t.boolean  "attunement"
@@ -53,7 +53,27 @@ ActiveRecord::Schema.define(version: 20160619134557) do
     t.string   "picture"
     t.string   "athigherlevel"
     t.boolean  "concentration"
-    t.boolean  "ritual",            default: false
+    t.boolean  "ritual",                      default: false
+    t.string   "size"
+    t.string   "monster_type"
+    t.string   "alignment"
+    t.string   "armor_class"
+    t.integer  "hit_points"
+    t.string   "speed"
+    t.integer  "strength"
+    t.integer  "dexterity"
+    t.integer  "constitution"
+    t.integer  "intelligence"
+    t.integer  "wisdom"
+    t.integer  "charisma"
+    t.string   "senses"
+    t.string   "languages"
+    t.float    "challenge",                   default: 0.0,   null: false
+    t.integer  "saving_throws_mask"
+    t.integer  "damage_vulnerabilities_mask"
+    t.integer  "damage_resistances_mask"
+    t.integer  "damage_immunities_mask"
+    t.integer  "cond_immunities_mask"
   end
 
   add_index "cards", ["category_id"], name: "index_cards_on_category_id"
@@ -69,6 +89,18 @@ ActiveRecord::Schema.define(version: 20160619134557) do
   add_index "cards_hero_classes", ["card_id"], name: "index_cards_hero_classes_on_card_id"
   add_index "cards_hero_classes", ["hero_class_id", "card_id"], name: "index_cards_hero_classes_on_hero_class_id_and_card_id", unique: true
   add_index "cards_hero_classes", ["hero_class_id"], name: "index_cards_hero_classes_on_hero_class_id"
+
+  create_table "cards_skills", force: :cascade do |t|
+    t.integer  "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "card_id"
+    t.integer  "skill_id"
+  end
+
+  add_index "cards_skills", ["card_id"], name: "index_cards_skills_on_card_id"
+  add_index "cards_skills", ["skill_id", "card_id"], name: "index_cards_skills_on_skill_id_and_card_id", unique: true
+  add_index "cards_skills", ["skill_id"], name: "index_cards_skills_on_skill_id"
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -99,51 +131,6 @@ ActiveRecord::Schema.define(version: 20160619134557) do
   end
 
   add_index "hero_classes", ["name"], name: "index_hero_classes_on_name"
-
-  create_table "monsters", force: :cascade do |t|
-    t.string   "name"
-    t.string   "cite"
-    t.string   "size"
-    t.string   "monster_type"
-    t.string   "alignment"
-    t.string   "armor_class"
-    t.integer  "hit_points"
-    t.string   "speed"
-    t.integer  "strength"
-    t.integer  "dexterity"
-    t.integer  "constitution"
-    t.integer  "intelligence"
-    t.integer  "wisdom"
-    t.integer  "charisma"
-    t.string   "senses"
-    t.string   "languages"
-    t.float    "challenge",                   default: 0.0,   null: false
-    t.text     "description"
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
-    t.integer  "user_id"
-    t.integer  "saving_throws_mask"
-    t.integer  "damage_vulnerabilities_mask"
-    t.integer  "damage_resistances_mask"
-    t.integer  "damage_immunities_mask"
-    t.integer  "cond_immunities_mask"
-    t.boolean  "shared",                      default: false, null: false
-  end
-
-  add_index "monsters", ["name"], name: "index_monsters_on_name"
-  add_index "monsters", ["user_id"], name: "index_monsters_on_user_id"
-
-  create_table "monsters_skills", force: :cascade do |t|
-    t.integer  "monster_id"
-    t.integer  "skill_id"
-    t.integer  "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "monsters_skills", ["monster_id", "skill_id"], name: "index_monsters_skills_on_monster_id_and_skill_id", unique: true
-  add_index "monsters_skills", ["monster_id"], name: "index_monsters_skills_on_monster_id"
-  add_index "monsters_skills", ["skill_id"], name: "index_monsters_skills_on_skill_id"
 
   create_table "properties", force: :cascade do |t|
     t.string   "name"
@@ -205,12 +192,12 @@ ActiveRecord::Schema.define(version: 20160619134557) do
   create_table "traits", force: :cascade do |t|
     t.string   "title"
     t.string   "description"
-    t.integer  "monster_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "card_id"
   end
 
-  add_index "traits", ["monster_id"], name: "index_traits_on_monster_id"
+  add_index "traits", ["card_id"], name: "index_traits_on_card_id"
   add_index "traits", ["title"], name: "index_traits_on_title"
 
   create_table "users", force: :cascade do |t|
