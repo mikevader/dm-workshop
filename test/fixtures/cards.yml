@@ -1,7 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+# Free form cards
+
 cunning_action:
-  id: 1
+  id: 21
+  type: FreeForm
   name: Cunning Action
   icon: white-book
   color: indigo
@@ -10,11 +13,118 @@ cunning_action:
   shared: true
 
 action_surge:
-  id: 2
+  id: 22
+  type: FreeForm
   name: Action Surge
   icon: white-book
   color: indigo
   contents: 'property | faith | it will work'
   user: michael
   shared: true
+
+
+# Items
+
+sting:
+  id: 11
+  type: Item
+  name: Sting
+  color: grey
+  icon: dirty-icon
+  category: armor
+  rarity: uncommon
+  attunement: false
+  description: MyText
+  user: michael
+  shared: true
+
+glamdring:
+  id: 12
+  type: Item
+  name: Glamdring
+  color: grey
+  icon: dirty-icon
+  category: weapon
+  rarity: very_rare
+  attunement: true
+  description: MyText
+  user: michael
+  shared: true
+
+
+# Monsters
+
+shadow_demon:
+  id: 66
+  type: Monster
+  name: Shadow Demon
+  cite: MM 64
+  size: medium
+  monster_type: fiend (demon)
+  alignment: chaotic evil
+  armor_class: 13 (leather)
+  hit_points: 66
+  speed: 30ft, fly 30ft
+  strength: 1
+  dexterity: 17
+  constitution: 12
+  intelligence: 14
+  wisdom: 13
+  charisma: 14
+  skills:
+    - stealth
+  saving_throws_mask: 3
+  damage_vulnerabilities_mask: 1024
+  damage_resistances_mask: 4169
+  damage_immunities_mask: 292
+  cond_immunities_mask: 7969
+  senses: darkvision 120ft, passive Perception 11
+  languages: Abyssal, telepathy 120ft
+  challenge: 4
+  description: What ever
+  shared: true
+  user: michael
+
+
+# Spells
+
+fireball:
+  id: 41
+  type: Spell
+  name: Fireball
+  level: 3
+  school: evocation
+  hero_classes:
+    - sorcerer
+    - wizard
+  casting_time: 1 action
+  range: 150 feet
+  components: V, S, M (a tiny ball of bat guano and sulfur)
+  duration: Instantaneous
+  short_description: MyText
+  description: >
+                A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a Dexterity saving throw. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one.<br/>
+                The fire spreads around corners. It ignites flammable objects in the area that aren't being worn or carried.<br/>
+                <b>At Higher Levels.</b> When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.
+  user: archer
+  shared: true
+
+bane:
+  id: 42
+  type: Spell
+  name: Bane
+  level: 1
+  school: enchantment
+  hero_classes:
+    - bard
+    - cleric
+  casting_time: 1 action
+  range: 30 feet (sight)
+  components: V, S, M (a drop of blood)
+  duration: Concentration, up to 1 minute
+  short_description: Bis drei Ziele im Sichtfeld müssen einen Charisma-Rettungswurf bestehen. Bei Misslingen muss das Ziel bei jedem Angriffs- oder Rettungswurf einen d4 abziehen.
+  description: MyText
+  user: michael
+  shared: true
+
 

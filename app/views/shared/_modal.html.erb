@@ -4,10 +4,11 @@
   prev_index = (index - 1)%@cards.size
   modal_size = modal_size(@cards)
 %>
-
+<% cache(card) do %>
 <div class="modal card-dialog" id="myModal-<%= index %>" tabindex="-1" role="dialog" data-size="<%= modal_size %>" data-previd="#myModal-<%= prev_index %>" data-nextid="#myModal-<%= next_index %>" data-card="<%= "/#{card.class.model_name.human.downcase.pluralize}/#{card.id}/modal" %>" aria-labelledby="myModalLabel">
   <div class="modal-dialog <%= modal_size %>" role="document">
     <div class="modal-content">
     </div>
   </div>
 </div>
+<% end %>

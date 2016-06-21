@@ -5,7 +5,9 @@ module StringToBoolean
     raise ArgumentError.new("invalid value for Boolean: \"#{self}\"")
   end
 end
-class String; include StringToBoolean; end
+class String;
+  include StringToBoolean;
+end
 
 class CardImport
 
@@ -52,11 +54,11 @@ class CardImport
   end
 
   def new_record?
-    @cards.empty? || @cards.map {|card| card.new_record?}.any?
+    @cards.empty? || @cards.map { |card| card.new_record? }.any?
   end
 
   def save
-    @cards = imports.select{|import_card| import_card.import?}.map {|import_card| create_new_card(@user, import_card)}
+    @cards = imports.select { |import_card| import_card.import? }.map { |import_card| create_new_card(@user, import_card) }
     if @cards.map(&:valid?).all?
       @cards.each(&:save!)
       true
@@ -114,11 +116,11 @@ class CardImport
     spells_doc = open_xmlfile(spells_file)
 
     spells_doc.xpath('//cards/spells/spell').map do |spell|
-      complete_name = CardImport.load_element '', spell, 'name', true, "inscribe card: %{value}"
+      complete_name = CardImport.load_element '', spell, 'name', true, 'inscribe card: %{value}'
       name = %r{^([a-zA-Z'’/\- ]*)( \(Ritual\))?.*$}.match(complete_name)[1].squish
       ritual = complete_name.downcase.include? 'ritual'
 
-      if existing_spell = Spell.find_by_name(name)
+      unless (existing_spell = Spell.find_by_name(name)).nil?
         logger.info "Spell #{name} already inscribed"
         id = existing_spell.id
       end
@@ -128,8 +130,8 @@ class CardImport
       logger.debug "    level: #{level}"
       logger.debug "    school: #{school}"
 
-      classes = CardImport.load_element name, spell, 'classes' do |node, name|
-        node.xpath('class').map { |node| node.text }
+      classes = CardImport.load_element name, spell, 'classes' do |node, _class_name|
+        node.xpath('class').map(&:text)
       end
 
       casting_time = CardImport.load_element(name, spell, 'castingtime', true)
@@ -216,16 +218,16 @@ class CardImport
   def load_imported_items
     items_doc = open_xmlfile(items_file)
     items_doc.xpath('//cards/items/item').map do |item|
-      name = CardImport.load_element '', item, 'name', true, "craft item: %{value}"
+      name = CardImport.load_element '', item, 'name', true, 'craft item: %{value}'
 
-      if existing_item = Item.find_by_name(name)
+      unless (existing_item = Item.find_by_name(name)).nil?
         logger.info "Item #{name} already exists."
         id = existing_item.id
       end
 
       cite = CardImport.load_element(name, item, 'cite', true)
-      category = Category.where("lower(name) LIKE ?", CardImport.load_element(name, item, 'type', true).downcase)
-      rarity = Rarity.where("lower(name) LIKE ?", CardImport.load_element(name, item, 'rarity', true).downcase)
+      category = Category.where('lower(name) LIKE ?', CardImport.load_element(name, item, 'type', true).downcase)
+      rarity = Rarity.where('lower(name) LIKE ?', CardImport.load_element(name, item, 'rarity', true).downcase)
       attunement = CardImport.load_element(name, item, 'requiresAttunement', false) || 'false'
       description = CardImport.load_element(name, item, 'description', false)
 
@@ -270,14 +272,14 @@ class CardImport
     end
 
     monsters_doc.xpath('//cards/monsters/monster').map do |monster|
-      name = CardImport.load_element '', monster, 'name', true, "bread monster: %{value}"
+      name = CardImport.load_element '', monster, 'name', true, 'bread monster: %{value}'
 
-      if existing_monster = Monster.find_by_name(name)
+      unless (existing_monster = Monster.find_by_name(name)).nil?
         logger.info "Monster #{name} already bread"
         id = existing_monster.id
       end
 
-      type = CardImport.load_element name,  monster, 'type', true
+      type = CardImport.load_element name, monster, 'type', true
       cite = CardImport.load_element name, monster, 'cite', false
       description = CardImport.load_element name, monster, 'description', false
 
@@ -295,12 +297,12 @@ class CardImport
       languages = nil
       cr = nil
 
-      savingThrows = []
+      saving_throws = []
       skills = []
-      dmgVulnerability = []
-      dmgResistance = []
-      dmgImmunity = []
-      condImmunity = []
+      dmg_vulnerability = []
+      dmg_resistance = []
+      dmg_immunity = []
+      cond_immunity = []
       senses = []
 
       monster.xpath('stats').each do |stat|
@@ -319,26 +321,26 @@ class CardImport
         cr = CardImport.load_element name, stat, 'cr', false
         cr = Rational(%r{([0-9\/]+)( \([\d']+ XP\))?}.match(cr)[1]).to_f
 
-        savingThrows = CardImport.load_element name, stat, 'savingThrows/@*' do |node, name|
-          node.map { |ability| ability.name }
+        saving_throws = CardImport.load_element name, stat, 'savingThrows/@*' do |node, _name|
+          node.map(&:name)
         end
 
-        skills = CardImport.load_element name, stat, 'skills' do |node, name|
-          node.xpath('skill/@name').map { |node| node.text }
+        skills = CardImport.load_element name, stat, 'skills' do |node, _name|
+          node.xpath('skill/@name').map(&:text)
         end
-        dmgVulnerability = CardImport.load_element name, stat, 'dmgVulnerability/*' do |node, name|
-          node.map { |dmg| dmg.name }
+        dmg_vulnerability = CardImport.load_element name, stat, 'dmgVulnerability/*' do |node, _name|
+          node.map(&:name)
         end
-        dmgResistance = CardImport.load_element name, stat, 'dmgResistance/*' do |node, name|
-          node.map { |dmg| dmg.name }
+        dmg_resistance = CardImport.load_element name, stat, 'dmgResistance/*' do |node, _name|
+          node.map(&:name)
         end
-        dmgImmunity = CardImport.load_element name, stat, 'dmgImmunity/*' do |node, name|
-          node.map { |dmg| dmg.name }
+        dmg_immunity = CardImport.load_element name, stat, 'dmgImmunity/*' do |node, _name|
+          node.map(&:name)
         end
-        condImmunity = CardImport.load_element name, stat, 'condImmunity/*' do |node, name|
-          node.map { |cond| cond.name }
+        cond_immunity = CardImport.load_element name, stat, 'condImmunity/*' do |node, _name|
+          node.map(&:name)
         end
-        senses = CardImport.load_element name, stat, 'senses/*' do |node, name|
+        senses = CardImport.load_element name, stat, 'senses/*' do |node, _name|
           node.map { |sense| "#{sense.xpath('@name')}: #{sense.text}" }
         end
       end
@@ -382,14 +384,14 @@ class CardImport
       import_card.attributes.languages = languages
       import_card.attributes.challenge = cr
 
-      import_card.attributes.saving_throws = savingThrows
+      import_card.attributes.saving_throws = saving_throws
       import_card.attributes.skills = skills
       import_card.attributes.senses = senses.join(', ') unless senses.nil?
 
-      import_card.attributes.damage_vulnerabilities = dmgVulnerability
-      import_card.attributes.damage_resistances = dmgResistance
-      import_card.attributes.damage_immunities = dmgImmunity
-      import_card.attributes.cond_immunities = condImmunity
+      import_card.attributes.damage_vulnerabilities = dmg_vulnerability
+      import_card.attributes.damage_resistances = dmg_resistance
+      import_card.attributes.damage_immunities = dmg_immunity
+      import_card.attributes.cond_immunities = cond_immunity
 
       import_card.attributes.description = description
       import_card.attributes.traits = traits
@@ -426,7 +428,7 @@ class CardImport
     new_monster.challenge = import_card.attributes.challenge
 
     new_monster.saving_throws = import_card.attributes.saving_throws unless import_card.attributes.saving_throws.nil?
-    new_monster.skills << import_card.attributes.skills.map {|skill| Skill.where("lower(name) LIKE ?", skill.downcase)} unless import_card.attributes.skills.nil?
+    new_monster.skills << import_card.attributes.skills.map { |skill| Skill.where('lower(name) LIKE ?', skill.downcase) } unless import_card.attributes.skills.nil?
     new_monster.senses = import_card.attributes.senses
 
     new_monster.damage_vulnerabilities = import_card.attributes.damage_vulnerabilities unless import_card.attributes.damage_vulnerabilities.nil?
@@ -455,9 +457,9 @@ class CardImport
   def load_imported_cards
     cards_doc = open_xmlfile(cards_file)
     cards_doc.xpath('//cards/cards/card').map do |card|
-      name = CardImport.load_element '', card, 'name', true, "craft card: %{value}"
+      name = CardImport.load_element '', card, 'name', true, 'craft card: %{value}'
 
-      if existing_card = Card.find_by_name(name)
+      unless (existing_card = Card.find_by_name(name)).nil?
         logger.info "Card #{name} already printed"
         id = existing_card.id
       end
@@ -498,14 +500,17 @@ class CardImport
 
   def open_xmlfile(file)
     case File.extname(file.original_filename)
-      when ".xml" then
+      when '.xml' then
         item_file = File.open(file.path)
         Nokogiri::Slop(item_file)
-      else raise "Unknown file type: #{file.original_filename}"
+      else
+        raise "Unknown file type: #{file.original_filename}"
     end
   end
 
-  def self.load_element(for_card, node, name, required = false, description = "    %{name}: %{value}")
+  private
+
+  def self.load_element(for_card, node, name, required = false, _description = '    %{name}: %{value}')
     name.downcase!
     value_node = node.xpath(name)
     if value_node.empty?

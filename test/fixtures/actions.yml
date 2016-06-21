@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-shortsword:
-  action_type: 'action'
-  title: Shortsword
-  description: "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
-  melee: true
-  monster: shadow_demon
+#shortsword:
+#  action_type: 'action'
+#  title: Shortsword
+#  description: "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+#  melee: true
+#  card_id: 31
 
-shortbow:
-  action_type: 'action'
-  title: Shortbow
-  description: "Ranged Weapon Attack: +4 to hit, range 80f320 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
-  ranged: true
-  monster: shadow_demon
+#shortbow:
+#  action_type: 'action'
+#  title: Shortbow
+#  description: "Ranged Weapon Attack: +4 to hit, range 80f320 ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+#  ranged: true
+#  card_id: 31

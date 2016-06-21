@@ -7,8 +7,12 @@ class Card < ActiveRecord::Base
 
   validates :user_id, presence: true
   validates :name, presence: true, length: {maximum: 50}, uniqueness: {case_sensitive: false}
-  validates :icon, presence: true
-  validates :color, presence: true
+  #validates :icon, presence: true
+  #validates :color, presence: true
+
+  def self.types
+    %w(Item FreeForm Monster Spell)
+  end
 
   def self.search(search)
     if search
@@ -85,6 +89,10 @@ class Card < ActiveRecord::Base
   def self.new_search_builder
     builder = SearchBuilder.new do
       configure_field 'name', 'cards.name'
+      configure_field 'type', 'cards.type'
+      configure_field 'attunement', 'cards.attunement'
+      configure_relation 'category', 'categories.name', 'category'
+      configure_relation 'rarity', 'rarities.name', 'rarity'
       configure_tag 'tags', Card
     end
     return builder

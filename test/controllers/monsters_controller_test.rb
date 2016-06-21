@@ -3,7 +3,7 @@ require 'test_helper'
 class MonstersControllerTest < ActionController::TestCase
 
   setup do
-    @monster = monsters(:shadow_demon)
+    @monster = cards(:shadow_demon)
   end
 
   test 'show should redirect when not logged in' do
@@ -69,6 +69,7 @@ class MonstersControllerTest < ActionController::TestCase
   test 'should get create' do
     log_in_as(users(:michael))
     assert_difference 'Monster.count', +1 do
+      session[:return_to] = 'http://test.host/monsters'
       post :create, monster: {name: 'AAA', bonus: 2, size: 'huge', monster_type: 'humanoid', armor_class: '19 (plate)', hit_points: 150, strength: 8, dexterity: 8, constitution: 8, intelligence: 12, wisdom: 12, charisma: 12}
     end
 
@@ -88,6 +89,7 @@ class MonstersControllerTest < ActionController::TestCase
   test 'should get update' do
     log_in_as(users(:michael))
     assert_no_difference 'Monster.count' do
+      session[:return_to] = 'http://test.host/monsters'
       patch :update, id: @monster.id, monster: {name: 'ABCD'}
     end
 
@@ -101,6 +103,7 @@ class MonstersControllerTest < ActionController::TestCase
   test 'should get destory' do
     log_in_as(users(:michael))
     assert_difference 'Monster.count', -1 do
+      @request.env['HTTP_REFERER'] = monsters_path
       delete :destroy, id: @monster
     end
     assert_redirected_to monsters_url
@@ -108,8 +111,9 @@ class MonstersControllerTest < ActionController::TestCase
 
   test 'should get duplicate' do
     log_in_as(users(:archer))
-    monster = monsters(:shadow_demon)
+    monster = cards(:shadow_demon)
     assert_difference 'Monster.count', +1 do
+      @request.env['HTTP_REFERER'] = monsters_path
       post :duplicate, id: monster.id
     end
     assert_redirected_to monsters_url

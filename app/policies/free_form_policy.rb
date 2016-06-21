@@ -1,0 +1,3 @@
+class FreeFormPolicy < CardPolicy
+
+end

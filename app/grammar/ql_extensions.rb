@@ -15,7 +15,7 @@ module Dmwql
 
   class StringSearch  < Treetop::Runtime::SyntaxNode
     def query_string(builder)
-      builder.add_str_comp_clause "name", "~", string.text_value
+      builder.add_str_comp_clause 'name', '~', string.text_value
     end
   end
   
@@ -41,14 +41,13 @@ module Dmwql
   
   class Group < Treetop::Runtime::SyntaxNode
     def query_string(builder)
-      values = '(' + surround_string_with_quotes_if_necessary(literal.text_value)
+      values = '(' << surround_string_with_quotes_if_necessary(literal.text_value)
 
       second.elements.each do |node|
-        values = values + ', ' + surround_string_with_quotes_if_necessary(node.literal.text_value)
+        values << ', ' << surround_string_with_quotes_if_necessary(node.literal.text_value)
       end
 
-      values + ')'
-
+      values << ')'
 
       builder.add_group_clause id.text_value, values
     end

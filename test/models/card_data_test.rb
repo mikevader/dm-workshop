@@ -1,6 +1,5 @@
 class CardDataTest < ActiveSupport::TestCase
 
-
   test 'should work with a single element' do
     data = CardData.new
 
@@ -40,8 +39,5 @@ class CardDataTest < ActiveSupport::TestCase
     assert fourth.property?
     assert_equal 'size', fourth.args.first
     assert_equal 'medium', fourth.args.second
-
-
   end
-
 end

@@ -2,7 +2,7 @@ module ColumnsHelper
   def columns_definition(klass, cards = nil)
     card_type = klass.classify
 
-    unless %w(Card Spell Monster Item).include? card_type or cards.nil?
+    unless %w(FreeForm Spell Monster Item).include? card_type or cards.nil?
       if cards.is_a? Array
         card_type = cards.first.class.name unless cards.empty?
       else
@@ -11,7 +11,7 @@ module ColumnsHelper
     end
 
     case card_type
-      when 'Card'
+      when 'FreeForm'
         [{title: 'Name', field: lambda { |card| card.name }},
          {title: 'Icon', field: lambda { |card| card.icon }},
          {title: 'Color', field: lambda { |card| card.color }}]

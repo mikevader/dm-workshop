@@ -225,6 +225,9 @@ div.cards {
 
 .card-text {
   display: inline;
+}
+
+.card-text-line + .card-text-line > .card-text {
   text-indent: -10px;
   margin-left: 10px;
 }
