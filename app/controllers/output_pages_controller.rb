@@ -28,9 +28,7 @@ class OutputPagesController < ApplicationController
 
   def init_search_engine_all
     @search_engines = {
-        cards: SearchEngine2.new(policy_scope(Card)),
-        spells: SearchEngine2.new(policy_scope(Spell)),
-        monsters: SearchEngine2.new(policy_scope(Monster))
+        cards: SearchEngine2.new(policy_scope(Card))
     }
   end
 

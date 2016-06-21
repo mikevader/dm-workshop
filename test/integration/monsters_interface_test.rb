@@ -23,6 +23,7 @@ class MonstersInterfaceTest < ActionDispatch::IntegrationTest
     # Valid submission
     name = "heroblade"
     assert_difference 'Monster.count', 1 do
+      get new_monster_path, nil, referer: monsters_url
       post monsters_path, monster: { name: name, size: "small", monster_type: "humanoid", armor_class: "15 (leather armor, shield)", hit_points: 7, strength: 8, dexterity: 14, constitution: 10, intelligence: 10, wisdom: 8, charisma: 8 }
     end
     assert_redirected_to monsters_url

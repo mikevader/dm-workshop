@@ -46,7 +46,6 @@ class OutputPagesControllerTest < ActionController::TestCase
     assert_response :success
 
     assert assigns[:cards]
-    assert_equal 1, assigns[:cards].size
     card_1 = assigns[:cards].first
     assert_equal 'Shadow Demon', card_1.name
   end

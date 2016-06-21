@@ -14,7 +14,7 @@ class SearchBuilderTest < ActiveSupport::TestCase
   end
 
   test 'should work with tags' do
-    spell = spells('fireball')
+    spell = cards('fireball')
     spell.tag_list.add('jdf')
     spell.save
 
