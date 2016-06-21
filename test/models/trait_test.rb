@@ -3,7 +3,7 @@ require 'test_helper'
 class TraitTest < ActiveSupport::TestCase
 
   def setup
-    @monster = monsters(:shadow_demon)
+    @monster = cards(:shadow_demon)
     @trait = @monster.traits.build(title: 'Shadow Stealth', description: 'While in dim light or darkness, the demon can take the Hide action as a bonus action.')
   end
 
@@ -12,7 +12,7 @@ class TraitTest < ActiveSupport::TestCase
   end
 
   test 'monster id should be present' do
-    @trait.monster_id = nil
+    @trait.card_id = nil
     assert_not @trait.valid?
   end
 

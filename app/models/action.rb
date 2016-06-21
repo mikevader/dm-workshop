@@ -1,8 +1,9 @@
 class Action < ActiveRecord::Base
   enum action_type: [:action, :reaction, :legendary]
 
-  belongs_to :monster
+  belongs_to :monster, foreign_key: :card_id
   
+  validates :card_id, presence: true
   validates :title, presence: true
   validates :action_type, presence: true, inclusion: {in: action_types.keys}
   validates :description, presence: true

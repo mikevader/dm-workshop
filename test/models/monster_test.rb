@@ -28,7 +28,6 @@ class MonsterTest < ActiveSupport::TestCase
     assert_equal 2, @monster.skills.size
   end
 
-
   test 'ability should be between 0 and 100' do
     @monster.dexterity = 0
     assert_not @monster.valid?
@@ -119,7 +118,7 @@ class MonsterTest < ActiveSupport::TestCase
   end
 
   test 'shadow deamon should have correct damange and condition attributes' do
-    shadow_demon = monsters(:shadow_demon)
+    shadow_demon = cards(:shadow_demon)
 
     assert_includes shadow_demon.saving_throws, 'str'
     assert_includes shadow_demon.saving_throws, 'dex'
@@ -146,11 +145,9 @@ class MonsterTest < ActiveSupport::TestCase
 
 
   test 'monster should have shortsword action' do
-    action = actions(:shortsword)
-    @monster.actions << action
+    @monster.actions.build(action_type: 'action', title: 'Shortsword', description: "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage.", melee: true)
 
     assert_equal 1, @monster.actions.size
-    assert_includes @monster.actions, action
   end
 
   test 'monster should have no traits initially' do
@@ -159,11 +156,9 @@ class MonsterTest < ActiveSupport::TestCase
 
 
   test 'monster should have nimble escape trait' do
-    trait = traits(:nimble_escape)
-    @monster.traits << trait
+    @monster.traits.build(title: 'Nimble Escape', description: 'The goblin can take the Disengage or Hide action as a bonus action on each of its turns.')
 
     assert_equal 1, @monster.traits.size
-    assert_includes @monster.traits, trait
   end
 
   test 'replicate should work with tags as well' do

@@ -49,7 +49,7 @@ class SpellTest < ActiveSupport::TestCase
   end
 
   test 'order should be alphabetically' do
-    assert_equal spells(:bane), Spell.first
+    assert_equal cards(:bane), Spell.first
   end
 
   test 'replicate should work with tags as well' do
@@ -62,8 +62,8 @@ class SpellTest < ActiveSupport::TestCase
   end
 
   test 'should follow and unfollow a user' do
-    fireball = spells(:fireball)
-    bane = spells(:bane)
+    fireball = cards(:fireball)
+    bane = cards(:bane)
     gunslinger = hero_classes(:gunslinger)
     goliath = hero_classes(:goliath)
 

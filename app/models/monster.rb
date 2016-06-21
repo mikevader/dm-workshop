@@ -1,6 +1,6 @@
 class Monster < Card
   acts_as_taggable
-  has_many :cards_skills, foreign_key: :card_id#, class_name: :cards_skills
+  has_many :cards_skills, foreign_key: :card_id
   has_many :skills, through: :cards_skills
   has_many :traits, dependent: :destroy, foreign_key: :card_id
   has_many :actions, dependent: :destroy, foreign_key: :card_id
