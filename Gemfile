@@ -110,9 +110,10 @@ end
 
 group :production do
   # Ruby interface for ProgreSQL database
-  gem 'pg',              '0.18.4'
-  gem 'rails_12factor',  '0.0.3'
+  gem 'pg',                     '0.18.4'
+  gem 'rails_12factor',         '0.0.3'
+  gem 'rails_stdout_logging',   '0.0.5'
   # Ruby web server built for concurrency and performance
-  gem 'puma',            '2.15.3'
+  gem 'puma',                   '2.15.3'
 end
 
