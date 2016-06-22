@@ -138,8 +138,10 @@ ActiveRecord::Schema.define(version: 20160619152804) do
     t.integer  "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "card_id"
   end
 
+  add_index "properties", ["card_id"], name: "index_properties_on_card_id"
   add_index "properties", ["item_id"], name: "index_properties_on_item_id"
 
   create_table "rarities", force: :cascade do |t|

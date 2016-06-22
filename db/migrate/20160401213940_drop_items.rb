@@ -1,8 +1,12 @@
 class DropItems < ActiveRecord::Migration
   def up
 
+    add_reference :properties, :card, index: true, foreign_key: true
+    Property.reset_column_information
+
     items = select_all('SELECT * FROM items')
     items.each do |item|
+      item_id = item['id']
       user_id = item['user_id']
       type = 'Item'
       name = item['name']
@@ -16,11 +20,18 @@ class DropItems < ActiveRecord::Migration
       created_at = item['created_at']
       updated_at = item['updated_at']
 
-      insert("INSERT INTO cards (user_id, type, name, attunement, description, cssclass, cite, shared, category_id, rarity_id, created_at, updated_at)
+      card_id = insert("INSERT INTO cards (user_id, type, name, attunement, description, cssclass, cite, shared, category_id, rarity_id, created_at, updated_at)
         VALUES (#{user_id}, '#{type}', #{sani(name)}, '#{attunement}', #{sani(description)}, #{sani(cssclass)}, #{sani(cite)}, '#{shared}', #{category_id}, #{rarity_id}, '#{created_at}', '#{updated_at}')")
 
-    end
+      # Properties
+      properties = select_all("SELECT * FROM properties WHERE item_id = #{item_id}")
+      properties.each do |property|
+        property_id = property['id']
+        update("UPDATE properties SET card_id = #{card_id} WHERE id = #{property_id}")
+      end
 
+    end
+    remove_reference :properties, :monster
     drop_table :items
   end
 
@@ -43,9 +54,13 @@ class DropItems < ActiveRecord::Migration
     end
     Item.reset_column_information
 
+    add_reference :properties, :monster, index: true, foreign_key: true
+    Property.reset_column_information
+
+
     items = select_all("SELECT * FROM cards WHERE type LIKE 'item'")
     items.each do |item|
-      item_id = item['id']
+      card_id = item['id']
       user_id = item['user_id']
       name = item['name']
       attunement = item['attunement']
@@ -58,10 +73,19 @@ class DropItems < ActiveRecord::Migration
       created_at = item['created_at']
       updated_at = item['updated_at']
 
-      insert("INSERT INTO items (user_id, name, attunement, description, cssclass, cite, shared, category_id, rarity_id, created_at, updated_at)
+      item_id = insert("INSERT INTO items (user_id, name, attunement, description, cssclass, cite, shared, category_id, rarity_id, created_at, updated_at)
         VALUES (#{user_id}, #{sani(name)}, '#{attunement}', #{sani(description)}, #{sani(cssclass)}, #{sani(cite)}, '#{shared}', #{category_id}, #{rarity_id}, '#{created_at}', '#{updated_at}')")
 
-      delete("DELETE FROM cards WHERE id = #{item_id}")
+      # Properties
+      properties = select_all("SELECT * FROM properties WHERE card_id = #{card_id}")
+      properties.each do |property|
+        property_id = property['id']
+        update("UPDATE properties SET item_id = #{item_id} WHERE id = #{property_id}")
+      end
+
+      delete("DELETE FROM cards WHERE id = #{card_id}")
     end
+
+    remove_reference :properties, :card
   end
 end
