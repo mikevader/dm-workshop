@@ -17,11 +17,15 @@ class DropItems < ActiveRecord::Migration
       updated_at = item['updated_at']
 
       insert("INSERT INTO cards (user_id, type, name, attunement, description, cssclass, cite, shared, category_id, rarity_id, created_at, updated_at)
-        VALUES (#{user_id}, '#{type}', '#{name}', '#{attunement}', '#{description}', '#{cssclass}', '#{cite}', '#{shared}', #{category_id}, #{rarity_id}, '#{created_at}', '#{updated_at}')")
+        VALUES (#{user_id}, '#{type}', #{sani(name)}, '#{attunement}', #{sani(description)}, #{sani(cssclass)}, #{sani(cite)}, '#{shared}', #{category_id}, #{rarity_id}, '#{created_at}', '#{updated_at}')")
 
     end
 
     drop_table :items
+  end
+
+  def sani(value)
+    return Card.sanitize(value)
   end
 
   def down
@@ -55,7 +59,7 @@ class DropItems < ActiveRecord::Migration
       updated_at = item['updated_at']
 
       insert("INSERT INTO items (user_id, name, attunement, description, cssclass, cite, shared, category_id, rarity_id, created_at, updated_at)
-        VALUES (#{user_id}, '#{name}', '#{attunement}', '#{description}', '#{cssclass}', '#{cite}', '#{shared}', #{category_id}, #{rarity_id}, '#{created_at}', '#{updated_at}')")
+        VALUES (#{user_id}, #{sani(name)}, '#{attunement}', #{sani(description)}, #{sani(cssclass)}, #{sani(cite)}, '#{shared}', #{category_id}, #{rarity_id}, '#{created_at}', '#{updated_at}')")
 
       delete("DELETE FROM cards WHERE id = #{item_id}")
     end

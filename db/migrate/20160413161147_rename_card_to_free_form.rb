@@ -1,6 +1,6 @@
 class RenameCardToFreeForm < ActiveRecord::Migration
   def up
-    Card.where(type: 'Card').find_each do |card|
+    Card.where(type: nil).find_each do |card|
       card.type = 'FreeForm'
       card.save
     end
@@ -8,7 +8,7 @@ class RenameCardToFreeForm < ActiveRecord::Migration
 
   def down
     Card.where(type: 'FreeForm').find_each do |card|
-      card.type = 'Card'
+      card.type = nil
       card.save
     end
   end

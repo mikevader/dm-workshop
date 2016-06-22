@@ -49,7 +49,7 @@ class MoveSpellsToCards < ActiveRecord::Migration
       shared = spell['shared']
 
       card_id = insert("INSERT INTO cards (type, name, level, school, casting_time, range, components, duration, short_description, description, user_id, created_at, updated_at, picture, athigherlevel, concentration, ritual, cite, shared)
-        VALUES ('#{type}', '#{name}', #{level}, '#{school}', '#{casting_time}', '#{range}', '#{components}', '#{duration}', '#{short_description}', '#{description}', #{user_id}, '#{created_at}', '#{updated_at}', '#{picture}', '#{athigherlevel}', '#{concentration}', '#{ritual}', '#{cite}', '#{shared}')")
+        VALUES ('#{type}', #{sani(name)}, #{level}, #{sani(school)}, #{sani(casting_time)}, #{sani(range)}, #{sani(components)}, #{sani(duration)}, #{sani(short_description)}, #{sani(description)}, #{user_id}, '#{created_at}', '#{updated_at}', #{sani(picture)}, #{sani(athigherlevel)}, '#{concentration}', '#{ritual}', #{sani(cite)}, '#{shared}')")
 
       hero_classes = select_all("SELECT * FROM hero_classes_spells WHERE spell_id = #{spell_id}")
       hero_classes.each do |hc|
@@ -63,6 +63,10 @@ class MoveSpellsToCards < ActiveRecord::Migration
 
     drop_join_table :hero_classes, :spells
     drop_table :spells
+  end
+
+  def sani(value)
+    return Card.sanitize(value)
   end
 
   def down
@@ -115,7 +119,7 @@ class MoveSpellsToCards < ActiveRecord::Migration
       shared = spell['shared']
 
       spell_id = insert("INSERT INTO spells (name, level, school, casting_time, range, components, duration, short_description, description, user_id, created_at, updated_at, picture, athigherlevel, concentration, ritual, cite, shared)
-        VALUES ('#{name}', #{level}, '#{school}', '#{casting_time}', '#{range}', '#{components}', '#{duration}', '#{short_description}', '#{description}', #{user_id}, '#{created_at}', '#{updated_at}', '#{picture}', '#{athigherlevel}', '#{concentration}', '#{ritual}', '#{cite}', '#{shared}')")
+        VALUES (#{sani(name)}, #{level}, #{sani(school)}, #{sani(casting_time)}, #{sani(range)}, #{sani(components)}, #{sani(duration)}, #{sani(short_description)}, #{sani(description)}, #{user_id}, '#{created_at}', '#{updated_at}', #{sani(picture)}, #{sani(athigherlevel)}, '#{concentration}', '#{ritual}', #{sani(cite)}, '#{shared}')")
 
       hero_classes = select_all("SELECT * FROM cards_hero_classes WHERE card_id = #{card_id}")
       hero_classes.each do |hc|
