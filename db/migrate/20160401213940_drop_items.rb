@@ -54,7 +54,7 @@ class DropItems < ActiveRecord::Migration
     end
     Item.reset_column_information
 
-    add_reference :properties, :monster, index: true, foreign_key: true
+    add_reference :properties, :item, index: true, foreign_key: true
     Property.reset_column_information
 
 
