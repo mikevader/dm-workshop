@@ -31,7 +31,7 @@ class DropItems < ActiveRecord::Migration
       end
 
     end
-    remove_reference :properties, :monster
+    remove_reference :properties, :item
     drop_table :items
   end
 
