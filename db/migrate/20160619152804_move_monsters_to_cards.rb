@@ -71,7 +71,7 @@ class MoveMonstersToCards < ActiveRecord::Migration
       shared = monster['shared']
 
       card_id = insert("INSERT INTO cards (type, name, cite, size, monster_type, alignment, armor_class, hit_points, speed, strength, dexterity, constitution, intelligence, wisdom, charisma, senses, languages, challenge, description, created_at, updated_at, user_id, saving_throws_mask, damage_vulnerabilities_mask, damage_resistances_mask, damage_immunities_mask, cond_immunities_mask, shared)
-        VALUES ('#{type}', #{sani(name)}, #{sani(cite)}, #{sani(size)}, #{sani(monster_type)}, #{sani(alignment)}, #{sani(armor_class)}, #{hit_points}, #{sani(speed)}, #{strength}, #{dexterity}, #{constitution}, #{intelligence}, #{wisdom}, #{charisma}, #{sani(senses)}, #{sani(languages)}, #{challenge}, #{sani(description)}, '#{created_at}', '#{updated_at}', #{user_id}, #{sani(saving_throws_mask)}, #{sani(damage_vulnerabilities_mask)}, #{sani(damage_resistances_mask)}, #{sani(damage_immunities_mask)}, #{sani(cond_immunities_mask)}, '#{shared}')")
+        VALUES ('#{type}', #{sani(name)}, #{sani(cite)}, #{sani(size)}, #{sani(monster_type)}, #{sani(alignment)}, #{sani(armor_class)}, #{hit_points}, #{sani(speed)}, #{strength}, #{dexterity}, #{constitution}, #{intelligence}, #{wisdom}, #{charisma}, #{sani(senses)}, #{sani(languages)}, #{challenge}, #{sani(description)}, '#{created_at}', '#{updated_at}', #{user_id}, #{sani(saving_throws_mask)}, #{sani(damage_vulnerabilities_mask)}, #{sani(damage_resistances_mask)}, #{sani(damage_immunities_mask)}, #{sani(cond_immunities_mask)}, #{sani(shared)})")
 
       # Traits
       traits = select_all("SELECT * FROM traits WHERE monster_id = #{monster_id}")
@@ -186,7 +186,7 @@ class MoveMonstersToCards < ActiveRecord::Migration
       shared = monster['shared']
 
       monster_id = insert("INSERT INTO monsters (name, cite, size, monster_type, alignment, armor_class, hit_points, speed, strength, dexterity, constitution, intelligence, wisdom, charisma, senses, languages, challenge, description, created_at, updated_at, user_id, saving_throws_mask, damage_vulnerabilities_mask, damage_resistances_mask, damage_immunities_mask, cond_immunities_mask, shared)
-        VALUES (#{sani(name)}, #{sani(cite)}, #{sani(size)}, #{sani(monster_type)}, #{sani(alignment)}, #{sani(armor_class)}, #{hit_points}, #{sani(speed)}, #{strength}, #{dexterity}, #{constitution}, #{intelligence}, #{wisdom}, #{charisma}, #{sani(senses)}, #{sani(languages)}, #{challenge}, #{sani(description)}, '#{created_at}', '#{updated_at}', #{user_id}, #{sani(saving_throws_mask)}, #{sani(damage_vulnerabilities_mask)}, #{sani(damage_resistances_mask)}, #{sani(damage_immunities_mask)}, #{sani(cond_immunities_mask)}, '#{shared}')")
+        VALUES (#{sani(name)}, #{sani(cite)}, #{sani(size)}, #{sani(monster_type)}, #{sani(alignment)}, #{sani(armor_class)}, #{hit_points}, #{sani(speed)}, #{strength}, #{dexterity}, #{constitution}, #{intelligence}, #{wisdom}, #{charisma}, #{sani(senses)}, #{sani(languages)}, #{challenge}, #{sani(description)}, '#{created_at}', '#{updated_at}', #{user_id}, #{sani(saving_throws_mask)}, #{sani(damage_vulnerabilities_mask)}, #{sani(damage_resistances_mask)}, #{sani(damage_immunities_mask)}, #{sani(cond_immunities_mask)}, #{sani(shared)})")
 
       # Traits
       traits = select_all("SELECT * FROM traits WHERE card_id = #{card_id}")

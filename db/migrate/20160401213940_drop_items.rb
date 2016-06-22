@@ -21,7 +21,7 @@ class DropItems < ActiveRecord::Migration
       updated_at = item['updated_at']
 
       card_id = insert("INSERT INTO cards (user_id, type, name, attunement, description, cssclass, cite, shared, category_id, rarity_id, created_at, updated_at)
-        VALUES (#{user_id}, '#{type}', #{sani(name)}, '#{attunement}', #{sani(description)}, #{sani(cssclass)}, #{sani(cite)}, '#{shared}', #{category_id}, #{rarity_id}, '#{created_at}', '#{updated_at}')")
+        VALUES (#{user_id}, '#{type}', #{sani(name)}, #{sani(attunement)}, #{sani(description)}, #{sani(cssclass)}, #{sani(cite)}, #{sani(shared)}, #{category_id}, #{rarity_id}, '#{created_at}', '#{updated_at}')")
 
       # Properties
       properties = select_all("SELECT * FROM properties WHERE item_id = #{item_id}")
@@ -74,7 +74,7 @@ class DropItems < ActiveRecord::Migration
       updated_at = item['updated_at']
 
       item_id = insert("INSERT INTO items (user_id, name, attunement, description, cssclass, cite, shared, category_id, rarity_id, created_at, updated_at)
-        VALUES (#{user_id}, #{sani(name)}, '#{attunement}', #{sani(description)}, #{sani(cssclass)}, #{sani(cite)}, '#{shared}', #{category_id}, #{rarity_id}, '#{created_at}', '#{updated_at}')")
+        VALUES (#{user_id}, #{sani(name)}, #{sani(attunement)}, #{sani(description)}, #{sani(cssclass)}, #{sani(cite)}, #{sani(shared)}, #{category_id}, #{rarity_id}, '#{created_at}', '#{updated_at}')")
 
       # Properties
       properties = select_all("SELECT * FROM properties WHERE card_id = #{card_id}")
