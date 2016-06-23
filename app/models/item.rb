@@ -2,7 +2,7 @@ class Item < Card
   acts_as_taggable
   belongs_to :category
   belongs_to :rarity
-  has_many :properties, dependent: :destroy
+  has_many :properties, dependent: :destroy, foreign_key: :card_id
   accepts_nested_attributes_for :properties, reject_if: proc { |attributes| attributes['name'].blank? }, allow_destroy: true
 
   validates :category_id, presence: true
