@@ -52,9 +52,22 @@ The final version is accessible under:
 * Working SSL over anduin.ch
 
 
+## How to ... ##
+
+### Create a release ###
+> 1. git flow release start '0.x'
+> 2. update README.md
+> 3. git flow release finish '0.x'
+> 4. git push origin master (both together don't trigger a build)
+> 5. test release on dmw-staging.herokuapp.com
+> 6. rake release_from_stage
+
 
 ## Release notes ##
 We had the following releases:
+
+### Dungeon Master Workshop 0.14 ###
+*
 
 ### Dungeon Master Workshop 0.13 ###
 * Admin section can now export and import free form cards.
