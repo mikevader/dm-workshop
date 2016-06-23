@@ -66,7 +66,10 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
-### Dungeon Master Workshop 0.14 ###
+### Dungeon Master Workshop 0.15 ###
+*
+
+### Dungeon Master Workshop 0.14 (failed on stage: not released) ###
 *
 
 ### Dungeon Master Workshop 0.13 ###
