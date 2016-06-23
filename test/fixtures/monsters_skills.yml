@@ -1,6 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-shadow_demon_stealth:
-  monster: shadow_demon
-  skill: stealth
-

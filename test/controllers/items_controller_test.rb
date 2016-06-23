@@ -3,7 +3,7 @@ require 'test_helper'
 class ItemsControllerTest < ActionController::TestCase
 
   setup do
-    @item = items(:sting)
+    @item = cards(:sting)
   end
 
   test 'show should redirect to login if not logged in' do
@@ -73,6 +73,7 @@ class ItemsControllerTest < ActionController::TestCase
     category = categories(:armor)
     rarity = rarities(:uncommon)
     assert_difference 'Item.count', +1 do
+      session[:return_to] = 'http://test.host/items'
       post :create, item: {name: 'Nerd', category_id: category.id, rarity_id: rarity.id, attunement: true, description: 'the nerdster'}
     end
 
@@ -92,9 +93,10 @@ class ItemsControllerTest < ActionController::TestCase
 
   test 'update should change existing item' do
     log_in_as(users(:michael))
-    item = items(:glamdring)
+    item = cards(:glamdring)
 
     assert_no_difference 'Item.count' do
+      session[:return_to] = 'http://test.host/items'
       patch :update, id: item.id, item: {name: 'Qua?'}
     end
 
@@ -107,8 +109,9 @@ class ItemsControllerTest < ActionController::TestCase
 
   test 'delete should remove item' do
     log_in_as(users(:michael))
-    item = items(:sting)
+    item = cards(:sting)
     assert_difference 'Item.count', -1 do
+      @request.env['HTTP_REFERER'] = items_path
       delete :destroy, id: item
     end
     assert_redirected_to items_url
@@ -116,8 +119,9 @@ class ItemsControllerTest < ActionController::TestCase
 
   test 'should get duplicate' do
     log_in_as(users(:archer))
-    item = items(:glamdring)
+    item = cards(:glamdring)
     assert_difference 'Item.count', +1 do
+      @request.env['HTTP_REFERER'] = items_path
       post :duplicate, id: item.id
     end
     assert_redirected_to items_url

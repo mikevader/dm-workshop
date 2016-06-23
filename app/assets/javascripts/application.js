@@ -44,7 +44,7 @@ $(document).on("page:load ready", loaded);
 
 var modal = function(event) {
     var modal = $(this)
-    var cardPath = modal.data('card')
+    var cardPath = modal.data('card').replace(' ', '_')
     var modal_size = modal.data('size')
     var target = '#' + modal.attr('id')
     var nextid = modal.data('nextid')

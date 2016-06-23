@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :items
   has_many :monsters
   has_many :cards
+  has_many :free_forms
   has_many :filters
 
   enum role: {dm: 2, player: 4}

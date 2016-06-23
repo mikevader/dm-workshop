@@ -3,7 +3,7 @@ require 'test_helper'
 class SpellsControllerTest < ActionController::TestCase
 
   setup do
-    @spell = spells(:bane)
+    @spell = cards(:bane)
   end
 
   test 'show should' do
@@ -71,6 +71,7 @@ class SpellsControllerTest < ActionController::TestCase
   test 'should get create' do
     log_in_as(users(:michael))
     assert_difference 'Spell.count', +1 do
+      session[:return_to] = 'http://test.host/spells'
       post :create, spell: {name: 'AAA', level: 2, school: 'transmutation'}
     end
 
@@ -90,6 +91,7 @@ class SpellsControllerTest < ActionController::TestCase
   test 'should get update' do
     log_in_as(users(:michael))
     assert_no_difference 'Spell.count' do
+      session[:return_to] = 'http://test.host/spells'
       patch :update, id: @spell.id, spell: {name: 'ABCD'}
     end
 
@@ -102,8 +104,9 @@ class SpellsControllerTest < ActionController::TestCase
 
   test 'should redirect to index after destroy' do
     log_in_as(users(:michael))
-    spell = spells(:fireball)
+    spell = cards(:fireball)
     assert_difference 'Spell.count', -1 do
+      @request.env['HTTP_REFERER'] = spells_path
       delete :destroy, id: spell
     end
     assert_redirected_to spells_url
@@ -111,7 +114,7 @@ class SpellsControllerTest < ActionController::TestCase
 
   test 'should redirect destroy for wrong spell' do
     log_in_as(users(:archer))
-    spell = spells(:bane)
+    spell = cards(:bane)
     assert_no_difference 'Spell.count' do
       delete :destroy, id: spell
     end
@@ -120,8 +123,9 @@ class SpellsControllerTest < ActionController::TestCase
 
   test 'should get duplicate' do
     log_in_as(users(:michael))
-    spell = spells(:fireball)
+    spell = cards(:fireball)
     assert_difference 'Spell.count', +1 do
+      @request.env['HTTP_REFERER'] = spells_path
       post :duplicate, id: spell.id
     end
     assert_redirected_to spells_url

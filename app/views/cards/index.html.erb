@@ -1,6 +1,112 @@
-<% provide(:title, 'Cards') %>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="page-header">
+      <h1><%= yield(:page_title) %></h1>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-10 col-xs-12">
+    <%= form_tag search_path, method: 'get', id: "cards_search" do %>
+        <div class="input-group">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default" data-toggle="popover" data-container="body" data-placement="bottom"
+                    data-content="You can search here like this:<pre>(name ~ fire OR level > 5) AND classes in (Bard, Cleric)</pre> For more details look in the <a href='<%= help_path(anchor: 'search') %>'>help</a>">
+              <span class="glyphicon glyphicon-question-sign"></span></button>
+          </div>
+          <%= text_field_tag :search, params[:search], class: "form-control", autocomplete: 'off', placeholder: 'Search for...' %>
+          <div class="input-group-btn">
+            <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+                <span class="glyphicon glyphicon-search"></span>
+            <% end %>
+            <%= link_to print_path(search: params[:search]), class: 'btn btn-default', target: '_blank' do %>
+                <span class="glyphicon glyphicon-print"></span>
+            <% end %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= content_tag :div, @error.html_safe, class: 'alert alert-danger' if @error %>
+        </div>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-10">
+    <table class="table table-striped">
+      <tr>
+        <th>#</th>
+        <% columns_definition(controller_name, @cards).each do |column| %>
+            <th><%= column[:title] %></th>
+        <% end %>
+        <th class="last"></th>
+      </tr>
+      <% @cards.each_with_index do |card, index| %>
+          <%
+            next_index = (index + 1)%@cards.size
+            prev_index = (index - 1)%@cards.size
+            large ||= false
+            modal_size = (large == true) ? 'modal-lg' : 'modal-sm'
+          %>
+          <tr>
+            <td>
+              <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal-<%= index %>" data-size="<%= modal_size %>" data-previd="#myModal-<%= prev_index %>" data-nextid="#myModal-<%= next_index %>" data-card="<%= "/#{card.class.name.underscore.pluralize}/#{card.id}/modal" %>">
+                o
+              </button>
+            </td>
+            <% columns_definition(controller_name, card).each do |column| %>
+                <td><%= column[:field].call(card) %></td>
+            <% end %>
+            <td class="last">
+              <ul class="actions">
+                <% if policy(card).edit? -%>
+                    <li><%= link_to edit_path(card), 'aria-label' => 'edit' do -%>
+                          <span class="glyphicon glyphicon-pencil"></span>
+                      <% end -%>
+                    </li>
+                <% end -%>
+                <% if policy(card).duplicate? -%>
+                    <li><%= link_to duplicate_path(card), method: :post, 'aria-label' => 'duplicate' do -%>
+                          <span class="glyphicon glyphicon-duplicate"></span>
+                      <% end -%>
+                    </li>
+                <% end -%>
+                <% if policy(card).destroy? -%>
+                    <li><%= link_to card_path(card), controller: 'cards', action: :destroy, method: :delete, data: {confirm: "You sure?"}, 'aria-label' => 'delete' do -%>
+                          <span class="glyphicon glyphicon-remove"></span>
+                      <% end -%>
+                    </li>
+                <% end -%>
+              </ul>
+            </td>
+          </tr>
+      <% end %>
+    </table>
 
-<% provide(:search_path, cards_path) %>
-<% provide(:print_path, print_cards_path(search: params[:search])) %>
-<% provide(:new_path, new_card_path) %>
-<% provide(:page_title, 'Search cards') %>
+    <div id="modals">
+      <% @cards.each_with_index do |card, index| %>
+        <%
+          next_index = (index + 1)%@cards.size
+          prev_index = (index - 1)%@cards.size
+          modal_size = 'modal-lg' #modal_size(@cards)
+        %>
+        <div class="modal card-dialog" id="myModal-<%= index %>" tabindex="-1" role="dialog" data-size="<%= modal_size %>" data-previd="#myModal-<%= prev_index %>" data-nextid="#myModal-<%= next_index %>" data-card="<%= "/#{card.class.model_name.human.downcase.pluralize}/#{card.id}/modal" %>" aria-labelledby="myModalLabel">
+          <div class="modal-dialog <%= modal_size %>" role="document">
+            <div class="modal-content">
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <%#= render partial: 'shared/modal', collection: @cards, as: :card %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 col-sm-offset-1 col-sm-10">
+    <div class="form-group">
+      <% if policy(card_model).new? -%>
+          <%= link_to "New", new_path, class: 'btn btn-default', role: 'button' -%>
+      <% end -%>
+    </div>
+  </div>
+</div>

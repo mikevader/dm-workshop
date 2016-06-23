@@ -1,19 +1,15 @@
-class Monster < ActiveRecord::Base
+class Monster < Card
   acts_as_taggable
-  belongs_to :user
-  has_many :monsters_skills, -> { order(skill_id: :asc) }
-  has_many :skills, through: :monsters_skills
-  has_many :traits, dependent: :destroy
-  has_many :actions, dependent: :destroy
+  has_many :cards_skills, foreign_key: :card_id
+  has_many :skills, through: :cards_skills
+  has_many :traits, dependent: :destroy, foreign_key: :card_id
+  has_many :actions, dependent: :destroy, foreign_key: :card_id
 
   accepts_nested_attributes_for :actions, reject_if: proc { |action| action['title'].blank? }, allow_destroy: true
   accepts_nested_attributes_for :traits, reject_if: proc { |trait| trait['title'].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :monsters_skills, reject_if: proc { |monsters_skill| monsters_skill['skill_id'].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :cards_skills, reject_if: proc { |monsters_skill| monsters_skill['skill_id'].blank? }, allow_destroy: true
 
-  default_scope -> { order(name: :asc) }
 
-  validates :user_id, presence: true
-  validates :name, presence: true, length: {maximum: 50}, uniqueness: {case_sensitive: false}
   validates :challenge, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 50}
   validates :size, presence: true
   validates :monster_type, presence: true
@@ -107,7 +103,7 @@ class Monster < ActiveRecord::Base
   end
 
   def replicate
-    replica = dup
+    replica = super
 
     skills.each do |skill|
       replica.skills << skill
@@ -237,8 +233,8 @@ class Monster < ActiveRecord::Base
       data.add_property ['Saving throws', saving_throws.map { |saving_throw| "#{saving_throw.titleize} #{'%+d' % saving_throw_modifier(saving_throw)}" }.join(', ')]
     end
 
-    unless monsters_skills.empty?
-      data.add_property ['Skills', monsters_skills.map { |monsters_skill| "#{monsters_skill.skill.name} #{'%+d' % skill_modifier(monsters_skill)}" }.join(', ')]
+    unless cards_skills.empty?
+      data.add_property ['Skills', cards_skills.map { |monsters_skill| "#{monsters_skill.skill.name} #{'%+d' % skill_modifier(monsters_skill)}" }.join(', ')]
     end
 
     unless damage_vulnerabilities.blank?
@@ -290,13 +286,13 @@ class Monster < ActiveRecord::Base
 
   def self.new_search_builder
     builder = SearchBuilder.new do
-      configure_field 'name', 'monsters.name'
-      configure_field 'str', 'monsters.strength'
-      configure_field 'dex', 'monsters.dexterity'
-      configure_field 'con', 'monsters.constitution'
-      configure_field 'int', 'monsters.intelligence'
-      configure_field 'wis', 'monsters.wisdom'
-      configure_field 'cha', 'monsters.charisma'
+      configure_field 'name', 'cards.name'
+      configure_field 'str', 'cards.strength'
+      configure_field 'dex', 'cards.dexterity'
+      configure_field 'con', 'cards.constitution'
+      configure_field 'int', 'cards.intelligence'
+      configure_field 'wis', 'cards.wisdom'
+      configure_field 'cha', 'cards.charisma'
       configure_tag 'tags', Monster
     end
     return builder

@@ -3,7 +3,7 @@ require 'test_helper'
 class ActionTest < ActiveSupport::TestCase
 
   def setup
-    @monster = monsters(:shadow_demon)
+    @monster = cards(:shadow_demon)
     @action = @monster.actions.build(title: "Shortsword", description: "Hit: +8, Damage: 1d10 +9")
   end
 
@@ -12,7 +12,7 @@ class ActionTest < ActiveSupport::TestCase
   end
 
   test "monster id should be present" do
-    @action.monster_id = nil
+    @action.card_id = nil
     assert_not @action.valid?
   end
 
