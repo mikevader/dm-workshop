@@ -6,7 +6,21 @@ class SpellPerformanceTest < ActionDispatch::PerformanceTest
   # self.profile_options = { runs: 5, metrics: [:wall_time, :memory],
   #                          output: 'tmp/performance', formats: [:flat] }
 
-  #test 'spell_index' do
-  #  get '/'
-  #end
+  def setup
+  end
+
+  test 'spell_index' do
+    skip('performance test are not ready yet!')
+
+    @user = users(:michael)
+    path = File.join('test/fixtures', 'spells_all.xml')
+    file = Rack::Test::UploadedFile.new(path, 'text/xml')
+    importer = CardImport.new(@user, spells_file: file)
+    importer.import_spells
+    importer.save
+
+    get '/spells'
+    assert_response :success
+    assert_select "tr", 407
+  end
 end
