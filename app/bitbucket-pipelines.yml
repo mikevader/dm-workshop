@@ -3,7 +3,7 @@
 # -----
 # You can specify a custom docker image from Dockerhub as your build environment
 image: ruby:2.3.1
-
+# sfsdg
 pipelines:
   default:
     - step:
