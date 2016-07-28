@@ -3,11 +3,12 @@
 var loadColor = function() {
     $('#colorselector').colorselector({
         callback: function(value, color, title) {
-            $('#card_color').val(color);
+            $('#free_form_color').val(color);
         }
     });
 
-    $("#card_color").change(ui_change_default_color);
+    ui_change_default_color();
+    $("#free_form_color").change(ui_change_default_color);
 };
 
 
@@ -23,11 +24,11 @@ function ui_update_card_color_selector(color, input, selector) {
 }
 
 function ui_change_default_color() {
-    var input = $(this);
+    var input = $('#free_form_color');
     var color = input.val();
 
     ui_update_card_color_selector(color, input, "#colorselector");
 }
 
 
-$(document).on("page:load ready", loadColor);
+$(document).on("turbolinks:load", loadColor);

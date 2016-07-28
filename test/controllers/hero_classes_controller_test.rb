@@ -12,20 +12,20 @@ class HeroClassesControllerTest < ActionController::TestCase
   end
 
   test "should redirect edit when not logged in" do
-    post :edit, id: @hero_class
+    post :edit, params: { id: @hero_class }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
   
   test "should redirect update when not logged in" do
-    patch :update, id: @hero_class, name: { name: 'gunser', cssclass: 'foo' }
+    patch :update, params: { id: @hero_class, name: { name: 'gunser', cssclass: 'foo' } }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test "should redirect destroy when not logged in" do
     assert_no_difference 'HeroClass.count' do
-      delete :destroy, id: @hero_class
+      delete :destroy, params: { id: @hero_class }
     end
     assert_redirected_to login_url
   end
@@ -36,7 +36,7 @@ class HeroClassesControllerTest < ActionController::TestCase
   end
 
   test "should get show" do
-    get :show, id: @hero_class
+    get :show, params: { id: @hero_class }
     assert_response :success
   end
   
@@ -44,7 +44,7 @@ class HeroClassesControllerTest < ActionController::TestCase
     log_in_as(users(:michael))
     hero = hero_classes(:goliath)
     assert_difference 'HeroClass.count', -1 do
-      delete :destroy, id: hero
+      delete :destroy, params: { id: hero }
     end
     assert_redirected_to hero_classes_url
   end
@@ -52,7 +52,7 @@ class HeroClassesControllerTest < ActionController::TestCase
   test "create should add new hero class" do
     log_in_as(users(:michael))
     assert_difference 'HeroClass.count', +1 do
-      post :create, hero_class: { name: 'Nerd', cssclass: 'nerd-icons' }
+      post :create, params: { hero_class: { name: 'Nerd', cssclass: 'nerd-icons' } }
     end
     assert_redirected_to hero_classes_url
   end
@@ -63,7 +63,7 @@ class HeroClassesControllerTest < ActionController::TestCase
     hero.name = 'qua?'
   
     assert_no_difference 'HeroClass.count' do
-      patch :update, id: hero, hero_class: { name: 'Qua?' }
+      patch :update, params: { id: hero, hero_class: { name: 'Qua?' } }
     end
     assert_redirected_to hero_classes_url
   end

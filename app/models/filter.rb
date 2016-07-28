@@ -1,4 +1,4 @@
-class Filter < ActiveRecord::Base
+class Filter < ApplicationRecord
   belongs_to :user
 
   validates :user_id, presence: true

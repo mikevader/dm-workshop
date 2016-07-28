@@ -7,34 +7,34 @@ class MonstersControllerTest < ActionController::TestCase
   end
 
   test 'show should redirect when not logged in' do
-    get :show, id: @monster
+    get :show, params: { id: @monster }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'create should redirect when not logged in' do
     assert_no_difference 'Monster.count' do
-      post :create, monster: {name: ''}
+      post :create, params: { monster: {name: ''} }
     end
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'edit should redirect when not logged in' do
-    post :edit, id: @monster
+    post :edit, params: { id: @monster }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'update should redirect when not logged in' do
-    patch :update, id: @monster
+    patch :update, params: { id: @monster }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'destroy should redirect when not logged in' do
     assert_no_difference 'Monster.count' do
-      delete :destroy, id: @monster
+      delete :destroy, params: { id: @monster }
     end
     assert_not flash.empty?
     assert_redirected_to login_url
@@ -56,7 +56,7 @@ class MonstersControllerTest < ActionController::TestCase
 
   test 'should get show' do
     log_in_as(users(:michael))
-    get :show, id: @monster
+    get :show, params: { id: @monster }
     assert_response :success
   end
 
@@ -70,7 +70,7 @@ class MonstersControllerTest < ActionController::TestCase
     log_in_as(users(:michael))
     assert_difference 'Monster.count', +1 do
       session[:return_to] = 'http://test.host/monsters'
-      post :create, monster: {name: 'AAA', bonus: 2, size: 'huge', monster_type: 'humanoid', armor_class: '19 (plate)', hit_points: 150, strength: 8, dexterity: 8, constitution: 8, intelligence: 12, wisdom: 12, charisma: 12}
+      post :create, params: { monster: {name: 'AAA', bonus: 2, size: 'huge', monster_type: 'humanoid', armor_class: '19 (plate)', hit_points: 150, strength: 8, dexterity: 8, constitution: 8, intelligence: 12, wisdom: 12, charisma: 12} }
     end
 
     new_monster = Monster.find_by_name('AAA')
@@ -82,7 +82,7 @@ class MonstersControllerTest < ActionController::TestCase
 
   test 'should get edit' do
     log_in_as(users(:michael))
-    post :edit, id: @monster
+    post :edit, params: { id: @monster }
     assert_response :success
   end
 
@@ -90,7 +90,7 @@ class MonstersControllerTest < ActionController::TestCase
     log_in_as(users(:michael))
     assert_no_difference 'Monster.count' do
       session[:return_to] = 'http://test.host/monsters'
-      patch :update, id: @monster.id, monster: {name: 'ABCD'}
+      patch :update, params: { id: @monster.id, monster: {name: 'ABCD'} }
     end
 
     updated_monster = Monster.find(@monster.id)
@@ -104,7 +104,7 @@ class MonstersControllerTest < ActionController::TestCase
     log_in_as(users(:michael))
     assert_difference 'Monster.count', -1 do
       @request.env['HTTP_REFERER'] = monsters_path
-      delete :destroy, id: @monster
+      delete :destroy, params: { id: @monster }
     end
     assert_redirected_to monsters_url
   end
@@ -114,7 +114,7 @@ class MonstersControllerTest < ActionController::TestCase
     monster = cards(:shadow_demon)
     assert_difference 'Monster.count', +1 do
       @request.env['HTTP_REFERER'] = monsters_path
-      post :duplicate, id: monster.id
+      post :duplicate, params: { id: monster.id }
     end
     assert_redirected_to monsters_url
 

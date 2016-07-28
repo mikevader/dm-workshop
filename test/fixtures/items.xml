@@ -3,6 +3,7 @@
   <items>
     <item>
       <name>Schutzring</name>
+      <shared>yes</shared>
       <cite>DMH 191</cite>
       <type>Ring</type>
       <rarity>Rare</rarity>
@@ -13,6 +14,7 @@
     </item>
     <item>
       <name>Speer des Blitzes</name>
+      <shared>no</shared>
       <cite>DMH 178</cite>
       <type>Weapon</type>
       <rarity>Uncommon</rarity>

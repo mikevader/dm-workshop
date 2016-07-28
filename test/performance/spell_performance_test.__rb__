@@ -1,3 +1,4 @@
+=begin
 require 'test_helper'
 require 'rails/performance_test_help'
 
@@ -24,3 +25,4 @@ class SpellPerformanceTest < ActionDispatch::PerformanceTest
     assert_select "tr", 407
   end
 end
+=end

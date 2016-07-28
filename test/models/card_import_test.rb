@@ -16,6 +16,7 @@ class CardImportTest < ActiveSupport::TestCase
     obgam = Monster.find_by_name('Obgam Sohn des Brogar')
     assert obgam, 'Did not find Obgam.'
 
+    assert_not obgam.shared?
     assert_empty obgam.cite
     assert_equal 'Humanoid (dwarf)', obgam.monster_type
     assert_equal 'Medium', obgam.size
@@ -80,6 +81,7 @@ class CardImportTest < ActiveSupport::TestCase
     goblin = Monster.find_by_name 'Goblin'
     assert goblin, 'Did not find Goblin.'
 
+    assert goblin.shared?
     assert_equal 'MM 123', goblin.cite
     assert_equal 'Goblin', goblin.monster_type
     assert_equal 'huge', goblin.size
@@ -133,6 +135,7 @@ class CardImportTest < ActiveSupport::TestCase
 
     assert_equal 'Alarm', alarm.name
     assert alarm.ritual?
+    assert alarm.shared?
     assert_equal 'Page: 211  Players Handbook', alarm.cite
     assert_equal 1, alarm.level
     assert_equal 'Abjuration', alarm.school
@@ -162,6 +165,7 @@ class CardImportTest < ActiveSupport::TestCase
 
     assert_equal 'Magic Missile', magic_missile.name
     assert_not magic_missile.ritual?
+    assert_not magic_missile.shared?
     assert_nil magic_missile.cite
     assert_equal 1, magic_missile.level
     assert_equal 'evocation', magic_missile.school
@@ -191,6 +195,7 @@ class CardImportTest < ActiveSupport::TestCase
 
     frenzy = Card.find_by_name 'Frenzy'
     assert frenzy, 'Did not find Frenzy card'
+    assert frenzy.shared?
     assert_equal 'PH 49', frenzy.cite
     assert_equal 'icon-white-book', frenzy.icon
     assert_equal 'indigo', frenzy.color
@@ -211,6 +216,7 @@ class CardImportTest < ActiveSupport::TestCase
 
     schutzring = Item.find_by_name 'Schutzring'
     assert schutzring, 'Did not find Schutzring'
+    assert schutzring.shared?
     assert_equal 'DMH 191', schutzring.cite
     assert_equal 'Ring', schutzring.category.name
     assert_equal 'Rare', schutzring.rarity.name

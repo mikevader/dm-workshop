@@ -7,8 +7,9 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.paths << Emoji.images_path
 
 # Precompile additional assets.
-# application.js, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
+# application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
+
 %w(print admin cards free_forms monsters items spells static_pages filters users sessions password_resets).each do |controller|
   Rails.application.config.assets.precompile += %W(#{controller}.js #{controller}.css)
 end

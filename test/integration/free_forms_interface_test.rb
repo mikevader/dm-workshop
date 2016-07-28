@@ -12,7 +12,7 @@ class FreeFormsInterfaceTest < ActionDispatch::IntegrationTest
     #assert_select 'div.pagination'
     # Invalid submission
     assert_no_difference 'Card.count' do
-      post free_forms_path, free_form: { name: "" }
+      post free_forms_path, params: { free_form: { name: "" } }
     end
     assert_select 'div#error_explanation'
   end
@@ -24,7 +24,7 @@ class FreeFormsInterfaceTest < ActionDispatch::IntegrationTest
     name = "heroblade"
     assert_difference 'Card.count', 1 do
       get new_free_form_path, nil, referer: free_forms_url
-      post free_forms_path, free_form: { name: name, icon: 'white-book', color: 'indigo', contents: 'subtitle | Rogue feature' }
+      post free_forms_path, params: { free_form: { name: name, icon: 'white-book', color: 'indigo', contents: 'subtitle | Rogue feature' } }
     end
 
     assert_redirected_to free_forms_url

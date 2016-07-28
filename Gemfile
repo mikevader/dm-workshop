@@ -4,18 +4,18 @@ source 'https://rubygems.org'
 ruby '2.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.6'
+gem 'rails', '~> 5.0'
 # Use bootstrap with sass
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-sass', '~> 3.3.7'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0.4'
+gem 'sass-rails', '~> 5.0.5'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.2.1'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 4.1.0'
+gem 'jquery-rails', '~> 4.1.1'
 
 # Simple API to perform paginated queries
 gem 'will_paginate', '~> 3.1.0'
@@ -25,9 +25,9 @@ gem 'bootstrap-will_paginate', '~> 0.0.10'
 gem 'bootstrap-colorselector-rails', '~> 0.1.0'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '~> 2.5.3'
+gem 'turbolinks', '~> 5.0.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.4.0'
+gem 'jbuilder', '~> 2.6.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.1', group: :doc
 
@@ -37,7 +37,7 @@ gem 'bcrypt', '~> 3.1.11'
 gem 'pundit', '~> 1.1.0'
 
 # Use Data::Faker from perl to easily generate fake test data
-gem 'faker', '~> 1.6.1'
+gem 'faker', '~> 1.6.6'
 
 # Upload files to Rails and map them to ORM frameworks
 gem 'carrierwave', '~> 0.10'
@@ -47,21 +47,25 @@ gem 'mini_magick', '~> 4.3'
 gem 'fog', '~> 1.37'
 
 # Producing and parsing XML used for import/export of cards
-gem 'nokogiri', '~> 1.6.7.2'
+gem 'nokogiri', '~> 1.6.8'
 # Store session data in active records aka database
 gem 'activerecord-session_store', '~> 1.0.0'
 
 # Use for easy parsing the search expression
 gem 'treetop', '~> 1.6.3'
-gem 'net-ssh', '~> 3.0.1'
+gem 'net-ssh', '~> 3.2.0'
 
 # Create general purpose data admin interface
-gem 'rails_admin', '~> 0.8.0'
+gem 'remotipart', github: 'mshibuya/remotipart'
+gem 'rails_admin', '~> 1.0.0.rc'
 
 # Tagging library for used on any kind of object
-gem 'acts-as-taggable-on', '~> 3.5.0'
+gem 'acts-as-taggable-on', '~> 4.0.0.pre'
 # Google re-captcha for sign-up process
-gem 'recaptcha', '~> 1.2.0', require: 'recaptcha/rails'
+gem 'recaptcha', '~> 3.3.0', require: 'recaptcha/rails'
+
+# Ruby web server built for concurrency and performance
+gem 'puma', '~> 3.6.0'
 
 group :development do
   # Triggers live-reload any time guard is executed
@@ -71,7 +75,7 @@ group :development do
   gem 'mechanize', '~> 2.7.4'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.2'
+  gem 'web-console', '~> 3.3.1'
 
   # Security check
   gem 'brakeman', '>= 3.2.1', require: false
@@ -87,12 +91,15 @@ group :development, :test do
   gem 'byebug', '>= 8.2.2'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring', '>= 1.6.4'
+  gem 'spring', '>= 1.7.2'
+
+
+  gem 'rails-controller-testing'
 end
 
 group :test do
   # Modify output of minitest
-  gem 'minitest-reporters', '~> 1.1'
+  gem 'minitest-reporters', '~> 1.1.10'
   # Adds support of ActiveRecord::backtrace_cleaner in minitest framework
   gem 'mini_backtrace',     '~> 0.1'
   # File system change tracker used for executing tests of changed files
@@ -104,8 +111,8 @@ group :test do
   # Extension for nokogiri to calculate differences between two XML documents
   gem 'nokogiri-diff', '~> 0.2.0'
   # Performance test for optimizing cards display
-  gem 'rails-perftest'
-  gem 'ruby-prof'
+  #gem 'rails-perftest'
+  #gem 'ruby-prof'
 end
 
 group :production do
@@ -113,7 +120,5 @@ group :production do
   gem 'pg',                     '0.18.4'
   gem 'rails_12factor',         '0.0.3'
   gem 'rails_stdout_logging',   '0.0.5'
-  # Ruby web server built for concurrency and performance
-  gem 'puma',                   '2.15.3'
 end
 

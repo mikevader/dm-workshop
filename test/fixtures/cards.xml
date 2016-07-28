@@ -3,6 +3,7 @@
   <cards>
     <card>
       <name>Frenzy</name>
+      <shared>yes</shared>
       <cite>PH 49</cite>
       <icon>icon-white-book</icon>
       <color>indigo</color>
@@ -17,6 +18,7 @@
     </card>
     <card>
       <name>Wand of Iseth</name>
+      <shared>no</shared>
       <icon>icon-custom-staff</icon>
       <color>grey</color>
       <badges></badges>

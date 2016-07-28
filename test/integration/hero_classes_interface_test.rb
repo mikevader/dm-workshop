@@ -12,14 +12,14 @@ class HeroClassesInterfaceTest < ActionDispatch::IntegrationTest
     #assert_select 'div.pagination'
     # Invalid submission
     assert_no_difference 'HeroClass.count' do
-      post hero_classes_path, hero_class: { name: "", cssclass: ""}
+      post hero_classes_path, params: { hero_class: { name: "", cssclass: ""} }
     end
     assert_select 'div#error_explanation'
     # Valid submission
     name = "Vagabund"
     cssclass = "vagabund-icon"
     assert_difference 'HeroClass.count', 1 do
-      post hero_classes_path, hero_class: { name: name, cssclass: cssclass }
+      post hero_classes_path, params: { hero_class: { name: name, cssclass: cssclass } }
     end
     assert_redirected_to hero_classes_url
     follow_redirect!

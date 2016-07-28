@@ -7,33 +7,33 @@ class SpellsControllerTest < ActionController::TestCase
   end
 
   test 'show should' do
-    get :show, id: @spell
+    get :show, params: { id: @spell }
     assert_response :success
   end
 
   test 'should redirect create when not logged in' do
     assert_no_difference 'Spell.count' do
-      post :create, spell: {description: "Woopsie"}
+      post :create, params: { spell: {description: "Woopsie"} }
     end
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'edit should redirect when not logged in' do
-    post :edit, id: @spell
+    post :edit, params: { id: @spell }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'update should redirect when not logged in' do
-    patch :update, id: @spell
+    patch :update, params: { id: @spell }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'should redirect destroy when not logged in' do
     assert_no_difference 'Spell.count' do
-      post :destroy, id: @spell
+      post :destroy, params: { id: @spell }
     end
     assert_not flash.empty?
     assert_redirected_to login_url
@@ -58,7 +58,7 @@ class SpellsControllerTest < ActionController::TestCase
 
   test 'should get show' do
     log_in_as(users(:michael))
-    get :show, id: @spell
+    get :show, params: { id: @spell }
     assert_response :success
   end
 
@@ -72,7 +72,7 @@ class SpellsControllerTest < ActionController::TestCase
     log_in_as(users(:michael))
     assert_difference 'Spell.count', +1 do
       session[:return_to] = 'http://test.host/spells'
-      post :create, spell: {name: 'AAA', level: 2, school: 'transmutation'}
+      post :create, params: { spell: {name: 'AAA', level: 2, school: 'transmutation'} }
     end
 
     new_spell = Spell.find_by_name('AAA')
@@ -84,7 +84,7 @@ class SpellsControllerTest < ActionController::TestCase
 
   test 'should get edit' do
     log_in_as(users(:michael))
-    post :edit, id: @spell
+    post :edit, params: { id: @spell }
     assert_response :success
   end
 
@@ -92,7 +92,7 @@ class SpellsControllerTest < ActionController::TestCase
     log_in_as(users(:michael))
     assert_no_difference 'Spell.count' do
       session[:return_to] = 'http://test.host/spells'
-      patch :update, id: @spell.id, spell: {name: 'ABCD'}
+      patch :update, params: { id: @spell.id, spell: {name: 'ABCD'} }
     end
 
     updated_spell = Spell.find(@spell.id)
@@ -107,7 +107,7 @@ class SpellsControllerTest < ActionController::TestCase
     spell = cards(:fireball)
     assert_difference 'Spell.count', -1 do
       @request.env['HTTP_REFERER'] = spells_path
-      delete :destroy, id: spell
+      delete :destroy, params: { id: spell }
     end
     assert_redirected_to spells_url
   end
@@ -116,7 +116,7 @@ class SpellsControllerTest < ActionController::TestCase
     log_in_as(users(:archer))
     spell = cards(:bane)
     assert_no_difference 'Spell.count' do
-      delete :destroy, id: spell
+      delete :destroy, params: { id: spell }
     end
     assert_redirected_to root_url
   end
@@ -126,7 +126,7 @@ class SpellsControllerTest < ActionController::TestCase
     spell = cards(:fireball)
     assert_difference 'Spell.count', +1 do
       @request.env['HTTP_REFERER'] = spells_path
-      post :duplicate, id: spell.id
+      post :duplicate, params: { id: spell.id }
     end
     assert_redirected_to spells_url
 

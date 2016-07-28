@@ -12,7 +12,7 @@ class MonstersInterfaceTest < ActionDispatch::IntegrationTest
     #assert_select 'div.pagination'
     # Invalid submission
     assert_no_difference 'Monster.count' do
-      post monsters_path, monster: { name: "" }
+      post monsters_path, params: { monster: { name: "" } }
     end
     assert_select 'div#error_explanation'
   end
@@ -24,7 +24,7 @@ class MonstersInterfaceTest < ActionDispatch::IntegrationTest
     name = "heroblade"
     assert_difference 'Monster.count', 1 do
       get new_monster_path, nil, referer: monsters_url
-      post monsters_path, monster: { name: name, size: "small", monster_type: "humanoid", armor_class: "15 (leather armor, shield)", hit_points: 7, strength: 8, dexterity: 14, constitution: 10, intelligence: 10, wisdom: 8, charisma: 8 }
+      post monsters_path, params: { monster: { name: name, size: "small", monster_type: "humanoid", armor_class: "15 (leather armor, shield)", hit_points: 7, strength: 8, dexterity: 14, constitution: 10, intelligence: 10, wisdom: 8, charisma: 8 } }
     end
     assert_redirected_to monsters_url
     follow_redirect!
