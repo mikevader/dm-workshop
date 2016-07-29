@@ -10,5 +10,8 @@ pipelines:
         script: # Modify the commands below to build your repository.
           - ruby --version
           - bundler --version
+          - bundle config build.nokogiri --use-system-libraries
           - bundle install
-          - bundle exec rake db:schema:load
+          - export RAILS_ENV=test
+          - bundle exec rake db:migrate
+          - bundle exec rake
