@@ -99,7 +99,7 @@ end
 
 group :test do
   # Modify output of minitest
-  gem 'minitest-reporters', '~> 1.1.10'
+  gem 'minitest-reporters', '~> 1.1'
   # Adds support of ActiveRecord::backtrace_cleaner in minitest framework
   gem 'mini_backtrace',     '~> 0.1'
   # File system change tracker used for executing tests of changed files
@@ -109,7 +109,7 @@ group :test do
   # Extension for guard to send user notification on OSX
   gem 'terminal-notifier-guard', '~> 1.7'
   # Extension for nokogiri to calculate differences between two XML documents
-  gem 'nokogiri-diff', '~> 0.2.0'
+  gem 'nokogiri-diff', '~> 0.2'
   # Performance test for optimizing cards display
   #gem 'rails-perftest'
   #gem 'ruby-prof'
