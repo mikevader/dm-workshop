@@ -27,22 +27,13 @@ class OutputPagesController < ApplicationController
   end
 
   def init_search_engine_all
-    @search_engines = {
-        cards: SearchEngine2.new(policy_scope(Card))
-    }
+    @search_engine =  SearchEngine2.new(policy_scope(Card))
   end
 
   def all
-    results = []
-    @search_engines.each do |_type, engine|
-      result, error = engine.search(params[:search], false)
+    result, _error = @search_engine.search(params[:search], false)
 
-      unless error
-        results += result
-      end
-    end
-
-    @cards = results
+    @cards = result
   end
 
   def free_forms
