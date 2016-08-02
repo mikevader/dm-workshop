@@ -49,8 +49,8 @@ class Item < Card
   def self.new_search_builder
     builder = SearchBuilder.new do
       configure_field 'name', 'cards.name'
-      configure_field 'attunement', 'cards.attunement'
       configure_field 'type', 'cards.type'
+      configure_field 'attunement', 'cards.attunement'
       configure_tag 'tags', Item
       configure_relation 'category', 'categories.name', 'category'
       configure_relation 'rarity', 'rarities.name', 'rarity'

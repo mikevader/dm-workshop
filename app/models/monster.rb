@@ -287,6 +287,7 @@ class Monster < Card
   def self.new_search_builder
     builder = SearchBuilder.new do
       configure_field 'name', 'cards.name'
+      configure_field 'type', 'cards.type'
       configure_field 'str', 'cards.strength'
       configure_field 'dex', 'cards.dexterity'
       configure_field 'con', 'cards.constitution'

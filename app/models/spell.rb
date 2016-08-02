@@ -67,6 +67,7 @@ class Spell < Card
   def self.new_search_builder
     builder = SearchBuilder.new do
       configure_field 'name', 'cards.name'
+      configure_field 'type', 'cards.type'
       configure_field 'ritual', 'cards.ritual'
       configure_field 'school', 'cards.school'
       configure_field 'level', 'cards.level'
