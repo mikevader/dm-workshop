@@ -76,7 +76,9 @@ class CardsController < ApplicationController
   # Read actions
   def index
     authorize card_model
-    result, error = search_engine.search(params[:search])
+    result, normalized, error = search_engine.search(params[:search])
+
+    params[:search] = normalized
 
     @cards = result
     @error = error

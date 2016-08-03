@@ -64,22 +64,6 @@ class Spell < Card
     data
   end
 
-  def self.new_search_builder
-    builder = SearchBuilder.new do
-      configure_field 'name', 'cards.name'
-      configure_field 'type', 'cards.type'
-      configure_field 'ritual', 'cards.ritual'
-      configure_field 'school', 'cards.school'
-      configure_field 'level', 'cards.level'
-      configure_field 'concentration', 'cards.concentration'
-      configure_field 'duration', 'cards.duration'
-      configure_field 'castingTime', 'cards.casting_time'
-      configure_tag 'tags', Spell
-      configure_relation 'classes', 'hero_classes.name', :hero_classes
-    end
-    return builder
-  end
-
   private
   # Validates the size of an uploaded picture.
   def picture_size

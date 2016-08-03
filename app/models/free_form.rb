@@ -52,13 +52,4 @@ class FreeForm < Card
 
     return data
   end
-
-  def self.new_search_builder
-    builder = SearchBuilder.new do
-      configure_field 'name', 'cards.name'
-      configure_field 'type', 'cards.type'
-      configure_tag 'tags', FreeForm
-    end
-    return builder
-  end
 end

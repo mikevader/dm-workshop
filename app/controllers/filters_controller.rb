@@ -7,14 +7,13 @@ class FiltersController < ApplicationController
   after_action :verify_policy_scoped, only: [:index]
 
   def init_search_engine
-    @search_engines = {
-        card: SearchEngine2.new(policy_scope(Card))
-    }
+    @search_engine = SearchEngine2.new(policy_scope(Card))
   end
 
   def index
     @filters = policy_scope(Filter).all
-    @cards, @error = search(params[:search])
+    @cards, normalized, @error = @search_engine.search(params[:search], false)
+    params[:search] = normalized
     @filters.each {|filter| authorize filter}
     @cards.each {|card| authorize card}
     @filter = current_user.filters.build(query: params[:search])
@@ -26,7 +25,8 @@ class FiltersController < ApplicationController
     authorize @filter
     @filters.each {|filter| authorize filter}
 
-    @cards, @error = search(@filter.query)
+    @cards, normalize, @error = @search_engine.search(@filter.query, false)
+    params[:search] = normalize
     @cards.each {|card| authorize card}
 
     render :index
@@ -81,23 +81,5 @@ class FiltersController < ApplicationController
       flash[:danger] = 'Please log in.'
       redirect_to login_url
     end
-  end
-
-  def search(query)
-    results = []
-    errors = ''
-
-    @search_engines.each do |_type, engine|
-      result, error = engine.search(query, false)
-
-      unless error
-        results += result
-      end
-      errors << error unless error.nil?
-    end
-
-    errors = nil if errors.blank?
-
-    return results, errors
   end
 end

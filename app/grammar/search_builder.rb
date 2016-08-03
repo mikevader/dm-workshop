@@ -9,6 +9,8 @@ class SearchBuilder
 
     @tree_root = nil
 
+    @normalized_search = nil
+
     self.instance_eval(&block) if block_given?
   end
 
@@ -54,12 +56,13 @@ class SearchBuilder
     value = value.downcase.gsub('\'', '').strip
 
     if operator == '~'
-      value = "%#{value}%"
+      new_value = "%#{value}%"
     else
-      value = "#{value.gsub(/\*/, '%')}"
+      new_value = "#{value.gsub(/\*/, '%')}"
     end
 
-    @tree_root = lambda { return "LOWER(#{query_id(field)}) LIKE '#{value}'" }
+    @tree_root = lambda { return "LOWER(#{query_id(field)}) LIKE '#{new_value}'" }
+    @normalized_search = lambda { return "#{field} #{operator} '#{value}'" }
     self
   end
 
@@ -67,6 +70,7 @@ class SearchBuilder
     value = value.sub('true', "'t'").sub('false', "'f'")
 
     @tree_root = lambda { return "#{query_id(field)} #{operator} #{value}" }
+    @normalized_search = lambda { return "#{field} #{operator} #{value}" }
     self
   end
 
@@ -83,39 +87,62 @@ class SearchBuilder
       end
 
       @tree_root = lambda { return "id IN (#{ids.join(', ')})" }
+      query = values.split(',').map(&:strip).map { |x| surround_string_with_quotes_if_necessary(x) }.join(', ')
+      query = '(' + query + ')'
+      @normalized_search = lambda { return "#{field} IN #{query}" }
     else
       query = values.split(',').map(&:strip).map { |x| surround_string_with_quotes_if_necessary(x) }.join(', ')
       query = '(' + query + ')'
 
       @tree_root = lambda { return "#{query_id(field)} IN #{query}" }
+      @normalized_search = lambda { return "#{field} IN #{query}" }
     end
 
     self
   end
 
-  def and(and_second)
+  def and(second_builder)
     and_first = @tree_root
-    and_second = and_second.instance_variable_get(:@tree_root)
+    and_second = second_builder.instance_variable_get(:@tree_root)
     @tree_root = lambda { return "#{and_first.call} AND #{and_second.call}" }
+
+    norm_or_first = @normalized_search
+    norm_or_second = second_builder.instance_variable_get(:@normalized_search)
+    @normalized_search = lambda { return "#{norm_or_first.call} AND #{norm_or_second.call}" }
     self
   end
 
-  def or(or_second)
+  def or(second_builder)
     or_first = @tree_root
-    or_second = or_second.instance_variable_get(:@tree_root)
+    or_second = second_builder.instance_variable_get(:@tree_root)
     @tree_root = lambda { return "#{or_first.call} OR #{or_second.call}" }
+
+    norm_or_first = @normalized_search
+    norm_or_second = second_builder.instance_variable_get(:@normalized_search)
+    @normalized_search = lambda { return "#{norm_or_first.call} OR #{norm_or_second.call}" }
     self
   end
 
   def parenthesis(search)
     search_root = search.instance_variable_get(:@tree_root)
     @tree_root = lambda { return "( #{search_root.call} )" }
+
+    normalize_root = search.instance_variable_get(:@normalized_search)
+    @normalized_search = lambda { return "(#{normalize_root.call})" }
     self
   end
 
   def query
     unless @tree_root.nil?
       @tree_root.call
+    else
+      ''
+    end
+  end
+
+  def search
+    unless @normalized_search.nil?
+      @normalized_search.call
     else
       ''
     end

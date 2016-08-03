@@ -27,7 +27,7 @@ gem 'bootstrap-will_paginate', '~> 0.0.10'
 gem 'bootstrap-colorselector-rails', '~> 0.1.0'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '~> 5.0.0'
+gem 'turbolinks', '~> 5.0.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.6.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -62,7 +62,7 @@ gem 'remotipart', github: 'mshibuya/remotipart'
 gem 'rails_admin', '~> 1.0.0.rc'
 
 # Tagging library for used on any kind of object
-gem 'acts-as-taggable-on', '~> 4.0.0.pre'
+gem 'acts-as-taggable-on', '~> 4.0.0'
 # Google re-captcha for sign-up process
 gem 'recaptcha', '~> 3.3.0', require: 'recaptcha/rails'
 
