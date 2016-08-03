@@ -14,8 +14,6 @@ class CardExportTest < ActiveSupport::TestCase
     importer.import_monsters
     importer.save
 
-    #export_path = File.join(fixture_path, 'monsters_new.xml')
-
     exporter = CardExport.new
 
     xml = exporter.load_monsters(Monster.where("name = 'Goblin' or name = 'Obgam Sohn des Brogar'"))

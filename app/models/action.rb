@@ -1,4 +1,4 @@
-class Action < ActiveRecord::Base
+class Action < ApplicationRecord
   enum action_type: [:action, :reaction, :legendary]
 
   belongs_to :monster, foreign_key: :card_id

@@ -1,0 +1,17 @@
+# This is a sample build configuration for Ruby.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Dockerhub as your build environment
+image: ruby:2.3.1
+# sfsdg
+pipelines:
+  default:
+    - step:
+        script: # Modify the commands below to build your repository.
+          - ruby --version
+          - bundler --version
+          - bundle config build.nokogiri --use-system-libraries
+          - bundle install
+          - export RAILS_ENV=test
+          - bundle exec rake db:migrate
+          - bundle exec rake

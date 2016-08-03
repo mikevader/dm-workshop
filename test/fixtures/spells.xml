@@ -3,6 +3,7 @@
   <spells>
     <spell>
       <cite>Page: 211  Players Handbook</cite>
+      <shared>yes</shared>
       <name>Alarm (Ritual)</name>
       <type>1st-level Abjuration</type>
       <classes>
@@ -24,6 +25,7 @@
     </spell>
     <spell>
       <name>Antilife Shell</name>
+      <shared>no</shared>
       <type>5th-level abjuration</type>
       <classes>
         <class>Druid</class>
@@ -43,6 +45,7 @@
     </spell>
     <spell>
       <name>Magic Missile</name>
+      <shared>no</shared>
       <type>1st-level evocation</type>
       <classes>
         <class>Sorcerer</class>

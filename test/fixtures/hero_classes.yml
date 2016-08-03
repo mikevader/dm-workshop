@@ -8,6 +8,10 @@ goliath:
   name: Goliath
   cssclass: icon-goliath
 
+barbarian:
+  name: Barbarian
+  cssclass: icon-barbarian
+
 bard:
   name: Bard
   cssclass: icon-bard
@@ -20,13 +24,33 @@ druid:
   name: Druid
   cssclass: icon-druid
 
+fighter:
+  name: Fighter
+  cssclass: icon-fighter
+
+monk:
+  name: Monk
+  cssclass: icon-monk
+
+paladin:
+  name: Paladin
+  cssclass: icon-paladin
+
 ranger:
   name: Ranger
   cssclass: icon-ranger
 
+rouge:
+  name: Rouge
+  cssclass: icon-rouge
+
 sorcerer:
   name: Sorcerer
   cssclass: icon-sorcerer
+
+warlock:
+  name: Warlock
+  cssclass: icon-warlock
 
 wizard:
   name: Wizard

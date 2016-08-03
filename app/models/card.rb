@@ -1,4 +1,4 @@
-class Card < ActiveRecord::Base
+class Card < ApplicationRecord
   acts_as_taggable
   serialize :badges
   belongs_to :user
@@ -88,12 +88,35 @@ class Card < ActiveRecord::Base
 
   def self.new_search_builder
     builder = SearchBuilder.new do
+      # General
       configure_field 'name', 'cards.name'
       configure_field 'type', 'cards.type'
+      configure_tag 'tags', Card
+
+      # FreeForms
+      configure_field 'color', 'cards.color'
+
+      # Items
       configure_field 'attunement', 'cards.attunement'
       configure_relation 'category', 'categories.name', 'category'
       configure_relation 'rarity', 'rarities.name', 'rarity'
-      configure_tag 'tags', Card
+
+      # Spells
+      configure_field 'ritual', 'cards.ritual'
+      configure_field 'school', 'cards.school'
+      configure_field 'level', 'cards.level'
+      configure_field 'concentration', 'cards.concentration'
+      configure_field 'duration', 'cards.duration'
+      configure_field 'castingTime', 'cards.casting_time'
+      configure_relation 'classes', 'hero_classes.name', :hero_classes
+
+      # Monsters
+      configure_field 'str', 'cards.strength'
+      configure_field 'dex', 'cards.dexterity'
+      configure_field 'con', 'cards.constitution'
+      configure_field 'int', 'cards.intelligence'
+      configure_field 'wis', 'cards.wisdom'
+      configure_field 'cha', 'cards.charisma'
     end
     return builder
   end

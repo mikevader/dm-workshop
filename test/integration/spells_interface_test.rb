@@ -11,7 +11,7 @@ class SpellsInterfaceTest < ActionDispatch::IntegrationTest
     get spells_path
     # Invalid submission
     assert_no_difference 'Spell.count' do
-      post spells_path, spell: { name: "", level: 0, school: "" }
+      post spells_path, params: { spell: { name: "", level: 0, school: "" } }
     end
     assert_select 'div#error_explanation'
   end
@@ -23,8 +23,8 @@ class SpellsInterfaceTest < ActionDispatch::IntegrationTest
     description = "This spell really ties the room together"
     spell_name = "Slow"
     assert_difference 'Spell.count', 1 do
-      get new_spell_path, nil, referer: spells_url
-      post spells_path, spell: {name: spell_name, level: 3, school: "transmutation", description: description }
+      get new_spell_path, headers: { referer: spells_url }
+      post spells_path, params: { spell: {name: spell_name, level: 3, school: "transmutation", description: description } }
     end
     assert_redirected_to spells_url
     follow_redirect!

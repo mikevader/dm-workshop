@@ -125,6 +125,7 @@ class CardImport
         id = existing_spell.id
       end
       cite = CardImport.load_element name, spell, 'cite', false
+      shared = CardImport.load_element(name, spell, 'shared', false) || 'false'
       type = CardImport.load_element name, spell, 'type', true
       level, school = CardImport.parse_school_and_level type
       logger.debug "    level: #{level}"
@@ -149,6 +150,7 @@ class CardImport
 
       import_card.attributes.ritual = ritual
       import_card.attributes.cite = cite
+      import_card.attributes.shared = shared.to_b
       import_card.attributes.level = level
       import_card.attributes.school = school
       import_card.attributes.description = description
@@ -195,6 +197,7 @@ class CardImport
     end
 
     new_spell.cite = import_card.attributes.cite
+    new_spell.shared = import_card.attributes.shared
     hero_classes = import_card.attributes.classes.map do |hero_class|
       HeroClass.find_by(name: hero_class)
     end
@@ -225,6 +228,7 @@ class CardImport
         id = existing_item.id
       end
 
+      shared = CardImport.load_element(name, item, 'shared', false) || 'false'
       cite = CardImport.load_element(name, item, 'cite', true)
       category = Category.where('lower(name) LIKE ?', CardImport.load_element(name, item, 'type', true).downcase)
       rarity = Rarity.where('lower(name) LIKE ?', CardImport.load_element(name, item, 'rarity', true).downcase)
@@ -235,6 +239,7 @@ class CardImport
 
       import_card.name = name
       import_card.attributes.cite = cite
+      import_card.attributes.shared = shared.to_b
       import_card.attributes.category = category.take!
       import_card.attributes.rarity = rarity.take!
       import_card.attributes.attunement = attunement.to_b
@@ -252,6 +257,7 @@ class CardImport
     end
 
     new_item.cite = import_card.attributes.cite
+    new_item.shared = import_card.attributes.shared
     new_item.category = import_card.attributes.category
     new_item.rarity = import_card.attributes.rarity
     new_item.attunement = import_card.attributes.attunement
@@ -280,6 +286,7 @@ class CardImport
       end
 
       type = CardImport.load_element name, monster, 'type', true
+      shared = CardImport.load_element(name, monster, 'shared', false) || 'false'
       cite = CardImport.load_element name, monster, 'cite', false
       description = CardImport.load_element name, monster, 'description', false
 
@@ -369,6 +376,7 @@ class CardImport
 
       import_card.name = name
       import_card.attributes.bonus = proficiency
+      import_card.attributes.shared = shared.to_b
       import_card.attributes.cite = cite
       import_card.attributes.size = size
       import_card.attributes.monster_type = type
@@ -412,6 +420,7 @@ class CardImport
       new_monster.name = import_card.name
     end
 
+    new_monster.shared = import_card.attributes.shared
     new_monster.cite = import_card.attributes.cite
     new_monster.size = import_card.attributes.size
     new_monster.monster_type = import_card.attributes.monster_type
@@ -464,6 +473,7 @@ class CardImport
         id = existing_card.id
       end
 
+      shared = CardImport.load_element(name, card, 'shared', false) || 'false'
       cite = CardImport.load_element name, card, 'cite', false
       color = CardImport.load_element name, card, 'color', false
       icon = CardImport.load_element name, card, 'icon', false
@@ -472,6 +482,7 @@ class CardImport
 
       import_card = ImportCard.new(id, :card)
       import_card.name = name
+      import_card.attributes.shared = shared.to_b
       import_card.attributes.cite = cite
       import_card.attributes.color = color
       import_card.attributes.icon = icon
@@ -483,12 +494,13 @@ class CardImport
 
   def create_card(user, import_card)
     if import_card.new_record?
-      card = user.cards.create(name: import_card.name)
+      card = user.free_forms.create(name: import_card.name)
     else
       card = Card.find(import_card.id)
       card.name = import_card.name
     end
 
+    card.shared = import_card.attributes.shared
     card.cite = import_card.attributes.cite
     card.color = import_card.attributes.color
     card.icon = import_card.attributes.icon

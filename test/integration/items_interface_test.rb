@@ -14,7 +14,7 @@ class ItemsInterfaceTest < ActionDispatch::IntegrationTest
     #assert_select 'div.pagination'
     # Invalid submission
     assert_no_difference 'Item.count' do
-      post items_path, item: { name: "", category_id: nil, rarity_id: nil, attunement: false, description: ""}
+      post items_path, params: { item: { name: "", category_id: nil, rarity_id: nil, attunement: false, description: ''} }
     end
     assert_select 'div#error_explanation'
   end
@@ -25,8 +25,8 @@ class ItemsInterfaceTest < ActionDispatch::IntegrationTest
     # Valid submission
     name = "heroblade"
     assert_difference 'Item.count', 1 do
-      get new_item_path, nil, referer: items_url
-      post items_path, item: { name: name, category_id: @category.id, rarity_id: @rarity.id, attunement: false, description: "some stuff"}
+      get new_item_path, headers: { referer: items_url }
+      post items_path, params: { item: { name: name, category_id: @category.id, rarity_id: @rarity.id, attunement: false, description: 'some stuff'} }
     end
     assert_redirected_to items_url
     follow_redirect!

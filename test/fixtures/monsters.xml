@@ -3,6 +3,7 @@
   <monsters>
     <monster>
       <cite>MM 123</cite>
+      <shared>yes</shared>
       <name>Goblin</name>
       <type>Goblin</type>
       <stats>
@@ -40,6 +41,7 @@
     <monster>
       <cite/>
       <name>Obgam Sohn des Brogar</name>
+      <shared>no</shared>
       <type>Humanoid (dwarf)</type>
       <stats>
         <proficiency>4</proficiency>

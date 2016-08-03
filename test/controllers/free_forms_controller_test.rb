@@ -7,31 +7,31 @@ class FreeFormsControllerTest < ActionController::TestCase
   end
 
   test 'show should redirect when not logged in' do
-    get :show, id: @card
+    get :show, params: { id: @card }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'create should redirect when not logged in' do
-    post :create, card: {name: ''}
+    post :create, params: { card: {name: ''} }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'edit should redirect when not logged in' do
-    post :edit, id: @card
+    post :edit, params: { id: @card }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'update should redirect when not logged in' do
-    patch :update, id: @card
+    patch :update, params: { id: @card }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'destroy should redirect when not logged in' do
-    delete :destroy, id: @card
+    delete :destroy, params: { id: @card }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
@@ -56,7 +56,7 @@ class FreeFormsControllerTest < ActionController::TestCase
 
   test 'should get show' do
     log_in_as(users(:michael))
-    get :show, id: @card
+    get :show, params: { id: @card }
     assert_response :success
   end
 
@@ -70,7 +70,7 @@ class FreeFormsControllerTest < ActionController::TestCase
     log_in_as(users(:michael))
     assert_difference 'Card.count', +1 do
       session[:return_to] = 'http://test.host/free_forms'
-      post :create, free_form: {name: 'Frenzy', icon: 'white-book', color: 'black', contents: ''}
+      post :create, params: { free_form: {name: 'Frenzy', icon: 'white-book', color: 'black', contents: ''} }
     end
 
     new_card = Card.find_by_name('Frenzy')
@@ -82,7 +82,7 @@ class FreeFormsControllerTest < ActionController::TestCase
 
   test 'should get edit' do
     log_in_as(users(:michael))
-    post :edit, id: @card
+    post :edit, params: { id: @card }
     assert_response :success
   end
 
@@ -92,7 +92,7 @@ class FreeFormsControllerTest < ActionController::TestCase
 
     assert_no_difference 'Card.count' do
       session[:return_to] = 'http://test.host/free_forms'
-      patch :update, id: card.id, free_form: {name: 'Qua?'}
+      patch :update, params: { id: card.id, free_form: {name: 'Qua?'} }
     end
 
     updated_card = Card.find(card.id)
@@ -107,7 +107,7 @@ class FreeFormsControllerTest < ActionController::TestCase
     card = cards(:cunning_action)
     assert_difference 'Card.count', -1 do
       @request.env['HTTP_REFERER'] = free_forms_path
-      delete :destroy, id: card
+      delete :destroy, params: { id: card }
     end
     assert_redirected_to free_forms_url
   end
@@ -117,7 +117,7 @@ class FreeFormsControllerTest < ActionController::TestCase
     card = cards(:cunning_action)
     assert_difference 'Card.count', +1 do
       @request.env['HTTP_REFERER'] = free_forms_path
-      post :duplicate, id: card.id
+      post :duplicate, params: { id: card.id }
     end
     assert_redirected_to free_forms_url
 

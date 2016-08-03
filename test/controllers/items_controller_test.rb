@@ -7,32 +7,32 @@ class ItemsControllerTest < ActionController::TestCase
   end
 
   test 'show should redirect to login if not logged in' do
-    get :show, id: @item
+    get :show, params: { id: @item }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'create should redirect to login if not logged in' do
-    get :create, item: {name: ''}
+    get :create, params: { item: {name: ''} }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'should redirect edit when not logged in' do
-    post :edit, id: @item
+    post :edit, params: { id: @item }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'should redirect update when not logged in' do
-    patch :update, id: @item, name: {name: 'gun'}
+    patch :update, params: { id: @item, name: {name: 'gun'} }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'should redirect destroy when not logged in' do
     assert_no_difference 'Item.count' do
-      delete :destroy, id: @item
+      delete :destroy, params: { id: @item }
     end
     assert_not flash.empty?
     assert_redirected_to login_url
@@ -58,7 +58,7 @@ class ItemsControllerTest < ActionController::TestCase
 
   test 'should get show' do
     log_in_as(users(:michael))
-    get :show, id: @item
+    get :show, params: { id: @item }
     assert_response :success
   end
 
@@ -74,7 +74,7 @@ class ItemsControllerTest < ActionController::TestCase
     rarity = rarities(:uncommon)
     assert_difference 'Item.count', +1 do
       session[:return_to] = 'http://test.host/items'
-      post :create, item: {name: 'Nerd', category_id: category.id, rarity_id: rarity.id, attunement: true, description: 'the nerdster'}
+      post :create, params: { item: {name: 'Nerd', category_id: category.id, rarity_id: rarity.id, attunement: true, description: 'the nerdster'} }
     end
 
     new_item = Item.find_by_name('Nerd')
@@ -87,7 +87,7 @@ class ItemsControllerTest < ActionController::TestCase
 
   test 'should get edit' do
     log_in_as(users(:michael))
-    post :edit, id: @item
+    post :edit, params: { id: @item }
     assert_response :success
   end
 
@@ -97,7 +97,7 @@ class ItemsControllerTest < ActionController::TestCase
 
     assert_no_difference 'Item.count' do
       session[:return_to] = 'http://test.host/items'
-      patch :update, id: item.id, item: {name: 'Qua?'}
+      patch :update, params: { id: item.id, item: {name: 'Qua?'} }
     end
 
     updated_item = Item.find(item.id)
@@ -112,7 +112,7 @@ class ItemsControllerTest < ActionController::TestCase
     item = cards(:sting)
     assert_difference 'Item.count', -1 do
       @request.env['HTTP_REFERER'] = items_path
-      delete :destroy, id: item
+      delete :destroy, params: { id: item }
     end
     assert_redirected_to items_url
   end
@@ -122,7 +122,7 @@ class ItemsControllerTest < ActionController::TestCase
     item = cards(:glamdring)
     assert_difference 'Item.count', +1 do
       @request.env['HTTP_REFERER'] = items_path
-      post :duplicate, id: item.id
+      post :duplicate, params: { id: item.id }
     end
     assert_redirected_to items_url
 

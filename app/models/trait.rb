@@ -1,4 +1,4 @@
-class Trait < ActiveRecord::Base
+class Trait < ApplicationRecord
   belongs_to :monster, foreign_key: :card_id
 
   validates :card_id, presence: true

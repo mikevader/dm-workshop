@@ -5,6 +5,7 @@ class SearchEngine2
 
   def search(search_string, all_on_empty = true)
     result = @entity_class.none
+    normalized = search_string
     error = nil
     #begin
       if search_string.blank?
@@ -14,7 +15,7 @@ class SearchEngine2
           result = []
         end
       else
-        result = search_entities(search_string)
+        result, normalized = search_entities(search_string)
       end
     #rescue ParseSearchError => e
     #  puts e.message
@@ -24,7 +25,7 @@ class SearchEngine2
     #  error = e.parse_error
     #end
 
-    return result, error
+    return result, normalized, error
   end
 
   def search_entities(search)
@@ -40,9 +41,9 @@ class SearchEngine2
       #builder.orders.each do |order|
       #  query = query.order(order)
       #end
-      query
+      return query, builder.search
     else
-      all
+      return all, search
     end
   end
 end

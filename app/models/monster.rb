@@ -284,22 +284,7 @@ class Monster < Card
     return data
   end
 
-  def self.new_search_builder
-    builder = SearchBuilder.new do
-      configure_field 'name', 'cards.name'
-      configure_field 'str', 'cards.strength'
-      configure_field 'dex', 'cards.dexterity'
-      configure_field 'con', 'cards.constitution'
-      configure_field 'int', 'cards.intelligence'
-      configure_field 'wis', 'cards.wisdom'
-      configure_field 'cha', 'cards.charisma'
-      configure_tag 'tags', Monster
-    end
-    return builder
-  end
-
   private
-
   def calc_modifier_for ability = 10
     return (ability - 10) / 2
   end

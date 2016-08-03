@@ -40,7 +40,7 @@ var updateCard = function(event) {
 };
 
 $(document).on('change', 'form.preview_form', updateCard);
-$(document).on("page:load ready", loaded);
+$(document).on("turbolinks:load", loaded);
 
 var modal = function(event) {
     var modal = $(this)
@@ -67,7 +67,7 @@ var loader = function() {
 
 }
 
-$(document).on("page:load ready", loader)
+$(document).on("turbolinks:load", loader)
 
 $(function () {
     $('[data-toggle="popover"]').popover({html: true})

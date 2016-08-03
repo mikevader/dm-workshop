@@ -7,27 +7,27 @@ class FiltersControllerTest < ActionController::TestCase
   end
 
   test 'show should redirect when not logged in' do
-    get :show, id: @filter
+    get :show, params: { id: @filter }
     assert_redirected_to login_url
   end
 
   test 'create should redirect when not logged in' do
-    post :create, filter: { name: '', query: '' }
+    post :create, params: { filter: { name: '', query: '' } }
     assert_redirected_to login_url
   end
 
   test 'edit should redirect when not logged in' do
-    post :edit, id: @filter
+    post :edit, params: { id: @filter }
     assert_redirected_to login_url
   end
 
   test 'update should redirect when not logged in' do
-    patch :update, id: @filter
+    patch :update, params: { id: @filter }
     assert_redirected_to login_url
   end
 
   test 'destroy should redirect when not logged in' do
-    delete :destroy, id: @filter
+    delete :destroy, params: { id: @filter }
     assert_redirected_to login_url
   end
 
@@ -53,7 +53,7 @@ class FiltersControllerTest < ActionController::TestCase
 
   test 'should get show' do
     log_in_as(users(:michael))
-    get :show, id: @filter
+    get :show, params: { id: @filter }
     assert_response :success
   end
 
@@ -67,7 +67,7 @@ class FiltersControllerTest < ActionController::TestCase
     log_in_as(users(:michael))
     query = 'name ~ end'
     assert_difference 'Filter.count', +1 do
-      post :create, filter: { name: 'AAA', query: query}
+      post :create, params: { filter: { name: 'AAA', query: query} }
     end
 
     new_filter = Filter.find_by_name('AAA')
@@ -79,7 +79,7 @@ class FiltersControllerTest < ActionController::TestCase
 
   test 'should get edit' do
     log_in_as(users(:michael))
-    post :edit, id: @filter
+    post :edit, params: { id: @filter }
     assert_response :success
   end
 
@@ -89,7 +89,7 @@ class FiltersControllerTest < ActionController::TestCase
     filter_query = 'labels in (jdf, jdg)'
     id = @filter.id
     assert_no_difference 'Filter.count' do
-      patch :update, id: id, filter: { name: filter_name, query: filter_query }
+      patch :update, params: { id: id, filter: { name: filter_name, query: filter_query } }
     end
 
     filter = Filter.find(id)
@@ -103,7 +103,7 @@ class FiltersControllerTest < ActionController::TestCase
   test 'should get destory' do
     log_in_as(users(:michael))
     assert_difference 'Filter.count', -1 do
-      delete :destroy, id: @filter
+      delete :destroy, params: { id: @filter }
     end
     assert_redirected_to filters_url
   end

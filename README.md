@@ -66,6 +66,12 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
+### Dungeon Master Workshop 0.16 ###
+* Migration to Rails 5
+* Aggregate all search fields
+* Cancel button in card forms
+
+
 ### Dungeon Master Workshop 0.15 ###
 *
 
