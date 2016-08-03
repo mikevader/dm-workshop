@@ -23,7 +23,7 @@ class FreeFormsInterfaceTest < ActionDispatch::IntegrationTest
     # Valid submission
     name = "heroblade"
     assert_difference 'Card.count', 1 do
-      get new_free_form_path, nil, referer: free_forms_url
+      get new_free_form_path, headers: { referer: free_forms_url }
       post free_forms_path, params: { free_form: { name: name, icon: 'white-book', color: 'indigo', contents: 'subtitle | Rogue feature' } }
     end
 

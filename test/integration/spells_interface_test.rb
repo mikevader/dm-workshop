@@ -23,7 +23,7 @@ class SpellsInterfaceTest < ActionDispatch::IntegrationTest
     description = "This spell really ties the room together"
     spell_name = "Slow"
     assert_difference 'Spell.count', 1 do
-      get new_spell_path, nil, referer: spells_url
+      get new_spell_path, headers: { referer: spells_url }
       post spells_path, params: { spell: {name: spell_name, level: 3, school: "transmutation", description: description } }
     end
     assert_redirected_to spells_url
