@@ -9,7 +9,8 @@ class ParserTest < ActiveSupport::TestCase
     @builder.configure_field 'class'
     @builder.configure_field 'school'
     @builder.configure_field 'ritual'
-    @builder.configure_tag 'tags', Spell
+    @builder.configure_field 'type'
+    @builder.configure_tag 'tags', Card
     @parser = Parser.new
   end
   
@@ -65,6 +66,14 @@ class ParserTest < ActiveSupport::TestCase
   test 'should work with groups' do
     assert_equal "LOWER(name) LIKE 'bane' AND ( level = 5 OR LOWER(school) LIKE 'necromancy' )",
       @parser.parse("name = 'bane' and ( level = 5 or school = 'necromancy')", @builder.clone)
+  end
+
+  test 'should work with groups first' do
+    skip 'Not possible at the moment because of some issue in the grammar'
+    result = @parser.parse("(type = 'Monster' or type = 'Spell') and name ~ 'Orc'", @builder.clone)
+    p result
+    assert_equal "(LOWER(type) LIKE 'monster' OR LOWER(type) LIKE 'spell') AND LOWER(name) LIKE '%orc%'",
+      @parser.parse("(type = 'Monster' or type = 'Spell') and name ~ 'Orc'", @builder.clone)
   end
 
   test 'should work with all comparators' do
