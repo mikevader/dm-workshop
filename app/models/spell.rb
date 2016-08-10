@@ -25,9 +25,8 @@ class Spell < Card
   end
 
   def card_data
-    data = CardData.new
+    data = super
 
-    data.id = id
     data.name = "#{name}#{' (Ritual)' if ritual?}"
     data.icon = "icon-white-book-#{level}"
     data.color = 'maroon'

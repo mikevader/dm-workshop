@@ -210,10 +210,8 @@ class Monster < Card
   end
 
   def card_data
-    data = CardData.new
+    data = super
 
-    data.id = id
-    data.name = name
     data.icon = 'icon-custom-monster'
     data.color = 'black'
     data.card_size = '35x50'

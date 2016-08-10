@@ -48,6 +48,8 @@ class FreeFormTest < ActiveSupport::TestCase
     card_data = @card.card_data
 
     assert_equal 'Frenzy', card_data.name
+    assert_equal '25x35', card_data.card_size
+
     assert_equal 'white-book', card_data.icon
     assert_equal 'indigo', card_data.color
 
@@ -57,5 +59,12 @@ class FreeFormTest < ActiveSupport::TestCase
     first = card_content.first
     assert first.subtitle?
     assert_equal 'Rogue feature', first.args.first
+  end
+
+  test 'should generate card data with special card size' do
+    @card.card_size = '35x50'
+    card_data = @card.card_data
+
+    assert_equal '35x50', card_data.card_size
   end
 end
