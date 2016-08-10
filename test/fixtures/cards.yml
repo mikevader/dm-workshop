@@ -59,7 +59,7 @@ shadow_demon:
   type: Monster
   name: Shadow Demon
   cite: MM 64
-  size: medium
+  monster_size: medium
   monster_type: fiend (demon)
   alignment: chaotic evil
   armor_class: 13 (leather)

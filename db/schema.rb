@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160810113520) do
+ActiveRecord::Schema.define(version: 20160810183055) do
 
   create_table "actions", force: :cascade do |t|
     t.string   "title"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20160810113520) do
     t.string   "athigherlevel"
     t.boolean  "concentration"
     t.boolean  "ritual",                      default: false
-    t.string   "size"
+    t.string   "monster_size"
     t.string   "monster_type"
     t.string   "alignment"
     t.string   "armor_class"

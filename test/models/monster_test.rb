@@ -4,7 +4,7 @@ class MonsterTest < ActiveSupport::TestCase
 
   def setup
     @user = users(:michael)
-    @monster = @user.monsters.build(name: 'Goblin', size: 'small', monster_type: 'humanoid', armor_class: '15 (leather armor, shield)', hit_points: 7, strength: 8, dexterity: 14, constitution: 10, intelligence: 10, wisdom: 8, charisma: 8)
+    @monster = @user.monsters.build(name: 'Goblin', monster_size: 'small', monster_type: 'humanoid', armor_class: '15 (leather armor, shield)', hit_points: 7, strength: 8, dexterity: 14, constitution: 10, intelligence: 10, wisdom: 8, charisma: 8)
   end
 
   test 'should be valid' do

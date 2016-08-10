@@ -15,7 +15,7 @@ class CardExport
               xml.type_ monster.monster_type
               xml.stats {
                 xml.proficiency monster.bonus
-                xml.size monster.size
+                xml.size monster.monster_size
                 xml.ac monster.armor_class
                 xml.hp monster.hit_points
                 xml.speed monster.speed

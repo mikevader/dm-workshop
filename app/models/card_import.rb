@@ -378,7 +378,7 @@ class CardImport
       import_card.attributes.bonus = proficiency
       import_card.attributes.shared = shared.to_b
       import_card.attributes.cite = cite
-      import_card.attributes.size = size
+      import_card.attributes.monster_size = size
       import_card.attributes.monster_type = type
       import_card.attributes.armor_class = ac
       import_card.attributes.hit_points = hp
@@ -422,7 +422,7 @@ class CardImport
 
     new_monster.shared = import_card.attributes.shared
     new_monster.cite = import_card.attributes.cite
-    new_monster.size = import_card.attributes.size
+    new_monster.monster_size = import_card.attributes.monster_size
     new_monster.monster_type = import_card.attributes.monster_type
     new_monster.armor_class = import_card.attributes.armor_class
     new_monster.hit_points = import_card.attributes.hit_points

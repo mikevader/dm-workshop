@@ -70,7 +70,7 @@ class MonstersControllerTest < ActionController::TestCase
     log_in_as(users(:michael))
     assert_difference 'Monster.count', +1 do
       session[:return_to] = 'http://test.host/monsters'
-      post :create, params: { monster: {name: 'AAA', bonus: 2, size: 'huge', monster_type: 'humanoid', armor_class: '19 (plate)', hit_points: 150, strength: 8, dexterity: 8, constitution: 8, intelligence: 12, wisdom: 12, charisma: 12} }
+      post :create, params: { monster: {name: 'AAA', bonus: 2, monster_size: 'huge', monster_type: 'humanoid', armor_class: '19 (plate)', hit_points: 150, strength: 8, dexterity: 8, constitution: 8, intelligence: 12, wisdom: 12, charisma: 12} }
     end
 
     new_monster = Monster.find_by_name('AAA')

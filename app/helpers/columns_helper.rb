@@ -21,7 +21,7 @@ module ColumnsHelper
          {title: 'School', field: lambda { |card| card.school }}]
       when 'Monster'
         [{title: 'Name', field: lambda { |card| card.name }},
-         {title: 'Type', field: lambda { |card| "#{card.size} #{card.monster_type}" }},
+         {title: 'Type', field: lambda { |card| "#{card.monster_size} #{card.monster_type}" }},
          {title: 'CR', field: lambda { |card| Monster.challenge_pretty(card.challenge) }}]
       when 'Item'
         [{title: 'Name', field: lambda { |card| card.name }},
