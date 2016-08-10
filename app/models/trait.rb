@@ -1,5 +1,6 @@
 class Trait < ApplicationRecord
   belongs_to :monster, foreign_key: :card_id
+  acts_as_list scope: :card
 
   validates :card_id, presence: true
   validates :title, presence: true

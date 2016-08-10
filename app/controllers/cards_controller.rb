@@ -48,6 +48,10 @@ class CardsController < ApplicationController
       end
       authorize card
       card.assign_attributes(ttt)
+
+      card.save
+      card.reload
+
       card_data = card.card_data
       raise ActiveRecord::Rollback, "Don't commit preview data changes!"
     end
@@ -141,9 +145,9 @@ class CardsController < ApplicationController
       when :freeform
         params.require(:free_form).permit(:name, :shared, :cite, :icon, :color, :contents, :tag_list)
       when :item
-        params.require(:item).permit(:name, :shared, :tag_list, :cssclass, :category_id, :rarity_id, :attunement, :description, properties_attributes: [:id, :name, :value, :_destroy])
+        params.require(:item).permit(:name, :shared, :tag_list, :cssclass, :category_id, :rarity_id, :attunement, :description, properties_attributes: [:id, :name, :value, :position, :_destroy])
       when :monster
-        params.require(:monster).permit(:name, :shared, :tag_list, :cite, :size, :monster_type, :alignment, :armor_class, :hit_points, :speed, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :senses, :languages, :challenge, :description, :skills, :saving_throws => [], :damage_vulnerabilities => [], :damage_resistances => [], :damage_immunities => [], :cond_immunities => [], :cards_skills_ids => [], :skill_ids => [], actions_attributes: [:id, :title, :description, :action_type, :melee, :ranged, :_destroy], traits_attributes: [:id, :title, :description, :_destroy], cards_skills_attributes: [:id, :skill_id, :value, :_destroy])
+        params.require(:monster).permit(:name, :shared, :tag_list, :cite, :size, :monster_type, :alignment, :armor_class, :hit_points, :speed, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :senses, :languages, :challenge, :description, :skills, :saving_throws => [], :damage_vulnerabilities => [], :damage_resistances => [], :damage_immunities => [], :cond_immunities => [], :cards_skills_ids => [], :skill_ids => [], actions_attributes: [:id, :title, :description, :action_type, :melee, :ranged, :position, :_destroy], traits_attributes: [:id, :title, :description, :position, :_destroy], cards_skills_attributes: [:id, :skill_id, :value, :_destroy])
       when :spell
         params.require(:spell).permit(:name, :shared, :tag_list, :cite, :ritual, :level, :school, :casting_time, :range, :components, :duration, :short_description, :athigherlevel, :description, :picture, :concentration, :hero_classes, :hero_class_ids => [])
     end
