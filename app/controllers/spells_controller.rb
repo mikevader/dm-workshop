@@ -1,6 +1,5 @@
-require 'search_engine'
-
 class SpellsController < CardsController
+
   private
   def search_path
     spells_path

@@ -3,10 +3,8 @@ require 'search_engine'
 class CardsController < ApplicationController
   include ColumnsHelper
 
-  #layout :choose_layout
   helper_method :card_model, :print_path, :search_path, :new_path, :edit_path, :duplicate_path
   before_action :logged_in_user, only: [:new, :edit, :update, :create, :destroy]
-  #before_action :admin_user, only: [:edit, :update, :destroy]
   before_action :init_search_engine, only: [:index]
   after_action :verify_authorized
   after_action :verify_policy_scoped, only: [:index]
@@ -129,7 +127,6 @@ class CardsController < ApplicationController
 
   def card_model
     controller_name.classify.constantize
-    #params[:type].constantize
   end
 
   def card_type
