@@ -19,7 +19,7 @@ class CardsController < ApplicationController
   def new
     authorize card_model
     @card = user_collection.build
-    session[:return_to] ||= request.referer
+    session[:return_to] = request.referer
   end
 
   def create
@@ -95,7 +95,7 @@ class CardsController < ApplicationController
   def edit
     @card = card_model.find(params[:id])
     authorize @card
-    session[:return_to] ||= request.referer
+    session[:return_to] = request.referer
   end
 
   def update
