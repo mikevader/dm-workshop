@@ -88,7 +88,7 @@
 <% end %>
 
 <%= content_tag :div, class: 'form-group' do -%>
-    <%= f.label :cards_skills, class: 'control-label col-sm-3' %>
+    <%= f.label :cards_skills, 'Skills', class: 'control-label col-sm-3' %>
     <%= content_tag(:div, class: 'col-sm-9') do %>
         <%= f.fields_for :cards_skills do |monsters_skill| %>
             <%= render 'cards_skill_fields', f: monsters_skill %>
