@@ -1,41 +1,37 @@
-<div class="panel panel-default">
-  <div class="panel-body">
-    <%= content_tag :div, class: 'form-group' do -%>
-        <%= content_tag :div, class: ' col-sm-offset-2 col-sm-10' do -%>
-            <%= f.select(:action_type, Action.action_types.keys.to_a, {}, {class: 'form-control input-sm'}) %>
-        <% end -%>
-    <% end -%>
-    <%= content_tag :div, class: 'form-group' do -%>
-        <%= f.label :title, class: 'control-label col-sm-2' %>
-        <%= content_tag(:div, f.text_field(:title, class: 'form-control'), class: 'col-sm-10') %>
-    <% end -%>
+<div class="item">
+  <%= f.hidden_field :position %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= f.select(:action_type, Action.action_types.keys.to_a, {}, {class: 'form-control input-sm'}) %></h3>
+    </div>
+    <div class="panel-body">
+      <%= content_tag :div, class: 'row small-padding' do -%>
+          <%= content_tag(:div, f.text_field(:title, class: 'form-control', placeholder: :title), class: 'col-sm-10') %>
+          <%= content_tag :div, class: 'col-sm-2' do -%>
+              <%= content_tag :div, class: 'checkbox' do -%>
+                  <%= f.label :_destroy do -%>
+                      <%= f.check_box(:_destroy) %><span class="glyphicon glyphicon-trash" aria-label="Remove"></span>
+                  <% end -%>
+              <% end -%>
+          <% end -%>
+      <% end -%>
 
-    <%= content_tag :div, class: 'form-group' do -%>
-        <%= f.label :description, class: 'control-label col-sm-2' %>
-        <%= content_tag(:div, f.text_area(:description, class: 'form-control', rows: 4), class: 'col-sm-10') %>
-    <% end -%>
+      <%= content_tag :div, class: 'row' do -%>
+          <%= content_tag(:div, f.text_area(:description, class: 'form-control', rows: 4, placeholder: :description), class: 'col-sm-12') %>
+      <% end -%>
 
-    <%= content_tag :div, class: 'form-group' do -%>
-        <%= content_tag :div, class: 'col-sm-offset-2 col-sm-10' do -%>
-            <%= content_tag :div, class: 'checkbox' do -%>
-                <%= f.label :melee, class: 'checkbox-inline' do -%>
-                    <%= f.check_box(:melee) %>melee
-                <% end -%>
-                <%= f.label :ranged, class: 'checkbox-inline' do -%>
-                    <%= f.check_box(:ranged) %>ranged
-                <% end -%>
-            <% end -%>
-        <% end -%>
-    <% end -%>
-
-    <%= content_tag :div, class: 'form-group' do -%>
-        <%= content_tag :div, class: 'col-sm-offset-2 col-sm-10' do -%>
-            <%= content_tag :div, class: 'checkbox' do -%>
-                <%= f.label :_destroy do -%>
-                    <%= f.check_box(:_destroy) %>Remove
-                <% end -%>
-            <% end -%>
-        <% end -%>
-    <% end -%>
+      <%= content_tag :div, class: 'row small-padding' do -%>
+          <%= content_tag :div, class: 'col-sm-12' do -%>
+              <%= content_tag :div, class: 'checkbox' do -%>
+                  <%= f.label :melee, class: 'checkbox-inline' do -%>
+                      <%= f.check_box(:melee) %>melee
+                  <% end -%>
+                  <%= f.label :ranged, class: 'checkbox-inline' do -%>
+                      <%= f.check_box(:ranged) %>ranged
+                  <% end -%>
+              <% end -%>
+          <% end -%>
+      <% end -%>
+    </div>
   </div>
 </div>

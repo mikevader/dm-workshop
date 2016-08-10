@@ -7,8 +7,6 @@ class Card < ApplicationRecord
 
   validates :user_id, presence: true
   validates :name, presence: true, length: {maximum: 50}, uniqueness: {case_sensitive: false}
-  #validates :icon, presence: true
-  #validates :color, presence: true
 
   def self.types
     %w(Item FreeForm Monster Spell)

@@ -3,10 +3,8 @@ require 'search_engine'
 class CardsController < ApplicationController
   include ColumnsHelper
 
-  #layout :choose_layout
   helper_method :card_model, :print_path, :search_path, :new_path, :edit_path, :duplicate_path
   before_action :logged_in_user, only: [:new, :edit, :update, :create, :destroy]
-  #before_action :admin_user, only: [:edit, :update, :destroy]
   before_action :init_search_engine, only: [:index]
   after_action :verify_authorized
   after_action :verify_policy_scoped, only: [:index]
@@ -19,7 +17,7 @@ class CardsController < ApplicationController
   def new
     authorize card_model
     @card = user_collection.build
-    session[:return_to] ||= request.referer
+    session[:return_to] = request.referer
   end
 
   def create
@@ -48,6 +46,10 @@ class CardsController < ApplicationController
       end
       authorize card
       card.assign_attributes(ttt)
+
+      card.save
+      card.reload
+
       card_data = card.card_data
       raise ActiveRecord::Rollback, "Don't commit preview data changes!"
     end
@@ -95,7 +97,7 @@ class CardsController < ApplicationController
   def edit
     @card = card_model.find(params[:id])
     authorize @card
-    session[:return_to] ||= request.referer
+    session[:return_to] = request.referer
   end
 
   def update
@@ -125,7 +127,6 @@ class CardsController < ApplicationController
 
   def card_model
     controller_name.classify.constantize
-    #params[:type].constantize
   end
 
   def card_type
@@ -141,9 +142,9 @@ class CardsController < ApplicationController
       when :freeform
         params.require(:free_form).permit(:name, :shared, :cite, :icon, :color, :contents, :tag_list)
       when :item
-        params.require(:item).permit(:name, :shared, :tag_list, :cssclass, :category_id, :rarity_id, :attunement, :description, properties_attributes: [:id, :name, :value, :_destroy])
+        params.require(:item).permit(:name, :shared, :tag_list, :cssclass, :category_id, :rarity_id, :attunement, :description, properties_attributes: [:id, :name, :value, :position, :_destroy])
       when :monster
-        params.require(:monster).permit(:name, :shared, :tag_list, :cite, :size, :monster_type, :alignment, :armor_class, :hit_points, :speed, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :senses, :languages, :challenge, :description, :skills, :saving_throws => [], :damage_vulnerabilities => [], :damage_resistances => [], :damage_immunities => [], :cond_immunities => [], :cards_skills_ids => [], :skill_ids => [], actions_attributes: [:id, :title, :description, :action_type, :melee, :ranged, :_destroy], traits_attributes: [:id, :title, :description, :_destroy], cards_skills_attributes: [:id, :skill_id, :value, :_destroy])
+        params.require(:monster).permit(:name, :shared, :tag_list, :cite, :size, :monster_type, :alignment, :armor_class, :hit_points, :speed, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :senses, :languages, :challenge, :description, :skills, :saving_throws => [], :damage_vulnerabilities => [], :damage_resistances => [], :damage_immunities => [], :cond_immunities => [], :cards_skills_ids => [], :skill_ids => [], actions_attributes: [:id, :title, :description, :action_type, :melee, :ranged, :position, :_destroy], traits_attributes: [:id, :title, :description, :position, :_destroy], cards_skills_attributes: [:id, :skill_id, :value, :_destroy])
       when :spell
         params.require(:spell).permit(:name, :shared, :tag_list, :cite, :ritual, :level, :school, :casting_time, :range, :components, :duration, :short_description, :athigherlevel, :description, :picture, :concentration, :hero_classes, :hero_class_ids => [])
     end
