@@ -66,6 +66,17 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
+### Dungeon Master Workshop 0.17 ###
+* Add ordering for
+    * Traits in monster cards
+    * Actions in monster cards
+    * Properties in item cards
+* Add drag & drop support for changing the ordering
+* Add copyright disclaimers
+* Fixed issues with redirect from save or cancel 
+* Fixed some styling issues
+
+
 ### Dungeon Master Workshop 0.16 ###
 * Migration to Rails 5
 * Aggregate all search fields
