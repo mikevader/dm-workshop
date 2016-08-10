@@ -1,4 +1,4 @@
-<div class="form-group form-group-sm row">
+<div class="form-group form-group-sm row small-padding">
   <%#= f.label :skill_id, 'Skill' %>
   <div class="col-xs-6">
     <%= f.collection_select :skill_id, Skill.all, :id, :name, {}, { class: 'form-control' } %>
