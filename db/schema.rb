@@ -128,13 +128,11 @@ ActiveRecord::Schema.define(version: 20160810113520) do
   create_table "properties", force: :cascade do |t|
     t.string   "name"
     t.string   "value"
-    t.integer  "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "card_id"
     t.integer  "position"
     t.index ["card_id"], name: "index_properties_on_card_id"
-    t.index ["item_id"], name: "index_properties_on_item_id"
   end
 
   create_table "rarities", force: :cascade do |t|
@@ -163,10 +161,10 @@ ActiveRecord::Schema.define(version: 20160810113520) do
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
-    t.integer  "taggable_id"
     t.string   "taggable_type"
-    t.integer  "tagger_id"
+    t.integer  "taggable_id"
     t.string   "tagger_type"
+    t.integer  "tagger_id"
     t.string   "context",       limit: 128
     t.datetime "created_at"
     t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
