@@ -66,6 +66,9 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
+### Dungeon Master Workshop 0.18 ###
+* Add verification files for hostpoint ssl certificates. 
+
 ### Dungeon Master Workshop 0.17 ###
 * Add ordering for
     * Traits in monster cards
