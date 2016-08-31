@@ -1,5 +1,19 @@
 module ApplicationHelper
 
+  #require 'redcarpet'
+
+  def markdown(text)
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
+                                       autolink: true,
+                                       lax_spacing: true,
+                                       quote: true,
+                                       footnotes: true,
+                                       hard_wrap: true,
+                                       safe_links_only: true)
+
+    return markdown.render(text)
+  end
+
   # Returns the full title on a per-page basis.
   def full_title(page_title = '')
     base_title = 'Dungeon Masters Workshop'

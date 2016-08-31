@@ -31,7 +31,7 @@
             </div>
         <% elsif element.text? -%>
             <div class="card-element card-text-line">
-              <p class="card-p card-text"><%= raw(params.first) %></p>
+              <p class="card-p card-text"><%= raw(markdown(params.first)) %></p>
             </div>
         <% elsif element.subsection? -%>
             <h3 class="card-section"><%= raw(params.first) %></h3>
