@@ -66,6 +66,10 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
+### Dungeon Master Workshop 0.19 ###
+* Force SSL
+* Update various libraries
+
 ### Dungeon Master Workshop 0.18 ###
 * Add verification files for hostpoint ssl certificates. 
 
