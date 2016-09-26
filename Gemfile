@@ -17,7 +17,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'coffee-rails', '~> 4.2.1'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 4.1.1'
+gem 'jquery-rails', '~> 4.2.1'
 gem 'jquery-ui-rails', '~> 5.0.5'
 
 # Simple API to perform paginated queries
@@ -60,12 +60,12 @@ gem 'net-ssh', '~> 3.2.0'
 
 # Create general purpose data admin interface
 gem 'remotipart', github: 'mshibuya/remotipart'
-gem 'rails_admin', '~> 1.0.0.rc'
+gem 'rails_admin', '~> 1.0.0'
 
 # Tagging library for used on any kind of object
 gem 'acts-as-taggable-on', '~> 4.0.0'
 # Ordering library to order traits, actions, etc on monster and other cards
-gem 'acts_as_list', '~> 0.7.6'
+gem 'acts_as_list', '~> 0.8.1'
 # Google re-captcha for sign-up process
 gem 'recaptcha', '~> 3.3.0', require: 'recaptcha/rails'
 
