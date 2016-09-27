@@ -1,6 +1,6 @@
 class Monster < Card
   acts_as_taggable
-  has_many :cards_skills, foreign_key: :card_id
+  has_many :cards_skills, foreign_key: :card_id, dependent: :destroy
   has_many :skills, through: :cards_skills
   has_many :traits, -> { order(position: :asc) }, dependent: :destroy, foreign_key: :card_id
   has_many :actions, -> { order('action_type asc, position asc') }, dependent: :destroy, foreign_key: :card_id
