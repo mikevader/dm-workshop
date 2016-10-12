@@ -40,13 +40,14 @@ class CardsController < ApplicationController
       if Card.exists?(params[:id].to_i)
         card = Card.find(params[:id])
       else
-        ttt[:type] = card_model.to_s
-        card = current_user.cards.build
+        card_type = card_model.to_s
+        ttt[:type] = card_type
+        card = current_user.cards.build(type: card_type)
       end
       authorize card
       card.assign_attributes(ttt)
 
-      card.save(validate: true)
+      card.save(validate: false)
       card.reload
 
       card_data = card.card_data
