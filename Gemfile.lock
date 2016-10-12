@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/mshibuya/remotipart.git
-  revision: 7e244e78e148430b7720e6cf8f86263d6a1dfddf
+  revision: cd653ddc43bb09767b8f2802d6e27b3e00ef992f
   specs:
-    remotipart (1.3.0)
+    remotipart (1.3.1)
 
 GEM
   remote: https://rubygems.org/
@@ -68,7 +68,7 @@ GEM
       will_paginate
     brakeman (3.4.0)
     builder (3.2.2)
-    byebug (9.0.5)
+    byebug (9.0.6)
     carrierwave (0.11.2)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -396,6 +396,7 @@ GEM
       json (~> 1.4)
     recaptcha (3.3.0)
       json
+    redcarpet (3.3.4)
     ref (2.0.0)
     ruby-progressbar (1.8.1)
     ruby_dep (1.4.0)
@@ -406,12 +407,13 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    sdoc (0.4.1)
+    sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     shellany (0.0.1)
     slop (3.6.0)
-    spring (1.7.2)
+    spring (2.0.0)
+      activesupport (>= 4.2)
     sprockets (3.7.0)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -419,7 +421,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.3.11)
+    sqlite3 (1.3.12)
     tdiff (0.3.3)
     terminal-notifier-guard (1.7.0)
     therubyracer (0.12.2)
@@ -465,7 +467,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.7)
   bootstrap-will_paginate (~> 0.0.10)
   brakeman (>= 3.2.1)
-  byebug (>= 8.2.2)
+  byebug (>= 9.0)
   carrierwave (~> 0.10)
   coffee-rails (~> 4.2.1)
   faker (~> 1.6.6)
@@ -493,11 +495,12 @@ DEPENDENCIES
   rails_admin (~> 1.0.0)
   rails_stdout_logging (= 0.0.5)
   recaptcha (~> 3.3.0)
+  redcarpet (~> 3.3)
   remotipart!
   sass-rails (~> 5.0.5)
   sdoc (~> 0.4.1)
-  spring (>= 1.7.2)
-  sqlite3 (>= 1.3.11)
+  spring (>= 2.0)
+  sqlite3 (>= 1.3)
   terminal-notifier-guard (~> 1.7)
   therubyracer
   treetop (~> 1.6.3)
