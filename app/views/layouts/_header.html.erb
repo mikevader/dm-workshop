@@ -39,8 +39,8 @@
             <li><%= link_to 'Settings', edit_user_path(current_user) %></li>
             <li class="divider"></li>
             <% if admin_user? %>
-                <li><%= link_to 'Admin', admin_admin_path %></li>
-                <li><%= link_to 'Full Admin', rails_admin_path %></li>
+                <li><%= link_to 'Admin', admin_admin_path, 'data-turbolinks' => 'false' %></li>
+                <li><%= link_to 'Full Admin', rails_admin_path, 'data-turbolinks' => 'false' %></li>
                 <li class="divider"></li>
             <% end %>
             <li>
