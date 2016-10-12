@@ -1,6 +1,6 @@
-module ApplicationHelper
+require 'redcarpet'
 
-  #require 'redcarpet'
+module ApplicationHelper
 
   def markdown(text)
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML,

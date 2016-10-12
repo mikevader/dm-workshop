@@ -32,6 +32,9 @@ The final version is accessible under:
 * layout all items from a filter as cards for two-sided printing
 * (optional) Multilingual for at least english and german
 
+## Newly added features
+* You can now use markdown in description fields and text nodes for formatting your text.
+
 
 ### Cool features but not in scope for a first release are: ###
 
