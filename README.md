@@ -32,6 +32,9 @@ The final version is accessible under:
 * layout all items from a filter as cards for two-sided printing
 * (optional) Multilingual for at least english and german
 
+## Newly added features
+* You can now use markdown in description fields and text nodes for formatting your text.
+
 
 ### Cool features but not in scope for a first release are: ###
 
@@ -65,6 +68,10 @@ The final version is accessible under:
 
 ## Release notes ##
 We had the following releases:
+
+### Dungeon Master Workshop 0.20 ###
+* You can now use markdown in description fields and text nodes for formatting your text.
+* Preview view of cards is generated with invalid or incomplete card data as well.
 
 ### Dungeon Master Workshop 0.19 ###
 * Force SSL

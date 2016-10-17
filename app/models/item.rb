@@ -40,7 +40,7 @@ class Item < Card
     end
     data.add_rule
     data.add_fill [2]
-    data.add_text [description]
+    data.add_text [description] unless description.blank?
     data.add_fill [3]
 
     return data
