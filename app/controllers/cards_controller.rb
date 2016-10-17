@@ -36,18 +36,18 @@ class CardsController < ApplicationController
   def preview
     card_data = nil
     ActiveRecord::Base.transaction do
+      ttt = card_params
       if Card.exists?(params[:id].to_i)
-        ttt = card_params
         card = Card.find(params[:id])
       else
-        ttt = card_params
-        ttt[:type] = card_model.to_s
-        card = current_user.cards.build
+        card_type = card_model.to_s
+        ttt[:type] = card_type
+        card = current_user.cards.build(type: card_type)
       end
       authorize card
       card.assign_attributes(ttt)
 
-      card.save
+      card.save(validate: false)
       card.reload
 
       card_data = card.card_data

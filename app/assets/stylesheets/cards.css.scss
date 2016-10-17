@@ -260,7 +260,7 @@ div.cards {
   padding: 0;
 }
 
-.card-bullet-line {
+.card-bullet-line, .card-element > ul, .card-element > ol {
   font-size: inherit;
   color: black;
   padding-left: 16px;
@@ -269,7 +269,7 @@ div.cards {
   margin-top: 0;
 }
 
-.card-bullet {
+.card-bullet, .card-element > ul > li, .card-element > ol > li {
   margin-bottom: 0;
   margin-top: 0;
   font-size: inherit;

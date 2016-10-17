@@ -27,6 +27,8 @@ gem 'bootstrap-will_paginate', '~> 0.0.10'
 # Provides bootstrap-colorselector library
 gem 'bootstrap-colorselector-rails', '~> 0.1.0'
 
+gem 'redcarpet', '~> 3.3'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks', '~> 5.0.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -90,13 +92,13 @@ end
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
-  gem 'sqlite3', '>= 1.3.11'
+  gem 'sqlite3', '>= 1.3'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', '>= 8.2.2'
+  gem 'byebug', '>= 9.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring', '>= 1.7.2'
+  gem 'spring', '>= 2.0'
 
 
   gem 'rails-controller-testing'
@@ -121,7 +123,7 @@ group :test do
 end
 
 group :production do
-  # Ruby interface for ProgreSQL database
+  # Ruby interface for PostgreSQL database
   gem 'pg',                     '0.18.4'
   gem 'rails_12factor',         '0.0.3'
   gem 'rails_stdout_logging',   '0.0.5'

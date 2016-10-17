@@ -51,7 +51,7 @@ class Spell < Card
     data.add_fill [2]
 
     if short_description.blank?
-      data.add_text [description]
+      data.add_text [description] unless description.blank?
     else
       data.add_text [short_description]
     end
