@@ -69,6 +69,10 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
+### Dungeon Master Workshop 0.20 ###
+* You can now use markdown in description fields and text nodes for formatting your text.
+* Preview view of cards is generated with invalid or incomplete card data as well.
+
 ### Dungeon Master Workshop 0.19 ###
 * Force SSL
 * Update various libraries
