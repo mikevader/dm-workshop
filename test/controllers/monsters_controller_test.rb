@@ -90,12 +90,13 @@ class MonstersControllerTest < ActionController::TestCase
     log_in_as(users(:michael))
     assert_no_difference 'Monster.count' do
       session[:return_to] = 'http://test.host/monsters'
-      patch :update, params: { id: @monster.id, monster: {name: 'ABCD'} }
+      patch :update, params: { id: @monster.id, monster: {name: 'ABCD', card_size: '70x110'} }
     end
 
     updated_monster = Monster.find(@monster.id)
     assert updated_monster
     assert_equal 'ABCD', updated_monster.name
+    assert_equal '70x110', updated_monster.card_size
 
     assert_redirected_to monsters_url
   end

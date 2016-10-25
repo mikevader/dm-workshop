@@ -4,6 +4,7 @@
     <spell>
       <cite>Page: 211  Players Handbook</cite>
       <shared>yes</shared>
+      <cardSize>25x35</cardSize>
       <name>Alarm (Ritual)</name>
       <type>1st-level Abjuration</type>
       <classes>
@@ -25,6 +26,7 @@
     </spell>
     <spell>
       <name>Antilife Shell</name>
+      <cardSize>25x35</cardSize>
       <shared>no</shared>
       <type>5th-level abjuration</type>
       <classes>
@@ -45,6 +47,7 @@
     </spell>
     <spell>
       <name>Magic Missile</name>
+      <cardSize>25x35</cardSize>
       <shared>no</shared>
       <type>1st-level evocation</type>
       <classes>

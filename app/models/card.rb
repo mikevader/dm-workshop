@@ -6,6 +6,7 @@ class Card < ApplicationRecord
   default_scope -> { order(name: :asc) }
 
   validates :user_id, presence: true
+  #validates :card_size, presence: true
   validates :name, presence: true, length: {maximum: 50}, uniqueness: {case_sensitive: false}
 
   def self.types
@@ -46,7 +47,7 @@ class Card < ApplicationRecord
 
     data.id = id
     data.name = name
-    data.card_size = card_size unless card_size.nil?
+    data.card_size = card_size
     data.icon = icon unless icon.nil?
     data.color = color unless color.nil?
 

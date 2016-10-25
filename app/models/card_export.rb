@@ -9,6 +9,7 @@ class CardExport
         xml.monsters {
           monsters.each do |monster|
             xml.monster {
+              xml.cardSize monster.card_size
               xml.shared monster.shared ? 'yes' : 'no'
               xml.cite monster.cite
               xml.name monster.name
@@ -123,6 +124,7 @@ class CardExport
           spells.each do |spell|
             xml.spell {
               xml.name "#{spell.name}#{' (Ritual)' if spell.ritual?}"
+              xml.cardSize spell.card_size
               xml.shared spell.shared ? 'yes' : 'no'
               xml.cite spell.cite unless spell.cite.nil?
               xml.type_ "#{spell.level.ordinalize}-level #{spell.school}"
@@ -158,6 +160,7 @@ class CardExport
           items.each do |item|
             xml.item {
               xml.name item.name
+              xml.cardSize item.card_size
               xml.shared item.shared ? 'yes' : 'no'
               xml.cite item.cite
               xml.type_ item.category.name
@@ -193,6 +196,7 @@ class CardExport
           cards.each do |card|
             xml.card {
               xml.name card.name
+              xml.cardSize card.card_size
               xml.shared card.shared ? 'yes' : 'no'
               xml.cite card.cite unless card.cite.nil?
               xml.icon card.icon

@@ -6,6 +6,7 @@ class FreeFormTest < ActiveSupport::TestCase
     @user = users(:michael)
     @card = @user.cards.build(type: 'FreeForm',
                               name: 'Frenzy',
+                              card_size: '25x35',
                               icon: 'white-book',
                               color: 'indigo',
                               contents: 'subtitle|Rogue feature')

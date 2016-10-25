@@ -30,12 +30,12 @@ ActiveRecord::Schema.define(version: 20160810193307) do
     t.string   "icon"
     t.string   "color"
     t.text     "contents"
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
     t.integer  "user_id"
     t.string   "badges"
     t.string   "cite"
-    t.boolean  "shared",                      default: false, null: false
+    t.boolean  "shared",                      default: false,   null: false
     t.string   "type"
     t.string   "cssclass"
     t.boolean  "attunement"
@@ -67,13 +67,13 @@ ActiveRecord::Schema.define(version: 20160810193307) do
     t.integer  "charisma"
     t.string   "senses"
     t.string   "languages"
-    t.float    "challenge",                   default: 0.0,   null: false
+    t.float    "challenge",                   default: 0.0,     null: false
     t.integer  "saving_throws_mask"
     t.integer  "damage_vulnerabilities_mask"
     t.integer  "damage_resistances_mask"
     t.integer  "damage_immunities_mask"
     t.integer  "cond_immunities_mask"
-    t.string   "card_size"
+    t.string   "card_size",                   default: "25x35", null: false
     t.index ["category_id"], name: "index_cards_on_category_id"
     t.index ["name"], name: "index_cards_on_name"
     t.index ["rarity_id"], name: "index_cards_on_rarity_id"
@@ -129,13 +129,11 @@ ActiveRecord::Schema.define(version: 20160810193307) do
   create_table "properties", force: :cascade do |t|
     t.string   "name"
     t.string   "value"
-    t.integer  "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "card_id"
     t.integer  "position"
     t.index ["card_id"], name: "index_properties_on_card_id"
-    t.index ["item_id"], name: "index_properties_on_item_id"
   end
 
   create_table "rarities", force: :cascade do |t|
@@ -164,10 +162,10 @@ ActiveRecord::Schema.define(version: 20160810193307) do
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
-    t.integer  "taggable_id"
     t.string   "taggable_type"
-    t.integer  "tagger_id"
+    t.integer  "taggable_id"
     t.string   "tagger_type"
+    t.integer  "tagger_id"
     t.string   "context",       limit: 128
     t.datetime "created_at"
     t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
