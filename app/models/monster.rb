@@ -214,7 +214,6 @@ class Monster < Card
 
     data.icon = 'icon-custom-monster'
     data.color = 'black'
-    data.card_size = '35x50'
     data.description = description
 
     data.add_subtitle ["#{monster_size.try(:capitalize)} #{monster_type}, #{alignment}"]
