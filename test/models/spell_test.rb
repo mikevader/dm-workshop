@@ -4,7 +4,10 @@ class SpellTest < ActiveSupport::TestCase
 
   def setup
     @user = users(:michael)
-    @spell = @user.spells.create(name: 'Speak with Plants', level: 3, school: 'transmutation')
+    @spell = @user.spells.create(name: 'Speak with Plants',
+                                 card_size: '25x35',
+                                 level: 3,
+                                 school: 'transmutation')
   end
 
   test 'should be valid' do

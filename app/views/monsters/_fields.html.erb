@@ -6,6 +6,13 @@
 <% end %>
 
 <%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :card_size, class: 'control-label col-sm-3' %>
+    <%= content_tag :div, class: 'col-sm-9' do -%>
+        <%= f.select(:card_size, [['25x35', '25x35'], ['35x50', '35x50'], ['50x70', '50x70']], {selected: @card.card_size}, {class: 'form-control'}) %>
+    <% end -%>
+<% end -%>
+
+<%= content_tag :div, class: 'form-group' do -%>
     <%= content_tag :div, class: 'col-sm-offset-3 col-sm-9' do %>
         <%= content_tag :div, class: 'checkbox' do %>
             <%= f.label :shared do %>
@@ -31,8 +38,8 @@
 <% end -%>
 
 <%= content_tag :div, class: 'form-group' do -%>
-    <%= f.label :size, class: 'control-label col-sm-3' %>
-    <%= content_tag(:div, f.text_field(:size, class: 'form-control'), class: 'col-sm-9') %>
+    <%= f.label :monster_size, 'Size', class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.text_field(:monster_size, class: 'form-control'), class: 'col-sm-9') %>
 <% end %>
 
 <%= content_tag :div, class: 'form-group' do -%>

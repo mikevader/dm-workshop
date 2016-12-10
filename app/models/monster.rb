@@ -11,7 +11,7 @@ class Monster < Card
 
 
   validates :challenge, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 50}
-  validates :size, presence: true
+  validates :monster_size, presence: true
   validates :monster_type, presence: true
   validates :armor_class, presence: true
   validates :hit_points, presence: true
@@ -210,16 +210,13 @@ class Monster < Card
   end
 
   def card_data
-    data = CardData.new
+    data = super
 
-    data.id = id
-    data.name = name
     data.icon = 'icon-custom-monster'
     data.color = 'black'
-    data.card_size = '35x50'
     data.description = description
 
-    data.add_subtitle ["#{size.try(:capitalize)} #{monster_type}, #{alignment}"]
+    data.add_subtitle ["#{monster_size.try(:capitalize)} #{monster_type}, #{alignment}"]
 
     data.add_rule
     data.add_property ['Armor Class', armor_class]

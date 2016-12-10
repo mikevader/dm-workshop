@@ -5,6 +5,7 @@
       <cite>MM 123</cite>
       <shared>yes</shared>
       <name>Goblin</name>
+      <cardSize>35x50</cardSize>
       <type>Goblin</type>
       <stats>
         <proficiency>2</proficiency>
@@ -41,6 +42,7 @@
     <monster>
       <cite/>
       <name>Obgam Sohn des Brogar</name>
+      <cardSize>35x50</cardSize>
       <shared>no</shared>
       <type>Humanoid (dwarf)</type>
       <stats>

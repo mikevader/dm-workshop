@@ -11,7 +11,6 @@ class CardData
     @id = -1
     @contents = []
     @badges = []
-    @card_size = '25x35'
     @description = ''
   end
 
