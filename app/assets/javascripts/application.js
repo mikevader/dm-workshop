@@ -10,13 +10,13 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require analytics
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui/sortable
 //= require jquery-ui/effect-highlight
 //= require bootstrap-sprockets
 //= require turbolinks
+//= require analytics
 //= require item_properties
 //= require_self
 
