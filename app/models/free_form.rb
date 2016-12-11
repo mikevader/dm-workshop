@@ -11,12 +11,7 @@ class FreeForm < Card
   end
 
   def card_data
-    data = CardData.new
-
-    data.id = id
-    data.name = name
-    data.icon = icon
-    data.color = color
+    data = super
 
     unless contents.nil?
       contents.lines.map(&:strip).each do |line|

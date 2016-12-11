@@ -3,6 +3,7 @@
   <items>
     <item>
       <name>Schutzring</name>
+      <cardSize>25x35</cardSize>
       <shared>yes</shared>
       <cite>DMH 191</cite>
       <type>Ring</type>
@@ -14,6 +15,7 @@
     </item>
     <item>
       <name>Speer des Blitzes</name>
+      <cardSize>25x35</cardSize>
       <shared>no</shared>
       <cite>DMH 178</cite>
       <type>Weapon</type>

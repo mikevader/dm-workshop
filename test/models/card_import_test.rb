@@ -19,7 +19,7 @@ class CardImportTest < ActiveSupport::TestCase
     assert_not obgam.shared?
     assert_empty obgam.cite
     assert_equal 'Humanoid (dwarf)', obgam.monster_type
-    assert_equal 'Medium', obgam.size
+    assert_equal 'Medium', obgam.monster_size
     assert_equal 9, obgam.challenge
     assert_equal 4, obgam.bonus # calculated value from cr
     assert_equal '16', obgam.armor_class
@@ -84,7 +84,7 @@ class CardImportTest < ActiveSupport::TestCase
     assert goblin.shared?
     assert_equal 'MM 123', goblin.cite
     assert_equal 'Goblin', goblin.monster_type
-    assert_equal 'huge', goblin.size
+    assert_equal 'huge', goblin.monster_size
     assert_equal 2, goblin.bonus
     assert_equal '13 (natural armor)', goblin.armor_class
     assert_equal 105, goblin.hit_points

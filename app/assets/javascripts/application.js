@@ -16,6 +16,7 @@
 //= require jquery-ui/effect-highlight
 //= require bootstrap-sprockets
 //= require turbolinks
+//= require analytics
 //= require item_properties
 //= require_self
 

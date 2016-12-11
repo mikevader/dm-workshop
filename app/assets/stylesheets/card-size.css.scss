@@ -84,6 +84,18 @@ page[size="25x35"] {
     height: 1.5in;
 }
 
+/* Poker / Magic card size */
+.card-size-50x70 {
+  width:137mm;
+  min-width:137mm;
+  height:196mm;
+}
+
+.card-size-50x70 .card-back-icon {
+  width: 2in;
+  height: 2in;
+}
+
 /* Landscape big card */
 .card-size-75x50 {
     width:7.5in;

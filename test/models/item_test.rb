@@ -4,7 +4,13 @@ class ItemTest < ActiveSupport::TestCase
 
   def setup
     @user = users(:michael)
-    @item = @user.cards.build(type: 'Item', name: 'Wand of Nerdom', category_id: categories(:wand).id, rarity_id: rarities(:rare).id, attunement: true, description: 'Turn geek')
+    @item = @user.cards.build(type: 'Item',
+                              name: 'Wand of Nerdom',
+                              card_size: '25x35',
+                              category_id: categories(:wand).id,
+                              rarity_id: rarities(:rare).id,
+                              attunement: true,
+                              description: 'Turn geek')
   end
 
   test 'should be valid' do

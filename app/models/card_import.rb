@@ -119,11 +119,12 @@ class CardImport
       complete_name = CardImport.load_element '', spell, 'name', true, 'inscribe card: %{value}'
       name = %r{^([a-zA-Z'’/\- ]*)( \(Ritual\))?.*$}.match(complete_name)[1].squish
       ritual = complete_name.downcase.include? 'ritual'
-
       unless (existing_spell = Spell.find_by_name(name)).nil?
         logger.info "Spell #{name} already inscribed"
         id = existing_spell.id
       end
+
+      card_size = CardImport.load_element(name, spell, 'cardSize', false) || '25x35'
       cite = CardImport.load_element name, spell, 'cite', false
       shared = CardImport.load_element(name, spell, 'shared', false) || 'false'
       type = CardImport.load_element name, spell, 'type', true
@@ -148,6 +149,7 @@ class CardImport
       import_card = ImportCard.new(id, :spell)
       import_card.name = name
 
+      import_card.attributes.card_size = card_size
       import_card.attributes.ritual = ritual
       import_card.attributes.cite = cite
       import_card.attributes.shared = shared.to_b
@@ -196,6 +198,7 @@ class CardImport
       new_spell.description = import_card.attributes.description
     end
 
+    new_spell.card_size = import_card.attributes.card_size
     new_spell.cite = import_card.attributes.cite
     new_spell.shared = import_card.attributes.shared
     hero_classes = import_card.attributes.classes.map do |hero_class|
@@ -228,6 +231,7 @@ class CardImport
         id = existing_item.id
       end
 
+      card_size = CardImport.load_element(name, item, 'cardSize', false) || '25x35'
       shared = CardImport.load_element(name, item, 'shared', false) || 'false'
       cite = CardImport.load_element(name, item, 'cite', true)
       category = Category.where('lower(name) LIKE ?', CardImport.load_element(name, item, 'type', true).downcase)
@@ -238,6 +242,7 @@ class CardImport
       import_card = ImportCard.new(id, :item)
 
       import_card.name = name
+      import_card.attributes.card_size = card_size
       import_card.attributes.cite = cite
       import_card.attributes.shared = shared.to_b
       import_card.attributes.category = category.take!
@@ -256,6 +261,7 @@ class CardImport
       new_item.name = import_card.name
     end
 
+    new_item.card_size = import_card.attributes.card_size
     new_item.cite = import_card.attributes.cite
     new_item.shared = import_card.attributes.shared
     new_item.category = import_card.attributes.category
@@ -285,6 +291,7 @@ class CardImport
         id = existing_monster.id
       end
 
+      card_size = CardImport.load_element(name, monster, 'cardSize', false) || '35x50'
       type = CardImport.load_element name, monster, 'type', true
       shared = CardImport.load_element(name, monster, 'shared', false) || 'false'
       cite = CardImport.load_element name, monster, 'cite', false
@@ -375,10 +382,11 @@ class CardImport
       import_card = ImportCard.new(id, :monster)
 
       import_card.name = name
+      import_card.attributes.card_size = card_size
       import_card.attributes.bonus = proficiency
       import_card.attributes.shared = shared.to_b
       import_card.attributes.cite = cite
-      import_card.attributes.size = size
+      import_card.attributes.monster_size = size
       import_card.attributes.monster_type = type
       import_card.attributes.armor_class = ac
       import_card.attributes.hit_points = hp
@@ -420,9 +428,10 @@ class CardImport
       new_monster.name = import_card.name
     end
 
+    new_monster.card_size = import_card.attributes.card_size
     new_monster.shared = import_card.attributes.shared
     new_monster.cite = import_card.attributes.cite
-    new_monster.size = import_card.attributes.size
+    new_monster.monster_size = import_card.attributes.monster_size
     new_monster.monster_type = import_card.attributes.monster_type
     new_monster.armor_class = import_card.attributes.armor_class
     new_monster.hit_points = import_card.attributes.hit_points
@@ -473,6 +482,7 @@ class CardImport
         id = existing_card.id
       end
 
+      card_size = CardImport.load_element(name, card, 'cardSize', false) || '25x35'
       shared = CardImport.load_element(name, card, 'shared', false) || 'false'
       cite = CardImport.load_element name, card, 'cite', false
       color = CardImport.load_element name, card, 'color', false
@@ -482,6 +492,7 @@ class CardImport
 
       import_card = ImportCard.new(id, :card)
       import_card.name = name
+      import_card.attributes.card_size = card_size
       import_card.attributes.shared = shared.to_b
       import_card.attributes.cite = cite
       import_card.attributes.color = color
@@ -500,6 +511,7 @@ class CardImport
       card.name = import_card.name
     end
 
+    card.card_size = import_card.attributes.card_size
     card.shared = import_card.attributes.shared
     card.cite = import_card.attributes.cite
     card.color = import_card.attributes.color

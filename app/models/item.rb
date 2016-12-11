@@ -24,11 +24,8 @@ class Item < Card
   end
 
   def card_data
-    data = CardData.new
+    data = super
 
-    data.id = id
-    data.name = name
-    data.icon = category.cssclass unless category.nil?
     data.color = 'grey'
     data.description = description
 
