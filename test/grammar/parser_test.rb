@@ -69,10 +69,7 @@ class ParserTest < ActiveSupport::TestCase
   end
 
   test 'should work with groups first' do
-    skip 'Not possible at the moment because of some issue in the grammar'
-    result = @parser.parse("(type = 'Monster' or type = 'Spell') and name ~ 'Orc'", @builder.clone)
-    p result
-    assert_equal "(LOWER(type) LIKE 'monster' OR LOWER(type) LIKE 'spell') AND LOWER(name) LIKE '%orc%'",
+    assert_equal "( LOWER(type) LIKE 'monster' OR LOWER(type) LIKE 'spell' ) AND LOWER(name) LIKE '%orc%'",
       @parser.parse("(type = 'Monster' or type = 'Spell') and name ~ 'Orc'", @builder.clone)
   end
 
@@ -87,13 +84,13 @@ class ParserTest < ActiveSupport::TestCase
   end
   
   test 'should work with in' do
-    assert_equal "class IN ('Bard')", @parser.parse("class in ('Bard')", @builder.clone)
-    assert_equal "class IN ('Cleric', 'Bard')", @parser.parse("class in ('Cleric', 'Bard')", @builder.clone)
+    assert_equal "LOWER(class) IN ('bard')", @parser.parse("class in ('Bard')", @builder.clone)
+    assert_equal "LOWER(class) IN ('cleric', 'bard')", @parser.parse("class in ('Cleric', 'Bard')", @builder.clone)
   end
 
   test 'should work with in without quotes' do
-    assert_equal "class IN ('Bard')", @parser.parse("class in (Bard)", @builder.clone)
-    assert_equal "school IN ('transmutation', 'evocation')", @parser.parse("school in (transmutation, evocation)", @builder.clone)
+    assert_equal "LOWER(class) IN ('bard')", @parser.parse("class in (Bard)", @builder.clone)
+    assert_equal "LOWER(school) IN ('transmutation', 'evocation')", @parser.parse("school in (transmutation, evocation)", @builder.clone)
     assert_equal "level IN (1, 2)",
                  @parser.parse("level IN (1, 2)", @builder.clone)
   end
@@ -110,7 +107,7 @@ class ParserTest < ActiveSupport::TestCase
     builder = SearchBuilder.new
     builder.configure_relation "classes", "hero_classes.name", "hero_classes"
     
-    assert_equal "hero_classes.name IN ('Bard')",
+    assert_equal "LOWER(hero_classes.name) IN ('bard')",
     @parser.parse("classes in ('Bard')", builder)
     
     assert builder.joins.first == :hero_classes
@@ -119,5 +116,15 @@ class ParserTest < ActiveSupport::TestCase
   test 'should work with booleans' do
     assert_equal "ritual = 't'", @parser.parse("ritual = true", @builder.clone)
     assert_equal "ritual = 'f'", @parser.parse("ritual = false", @builder.clone)
+  end
+
+  test 'should order by id' do
+    builder = @builder.clone
+
+    assert_equal "LOWER(school) LIKE 'necromancy'",
+                 @parser.parse("school = 'necromancy' ORDER BY name", builder)
+    assert_includes(
+        builder.orders,
+        {field: 'name', direction: 'asc'})
   end
 end

@@ -1,12 +1,12 @@
 
 grammar Dmwql
   rule search
-    first:expression second:( s union:union_keyword s next:expression )* <Search>
-    / string:string_with_spaces <StringSearch>
+    first:expression second:( s union:union_keyword s next:expression )* sorting:( S orderBy:orderBy )? <Search>
+    / string:string_with_spaces sorting:( S orderBy:orderBy )? <StringSearch>
   end
 
   rule expression
-    '(' s search:search s ')' <Expression>
+    '(' s expression:search s ')' <Expression>
     / query:query <Expression>
   end
 
@@ -33,6 +33,14 @@ grammar Dmwql
     string
     / boolean
     / number
+  end
+
+  rule orderBy
+    'ORDER BY'i S first:order others:(s ',' s order)* <OrderBy>
+  end
+
+  rule order
+    id ( S direction:( 'ASC'i / 'DESC'i ) )?
   end
   
   rule boolean

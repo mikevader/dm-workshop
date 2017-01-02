@@ -11,6 +11,8 @@ class SearchBuilder
 
     @normalized_search = nil
 
+    @normalized_orders = []
+
     self.instance_eval(&block) if block_given?
   end
 
@@ -43,13 +45,9 @@ class SearchBuilder
 
   def orders
     if @orders.empty?
-      @orders << :name
+      # @orders << {field: 'name', field: 'ASC'}
     end
     @orders
-  end
-
-  def is_tag?(id)
-    @tags.include? id
   end
 
   def add_str_comp_clause(field, operator, value)
@@ -74,8 +72,18 @@ class SearchBuilder
     self
   end
 
+  def order_by(field, direction)
+    direction_sym = (direction.downcase == 'desc') ? 'desc' : 'asc'
+    @orders << {field: query_id(field), direction: direction_sym}
+    @normalized_orders << {field: field, direction: direction_sym}
+    self
+  end
+
   def add_group_clause(field, values)
     values.tr!('()', '')
+
+    query = values.split(',').map(&:strip).map { |x| surround_string_with_quotes_if_necessary(x) }.join(', ')
+    query = '(' + query + ')'
 
     if is_tag? field.to_sym
       tags = values.split(',').map(&:strip)
@@ -86,17 +94,17 @@ class SearchBuilder
         ids << -1
       end
 
-      @tree_root = lambda { return "id IN (#{ids.join(', ')})" }
-      query = values.split(',').map(&:strip).map { |x| surround_string_with_quotes_if_necessary(x) }.join(', ')
-      query = '(' + query + ')'
-      @normalized_search = lambda { return "#{field} IN #{query}" }
-    else
-      query = values.split(',').map(&:strip).map { |x| surround_string_with_quotes_if_necessary(x) }.join(', ')
-      query = '(' + query + ')'
 
-      @tree_root = lambda { return "#{query_id(field)} IN #{query}" }
-      @normalized_search = lambda { return "#{field} IN #{query}" }
+      @tree_root = lambda { return "id IN (#{ids.join(', ')})" }
+    else
+      if is_string_in_query? query
+        @tree_root = lambda { return "LOWER(#{query_id(field)}) IN #{query.downcase}" }
+      else
+        @tree_root = lambda { return "#{query_id(field)} IN #{query}" }
+      end
     end
+
+    @normalized_search = lambda { return "#{field} IN #{query}" }
 
     self
   end
@@ -142,13 +150,28 @@ class SearchBuilder
 
   def search
     unless @normalized_search.nil?
-      @normalized_search.call
+      @normalized_search.call + normalized_order
     else
       ''
     end
   end
 
   private
+
+  def normalized_order
+    return '' if @normalized_orders.empty?
+
+    " ORDER BY #{ @normalized_orders.map { |order| "#{order[:field]} #{order[:direction]}" }.join(', ') }"
+  end
+
+  def is_tag?(id)
+    @tags.include? id
+  end
+
+  def is_string_in_query?(query_string)
+    query_string =~ /'/
+  end
+
   def surround_string_with_quotes_if_necessary(string)
     if string =~ /\d/ or string =~ /'.*'/
       string

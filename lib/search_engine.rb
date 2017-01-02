@@ -7,7 +7,7 @@ class SearchEngine2
     result = @entity_class.none
     normalized = search_string
     error = nil
-    #begin
+    begin
       if search_string.blank?
         if all_on_empty
           result = @entity_class.all
@@ -17,13 +17,13 @@ class SearchEngine2
       else
         result, normalized = search_entities(search_string)
       end
-    #rescue ParseSearchError => e
-    #  puts e.message
-    #  puts e.backtrace.join("\n")
-    #  # Rails.logger.error e.message
-    #  # Rails.logger.error e.backtrace.join("\n")
-    #  error = e.parse_error
-    #end
+    rescue ParseSearchError => e
+      puts e.message
+      puts e.backtrace.join("\n")
+      # Rails.logger.error e.message
+      # Rails.logger.error e.backtrace.join("\n")
+      error = e.parse_error
+    end
 
     return result, normalized, error
   end
@@ -38,9 +38,9 @@ class SearchEngine2
         query = query.joins(join)
       end
       query = query.where(search)
-      #builder.orders.each do |order|
-      #  query = query.order(order)
-      #end
+      builder.orders.each do |order|
+        query = query.reorder("#{order[:field]} #{order[:direction]}")
+      end
       return query, builder.search
     else
       return all, search

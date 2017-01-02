@@ -112,7 +112,7 @@ class SearchBuilderTest < ActiveSupport::TestCase
     query = @builder.query
     search = @builder.search
 
-    assert_equal "name IN ('hello', 'world')", query
+    assert_equal "LOWER(name) IN ('hello', 'world')", query
     assert_equal "name IN ('hello', 'world')", search
   end
 end
