@@ -64,7 +64,7 @@ module Dmwql
     def query_string(builder)
       add_order_by(builder, first)
 
-      others.elements.each { |node| add_order_by(builder, node) }
+      others.elements.each { |node| add_order_by(builder, node.order) }
     end
 
     def add_order_by(builder, node)

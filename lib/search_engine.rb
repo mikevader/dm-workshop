@@ -18,8 +18,8 @@ class SearchEngine2
         result, normalized = search_entities(search_string)
       end
     rescue ParseSearchError => e
-      puts e.message
-      puts e.backtrace.join("\n")
+      # puts e.message
+      # puts e.backtrace.join("\n")
       # Rails.logger.error e.message
       # Rails.logger.error e.backtrace.join("\n")
       error = e.parse_error
@@ -38,8 +38,13 @@ class SearchEngine2
         query = query.joins(join)
       end
       query = query.where(search)
-      builder.orders.each do |order|
+
+      unless builder.orders.empty?
+        order = builder.orders.first
         query = query.reorder("#{order[:field]} #{order[:direction]}")
+        builder.orders.drop(1).each do |order|
+          query = query.order("#{order[:field]} #{order[:direction]}")
+        end
       end
       return query, builder.search
     else

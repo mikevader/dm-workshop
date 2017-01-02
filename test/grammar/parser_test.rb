@@ -127,4 +127,17 @@ class ParserTest < ActiveSupport::TestCase
         builder.orders,
         {field: 'name', direction: 'asc'})
   end
+
+  test 'should order by multiple ids' do
+    builder = @builder.clone
+
+    assert_equal "LOWER(class) LIKE 'warlock'",
+                 @parser.parse("class = warlock ORDER BY level, school", builder)
+    assert_includes(
+        builder.orders,
+        {field: 'level', direction: 'asc'})
+    assert_includes(
+        builder.orders,
+        {field: 'school', direction: 'asc'})
+  end
 end

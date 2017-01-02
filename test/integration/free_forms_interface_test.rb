@@ -52,7 +52,7 @@ class FreeFormsInterfaceTest < ActionDispatch::IntegrationTest
   end
 
   test 'cards interface should handle incorrect search expression' do
-    skip 'Because of non suppressable backtraces'
+    # skip 'Because of non suppressable backtraces'
     log_in_as(@user)
     get free_forms_path, params: { search: 'namer ~ cunning'}
     assert_select 'form#cards_search' do
