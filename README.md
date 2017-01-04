@@ -69,6 +69,10 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
+
+### Dungeon Master Workshop 0.22 ###
+* Orderby keyword in searches for ordering result.
+
 ### Dungeon Master Workshop 0.21 ###
 * Make card size configurable.
 
