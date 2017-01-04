@@ -36,7 +36,6 @@ class SearchBuilderTest < ActiveSupport::TestCase
   end
 
   test 'should work with union and parenthesis' do
-    #"name = 'bane' and ( level = 5 or school = 'necromancy')"
     @builder.add_str_comp_clause('name', '=', 'bane').and(@builder.clone.parenthesis(@builder.clone.add_non_str_comp_clause('level', '=', '5').or(@builder.clone.add_str_comp_clause('school', '=', 'necromancy'))))
 
     query = @builder.query

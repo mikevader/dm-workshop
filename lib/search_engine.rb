@@ -12,22 +12,19 @@ class SearchEngine2
         if all_on_empty
           result = @entity_class.all
         else
-          result = []
+          #result = []
         end
       else
         result, normalized = search_entities(search_string)
       end
     rescue ParseSearchError => e
-      # puts e.message
-      # puts e.backtrace.join("\n")
-      # Rails.logger.error e.message
-      # Rails.logger.error e.backtrace.join("\n")
       error = e.parse_error
     end
 
     return result, normalized, error
   end
 
+  private
   def search_entities(search)
     if search
       builder = @entity_class.new_search_builder
