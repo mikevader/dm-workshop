@@ -101,11 +101,11 @@ end
 
 desc 'Provision dev with prod data and start migration.'
 task :prepare_dev_from_stage do
-  heroku 'pg:backups capture --app dmw-staging'
-  backup_url = heroku 'pg:backups public-url --app dmw-staging | cat'
+  heroku 'pg:backups:capture --app dmw-staging'
+  backup_url = heroku 'pg:backups:url --app dmw-staging | cat'
   puts "Backup file can be found under: #{backup_url}"
 
-  heroku "pg:backups restore '#{backup_url}' DATABASE --app dmw-development  --confirm dmw-development"
+  heroku "pg:backups:restore '#{backup_url}' DATABASE --app dmw-development  --confirm dmw-development"
   heroku 'run rake db:migrate --app dmw-development'
 end
 
@@ -113,7 +113,7 @@ end
 # (prepare heroku to have pipeline tools) heroku plugins:install heroku-pipelines
 desc 'Release the currently staged version to prod incl. migration'
 task :release_from_stage do
-  heroku 'pg:backups capture --app dmw'
+  heroku 'pg:backups:capture --app dmw'
   heroku 'pipelines:promote --app dmw-staging'
   heroku 'run rake db:migrate --app dmw'
 end

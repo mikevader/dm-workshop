@@ -9,6 +9,13 @@ module Dmwql
           first_operand.or(node.next.query_string(builder.clone))
         end
       end
+
+      if defined? sorting
+        if defined? sorting.orderBy
+          sorting.orderBy.query_string(builder)
+        end
+      end
+
       first_operand
     end
   end
@@ -24,7 +31,7 @@ module Dmwql
       if defined? query
         query.query_string(builder)
       else
-        builder.clone.parenthesis(search.query_string(builder.clone))
+        builder.parenthesis(expression.query_string(builder.clone))
       end
     end
   end
@@ -52,7 +59,27 @@ module Dmwql
       builder.add_group_clause id.text_value, values
     end
   end
-  
+
+  class OrderBy < Treetop::Runtime::SyntaxNode
+    def query_string(builder)
+      add_order_by(builder, first)
+
+      others.elements.each { |node| add_order_by(builder, node.order) }
+    end
+
+    def add_order_by(builder, node)
+      field = node.id.text_value
+
+      if defined? node.elements[1].direction
+        direction = node.elements[1].direction.text_value
+      else
+        direction = 'ASC'
+      end
+
+      builder.order_by(field, direction)
+    end
+  end
+
   class StringComparison < Treetop::Runtime::SyntaxNode
     def query_string(builder)
       operator = if op.text_value == '~'

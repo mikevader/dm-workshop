@@ -6,10 +6,9 @@ class FreeFormsInterfaceTest < ActionDispatch::IntegrationTest
     @user = users(:michael)
   end
 
-  test "cards interface should handle invalid input" do
+  test 'cards interface should handle invalid input' do
     log_in_as(@user)
     get free_forms_path
-    #assert_select 'div.pagination'
     # Invalid submission
     assert_no_difference 'Card.count' do
       post free_forms_path, params: { free_form: { name: "" } }
@@ -21,7 +20,7 @@ class FreeFormsInterfaceTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     get free_forms_path
     # Valid submission
-    name = "heroblade"
+    name = 'heroblade'
     assert_difference 'Card.count', 1 do
       get new_free_form_path, headers: { referer: free_forms_url }
       post free_forms_path, params: { free_form: { name: name, icon: 'white-book', color: 'indigo', contents: 'subtitle | Rogue feature' } }
@@ -31,6 +30,35 @@ class FreeFormsInterfaceTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_match name, response.body
     assert_select 'td', text: name
+  end
+
+  test 'cards interface should search for all' do
+    log_in_as(@user)
+    get free_forms_path
+    # Valid submission
+    assert_select 'table.table' do
+      assert_select 'tr', FreeForm.count + 1
+    end
+  end
+
+  test 'cards interface should handle search for card by name' do
+    log_in_as(@user)
+    get free_forms_path, params: { search: 'name ~ cunning'}
+    # Valid submission
+    assert_select 'table.table' do
+      assert_select 'tr', 2
+      assert_select 'td', 'Cunning Action'
+    end
+  end
+
+  test 'cards interface should handle incorrect search expression' do
+    # skip 'Because of non suppressable backtraces'
+    log_in_as(@user)
+    get free_forms_path, params: { search: 'namer ~ cunning'}
+    assert_select 'form#cards_search' do
+      assert_select 'div.alert', "Field 'namer' does not exist."
+    end
+
   end
 
   test 'cards interface should handle delete' do
