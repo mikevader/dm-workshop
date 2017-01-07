@@ -16,8 +16,7 @@ class SearchEngineTest < ActiveSupport::TestCase
                  query.to_sql)
     assert_equal("",
                  human_readable_query)
-    assert_equal(nil,
-                 error)
+    assert_nil(error)
   end
 
   test 'empty search should search for none if set to false' do
@@ -282,10 +281,14 @@ class SearchEngineTest < ActiveSupport::TestCase
     query, normalized_query, error = search_engine.search(given_query, false)
     sql_query = query.to_sql
 
-    assert_equal(
-        expected_error,
-        error
-    )
+    if expected_error.nil?
+      assert_nil error
+    else
+      assert_equal(
+          expected_error,
+          error
+      )
+    end
     assert_equal(
         expected_normalized_query,
         normalized_query

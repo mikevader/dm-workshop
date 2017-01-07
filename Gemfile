@@ -42,34 +42,34 @@ gem 'bcrypt', '~> 3.1.11'
 gem 'pundit', '~> 1.1.0'
 
 # Use Data::Faker from perl to easily generate fake test data
-gem 'faker', '~> 1.6.6'
+gem 'faker', '~> 1.7.2'
 
 # Upload files to Rails and map them to ORM frameworks
-gem 'carrierwave', '~> 0.10'
+gem 'carrierwave', '~> 1.0'
 # Manipulate images via ImageMagick or GraphicsMagick
 gem 'mini_magick', '~> 4.3'
 # Cloud service library which supports most of cloud providers
 gem 'fog', '~> 1.37'
 
 # Producing and parsing XML used for import/export of cards
-gem 'nokogiri', '~> 1.6.8'
+gem 'nokogiri', '~> 1.7.0'
 # Store session data in active records aka database
 gem 'activerecord-session_store', '~> 1.0.0'
 
 # Use for easy parsing the search expression
 gem 'treetop', '~> 1.6.3'
-gem 'net-ssh', '~> 3.2.0'
+gem 'net-ssh', '~> 4.0.0'
 
 # Create general purpose data admin interface
 gem 'remotipart', github: 'mshibuya/remotipart'
-gem 'rails_admin', '~> 1.0.0'
+gem 'rails_admin', '~> 1.1.1'
 
 # Tagging library for used on any kind of object
 gem 'acts-as-taggable-on', '~> 4.0.0'
 # Ordering library to order traits, actions, etc on monster and other cards
 gem 'acts_as_list', '~> 0.8.1'
 # Google re-captcha for sign-up process
-gem 'recaptcha', '~> 3.3.0', require: 'recaptcha/rails'
+gem 'recaptcha', '~> 4.0.1', require: 'recaptcha/rails'
 
 # Ruby web server built for concurrency and performance
 gem 'puma', '~> 3.6.0'
@@ -79,10 +79,10 @@ group :development do
   gem 'guard-livereload', '~> 2.4', require: false
 
   # Automating interaction with websites. Used for scraping dndspells.com for spells.
-  gem 'mechanize', '~> 2.7.4'
+  gem 'mechanize', '~> 2.7'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 3.3.1'
+  gem 'web-console', '~> 3.3'
 
   # Security check
   gem 'brakeman', '>= 3.2.1', require: false
