@@ -11,11 +11,6 @@ class TraitTest < ActiveSupport::TestCase
     assert @trait.valid?
   end
 
-  test 'monster id should be present' do
-    @trait.card_id = nil
-    assert_not @trait.valid?
-  end
-
   test 'title should be present' do
     @trait.title = '      '
     assert_not @trait.valid?

@@ -11,11 +11,6 @@ class ActionTest < ActiveSupport::TestCase
     assert @action.valid?
   end
 
-  test "monster id should be present" do
-    @action.card_id = nil
-    assert_not @action.valid?
-  end
-
   test "title should be present" do
     @action.title = "      "
     assert_not @action.valid?
