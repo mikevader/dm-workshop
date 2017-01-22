@@ -4,6 +4,7 @@ class MonstersInterfaceTest < ActionDispatch::IntegrationTest
 
   def setup
     @user = users(:michael)
+    @source = sources(:dnd)
   end
 
   test "monsters interface should handle invalid input" do
@@ -24,7 +25,22 @@ class MonstersInterfaceTest < ActionDispatch::IntegrationTest
     name = "heroblade"
     assert_difference 'Monster.count', 1 do
       get new_monster_path, headers: { referer: monsters_url }
-      post monsters_path, params: { monster: { name: name, monster_size: "small", monster_type: "humanoid", armor_class: "15 (leather armor, shield)", hit_points: 7, strength: 8, dexterity: 14, constitution: 10, intelligence: 10, wisdom: 8, charisma: 8 } }
+      post monsters_path,
+           params: {
+               monster: {
+                   name: name,
+                   source_id: @source.id,
+                   card_size: '25x50',
+                   monster_size: "small",
+                   monster_type: "humanoid",
+                   armor_class: "15 (leather armor, shield)",
+                   hit_points: 7,
+                   strength: 8,
+                   dexterity: 14,
+                   constitution: 10,
+                   intelligence: 10,
+                   wisdom: 8,
+                   charisma: 8 } }
     end
     assert_redirected_to monsters_url
     follow_redirect!

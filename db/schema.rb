@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160810193307) do
+ActiveRecord::Schema.define(version: 20170121122423) do
 
   create_table "actions", force: :cascade do |t|
     t.string   "title"
@@ -74,9 +74,11 @@ ActiveRecord::Schema.define(version: 20160810193307) do
     t.integer  "damage_immunities_mask"
     t.integer  "cond_immunities_mask"
     t.string   "card_size"
+    t.integer  "source_id"
     t.index ["category_id"], name: "index_cards_on_category_id"
     t.index ["name"], name: "index_cards_on_name"
     t.index ["rarity_id"], name: "index_cards_on_rarity_id"
+    t.index ["source_id"], name: "index_cards_on_source_id"
     t.index ["user_id"], name: "index_cards_on_user_id"
   end
 
@@ -160,6 +162,12 @@ ActiveRecord::Schema.define(version: 20160810193307) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_skills_on_name"
+  end
+
+  create_table "sources", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "taggings", force: :cascade do |t|

@@ -4,6 +4,7 @@ class FreeFormsInterfaceTest < ActionDispatch::IntegrationTest
 
   def setup
     @user = users(:michael)
+    @source = sources(:dnd)
   end
 
   test 'cards interface should handle invalid input' do
@@ -23,7 +24,15 @@ class FreeFormsInterfaceTest < ActionDispatch::IntegrationTest
     name = 'heroblade'
     assert_difference 'Card.count', 1 do
       get new_free_form_path, headers: { referer: free_forms_url }
-      post free_forms_path, params: { free_form: { name: name, icon: 'white-book', color: 'indigo', contents: 'subtitle | Rogue feature' } }
+      post free_forms_path,
+           params: {
+               free_form: {
+                   name: name,
+                   source_id: @source.id,
+                   card_size: '25x50',
+                   icon: 'white-book',
+                   color: 'indigo',
+                   contents: 'subtitle | Rogue feature' } }
     end
 
     assert_redirected_to free_forms_url

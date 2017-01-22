@@ -138,15 +138,16 @@ class CardsController < ApplicationController
   end
 
   def card_params(type = card_type)
+    common_fields = [:name, :source_id, :card_size, :shared, :cite, :tag_list]
     case type
       when :freeform
-        params.require(:free_form).permit(:name, :card_size, :shared, :cite, :icon, :color, :contents, :tag_list)
+        params.require(:free_form).permit(common_fields, :icon, :color, :contents)
       when :item
-        params.require(:item).permit(:name, :card_size, :shared, :tag_list, :cssclass, :category_id, :rarity_id, :attunement, :description, properties_attributes: [:id, :name, :value, :position, :_destroy])
+        params.require(:item).permit(common_fields, :cssclass, :category_id, :rarity_id, :attunement, :description, properties_attributes: [:id, :name, :value, :position, :_destroy])
       when :monster
-        params.require(:monster).permit(:name, :card_size, :shared, :tag_list, :cite, :monster_size, :monster_type, :alignment, :armor_class, :hit_points, :speed, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :senses, :languages, :challenge, :description, :skills, :saving_throws => [], :damage_vulnerabilities => [], :damage_resistances => [], :damage_immunities => [], :cond_immunities => [], actions_attributes: [:id, :title, :description, :action_type, :melee, :ranged, :position, :_destroy], traits_attributes: [:id, :title, :description, :position, :_destroy], cards_skills_attributes: [:id, :skill_id, :value, :_destroy])
+        params.require(:monster).permit(common_fields, :monster_size, :monster_type, :alignment, :armor_class, :hit_points, :speed, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :senses, :languages, :challenge, :description, :skills, :saving_throws => [], :damage_vulnerabilities => [], :damage_resistances => [], :damage_immunities => [], :cond_immunities => [], actions_attributes: [:id, :title, :description, :action_type, :melee, :ranged, :position, :_destroy], traits_attributes: [:id, :title, :description, :position, :_destroy], cards_skills_attributes: [:id, :skill_id, :value, :_destroy])
       when :spell
-        params.require(:spell).permit(:name, :card_size, :shared, :tag_list, :cite, :ritual, :level, :school, :casting_time, :range, :components, :duration, :short_description, :athigherlevel, :description, :picture, :concentration, :hero_classes, :hero_class_ids => [])
+        params.require(:spell).permit(common_fields, :ritual, :level, :school, :casting_time, :range, :components, :duration, :short_description, :athigherlevel, :description, :picture, :concentration, :hero_classes, :hero_class_ids => [])
     end
   end
 end

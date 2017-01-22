@@ -1,9 +1,10 @@
 require 'test_helper'
 
 class MonstersControllerTest < ActionController::TestCase
+  include CommonCardControllerTest
 
   setup do
-    @monster = cards(:shadow_demon)
+    @card = @monster = cards(:shadow_demon)
   end
 
   test 'show should redirect when not logged in' do
@@ -20,57 +21,36 @@ class MonstersControllerTest < ActionController::TestCase
     assert_redirected_to login_url
   end
 
-  test 'edit should redirect when not logged in' do
-    post :edit, params: { id: @monster }
-    assert_not flash.empty?
-    assert_redirected_to login_url
-  end
-
-  test 'update should redirect when not logged in' do
-    patch :update, params: { id: @monster }
-    assert_not flash.empty?
-    assert_redirected_to login_url
-  end
-
-  test 'destroy should redirect when not logged in' do
-    assert_no_difference 'Monster.count' do
-      delete :destroy, params: { id: @monster }
-    end
-    assert_not flash.empty?
-    assert_redirected_to login_url
-  end
-
   test 'get should redirect index when not logged in' do
-    [:index, :new].each do |action|
-      get action
-      assert_not flash.empty?
-      assert_redirected_to login_url
-    end
-  end
-
-  test 'should get index' do
-    log_in_as(users(:michael))
     get :index
-    assert_response :success
-  end
-
-  test 'should get show' do
-    log_in_as(users(:michael))
-    get :show, params: { id: @monster }
-    assert_response :success
-  end
-
-  test 'should get new' do
-    log_in_as(users(:michael))
-    get :new
-    assert_response :success
+    assert_not flash.empty?
+    assert_redirected_to login_url
   end
 
   test 'should get create' do
     log_in_as(users(:michael))
     assert_difference 'Monster.count', +1 do
+      source = sources(:dnd)
       session[:return_to] = 'http://test.host/monsters'
-      post :create, params: { monster: {name: 'AAA', bonus: 2, monster_size: 'huge', monster_type: 'humanoid', armor_class: '19 (plate)', hit_points: 150, strength: 8, dexterity: 8, constitution: 8, intelligence: 12, wisdom: 12, charisma: 12} }
+      post :create,
+           params: {
+               monster: {
+                   name: 'AAA',
+                   source_id: source.id,
+                   card_size: '25x50',
+                   bonus: 2,
+                   monster_size: 'huge',
+                   monster_type: 'humanoid',
+                   armor_class: '19 (plate)',
+                   hit_points: 150,
+                   strength: 8,
+                   dexterity: 8,
+                   constitution: 8,
+                   intelligence: 12,
+                   wisdom: 12,
+                   charisma: 12
+               }
+           }
     end
 
     new_monster = Monster.find_by_name('AAA')
@@ -78,12 +58,6 @@ class MonstersControllerTest < ActionController::TestCase
     assert_equal 2, new_monster.bonus
 
     assert_redirected_to monsters_url
-  end
-
-  test 'should get edit' do
-    log_in_as(users(:michael))
-    post :edit, params: { id: @monster }
-    assert_response :success
   end
 
   test 'should get update' do

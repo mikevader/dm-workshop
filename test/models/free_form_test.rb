@@ -1,29 +1,17 @@
 require 'test_helper'
 
 class FreeFormTest < ActiveSupport::TestCase
+  include CommonCardTest
 
   def setup
     @user = users(:michael)
     @card = @user.cards.build(type: 'FreeForm',
                               name: 'Frenzy',
+                              source: sources(:dnd),
                               card_size: '25x35',
                               icon: 'white-book',
                               color: 'indigo',
                               contents: 'subtitle|Rogue feature')
-  end
-
-  test 'should be valid' do
-    assert @card.valid?
-  end
-
-  test 'user_id should be present' do
-    @card.user_id = nil
-    assert_not @card.valid?, 'Card must belong to a user.'
-  end
-
-  test 'name should be present' do
-    @card.name = '     '
-    assert_not @card.valid?
   end
 
   test 'icon should be present' do
@@ -34,15 +22,6 @@ class FreeFormTest < ActiveSupport::TestCase
   test 'color should be present' do
     @card.color = '     '
     assert_not @card.valid?
-  end
-
-  test 'replicate should work with tags as well' do
-    @card.tag_list.add('dsa')
-    @card.save
-    @card.reload
-
-    replicate = @card.replicate
-    assert_includes replicate.tag_list, 'dsa'
   end
 
   test 'should generate card data' do

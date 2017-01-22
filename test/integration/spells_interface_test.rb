@@ -4,6 +4,7 @@ class SpellsInterfaceTest < ActionDispatch::IntegrationTest
 
   def setup
     @user = users(:michael)
+    @source = sources(:dnd)
   end
 
   test "spell interface should handle invalid input" do
@@ -24,7 +25,15 @@ class SpellsInterfaceTest < ActionDispatch::IntegrationTest
     spell_name = "Slow"
     assert_difference 'Spell.count', 1 do
       get new_spell_path, headers: { referer: spells_url }
-      post spells_path, params: { spell: {name: spell_name, level: 3, school: "transmutation", description: description } }
+      post spells_path,
+           params: {
+               spell: {
+                   name: spell_name,
+                   source_id: @source.id,
+                   card_size: '25x50',
+                   level: 3,
+                   school: "transmutation",
+                   description: description } }
     end
     assert_redirected_to spells_url
     follow_redirect!

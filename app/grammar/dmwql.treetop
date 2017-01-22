@@ -96,6 +96,6 @@ grammar Dmwql
   end
 
   rule string_char
-    [0-9a-zA-Z_\-\*]
+    [0-9a-zA-Z_\-\*\&]
   end
 end

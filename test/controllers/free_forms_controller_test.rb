@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class FreeFormsControllerTest < ActionController::TestCase
+  include CommonCardControllerTest
 
   setup do
     @card = cards(:cunning_action)
@@ -18,59 +19,28 @@ class FreeFormsControllerTest < ActionController::TestCase
     assert_redirected_to login_url
   end
 
-  test 'edit should redirect when not logged in' do
-    post :edit, params: { id: @card }
-    assert_not flash.empty?
-    assert_redirected_to login_url
-  end
-
-  test 'update should redirect when not logged in' do
-    patch :update, params: { id: @card }
-    assert_not flash.empty?
-    assert_redirected_to login_url
-  end
-
-  test 'destroy should redirect when not logged in' do
-    delete :destroy, params: { id: @card }
-    assert_not flash.empty?
-    assert_redirected_to login_url
-  end
-
   test 'should redirect index when not logged in' do
     get :index
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
-  test 'should redirect new when not logged in' do
-    get :new
-    assert_not flash.empty?
-    assert_redirected_to login_url
-  end
-
-  test 'should get index' do
-    log_in_as(users(:michael))
-    get :index
-    assert_response :success
-  end
-
-  test 'should get show' do
-    log_in_as(users(:michael))
-    get :show, params: { id: @card }
-    assert_response :success
-  end
-
-  test 'should get new' do
-    log_in_as(users(:michael))
-    get :new
-    assert_response :success
-  end
-
   test 'should get create' do
     log_in_as(users(:michael))
     assert_difference 'Card.count', +1 do
+      source = sources(:dnd)
       session[:return_to] = 'http://test.host/free_forms'
-      post :create, params: { free_form: {name: 'Frenzy', icon: 'white-book', color: 'black', contents: ''} }
+      post :create,
+           params: {
+               free_form: {
+                   name: 'Frenzy',
+                   source_id: source.id,
+                   card_size: '25x50',
+                   icon: 'white-book',
+                   color: 'black',
+                   contents: ''
+               }
+           }
     end
 
     new_card = Card.find_by_name('Frenzy')
@@ -78,12 +48,6 @@ class FreeFormsControllerTest < ActionController::TestCase
     assert_equal 'white-book', new_card.icon
 
     assert_redirected_to free_forms_url
-  end
-
-  test 'should get edit' do
-    log_in_as(users(:michael))
-    post :edit, params: { id: @card }
-    assert_response :success
   end
 
   test 'should get update' do
