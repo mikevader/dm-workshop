@@ -6,6 +6,11 @@
 <% end %>
 
 <%= content_tag :div, class: 'form-group' do -%>
+    <%= f.label :source, class: 'control-label col-sm-3' %>
+    <%= content_tag(:div, f.collection_select(:source_id, Source.all, :id, :name, {}, {class: 'form-control'}), class: 'col-sm-9') %>
+<% end %>
+
+<%= content_tag :div, class: 'form-group' do -%>
     <%= f.label :card_size, class: 'control-label col-sm-3' %>
     <%= content_tag :div, class: 'col-sm-9' do -%>
         <%= f.select(:card_size, [['25x35', '25x35'], ['35x50', '35x50'], ['50x70', '50x70']], {selected: @card.card_size}, {class: 'form-control'}) %>

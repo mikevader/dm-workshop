@@ -1,27 +1,15 @@
 require 'test_helper'
 
 class SpellTest < ActiveSupport::TestCase
+  include CommonCardTest
 
   def setup
     @user = users(:michael)
-    @spell = @user.spells.create(name: 'Speak with Plants',
+    @card = @spell = @user.spells.create(name: 'Speak with Plants',
+                                 source: sources(:dnd),
                                  card_size: '25x35',
                                  level: 3,
                                  school: 'transmutation')
-  end
-
-  test 'should be valid' do
-    assert @spell.valid?
-  end
-
-  test 'user id should be present' do
-    @spell.user_id = nil
-    assert_not @spell.valid?
-  end
-
-  test 'name should be present' do
-    @spell.name = '    '
-    assert_not @spell.valid?
   end
 
   test 'school should be present' do
@@ -53,15 +41,6 @@ class SpellTest < ActiveSupport::TestCase
 
   test 'order should be alphabetically' do
     assert_equal cards(:bane), Spell.first
-  end
-
-  test 'replicate should work with tags as well' do
-    @spell.tag_list.add('dsa')
-    @spell.save
-    @spell.reload
-
-    replicate = @spell.replicate
-    assert_includes replicate.tag_list, 'dsa'
   end
 
   test 'should follow and unfollow a user' do

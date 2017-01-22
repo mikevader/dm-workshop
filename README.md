@@ -34,6 +34,7 @@ The final version is accessible under:
 
 ## Newly added features
 * You can now use markdown in description fields and text nodes for formatting your text.
+* Labels usable in search
 
 
 ### Cool features but not in scope for a first release are: ###
@@ -46,7 +47,6 @@ The final version is accessible under:
 ## Planned Features:
 * Overridable skill value
 * Overridable saving throw value
-* Labels usable in search
 * Auto complete for search
 * Access rights
 * Private cards
@@ -69,6 +69,8 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
+### Dungeon Master Workshop 0.24 ###
+* New attribute source.
 
 ### Dungeon Master Workshop 0.22 ###
 * Orderby keyword in searches for ordering result.

@@ -1,10 +1,12 @@
 require 'test_helper'
 
 class MonsterTest < ActiveSupport::TestCase
+  include CommonCardTest
 
   def setup
     @user = users(:michael)
-    @monster = @user.monsters.build(name: 'Goblin',
+    @card = @monster = @user.monsters.build(name: 'Goblin',
+                                    source: sources(:dnd),
                                     card_size: '35x50',
                                     monster_size: 'small',
                                     monster_type: 'humanoid',
@@ -16,20 +18,6 @@ class MonsterTest < ActiveSupport::TestCase
                                     intelligence: 10,
                                     wisdom: 8,
                                     charisma: 8)
-  end
-
-  test 'should be valid' do
-    assert @monster.valid?
-  end
-
-  test 'user id should be present' do
-    @monster.user_id = nil
-    assert_not @monster.valid?
-  end
-
-  test 'name should be present' do
-    @monster.name = '    '
-    assert_not @monster.valid?
   end
 
   test 'skills should be addible' do
@@ -170,15 +158,6 @@ class MonsterTest < ActiveSupport::TestCase
     @monster.traits.build(title: 'Nimble Escape', description: 'The goblin can take the Disengage or Hide action as a bonus action on each of its turns.')
 
     assert_equal 1, @monster.traits.size
-  end
-
-  test 'replicate should work with tags as well' do
-    @monster.tag_list.add('dsa')
-    @monster.save
-    @monster.reload
-
-    replicate = @monster.replicate
-    assert_includes replicate.tag_list, 'dsa'
   end
 
   test 'should calculate XP from challenge rating' do

@@ -1,9 +1,10 @@
 require 'test_helper'
 
 class SpellsControllerTest < ActionController::TestCase
+  include CommonCardControllerTest
 
   setup do
-    @spell = cards(:bane)
+    @card = @spell = cards(:bane)
   end
 
   test 'show should' do
@@ -19,60 +20,26 @@ class SpellsControllerTest < ActionController::TestCase
     assert_redirected_to login_url
   end
 
-  test 'edit should redirect when not logged in' do
-    post :edit, params: { id: @spell }
-    assert_not flash.empty?
-    assert_redirected_to login_url
-  end
-
-  test 'update should redirect when not logged in' do
-    patch :update, params: { id: @spell }
-    assert_not flash.empty?
-    assert_redirected_to login_url
-  end
-
-  test 'should redirect destroy when not logged in' do
-    assert_no_difference 'Spell.count' do
-      post :destroy, params: { id: @spell }
-    end
-    assert_not flash.empty?
-    assert_redirected_to login_url
-  end
-
   test 'index should' do
     get :index
-    assert_response :success
-  end
-
-  test 'new should redirect when not logged in' do
-    get :new
-    assert_not flash.empty?
-    assert_redirected_to login_url
-  end
-
-  test 'should get index' do
-    log_in_as(users(:michael))
-    get :index
-    assert_response :success
-  end
-
-  test 'should get show' do
-    log_in_as(users(:michael))
-    get :show, params: { id: @spell }
-    assert_response :success
-  end
-
-  test 'should get new' do
-    log_in_as(users(:michael))
-    get :new
     assert_response :success
   end
 
   test 'should get create' do
     log_in_as(users(:michael))
     assert_difference 'Spell.count', +1 do
+      source = sources(:dnd)
       session[:return_to] = 'http://test.host/spells'
-      post :create, params: { spell: {name: 'AAA', level: 2, school: 'transmutation'} }
+      post :create,
+           params: {
+               spell: {
+                   name: 'AAA',
+                   source_id: source.id,
+                   card_size: '25x50',
+                   level: 2,
+                   school: 'transmutation'
+               }
+           }
     end
 
     new_spell = Spell.find_by_name('AAA')
@@ -80,12 +47,6 @@ class SpellsControllerTest < ActionController::TestCase
     assert_equal 2, new_spell.level
 
     assert_redirected_to spells_url
-  end
-
-  test 'should get edit' do
-    log_in_as(users(:michael))
-    post :edit, params: { id: @spell }
-    assert_response :success
   end
 
   test 'should get update' do

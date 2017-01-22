@@ -6,6 +6,7 @@ class ItemsInterfaceTest < ActionDispatch::IntegrationTest
     @user = users(:michael)
     @category = categories(:weapon)
     @rarity = rarities(:rare)
+    @source = sources(:dnd)
   end
 
   test "items interface should handle invalid input" do
@@ -26,7 +27,16 @@ class ItemsInterfaceTest < ActionDispatch::IntegrationTest
     name = "heroblade"
     assert_difference 'Item.count', 1 do
       get new_item_path, headers: { referer: items_url }
-      post items_path, params: { item: { name: name, category_id: @category.id, rarity_id: @rarity.id, attunement: false, description: 'some stuff'} }
+      post items_path,
+           params: {
+               item: {
+                   name: name,
+                   source_id: @source.id,
+                   card_size: '25x50',
+                   category_id: @category.id,
+                   rarity_id: @rarity.id,
+                   attunement: false,
+                   description: 'some stuff'} }
     end
     assert_redirected_to items_url
     follow_redirect!

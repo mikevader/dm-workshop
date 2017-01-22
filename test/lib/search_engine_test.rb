@@ -69,7 +69,7 @@ class SearchEngineTest < ActiveSupport::TestCase
         "namer & 'cunning'",
         "namer & 'cunning'",
         '',
-        "Expected one of [ \\t\\n\\r], '=', '!=', '<=', '>=', '<', '>', '~', 'IN', \" \", [0-9a-zA-Z_\\-\\*] at line 1, column 7 (byte 7) after "
+        "Expected one of \" \", [0-9a-zA-Z_\\-\\*\\&], [ \\t\\n\\r] at line 1, column 9 (byte 9) after "
     )
   end
 

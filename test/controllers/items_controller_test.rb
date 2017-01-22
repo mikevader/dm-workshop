@@ -1,9 +1,10 @@
 require 'test_helper'
 
 class ItemsControllerTest < ActionController::TestCase
+  include CommonCardControllerTest
 
   setup do
-    @item = cards(:sting)
+    @card = @item = cards(:sting)
   end
 
   test 'show should redirect to login if not logged in' do
@@ -18,63 +19,29 @@ class ItemsControllerTest < ActionController::TestCase
     assert_redirected_to login_url
   end
 
-  test 'should redirect edit when not logged in' do
-    post :edit, params: { id: @item }
-    assert_not flash.empty?
-    assert_redirected_to login_url
-  end
-
-  test 'should redirect update when not logged in' do
-    patch :update, params: { id: @item, name: {name: 'gun'} }
-    assert_not flash.empty?
-    assert_redirected_to login_url
-  end
-
-  test 'should redirect destroy when not logged in' do
-    assert_no_difference 'Item.count' do
-      delete :destroy, params: { id: @item }
-    end
-    assert_not flash.empty?
-    assert_redirected_to login_url
-  end
-
   test 'index should redirect index when not logged in' do
     get :index
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
-  test 'new should redirect index when not logged in' do
-    get :new
-    assert_not flash.empty?
-    assert_redirected_to login_url
-  end
-
-  test 'should get index' do
-    log_in_as(users(:michael))
-    get :index
-    assert_response :success
-  end
-
-  test 'should get show' do
-    log_in_as(users(:michael))
-    get :show, params: { id: @item }
-    assert_response :success
-  end
-
-  test 'should get new' do
-    log_in_as(users(:michael))
-    get :new
-    assert_response :success
-  end
-
   test 'create should add new item' do
     log_in_as(users(:michael))
     category = categories(:armor)
     rarity = rarities(:uncommon)
+    source = sources(:dnd)
     assert_difference 'Item.count', +1 do
       session[:return_to] = 'http://test.host/items'
-      post :create, params: { item: {name: 'Nerd', category_id: category.id, rarity_id: rarity.id, attunement: true, description: 'the nerdster'} }
+      post :create,
+           params: {
+               item: {
+                   name: 'Nerd',
+                   source_id: source.id,
+                   card_size: '25x50',
+                   category_id: category.id,
+                   rarity_id: rarity.id,
+                   attunement: true,
+                   description: 'the nerdster'} }
     end
 
     new_item = Item.find_by_name('Nerd')
@@ -83,12 +50,6 @@ class ItemsControllerTest < ActionController::TestCase
     assert_equal rarity, new_item.rarity
 
     assert_redirected_to items_url
-  end
-
-  test 'should get edit' do
-    log_in_as(users(:michael))
-    post :edit, params: { id: @item }
-    assert_response :success
   end
 
   test 'update should change existing item' do

@@ -2,12 +2,18 @@ class Card < ApplicationRecord
   acts_as_taggable
   serialize :badges
   belongs_to :user
+  belongs_to :source
 
   default_scope -> { order(name: :asc) }
 
   validates :user_id, presence: true
-  #validates :card_size, presence: true
+  validates :source_id, presence: true
+  validates :card_size, presence: true#, inclusion: { in: Card.card_sizes }
   validates :name, presence: true, length: {maximum: 50}, uniqueness: {case_sensitive: false}
+
+  def self.card_sizes
+    %w(25x35 35x50 50x70)
+  end
 
   def self.types
     %w(Item FreeForm Monster Spell)
@@ -60,6 +66,8 @@ class Card < ApplicationRecord
       configure_field 'name', 'cards.name'
       configure_field 'type', 'cards.type'
       configure_tag 'tags', Card
+
+      configure_relation 'source', 'sources.name', 'source'
 
       # FreeForms
       configure_field 'color', 'cards.color'

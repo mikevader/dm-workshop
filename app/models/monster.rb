@@ -2,8 +2,8 @@ class Monster < Card
   acts_as_taggable
   has_many :cards_skills, foreign_key: :card_id, dependent: :destroy
   has_many :skills, through: :cards_skills
-  has_many :traits, -> { order(position: :asc) }, dependent: :destroy, foreign_key: :card_id
-  has_many :actions, -> { order('action_type asc, position asc') }, dependent: :destroy, foreign_key: :card_id
+  has_many :traits, -> { order(position: :asc) }, foreign_key: :card_id, dependent: :destroy
+  has_many :actions, -> { order('action_type asc, position asc') }, foreign_key: :card_id, dependent: :destroy
 
   accepts_nested_attributes_for :actions, reject_if: proc { |action| action['title'].blank? }, allow_destroy: true
   accepts_nested_attributes_for :traits, reject_if: proc { |trait| trait['title'].blank? }, allow_destroy: true

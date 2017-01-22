@@ -112,6 +112,32 @@ class CardImport
     @imported_spells ||= load_imported_spells
   end
 
+
+  def load_common_attributes(name, card, attributes)
+    source_name = CardImport.load_element(name, card, 'source', false)
+    if (source_name)
+      source = Source.where('lower(name) LIKE ?', source_name.downcase)
+    else
+      source = Source.first
+    end
+    card_size = CardImport.load_element(name, card, 'cardSize', false) || '25x35'
+    cite = CardImport.load_element name, card, 'cite', false
+    shared = CardImport.load_element(name, card, 'shared', false) || 'false'
+
+    attributes.source = source
+    attributes.card_size = card_size
+    attributes.cite = cite
+    attributes.shared = shared.to_b
+  end
+
+  def create_cards_common_attributes(attributes, card)
+    card.source = attributes.source
+    card.card_size = attributes.card_size
+    card.cite = attributes.cite
+    card.shared = attributes.shared
+
+  end
+
   def load_imported_spells
     spells_doc = open_xmlfile(spells_file)
 
@@ -124,9 +150,6 @@ class CardImport
         id = existing_spell.id
       end
 
-      card_size = CardImport.load_element(name, spell, 'cardSize', false) || '25x35'
-      cite = CardImport.load_element name, spell, 'cite', false
-      shared = CardImport.load_element(name, spell, 'shared', false) || 'false'
       type = CardImport.load_element name, spell, 'type', true
       level, school = CardImport.parse_school_and_level type
       logger.debug "    level: #{level}"
@@ -148,11 +171,9 @@ class CardImport
 
       import_card = ImportCard.new(id, :spell)
       import_card.name = name
+      load_common_attributes(name, spell, import_card.attributes)
 
-      import_card.attributes.card_size = card_size
       import_card.attributes.ritual = ritual
-      import_card.attributes.cite = cite
-      import_card.attributes.shared = shared.to_b
       import_card.attributes.level = level
       import_card.attributes.school = school
       import_card.attributes.description = description
@@ -198,9 +219,7 @@ class CardImport
       new_spell.description = import_card.attributes.description
     end
 
-    new_spell.card_size = import_card.attributes.card_size
-    new_spell.cite = import_card.attributes.cite
-    new_spell.shared = import_card.attributes.shared
+    create_cards_common_attributes(import_card.attributes, new_spell)
     hero_classes = import_card.attributes.classes.map do |hero_class|
       HeroClass.find_by(name: hero_class)
     end
@@ -231,20 +250,15 @@ class CardImport
         id = existing_item.id
       end
 
-      card_size = CardImport.load_element(name, item, 'cardSize', false) || '25x35'
-      shared = CardImport.load_element(name, item, 'shared', false) || 'false'
-      cite = CardImport.load_element(name, item, 'cite', true)
       category = Category.where('lower(name) LIKE ?', CardImport.load_element(name, item, 'type', true).downcase)
       rarity = Rarity.where('lower(name) LIKE ?', CardImport.load_element(name, item, 'rarity', true).downcase)
       attunement = CardImport.load_element(name, item, 'requiresAttunement', false) || 'false'
       description = CardImport.load_element(name, item, 'description', false)
 
       import_card = ImportCard.new(id, :item)
-
       import_card.name = name
-      import_card.attributes.card_size = card_size
-      import_card.attributes.cite = cite
-      import_card.attributes.shared = shared.to_b
+      load_common_attributes(name, item, import_card.attributes)
+
       import_card.attributes.category = category.take!
       import_card.attributes.rarity = rarity.take!
       import_card.attributes.attunement = attunement.to_b
@@ -261,9 +275,7 @@ class CardImport
       new_item.name = import_card.name
     end
 
-    new_item.card_size = import_card.attributes.card_size
-    new_item.cite = import_card.attributes.cite
-    new_item.shared = import_card.attributes.shared
+    create_cards_common_attributes(import_card.attributes, new_item)
     new_item.category = import_card.attributes.category
     new_item.rarity = import_card.attributes.rarity
     new_item.attunement = import_card.attributes.attunement
@@ -293,8 +305,6 @@ class CardImport
 
       card_size = CardImport.load_element(name, monster, 'cardSize', false) || '35x50'
       type = CardImport.load_element name, monster, 'type', true
-      shared = CardImport.load_element(name, monster, 'shared', false) || 'false'
-      cite = CardImport.load_element name, monster, 'cite', false
       description = CardImport.load_element name, monster, 'description', false
 
       proficiency = nil
@@ -380,12 +390,11 @@ class CardImport
       logger.debug "    actions: #{actions}"
 
       import_card = ImportCard.new(id, :monster)
-
       import_card.name = name
+      load_common_attributes(name, monster, import_card.attributes)
+
       import_card.attributes.card_size = card_size
       import_card.attributes.bonus = proficiency
-      import_card.attributes.shared = shared.to_b
-      import_card.attributes.cite = cite
       import_card.attributes.monster_size = size
       import_card.attributes.monster_type = type
       import_card.attributes.armor_class = ac
@@ -428,9 +437,7 @@ class CardImport
       new_monster.name = import_card.name
     end
 
-    new_monster.card_size = import_card.attributes.card_size
-    new_monster.shared = import_card.attributes.shared
-    new_monster.cite = import_card.attributes.cite
+    create_cards_common_attributes(import_card.attributes, new_monster)
     new_monster.monster_size = import_card.attributes.monster_size
     new_monster.monster_type = import_card.attributes.monster_type
     new_monster.armor_class = import_card.attributes.armor_class
@@ -482,9 +489,6 @@ class CardImport
         id = existing_card.id
       end
 
-      card_size = CardImport.load_element(name, card, 'cardSize', false) || '25x35'
-      shared = CardImport.load_element(name, card, 'shared', false) || 'false'
-      cite = CardImport.load_element name, card, 'cite', false
       color = CardImport.load_element name, card, 'color', false
       icon = CardImport.load_element name, card, 'icon', false
       badges = CardImport.load_element name, card, 'badges', false
@@ -492,9 +496,8 @@ class CardImport
 
       import_card = ImportCard.new(id, :card)
       import_card.name = name
-      import_card.attributes.card_size = card_size
-      import_card.attributes.shared = shared.to_b
-      import_card.attributes.cite = cite
+      load_common_attributes(name, card, import_card.attributes)
+
       import_card.attributes.color = color
       import_card.attributes.icon = icon
       import_card.attributes.badges = badges
@@ -511,9 +514,7 @@ class CardImport
       card.name = import_card.name
     end
 
-    card.card_size = import_card.attributes.card_size
-    card.shared = import_card.attributes.shared
-    card.cite = import_card.attributes.cite
+    create_cards_common_attributes(import_card.attributes, card)
     card.color = import_card.attributes.color
     card.icon = import_card.attributes.icon
     card.badges = import_card.attributes.badges
