@@ -87,6 +87,7 @@ class Card < ApplicationRecord
       configure_relation 'classes', 'hero_classes.name', :hero_classes
 
       # Monsters
+      configure_field 'cr', 'cards.challenge'
       configure_field 'str', 'cards.strength'
       configure_field 'dex', 'cards.dexterity'
       configure_field 'con', 'cards.constitution'
