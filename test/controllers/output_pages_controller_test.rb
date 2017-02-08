@@ -36,8 +36,10 @@ class OutputPagesControllerTest < ActionController::TestCase
     log_in_as(users(:michael))
     get :all, params: { search: 'name = *' }
     assert_response :success
-    assert assigns[:cards]
-    assert_equal 7, assigns[:cards].size
+    assert assigns[:pages]
+    assert_equal 2, assigns[:pages].size
+    assert_equal 5, assigns[:pages].first.cards.size
+    assert_equal 2, assigns[:pages].second.cards.size
   end
 
   test 'should output cards for monsters' do
@@ -45,8 +47,8 @@ class OutputPagesControllerTest < ActionController::TestCase
     get :monsters, params: { search: 'name ~ shadow' }
     assert_response :success
 
-    assert assigns[:cards]
-    card_1 = assigns[:cards].first
+    assert assigns[:pages]
+    card_1 = assigns[:pages].first.cards.first
     assert_equal 'Shadow Demon', card_1.name
   end
 
@@ -55,9 +57,9 @@ class OutputPagesControllerTest < ActionController::TestCase
     get :free_forms, params: { search: 'name ~ cunning' }
     assert_response :success
 
-    assert assigns[:cards]
-    assert_equal 1, assigns[:cards].size
-    card_1 = assigns[:cards].first
+    assert assigns[:pages]
+    assert_equal 1, assigns[:pages].size
+    card_1 = assigns[:pages].first.cards.first
     assert_equal 'Cunning Action', card_1.name
   end
 
@@ -66,23 +68,26 @@ class OutputPagesControllerTest < ActionController::TestCase
     get :free_forms, params: { search: '' }
     assert_response :success
 
-    assert assigns[:cards]
-    assert_equal 2, assigns[:cards].size
+    assert assigns[:pages]
+    assert_equal 1, assigns[:pages].size
+    assert_equal 2, assigns[:pages].first.cards.size
   end
 
   test 'should output cards for items' do
     log_in_as(users(:michael))
     get :items, params: { search: '' }
     assert_response :success
-    assert assigns[:cards]
-    assert_equal 2, assigns[:cards].size
+    assert assigns[:pages]
+    assert_equal 1, assigns[:pages].size
+    assert_equal 2, assigns[:pages].first.cards.size
   end
 
   test 'should output cards for spells' do
     log_in_as(users(:michael))
     get :spells, params: { search: 'level >= 0' }
     assert_response :success
-    assert assigns[:cards]
-    assert_equal 2, assigns[:cards].size
+    assert assigns[:pages]
+    assert_equal 1, assigns[:pages].size
+    assert_equal 2, assigns[:pages].first.cards.size
   end
 end

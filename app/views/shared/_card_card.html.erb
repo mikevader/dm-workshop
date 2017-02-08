@@ -1,5 +1,5 @@
 <% cache(card) do %>
-<div id="card-<%= card.id %>" class="card card-size-<%= card.card_size %> center-block" style="color: <%= card.color %>; border-color: <%= card.color %>; background-color: <%= card.color %>;">
+<div id="card-<%= card.id %>" class="card card-size-<%= card.card_size %> center-block" style="color: <%= card.color %>; border-color: <%= card.color %>; background-color: <%= card.color %>; <%= position_style %>">
   <div class="card-title-inlineicon-container">
     <div class="card-title-inlineicon <%= card.icon %>"></div>
   </div>

@@ -66,7 +66,7 @@ GEM
       sass (>= 3.3.4)
     bootstrap-will_paginate (0.0.10)
       will_paginate
-    brakeman (3.4.1)
+    brakeman (3.5.0)
     builder (3.2.2)
     byebug (9.0.6)
     carrierwave (1.0.0)

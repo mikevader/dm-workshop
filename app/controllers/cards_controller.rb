@@ -1,5 +1,3 @@
-require 'search_engine'
-
 class CardsController < ApplicationController
   include ColumnsHelper
 
@@ -10,7 +8,7 @@ class CardsController < ApplicationController
   after_action :verify_policy_scoped, only: [:index]
 
   def init_search_engine
-    @search_engine = SearchEngine2.new(policy_scope(card_model))
+    @search_engine = Search::SearchEngine.new(policy_scope(card_model))
   end
 
   # Create actions

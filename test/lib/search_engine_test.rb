@@ -5,8 +5,8 @@ class SearchEngineTest < ActiveSupport::TestCase
   setup do
     @standard_search_prefix = "SELECT \"cards\".* FROM \"cards\""
     @standard_search_postfix = "\"cards\".\"name\" ASC"
-    @search_engine = SearchEngine2.new(Card)
-    @search_engine_for_spells = SearchEngine2.new(Spell)
+    @search_engine = Search::SearchEngine.new(Card)
+    @search_engine_for_spells = Search::SearchEngine.new(Spell)
   end
 
   test 'empty search should search for all per default' do
@@ -257,7 +257,7 @@ class SearchEngineTest < ActiveSupport::TestCase
 
   def assert_search(for_type = Card, given_query, expected_sql_query)
     assert_instance_of(Class, for_type)
-    search_engine = SearchEngine2.new(for_type)
+    search_engine = Search::SearchEngine.new(for_type)
 
     query, _, error = search_engine.search(given_query, false)
     assert_nil(error, "Returned unexpected error: #{error}")
@@ -276,7 +276,7 @@ class SearchEngineTest < ActiveSupport::TestCase
     )
 
     assert_instance_of(Class, for_type)
-    search_engine = SearchEngine2.new(for_type)
+    search_engine = Search::SearchEngine.new(for_type)
 
     query, normalized_query, error = search_engine.search(given_query, false)
     sql_query = query.to_sql

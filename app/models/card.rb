@@ -15,6 +15,27 @@ class Card < ApplicationRecord
     %w(25x35 35x50 50x70)
   end
 
+  def width
+    case card_size
+      when '25x35'
+        return 63
+      when '35x50'
+        return 88
+      when '50x70'
+        return 126
+    end
+  end
+  def height
+    case card_size
+      when '25x35'
+        return 88
+      when '35x50'
+        return 126
+      when '50x70'
+        return 176
+    end
+  end
+
   def self.types
     %w(Item FreeForm Monster Spell)
   end
