@@ -69,6 +69,9 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
+### Dungeon Master Workshop 0.25 ###
+* Placing of cards on print page for minimal use of paper.
+
 ### Dungeon Master Workshop 0.24 ###
 * New attribute source.
 
