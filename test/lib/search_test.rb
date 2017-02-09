@@ -225,6 +225,15 @@ class SearchEngineTest < ActiveSupport::TestCase
     assert_search_for_standard_field('ritual != false', "cards.ritual != 'f'")
   end
 
+  test 'type clause should work with relation clause' do
+    assert_search_with_normalized_query(
+        "type = 'Spell' AND classes IN (sorcerer)",
+        "type = 'spell' AND classes IN ('sorcerer')",
+        "SELECT \"cards\".* FROM \"cards\" INNER JOIN \"cards_hero_classes\" ON \"cards_hero_classes\".\"card_id\" = \"cards\".\"id\" INNER JOIN \"hero_classes\" ON \"hero_classes\".\"id\" = \"cards_hero_classes\".\"hero_class_id\" WHERE (LOWER(cards.type) LIKE 'spell' AND LOWER(hero_classes.name) IN ('sorcerer')) ORDER BY \"cards\".\"name\" ASC",
+        nil
+    )
+  end
+
 
   private
   def surround_pre_and_postfix(search_query = '', type = '')
@@ -273,7 +282,7 @@ class SearchEngineTest < ActiveSupport::TestCase
       expected_normalized_query,
       expected_sql_query,
       expected_error
-    )
+  )
 
     assert_instance_of(Class, for_type)
     search_engine = Search::SearchEngine.new(for_type)

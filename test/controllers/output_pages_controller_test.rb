@@ -27,6 +27,7 @@ class OutputPagesControllerTest < ActionController::TestCase
   end
 
   test 'spell should redirect to login if not logged in' do
+    skip('temporary its allowed as anonymous to print spell cards.')
     get :spells, params: { search: 'name = halo' }
     assert_not flash.empty?
     assert_redirected_to login_url
@@ -90,4 +91,14 @@ class OutputPagesControllerTest < ActionController::TestCase
     assert_equal 1, assigns[:pages].size
     assert_equal 2, assigns[:pages].first.cards.size
   end
+
+  test 'should output cards for spells with queries including relations' do
+    log_in_as(users(:michael))
+    get :spells, params: { search: 'level >= 0 AND classes IN (sorcerer)' }
+    assert_response :success
+    assert assigns[:pages]
+    assert_equal 1, assigns[:pages].size
+    assert_equal 1, assigns[:pages].first.cards.size
+  end
+
 end

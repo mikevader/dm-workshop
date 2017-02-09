@@ -1,6 +1,5 @@
 class Spell < Card
   acts_as_taggable
-  has_and_belongs_to_many :hero_classes, join_table: :cards_hero_classes, foreign_key: :card_id, association_foreign_key: :hero_class_id
 
   default_scope -> { order(name: :asc) }
   mount_uploader :picture, PictureUploader

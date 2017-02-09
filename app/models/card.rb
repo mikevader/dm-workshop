@@ -1,5 +1,7 @@
 class Card < ApplicationRecord
   acts_as_taggable
+
+  has_and_belongs_to_many :hero_classes, join_table: :cards_hero_classes, foreign_key: :card_id, association_foreign_key: :hero_class_id
   serialize :badges
   belongs_to :user
   belongs_to :source
