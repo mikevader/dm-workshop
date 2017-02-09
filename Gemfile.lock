@@ -389,7 +389,7 @@ GEM
       nokogiri (~> 1.5)
       trollop (~> 2.1)
     rdoc (4.3.0)
-    recaptcha (4.0.1)
+    recaptcha (4.1.0)
       json
     redcarpet (3.4.0)
     ref (2.0.0)
@@ -489,7 +489,7 @@ DEPENDENCIES
   rails_12factor (= 0.0.3)
   rails_admin (~> 1.1.1)
   rails_stdout_logging (= 0.0.5)
-  recaptcha (~> 4.0.1)
+  recaptcha (~> 4.1.0)
   redcarpet (~> 3.3)
   remotipart!
   sass-rails (~> 5.0.5)
