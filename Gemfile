@@ -69,7 +69,7 @@ gem 'acts-as-taggable-on', '~> 4.0.0'
 # Ordering library to order traits, actions, etc on monster and other cards
 gem 'acts_as_list', '~> 0.9.2'
 # Google re-captcha for sign-up process
-gem 'recaptcha', '~> 4.0.1', require: 'recaptcha/rails'
+gem 'recaptcha', '~> 4.1.0', require: 'recaptcha/rails'
 
 # Ruby web server built for concurrency and performance
 gem 'puma', '~> 3.7.0'
