@@ -16,79 +16,83 @@
 
 /* Center all content within a page */
 .page {
-    @include flexbox;
-    @include align-content(center);
-    @include justify-content(center);
-    @include flex-direction(row);
-    @include flex-wrap(wrap);
-    page-break-after: always;
-    padding: 0;
+
+  @include flexbox;
+  //@include align-content(center);
+  //@include justify-content(center);
+  //@include flex-direction(row);
+  //@include flex-wrap(wrap);
+
+  //display: relative;
+
+  page-break-after: always;
+  padding: 0;
+  position: relative;
 }
 
 /* A4 paper area */
 /* Chrome has problems with page sizes given in metric units. Make the paper area slightly smaller to work around this. */
 page[size="A4"] {
-  width:  197mm; // 191mm; /* full: 210.0mm */
-  height: 275mm; // 267mm; /* full: 297.0mm */
+  width: 191mm; // 191mm; /* full: 210.0mm */
+  height: 267mm; // 267mm; /* full: 297.0mm */
 }
-
 
 /* US letter area */
 page[size="Letter"] {
-  width:  8.5in;
+  width: 8.5in;
   height: 11.0in;
 }
 
 page[size="25x35"] {
-    width: 63mm;
-    height: 88mm;
+  width: 63mm;
+  height: 88mm;
 }
 
 /* Default card size */
 .card {
-    width:63mm;
-    height:88mm;
+  width: 63mm;
+  height: 88mm;
 }
 
 /* Bridge card size */
 .card-size-225x35 {
-    width:2.25in;
-    height:88mm;
+  width: 2.25in;
+  height: 88mm;
 }
 
 .card-size-225x35 .card-back-icon {
-    width: 1in;
-    height: 1in;
+  width: 1in;
+  height: 1in;
 }
 
 /* Poker / Magic card size */
 .card-size-25x35 {
-    width: 63mm;
-    height: 88mm;
+  width: 63mm;
+  height: 88mm;
 }
 
 .card-size-25x35 .card-back-icon {
-    width: 1in;
-    height: 1in;
+  width: 1in;
+  height: 1in;
 }
 
 /* Poker / Magic card size */
 .card-size-35x50 {
-    width:98mm;
-    min-width:98mm;
-    height:137mm;
+  width: 88mm;
+  min-width: 88mm;
+  height: 126mm;
 }
 
 .card-size-35x50 .card-back-icon {
-    width: 1.5in;
-    height: 1.5in;
+  width: 1.5in;
+  height: 1.5in;
 }
 
 /* Poker / Magic card size */
 .card-size-50x70 {
-  width:137mm;
-  min-width:137mm;
-  height:196mm;
+  width: 126mm;
+  min-width: 126mm;
+  height: 176mm;
 }
 
 .card-size-50x70 .card-back-icon {
@@ -98,22 +102,22 @@ page[size="25x35"] {
 
 /* Landscape big card */
 .card-size-75x50 {
-    width:7.5in;
-    height:5.0in;
+  width: 7.5in;
+  height: 5.0in;
 }
 
 .card-size-75x50 .card-back-icon {
-    width: 2in;
-    height: 2in;
+  width: 2in;
+  height: 2in;
 }
 
 /* Card sizes that fill out the entire sheet of paper (minimal margins) */
 .page[size="A4"] .card-size-full3x3 {
-    width:69mm;
-    height:98mm;
+  width: 69mm;
+  height: 98mm;
 }
 
 .page[size="Letter"] .card-size-full3x3 {
-    width:71mm;
-    height:92mm;
+  width: 71mm;
+  height: 92mm;
 }

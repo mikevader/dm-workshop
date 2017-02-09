@@ -1,5 +1,7 @@
 class Card < ApplicationRecord
   acts_as_taggable
+
+  has_and_belongs_to_many :hero_classes, join_table: :cards_hero_classes, foreign_key: :card_id, association_foreign_key: :hero_class_id
   serialize :badges
   belongs_to :user
   belongs_to :source
@@ -13,6 +15,27 @@ class Card < ApplicationRecord
 
   def self.card_sizes
     %w(25x35 35x50 50x70)
+  end
+
+  def width
+    case card_size
+      when '25x35'
+        return 63
+      when '35x50'
+        return 88
+      when '50x70'
+        return 126
+    end
+  end
+  def height
+    case card_size
+      when '25x35'
+        return 88
+      when '35x50'
+        return 126
+      when '50x70'
+        return 176
+    end
   end
 
   def self.types
@@ -87,6 +110,7 @@ class Card < ApplicationRecord
       configure_relation 'classes', 'hero_classes.name', :hero_classes
 
       # Monsters
+      configure_field 'cr', 'cards.challenge'
       configure_field 'str', 'cards.strength'
       configure_field 'dex', 'cards.dexterity'
       configure_field 'con', 'cards.constitution'
