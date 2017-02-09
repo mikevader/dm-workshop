@@ -1,5 +1,3 @@
-require 'search_engine'
-
 class FiltersController < ApplicationController
   before_action :logged_in_user, only: [:index, :show, :new, :edit, :update, :create, :destroy]
   before_action :init_search_engine, only: [:show, :index]
@@ -7,7 +5,7 @@ class FiltersController < ApplicationController
   after_action :verify_policy_scoped, only: [:index]
 
   def init_search_engine
-    @search_engine = SearchEngine2.new(policy_scope(Card))
+    @search_engine = Search::SearchEngine.new(policy_scope(Card))
   end
 
   def index
