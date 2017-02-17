@@ -1,0 +1,6 @@
+<h1>Spellbook#edit</h1>
+
+<%= form_for(@spellbook) do |f| %>
+    <%= render 'fields', f: f %>
+    <%= f.submit "Save", class: "btn btn-primary" %>
+<% end %>

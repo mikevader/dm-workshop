@@ -24,7 +24,12 @@
         <li><%= link_to 'Items', items_path %></li>
     <% end -%>
     <% if policy(Spell).index? -%>
-        <li><%= link_to 'Spells', spells_path %></li>
+        <li>
+          <ul>
+            <li><%= link_to 'Spells', spells_path %></li>
+            <li><%= link_to 'Spellbooks', spellbooks_path %></li>
+          </ul>
+        </li>
     <% end -%>
     <li><%= link_to help_path do %>
           <span class="glyphicon glyphicon-question-sign"></span>

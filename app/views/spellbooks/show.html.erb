@@ -1,0 +1,9 @@
+<h1>Spellbook#show</h1>
+
+<h2><%= @spellbook.name %></h2>
+
+<ul>
+  <% @spells.each do |spell| -%>
+      <li><%= spell.name %></li>
+  <% end -%>
+</ul>

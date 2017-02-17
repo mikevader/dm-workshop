@@ -43,13 +43,12 @@ Rails.application.routes.draw do
 
   resources :users
   resources :spells
+  resources :spellbooks
   resources :hero_classes
   resources :items
-  #resources :items, controller: 'cards', type: 'Item'
   resources :monsters
   resources :free_forms
   resources :cards
-  #resources :cards, controller: 'cards', type: 'Card'
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
 
