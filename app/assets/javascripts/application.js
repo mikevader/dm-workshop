@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require jquery-ui/sortable
 //= require jquery-ui/effect-highlight
+//= require jquery-ui/autocomplete
+//= require autocomplete-rails
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require analytics

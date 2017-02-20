@@ -7,3 +7,8 @@
       <li><%= spell.name %></li>
   <% end -%>
 </ul>
+
+<%= form_for @spellbook do |f| %>
+    <%= f.autocomplete_field :spells, autocomplete_spell_name_spellbooks_path, 'data-delimiter' => ',', multiple: true %>
+
+<% end %>

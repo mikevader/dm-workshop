@@ -26,6 +26,8 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'bootstrap-will_paginate', '~> 0.0.10'
 # Provides bootstrap-colorselector library
 gem 'bootstrap-colorselector-rails', '~> 0.1.0'
+# Autocomplete field
+gem 'rails-jquery-autocomplete', '~> 1.0.3'
 
 gem 'redcarpet', '~> 3.3'
 

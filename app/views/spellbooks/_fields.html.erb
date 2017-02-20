@@ -3,4 +3,10 @@
 <div class="form-group">
   <%= f.label :name %>
   <%= f.text_field :name, class: 'form-control' %>
+
+  <%= f.fields_for :spells do |spell| %>
+      <% render 'spell_fields', f: spell %>
+  <% end %>
+
+  <%= link_to_add_fields 'add spell', f, :spells %>
 </div>

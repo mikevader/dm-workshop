@@ -43,7 +43,9 @@ Rails.application.routes.draw do
 
   resources :users
   resources :spells
-  resources :spellbooks
+  resources :spellbooks do
+    get :autocomplete_spell_name, on: :collection
+  end
   resources :hero_classes
   resources :items
   resources :monsters
