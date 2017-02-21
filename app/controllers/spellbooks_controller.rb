@@ -47,6 +47,6 @@ class SpellbooksController < ApplicationController
 
   private
   def spellbook_params
-    params.require(:spellbook).permit(:name, :spells, :spell_ids => [], spells_attributes: [:id, :spell_id, :_destroy])
+    params.require(:spellbook).permit(:name, :spells, :spell_ids => [])
   end
 end
