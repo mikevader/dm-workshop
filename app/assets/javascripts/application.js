@@ -109,7 +109,5 @@ var sortable = function () {
     }
 }
 
-$(document).on("turbolinks:load", sortable)
-
-
+$(document).on("turbolinks:load", sortable);
 

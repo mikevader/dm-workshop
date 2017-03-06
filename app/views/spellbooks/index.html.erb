@@ -1,24 +1,46 @@
-<h1>Spellbook#index</h1>
-<p>Find me in app/views/spellbook/index.html.erb</p>
-
-
-
-<table>
-  <% @spellbooks.each do |spellbook| -%>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="page-header">
+      <h1><%= yield(:page_title) %></h1>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-10">
+    <table class="table table-striped">
       <tr>
-        <td><a href="<%= spellbook_path(spellbook) %>"><%= spellbook.name %></a></td>
-        <td>
-          <%= link_to edit_spellbook_path(spellbook), 'aria-label' => 'edit' do -%>
-              <span class="glyphicon glyphicon-pencil"></span>
-          <% end -%>
-        </td>
-        <td>
-          <%= link_to spellbook, method: :delete, data: { confirm: "You sure?" }, 'aria-label' => 'delete' do -%>
-              <span class="glyphicon glyphicon-remove"></span>
-          <% end -%>
-        </td>
+        <th>Spellbook</th>
+        <th class="last"></th>
       </tr>
-  <% end -%>
-</table>
+      <% @spellbooks.each do |spellbook| -%>
+          <tr>
+            <td><a href="<%= spellbook_path(spellbook) %>"><%= spellbook.name %></a></td>
+            <td class="last">
+              <ul class="actions">
+                <li>
+                  <%= link_to edit_spellbook_path(spellbook), 'aria-label' => 'edit' do -%>
+                      <span class="glyphicon glyphicon-pencil"></span>
+                  <% end -%>
+                </li>
+                <li>
+                  <%= link_to spellbook, method: :delete, data: {confirm: "You sure?"}, 'aria-label' => 'delete' do -%>
+                      <span class="glyphicon glyphicon-remove"></span>
+                  <% end -%>
+                </li>
+              </ul>
+            </td>
+          </tr>
+      <% end -%>
+    </table>
+  </div>
+</div>
 
-<a href="<%= new_spellbook_path %>">new spellbook</a>
+<div class="row">
+  <div class="col-xs-12 col-sm-offset-1 col-sm-10">
+    <div class="form-group">
+      <%# if policy(card_model).new? -%>
+      <%= link_to "New", new_spellbook_path, class: 'btn btn-default', role: 'button' -%>
+      <%# end -%>
+    </div>
+  </div>
+</div>

@@ -1,14 +1,18 @@
-<h1>Spellbook#show</h1>
+<h1><%= @spellbook.name %></h1>
 
-<h2><%= @spellbook.name %></h2>
-
-<ul>
-  <% @spells.each do |spell| -%>
-      <li><%= spell.name %></li>
-  <% end -%>
-</ul>
-
-<%= form_for @spellbook do |f| %>
-    <%= f.autocomplete_field :spells, autocomplete_spell_name_spellbooks_path, 'data-delimiter' => ',', multiple: true %>
-
-<% end %>
+<div class="row">
+  <div class="col-sm-offset-2 col-sm-8">
+    <table class="table table-striped">
+      <tr>
+        <th>Level</th>
+        <th>Spells</th>
+      </tr>
+      <% @spells.group_by {|spell| spell.level }.each do |level, spells| -%>
+          <tr>
+            <th class="text-right col-xs-2"><%= level %>:</th>
+            <td class=" col-xs-10"><%= spells.map{|spell| spell.name}.join(', ') %></td>
+          </tr>
+      <% end -%>
+    </table>
+  </div>
+</div>

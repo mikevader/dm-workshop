@@ -1,12 +1,17 @@
 <%= render 'shared/error_messages', object: f.object %>
 
 <div class="form-group">
-  <%= f.label :name %>
-  <%= f.text_field :name, class: 'form-control' %>
+  <%= f.label :name, 'Spellbook', class: 'control-label col-sm-3' %>
+  <%= content_tag(:div, f.text_field(:name, class: 'form-control'), class: 'col-sm-9') %>
+</div>
 
-  <%= f.fields_for :spells do |spell| %>
-      <% render 'spell_fields', f: spell %>
-  <% end %>
+<div class="form-group">
+  <%= label_tag 'Spells', nil, class: 'control-label col-sm-3' %>
+  <div class="col-sm-9">
+    <%= f.fields_for :spells do |spell| %>
+        <% render 'spell_fields', f: spell %>
+    <% end %>
 
-  <%= link_to_add_association 'add spell', f, :spells %>
+    <%= link_to_add_association 'add spell', f, :spells %>
+  </div>
 </div>

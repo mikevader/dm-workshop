@@ -1,7 +1,13 @@
-<div class="nested-fields">
+<div class="form-group form-group-sm form-group-no-margin row small-padding">
   <% @it = f.options[:child_index] %>
-  <%= hidden_field_tag 'spellbook[spell_ids][]', f.object.id, id: "spellbook_spell_ids_#{@it}" %>
-  <%= f.autocomplete_field :name, autocomplete_spell_name_spellbooks_path, id_element: "#spellbook_spell_ids_#{@it}" %>
 
-  <%= link_to_remove_association 'remove spell', f %>
+  <%= hidden_field_tag 'spellbook[spell_ids][]', f.object.id, id: "spellbook_spell_ids_#{@it}" %>
+  <div class="col-xs-6">
+    <%= f.autocomplete_field :name, autocomplete_spell_name_spellbooks_path, id_element: "#spellbook_spell_ids_#{@it}", class: 'form-control col-xs-3 input-sm asdf', autofocus: true %>
+  </div>
+  <div class="col-xs-6 align-middle">
+    <%= link_to_remove_association('remove spell', f, id: "spellbook_spell_ids_#{@it}") do %>
+        <span class="glyphicon glyphicon-remove"></span>
+    <% end %>
+  </div>
 </div>
