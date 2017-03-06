@@ -3,13 +3,12 @@ jsclick = function (event, data) {
     var time = new Date().getTime();
     var regexp = new RegExp($(addSpell).data('id'), 'g');
     $(addSpell).before($(addSpell).data('fields').replace(regexp, time));
-    $('.asdf:last').focus();
 
-    updateAutocreateHandlers();
+    $('.asdf:last').focus();
 };
 
-$(document).on('railsAutocomplete.select', '.asdf:last', jsclick);
+$(document).on('autocompleteselect', '.asdf:last', jsclick);
 
 $(document).on('click', 'a.add_fields', function (event, data) {
-    updateAutocreateHandlers();
+    $('.asdf:last').focus();
 });
