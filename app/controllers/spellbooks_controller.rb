@@ -45,6 +45,18 @@ class SpellbooksController < ApplicationController
     redirect_to spellbooks_path
   end
 
+  def select
+    spellbook = Spellbook.find(params[:id])
+    select_spellbook(spellbook)
+    flash[:success] = "Select Spellbook: #{current_spellbook.name}"
+    redirect_to spells_path
+  end
+
+  def spells
+    @spellbook = Spellbook.find(params[:id])
+    @spells = @spellbook.spells
+  end
+
   private
   def spellbook_params
     params.require(:spellbook).permit(:name, :spells, :spell_ids => [])

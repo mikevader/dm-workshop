@@ -35,6 +35,16 @@ module SessionsHelper
     end
   end
 
+  def select_spellbook(spellbook)
+    session[:spellbook_id] = spellbook.id
+  end
+
+  def current_spellbook
+    if (spellbook_id = session[:spellbook_id])
+      @current_spellbook ||= Spellbook.find_by(id: spellbook_id)
+    end
+  end
+
   # Returns true if the user is logged in, false otherwise.
   def logged_in?
     !current_user.nil?
