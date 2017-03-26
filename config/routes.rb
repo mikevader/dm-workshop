@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post    'login'   => 'sessions#create'
   delete  'logout'  => 'sessions#destroy'
 
+  post 'spellbooks/:id/select' => 'spellbooks#select', as: :select_spellbook
+
   get     'print/all'         => 'output_pages#all',      as: :print
   get     'print/cards'       => 'output_pages#cards',    as: :print_cards
   get     'print/free_forms'       => 'output_pages#free_forms',    as: :print_free_forms
@@ -43,13 +45,19 @@ Rails.application.routes.draw do
 
   resources :users
   resources :spells
+  resources :spellbooks do
+    get :autocomplete_spell_name, on: :collection
+    member do
+      get :spells
+      patch :inscribe
+      delete :erase
+    end
+  end
   resources :hero_classes
   resources :items
-  #resources :items, controller: 'cards', type: 'Item'
   resources :monsters
   resources :free_forms
   resources :cards
-  #resources :cards, controller: 'cards', type: 'Card'
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
 

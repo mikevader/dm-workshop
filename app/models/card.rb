@@ -2,6 +2,7 @@ class Card < ApplicationRecord
   acts_as_taggable
 
   has_and_belongs_to_many :hero_classes, join_table: :cards_hero_classes, foreign_key: :card_id, association_foreign_key: :hero_class_id
+  has_and_belongs_to_many :spellbooks, join_table: :spellbooks_spells, foreign_key: :spell_id, association_foreign_key: :spellbook_id
   serialize :badges
   belongs_to :user
   belongs_to :source
@@ -11,7 +12,7 @@ class Card < ApplicationRecord
   validates :user_id, presence: true
   validates :source_id, presence: true
   validates :card_size, presence: true#, inclusion: { in: Card.card_sizes }
-  validates :name, presence: true, length: {maximum: 50}, uniqueness: {case_sensitive: false}
+  validates :name, presence: true, length: { maximum: 50 }, uniqueness: { case_sensitive: false }
 
   def self.card_sizes
     %w(25x35 35x50 50x70)
@@ -108,6 +109,7 @@ class Card < ApplicationRecord
       configure_field 'duration', 'cards.duration'
       configure_field 'castingTime', 'cards.casting_time'
       configure_relation 'classes', 'hero_classes.name', :hero_classes
+      configure_relation 'spellbooks', 'spellbooks.name', :spellbooks
 
       # Monsters
       configure_field 'cr', 'cards.challenge'

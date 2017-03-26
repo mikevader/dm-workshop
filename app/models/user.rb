@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :cards
   has_many :free_forms
   has_many :filters
+  has_many :spellbooks
 
   enum role: {dm: 2, player: 4}
 

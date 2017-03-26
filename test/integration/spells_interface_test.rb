@@ -43,7 +43,7 @@ class SpellsInterfaceTest < ActionDispatch::IntegrationTest
   test 'spell interface should handle deletes' do
     log_in_as(@user)
     get spells_path
-    # Delete a post.
+    # Delete a spell.
     assert_select 'a[aria-label=?]', 'delete'
     first_spell = @user.spells.first
     assert_difference 'Spell.count', -1 do
