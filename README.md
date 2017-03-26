@@ -69,6 +69,13 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
+### Dungeon Master Workshop 0.26 ###
+* Create and manage spellbooks
+* You can add spells to spellsbooks easily over an auto complete field
+* In the spells overview you can select an active spellbook.
+* Spells in the overview can easily be inscribed to or erased from the currently selected spellbook
+* Update libraries.
+
 ### Dungeon Master Workshop 0.25 ###
 * Placing of cards on print page for minimal use of paper.
 
