@@ -30,7 +30,7 @@ class SpellbooksController < ApplicationController
   end
 
   def edit
-    authorize Filter
+    authorize Spellbook
     @spellbook = Spellbook.find(params[:id])
   end
 
