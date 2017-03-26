@@ -1,6 +1,5 @@
 class Spell < Card
   acts_as_taggable
-  has_and_belongs_to_many :spellbooks, join_table: :spellbooks_spells
 
   default_scope -> { order(name: :asc) }
   mount_uploader :picture, PictureUploader
