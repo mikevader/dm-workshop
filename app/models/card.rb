@@ -12,7 +12,7 @@ class Card < ApplicationRecord
   validates :user_id, presence: true
   validates :source_id, presence: true
   validates :card_size, presence: true#, inclusion: { in: Card.card_sizes }
-  validates :name, presence: true, length: {maximum: 50}, uniqueness: {case_sensitive: false}
+  validates :name, presence: true, length: { maximum: 50 }, uniqueness: { case_sensitive: false }
 
   def self.card_sizes
     %w(25x35 35x50 50x70)
