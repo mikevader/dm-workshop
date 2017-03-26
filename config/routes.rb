@@ -49,6 +49,8 @@ Rails.application.routes.draw do
     get :autocomplete_spell_name, on: :collection
     member do
       get :spells
+      patch :inscribe
+      delete :erase
     end
   end
   resources :hero_classes

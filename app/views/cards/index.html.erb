@@ -12,7 +12,8 @@
           <div class="input-group-btn">
             <button type="button" class="btn btn-default" data-toggle="popover" data-container="body" data-placement="bottom"
                     data-content="You can search here like this:<pre>(name ~ fire OR level > 5) AND classes in (Bard, Cleric)</pre> For more details look in the <a href='<%= help_path(anchor: 'search') %>'>help</a>">
-              <span class="glyphicon glyphicon-question-sign"></span></button>
+              <span class="glyphicon glyphicon-question-sign"></span>
+            </button>
           </div>
           <%= text_field_tag :search, params[:search], class: "form-control", autocomplete: 'off', placeholder: 'Search for...' %>
           <div class="input-group-btn">
@@ -50,7 +51,7 @@
           <tr>
             <td>
               <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal-<%= index %>" data-size="<%= modal_size %>" data-previd="#myModal-<%= prev_index %>" data-nextid="#myModal-<%= next_index %>" data-card="<%= "/#{card.class.name.underscore.pluralize}/#{card.id}/modal" %>">
-                o
+                <span class="glyphicon glyphicon-modal-window"></span>
               </button>
             </td>
             <% columns_definition(controller_name, card).each do |column| %>
@@ -59,36 +60,33 @@
             <td class="last">
               <ul class="actions">
                 <% if policy(card).edit? -%>
-                    <li><%= link_to edit_path(card), 'aria-label' => 'edit' do -%>
+                    <li>
+                      <%= link_to edit_path(card), 'aria-label' => 'edit' do -%>
                           <span class="glyphicon glyphicon-pencil"></span>
                       <% end -%>
                     </li>
                 <% end -%>
                 <% if policy(card).duplicate? -%>
-                    <li><%= link_to duplicate_path(card), method: :post, 'aria-label' => 'duplicate' do -%>
+                    <li>
+                      <%= link_to duplicate_path(card), method: :post, 'aria-label' => 'duplicate' do -%>
                           <span class="glyphicon glyphicon-duplicate"></span>
                       <% end -%>
                     </li>
                 <% end -%>
                 <% if policy(card).destroy? -%>
-                    <li><%= link_to card_path(card), controller: 'cards', action: :destroy, method: :delete, data: {confirm: "You sure?"}, 'aria-label' => 'delete' do -%>
+                    <li>
+                      <%= link_to card_path(card), controller: 'cards', action: :destroy, method: :delete, data: {confirm: "You sure?"}, 'aria-label' => 'delete' do -%>
                           <span class="glyphicon glyphicon-remove"></span>
                       <% end -%>
                     </li>
                 <% end -%>
               </ul>
             </td>
-            <td>
-              <% if current_spellbook.has_spell?(card) -%>
-                  <%= link_to card_path(card), controller: 'cards', method: :post, class: 'btn btn-sm btn-danger' do -%>
-                      <span class="glyphicon glyphicon-minus"></span>
-                  <% end -%>
-              <% else -%>
-                  <%= link_to card_path(card), controller: 'cards', method: :post, class: 'btn btn-sm btn-success' do -%>
-                      <span class="glyphicon glyphicon-plus"></span>
-                  <% end -%>
-              <% end -%>
-            </td>
+            <% if spell_card? && !current_spellbook.nil? %>
+                <td>
+                  <%= render 'spellbooks/subscribe_form', spell: card %>
+                </td>
+            <% end %>
           </tr>
       <% end %>
     </table>
@@ -107,8 +105,6 @@
             </div>
           </div>
       <% end %>
-
-      <%#= render partial: 'shared/modal', collection: @cards, as: :card %>
     </div>
   </div>
 </div>
@@ -122,8 +118,10 @@
   </div>
 </div>
 
-<div style="position: fixed; z-index: 1000; top: 100px; left: 0px; height: 50px; width: 50px; background: transparent;">
-  <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Spellbooks" data-content="<ul><%= @current_user.spellbooks.map { |sb| (current_spellbook.id == sb.id) ? "<li><b>#{link_to sb.name, select_spellbook_path(sb), method: :post}</b></li>" : "<li>#{link_to sb.name, select_spellbook_path(sb), method: :post}</li>" }.join %></ul>">
-    <span class="glyphicon glyphicon-book"></span>
-  </a>
-</div>
+<% if spell_card? && policy(Spellbook).update? %>
+    <div style="position: fixed; z-index: 1000; top: 90px; left: -10px; height: 40px; width: 40px; background: transparent;">
+      <a id="spellbook" tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title='<%= link_to 'Spellbooks', spellbooks_path %>' data-content="<ul><%= @current_user.spellbooks.map { |sb| (current_spellbook == sb) ? "<li><b>#{link_to sb.name, select_spellbook_path(sb), method: :post}</b></li>" : "<li>#{link_to sb.name, select_spellbook_path(sb), method: :post}</li>" }.join %></ul>">
+        <span class="glyphicon glyphicon-book"></span>
+      </a>
+    </div>
+<% end %>

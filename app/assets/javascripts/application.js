@@ -29,6 +29,10 @@ var loaded = function () {
     });
 
     $('body').scrollspy({target: '#card_view', offset: 0});
+
+    $("[data-toggle='popover']")
+        .popover("destroy")
+        .popover({html: true});
 }
 
 var updateCard = function (event) {
@@ -73,11 +77,6 @@ var loader = function () {
 }
 
 $(document).on("turbolinks:load", loader)
-
-$(function () {
-    $('[data-toggle="popover"]').popover({html: true})
-})
-
 
 var sortable = function () {
     var cells, desired_width, table_width;

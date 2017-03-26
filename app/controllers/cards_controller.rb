@@ -1,7 +1,7 @@
 class CardsController < ApplicationController
   include ColumnsHelper
 
-  helper_method :card_model, :print_path, :search_path, :new_path, :edit_path, :duplicate_path
+  helper_method :card_model, :print_path, :search_path, :new_path, :edit_path, :duplicate_path, :spell_card?
   before_action :logged_in_user, only: [:new, :edit, :update, :create, :destroy]
   before_action :init_search_engine, only: [:index]
   after_action :verify_authorized
@@ -129,6 +129,10 @@ class CardsController < ApplicationController
 
   def card_type
     controller_name.classify.parameterize.underscore.to_sym
+  end
+
+  def spell_card?
+    card_model == Spell
   end
 
   def search_engine

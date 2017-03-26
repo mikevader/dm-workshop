@@ -1,9 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  user: one
+spellbook:
+  name: Spellbook
+  spells:
+    - bane
+    - fireball
+  user: michael
 
-two:
-  name: MyString
-  user: two
+orcspells:
+  name: Orc Spells
+  spells:
+    - bane
+  user: michael
