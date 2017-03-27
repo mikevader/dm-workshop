@@ -92,19 +92,7 @@
     </table>
 
     <div id="modals">
-      <% @cards.each_with_index do |card, index| %>
-          <%
-            next_index = (index + 1)%@cards.size
-            prev_index = (index - 1)%@cards.size
-            modal_size = 'modal-lg' #modal_size(@cards)
-          %>
-          <div class="modal card-dialog" id="myModal-<%= index %>" tabindex="-1" role="dialog" data-size="<%= modal_size %>" data-previd="#myModal-<%= prev_index %>" data-nextid="#myModal-<%= next_index %>" data-card="<%= "/#{card.class.model_name.human.downcase.pluralize}/#{card.id}/modal" %>" aria-labelledby="myModalLabel">
-            <div class="modal-dialog <%= modal_size %>" role="document">
-              <div class="modal-content">
-              </div>
-            </div>
-          </div>
-      <% end %>
+      <%= render partial: 'shared/modal', collection: @cards, as: :card %>
     </div>
   </div>
 </div>
@@ -118,7 +106,7 @@
   </div>
 </div>
 
-<% if spell_card? && policy(Spellbook).update? %>
+<% if spell_card? && current_user&.spellbooks&.empty? == false %>
     <div style="position: fixed; z-index: 1000; top: 90px; left: -10px; height: 40px; width: 40px; background: transparent;">
       <a id="spellbook" tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title='<%= link_to 'Spellbooks', spellbooks_path %>' data-content="<ul><%= @current_user.spellbooks.map { |sb| (current_spellbook == sb) ? "<li><b>#{link_to sb.name, select_spellbook_path(sb), method: :post}</b></li>" : "<li>#{link_to sb.name, select_spellbook_path(sb), method: :post}</li>" }.join %></ul>">
         <span class="glyphicon glyphicon-book"></span>
