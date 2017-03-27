@@ -1,0 +1,14 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+spellbook:
+  name: Spellbook
+  spells:
+    - bane
+    - fireball
+  user: michael
+
+orcspells:
+  name: Orc Spells
+  spells:
+    - bane
+  user: michael

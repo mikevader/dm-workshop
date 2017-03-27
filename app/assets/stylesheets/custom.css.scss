@@ -6,9 +6,9 @@
 $gray-medium-light: #eaeaea;
 
 @mixin box_sizing {
-  -moz-box-sizing:    border-box;
+  -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  box-sizing:         border-box;
+  box-sizing: border-box;
 }
 
 /* universal */
@@ -42,7 +42,7 @@ textarea {
   background-color: #fff;
 }
 
-@media(min-width:768px) {
+@media(min-width: 768px) {
   #page-wrapper {
     padding: 10px;
   }
@@ -101,37 +101,37 @@ p {
   padding: 0 15px !important;
 }
 
-.top-nav>li {
+.top-nav > li {
   display: inline-block;
   float: left;
 }
 
-.top-nav>li>a {
+.top-nav > li > a {
   padding-top: 15px;
   padding-bottom: 15px;
   line-height: 20px;
   color: #999;
 }
 
-.top-nav>li>a:hover,
-.top-nav>li>a:focus,
-.top-nav>.open>a,
-.top-nav>.open>a:hover,
-.top-nav>.open>a:focus {
+.top-nav > li > a:hover,
+.top-nav > li > a:focus,
+.top-nav > .open > a,
+.top-nav > .open > a:hover,
+.top-nav > .open > a:focus {
   color: #fff;
   background-color: #000;
 }
 
-.top-nav>.open>.dropdown-menu {
+.top-nav > .open > .dropdown-menu {
   float: left;
   position: absolute;
   margin-top: 0;
-  border: 1px solid rgba(0,0,0,.15);
+  border: 1px solid rgba(0, 0, 0, .15);
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   background-color: #fff;
-  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
-  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
 }
 
 /* footer */
@@ -175,7 +175,6 @@ table {
     }
   }
 }
-
 
 /* sidebar */
 
@@ -223,6 +222,7 @@ aside {
   padding-left: 12px;
   padding-right: 12px;
 }
+
 .row-no-padding {
   div[class*="col-"] {
     padding-left: 0 !important;
@@ -230,6 +230,10 @@ aside {
   }
   padding-left: 15px;
   padding-right: 15px;
+}
+
+div.form-group-no-margin:not(:last-child) {
+  margin-bottom: 0px;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -268,6 +272,7 @@ input[type=number]::-webkit-outer-spin-button {
   line-height: 1.428571429;
   border-radius: 15px;
 }
+
 .btn-circle.btn-lg {
   width: 50px;
   height: 50px;

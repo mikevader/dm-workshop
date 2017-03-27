@@ -1,0 +1,9 @@
+<% unless current_spellbook.nil? %>
+    <div id="follow_form-<%= spell.id %>">
+      <% if current_spellbook.inscribed?(spell) %>
+          <%= render 'spellbooks/erase', spell: spell %>
+      <% else %>
+          <%= render 'spellbooks/inscribe', spell: spell %>
+      <% end %>
+    </div>
+<% end %>

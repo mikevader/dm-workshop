@@ -107,5 +107,4 @@ class FiltersControllerTest < ActionController::TestCase
     end
     assert_redirected_to filters_url
   end
-
 end

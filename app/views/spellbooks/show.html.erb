@@ -1,0 +1,18 @@
+<h1><%= @spellbook.name %></h1>
+
+<div class="row">
+  <div class="col-sm-offset-2 col-sm-8">
+    <table class="table table-striped">
+      <tr>
+        <th>Level</th>
+        <th>Spells</th>
+      </tr>
+      <% @spells.group_by {|spell| spell.level }.each do |level, spells| -%>
+          <tr>
+            <th class="text-right col-xs-2"><%= level %>:</th>
+            <td class=" col-xs-10"><%= spells.map{|spell| spell.name}.join(', ') %></td>
+          </tr>
+      <% end -%>
+    </table>
+  </div>
+</div>

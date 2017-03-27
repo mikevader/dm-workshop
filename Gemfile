@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Use specific ruby version
-ruby '2.3.1'
+ruby '2.3.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0'
@@ -17,7 +17,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'coffee-rails', '~> 4.2.1'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 4.2.1'
+gem 'jquery-rails', '~> 4.3.1'
 gem 'jquery-ui-rails', '~> 5.0.5'
 
 # Simple API to perform paginated queries
@@ -26,6 +26,8 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'bootstrap-will_paginate', '~> 0.0.10'
 # Provides bootstrap-colorselector library
 gem 'bootstrap-colorselector-rails', '~> 0.1.0'
+# Autocomplete field
+gem 'rails-jquery-autocomplete', '~> 1.0.3'
 
 gem 'redcarpet', '~> 3.3'
 
@@ -58,7 +60,7 @@ gem 'activerecord-session_store', '~> 1.0.0'
 
 # Use for easy parsing the search expression
 gem 'treetop', '~> 1.6.3'
-gem 'net-ssh', '~> 4.0.0'
+gem 'net-ssh', '~> 4.1.0'
 
 # Create general purpose data admin interface
 gem 'remotipart', github: 'mshibuya/remotipart'
@@ -72,7 +74,7 @@ gem 'acts_as_list', '~> 0.9.2'
 gem 'recaptcha', '~> 4.1.0', require: 'recaptcha/rails'
 
 # Ruby web server built for concurrency and performance
-gem 'puma', '~> 3.7.0'
+gem 'puma', '~> 3.8.2'
 
 group :development do
   # Triggers live-reload any time guard is executed
@@ -88,6 +90,9 @@ group :development do
   gem 'brakeman', '>= 3.2.1', require: false
   # Extension for guard to natively support brakeman
   gem 'guard-brakeman', '>= 0.8.3', require: false
+
+  # RuboCop
+  gem 'rubocop', require: false
 end
 
 group :development, :test do
