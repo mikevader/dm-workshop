@@ -23,6 +23,14 @@ class Spell < Card
     replica
   end
 
+  def subtitle
+    if level == 0
+      "#{school} cantrip"
+    else
+      "#{level.try(:ordinalize)}-level #{school}"
+    end
+  end
+
   def card_data
     data = super
 
@@ -30,16 +38,9 @@ class Spell < Card
     data.icon = "icon-white-book-#{level}"
     data.color = 'maroon'
     data.description = description
+    data.badges = hero_classes.collect(&:cssclass)
 
-    hero_classes.each do |hero_class|
-      data.badges << hero_class.cssclass
-    end
-
-    if level == 0
-      data.add_subtitle ["#{school} cantrip"]
-    else
-      data.add_subtitle ["#{level.try(:ordinalize)}-level #{school}"]
-    end
+    data.add_subtitle [subtitle]
 
     data.add_rule
     data.add_property ['Casting Time', casting_time]
