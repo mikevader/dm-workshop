@@ -4,7 +4,7 @@ class Spell < Card
   default_scope -> { order(name: :asc) }
   mount_uploader :picture, PictureUploader
 
-  validates :level, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 9}
+  validates :level, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 9 }
   validates :school, presence: true
   # validate :spell_unique_per_class
   validate :picture_size
@@ -16,7 +16,7 @@ class Spell < Card
       replica.hero_classes << hero_class
     end
 
-    self.tag_list.each do |tag|
+    tag_list.each do |tag|
       replica.tag_list.add(tag)
     end
 
@@ -64,18 +64,16 @@ class Spell < Card
   end
 
   private
+
   # Validates the size of an uploaded picture.
   def picture_size
-    if picture.size > 5.megabytes
-      errors.add(:picture, "should be less than 5MB")
-    end
+
+    errors.add(:picture, 'should be less than 5MB') if picture.size > 5.megabytes
   end
 
   # Validates the uniqueness of a spell in a class
   def spell_unique_per_class
-    if hero_classes.select { |c| hero_classes.select { |q| q == c }.size > 1 }.any?
-      errors.add :spell, 'tried to add a class multiple times'
-    end
+    errors.add :spell, 'tried to add a class multiple times' if hero_classes.select { |c| hero_classes.select { |q| q == c }.size > 1 }.any?
   end
 
 end
