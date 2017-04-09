@@ -31,8 +31,8 @@ class Spell < Card
     end
   end
 
-  def card_data
-    data = super
+  def card_data(detailed = false)
+    data = super(detailed)
 
     data.name = "#{name}#{' (Ritual)' if ritual?}"
     data.icon = "icon-white-book-#{level}"
@@ -49,7 +49,7 @@ class Spell < Card
     data.add_property ['Duration', duration]
     data.add_fill [2]
 
-    if short_description.blank?
+    if short_description.blank? || detailed
       data.add_text [description] unless description.blank?
     else
       data.add_text [short_description]
