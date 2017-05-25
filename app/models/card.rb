@@ -72,7 +72,7 @@ class Card < ApplicationRecord
     replica
   end
 
-  def card_data
+  def card_data(detailed = false)
     data = CardData.new
 
     data.id = id
@@ -80,6 +80,7 @@ class Card < ApplicationRecord
     data.card_size = card_size
     data.icon = icon unless icon.nil?
     data.color = color unless color.nil?
+    data.description = description
 
     return data
   end

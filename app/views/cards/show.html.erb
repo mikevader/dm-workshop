@@ -1,2 +1,12 @@
-<h1>Card#show</h1>
-<p>Find me in app/views/card/show.html.erb</p>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="page-header">
+      <h1><%= yield(:page_title) %></h1>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+    <%= render @card %>
+  </div>
+</div>

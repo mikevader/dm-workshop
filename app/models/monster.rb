@@ -209,12 +209,11 @@ class Monster < Card
     CR_XP[cr][:bonus]
   end
 
-  def card_data
-    data = super
+  def card_data(detailed = false)
+    data = super(detailed)
 
     data.icon = 'icon-custom-monster'
     data.color = 'black'
-    data.description = description
 
     data.add_subtitle ["#{monster_size.try(:capitalize)} #{monster_type}, #{alignment}"]
 
@@ -276,6 +275,11 @@ class Monster < Card
     data.add_subsection ['Legendary Action'] unless actions_legendary.empty?
     actions_legendary.each do |action|
       data.add_description [action.title, action.text]
+    end
+
+    if detailed && !description.blank?
+      data.add_rule
+      data.add_description description
     end
 
     return data

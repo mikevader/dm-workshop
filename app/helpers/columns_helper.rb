@@ -10,25 +10,23 @@ module ColumnsHelper
       end
     end
 
+    columns = [{title: 'Name', field: lambda { |card| link_to card.name, card_path(card) }}]
+
     case card_type
       when 'FreeForm'
-        [{title: 'Name', field: lambda { |card| card.name }},
-         {title: 'Icon', field: lambda { |card| card.icon }},
-         {title: 'Color', field: lambda { |card| card.color }}]
+        columns.concat [{title: 'Icon', field: lambda { |card| card.icon }},
+                        {title: 'Color', field: lambda { |card| card.color }}]
       when 'Spell'
-        [{title: 'Name', field: lambda { |card| card.name }},
-         {title: 'Level', field: lambda { |card| card.level }},
-         {title: 'School', field: lambda { |card| card.school }}]
+        columns.concat [{title: 'Level', field: lambda { |card| card.level }},
+                        {title: 'School', field: lambda { |card| card.school }}]
       when 'Monster'
-        [{title: 'Name', field: lambda { |card| card.name }},
-         {title: 'Type', field: lambda { |card| "#{card.monster_size} #{card.monster_type}" }},
-         {title: 'CR', field: lambda { |card| Monster.challenge_pretty(card.challenge) }}]
+        columns.concat [{title: 'Type', field: lambda { |card| "#{card.monster_size} #{card.monster_type}" }},
+                        {title: 'CR', field: lambda { |card| Monster.challenge_pretty(card.challenge) }}]
       when 'Item'
-        [{title: 'Name', field: lambda { |card| card.name }},
-         {title: 'Category', field: lambda { |card| card.category.name }},
-         {title: 'Rarity', field: lambda { |card| card.rarity.name }}]
-      else
-        [{title: 'Name', field: lambda { |card| card.name }}]
+        columns.concat [{title: 'Category', field: lambda { |card| card.category.name }},
+                        {title: 'Rarity', field: lambda { |card| card.rarity.name }}]
     end
+
+    columns
   end
 end
