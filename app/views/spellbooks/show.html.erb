@@ -1,12 +1,39 @@
 <div class="row">
   <div class="col-xs-12">
     <div class="page-header">
-      <h1><%= @spellbook.name %></h1>
+      <h1><%= @spellbook.name %>
+        <%= link_to print_path(search: "spellbooks = '#{@spellbook.name}'", layout: 'detailed_layout'), class: 'btn btn-default', target: '_blank' do -%>
+            <span class="glyphicon glyphicon-print"></span>
+        <% end %>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#printDialog">
+          <span class="glyphicon glyphicon-print"></span>
+        </button>
+        <div class="modal" id="printDialog" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <%= form_tag(print_path, method: 'get') do %>
+                  <%= hidden_field_tag(:search, "spellbooks = '#{@spellbook.name}'") %>
+                  <div class="form-group">
+                    <label class="radio-inline" for="card_layout">
+                      <input id="card_layout" name="layout" type="radio" value="card_layout"/>
+                      Cards
+                    </label>
+                    <label class="radio-inline" for="detail_layout">
+                      <input id="detail_layout" name="layout" type="radio" value="detail_layout"/>
+                      Detailed
+                    </label>
+                  </div>
+                  <%= submit_tag('Print', class: 'btn btn-default') %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </h1>
     </div>
   </div>
 </div>
 <div class="row">
-  <% @spells.group_by { |spell| spell.level }.each do |level, spells| -%>
+  <% @spells.group_by {|spell| spell.level}.each do |level, spells| -%>
       <% spells.each do |spell| %>
           <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
             <%= render spell %>
