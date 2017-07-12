@@ -8,26 +8,7 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#printDialog">
           <span class="glyphicon glyphicon-print"></span>
         </button>
-        <div class="modal" id="printDialog" tabindex="-1" role="dialog">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <%= form_tag(print_path, method: 'get') do %>
-                  <%= hidden_field_tag(:search, "spellbooks = '#{@spellbook.name}'") %>
-                  <div class="form-group">
-                    <label class="radio-inline" for="card_layout">
-                      <input id="card_layout" name="layout" type="radio" value="card_layout"/>
-                      Cards
-                    </label>
-                    <label class="radio-inline" for="detail_layout">
-                      <input id="detail_layout" name="layout" type="radio" value="detail_layout"/>
-                      Detailed
-                    </label>
-                  </div>
-                  <%= submit_tag('Print', class: 'btn btn-default') %>
-              <% end %>
-            </div>
-          </div>
-        </div>
+        <%= print_modal_tag('printDialog', "spellbooks = '#{@spellbook.name}'") %>
       </h1>
     </div>
   </div>
