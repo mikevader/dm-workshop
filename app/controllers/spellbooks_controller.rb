@@ -54,10 +54,15 @@ class SpellbooksController < ApplicationController
   end
 
   def select
-    spellbook = Spellbook.find(params[:id])
-    authorize spellbook
-    select_spellbook(spellbook)
-    flash[:success] = "Select Spellbook: #{current_spellbook.name}"
+    if params[:id].to_i < 0
+      deselect_spellbook
+      flash[:success] = 'Spellbook deselected'
+    else
+      spellbook = Spellbook.find(params[:id])
+      authorize spellbook
+      select_spellbook(spellbook)
+      flash[:success] = "Select Spellbook: #{current_spellbook.name}"
+    end
     redirect_to spells_path
   end
 

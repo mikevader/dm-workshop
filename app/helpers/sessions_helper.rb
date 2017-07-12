@@ -1,5 +1,5 @@
 module SessionsHelper
-  
+
   # Logs in the given user.
   def log_in(user)
     session[:user_id] = user.id
@@ -11,17 +11,17 @@ module SessionsHelper
     cookies.permanent.signed[:user_id] = user.id
     cookies.permanent[:remember_token] = user.remember_token
   end
-  
+
   # Returns true if the given user is the current user.
   def current_user?(user)
     user == current_user
   end
-  
+
   # Returns true if the current user is an admin
   def admin_user?
     current_user.admin? if logged_in?
   end
-    
+
   # Returns the user corresponding to the remember token cookie.
   def current_user
     if (user_id = session[:user_id])
@@ -35,14 +35,17 @@ module SessionsHelper
     end
   end
 
+  def deselect_spellbook
+    session.delete(:spellbook_id)
+  end
+
   def select_spellbook(spellbook)
     session[:spellbook_id] = spellbook.id
   end
 
   def current_spellbook
-    if (spellbook_id = session[:spellbook_id])
-      @current_spellbook ||= Spellbook.find_by(id: spellbook_id)
-    end
+    spellbook_id = session[:spellbook_id]
+    @current_spellbook ||= Spellbook.find_by(id: spellbook_id) unless spellbook_id.nil?
   end
 
   # Returns true if the user is logged in, false otherwise.
@@ -63,7 +66,7 @@ module SessionsHelper
     session.delete(:user_id)
     @current_user = nil
   end
-  
+
   # Redirects to stored location (or to the default).
   def redirect_back_or(default)
     redirect_to(session[:forwarding_url] || default)

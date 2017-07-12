@@ -20,15 +20,16 @@
             <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
                 <span class="glyphicon glyphicon-search"></span>
             <% end %>
-            <%= link_to print_path(search: params[:search]), class: 'btn btn-default', target: '_blank' do %>
-                <span class="glyphicon glyphicon-print"></span>
-            <% end %>
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#printDialog">
+              <span class="glyphicon glyphicon-print"></span>
+            </button>
           </div>
         </div>
         <div class="form-group">
           <%= content_tag :div, @error.html_safe, class: 'alert alert-danger' if @error %>
         </div>
     <% end %>
+    <%= print_modal_tag('printDialog', params[:search]) %>
   </div>
 </div>
 <div class="row">
@@ -108,7 +109,13 @@
 
 <% if spell_card? && policy(Spellbook).create? %>
     <div style="position: fixed; z-index: 1000; top: 90px; left: -10px; height: 40px; width: 40px; background: transparent;">
-      <a id="spellbook" tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title='<%= link_to 'Spellbooks', spellbooks_path %>' data-content="<ul><%= @current_user.spellbooks.map { |sb| (current_spellbook == sb) ? "<li><b>#{link_to sb.name, select_spellbook_path(sb), method: :post}</b></li>" : "<li>#{link_to sb.name, select_spellbook_path(sb), method: :post}</li>" }.join %></ul>">
+      <a id="spellbook" tabindex="0"
+         class="btn btn-lg btn-danger"
+         role="button"
+         data-toggle="popover"
+         data-trigger="focus"
+         title='<%= link_to 'Spellbooks', spellbooks_path %>'
+         data-content='<%= render partial: 'shared/spellbook' %>'>
         <span class="glyphicon glyphicon-book"></span>
       </a>
     </div>

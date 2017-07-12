@@ -1,3 +1,5 @@
+//@import "bootstrap-sprockets";
+//@import "bootstrap";
 @import "mixins/flex";
 
 .card-actions {
@@ -21,20 +23,50 @@ body {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 }
 
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.row {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.col-xs-6 {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.col-xs-6 {
+  float: left;
+}
+
+.col-xs-6 {
+  width: 50%;
+}
+
 @media print {
   @page {
     size: portrait;
   }
 
-  /*
-  page {
-    width: 191mm;
-    height: 267mm;
-  }
-  */
-
   html {
     zoom: 100%;
+  }
+
+  .detail {
+    page-break-after: auto;
+    page-break-before: auto;
+    page-break-inside: avoid;
   }
 
   .page-preview {

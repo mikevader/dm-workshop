@@ -69,6 +69,10 @@ The final version is accessible under:
 ## Release notes ##
 We had the following releases:
 
+### Dungeon Master Workshop 0.28 ###
+* Add detailed print layout for spell books
+
+
 ### Dungeon Master Workshop 0.27 ###
 * Add rake cleanup tasks for sessions
 * Better detail view for spells and spellbooks

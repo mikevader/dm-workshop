@@ -1,12 +1,17 @@
 <div class="row">
   <div class="col-xs-12">
     <div class="page-header">
-      <h1><%= @spellbook.name %></h1>
+      <h1><%= @spellbook.name %>
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#printDialog">
+          <span class="glyphicon glyphicon-print"></span>
+        </button>
+        <%= print_modal_tag('printDialog', "spellbooks = '#{@spellbook.name}'") %>
+      </h1>
     </div>
   </div>
 </div>
 <div class="row">
-  <% @spells.group_by { |spell| spell.level }.each do |level, spells| -%>
+  <% @spells.group_by {|spell| spell.level}.each do |level, spells| -%>
       <% spells.each do |spell| %>
           <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
             <%= render spell %>
