@@ -2,10 +2,7 @@
   <div class="col-xs-12">
     <div class="page-header">
       <h1><%= @spellbook.name %>
-        <%= link_to print_path(search: "spellbooks = '#{@spellbook.name}'", layout: 'detailed_layout'), class: 'btn btn-default', target: '_blank' do -%>
-            <span class="glyphicon glyphicon-print"></span>
-        <% end %>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#printDialog">
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#printDialog">
           <span class="glyphicon glyphicon-print"></span>
         </button>
         <%= print_modal_tag('printDialog', "spellbooks = '#{@spellbook.name}'") %>

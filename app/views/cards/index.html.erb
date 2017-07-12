@@ -20,9 +20,6 @@
             <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
                 <span class="glyphicon glyphicon-search"></span>
             <% end %>
-            <%= link_to print_path(search: params[:search]), class: 'btn btn-default', target: '_blank' do %>
-                <span class="glyphicon glyphicon-print"></span>
-            <% end %>
             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#printDialog">
               <span class="glyphicon glyphicon-print"></span>
             </button>
