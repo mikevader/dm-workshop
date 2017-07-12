@@ -3,14 +3,14 @@ class OutputPagesController < ApplicationController
   before_action :logged_in_user, only: [:all, :free_forms, :monsters, :items]
 
   def all
-    @print_layout = params[:layout] || :card_layout
+    @print_layout = params[:layout] || 'card_layout'
 
     search_engine = Search::SearchEngine.new(policy_scope(Card))
     result, _normalized, _error = search_engine.search(params[:search], false)
 
     @pages = Guillotine.insert(result)
 
-    if @print_layout == :card_layout
+    if @print_layout == 'card_layout'
       render :all
     else
       render :detailed
