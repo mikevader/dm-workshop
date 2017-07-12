@@ -1,0 +1,14 @@
+<ul>
+  <% @current_user.spellbooks.map do |sb| %>
+      <li>
+        <% if (current_spellbook == sb) %>
+            <b><%= link_to(sb.name, spellbook_path(sb)) -%>&nbsp;&nbsp;</b><%= link_to(check_box_tag('', '', true), select_spellbook_path(sb), method: :post) -%>
+        <% else %>
+            <%= link_to(sb.name, spellbook_path(sb)) -%>&nbsp;&nbsp;<%= link_to(check_box_tag(''), select_spellbook_path(sb), method: :post) -%>
+        <% end %>
+      </li>
+  <% end %>
+  <li>
+    none&nbsp;&nbsp;<%= link_to(check_box_tag(''), select_spellbook_path(-1), method: :post) -%>
+  </li>
+</ul>
