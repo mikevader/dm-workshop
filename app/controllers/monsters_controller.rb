@@ -5,7 +5,7 @@ class MonstersController < CardsController
     monsters_path
   end
 
-  def print_path(search_args)
-    print_monsters_path(search_args)
+  def print_path(*search_args, &blk)
+    print_monsters_path(*search_args, &blk)
   end
 end
