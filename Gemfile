@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 ruby '2.3.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0'
+gem 'rails', '~> 5.1'
 # Use bootstrap with sass
 gem 'bootstrap-sass', '~> 3.3.7'
 # Use SCSS for stylesheets
@@ -18,12 +18,12 @@ gem 'coffee-rails', '~> 4.2.1'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~> 4.3.1'
-gem 'jquery-ui-rails', '~> 5.0.5'
+gem 'jquery-ui-rails', '~> 5.0'
 
 # Simple API to perform paginated queries
 gem 'will_paginate', '~> 3.1.0'
 # Extends will_paginate to provide correct styling for bootstrap
-gem 'bootstrap-will_paginate', '~> 0.0.10'
+gem 'bootstrap-will_paginate', '~> 1.0'
 # Provides bootstrap-colorselector library
 gem 'bootstrap-colorselector-rails', '~> 0.1.0'
 # Autocomplete field
@@ -34,7 +34,7 @@ gem 'redcarpet', '~> 3.3'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks', '~> 5.0.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.6.0'
+gem 'jbuilder', '~> 2.7'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.1', group: :doc
 
@@ -44,7 +44,7 @@ gem 'bcrypt', '~> 3.1.11'
 gem 'pundit', '~> 1.1.0'
 
 # Use Data::Faker from perl to easily generate fake test data
-gem 'faker', '~> 1.7.2'
+gem 'faker', '~> 1.8'
 
 # Upload files to Rails and map them to ORM frameworks
 gem 'carrierwave', '~> 1.0'
@@ -54,27 +54,27 @@ gem 'mini_magick', '~> 4.3'
 gem 'fog', '~> 1.37'
 
 # Producing and parsing XML used for import/export of cards
-gem 'nokogiri', '~> 1.7.0'
+gem 'nokogiri', '~> 1.8'
 # Store session data in active records aka database
-gem 'activerecord-session_store', '~> 1.0.0'
+gem 'activerecord-session_store', '~> 1.1'
 
 # Use for easy parsing the search expression
 gem 'treetop', '~> 1.6.3'
 gem 'net-ssh', '~> 4.1.0'
 
 # Create general purpose data admin interface
-gem 'remotipart', github: 'mshibuya/remotipart'
-gem 'rails_admin', '~> 1.1.1'
+gem 'remotipart', '~> 1.3'
+gem 'rails_admin', '~> 1.2'
 
 # Tagging library for used on any kind of object
-gem 'acts-as-taggable-on', '~> 4.0.0'
+gem 'acts-as-taggable-on', '~> 5.0'
 # Ordering library to order traits, actions, etc on monster and other cards
 gem 'acts_as_list', '~> 0.9.2'
 # Google re-captcha for sign-up process
-gem 'recaptcha', '~> 4.1.0', require: 'recaptcha/rails'
+gem 'recaptcha', '~> 4.3', require: 'recaptcha/rails'
 
 # Ruby web server built for concurrency and performance
-gem 'puma', '~> 3.8.2'
+gem 'puma', '~> 3.9'
 
 group :development do
   # Triggers live-reload any time guard is executed
@@ -129,7 +129,7 @@ end
 
 group :production do
   # Ruby interface for PostgreSQL database
-  gem 'pg',                     '0.18.4'
+  gem 'pg',                     '0.21.0'
   gem 'rails_12factor',         '0.0.3'
   gem 'rails_stdout_logging',   '0.0.5'
 end
