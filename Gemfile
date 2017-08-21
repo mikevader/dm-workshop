@@ -107,6 +107,8 @@ group :development, :test do
 
 
   gem 'rails-controller-testing'
+
+  gem 'minitest-ci'
 end
 
 group :test do
