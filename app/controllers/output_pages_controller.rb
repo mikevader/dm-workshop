@@ -22,7 +22,12 @@ class OutputPagesController < ApplicationController
     result, _normalized, _error = search_engine.search(combineTypeAndSearchExpression('freeform', params[:search]))
 
     @pages = Guillotine.insert(result)
-    render :all
+
+    if @print_layout == 'card_layout'
+      render :all
+    else
+      render :detailed
+    end
   end
 
   def spells
@@ -30,7 +35,12 @@ class OutputPagesController < ApplicationController
     result, _normalized, _error = search_engine.search(combineTypeAndSearchExpression('spell', params[:search]))
 
     @pages = Guillotine.insert(result)
-    render :all
+
+    if @print_layout == 'card_layout'
+      render :all
+    else
+      render :detailed
+    end
   end
 
   def items
@@ -38,7 +48,12 @@ class OutputPagesController < ApplicationController
     result, _normalized, _error = search_engine.search(combineTypeAndSearchExpression('item', params[:search]))
 
     @pages = Guillotine.insert(result)
-    render :all
+
+    if @print_layout == 'card_layout'
+      render :all
+    else
+      render :detailed
+    end
   end
 
   def monsters
@@ -46,7 +61,12 @@ class OutputPagesController < ApplicationController
     result, _normalized, _error = search_engine.search(combineTypeAndSearchExpression('monster', params[:search]))
 
     @pages = Guillotine.insert(result)
-    render :all
+
+    if @print_layout == 'card_layout'
+      render :all
+    else
+      render :detailed
+    end
   end
 
   private
