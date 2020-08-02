@@ -19,9 +19,11 @@
             <% if element.subtitle? -%>
                 <div class="card-element card-subtitle"><%= params.first %></div>
             <% elsif element.rule? -%>
-                <svg class="card-ruler" height="1" width="100" viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                  <polyline points="0,0 100,0.5 0,1" fill="<%= card.color %>"></polyline>
-                </svg>
+                <div class="card-ruler">
+                  <svg viewBox="0 0 100 1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="0,0 100,0.5 0,1" fill="<%= card.color %>"></polyline>
+                  </svg>
+                </div>
             <% elsif element.property? -%>
                 <div class="card-element card-property-line">
                   <h4 class="card-property-name"><%= params.first %></h4>

@@ -1,9 +1,11 @@
 @mixin flexbox {
+  display: -webkit-box;
   display: -webkit-flex;
   display: flex;
 }
 
 @mixin justify-content($values) {
+  -webkit-box-pack: $values;
   -webkit-justify-content: $values;
   justify-content: $values;
 }
@@ -15,6 +17,12 @@
 
 @mixin flex-direction($values) {
   -webkit-flex-direction: $values;
+  @if $values == 'row' {
+    -webkit-box-orient: horizontal;
+  } @else if($values == 'column') {
+    -webkit-box-orient: vertical;
+  }
+  -webkit-box-direction: normal;
   flex-direction: $values;
 }
 
@@ -25,11 +33,13 @@
 
 @mixin flex($values) {
   -webkit-flex: $values;
+  -webkit-box-flex: $values;
   flex: $values;
 }
 
 @mixin align-items($values) {
   -webkit-align-items: $values;
+  -webkit-box-align: $values;
   align-items: $values;
 }
 

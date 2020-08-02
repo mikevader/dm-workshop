@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      <%#= Rails.application.assets.find_asset('output').to_s.html_safe %>
+      <%#= Rails.application.assets.find_asset('cards').to_s.html_safe %>
+      <%#= Rails.application.assets.find_asset('card-size').to_s.html_safe %>
+      <%#= Rails.application.assets.find_asset('custom-icons').to_s.html_safe %>
+      <%#= Rails.application.assets.find_asset('class-icons').to_s.html_safe %>
+      <%#= Rails.application.assets.find_asset('icons').to_s.html_safe %>
+      <%= Rails.application.assets.find_asset('print.css').to_s.html_safe %>
+    </style>
+    <%#= stylesheet_link_tag    'print', media: 'all', 'data-turbolinks-track' => false %>
+
+    <%#= stylesheet_link_tag    'print', media: 'all', 'data-turbolinks-track' => true %>
+    <%#= javascript_include_tag 'print', 'data-turbolinks-track' => true %>
+    <%#= csrf_meta_tags %>
+    <%#= render 'layouts/shim' %>
+  </head>
+  <body class="page-background">
+    <div class="output-container" id="output-container">
+      <%= yield %>
+    </div>
+  </body>
+</html>

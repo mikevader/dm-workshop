@@ -1,0 +1,8 @@
+<% pages.each do |page| -%>
+  <page class="page page-preview" size="A4" style="background-color:white;">
+    <% page.card_nodes.each do |card_node| -%>
+      <% card = card_node.card %>
+      <%= render 'shared/card_card', card: card.card_data, position_style: card_style(card_node) %>
+    <% end -%>
+  </page>
+<% end -%>

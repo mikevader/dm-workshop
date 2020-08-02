@@ -29,16 +29,17 @@ div.cards {
 
 
 .card-content-container {
-  padding:2mm;
-  padding-top:1mm;
+  padding: 1mm 2mm 2mm;
   border-radius: 2mm;
-  margin-top:0px;
+  margin-top: 0;
   background-color: white;
   border-color: inherit;
   @include flexbox();
   @include flex-direction(column);
   @include flex(1);
   font-size: inherit;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .card-back {
@@ -291,6 +292,7 @@ div.cards {
   height: 1.0mm;
   margin-top: 0.3em;
   margin-bottom: 0.3em;
+  overflow: visible;
 }
 .card-box {
   display: inline;

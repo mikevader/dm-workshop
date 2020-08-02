@@ -76,6 +76,13 @@ gem 'recaptcha', '~> 4.3', require: 'recaptcha/rails'
 # Ruby web server built for concurrency and performance
 gem 'puma', '~> 3.9'
 
+
+gem 'pdfkit'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
+
+
 group :development do
   # Triggers live-reload any time guard is executed
   gem 'guard-livereload', '~> 2.4', require: false

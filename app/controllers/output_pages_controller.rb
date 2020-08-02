@@ -18,6 +18,7 @@ class OutputPagesController < ApplicationController
   end
 
   def free_forms
+    @print_layout = params[:layout] || 'card_layout'
     search_engine = Search::SearchEngine.new(policy_scope(FreeForm))
     result, _normalized, _error = search_engine.search(combineTypeAndSearchExpression('freeform', params[:search]))
 
@@ -31,6 +32,7 @@ class OutputPagesController < ApplicationController
   end
 
   def spells
+    @print_layout = params[:layout] || 'card_layout'
     search_engine = Search::SearchEngine.new(policy_scope(Spell))
     result, _normalized, _error = search_engine.search(combineTypeAndSearchExpression('spell', params[:search]))
 
@@ -44,6 +46,7 @@ class OutputPagesController < ApplicationController
   end
 
   def items
+    @print_layout = params[:layout] || 'card_layout'
     search_engine = Search::SearchEngine.new(policy_scope(Item))
     result, _normalized, _error = search_engine.search(combineTypeAndSearchExpression('item', params[:search]))
 
@@ -57,6 +60,7 @@ class OutputPagesController < ApplicationController
   end
 
   def monsters
+    @print_layout = params[:layout] || 'card_layout'
     search_engine = Search::SearchEngine.new(policy_scope(Monster))
     result, _normalized, _error = search_engine.search(combineTypeAndSearchExpression('monster', params[:search]))
 

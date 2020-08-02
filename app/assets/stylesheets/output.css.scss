@@ -10,7 +10,8 @@
   background: rgb(204, 204, 204);
 }
 
-body {
+//.page {
+body, .page {
   @include flexbox;
   @include justify-content(center);
   @include align-content(center);
@@ -18,8 +19,7 @@ body {
 
 .page-preview {
   background: white;
-  margin: 0 auto;
-  margin-bottom: 16px;
+  margin: 0 auto 16px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 }
 
@@ -28,7 +28,7 @@ body {
   box-sizing: border-box;
 }
 
-.container {
+.output-container {
   margin-right: auto;
   margin-left: auto;
   padding-left: 15px;
@@ -73,16 +73,16 @@ body {
     margin: 0;
     padding: 0;
     border: 0;
-    box-shadow: 0;
+    box-shadow: none;
     background-color: white;
   }
   .page-background {
     margin: 0;
     padding: 0;
     border: 0;
-    box-shadow: 0;
+    box-shadow: none;
     /* Set the background to gray to visualize the page size in the print preview */
-    background-color: gray;
+    background-color: white;
   }
 
   .debug_dump {
