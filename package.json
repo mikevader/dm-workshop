@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "@rails/webpacker": "5.4.4",
+    "rails_admin": "3.1.2",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3"
+  },
+  "resolutions": {
+    "rails_admin/@fortawesome/fontawesome-free": "^5.15.0"
+  }
+}

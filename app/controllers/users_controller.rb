@@ -17,7 +17,8 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(user_params)
-    if verify_recaptcha(model: @user) && @user.save
+    # if verify_recaptcha(action: 'dmw/signup') && @user.save
+    if @user.save
       @user.send_activation_email
       flash[:info] = "Please check your email to activate your account."
       redirect_to root_url
@@ -32,7 +33,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
+    if @user.update(user_params)
       flash[:success] = "Profile updated"
       redirect_to @user
     else

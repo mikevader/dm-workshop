@@ -118,7 +118,7 @@ class SearchEngineTest < ActiveSupport::TestCase
         Spell,
         'classes = Bard',
         "classes = 'bard'",
-        "SELECT \"cards\".* FROM \"cards\" INNER JOIN \"cards_hero_classes\" ON \"cards_hero_classes\".\"card_id\" = \"cards\".\"id\" INNER JOIN \"hero_classes\" ON \"hero_classes\".\"id\" = \"cards_hero_classes\".\"hero_class_id\" WHERE \"cards\".\"type\" IN ('Spell') AND (LOWER(hero_classes.name) LIKE 'bard') ORDER BY \"cards\".\"name\" ASC",
+        "SELECT \"cards\".* FROM \"cards\" INNER JOIN \"cards_hero_classes\" ON \"cards_hero_classes\".\"card_id\" = \"cards\".\"id\" INNER JOIN \"hero_classes\" ON \"hero_classes\".\"id\" = \"cards_hero_classes\".\"hero_class_id\" WHERE \"cards\".\"type\" = 'Spell' AND (LOWER(hero_classes.name) LIKE 'bard') ORDER BY \"cards\".\"name\" ASC",
         nil
     )
   end
@@ -128,7 +128,7 @@ class SearchEngineTest < ActiveSupport::TestCase
         Spell,
         'classes in (Bard)',
         "classes IN ('Bard')",
-        "SELECT \"cards\".* FROM \"cards\" INNER JOIN \"cards_hero_classes\" ON \"cards_hero_classes\".\"card_id\" = \"cards\".\"id\" INNER JOIN \"hero_classes\" ON \"hero_classes\".\"id\" = \"cards_hero_classes\".\"hero_class_id\" WHERE \"cards\".\"type\" IN ('Spell') AND (LOWER(hero_classes.name) IN ('bard')) ORDER BY \"cards\".\"name\" ASC",
+        "SELECT \"cards\".* FROM \"cards\" INNER JOIN \"cards_hero_classes\" ON \"cards_hero_classes\".\"card_id\" = \"cards\".\"id\" INNER JOIN \"hero_classes\" ON \"hero_classes\".\"id\" = \"cards_hero_classes\".\"hero_class_id\" WHERE \"cards\".\"type\" = 'Spell' AND (LOWER(hero_classes.name) IN ('bard')) ORDER BY \"cards\".\"name\" ASC",
         nil
     )
   end
@@ -172,8 +172,8 @@ class SearchEngineTest < ActiveSupport::TestCase
 
   test 'all Item fields should work in search queries' do
     assert_search_for_standard_field('attunement = false', "cards.attunement = 'f'")
-    assert_search(Item, 'category = Armor', "SELECT \"cards\".* FROM \"cards\" INNER JOIN \"categories\" ON \"categories\".\"id\" = \"cards\".\"category_id\" WHERE \"cards\".\"type\" IN ('Item') AND (LOWER(categories.name) LIKE 'armor') ORDER BY \"cards\".\"name\" ASC")
-    assert_search(Item, 'rarity = Uncommon', "SELECT \"cards\".* FROM \"cards\" INNER JOIN \"rarities\" ON \"rarities\".\"id\" = \"cards\".\"rarity_id\" WHERE \"cards\".\"type\" IN ('Item') AND (LOWER(rarities.name) LIKE 'uncommon') ORDER BY \"cards\".\"name\" ASC")
+    assert_search(Item, 'category = Armor', "SELECT \"cards\".* FROM \"cards\" INNER JOIN \"categories\" ON \"categories\".\"id\" = \"cards\".\"category_id\" WHERE \"cards\".\"type\" = 'Item' AND (LOWER(categories.name) LIKE 'armor') ORDER BY \"cards\".\"name\" ASC")
+    assert_search(Item, 'rarity = Uncommon', "SELECT \"cards\".* FROM \"cards\" INNER JOIN \"rarities\" ON \"rarities\".\"id\" = \"cards\".\"rarity_id\" WHERE \"cards\".\"type\" = 'Item' AND (LOWER(rarities.name) LIKE 'uncommon') ORDER BY \"cards\".\"name\" ASC")
   end
 
   test 'all Spell fields should work in search queries' do
@@ -183,7 +183,7 @@ class SearchEngineTest < ActiveSupport::TestCase
     assert_search_for_standard_field('concentration = true', "cards.concentration = 't'")
     assert_search_for_standard_field("duration = '8 hours'", "LOWER(cards.duration) LIKE '8 hours'")
     assert_search_for_standard_field("castingTime = '1 Action'", "LOWER(cards.casting_time) LIKE '1 action'")
-    assert_search(Spell, 'classes IN (Paladin, Warlock)', "SELECT \"cards\".* FROM \"cards\" INNER JOIN \"cards_hero_classes\" ON \"cards_hero_classes\".\"card_id\" = \"cards\".\"id\" INNER JOIN \"hero_classes\" ON \"hero_classes\".\"id\" = \"cards_hero_classes\".\"hero_class_id\" WHERE \"cards\".\"type\" IN ('Spell') AND (LOWER(hero_classes.name) IN ('paladin', 'warlock')) ORDER BY \"cards\".\"name\" ASC")
+    assert_search(Spell, 'classes IN (Paladin, Warlock)', "SELECT \"cards\".* FROM \"cards\" INNER JOIN \"cards_hero_classes\" ON \"cards_hero_classes\".\"card_id\" = \"cards\".\"id\" INNER JOIN \"hero_classes\" ON \"hero_classes\".\"id\" = \"cards_hero_classes\".\"hero_class_id\" WHERE \"cards\".\"type\" = 'Spell' AND (LOWER(hero_classes.name) IN ('paladin', 'warlock')) ORDER BY \"cards\".\"name\" ASC")
   end
 
   test 'all Monster fields should work in search queries' do

@@ -35,7 +35,7 @@ class SearchBuilder
       @joins << @relations[id.to_sym][:join_table]
       @relations[id.to_sym][:substitution]
     else
-      raise ParseSearchError.new("Field '#{id}' does not exist."), "Search contained query for unknown field '#{id}'."
+      raise Parser::ParseSearchError.new("Field '#{id}' does not exist."), "Search contained query for unknown field '#{id}'."
     end
   end
 

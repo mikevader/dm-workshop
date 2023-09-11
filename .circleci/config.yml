@@ -1,0 +1,60 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/circleci
+    docker:
+      - image: circleci/ruby:2.4.1-node
+        environment:
+          RAILS_ENV: test
+      - image: circleci/postgres:9.4.12-alpine
+
+    steps:
+      - checkout
+
+
+      - type: cache-restore
+        key: dmw-{{ checksum "Gemfile.lock" }}
+
+      - run: bundle install --path vendor/bundle
+
+      - type: cache-save
+        key: dmw-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
+
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+
+
+      # Run rspec in parallel
+      - run: mkdir reports
+      - run: bundle exec rake test TESTOPTS="--ci-dir=./reports"
+
+      # Save artifacts
+      - type: store_test_results
+        path: reports
+
+      - run: bash .circleci/setup-heroku.sh
+      - add_ssh_keys:
+          fingerprints:
+            - "48:a0:87:54:ca:75:32:12:c6:9e:a2:77:a4:7a:08:a4"
+
+      - deploy:
+          name: Deploy Master to Heroku
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              git push heroku master
+              heroku run rake db:migrate
+              heroku restart
+            fi
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master

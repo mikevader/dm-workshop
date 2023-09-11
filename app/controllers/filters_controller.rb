@@ -52,7 +52,7 @@ class FiltersController < ApplicationController
   def update
     @filter = Filter.find(params[:id])
     authorize @filter
-    if @filter.update_attributes(filter_params)
+    if @filter.update(filter_params)
       flash[:success] = 'Filter updated!'
       redirect_to filter_path(@filter)
     else

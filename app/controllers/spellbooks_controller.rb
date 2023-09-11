@@ -37,7 +37,7 @@ class SpellbooksController < ApplicationController
   def update
     @spellbook = Spellbook.find(params[:id])
     authorize @spellbook
-    if @spellbook.update_attributes(spellbook_params)
+    if @spellbook.update(spellbook_params)
       flash[:success] = 'Spellbook updated!'
       redirect_to spellbooks_path
     else

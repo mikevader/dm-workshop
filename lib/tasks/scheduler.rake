@@ -53,7 +53,7 @@ def delete_old_sessions(threshold)
   ActiveRecord::Base.connection.execute(sql)
 end
 
-def threshold_date_string(threshold_in_days = 30)
+def threshold_date_string(threshold_in_days = 10)
   threshold = Date.today - threshold_in_days
   threshold.strftime('%Y-%m-%d')
 end
