@@ -3,7 +3,7 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'minitest/reporters'
 Dir[Rails.root.join("test/support/**/*")].each { |f| require f }
-Minitest::Reporters.use!
+Minitest::Reporters.use! unless ENV['RM_INFO']
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
@@ -24,7 +24,9 @@ class ActiveSupport::TestCase
                                  password: password,
                                  remember_me: remember_me} }
     else
-      session[:user_id] = user.id
+      post login_path, params: { session: {email: user.email,
+                                           password: password,
+                                           remember_me: remember_me} }
     end
   end
 

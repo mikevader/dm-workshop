@@ -101,7 +101,7 @@ class CardsController < ApplicationController
   def update
     @card = Card.find(params[:id])
     authorize @card
-    if @card.update_attributes(card_params)
+    if @card.update(card_params)
       flash[:success] = 'Card updated!'
       redirect_to session.delete(:return_to) || root_path
     else

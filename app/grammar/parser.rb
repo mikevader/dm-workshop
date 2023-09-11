@@ -1,15 +1,7 @@
 require 'polyglot'
 require 'treetop'
-require 'ql_extensions'
+require 'dmwql'
 
-
-class ParseSearchError < ArgumentError
-  attr_accessor :parse_error
-  
-  def initialize(parse_error)
-    @parse_error = parse_error
-  end
-end
 
 class Parser
   def initialize
@@ -37,5 +29,13 @@ class Parser
     return if(root_node.elements.nil?)
     root_node.elements.delete_if { |node| node.class.name == 'Treetop::Runtime::SyntaxNode' }
     root_node.elements.each { |node| clean_tree(node) }
+  end
+
+  class ParseSearchError < ArgumentError
+    attr_accessor :parse_error
+
+    def initialize(parse_error)
+      @parse_error = parse_error
+    end
   end
 end

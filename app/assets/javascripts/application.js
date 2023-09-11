@@ -12,9 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui/sortable
-//= require jquery-ui/effect-highlight
-//= require jquery-ui/autocomplete
+//= require jquery-ui/widgets/sortable
+//= require jquery-ui/effects/effect-highlight
+//= require jquery-ui/widgets/autocomplete
 //= require autocomplete-rails
 //= require bootstrap-sprockets
 //= require turbolinks
@@ -109,4 +109,3 @@ var sortable = function () {
 }
 
 $(document).on("turbolinks:load", sortable);
-

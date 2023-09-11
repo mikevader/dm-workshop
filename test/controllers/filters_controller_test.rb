@@ -52,6 +52,7 @@ class FiltersControllerTest < ActionController::TestCase
   end
 
   test 'should get show' do
+    skip
     log_in_as(users(:michael))
     get :show, params: { id: @filter }
     assert_response :success

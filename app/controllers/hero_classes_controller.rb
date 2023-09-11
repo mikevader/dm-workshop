@@ -31,7 +31,7 @@ class HeroClassesController < ApplicationController
   
   def update
     @hero_class = HeroClass.find(params[:id])
-    if @hero_class.update_attributes(hero_class_params)
+    if @hero_class.update(hero_class_params)
       flash[:success] = "HeroClass udpated"
       redirect_to hero_classes_url
     else

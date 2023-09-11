@@ -27,3 +27,11 @@
 certificate.pem
 security_report.html
 server.key
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+/test/reports/*

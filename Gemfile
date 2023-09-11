@@ -1,27 +1,27 @@
 source 'https://rubygems.org'
 
 # Use specific ruby version
-ruby '2.4.1'
+ruby '3.0.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1'
+gem 'rails', '~> 6.1'
 # Use bootstrap with sass
-gem 'bootstrap-sass', '~> 3.3.7'
+gem 'bootstrap-sass', '~> 3.4.1'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0.5'
+gem 'sass-rails', '~> 6.0.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-gem 'therubyracer', platforms: :ruby
+# gem 'therubyracer', platforms: :ruby
 
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2.1'
+gem 'coffee-rails', '~> 5.0.0'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 4.3.1'
-gem 'jquery-ui-rails', '~> 5.0'
+gem 'jquery-rails', '~> 4.6.0'
+gem 'jquery-ui-rails', '~> 6.0.1'
 
 # Simple API to perform paginated queries
-gem 'will_paginate', '~> 3.1.0'
+gem 'will_paginate', '~> 3.3.1'
 # Extends will_paginate to provide correct styling for bootstrap
 gem 'bootstrap-will_paginate', '~> 1.0'
 # Provides bootstrap-colorselector library
@@ -31,17 +31,20 @@ gem 'rails-jquery-autocomplete', '~> 1.0.3'
 
 gem 'redcarpet', '~> 3.3'
 
+gem 'bootsnap', require: false
+gem 'webpacker'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '~> 5.0.1'
+gem 'turbolinks', '~> 5.2.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.1', group: :doc
+gem 'sdoc', '~> 2.6.1', group: :doc
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.11'
 # For the authorization
-gem 'pundit', '~> 1.1.0'
+gem 'pundit', '~> 2.3.1'
 
 # Use Data::Faker from perl to easily generate fake test data
 gem 'faker', '~> 1.8'
@@ -51,30 +54,31 @@ gem 'carrierwave', '~> 1.0'
 # Manipulate images via ImageMagick or GraphicsMagick
 gem 'mini_magick', '~> 4.3'
 # Cloud service library which supports most of cloud providers
-gem 'fog', '~> 1.37'
+gem 'fog', '~> 2.3.0'
 
 # Producing and parsing XML used for import/export of cards
 gem 'nokogiri', '~> 1.8'
 # Store session data in active records aka database
-gem 'activerecord-session_store', '~> 1.1'
+gem 'activerecord-session_store', '~> 2.1.0'
 
 # Use for easy parsing the search expression
-gem 'treetop', '~> 1.6.3'
+gem 'treetop', '~> 1.6.12'
 gem 'net-ssh', '~> 4.1.0'
 
 # Create general purpose data admin interface
 gem 'remotipart', '~> 1.3'
-gem 'rails_admin', '~> 1.2'
+gem 'rails_admin', '~> 3.1.2'
+gem 'json', '~> 2.6.3'
 
 # Tagging library for used on any kind of object
-gem 'acts-as-taggable-on', '~> 5.0'
+gem 'acts-as-taggable-on', '~> 9.0.1'
 # Ordering library to order traits, actions, etc on monster and other cards
-gem 'acts_as_list', '~> 0.9.2'
+gem 'acts_as_list', '~> 1.1.0'
 # Google re-captcha for sign-up process
-gem 'recaptcha', '~> 4.3', require: 'recaptcha/rails'
+gem 'recaptcha', '~> 5.15.0', require: 'recaptcha/rails'
 
 # Ruby web server built for concurrency and performance
-gem 'puma', '~> 3.9'
+gem 'puma', '~> 6.3.1'
 
 group :development do
   # Triggers live-reload any time guard is executed
@@ -84,7 +88,7 @@ group :development do
   gem 'mechanize', '~> 2.7'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 3.3'
+  gem 'web-console', '~> 4.2.1'
 
   # Security check
   gem 'brakeman', '>= 3.2.1', require: false
@@ -135,4 +139,3 @@ group :production do
   gem 'rails_12factor',         '0.0.3'
   gem 'rails_stdout_logging',   '0.0.5'
 end
-

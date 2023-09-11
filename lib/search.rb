@@ -18,7 +18,7 @@ module Search
         else
           result, normalized = search_entities(search_string)
         end
-      rescue ParseSearchError => e
+      rescue Parser::ParseSearchError => e
         error = e.parse_error
       end
 

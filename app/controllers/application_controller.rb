@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :edit_path, :duplicate_path
   include SessionsHelper
-  include Pundit
+  include Pundit::Authorization
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   def admin_user
     redirect_to root_url unless admin_user?
   end
-  def user_not_authorized
+  def user_not_authorized(exception)
     if logged_in?
       flash[:alert] = "You are not authorized to perform this action."
       redirect_to(request.referrer || root_path)
