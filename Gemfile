@@ -135,7 +135,7 @@ end
 
 group :production do
   # Ruby interface for PostgreSQL database
-  gem 'pg',                     '0.21.0'
+  gem 'pg',                     '1.5.4'
   gem 'rails_12factor',         '0.0.3'
   gem 'rails_stdout_logging',   '0.0.5'
 end
