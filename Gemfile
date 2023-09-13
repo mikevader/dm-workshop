@@ -50,14 +50,14 @@ gem 'pundit', '~> 2.3.1'
 gem 'faker', '~> 1.8'
 
 # Upload files to Rails and map them to ORM frameworks
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave', '~> 3.0.3'
 # Manipulate images via ImageMagick or GraphicsMagick
-gem 'mini_magick', '~> 4.3'
+gem 'mini_magick', '~> 4.12'
 # Cloud service library which supports most of cloud providers
-gem 'fog', '~> 2.3.0'
+gem 'fog-aws', '~> 3.19.0'
 
 # Producing and parsing XML used for import/export of cards
-gem 'nokogiri', '~> 1.8'
+gem 'nokogiri', '~> 1.15'
 # Store session data in active records aka database
 gem 'activerecord-session_store', '~> 2.1.0'
 
