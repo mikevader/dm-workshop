@@ -22,11 +22,6 @@ Layout/ArgumentAlignment:
   Exclude:
     - 'app/controllers/users_controller.rb'
     - 'app/models/user.rb'
-    - 'bin/bundle-audit'
-    - 'bin/bundler-audit'
-    - 'bin/rubocop'
-    - 'bin/webpack'
-    - 'bin/webpack-dev-server'
     - 'test/grammar/parser_test.rb'
     - 'test/models/item_test.rb'
     - 'test/models/monster_test.rb'
@@ -76,7 +71,6 @@ Layout/EmptyLineAfterGuardClause:
     - 'app/models/card_import.rb'
     - 'app/models/monster.rb'
     - 'app/models/user.rb'
-    - 'bin/bundle'
     - 'config/spring.rb'
     - 'lib/tasks/scrape.rake'
 
@@ -299,7 +293,6 @@ Layout/MultilineOperationIndentation:
   Exclude:
     - 'Guardfile'
     - 'app/models/node.rb'
-    - 'bin/bundle'
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
@@ -432,7 +425,6 @@ Lint/AmbiguousRegexpLiteral:
 Lint/AssignmentInCondition:
   Exclude:
     - 'app/models/node.rb'
-    - 'bin/spring'
 
 # Offense count: 1
 # Configuration parameters: AllowComments.
@@ -640,9 +632,6 @@ Performance/Count:
 # This cop supports safe autocorrection (--autocorrect).
 Performance/RegexpMatch:
   Exclude:
-    - 'bin/bundle-audit'
-    - 'bin/bundler-audit'
-    - 'bin/rubocop'
     - 'config/spring.rb'
 
 # Offense count: 4
@@ -767,7 +756,6 @@ Rails/Present:
     - 'app/models/item.rb'
     - 'app/models/monster.rb'
     - 'app/models/spell.rb'
-    - 'bin/bundle'
 
 # Offense count: 3
 # This cop supports unsafe autocorrection (--autocorrect-all).
@@ -976,10 +964,6 @@ Style/Encoding:
 Style/ExpandPathArguments:
   Exclude:
     - 'Rakefile'
-    - 'bin/bundle'
-    - 'bin/bundle-audit'
-    - 'bin/bundler-audit'
-    - 'bin/rubocop'
     - 'config.ru'
     - 'test/test_helper.rb'
 
@@ -1074,7 +1058,6 @@ Style/IfUnlessModifier:
     - 'app/models/guillotine.rb'
     - 'app/models/monster.rb'
     - 'app/models/node.rb'
-    - 'bin/bundle'
     - 'db/migrate/20160123160363_change_collation_for_tag_names.acts_as_taggable_on_engine.rb'
     - 'db/migrate/20170712213301_add_missing_indexes_on_taggings.acts_as_taggable_on_engine.rb'
     - 'lib/tasks/scrape.rake'
@@ -1101,12 +1084,6 @@ Style/MethodDefParentheses:
     - 'app/models/card_import.rb'
     - 'app/models/monster.rb'
     - 'app/models/spellbook.rb'
-
-# Offense count: 2
-Style/MixinUsage:
-  Exclude:
-    - 'bin/setup'
-    - 'bin/update'
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
@@ -1196,7 +1173,6 @@ Style/PercentLiteralDelimiters:
 # This cop supports safe autocorrection (--autocorrect).
 Style/PerlBackrefs:
   Exclude:
-    - 'bin/bundle'
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
@@ -1211,12 +1187,6 @@ Style/RaiseArgs:
 Style/RedundantAssignment:
   Exclude:
     - 'app/models/free_form.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-Style/RedundantBegin:
-  Exclude:
-    - 'bin/yarn'
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
@@ -1323,12 +1293,6 @@ Style/SoleNestedConditional:
 # SupportedStyles: use_perl_names, use_english_names, use_builtin_english_names
 Style/SpecialGlobalVars:
   EnforcedStyle: use_perl_names
-
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-Style/StderrPuts:
-  Exclude:
-    - 'bin/yarn'
 
 # Offense count: 13
 # This cop supports unsafe autocorrection (--autocorrect-all).
