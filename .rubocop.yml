@@ -8,4 +8,7 @@ require:
 AllCops:
   Exclude:
     - "db/*"
+    - "vendor/**/*"
+  NewCops: disable
+  SuggestExtensions: false
   TargetRubyVersion: 3.0
