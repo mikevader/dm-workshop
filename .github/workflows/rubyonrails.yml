@@ -82,10 +82,15 @@ jobs:
       - name: Run tests
         run: bin/rake
 
-  container:
+  hadolint:
     needs:
       - lint
       - test
     runs-on: ubuntu-latest
     steps:
-      - name:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: hadolint
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
