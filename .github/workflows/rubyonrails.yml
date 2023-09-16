@@ -81,3 +81,11 @@ jobs:
       # Add or replace test runners here
       - name: Run tests
         run: bin/rake
+
+  container:
+    needs:
+      - lint
+      - test
+    runs-on: ubuntu-latest
+    steps:
+      - name:
