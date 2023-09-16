@@ -10,7 +10,7 @@ class CardExportTest < ActiveSupport::TestCase
   test 'export monsters' do
     skip("unclear diffs")
 
-    input_path = File.join(fixture_path, 'monsters.xml')
+    input_path = File.join(file_fixture_path, 'monsters.xml')
     file = Rack::Test::UploadedFile.new(input_path, 'text/xml')
     importer = CardImport.new(@user, monsters_file: file)
     importer.import_monsters
@@ -41,7 +41,7 @@ class CardExportTest < ActiveSupport::TestCase
   test 'export spells' do
     skip("unclear diffs")
 
-    input_path = File.join(fixture_path, 'spells.xml')
+    input_path = File.join(file_fixture_path, 'spells.xml')
     file = Rack::Test::UploadedFile.new(input_path, 'text/xml')
     importer = CardImport.new(@user, spells_file: file)
     importer.import_spells
@@ -67,7 +67,7 @@ class CardExportTest < ActiveSupport::TestCase
   test 'export items' do
     skip("unclear diffs")
 
-    input_path = File.join(fixture_path, 'items.xml')
+    input_path = File.join(file_fixture_path, 'items.xml')
     file = Rack::Test::UploadedFile.new(input_path, 'text/xml')
     importer = CardImport.new(@user, items_file: file)
     importer.import_items
@@ -91,7 +91,7 @@ class CardExportTest < ActiveSupport::TestCase
   end
 
   test 'export cards' do
-    input_path = File.join(fixture_path, 'cards.xml')
+    input_path = File.join(file_fixture_path, 'cards.xml')
     file = Rack::Test::UploadedFile.new(input_path, 'text/xml')
     importer = CardImport.new(@user, cards_file: file)
     importer.import_cards
