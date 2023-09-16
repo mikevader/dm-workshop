@@ -1,7 +1,7 @@
 require 'test_helper'
 
 module Admin
-  class AdminControllerTest < ActionController::TestCase
+  class AdminControllerTest < ActionDispatch::IntegrationTest
 
     def setup
       @user = users(:michael)
@@ -9,7 +9,7 @@ module Admin
 
     test "should get home" do
       log_in_as @user
-      get :home
+      get admin_admin_path
       assert_response :success
     end
   end

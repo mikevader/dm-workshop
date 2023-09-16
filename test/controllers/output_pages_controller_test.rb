@@ -1,41 +1,41 @@
 require 'test_helper'
 
-class OutputPagesControllerTest < ActionController::TestCase
+class OutputPagesControllerTest < ActionDispatch::IntegrationTest
 
   test 'all should redirect to login if not logged in' do
-    get :all, params: { search: 'name = halo' }
+    get print_path, params: { search: 'name = halo' }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'monster should redirect to login if not logged in' do
-    get :monsters, params: { search: 'name = halo' }
+    get print_monsters_path, params: { search: 'name = halo' }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'free_form should redirect to login if not logged in' do
-    get :free_forms, params: { search: 'name = halo' }
+    get print_free_forms_path, params: { search: 'name = halo' }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'item should redirect to login if not logged in' do
-    get :items, params: { search: 'name = halo' }
+    get print_items_path, params: { search: 'name = halo' }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'spell should redirect to login if not logged in' do
     skip('temporary its allowed as anonymous to print spell cards.')
-    get :spells, params: { search: 'name = halo' }
+    get print_spells_path, params: { search: 'name = halo' }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'should output cards for all' do
     log_in_as(users(:michael))
-    get :all, params: { search: 'name = *' }
+    get print_path, params: { search: 'name = *' }
     assert_response :success
     assert assigns[:pages]
     assert_equal 2, assigns[:pages].size
@@ -45,7 +45,7 @@ class OutputPagesControllerTest < ActionController::TestCase
 
   test 'should output cards for monsters' do
     log_in_as(users(:michael))
-    get :monsters, params: { search: 'name ~ shadow' }
+    get print_monsters_path, params: { search: 'name ~ shadow' }
     assert_response :success
 
     assert assigns[:pages]
@@ -55,7 +55,7 @@ class OutputPagesControllerTest < ActionController::TestCase
 
   test 'should output cards for free forms' do
     log_in_as(users(:michael))
-    get :free_forms, params: { search: 'name ~ cunning' }
+    get print_free_forms_path, params: { search: 'name ~ cunning' }
     assert_response :success
 
     assert assigns[:pages]
@@ -66,7 +66,7 @@ class OutputPagesControllerTest < ActionController::TestCase
 
   test 'should output only free form cards' do
     log_in_as(users(:michael))
-    get :free_forms, params: { search: '' }
+    get print_free_forms_path, params: { search: '' }
     assert_response :success
 
     assert assigns[:pages]
@@ -76,7 +76,7 @@ class OutputPagesControllerTest < ActionController::TestCase
 
   test 'should output cards for items' do
     log_in_as(users(:michael))
-    get :items, params: { search: '' }
+    get print_items_path, params: { search: '' }
     assert_response :success
     assert assigns[:pages]
     assert_equal 1, assigns[:pages].size
@@ -85,7 +85,7 @@ class OutputPagesControllerTest < ActionController::TestCase
 
   test 'should output cards for spells' do
     log_in_as(users(:michael))
-    get :spells, params: { search: 'level >= 0' }
+    get print_spells_path, params: { search: 'level >= 0' }
     assert_response :success
     assert assigns[:pages]
     assert_equal 1, assigns[:pages].size
@@ -94,7 +94,7 @@ class OutputPagesControllerTest < ActionController::TestCase
 
   test 'should output cards for spells with queries including relations' do
     log_in_as(users(:michael))
-    get :spells, params: { search: 'level >= 0 AND classes IN (sorcerer)' }
+    get print_spells_path, params: { search: 'level >= 0 AND classes IN (sorcerer)' }
     assert_response :success
     assert assigns[:pages]
     assert_equal 1, assigns[:pages].size
