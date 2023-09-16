@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SpellsControllerTest < ActionController::TestCase
+class SpellsControllerTest < ActionDispatch::IntegrationTest
   include CommonCardControllerTest
 
   setup do
@@ -8,20 +8,20 @@ class SpellsControllerTest < ActionController::TestCase
   end
 
   test 'show should' do
-    get :show, params: { id: @spell }
+    get spell_path(@spell)
     assert_response :success
   end
 
   test 'should redirect create when not logged in' do
     assert_no_difference 'Spell.count' do
-      post :create, params: { spell: {description: "Woopsie"} }
+      post spells_path, params: { spell: {description: "Woopsie"} }
     end
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'index should' do
-    get :index
+    get spells_path
     assert_response :success
   end
 
@@ -29,8 +29,8 @@ class SpellsControllerTest < ActionController::TestCase
     log_in_as(users(:michael))
     assert_difference 'Spell.count', +1 do
       source = sources(:dnd)
-      session[:return_to] = 'http://test.host/spells'
-      post :create,
+      get new_spell_path, headers: { "HTTP_REFERER" => spells_url }
+      post spells_path,
            params: {
                spell: {
                    name: 'AAA',
@@ -52,8 +52,8 @@ class SpellsControllerTest < ActionController::TestCase
   test 'should get update' do
     log_in_as(users(:michael))
     assert_no_difference 'Spell.count' do
-      session[:return_to] = 'http://test.host/spells'
-      patch :update, params: { id: @spell.id, spell: {name: 'ABCD'} }
+      get edit_spell_path(@spell), headers: { "HTTP_REFERER" => spells_url }
+      patch spell_path(@spell), params: { id: @spell.id, spell: {name: 'ABCD'} }
     end
 
     updated_spell = Spell.find(@spell.id)
@@ -67,8 +67,7 @@ class SpellsControllerTest < ActionController::TestCase
     log_in_as(users(:michael))
     spell = cards(:fireball)
     assert_difference 'Spell.count', -1 do
-      @request.env['HTTP_REFERER'] = spells_path
-      delete :destroy, params: { id: spell }
+      delete spell_path(spell), headers: { "HTTP_REFERER" => spells_url }
     end
     assert_redirected_to spells_url
   end
@@ -77,7 +76,7 @@ class SpellsControllerTest < ActionController::TestCase
     log_in_as(users(:archer))
     spell = cards(:bane)
     assert_no_difference 'Spell.count' do
-      delete :destroy, params: { id: spell }
+      delete spell_path(spell)
     end
     assert_redirected_to root_url
   end
@@ -86,8 +85,7 @@ class SpellsControllerTest < ActionController::TestCase
     log_in_as(users(:michael))
     spell = cards(:fireball)
     assert_difference 'Spell.count', +1 do
-      @request.env['HTTP_REFERER'] = spells_path
-      post :duplicate, params: { id: spell.id }
+      post duplicate_spell_path(spell), headers: { "HTTP_REFERER" => spells_url }
     end
     assert_redirected_to spells_url
 

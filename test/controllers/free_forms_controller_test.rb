@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FreeFormsControllerTest < ActionController::TestCase
+class FreeFormsControllerTest < ActionDispatch::IntegrationTest
   include CommonCardControllerTest
 
   setup do
@@ -8,19 +8,19 @@ class FreeFormsControllerTest < ActionController::TestCase
   end
 
   test 'show should redirect when not logged in' do
-    get :show, params: { id: @card }
+    get free_form_path(@card)
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'create should redirect when not logged in' do
-    post :create, params: { card: {name: ''} }
+    post free_forms_path, params: { card: {name: ''} }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'should redirect index when not logged in' do
-    get :index
+    get free_forms_path
     assert_not flash.empty?
     assert_redirected_to login_url
   end
@@ -29,8 +29,8 @@ class FreeFormsControllerTest < ActionController::TestCase
     log_in_as(users(:michael))
     assert_difference 'Card.count', +1 do
       source = sources(:dnd)
-      session[:return_to] = 'http://test.host/free_forms'
-      post :create,
+      get new_free_form_path, headers: { "HTTP_REFERER" => free_forms_url }
+      post free_forms_path,
            params: {
                free_form: {
                    name: 'Frenzy',
@@ -55,8 +55,8 @@ class FreeFormsControllerTest < ActionController::TestCase
     card = cards(:action_surge)
 
     assert_no_difference 'Card.count' do
-      session[:return_to] = 'http://test.host/free_forms'
-      patch :update, params: { id: card.id, free_form: {name: 'Qua?'} }
+      get edit_free_form_path(card), headers: { "HTTP_REFERER" => free_forms_url }
+      patch free_form_path(card), params: { id: card.id, free_form: {name: 'Qua?'} }
     end
 
     updated_card = Card.find(card.id)
@@ -70,8 +70,7 @@ class FreeFormsControllerTest < ActionController::TestCase
     log_in_as(users(:michael))
     card = cards(:cunning_action)
     assert_difference 'Card.count', -1 do
-      @request.env['HTTP_REFERER'] = free_forms_path
-      delete :destroy, params: { id: card }
+      delete free_form_path(card), headers: { "HTTP_REFERER" => free_forms_url }
     end
     assert_redirected_to free_forms_url
   end
@@ -80,8 +79,7 @@ class FreeFormsControllerTest < ActionController::TestCase
     log_in_as(users(:archer))
     card = cards(:cunning_action)
     assert_difference 'Card.count', +1 do
-      @request.env['HTTP_REFERER'] = free_forms_path
-      post :duplicate, params: { id: card.id }
+      post duplicate_free_form_path(card), headers: { "HTTP_REFERER" => free_forms_url }
     end
     assert_redirected_to free_forms_url
 

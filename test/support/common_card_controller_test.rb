@@ -3,26 +3,26 @@ module CommonCardControllerTest
   included do
 
     test 'should redirect new when not logged in' do
-      get :new
+      get new_polymorphic_path(@card)
       assert_not flash.empty?
       assert_redirected_to login_url
     end
 
     test 'edit should redirect when not logged in' do
-      post :edit, params: { id: @card }
+      get edit_polymorphic_path(@card)
       assert_not flash.empty?
       assert_redirected_to login_url
     end
 
     test 'update should redirect when not logged in' do
-      patch :update, params: { id: @card }
+      patch polymorphic_path(@card), params: { id: @card }
       assert_not flash.empty?
       assert_redirected_to login_url
     end
 
     test 'should redirect destroy when not logged in' do
       assert_no_difference 'Card.count' do
-        post :destroy, params: { id: @card }
+        delete polymorphic_path(@card)
       end
       assert_not flash.empty?
       assert_redirected_to login_url
@@ -30,25 +30,25 @@ module CommonCardControllerTest
 
     test 'should get index' do
       log_in_as(users(:michael))
-      get :index
+      get polymorphic_path(@card)
       assert_response :success
     end
 
     test 'should get show' do
       log_in_as(users(:michael))
-      get :show, params: { id: @card }
+      get polymorphic_path(@card)
       assert_response :success
     end
 
     test 'should get new' do
       log_in_as(users(:michael))
-      get :new
+      get new_polymorphic_path(@card)
       assert_response :success
     end
 
     test 'should get edit' do
       log_in_as(users(:michael))
-      post :edit, params: { id: @card }
+      get edit_polymorphic_path(@card)
       assert_response :success
     end
 

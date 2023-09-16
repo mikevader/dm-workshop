@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ItemsControllerTest < ActionController::TestCase
+class ItemsControllerTest < ActionDispatch::IntegrationTest
   include CommonCardControllerTest
 
   setup do
@@ -8,19 +8,19 @@ class ItemsControllerTest < ActionController::TestCase
   end
 
   test 'show should redirect to login if not logged in' do
-    get :show, params: { id: @item }
+    get item_path(@item)
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'create should redirect to login if not logged in' do
-    get :create, params: { item: {name: ''} }
+    post items_path, params: { item: {name: ''} }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'index should redirect index when not logged in' do
-    get :index
+    get items_path
     assert_not flash.empty?
     assert_redirected_to login_url
   end
@@ -31,8 +31,8 @@ class ItemsControllerTest < ActionController::TestCase
     rarity = rarities(:uncommon)
     source = sources(:dnd)
     assert_difference 'Item.count', +1 do
-      session[:return_to] = 'http://test.host/items'
-      post :create,
+      get new_item_path, headers: { "HTTP_REFERER" => items_url }
+      post items_path,
            params: {
                item: {
                    name: 'Nerd',
@@ -57,8 +57,8 @@ class ItemsControllerTest < ActionController::TestCase
     item = cards(:glamdring)
 
     assert_no_difference 'Item.count' do
-      session[:return_to] = 'http://test.host/items'
-      patch :update, params: { id: item.id, item: {name: 'Qua?'} }
+      get edit_item_path(item), headers: { "HTTP_REFERER" => items_url }
+      patch item_path(item), params: { id: item.id, item: {name: 'Qua?'} }
     end
 
     updated_item = Item.find(item.id)
@@ -72,8 +72,7 @@ class ItemsControllerTest < ActionController::TestCase
     log_in_as(users(:michael))
     item = cards(:sting)
     assert_difference 'Item.count', -1 do
-      @request.env['HTTP_REFERER'] = items_path
-      delete :destroy, params: { id: item }
+      delete item_path(item), headers: { "HTTP_REFERER" => items_url }
     end
     assert_redirected_to items_url
   end
@@ -82,8 +81,7 @@ class ItemsControllerTest < ActionController::TestCase
     log_in_as(users(:archer))
     item = cards(:glamdring)
     assert_difference 'Item.count', +1 do
-      @request.env['HTTP_REFERER'] = items_path
-      post :duplicate, params: { id: item.id }
+      post duplicate_item_path(item), headers: { "HTTP_REFERER" => items_url }
     end
     assert_redirected_to items_url
 

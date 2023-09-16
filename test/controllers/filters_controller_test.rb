@@ -1,66 +1,68 @@
 require 'test_helper'
 
-class FiltersControllerTest < ActionController::TestCase
+class FiltersControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @filter = filters(:one)
   end
 
   test 'show should redirect when not logged in' do
-    get :show, params: { id: @filter }
+    get filter_path(@filter)
     assert_redirected_to login_url
   end
 
   test 'create should redirect when not logged in' do
-    post :create, params: { filter: { name: '', query: '' } }
+    assert_no_difference 'Filter.count' do
+      post filters_path, params: { filter: { name: '', query: '' } }
+    end
     assert_redirected_to login_url
   end
 
   test 'edit should redirect when not logged in' do
-    post :edit, params: { id: @filter }
+    get edit_filter_path(@filter)
     assert_redirected_to login_url
   end
 
   test 'update should redirect when not logged in' do
-    patch :update, params: { id: @filter }
+    patch filter_path(@filter)
     assert_redirected_to login_url
   end
 
   test 'destroy should redirect when not logged in' do
-    delete :destroy, params: { id: @filter }
+    delete filter_path(@filter)
     assert_redirected_to login_url
   end
 
   test 'get should redirect index when not logged in' do
-    [:index, :new].each do |action|
-      get action
-      assert_redirected_to login_url
-    end
+    get filters_path
+    assert_redirected_to login_url
+  end
+
+  test 'get should redirect new when not logged in' do
+    get filter_path(@filter)
+    assert_redirected_to login_url
   end
 
   test 'post should redirect index when not logged in' do
-    [:create].each do |action|
-      post action
-      assert_redirected_to login_url
-    end
+    post filters_path
+    assert_redirected_to login_url
   end
 
   test 'should get index' do
     log_in_as(users(:michael))
-    get :index
+    get filters_path
     assert_response :success
   end
 
   test 'should get show' do
-    skip
     log_in_as(users(:michael))
-    get :show, params: { id: @filter }
+    get filter_path(@filter)
     assert_response :success
   end
 
   test 'should get new' do
     log_in_as(users(:michael))
-    get :new
+    get new_filter_path
     assert_response :success
   end
 
@@ -68,7 +70,7 @@ class FiltersControllerTest < ActionController::TestCase
     log_in_as(users(:michael))
     query = 'name ~ end'
     assert_difference 'Filter.count', +1 do
-      post :create, params: { filter: { name: 'AAA', query: query} }
+      post filters_path, params: { filter: { name: 'AAA', query: query} }
     end
 
     new_filter = Filter.find_by_name('AAA')
@@ -80,7 +82,7 @@ class FiltersControllerTest < ActionController::TestCase
 
   test 'should get edit' do
     log_in_as(users(:michael))
-    post :edit, params: { id: @filter }
+    get edit_filter_path(@filter)
     assert_response :success
   end
 
@@ -90,7 +92,7 @@ class FiltersControllerTest < ActionController::TestCase
     filter_query = 'labels in (jdf, jdg)'
     id = @filter.id
     assert_no_difference 'Filter.count' do
-      patch :update, params: { id: id, filter: { name: filter_name, query: filter_query } }
+      patch filter_path(@filter), params: { id: id, filter: { name: filter_name, query: filter_query } }
     end
 
     filter = Filter.find(id)
@@ -104,7 +106,7 @@ class FiltersControllerTest < ActionController::TestCase
   test 'should get destory' do
     log_in_as(users(:michael))
     assert_difference 'Filter.count', -1 do
-      delete :destroy, params: { id: @filter }
+      delete filter_path(@filter)
     end
     assert_redirected_to filters_url
   end

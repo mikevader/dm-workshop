@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class MonstersControllerTest < ActionController::TestCase
+class MonstersControllerTest < ActionDispatch::IntegrationTest
   include CommonCardControllerTest
 
   setup do
@@ -8,21 +8,21 @@ class MonstersControllerTest < ActionController::TestCase
   end
 
   test 'show should redirect when not logged in' do
-    get :show, params: { id: @monster }
+    get monster_path(@monster)
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'create should redirect when not logged in' do
     assert_no_difference 'Monster.count' do
-      post :create, params: { monster: {name: ''} }
+      post monsters_path, params: { monster: {name: ''} }
     end
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test 'get should redirect index when not logged in' do
-    get :index
+    get monsters_path
     assert_not flash.empty?
     assert_redirected_to login_url
   end
@@ -31,8 +31,8 @@ class MonstersControllerTest < ActionController::TestCase
     log_in_as(users(:michael))
     assert_difference 'Monster.count', +1 do
       source = sources(:dnd)
-      session[:return_to] = 'http://test.host/monsters'
-      post :create,
+      get new_monster_path, headers: { "HTTP_REFERER" => monsters_url }
+      post monsters_path,
            params: {
                monster: {
                    name: 'AAA',
@@ -63,8 +63,8 @@ class MonstersControllerTest < ActionController::TestCase
   test 'should get update' do
     log_in_as(users(:michael))
     assert_no_difference 'Monster.count' do
-      session[:return_to] = 'http://test.host/monsters'
-      patch :update, params: { id: @monster.id, monster: {name: 'ABCD', card_size: '70x110'} }
+      get edit_monster_path(@monster), headers: { "HTTP_REFERER" => monsters_url }
+      patch monster_path(@monster), params: { id: @monster.id, monster: {name: 'ABCD', card_size: '70x110'} }
     end
 
     updated_monster = Monster.find(@monster.id)
@@ -78,8 +78,7 @@ class MonstersControllerTest < ActionController::TestCase
   test 'should get destory' do
     log_in_as(users(:michael))
     assert_difference 'Monster.count', -1 do
-      @request.env['HTTP_REFERER'] = monsters_path
-      delete :destroy, params: { id: @monster }
+      delete monster_path(@monster), headers: { "HTTP_REFERER" => monsters_url }
     end
     assert_redirected_to monsters_url
   end
@@ -88,8 +87,7 @@ class MonstersControllerTest < ActionController::TestCase
     log_in_as(users(:archer))
     monster = cards(:shadow_demon)
     assert_difference 'Monster.count', +1 do
-      @request.env['HTTP_REFERER'] = monsters_path
-      post :duplicate, params: { id: monster.id }
+      post duplicate_monster_path(monster), headers: { "HTTP_REFERER" => monsters_url }
     end
     assert_redirected_to monsters_url
 
