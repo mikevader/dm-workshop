@@ -97,6 +97,8 @@ group :development do
 
   # RuboCop
   gem 'rubocop', '~> 1.56', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
 
   gem 'bundler-audit', '~> 0.9.1'
 end

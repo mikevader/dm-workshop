@@ -1,7 +1,8 @@
 # Dungeon Master Workshop #
 
-Master: [![Codeship Status for mikevader/dm-workshop](https://app.codeship.com/projects/4b06b2b0-2940-0133-4c3b-76c73dc375da/status?branch=master)](https://app.codeship.com/projects/97935)
-Dev: [![Codeship Status for mikevader/dm-workshop](https://app.codeship.com/projects/4b06b2b0-2940-0133-4c3b-76c73dc375da/status?branch=develop)](https://app.codeship.com/projects/97935)
+[![Build Status](https://github.com/mikevader/dm-workshop/actions/workflows/rubyonrails.yml/badge.svg)][ghactions]
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop)
+
 
 This dungeon master support tool is all about cards and managing them: Spell
 card for the dm or players, creature sheets for encounters or NPCs, item cards
