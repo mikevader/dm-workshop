@@ -7,6 +7,7 @@ require:
 
 AllCops:
   Exclude:
+    - "bin/*"
     - "db/*"
     - "vendor/**/*"
   NewCops: disable
