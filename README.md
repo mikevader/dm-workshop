@@ -2,6 +2,8 @@
 
 [![Build Status](https://github.com/mikevader/dm-workshop/actions/workflows/rubyonrails.yml/badge.svg)][ghactions]
 [![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop)
+[![Maintainability](https://api.codeclimate.com/v1/badges/9ae2f2d5ea2082575ed6/maintainability)](https://codeclimate.com/github/mikevader/dm-workshop/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/9ae2f2d5ea2082575ed6/test_coverage)](https://codeclimate.com/github/mikevader/dm-workshop/test_coverage)
 
 
 This dungeon master support tool is all about cards and managing them: Spell
