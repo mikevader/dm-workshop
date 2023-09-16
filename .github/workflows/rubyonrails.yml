@@ -11,6 +11,38 @@ on:
   pull_request:
     branches: [ "master" ]
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1.152.0
+        with:
+          ruby-version: 3.0.6
+          bundler-cache: true
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: yarn
+
+      - name: Install packages
+        run: |
+          yarn install --pure-lockfile
+      # Add or replace any other lints here
+      - name: Run linters
+        run: |
+          bin/rubocop --parallel
+          bin/stylelint
+#          bin/prettier
+#          bin/eslint
+
+      - name: Run security checks
+        run: |
+          bin/bundler-audit --update
+          bin/brakeman -q -w2
+
   test:
     runs-on: ubuntu-latest
     services:
@@ -49,30 +81,3 @@ jobs:
       # Add or replace test runners here
       - name: Run tests
         run: bin/rake
-
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@v1.152.0
-        with:
-          ruby-version: 3.0.6
-          bundler-cache: true
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: yarn
-
-      - name: Install packages
-        run: |
-          yarn install --pure-lockfile
-      # Add or replace any other lints here
-      - name: Security audit dependencies
-        run: bin/bundler-audit --update
-      - name: Security audit application code
-        run: bin/brakeman -q -w2
-      - name: Lint Ruby files
-        run: bin/rubocop --parallel

@@ -35,3 +35,4 @@ server.key
 yarn-debug.log*
 .yarn-integrity
 /test/reports/*
+/public/assets/

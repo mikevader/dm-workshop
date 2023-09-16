@@ -91,12 +91,14 @@ group :development do
   gem 'web-console', '~> 4.2.1'
 
   # Security check
-  gem 'brakeman', '>= 3.2.1', require: false
+  gem 'brakeman', '>= 6.0.1', require: false
   # Extension for guard to natively support brakeman
-  gem 'guard-brakeman', '>= 0.8.3', require: false
+  gem 'guard-brakeman', '>= 0.8.6', require: false
 
   # RuboCop
-  gem 'rubocop', require: false
+  gem 'rubocop', '~> 1.56', require: false
+
+  gem 'bundler-audit', '~> 0.9.1'
 end
 
 group :development, :test do
