@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2017_07_12_213301) do
-
+ActiveRecord::Schema[7.0].define(version: 2023_09_17_104936) do
   create_table "actions", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "action_type", default: 0, null: false
     t.boolean "melee"
     t.boolean "ranged"
@@ -30,8 +29,8 @@ ActiveRecord::Schema.define(version: 2017_07_12_213301) do
     t.string "icon"
     t.string "color"
     t.text "contents"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "user_id"
     t.string "badges"
     t.string "cite"
@@ -92,8 +91,8 @@ ActiveRecord::Schema.define(version: 2017_07_12_213301) do
 
   create_table "cards_skills", force: :cascade do |t|
     t.integer "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.integer "card_id"
     t.integer "skill_id"
     t.index ["card_id"], name: "index_cards_skills_on_card_id"
@@ -103,8 +102,8 @@ ActiveRecord::Schema.define(version: 2017_07_12_213301) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "cssclass"
     t.index ["name"], name: "index_categories_on_name"
   end
@@ -113,8 +112,8 @@ ActiveRecord::Schema.define(version: 2017_07_12_213301) do
     t.string "name"
     t.text "query"
     t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "shared", default: false, null: false
     t.index ["name"], name: "index_filters_on_name", unique: true
     t.index ["user_id"], name: "index_filters_on_user_id"
@@ -123,8 +122,8 @@ ActiveRecord::Schema.define(version: 2017_07_12_213301) do
   create_table "hero_classes", force: :cascade do |t|
     t.string "name"
     t.string "cssclass"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["name"], name: "index_hero_classes_on_name"
   end
 
@@ -132,8 +131,8 @@ ActiveRecord::Schema.define(version: 2017_07_12_213301) do
     t.string "name"
     t.string "value"
     t.integer "item_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "card_id"
     t.integer "position"
     t.index ["card_id"], name: "index_properties_on_card_id"
@@ -142,16 +141,16 @@ ActiveRecord::Schema.define(version: 2017_07_12_213301) do
 
   create_table "rarities", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["name"], name: "index_rarities_on_name"
   end
 
   create_table "sessions", force: :cascade do |t|
     t.string "session_id", null: false
     t.text "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
@@ -159,22 +158,22 @@ ActiveRecord::Schema.define(version: 2017_07_12_213301) do
   create_table "skills", force: :cascade do |t|
     t.string "name"
     t.string "ability"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["name"], name: "index_skills_on_name"
   end
 
   create_table "sources", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "spellbooks", force: :cascade do |t|
     t.string "name"
     t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["name"], name: "index_spellbooks_on_name"
     t.index ["user_id"], name: "index_spellbooks_on_user_id"
   end
@@ -191,7 +190,7 @@ ActiveRecord::Schema.define(version: 2017_07_12_213301) do
     t.integer "tagger_id"
     t.string "tagger_type"
     t.string "context", limit: 128
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.index ["context"], name: "index_taggings_on_context"
     t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
@@ -212,8 +211,8 @@ ActiveRecord::Schema.define(version: 2017_07_12_213301) do
   create_table "traits", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "card_id"
     t.integer "position"
     t.index ["card_id"], name: "index_traits_on_card_id"
@@ -223,16 +222,16 @@ ActiveRecord::Schema.define(version: 2017_07_12_213301) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "password_digest"
     t.string "remember_digest"
     t.boolean "admin", default: false
     t.string "activation_digest"
     t.boolean "activated", default: false
-    t.datetime "activated_at"
+    t.datetime "activated_at", precision: nil
     t.string "reset_digest"
-    t.datetime "reset_sent_at"
+    t.datetime "reset_sent_at", precision: nil
     t.integer "role", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end

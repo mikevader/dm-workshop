@@ -23,7 +23,7 @@ class SearchEngineTest < ActiveSupport::TestCase
     assert_search_with_normalized_query(
         '',
         '',
-        '',
+        'SELECT "cards".* FROM "cards" WHERE (1=0) ORDER BY "cards"."name" ASC',
         nil
     )
   end
@@ -59,7 +59,7 @@ class SearchEngineTest < ActiveSupport::TestCase
     assert_search_with_normalized_query(
         "namer ~ 'cunning'",
         "namer ~ 'cunning'",
-        '',
+        'SELECT "cards".* FROM "cards" WHERE (1=0) ORDER BY "cards"."name" ASC',
         "Field 'namer' does not exist."
     )
   end
@@ -68,7 +68,7 @@ class SearchEngineTest < ActiveSupport::TestCase
     assert_search_with_normalized_query(
         "namer & 'cunning'",
         "namer & 'cunning'",
-        '',
+        'SELECT "cards".* FROM "cards" WHERE (1=0) ORDER BY "cards"."name" ASC',
         "Expected one of \" \", [0-9a-zA-Z_\\-\\*\\&], [ \\t\\n\\r] at line 1, column 9 (byte 9) after "
     )
   end

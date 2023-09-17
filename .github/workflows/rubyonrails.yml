@@ -75,6 +75,8 @@ jobs:
       - name: Install packages
         run: |
           yarn install --pure-lockfile
+      - name: Build Esbuild
+        run: yarn build
       # Add or replace database setup steps here
       - name: Set up database schema
         run: bin/rails db:schema:load
