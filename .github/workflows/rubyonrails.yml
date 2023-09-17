@@ -88,6 +88,12 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           format: simplecov
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v5.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+        with:
+          coverageLocations: coverage:simplecov
 
   hadolint:
     needs:
