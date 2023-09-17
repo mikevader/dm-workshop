@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%= stylesheet_link_tag    'print', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'print', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag    'print', media: 'all', "data-turbo-track": "reload", defer: true %>
+    <%= javascript_include_tag 'print', "data-turbo-track": "reload", defer: true %>
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
     <%#= render 'layouts/livereload' if Rails.env.development?%>
