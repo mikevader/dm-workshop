@@ -32,7 +32,6 @@ gem 'rails-jquery-autocomplete', '~> 1.0.3'
 gem 'redcarpet', '~> 3.3'
 
 gem 'bootsnap', require: false
-gem 'webpacker'
 
 gem 'jsbundling-rails'
 gem 'stimulus-rails', '~> 1.2'
