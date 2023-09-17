@@ -140,6 +140,7 @@ group :test do
   #gem 'rails-perftest'
   #gem 'ruby-prof'
   gem 'simplecov'
+  gem 'simplecov-lcov'
 end
 
 group :production do

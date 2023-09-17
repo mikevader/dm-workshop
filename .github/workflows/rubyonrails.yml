@@ -84,9 +84,9 @@ jobs:
       - name: Run tests
         run: bin/rake
       - name: Coveralls Finished
-        uses: coverallsapp/github-action@master
+        uses: coverallsapp/github-action@v2
         with:
-          github-token: ${{ secrets.github_token }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           format: simplecov
 
   hadolint:
