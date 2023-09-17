@@ -139,6 +139,7 @@ group :test do
   # Performance test for optimizing cards display
   #gem 'rails-perftest'
   #gem 'ruby-prof'
+  gem 'simplecov'
 end
 
 group :production do

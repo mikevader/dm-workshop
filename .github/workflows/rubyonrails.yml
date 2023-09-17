@@ -31,11 +31,8 @@ jobs:
         run: |
           yarn install --pure-lockfile
       # Add or replace any other lints here
-      - name: Coveralls Finished
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.github_token }}
-          parallel-finished: true
+      - name: Run check
+        run: yarn run prettier --check .
       - name: Run linters
         run: |
           bin/rubocop --parallel
@@ -88,6 +85,11 @@ jobs:
       # Add or replace test runners here
       - name: Run tests
         run: bin/rake
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
+          parallel-finished: true
 
   hadolint:
     needs:
