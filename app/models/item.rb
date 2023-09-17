@@ -1,7 +1,7 @@
 class Item < Card
   acts_as_taggable
-  belongs_to :category
-  belongs_to :rarity
+  belongs_to :category, optional: true
+  belongs_to :rarity, optional: true
   has_many :properties, -> { order(position: :asc) }, dependent: :destroy, foreign_key: :card_id
   accepts_nested_attributes_for :properties, reject_if: proc { |attributes| attributes['name'].blank? }, allow_destroy: true
 
