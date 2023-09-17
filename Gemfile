@@ -35,6 +35,7 @@ gem 'bootsnap', require: false
 gem 'webpacker'
 
 gem 'jsbundling-rails'
+gem 'stimulus-rails', '~> 1.2'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks', '~> 5.2.1'
