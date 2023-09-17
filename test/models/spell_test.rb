@@ -3,7 +3,7 @@ require 'test_helper'
 class SpellTest < ActiveSupport::TestCase
   include CommonCardTest
 
-  def setup
+  setup do
     @user = users(:michael)
     @card = @spell = @user.spells.create(name: 'Speak with Plants',
                                  source: sources(:dnd),

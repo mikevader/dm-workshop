@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PrintLayoutTest < ActionDispatch::IntegrationTest
 
-  def setup
+  setup do
     @user = users(:michael)
   end
 

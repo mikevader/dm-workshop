@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SessionsHelperTest < ActionView::TestCase
 
-  def setup
+  setup do
     @user = users(:michael)
     remember(@user)
   end

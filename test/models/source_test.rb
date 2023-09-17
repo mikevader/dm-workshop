@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class SourceTest < ActiveSupport::TestCase
-  def setup
+  setup do
     @source = Source.new(name: 'D&D6')
   end
 

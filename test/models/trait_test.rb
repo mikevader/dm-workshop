@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TraitTest < ActiveSupport::TestCase
 
-  def setup
+  setup do
     @monster = cards(:shadow_demon)
     @trait = @monster.traits.build(title: 'Shadow Stealth', description: 'While in dim light or darkness, the demon can take the Hide action as a bonus action.')
   end

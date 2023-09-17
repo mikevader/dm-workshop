@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ActionTest < ActiveSupport::TestCase
 
-  def setup
+  setup do
     @monster = cards(:shadow_demon)
     @action = @monster.actions.build(title: "Shortsword", description: "Hit: +8, Damage: 1d10 +9")
   end

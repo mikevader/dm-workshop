@@ -3,7 +3,7 @@ require 'test_helper'
 class UsersProfileTest < ActionDispatch::IntegrationTest
   include ApplicationHelper
 
-  def setup
+  setup do
     @user = users(:michael)
   end
 

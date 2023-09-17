@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class FiltersInterfaceTest < ActionDispatch::IntegrationTest
-  def setup
+  setup do
     @user = users(:michael)
   end
 

@@ -3,7 +3,7 @@ require 'test_helper'
 module Admin
   class AdminControllerTest < ActionDispatch::IntegrationTest
 
-    def setup
+    setup do
       @user = users(:michael)
     end
 

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
 
-  def setup
+  setup do
     @user = users(:michael)
     @other_user = users(:archer)
     @base_title = "Dungeon Masters Workshop"

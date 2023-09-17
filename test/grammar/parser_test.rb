@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ParserTest < ActiveSupport::TestCase
   
-  def setup
+  setup do
     @builder = SearchBuilder.new
     @builder.configure_field 'name'
     @builder.configure_field 'level'

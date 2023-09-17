@@ -2,7 +2,7 @@ require 'test_helper'
 
 class HeroClassesControllerTest < ActionDispatch::IntegrationTest
   
-  def setup
+  setup do
     @hero_class = hero_classes(:gunslinger)
   end
 

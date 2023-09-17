@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CategoryTest < ActiveSupport::TestCase
 
-  def setup
+  setup do
     @category = Category.create(name: 'Wonderous items')
   end
 

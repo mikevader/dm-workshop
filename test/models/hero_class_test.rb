@@ -2,7 +2,7 @@ require 'test_helper'
 
 class HeroClassTest < ActiveSupport::TestCase
 
-  def setup
+  setup do
     @hero_class = HeroClass.new(name: 'Gronk', cssclass: 'icon-gronk')
   end
 

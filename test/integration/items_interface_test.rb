@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ItemsInterfaceTest < ActionDispatch::IntegrationTest
 
-  def setup
+  setup do
     @user = users(:michael)
     @category = categories(:weapon)
     @rarity = rarities(:rare)

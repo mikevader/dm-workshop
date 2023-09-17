@@ -2,7 +2,7 @@ require 'test_helper'
 
 class RarityTest < ActiveSupport::TestCase
 
-  def setup
+  setup do
     @rarity = Rarity.create(name: 'Legendary')
   end
 

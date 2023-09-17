@@ -2,7 +2,7 @@ require 'test_helper'
 
 class StaticPagesControllerTest < ActionController::TestCase
   
-  def setup
+  setup do
     @base_title = "Dungeon Masters Workshop"
   end
     

@@ -3,7 +3,7 @@ require 'test_helper'
 class FreeFormTest < ActiveSupport::TestCase
   include CommonCardTest
 
-  def setup
+  setup do
     @user = users(:michael)
     @card = @user.cards.build(type: 'FreeForm',
                               name: 'Frenzy',

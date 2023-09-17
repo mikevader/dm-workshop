@@ -4,7 +4,7 @@ class GuillotineTest < ActiveSupport::TestCase
 
   # Called before every test method runs. Can be used
   # to set up fixture information.
-  def setup
+  setup do
   end
 
   # Called after every test method runs. Can be used to tear

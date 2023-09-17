@@ -3,7 +3,7 @@ require 'test_helper'
 class MonsterTest < ActiveSupport::TestCase
   include CommonCardTest
 
-  def setup
+  setup do
     @user = users(:michael)
     @card = @monster = @user.monsters.build(name: 'Goblin',
                                     source: sources(:dnd),

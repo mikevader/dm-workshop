@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SkillTest < ActiveSupport::TestCase
 
-  def setup
+  setup do
     @skill = Skill.new(name: 'Medicine', ability: 'Wis')
   end
 

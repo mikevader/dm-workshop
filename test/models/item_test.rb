@@ -3,7 +3,7 @@ require 'test_helper'
 class ItemTest < ActiveSupport::TestCase
   include CommonCardTest
 
-  def setup
+  setup do
     @user = users(:michael)
     @card = @item = @user.cards.build(
                               type: 'Item',

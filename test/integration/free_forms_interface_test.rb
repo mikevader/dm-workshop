@@ -2,7 +2,7 @@ require 'test_helper'
 
 class FreeFormsInterfaceTest < ActionDispatch::IntegrationTest
 
-  def setup
+  setup do
     @user = users(:michael)
     @source = sources(:dnd)
   end
