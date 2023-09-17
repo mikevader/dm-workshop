@@ -31,10 +31,11 @@ gem 'rails-jquery-autocomplete', '~> 1.0.3'
 
 gem 'redcarpet', '~> 3.3'
 
-gem 'bootsnap', require: false
+gem 'bootsnap', '~> 1.16', require: false
 
-gem 'jsbundling-rails'
+gem 'jsbundling-rails', '~> 1.2'
 gem 'stimulus-rails', '~> 1.2'
+gem 'sprockets-rails', '~> 3.4'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks', '~> 5.2.1'
