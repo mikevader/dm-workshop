@@ -111,10 +111,10 @@ jobs:
         id: prep
         run: |
           BUILD_DATE=$(date --rfc-3339=seconds --utc)
-          echo ::set-output name=build_date::${BUILD_DATE}
+          echo "build_date=${BUILD_DATE}" >> "$GITHUB_OUTPUT"
 
           VERSION="0.1.0"
-          echo ::set-output name=version::${VERSION}
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
 
       - name: Login to GHCR
         uses: docker/login-action@v2
