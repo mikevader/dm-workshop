@@ -5,7 +5,7 @@ class Card < ApplicationRecord
   has_and_belongs_to_many :spellbooks, join_table: :spellbooks_spells, foreign_key: :spell_id, association_foreign_key: :spellbook_id
   serialize :badges
   belongs_to :user
-  belongs_to :source
+  belongs_to :source, optional: true
 
   default_scope -> { order(name: :asc) }
 

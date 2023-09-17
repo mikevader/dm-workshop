@@ -19,7 +19,7 @@ jobs:
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1.152.0
         with:
-          ruby-version: 3.0.6
+          ruby-version: 3.2.2
           bundler-cache: true
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -64,7 +64,7 @@ jobs:
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1.152.0
         with:
-          ruby-version: 3.0.6
+          ruby-version: 3.2.2
           bundler-cache: true
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -75,6 +75,8 @@ jobs:
       - name: Install packages
         run: |
           yarn install --pure-lockfile
+      - name: Build Esbuild
+        run: yarn build
       # Add or replace database setup steps here
       - name: Set up database schema
         run: bin/rails db:schema:load

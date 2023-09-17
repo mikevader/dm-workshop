@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
 # Use specific ruby version
-ruby '3.0.6'
+ruby '3.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1'
+gem 'rails', '~> 7.0.8'
 # Use bootstrap with sass
 gem 'bootstrap-sass', '~> 3.4.1'
 # Use SCSS for stylesheets
@@ -31,8 +31,11 @@ gem 'rails-jquery-autocomplete', '~> 1.0.3'
 
 gem 'redcarpet', '~> 3.3'
 
-gem 'bootsnap', require: false
-gem 'webpacker'
+gem 'bootsnap', '~> 1.16', require: false
+
+gem 'jsbundling-rails', '~> 1.2'
+gem 'stimulus-rails', '~> 1.2'
+gem 'sprockets-rails', '~> 3.4'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks', '~> 5.2.1'
