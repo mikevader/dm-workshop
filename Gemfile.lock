@@ -508,6 +508,7 @@ DEPENDENCIES
   sdoc (~> 2.6.1)
   simplecov
   simplecov-lcov
+  simplecov_json_formatter
   spring (>= 2.0)
   sprockets-rails (~> 3.4)
   sqlite3 (>= 1.3)

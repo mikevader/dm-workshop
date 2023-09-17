@@ -141,6 +141,7 @@ group :test do
   #gem 'ruby-prof'
   gem 'simplecov'
   gem 'simplecov-lcov'
+  gem 'simplecov_json_formatter'
 end
 
 group :production do
