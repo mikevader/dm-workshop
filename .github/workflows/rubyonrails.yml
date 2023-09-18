@@ -207,6 +207,10 @@ jobs:
         uses: helm/chart-releaser-action@v1.5.0
         with:
           charts_dir: charts/*
+          skip_existing: true
+          config: cr.yaml
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           CR_SKIP_EXISTING: "true"
+          CR_OWNER: mikevader
+          CR_GIT_REPO: charts
