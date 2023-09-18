@@ -189,6 +189,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
       - name: Install Kubernetes tools
         uses: yokawasa/action-setup-kube-tools@v0.9.3
         with:
@@ -201,8 +206,7 @@ jobs:
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.5.0
         with:
-          charts_dir: chart
-          charts_repo_url: https://mikevader.github.io/charts/
+          charts_dir: charts/*
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           CR_SKIP_EXISTING: "true"
