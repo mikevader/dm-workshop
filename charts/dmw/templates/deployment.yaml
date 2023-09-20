@@ -4,7 +4,6 @@ metadata:
   name: {{ include "dmw.fullname" . }}
   labels:
     {{- include "dmw.labels" . | nindent 4 }}
-    helloWorld: test
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}

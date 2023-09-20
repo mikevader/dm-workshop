@@ -60,14 +60,3 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
-
-{{/*
-Create the name of the service account to use
-*/}}
-{{- define "dmw.huibuuu" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "dmw.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
-{{- end }}
-{{- end }}
