@@ -291,7 +291,7 @@ GEM
     psych (5.1.0)
       stringio
     public_suffix (5.0.3)
-    puma (6.3.1)
+    puma (6.4.0)
       nio4r (~> 2.0)
     pundit (2.3.1)
       activesupport (>= 3.0.0)
@@ -489,7 +489,7 @@ DEPENDENCIES
   nokogiri (~> 1.15)
   nokogiri-diff (~> 0.2)
   pg (= 1.5.4)
-  puma (~> 6.3.1)
+  puma (~> 6.4.0)
   pundit (~> 2.3.1)
   rails (~> 7.0.8)
   rails-controller-testing
