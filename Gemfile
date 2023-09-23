@@ -81,7 +81,7 @@ gem 'acts_as_list', '~> 1.1.0'
 gem 'recaptcha', '~> 5.15.0', require: 'recaptcha/rails'
 
 # Ruby web server built for concurrency and performance
-gem 'puma', '~> 6.3.1'
+gem 'puma', '~> 6.4.0'
 
 group :development do
   # Triggers live-reload any time guard is executed
