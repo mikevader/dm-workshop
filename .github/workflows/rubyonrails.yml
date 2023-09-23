@@ -144,7 +144,7 @@ jobs:
 
       # Creates a local build to run tests on
       - name: Build and Load local test-container
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         env:
           BUILD_DATE: ${{ steps.prep.outputs.build_date }}
           VERSION: ${{ steps.prep.outputs.version }}
@@ -162,7 +162,7 @@ jobs:
 
       # Push if not a PR, otherwise just test the build process for all requested platforms
       - name: Build and Push
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         env:
           BUILD_DATE: ${{ steps.prep.outputs.build_date }}
           VERSION: ${{ steps.prep.outputs.version }}
