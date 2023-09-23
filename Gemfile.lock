@@ -268,7 +268,7 @@ GEM
       timeout
     net-smtp (0.3.3)
       net-protocol
-    net-ssh (4.1.0)
+    net-ssh (4.2.0)
     nio4r (2.5.9)
     nokogiri (1.15.4)
       mini_portile2 (~> 2.8.2)
@@ -485,7 +485,7 @@ DEPENDENCIES
   mini_magick (~> 4.12)
   minitest-ci
   minitest-reporters (~> 1.1)
-  net-ssh (~> 4.1.0)
+  net-ssh (~> 4.2.0)
   nokogiri (~> 1.15)
   nokogiri-diff (~> 0.2)
   pg (= 1.5.4)
