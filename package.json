@@ -11,7 +11,7 @@
     "webpack-dev-server": "^4.0.0"
   },
   "resolutions": {
-    "rails_admin/@fortawesome/fontawesome-free": "^5.15.0"
+    "rails_admin/@fortawesome/fontawesome-free": "^6.0.0"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets"
