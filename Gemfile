@@ -50,7 +50,7 @@ gem 'bcrypt', '~> 3.1.11'
 gem 'pundit', '~> 2.3.1'
 
 # Use Data::Faker from perl to easily generate fake test data
-gem 'faker', '~> 1.8'
+gem 'faker', '~> 3.0'
 
 # Upload files to Rails and map them to ORM frameworks
 gem 'carrierwave', '~> 3.0.3'
