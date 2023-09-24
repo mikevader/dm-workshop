@@ -7,8 +7,8 @@ RUN apt-get update \
  && apt-get remove cmdtest \
  && apt-get remove yarn \
  && apt-get clean \
- && rm -rf /var/lib/apt/lists/* \
- && npm install -g yarn@1.22.19
+ && rm -rf /var/lib/apt/lists/*
+RUN npm install -g yarn@1.22.19
 
 RUN mkdir /app
 WORKDIR /app
