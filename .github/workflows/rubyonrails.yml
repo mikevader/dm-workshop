@@ -8,8 +8,6 @@ name: "Ruby on Rails CI"
 on:
   push:
     branches: [ "master", "develop" ]
-  pull_request:
-    branches: [ "master" ]
 jobs:
   lint:
     runs-on: ubuntu-latest
