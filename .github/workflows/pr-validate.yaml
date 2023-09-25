@@ -109,7 +109,6 @@ jobs:
     needs:
       - pr-metadata
       - pre-commit-check
-#      - charts-changelog
     with:
       checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
       chartChangesDetected: ${{ needs.pr-metadata.outputs.addedOrModified }}
@@ -119,7 +118,6 @@ jobs:
     needs:
       - pr-metadata
       - pre-commit-check
-#      - charts-changelog
     with:
       checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
       chartChangesDetected: ${{ needs.pr-metadata.outputs.addedOrModified }}
