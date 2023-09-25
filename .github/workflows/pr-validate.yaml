@@ -93,14 +93,15 @@ jobs:
       checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
       chartChangesDetected: ${{ needs.pr-metadata.outputs.addedOrModified }}
 
-#  charts-test:
-#    uses: mikevader/charts/.github/workflows/charts-test.yaml@master
-#    needs:
-#      - pr-metadata
+  charts-test:
+    uses: mikevader/charts/.github/workflows/charts-test.yaml@master
+    needs:
+      - pr-metadata
+      - pre-commit-check
 #      - charts-changelog
-#    with:
-#      checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
-#      chartChangesDetected: ${{ needs.pr-metadata.outputs.addedOrModified }}
+    with:
+      checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
+      chartChangesDetected: ${{ needs.pr-metadata.outputs.addedOrModified }}
 
 
 
