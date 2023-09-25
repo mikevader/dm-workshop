@@ -21,8 +21,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  reviewdog:
-    name: ReviewDog
+  reviewdog-gha:
+    name: ReviewDog GHA
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -31,6 +31,27 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
+
+  reviewdog-rails:
+    name: Reviewdog Rails
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1.154.0
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: yarn
+      - name: Install packages
+        run: |
+          yarn install --pure-lockfile
+
       - name: Review JavaScript
         uses: reviewdog/action-eslint@v1
         with:
