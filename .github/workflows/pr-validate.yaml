@@ -114,7 +114,7 @@ jobs:
       chartChangesDetected: ${{ needs.pr-metadata.outputs.addedOrModified }}
 
   charts-test:
-    uses: mikevader/charts/.github/workflows/charts-test.yaml@master
+    uses: ./.github/workflows/charts-test.yaml
     needs:
       - pr-metadata
       - pre-commit-check
