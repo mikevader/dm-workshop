@@ -2,9 +2,9 @@ remote: origin
 target-branch: master
 helm-extra-args: --timeout 600s
 chart-dirs:
-- charts
+  - charts
 excluded-charts:
 chart-repos:
-- bitnami=https://charts.bitnami.com/bitnami
-- mikevader=https://mikevader.github.io/charts
-- jetstack=https://charts.jetstack.io
+  - bitnami=https://charts.bitnami.com/bitnami
+  - mikevader=https://mikevader.github.io/charts
+  - jetstack=https://charts.jetstack.io
