@@ -1,6 +1,12 @@
+---
 apiVersion: v2
 name: dmw
-description: A Helm chart for Kubernetes
+# This is the chart version. This version number should be incremented each time you make changes
+# to the chart and its templates, including the app version.
+# Versions are expected to follow Semantic Versioning (https://semver.org/)
+version: 1.1.2
+
+description: "DMW: Dungeon Master Workshop. A personal manager for monsters, items and spells with adjacent tools."
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -12,18 +18,19 @@ description: A Helm chart for Kubernetes
 # pipeline. Library charts do not define any templates and therefore cannot be deployed.
 type: application
 
-# This is the chart version. This version number should be incremented each time you make changes
-# to the chart and its templates, including the app version.
-# Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 1.1.2
+keywords:
+  - dnd
+
+dependencies:
+  - name: common
+    repository: https://mikevader.github.io/charts
+    version: 4.5.20
+maintainers:
+  - name: mikevader
+    email: mikevader@users.noreply.github.com
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "1.1.2"
-
-dependencies:
-  - name: common
-    repository: https://mikevader.github.io/charts
-    version: 4.5.20
