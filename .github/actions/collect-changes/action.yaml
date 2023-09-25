@@ -35,7 +35,8 @@ runs:
         # Get only the chart paths
         for CHARTPATH in "${PATHS[@]}"
         do
-          CHARTS+=(`./.github/scripts/find-chart-dirs.sh "${CHARTPATH}"`)
+          myChart=`./.github/scripts/find-chart-dirs.sh "${CHARTPATH}"`
+          CHARTS+=(${myChart#charts/})
         done
 
         # Remove duplicates
