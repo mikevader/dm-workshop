@@ -237,7 +237,6 @@ jobs:
 
       # Creates a local build to run tests on
       - name: Build and Load local test-container
-        if: ${{ steps.prep.outputs.goss == 'true' }}
         uses: docker/build-push-action@v5
         with:
           build-args: VERSION=${{ steps.prep.outputs.version }}
