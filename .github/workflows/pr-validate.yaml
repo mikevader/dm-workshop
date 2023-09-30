@@ -312,12 +312,9 @@ jobs:
 #      modifiedCharts: ${{ needs.pr-metadata.outputs.addedOrModifiedCharts }}
 
 
-  charts:
-    name: Build Chart
+  charts-prepare:
     runs-on: ubuntu-latest
     needs:
-      - pr-metadata
-      - pre-commit-check
       - docker-build
     steps:
       - name: Prepare
@@ -325,17 +322,25 @@ jobs:
           sed -i "s/^version:.*$/version: ${steps.prep.output.version}/" chart/Chart.yaml
           sed -i "s/^appVersion:.*$/appVersion: ${steps.prep.output.version}/" chart/Chart.yaml
 
-      - name: charts-lint
-        uses: mikevader/charts/.github/workflows/charts-lint.yaml@master
-        with:
-          checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
-          chartChangesDetected: ${{ needs.pr-metadata.outputs.addedOrModified }}
+  charts-lint:
+    uses: mikevader/charts/.github/workflows/charts-lint.yaml@master
+    needs:
+      - pr-metadata
+      - pre-commit-check
+      - charts-prepare
+    with:
+      checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
+      chartChangesDetected: ${{ needs.pr-metadata.outputs.addedOrModified }}
 
-      - name: charts-test
-        uses: ./.github/workflows/charts-test.yaml
-        with:
-          checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
-          chartChangesDetected: ${{ needs.pr-metadata.outputs.addedOrModified }}
+  charts-test:
+    uses: ./.github/workflows/charts-test.yaml
+    needs:
+      - pr-metadata
+      - pre-commit-check
+      - charts-prepare
+    with:
+      checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
+      chartChangesDetected: ${{ needs.pr-metadata.outputs.addedOrModified }}
 
 
 
