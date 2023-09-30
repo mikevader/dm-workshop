@@ -186,7 +186,7 @@ jobs:
           echo "build_date=${BUILD_DATE}" >> "$GITHUB_OUTPUT"
           
           echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-          if [ "${{gihub.ref}}" == "refs/heads/master" ]; then
+          if [ "${{github.ref}}" == "refs/heads/master" ]; then
             VERSION=$(cat ./${CATEGORY}/${{ matrix.container }}/VERSION)
             echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
           else
