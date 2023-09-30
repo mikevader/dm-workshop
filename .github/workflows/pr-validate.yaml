@@ -195,7 +195,7 @@ jobs:
           fi
 
 
-          PLATFORM=$(cat "linux/amd64,linux/arm64")
+          PLATFORM="linux/amd64,linux/arm64"
           echo "platform=${PLATFORM}" >> "$GITHUB_OUTPUT"
 
           if test -f "./goss.yaml"; then
