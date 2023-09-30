@@ -190,7 +190,7 @@ jobs:
             VERSION=$(cat ./${CATEGORY}/${{ matrix.container }}/VERSION)
             echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
           else
-            VERSION=$(cat "dev-${sha_short}")
+            VERSION="dev-${sha_short}"
             echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
           fi
 
