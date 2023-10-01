@@ -1,6 +1,6 @@
 remote: origin
 target-branch: master
-helm-extra-args: --timeout 600s
+helm-extra-args: --timeout 300s
 chart-dirs:
   - charts
 excluded-charts:
