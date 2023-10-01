@@ -5,7 +5,7 @@
 replicaasdfCount: 1
 
 image:
-  repository: ghcr.io/mikevader/dm-workshop
+  repository: ghcr.io/mikevader/dmw
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
