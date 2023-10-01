@@ -192,7 +192,7 @@ jobs:
             VERSION=$(cat ./${CATEGORY}/${{ matrix.container }}/VERSION)
             PLATFORM="linux/amd64,linux/arm64"
           else
-            VERSION="1.0.0-dev+$(git rev-parse --short HEAD)"
+            VERSION="1.0.0-dev.$(git rev-parse --short HEAD)"
             PLATFORM="linux/amd64"
           fi
 
@@ -292,6 +292,7 @@ jobs:
           push: ${{ steps.prep.outputs.push }}
           tags: |
             ghcr.io/${{ github.repository_owner }}/dmw:${{ steps.prep.outputs.version }}
+            ghcr.io/${{ github.repository_owner }}/dmw:develop
           cache-from: ${{ steps.prep.outputs.cache_from }}
           cache-to: ${{ steps.prep.outputs.cache_to }}
 
