@@ -253,6 +253,7 @@ jobs:
       # Creates a local build to run tests on
       - name: Build and Load local test-container
         uses: docker/build-push-action@v5
+        if: github.event_name != 'pull_request'
         with:
           build-args: VERSION=${{ steps.prep.outputs.version }}
           labels: |
@@ -276,6 +277,7 @@ jobs:
       # Push if not a PR, otherwise just test the build process for all requested platforms
       - name: Build and Push
         uses: docker/build-push-action@v5
+        if: github.event_name == 'pull_request'
         with:
           build-args: VERSION=${{ steps.prep.outputs.version }}
           labels: |
@@ -318,9 +320,11 @@ jobs:
       - docker-build
     steps:
       - name: Prepare
+        env:
+          VERSION: ${{ steps.prep.output.version }}
         run: |
-          sed -i "s/^version:.*$/version: ${steps.prep.output.version}/" chart/Chart.yaml
-          sed -i "s/^appVersion:.*$/appVersion: ${steps.prep.output.version}/" chart/Chart.yaml
+          sed -i "s/^version:.*$/version: $VERSION/" chart/Chart.yaml
+          sed -i "s/^appVersion:.*$/appVersion: $VERSION/" chart/Chart.yaml
 
   charts-lint:
     uses: mikevader/charts/.github/workflows/charts-lint.yaml@master
