@@ -324,8 +324,8 @@ jobs:
         env:
           VERSION: ${{ steps.prep.output.version }}
         run: |
-          sed -i "s/^version:.*$/version: $VERSION/" chart/Chart.yaml
-          sed -i "s/^appVersion:.*$/appVersion: $VERSION/" chart/Chart.yaml
+          sed -i "s/^version:.*$/version: $VERSION/" charts/dmw/Chart.yaml
+          sed -i "s/^appVersion:.*$/appVersion: $VERSION/" charts/dmw/Chart.yaml
 
   charts-lint:
     uses: mikevader/charts/.github/workflows/charts-lint.yaml@master
