@@ -329,25 +329,85 @@ jobs:
           sed -i "s/^version:.*$/version: $VERSION/" charts/dmw/Chart.yaml
           sed -i "s/^appVersion:.*$/appVersion: $VERSION/" charts/dmw/Chart.yaml
 
-  charts-lint:
-    uses: mikevader/charts/.github/workflows/charts-lint.yaml@master
-    needs:
-      - pr-metadata
-      - pre-commit-check
-      - charts-prepare
-    with:
-      checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
-      chartChangesDetected: ${{ needs.pr-metadata.outputs.addedOrModified }}
+      #  charts-lint:
+      #    uses: mikevader/charts/.github/workflows/charts-lint.yaml@master
+      #    needs:
+      #      - pr-metadata
+      #      - pre-commit-check
+      #      - charts-prepare
+      #    with:
+      #      checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
+      #      chartChangesDetected: ${{ needs.pr-metadata.outputs.addedOrModified }}
 
-  charts-test:
-    uses: ./.github/workflows/charts-test.yaml
-    needs:
-      - pr-metadata
-      - pre-commit-check
-      - charts-prepare
-    with:
-      checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
-      chartChangesDetected: ${{ needs.pr-metadata.outputs.addedOrModified }}
+      - name: Install Kubernetes tools
+        uses: yokawasa/action-setup-kube-tools@v0.9.3
+        with:
+          setup-tools: |
+            helmv3
+          helm: "3.8.0"
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.4.0
+
+      - name: Collect changes
+        id: list-changed
+        if: inputs.chartChangesDetected == 'true'
+        run: |
+          EXCLUDED=$(yq eval -o=json '.excluded-charts // []' .github/ct-lint.yaml)
+          CHARTS=$(ct list-changed --config .github/ct-lint.yaml)
+          CHARTS_JSON=$(echo "${CHARTS}" | jq -R -s -c 'split("\n")[:-1]')
+          OUTPUT_JSON=$(echo "{\"excluded\": ${EXCLUDED}, \"all\": ${CHARTS_JSON}}" | jq -c '.all-.excluded')
+          echo "charts=${OUTPUT_JSON}" >> "$GITHUB_OUTPUT"
+          if [[ $(echo ${OUTPUT_JSON} | jq -c '. | length') -gt 0 ]]; then
+            echo "detected=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run chart-testing (lint)
+        id: lint
+        if: steps.list-changed.outputs.detected == 'true'
+        run: ct lint --config .github/ct-lint.yaml
+
+
+#  charts-test:
+#    uses: ./.github/workflows/charts-test.yaml
+#    needs:
+#      - pr-metadata
+#      - pre-commit-check
+#      - charts-prepare
+#    with:
+#      checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
+#      chartChangesDetected: ${{ needs.pr-metadata.outputs.addedOrModified }}
+
+      - name: Install Kubernetes tools
+        uses: yokawasa/action-setup-kube-tools@v0.9.3
+        with:
+          setup-tools: |
+            helmv3
+          helm: "3.6.3"
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.4.0
+
+      - name: Create k3d cluster
+        uses: nolar/setup-k3d-k3s@v1
+        with:
+          version: v1.26
+
+      - name: Remove node taints
+        run: |
+          kubectl taint --all=true nodes node.cloudprovider.kubernetes.io/uninitialized- || true
+
+      - name: Run chart-testing (install)
+        run: ct install --config .github/ct-install.yaml --charts charts/dmw
+
 
 
 
