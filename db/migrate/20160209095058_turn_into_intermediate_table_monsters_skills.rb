@@ -1,4 +1,4 @@
-class TurnIntoIntermediateTableMonstersSkills < ActiveRecord::Migration
+class TurnIntoIntermediateTableMonstersSkills < ActiveRecord::Migration[5.0]
   def up
     change_table :monsters_skills do |t|
       t.column(:id, :primary_key)

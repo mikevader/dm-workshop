@@ -1,4 +1,4 @@
-class RemoveIndexFromHeroClassesSpells < ActiveRecord::Migration
+class RemoveIndexFromHeroClassesSpells < ActiveRecord::Migration[5.0]
   def up
     remove_index :hero_classes_spells, name: "index_hero_classes_spells_on_spell_id_and_hero_class_id"
   end

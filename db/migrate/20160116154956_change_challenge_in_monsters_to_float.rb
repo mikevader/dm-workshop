@@ -1,4 +1,4 @@
-class ChangeChallengeInMonstersToFloat < ActiveRecord::Migration
+class ChangeChallengeInMonstersToFloat < ActiveRecord::Migration[5.0]
   def up
     change_column :monsters, :challenge, :float
   end

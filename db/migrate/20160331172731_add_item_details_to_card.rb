@@ -1,4 +1,4 @@
-class AddItemDetailsToCard < ActiveRecord::Migration
+class AddItemDetailsToCard < ActiveRecord::Migration[5.0]
   def change
     add_column :cards, :cssclass, :string
     add_column :cards, :attunement, :boolean
