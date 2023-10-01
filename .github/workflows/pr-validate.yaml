@@ -185,12 +185,11 @@ jobs:
           BUILD_DATE=$(date --rfc-3339=seconds --utc)
           echo "build_date=${BUILD_DATE}" >> "$GITHUB_OUTPUT"
           
-          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
           if [ "${{github.ref}}" == "refs/heads/master" ]; then
             VERSION=$(cat ./${CATEGORY}/${{ matrix.container }}/VERSION)
             PLATFORM="linux/amd64,linux/arm64"
           else
-            VERSION="dev-${sha_short}"
+            VERSION="dev-$(git rev-parse --short HEAD)"
             PLATFORM="linux/amd64"
           fi
 
