@@ -26,7 +26,9 @@ COPY . .
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile --gemfile app/ lib/
 
-RUN export NODE_OPTIONS=--openssl-legacy-provider \
+# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+RUN SECRET_KEY_BASE_DUMMY=1 \
+ && export NODE_OPTIONS=--openssl-legacy-provider \
  && bundle exec rails assets:precompile
 
 # Entrypoint prepares the database.
