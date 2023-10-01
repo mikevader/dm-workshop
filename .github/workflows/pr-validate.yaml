@@ -283,7 +283,9 @@ jobs:
         uses: docker/build-push-action@v5
         if: github.event_name == 'pull_request'
         with:
-          build-args: VERSION=${{ steps.prep.outputs.version }}
+          build-args: |
+            VERSION=${{ steps.prep.outputs.version }}
+            RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}
           labels: |
             org.opencontainers.image.created=${{ steps.prep.outputs.build_date }}
           context: .
