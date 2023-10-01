@@ -188,30 +188,32 @@ jobs:
           echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
           if [ "${{github.ref}}" == "refs/heads/master" ]; then
             VERSION=$(cat ./${CATEGORY}/${{ matrix.container }}/VERSION)
-            echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+            PLATFORM="linux/amd64,linux/arm64"
           else
             VERSION="dev-${sha_short}"
-            echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+            PLATFORM="linux/amd64"
           fi
 
-
-          PLATFORM="linux/amd64,linux/arm64"
           echo "platform=${PLATFORM}" >> "$GITHUB_OUTPUT"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
 
           if test -f "./goss.yaml"; then
             echo "goss=true" >> "$GITHUB_OUTPUT"
           else
             echo "goss=false" >> "$GITHUB_OUTPUT"
           fi
-          if [ "${{github.event_name}}" == "pull_request" ]; then
-            echo "push=false" >> "$GITHUB_OUTPUT"
-            echo "cache_from=type=gha" >> "$GITHUB_OUTPUT"
-            echo "cache_to=" >> "$GITHUB_OUTPUT"
-          else
-            echo "push=true" >> "$GITHUB_OUTPUT"
-            echo "cache_from=type=gha" >> "$GITHUB_OUTPUT"
-            echo "cache_to=type=gha,mode=max" >> "$GITHUB_OUTPUT"
-          fi
+          echo "push=true" >> "$GITHUB_OUTPUT"
+          echo "cache_from=type=gha" >> "$GITHUB_OUTPUT"
+          echo "cache_to=type=gha,mode=max" >> "$GITHUB_OUTPUT"
+#          if [ "${{github.event_name}}" == "pull_request" ]; then
+#            echo "push=false" >> "$GITHUB_OUTPUT"
+#            echo "cache_from=type=gha" >> "$GITHUB_OUTPUT"
+#            echo "cache_to=" >> "$GITHUB_OUTPUT"
+#          else
+#            echo "push=true" >> "$GITHUB_OUTPUT"
+#            echo "cache_from=type=gha" >> "$GITHUB_OUTPUT"
+#            echo "cache_to=type=gha,mode=max" >> "$GITHUB_OUTPUT"
+#          fi
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
