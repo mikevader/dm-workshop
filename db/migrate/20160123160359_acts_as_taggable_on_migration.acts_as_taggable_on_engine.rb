@@ -20,8 +20,8 @@ class ActsAsTaggableOnMigration < ActiveRecord::Migration[5.0]
       t.datetime :created_at
     end
 
-    add_index :taggings, :tag_id
-    add_index :taggings, [:taggable_id, :taggable_type, :context]
+    add_index :taggings, :tag_id unless index_exists? :taggings, :tag_id
+    add_index :taggings, [:taggable_id, :taggable_type, :context] unless index_exists? :taggings, [:taggable_id, :taggable_type, :context]
   end
 
   def self.down
