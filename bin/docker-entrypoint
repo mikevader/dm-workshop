@@ -1,7 +1,10 @@
 #!/bin/bash
 
+echo "run: docker-entrypoint"
+
 # If running the rails server then create or migrate existing database
-if [ "${*}" == "./bin/rails server" ]; then
+if [ "${*}" == "./bin/rails server -b 0.0.0.0" ]; then
+  echo "run: rails db:prepare"
   ./bin/rails db:prepare
 fi
 
