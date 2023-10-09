@@ -392,6 +392,10 @@ jobs:
 #      checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
 #      chartChangesDetected: ${{ needs.pr-metadata.outputs.addedOrModified }}
 
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
       - name: Install Kubernetes tools
         uses: yokawasa/action-setup-kube-tools@v0.9.3
         with:
