@@ -3,7 +3,7 @@ FROM ruby:3.2.2
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN apt-get update -qq \
- && apt-get install --no-install-recommends -y build-essential libvips nodejs=18.13.0+dfsg1-1 npm=9.2.0~ds1-1 postgresql-client=15+248 \
+ && apt-get install --no-install-recommends -y build-essential=12.9 libvips=8.14.1-3 nodejs=18.13.0+dfsg1-1 npm=9.2.0~ds1-1 postgresql-client=15+248 \
  && apt-get remove cmdtest \
  && apt-get remove yarn \
  && apt-get clean \
@@ -30,6 +30,7 @@ COPY . .
 RUN bundle exec bootsnap precompile --gemfile app/ lib/
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+# shellcheck disable=SC2034 \
 RUN export NODE_OPTIONS=--openssl-legacy-provider \
  && SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
 
