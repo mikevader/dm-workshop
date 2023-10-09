@@ -1,4 +1,4 @@
-class CreateHeroClasses < ActiveRecord::Migration
+class CreateHeroClasses < ActiveRecord::Migration[5.0]
   def change
     create_table :hero_classes do |t|
       t.string :name, index: true

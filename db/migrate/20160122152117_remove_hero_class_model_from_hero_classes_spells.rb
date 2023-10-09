@@ -1,4 +1,4 @@
-class RemoveHeroClassModelFromHeroClassesSpells < ActiveRecord::Migration
+class RemoveHeroClassModelFromHeroClassesSpells < ActiveRecord::Migration[5.0]
   def up
     change_table :hero_classes_spells, id: false do |t|
       t.remove :updated_at
