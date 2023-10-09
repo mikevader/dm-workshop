@@ -425,7 +425,7 @@ jobs:
         with:
           charts_dir: charts/*
         env:
-          CR_TOKEN: "${{ secrets.K8S_AT_HOME_TOKEN }}"
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           CR_SKIP_EXISTING: "true"
 
 
