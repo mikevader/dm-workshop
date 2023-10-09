@@ -3,7 +3,7 @@ FROM ruby:3.2.2
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN apt-get update -qq \
- && apt-get install --no-install-recommends -y build-essential=12.9 libvips=8.14.1-3 nodejs=18.13.0+dfsg1-1 npm=9.2.0~ds1-1 postgresql-client=15+248 \
+ && apt-get install --no-install-recommends -y build-essential=12.9 libvips42=8.14.1-3 nodejs=18.13.0+dfsg1-1 npm=9.2.0~ds1-1 postgresql-client=15+248 \
  && apt-get remove cmdtest \
  && apt-get remove yarn \
  && apt-get clean \
