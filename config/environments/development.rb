@@ -2,12 +2,7 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
 
-  config.hosts = [
-    IPAddr.new("0.0.0.0/0"), # All IPv4 addresses.
-    IPAddr.new("::/0"),      # All IPv6 addresses.
-    "localhost",             # The localhost reserved domain.
-    ENV["SERVER_HOST_NAME"]
-  ]
+  config.hosts << ENV["SERVER_HOST_NAME"]
 
   # Settings specified here will take precedence over those in config/application.rb.
 
