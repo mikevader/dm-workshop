@@ -21,7 +21,290 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  reviewdog-gha:
+    name: ReviewDog GHA
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - uses: reviewdog/action-actionlint@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+
+  reviewdog-rails:
+    name: Reviewdog Rails
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1.154.0
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: yarn
+      - name: Install packages
+        run: |
+          yarn install --pure-lockfile
+
+#      - name: Review JavaScript
+#        uses: reviewdog/action-eslint@v1
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          reporter: github-pr-review
+#          eslint_flags: "app/javascript/"
+      - name: hadolint
+        uses: reviewdog/action-hadolint@v1.36.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          filter_mode: diff_context
+#      - name: stylelint
+#        uses: reviewdog/action-stylelint@v1
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          reporter: github-pr-review
+#          stylelint_input: '**/*.css'
+      - name: brakeman
+        uses: reviewdog/action-brakeman@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          brakeman_version: 6.0.1
+          reporter: github-pr-review
+      - name: rubocop
+        uses: reviewdog/action-rubocop@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          rubocop_version: gemfile
+          rubocop_extensions: rubocop-rails:gemfile rubocop-performance:gemfile rubocop-minitest:gemfile
+          reporter: github-pr-review
+
+  rails-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1.154.0
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: yarn
+
+      - name: Install packages
+        run: |
+          yarn install --pure-lockfile
+      # Add or replace any other lints here
+      - name: Run linters
+        run: |
+          bin/rubocop --parallel
+      #          bin/stylelint
+      #          bin/prettier
+      #          bin/eslint
+
+      - name: Run security checks
+        run: |
+          bin/bundler-audit --update
+          bin/brakeman -q -w2
+
+  rails-test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:11-alpine
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      # Add or replace dependency steps here
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1.154.0
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: yarn
+
+      - name: Install packages
+        run: |
+          yarn install --pure-lockfile
+      - name: Build Esbuild
+        run: yarn build
+      # Add or replace database setup steps here
+      - name: Set up database schema
+        run: bin/rails db:schema:load
+      # Add or replace test runners here
+      - name: Run tests
+        run: bin/rake
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          format: simplecov
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v5.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+        with:
+          coverageLocations: ${{ github.workspace }}/coverage/coverage.json:simplecov
+
+  docker-build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs:
+      - reviewdog-gha
+      - reviewdog-rails
+      - rails-lint
+      - rails-test
+    outputs:
+      build_date: ${{ steps.prep.outputs.build_date }}
+      version: ${{ steps.prep.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Define if tests and push should be run against which versions/platforms
+      # if: github.ref == 'refs/heads/master'
+      - name: Prepare
+        id: prep
+        run: |
+          BUILD_DATE=$(date --rfc-3339=seconds --utc)
+          echo "build_date=${BUILD_DATE}" >> "$GITHUB_OUTPUT"
+          
+          if [ "${{github.ref}}" == "refs/heads/master" ]; then
+            VERSION=$(cat ./${CATEGORY}/${{ matrix.container }}/VERSION)
+            PLATFORM="linux/amd64,linux/arm64"
+          else
+            VERSION="1.0.0-dev.$(git rev-parse --short HEAD)"
+            PLATFORM="linux/amd64"
+          fi
+
+          echo "platform=${PLATFORM}" >> "$GITHUB_OUTPUT"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+
+          if test -f "./goss.yaml"; then
+            echo "goss=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "goss=false" >> "$GITHUB_OUTPUT"
+          fi
+          echo "push=true" >> "$GITHUB_OUTPUT"
+          echo "cache_from=type=gha" >> "$GITHUB_OUTPUT"
+          echo "cache_to=type=gha,mode=max" >> "$GITHUB_OUTPUT"
+#          if [ "${{github.event_name}}" == "pull_request" ]; then
+#            echo "push=false" >> "$GITHUB_OUTPUT"
+#            echo "cache_from=type=gha" >> "$GITHUB_OUTPUT"
+#            echo "cache_to=" >> "$GITHUB_OUTPUT"
+#          else
+#            echo "push=true" >> "$GITHUB_OUTPUT"
+#            echo "cache_from=type=gha" >> "$GITHUB_OUTPUT"
+#            echo "cache_to=type=gha,mode=max" >> "$GITHUB_OUTPUT"
+#          fi
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: amd64,arm64
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        if: github.event_name == 'pull_request'
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Install and configure Buildx
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          install: true
+          version: latest
+          driver-opts: image=moby/buildkit:latest
+
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ secrets.DOCKER_REGISTRY }}/${{ github.repository_owner }}/dmw/$GITHUB_REF_NAME
+          restore-keys: |
+            ${{ secrets.DOCKER_REGISTRY }}/${{ github.repository_owner }}/dmw/$GITHUB_REF_NAME
+
+      # Install the GOSS testing framework
+      - name: Set up goss/dgoss
+        uses: e1himself/goss-installation-action@v1.1.0
+        if: steps.prep.outputs.goss == 'true'
+        with:
+          version: v0.3.16
+
+      # Creates a local build to run tests on
+      - name: Build and Load local test-container
+        uses: docker/build-push-action@v5
+        if: github.event_name != 'pull_request'
+        with:
+          build-args: VERSION=${{ steps.prep.outputs.version }}
+          labels: |
+            org.opencontainers.image.created=${{ steps.prep.outputs.build_date }}
+          context: .
+          file: ./Dockerfile
+          load: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/dmw:test
+          cache-from: ${{ steps.prep.outputs.cache_from }}
+          cache-to: ${{ steps.prep.outputs.cache_to }}
+
+      # Run GOSS tests if included with the container
+      - name: Run GOSS tests
+        if: steps.prep.outputs.goss == 'true'
+        env:
+          GOSS_FILE: ./goss.yaml
+        run: |
+          dgoss run ghcr.io/${{ github.repository_owner }}/dmw:test
+
+      # Push if not a PR, otherwise just test the build process for all requested platforms
+      - name: Build and Push
+        uses: docker/build-push-action@v5
+        if: github.event_name == 'pull_request'
+        with:
+          build-args: |
+            VERSION=${{ steps.prep.outputs.version }}
+            RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}
+          labels: |
+            org.opencontainers.image.created=${{ steps.prep.outputs.build_date }}
+          context: .
+          platforms: ${{ steps.prep.outputs.platform }}
+          file: ./Dockerfile
+          push: ${{ steps.prep.outputs.push }}
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/dmw:${{ steps.prep.outputs.version }}
+            ghcr.io/${{ github.repository_owner }}/dmw:develop
+          cache-from: ${{ steps.prep.outputs.cache_from }}
+          cache-to: ${{ steps.prep.outputs.cache_to }}
+
+
   pr-metadata:
+    needs:
+      - docker-build
     uses: mikevader/charts/.github/workflows/pr-metadata.yaml@master
 
   pre-commit-check:
@@ -31,32 +314,120 @@ jobs:
     with:
       modifiedFiles: ${{ needs.pr-metadata.outputs.addedOrModifiedFiles }}
 
-  charts-changelog:
-    uses: mikevader/charts/.github/workflows/charts-changelog.yaml@master
-    needs:
-      - pr-metadata
-      - pre-commit-check
-    with:
-      isRenovatePR: ${{ needs.pr-metadata.outputs.isRenovatePR }}
-      modifiedCharts: ${{ needs.pr-metadata.outputs.addedOrModifiedCharts }}
-
-  charts-lint:
-    uses: mikevader/charts/.github/workflows/charts-lint.yaml@master
-    needs:
-      - pr-metadata
-      - charts-changelog
-    with:
-      checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
-      chartChangesDetected: ${{ needs.pr-metadata.outputs.addedOrModified }}
-
-#  charts-test:
-#    uses: mikevader/charts/.github/workflows/charts-test.yaml@master
+#  charts-changelog:
+#    uses: mikevader/charts/.github/workflows/charts-changelog.yaml@master
 #    needs:
 #      - pr-metadata
-#      - charts-changelog
+#      - pre-commit-check
+#    with:
+#      isRenovatePR: ${{ needs.pr-metadata.outputs.isRenovatePR }}
+#      modifiedCharts: ${{ needs.pr-metadata.outputs.addedOrModifiedCharts }}
+
+
+  charts-prepare:
+    runs-on: ubuntu-latest
+    needs:
+      - docker-build
+      - pre-commit-check
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Prepare
+        env:
+          VERSION: ${{ needs.docker-build.outputs.version }}
+        run: |
+          sed -i "s/^version:.*$/version: $VERSION/" charts/dmw/Chart.yaml
+          sed -i "s/^appVersion:.*$/appVersion: $VERSION/" charts/dmw/Chart.yaml
+
+      #  charts-lint:
+      #    uses: mikevader/charts/.github/workflows/charts-lint.yaml@master
+      #    needs:
+      #      - pr-metadata
+      #      - pre-commit-check
+      #      - charts-prepare
+      #    with:
+      #      checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
+      #      chartChangesDetected: ${{ needs.pr-metadata.outputs.addedOrModified }}
+
+      - name: Install Kubernetes tools
+        uses: yokawasa/action-setup-kube-tools@v0.9.3
+        with:
+          setup-tools: |
+            helmv3
+          helm: "3.12.1"
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.4.0
+
+      - name: Collect changes
+        id: list-changed
+        if: inputs.chartChangesDetected == 'true'
+        run: |
+          EXCLUDED=$(yq eval -o=json '.excluded-charts // []' .github/ct-lint.yaml)
+          CHARTS=$(ct list-changed --config .github/ct-lint.yaml)
+          CHARTS_JSON=$(echo "${CHARTS}" | jq -R -s -c 'split("\n")[:-1]')
+          OUTPUT_JSON=$(echo "{\"excluded\": ${EXCLUDED}, \"all\": ${CHARTS_JSON}}" | jq -c '.all-.excluded')
+          echo "charts=${OUTPUT_JSON}" >> "$GITHUB_OUTPUT"
+          if [[ $(echo ${OUTPUT_JSON} | jq -c '. | length') -gt 0 ]]; then
+            echo "detected=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run chart-testing (lint)
+        id: lint
+        if: steps.list-changed.outputs.detected == 'true'
+        run: ct lint --config .github/ct-lint.yaml
+
+
+#  charts-test:
+#    uses: ./.github/workflows/charts-test.yaml
+#    needs:
+#      - pr-metadata
+#      - pre-commit-check
+#      - charts-prepare
 #    with:
 #      checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
 #      chartChangesDetected: ${{ needs.pr-metadata.outputs.addedOrModified }}
+
+      - name: Install Kubernetes tools
+        uses: yokawasa/action-setup-kube-tools@v0.9.3
+        with:
+          setup-tools: |
+            helmv3
+            yq
+          helm: "3.12.1"
+          yq: "4.16.2"
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.4.0
+
+      - name: Create k3d cluster
+        uses: nolar/setup-k3d-k3s@v1
+        with:
+          version: v1.26
+
+      - name: Remove node taints
+        run: |
+          kubectl taint --all=true nodes node.cloudprovider.kubernetes.io/uninitialized- || true
+
+      - name: Run chart-testing (install)
+        run: ct install --config .github/ct-install.yaml --charts charts/dmw
+
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.5.0
+        with:
+          charts_dir: charts
+          skip_existing: false
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_SKIP_EXISTING: "false"
 
 
 

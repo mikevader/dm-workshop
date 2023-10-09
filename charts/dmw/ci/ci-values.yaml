@@ -1,0 +1,5 @@
+railsEnvironment: development
+
+env:
+  - name: SERVER_HOST_NAME
+    value: "{{ .Release.Name }}"

@@ -1,4 +1,4 @@
-class MonstersSkills < ActiveRecord::Migration
+class MonstersSkills < ActiveRecord::Migration[5.0]
   def change
     create_table :monsters_skills, id: false do |t|
       t.integer :monster_id

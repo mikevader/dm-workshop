@@ -1,4 +1,4 @@
-class CreateSpellclasses < ActiveRecord::Migration
+class CreateSpellclasses < ActiveRecord::Migration[5.0]
   def change
     create_table :spellclasses do |t|
       t.integer :spell_id
