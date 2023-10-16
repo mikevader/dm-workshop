@@ -1,4 +1,4 @@
-class MoveMonstersToCards < ActiveRecord::Migration
+class MoveMonstersToCards < ActiveRecord::Migration[5.0]
   def up
     create_table :cards_skills, force: :cascase do |t|
       t.integer :value

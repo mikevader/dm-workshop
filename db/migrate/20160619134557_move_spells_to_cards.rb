@@ -1,4 +1,4 @@
-class MoveSpellsToCards < ActiveRecord::Migration
+class MoveSpellsToCards < ActiveRecord::Migration[5.0]
   def up
 
     create_join_table :hero_classes, :cards, force: :cascade do |t|

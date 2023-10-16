@@ -1,4 +1,4 @@
-class AddSharedToSpells < ActiveRecord::Migration
+class AddSharedToSpells < ActiveRecord::Migration[5.0]
   def up
     add_column :spells, :shared, :boolean, default: false, null: false
 

@@ -1,4 +1,4 @@
-class DropItems < ActiveRecord::Migration
+class DropItems < ActiveRecord::Migration[5.0]
   def up
 
     add_reference :properties, :card, index: true, foreign_key: true
