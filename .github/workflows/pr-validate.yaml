@@ -209,7 +209,9 @@ jobs:
 
           echo "platform=${PLATFORM}" >> "$GITHUB_OUTPUT"
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
-          echo "tags=${TAGS}" >> "$GITHUB_OUTPUT"
+          echo "tags<<EOF" >> $GITHUB_OUTPUT
+          echo $TAGS >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
           if test -f "./goss.yaml"; then
             echo "goss=true" >> "$GITHUB_OUTPUT"
