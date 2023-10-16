@@ -192,15 +192,24 @@ jobs:
           echo "build_date=${BUILD_DATE}" >> "$GITHUB_OUTPUT"
           
           if [ "${{github.ref}}" == "refs/heads/master" ]; then
-            VERSION=$(cat ./${CATEGORY}/${{ matrix.container }}/VERSION)
+            VERSION=$(cat ./VERSION)
             PLATFORM="linux/amd64,linux/arm64"
+            read -r -d '' TAGS << EOM
+              ghcr.io/${{ github.repository_owner }}/dmw:${{ steps.prep.outputs.version }}
+              ghcr.io/${{ github.repository_owner }}/dmw:latest
+            EOM
           else
             VERSION="1.0.0-dev.$(git rev-parse --short HEAD)"
             PLATFORM="linux/amd64"
+            read -r -d '' TAGS << EOM
+              ghcr.io/${{ github.repository_owner }}/dmw:${{ steps.prep.outputs.version }}
+              ghcr.io/${{ github.repository_owner }}/dmw:develop
+            EOM
           fi
 
           echo "platform=${PLATFORM}" >> "$GITHUB_OUTPUT"
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "tags=${TAGS}" >> "$GITHUB_OUTPUT"
 
           if test -f "./goss.yaml"; then
             echo "goss=true" >> "$GITHUB_OUTPUT"
@@ -295,9 +304,7 @@ jobs:
           platforms: ${{ steps.prep.outputs.platform }}
           file: ./Dockerfile
           push: ${{ steps.prep.outputs.push }}
-          tags: |
-            ghcr.io/${{ github.repository_owner }}/dmw:${{ steps.prep.outputs.version }}
-            ghcr.io/${{ github.repository_owner }}/dmw:develop
+          tags: ${{ steps.prep.outputs.tags }}
           cache-from: ${{ steps.prep.outputs.cache_from }}
           cache-to: ${{ steps.prep.outputs.cache_to }}
 
@@ -339,16 +346,6 @@ jobs:
           sed -i "s/^version:.*$/version: $VERSION/" charts/dmw/Chart.yaml
           sed -i "s/^appVersion:.*$/appVersion: $VERSION/" charts/dmw/Chart.yaml
 
-      #  charts-lint:
-      #    uses: mikevader/charts/.github/workflows/charts-lint.yaml@master
-      #    needs:
-      #      - pr-metadata
-      #      - pre-commit-check
-      #      - charts-prepare
-      #    with:
-      #      checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
-      #      chartChangesDetected: ${{ needs.pr-metadata.outputs.addedOrModified }}
-
       - name: Install Kubernetes tools
         uses: yokawasa/action-setup-kube-tools@v0.9.3
         with:
@@ -363,34 +360,9 @@ jobs:
       - name: Set up chart-testing
         uses: helm/chart-testing-action@v2.4.0
 
-      - name: Collect changes
-        id: list-changed
-        if: inputs.chartChangesDetected == 'true'
-        run: |
-          EXCLUDED=$(yq eval -o=json '.excluded-charts // []' .github/ct-lint.yaml)
-          CHARTS=$(ct list-changed --config .github/ct-lint.yaml)
-          CHARTS_JSON=$(echo "${CHARTS}" | jq -R -s -c 'split("\n")[:-1]')
-          OUTPUT_JSON=$(echo "{\"excluded\": ${EXCLUDED}, \"all\": ${CHARTS_JSON}}" | jq -c '.all-.excluded')
-          echo "charts=${OUTPUT_JSON}" >> "$GITHUB_OUTPUT"
-          if [[ $(echo ${OUTPUT_JSON} | jq -c '. | length') -gt 0 ]]; then
-            echo "detected=true" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Run chart-testing (lint)
         id: lint
-        if: steps.list-changed.outputs.detected == 'true'
         run: ct lint --config .github/ct-lint.yaml
-
-
-#  charts-test:
-#    uses: ./.github/workflows/charts-test.yaml
-#    needs:
-#      - pr-metadata
-#      - pre-commit-check
-#      - charts-prepare
-#    with:
-#      checkoutCommit: ${{ needs.charts-changelog.outputs.commitHash }}
-#      chartChangesDetected: ${{ needs.pr-metadata.outputs.addedOrModified }}
 
       - name: Configure Git
         run: |
@@ -433,216 +405,6 @@ jobs:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           CR_SKIP_EXISTING: "false"
 
-
-
-
-#
-#  lint:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v4
-#      - name: Install Ruby and gems
-#        uses: ruby/setup-ruby@v1.154.0
-#        with:
-#          ruby-version: 3.2.2
-#          bundler-cache: true
-#      - name: Setup Node
-#        uses: actions/setup-node@v3
-#        with:
-#          node-version: 18
-#          cache: yarn
-#
-#      - name: Install packages
-#        run: |
-#          yarn install --pure-lockfile
-#      # Add or replace any other lints here
-#      - name: Run linters
-#        run: |
-#          bin/rubocop --parallel
-#      #          bin/stylelint
-#      #          bin/prettier
-#      #          bin/eslint
-#
-#      - name: Run security checks
-#        run: |
-#          bin/bundler-audit --update
-#          bin/brakeman -q -w2
-#
-#  test:
-#    runs-on: ubuntu-latest
-#    services:
-#      postgres:
-#        image: postgres:11-alpine
-#        ports:
-#          - "5432:5432"
-#        env:
-#          POSTGRES_DB: rails_test
-#          POSTGRES_USER: rails
-#          POSTGRES_PASSWORD: password
-#    env:
-#      RAILS_ENV: test
-#      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v4
-#      # Add or replace dependency steps here
-#      - name: Install Ruby and gems
-#        uses: ruby/setup-ruby@v1.154.0
-#        with:
-#          ruby-version: 3.2.2
-#          bundler-cache: true
-#      - name: Setup Node
-#        uses: actions/setup-node@v3
-#        with:
-#          node-version: 18
-#          cache: yarn
-#
-#      - name: Install packages
-#        run: |
-#          yarn install --pure-lockfile
-#      - name: Build Esbuild
-#        run: yarn build
-#      # Add or replace database setup steps here
-#      - name: Set up database schema
-#        run: bin/rails db:schema:load
-#      # Add or replace test runners here
-#      - name: Run tests
-#        run: bin/rake
-#      - name: Coveralls Finished
-#        uses: coverallsapp/github-action@v2
-#        with:
-#          github-token: ${{ secrets.GITHUB_TOKEN }}
-#          format: simplecov
-#      - name: Test & publish code coverage
-#        uses: paambaati/codeclimate-action@v5.0.0
-#        env:
-#          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
-#        with:
-#          coverageLocations: ${{ github.workspace }}/coverage/coverage.json:simplecov
-#
-#  hadolint:
-#    needs:
-#      - lint
-#      - test
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#      - name: hadolint
-#        uses: hadolint/hadolint-action@v3.1.0
-#        with:
-#          dockerfile: Dockerfile
-#
-#  container:
-#    needs:
-#      - hadolint
-#    runs-on: ubuntu-latest
-#    strategy:
-#      matrix:
-#        platform: [amd64]
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#      - name: Prepare
-#        id: prep
-#        run: |
-#          BUILD_DATE=$(date --rfc-3339=seconds --utc)
-#          echo "build_date=${BUILD_DATE}" >> "$GITHUB_OUTPUT"
-#
-#          VERSION="0.1.0"
-#          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
-#
-#      - name: Login to GHCR
-#        uses: docker/login-action@v2
-#        with:
-#          registry: ghcr.io
-#          username: ${{ github.actor }}
-#          password: ${{ secrets.GITHUB_TOKEN }}
-#
-#      - name: Set up Docker Buildx
-#        id: buildx
-#        uses: docker/setup-buildx-action@v2
-#        with:
-#          install: true
-#          version: latest
-#          driver-opts: image=moby/buildkit:latest
-#
-#      # Creates a local build to run tests on
-#      - name: Build and Load local test-container
-#        uses: docker/build-push-action@v4
-#        env:
-#          BUILD_DATE: ${{ steps.prep.outputs.build_date }}
-#          VERSION: ${{ steps.prep.outputs.version }}
-#        with:
-#          build-args: VERSION=$VERSION
-#          labels: |
-#            org.opencontainers.image.created=$BUILD_DATE
-#          context: .
-#          file: ./Dockerfile
-#          load: true
-#          tags: |
-#            ghcr.io/${{ github.repository_owner }}/dm-workshop:test
-#          cache-from: "type=gha"
-#          cache-to: "type=gha,mode=max"
-#
-#      # Push if not a PR, otherwise just test the build process for all requested platforms
-#      - name: Build and Push
-#        uses: docker/build-push-action@v4
-#        env:
-#          BUILD_DATE: ${{ steps.prep.outputs.build_date }}
-#          VERSION: ${{ steps.prep.outputs.version }}
-#        with:
-#          build-args: VERSION=$VERSION
-#          labels: |
-#            org.opencontainers.image.created=$BUILD_DATE
-#          context: .
-#          platforms: ${{ matrix.platform }}
-#          file: ./Dockerfile
-#          push: true
-#          tags: |
-#            ghcr.io/${{ github.repository_owner }}/dm-workshop:latest
-#            ghcr.io/${{ github.repository_owner }}/dm-workshop:rolling
-#            ghcr.io/${{ github.repository_owner }}/dm-workshop:v${{ steps.prep.outputs.version }}
-#          cache-from: "type=gha"
-#          cache-to: "type=gha,mode=max"
-#
-#  chart:
-#    needs:
-#      - container
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#
-#      - name: Configure Git
-#        run: |
-#          git config user.name "$GITHUB_ACTOR"
-#          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-#
-#      - name: Install Kubernetes tools
-#        uses: yokawasa/action-setup-kube-tools@v0.9.3
-#        with:
-#          setup-tools: |
-#            helmv3
-#            yq
-#          helm: "3.8.0"
-#          yq: "4.16.2"
-#
-#      - name: Run chart-releaser
-#        uses: helm/chart-releaser-action@v1.5.0
-#        with:
-#          charts_dir: charts
-#          config: .cr.yaml
-#        env:
-#          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-#          CR_SKIP_EXISTING: "false"
-#
-#
-#
-#
-#
-#
 #  chart:
 #    needs:
 #      - container
