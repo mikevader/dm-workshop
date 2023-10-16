@@ -367,7 +367,7 @@ jobs:
 
       - name: Run chart-testing (lint)
         id: lint
-        run: ct lint --config .github/ct-lint.yaml --charts dmw
+        run: ct lint --config .github/ct-lint.yaml --charts charts/dmw
 
       - name: Configure Git
         run: |
