@@ -306,7 +306,8 @@ jobs:
           platforms: ${{ steps.prep.outputs.platform }}
           file: ./Dockerfile
           push: ${{ steps.prep.outputs.push }}
-          tags: ${{ steps.prep.outputs.tags }}
+          tags: |
+            ${{ steps.prep.outputs.tags }}
           cache-from: ${{ steps.prep.outputs.cache_from }}
           cache-to: ${{ steps.prep.outputs.cache_to }}
 
