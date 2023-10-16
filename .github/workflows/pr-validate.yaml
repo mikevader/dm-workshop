@@ -275,9 +275,11 @@ jobs:
       # Creates a local build to run tests on
       - name: Build and Load local test-container
         uses: docker/build-push-action@v5
-        if: github.event_name != 'pull_request'
+        if: steps.prep.outputs.goss == 'true'
         with:
-          build-args: VERSION=${{ steps.prep.outputs.version }}
+          build-args: |
+            VERSION=${{ steps.prep.outputs.version }}
+            RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}
           labels: |
             org.opencontainers.image.created=${{ steps.prep.outputs.build_date }}
           context: .
@@ -299,7 +301,6 @@ jobs:
       # Push if not a PR, otherwise just test the build process for all requested platforms
       - name: Build and Push
         uses: docker/build-push-action@v5
-        if: github.event_name == 'pull_request'
         with:
           build-args: |
             VERSION=${{ steps.prep.outputs.version }}
