@@ -6,6 +6,9 @@
 # run tests and linters.
 name: "Pull Request: Validate"
 on:
+  push:
+    branches:
+      - master
   pull_request:
     branches:
       - master
