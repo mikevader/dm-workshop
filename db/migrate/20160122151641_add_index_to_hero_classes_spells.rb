@@ -1,4 +1,4 @@
-class AddIndexToHeroClassesSpells < ActiveRecord::Migration
+class AddIndexToHeroClassesSpells < ActiveRecord::Migration[5.0]
   def up
     add_index :hero_classes_spells, [:spell_id, :hero_class_id], name: "index_hero_classes_spells_on_spell_id_and_hero_class_id", unique: true
   end

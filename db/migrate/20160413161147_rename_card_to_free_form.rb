@@ -1,4 +1,4 @@
-class RenameCardToFreeForm < ActiveRecord::Migration
+class RenameCardToFreeForm < ActiveRecord::Migration[5.0]
   def up
     Card.where(type: nil).find_each do |card|
       card.type = 'FreeForm'
