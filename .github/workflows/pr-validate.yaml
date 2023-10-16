@@ -194,18 +194,18 @@ jobs:
           if [ "${{github.ref}}" == "refs/heads/master" ]; then
             VERSION=$(cat ./VERSION)
             PLATFORM="linux/amd64,linux/arm64"
-            read -r -d '' TAGS << EOM
-              ghcr.io/${{ github.repository_owner }}/dmw:${{ steps.prep.outputs.version }}
-              ghcr.io/${{ github.repository_owner }}/dmw:latest
-            EOM
+            TAG_LABEL="latest"
           else
             VERSION="1.0.0-dev.$(git rev-parse --short HEAD)"
             PLATFORM="linux/amd64"
-            read -r -d '' TAGS << EOM
-              ghcr.io/${{ github.repository_owner }}/dmw:${{ steps.prep.outputs.version }}
-              ghcr.io/${{ github.repository_owner }}/dmw:develop
-            EOM
+            TAG_LABEL="develop"
           fi
+
+          TAGS=$(cat << EOM
+          ghcr.io/${{ github.repository_owner }}/dmw:${VERSION}
+          ghcr.io/${{ github.repository_owner }}/dmw:${TAG_LABEL}
+          EOM
+          )
 
           echo "platform=${PLATFORM}" >> "$GITHUB_OUTPUT"
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
