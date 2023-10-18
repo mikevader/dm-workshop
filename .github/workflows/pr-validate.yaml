@@ -24,6 +24,18 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  pr-metadata:
+    needs:
+      - docker-build
+    uses: mikevader/charts/.github/workflows/pr-metadata.yaml@master
+
+  pre-commit-check:
+    uses: mikevader/charts/.github/workflows/pre-commit-check.yaml@master
+    needs:
+      - pr-metadata
+    with:
+      modifiedFiles: ${{ needs.pr-metadata.outputs.addedOrModifiedFiles }}
+
   reviewdog-gha:
     name: ReviewDog GHA
     runs-on: ubuntu-latest
@@ -175,6 +187,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     needs:
+      - pr-metadata
       - reviewdog-gha
       - reviewdog-rails
       - rails-lint
@@ -241,6 +254,7 @@ jobs:
           platforms: amd64,arm64
 
       - name: Login to GHCR
+        if: ${{ needs.pr-metadata.outputs.isRenovatePR }} == false
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
@@ -300,6 +314,7 @@ jobs:
       # Push if not a PR, otherwise just test the build process for all requested platforms
       - name: Build and Push
         uses: docker/build-push-action@v5
+        if: ${{ needs.pr-metadata.outputs.isRenovatePR }} == false
         with:
           build-args: |
             VERSION=${{ steps.prep.outputs.version }}
@@ -315,19 +330,6 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/dmw:${{ steps.prep.outputs.rolling_label }}
           cache-from: ${{ steps.prep.outputs.cache_from }}
           cache-to: ${{ steps.prep.outputs.cache_to }}
-
-
-  pr-metadata:
-    needs:
-      - docker-build
-    uses: mikevader/charts/.github/workflows/pr-metadata.yaml@master
-
-  pre-commit-check:
-    uses: mikevader/charts/.github/workflows/pre-commit-check.yaml@master
-    needs:
-      - pr-metadata
-    with:
-      modifiedFiles: ${{ needs.pr-metadata.outputs.addedOrModifiedFiles }}
 
 #  charts-changelog:
 #    uses: mikevader/charts/.github/workflows/charts-changelog.yaml@master
@@ -386,32 +388,37 @@ jobs:
           yq: "4.16.2"
 
       - uses: actions/setup-python@v4
+        if: ${{ needs.pr-metadata.outputs.isRenovatePR }} == false
         with:
           python-version: "3.10"
 
       - name: Set up chart-testing
+        if: ${{ needs.pr-metadata.outputs.isRenovatePR }} == false
         uses: helm/chart-testing-action@v2.4.0
 
       - name: Create k3d cluster
+        if: ${{ needs.pr-metadata.outputs.isRenovatePR }} == false
         uses: nolar/setup-k3d-k3s@v1
         with:
           version: v1.26
 
       - name: Remove node taints
+        if: ${{ needs.pr-metadata.outputs.isRenovatePR }} == false
         run: |
           kubectl taint --all=true nodes node.cloudprovider.kubernetes.io/uninitialized- || true
 
       - name: Run chart-testing (install)
+        if: ${{ needs.pr-metadata.outputs.isRenovatePR }} == false
         run: ct install --config .github/ct-install.yaml --charts charts/dmw
 
       - name: Run chart-releaser
+        if: ${{ needs.pr-metadata.outputs.isRenovatePR }} == false
         uses: helm/chart-releaser-action@v1.5.0
         with:
           charts_dir: charts
-          skip_existing: false
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          CR_SKIP_EXISTING: "false"
+          CR_SKIP_EXISTING: "true"
 
 #  chart:
 #    needs:
