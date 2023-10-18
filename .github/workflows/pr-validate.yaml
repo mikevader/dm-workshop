@@ -25,8 +25,6 @@ concurrency:
 
 jobs:
   pr-metadata:
-    needs:
-      - docker-build
     uses: mikevader/charts/.github/workflows/pr-metadata.yaml@master
 
   pre-commit-check:
