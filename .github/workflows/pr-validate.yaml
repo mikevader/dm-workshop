@@ -88,8 +88,8 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          echo "${{ steps.current_version.version }}"
-          echo "${{ steps.current_version.version_tag }}"
+          echo "${{ steps.current_version.outputs.version }}"
+          echo "${{ steps.current_version.outputs.version_tag }}"
           
           
           BUILD_DATE=$(date --rfc-3339=seconds --utc)
@@ -105,9 +105,10 @@ jobs:
       - name: Debug
         id: debug
         run: |
-          echo "${{ steps.prep.versiona }}"
-          echo "${{ steps.prep.versionb }}"
-          echo "${{ steps.prep.build_date }}"
+          echo "${{ steps.prep.outputs.versiona }}"
+          echo "${{ steps.prep.outputs.versionb }}"
+          echo "${{ steps.prep.outputs.build_date }}"
+          echo "${{ steps.current_version.outputs.debug_output }}"
 
   reviewdog-gha:
     name: ReviewDog GHA
