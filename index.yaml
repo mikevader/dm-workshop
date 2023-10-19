@@ -221,4 +221,24 @@ entries:
     urls:
     - https://github.com/mikevader/dm-workshop/releases/download/dmw-1.0.0-dev.251109a/dmw-1.0.0-dev.251109a.tgz
     version: 1.0.0-dev.251109a
-generated: "2023-10-17T08:10:41.005338666Z"
+  - apiVersion: v2
+    appVersion: 1.0.0-dev.138316c
+    created: "2023-10-19T00:11:12.4562705Z"
+    dependencies:
+    - name: common
+      repository: https://mikevader.github.io/charts
+      version: 4.5.20
+    description: 'DMW: Dungeon Master Workshop. A personal manager for monsters, items
+      and spells with adjacent tools.'
+    digest: 41b0956d7c474210a061f21aebe583b21be08bfe79f0cc5a070d0dab89700478
+    keywords:
+    - dnd
+    maintainers:
+    - email: mikevader@users.noreply.github.com
+      name: mikevader
+    name: dmw
+    type: application
+    urls:
+    - https://github.com/mikevader/dm-workshop/releases/download/dmw-1.0.0-dev.138316c/dmw-1.0.0-dev.138316c.tgz
+    version: 1.0.0-dev.138316c
+generated: "2023-10-19T00:11:12.456504102Z"
