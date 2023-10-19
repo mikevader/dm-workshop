@@ -34,6 +34,107 @@ jobs:
     with:
       modifiedFiles: ${{ needs.pr-metadata.outputs.addedOrModifiedFiles }}
 
+  metadata:
+    name: Metadata
+    runs-on: ubuntu-latest
+    needs:
+      - pr-metadata
+    outputs:
+      build_date: ${{ steps.prep.outputs.build_date }}
+      changed: ${{ steps.prep.outputs.changed }}
+      version: ${{ steps.prep.outputs.version }}
+      version_tag: ${{ steps.prep.outputs.version_tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Kubernetes tools
+        uses: yokawasa/action-setup-kube-tools@v0.9.3
+        with:
+          setup-tools: |
+            yq
+          yq: "4.30.7"
+
+      - uses: paulhatch/semantic-version@v5.3.0
+        id: current_version
+        with:
+          # The prefix to use to identify tags
+          #tag_prefix: "v"
+          # A string which, if present in a git commit, indicates that a change represents a
+          # major (breaking) change, supports regular expressions wrapped with '/'
+          major_pattern: '/^(\w+(\(\w+\))?(!)+|.*MAJOR|.*BREAKING CHANGE|.*BREAKING-CHANGE):.*/'
+          # A string which indicates the flags used by the `major_pattern` regular expression. Supported flags: idgs
+          major_regexp_flags: ""
+          # Same as above except indicating a minor change, supports regular expressions wrapped with '/'
+          minor_pattern: '/^(feat|perf|refactor|revert|test|MINOR)?(\(\w+\))?:.*/'
+          # A string which indicates the flags used by the `minor_pattern` regular expression. Supported flags: idgs
+          minor_regexp_flags: ""
+          # A string to determine the format of the version output
+          version_format: "${major}.${minor}.${patch}-prerelease${increment}"
+          # Optional path to check for changes. If any changes are detected in the path the
+          # 'changed' output will true. Enter multiple paths separated by spaces.
+          change_path: '. ":^.github" ":^CODEOWNERS"'
+          # Named version, will be used as suffix for name version tag
+          #namespace: my-service
+          # If this is set to true, *every* commit will be treated as a new version.
+          bump_each_commit: false
+          # If bump_each_commit is also set to true, setting this value will cause the version to increment only if the pattern specified is matched.
+          bump_each_commit_patch_pattern: ""
+          # If true, the body of commits will also be searched for major/minor patterns to determine the version type.
+          search_commit_body: true
+          # The output method used to generate list of users, 'csv' or 'json'.
+          user_format_type: "csv"
+          # Prevents pre-v1.0.0 version from automatically incrementing the major version.
+          # If enabled, when the major version is 0, major releases will be treated as minor and minor as patch. Note that the version_type output is unchanged.
+          enable_prerelease_mode: false
+          # If enabled, diagnostic information will be added to the action output.
+          debug: true
+
+      # Define if tests and push should be run against which versions/platforms
+      # if: github.ref == 'refs/heads/master'
+      - name: Prepare
+        id: prep
+        run: |
+          echo "major: ${{ steps.current_version.outputs.major }}"
+          echo "minor: ${{ steps.current_version.outputs.minor }}"
+          echo "patch: ${{ steps.current_version.outputs.patch }}"
+          echo "increment: ${{ steps.current_version.outputs.increment }}"
+          echo "version_type: ${{ steps.current_version.outputs.version_type }}"
+          echo "version: ${{ steps.current_version.outputs.version }}"
+          echo "version_tag: ${{ steps.current_version.outputs.version_tag }}"
+          echo "changed: ${{ steps.current_version.outputs.changed }}"
+          echo "is_tagged: ${{ steps.current_version.outputs.is_tagged }}"
+          echo "authors: ${{ steps.current_version.outputs.authors }}"
+          echo "current_commit: ${{ steps.current_version.outputs.current_commit }}"
+          echo "previous_commit: ${{ steps.current_version.outputs.previous_commit }}"
+          echo "previous_version: ${{ steps.current_version.outputs.previous_version }}"
+
+          BUILD_DATE=$(date --rfc-3339=seconds --utc)
+          CHANGED="${{ steps.current_version.outputs.changed }}"
+
+          if [ "${{github.ref}}" == "refs/heads/master" ]; then
+            VERSION="${{ steps.current_version.outputs.major }}.${{ steps.current_version.outputs.minor }}.${{ steps.current_version.outputs.patch }}"
+          else
+            VERSION="${{ steps.current_version.outputs.major }}.${{ steps.current_version.outputs.minor }}.${{ steps.current_version.outputs.patch }}-dev.${{ steps.current_version.outputs.increment }}"
+          fi
+
+          VERSION_TAG="${{ steps.current_version.outputs.version_tag }}"
+
+          echo "build_date=${BUILD_DATE}" >> "$GITHUB_OUTPUT"
+          echo "changed=${CHANGED}" >> "$GITHUB_OUTPUT"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "version_tag=${VERSION_TAG}" >> "$GITHUB_OUTPUT"
+
+      - name: Debug
+        id: debug
+        run: |
+          echo "build_date: ${{ steps.prep.outputs.build_date }}"
+          echo "changed: ${{ steps.prep.outputs.changed }}"
+          echo "version: ${{ steps.prep.outputs.version }}"
+          echo "version_tag: ${{ steps.prep.outputs.version_tag }}"
+
   reviewdog-gha:
     name: ReviewDog GHA
     runs-on: ubuntu-latest
@@ -65,24 +166,24 @@ jobs:
         run: |
           yarn install --pure-lockfile
 
-#      - name: Review JavaScript
-#        uses: reviewdog/action-eslint@v1
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          reporter: github-pr-review
-#          eslint_flags: "app/javascript/"
+      #      - name: Review JavaScript
+      #        uses: reviewdog/action-eslint@v1
+      #        with:
+      #          github_token: ${{ secrets.GITHUB_TOKEN }}
+      #          reporter: github-pr-review
+      #          eslint_flags: "app/javascript/"
       - name: hadolint
         uses: reviewdog/action-hadolint@v1.36.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
           filter_mode: diff_context
-#      - name: stylelint
-#        uses: reviewdog/action-stylelint@v1
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          reporter: github-pr-review
-#          stylelint_input: '**/*.css'
+      #      - name: stylelint
+      #        uses: reviewdog/action-stylelint@v1
+      #        with:
+      #          github_token: ${{ secrets.GITHUB_TOKEN }}
+      #          reporter: github-pr-review
+      #          stylelint_input: '**/*.css'
       - name: brakeman
         uses: reviewdog/action-brakeman@v2
         with:
@@ -98,6 +199,7 @@ jobs:
           reporter: github-pr-review
 
   rails-lint:
+    name: Lint Rails Application
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -130,7 +232,10 @@ jobs:
           bin/brakeman -q -w2
 
   rails-test:
+    name: Test Rails Application
     runs-on: ubuntu-latest
+    needs:
+      - rails-lint
     services:
       postgres:
         image: postgres:11-alpine
@@ -182,47 +287,38 @@ jobs:
           coverageLocations: ${{ github.workspace }}/coverage/coverage.json:simplecov
 
   docker-build:
-    name: Build
+    name: Build Docker Image
     runs-on: ubuntu-latest
     needs:
       - pr-metadata
+      - metadata
       - reviewdog-gha
       - reviewdog-rails
       - rails-lint
       - rails-test
-    outputs:
-      build_date: ${{ steps.prep.outputs.build_date }}
-      version: ${{ steps.prep.outputs.version }}
+    if: needs.metadata.outputs.changed == 'true'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Define if tests and push should be run against which versions/platforms
-      # if: github.ref == 'refs/heads/master'
       - name: Prepare
         id: prep
         run: |
-          BUILD_DATE=$(date --rfc-3339=seconds --utc)
-          echo "build_date=${BUILD_DATE}" >> "$GITHUB_OUTPUT"
-          
           if [ "${{github.ref}}" == "refs/heads/master" ]; then
-            VERSION=$(cat ./VERSION)
             PLATFORM="linux/amd64,linux/arm64"
             ROLLING_LABEL="latest"
           else
-            VERSION="1.0.0-dev.$(git rev-parse --short HEAD)"
             PLATFORM="linux/amd64"
             ROLLING_LABEL="develop"
           fi
 
           TAGS=$(cat << EOM
-          ghcr.io/${{ github.repository_owner }}/dmw:${VERSION}
+          ghcr.io/${{ github.repository_owner }}/dmw:${{ needs.metadata.outputs.version }}
           ghcr.io/${{ github.repository_owner }}/dmw:${ROLLING_LABEL}
           EOM
           )
 
           echo "platform=${PLATFORM}" >> "$GITHUB_OUTPUT"
-          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
           echo "rolling_label=${ROLLING_LABEL}" >> "$GITHUB_OUTPUT"
           echo "tags<<EOF" >> $GITHUB_OUTPUT
           echo $TAGS >> $GITHUB_OUTPUT
@@ -236,15 +332,15 @@ jobs:
           echo "push=true" >> "$GITHUB_OUTPUT"
           echo "cache_from=type=gha" >> "$GITHUB_OUTPUT"
           echo "cache_to=type=gha,mode=max" >> "$GITHUB_OUTPUT"
-#          if [ "${{github.event_name}}" == "pull_request" ]; then
-#            echo "push=false" >> "$GITHUB_OUTPUT"
-#            echo "cache_from=type=gha" >> "$GITHUB_OUTPUT"
-#            echo "cache_to=" >> "$GITHUB_OUTPUT"
-#          else
-#            echo "push=true" >> "$GITHUB_OUTPUT"
-#            echo "cache_from=type=gha" >> "$GITHUB_OUTPUT"
-#            echo "cache_to=type=gha,mode=max" >> "$GITHUB_OUTPUT"
-#          fi
+      #          if [ "${{github.event_name}}" == "pull_request" ]; then
+      #            echo "push=false" >> "$GITHUB_OUTPUT"
+      #            echo "cache_from=type=gha" >> "$GITHUB_OUTPUT"
+      #            echo "cache_to=" >> "$GITHUB_OUTPUT"
+      #          else
+      #            echo "push=true" >> "$GITHUB_OUTPUT"
+      #            echo "cache_from=type=gha" >> "$GITHUB_OUTPUT"
+      #            echo "cache_to=type=gha,mode=max" >> "$GITHUB_OUTPUT"
+      #          fi
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -252,7 +348,7 @@ jobs:
           platforms: amd64,arm64
 
       - name: Login to GHCR
-        if: ${{ needs.pr-metadata.outputs.isRenovatePR }} == false
+        if: needs.pr-metadata.outputs.isRenovatePR == false
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
@@ -289,10 +385,10 @@ jobs:
         if: steps.prep.outputs.goss == 'true'
         with:
           build-args: |
-            VERSION=${{ steps.prep.outputs.version }}
+            VERSION=${{ needs.metadata.outputs.version }}
             RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}
           labels: |
-            org.opencontainers.image.created=${{ steps.prep.outputs.build_date }}
+            org.opencontainers.image.created=${{ needs.metadata.outputs.build_date }}
           context: .
           file: ./Dockerfile
           load: true
@@ -312,44 +408,46 @@ jobs:
       # Push if not a PR, otherwise just test the build process for all requested platforms
       - name: Build and Push
         uses: docker/build-push-action@v5
-        if: ${{ needs.pr-metadata.outputs.isRenovatePR }} == false
+        if: needs.pr-metadata.outputs.isRenovatePR == false
         with:
           build-args: |
-            VERSION=${{ steps.prep.outputs.version }}
+            VERSION=${{ needs.metadata.outputs.version }}
             RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}
           labels: |
-            org.opencontainers.image.created=${{ steps.prep.outputs.build_date }}
+            org.opencontainers.image.created=${{ needs.metadata.outputs.build_date }}
           context: .
           platforms: ${{ steps.prep.outputs.platform }}
           file: ./Dockerfile
           push: ${{ steps.prep.outputs.push }}
           tags: |
-            ghcr.io/${{ github.repository_owner }}/dmw:${{ steps.prep.outputs.version }}
+            ghcr.io/${{ github.repository_owner }}/dmw:${{ needs.metadata.outputs.version }}
             ghcr.io/${{ github.repository_owner }}/dmw:${{ steps.prep.outputs.rolling_label }}
           cache-from: ${{ steps.prep.outputs.cache_from }}
           cache-to: ${{ steps.prep.outputs.cache_to }}
 
-#  charts-changelog:
-#    uses: mikevader/charts/.github/workflows/charts-changelog.yaml@master
-#    needs:
-#      - pr-metadata
-#      - pre-commit-check
-#    with:
-#      isRenovatePR: ${{ needs.pr-metadata.outputs.isRenovatePR }}
-#      modifiedCharts: ${{ needs.pr-metadata.outputs.addedOrModifiedCharts }}
+  #  charts-changelog:
+  #    uses: mikevader/charts/.github/workflows/charts-changelog.yaml@master
+  #    needs:
+  #      - pr-metadata
+  #      - pre-commit-check
+  #    with:
+  #      isRenovatePR: ${{ needs.pr-metadata.outputs.isRenovatePR }}
+  #      modifiedCharts: ${{ needs.pr-metadata.outputs.addedOrModifiedCharts }}
 
 
   charts-prepare:
     runs-on: ubuntu-latest
     needs:
+      - metadata
       - docker-build
       - pre-commit-check
+    if: needs.metadata.outputs.changed == 'true'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Prepare
         env:
-          VERSION: ${{ needs.docker-build.outputs.version }}
+          VERSION: ${{ needs.metadata.outputs.version }}
         run: |
           sed -i "s/^version:.*$/version: $VERSION/" charts/dmw/Chart.yaml
           sed -i "s/^appVersion:.*$/appVersion: $VERSION/" charts/dmw/Chart.yaml
@@ -386,37 +484,43 @@ jobs:
           yq: "4.16.2"
 
       - uses: actions/setup-python@v4
-        if: ${{ needs.pr-metadata.outputs.isRenovatePR }} == false
+        if: needs.pr-metadata.outputs.isRenovatePR == false
         with:
           python-version: "3.10"
 
       - name: Set up chart-testing
-        if: ${{ needs.pr-metadata.outputs.isRenovatePR }} == false
+        if: needs.pr-metadata.outputs.isRenovatePR == false
         uses: helm/chart-testing-action@v2.4.0
 
       - name: Create k3d cluster
-        if: ${{ needs.pr-metadata.outputs.isRenovatePR }} == false
+        if: needs.pr-metadata.outputs.isRenovatePR == false
         uses: nolar/setup-k3d-k3s@v1
         with:
           version: v1.26
 
       - name: Remove node taints
-        if: ${{ needs.pr-metadata.outputs.isRenovatePR }} == false
+        if: needs.pr-metadata.outputs.isRenovatePR == false
         run: |
           kubectl taint --all=true nodes node.cloudprovider.kubernetes.io/uninitialized- || true
 
       - name: Run chart-testing (install)
-        if: ${{ needs.pr-metadata.outputs.isRenovatePR }} == false
+        if: needs.pr-metadata.outputs.isRenovatePR == false
         run: ct install --config .github/ct-install.yaml --charts charts/dmw
 
       - name: Run chart-releaser
-        if: ${{ needs.pr-metadata.outputs.isRenovatePR }} == false
+        if: needs.pr-metadata.outputs.isRenovatePR == false
         uses: helm/chart-releaser-action@v1.5.0
         with:
           charts_dir: charts
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           CR_SKIP_EXISTING: "true"
+
+      - name: Tag released version
+        if: github.ref == 'refs/heads/master'
+        uses: rickstaa/action-create-tag@v1
+        with:
+          tag: ${{ needs.metadata.outputs.version_tag }}
 
 #  chart:
 #    needs:
