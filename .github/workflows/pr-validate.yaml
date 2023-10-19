@@ -114,7 +114,7 @@ jobs:
           echo "build_date=${BUILD_DATE}" >> "$GITHUB_OUTPUT"
           
           VERSION="${{ steps.current_version.outputs.major }}.${{ steps.current_version.outputs.minor }}.${{ steps.current_version.outputs.patch }}"
-          PRERELEASE_VERSION="${{ steps.version.current_version.major }}.${{ steps.version.current_version.minor }}.${{ steps.version.current_version.patch }}-dev.${{ steps.version.current_version.increment }}"
+          PRERELEASE_VERSION="${{ steps.current_version.outputs.major }}.${{ steps.current_version.outputs.minor }}.${{ steps.current_version.outputs.patch }}-dev.${{ steps.current_version.outputs.increment }}"
           # PRERELEASE_VERSION="1.0.0-dev.$(git rev-parse --short HEAD)"
 
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
