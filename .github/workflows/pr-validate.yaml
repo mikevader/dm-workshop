@@ -88,14 +88,25 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          echo "${{ steps.current_version.outputs.version }}"
-          echo "${{ steps.current_version.outputs.version_tag }}"
+          echo "major: ${{ steps.current_version.outputs.major }}"
+          echo "minor: ${{ steps.current_version.outputs.minor }}"
+          echo "patch: ${{ steps.current_version.outputs.patch }}"
+          echo "increment: ${{ steps.current_version.outputs.increment }}"
+          echo "version_type: ${{ steps.current_version.outputs.version_type }}"
+          echo "version: ${{ steps.current_version.outputs.version }}"
+          echo "version_tag: ${{ steps.current_version.outputs.version_tag }}"
+          echo "changed: ${{ steps.current_version.outputs.changed }}"
+          echo "is_tagged: ${{ steps.current_version.outputs.is_tagged }}"
+          echo "authors: ${{ steps.current_version.outputs.authors }}"
+          echo "current_commit: ${{ steps.current_version.outputs.current_commit }}"
+          echo "previous_commit: ${{ steps.current_version.outputs.previous_commit }}"
+          echo "previous_version: ${{ steps.current_version.outputs.previous_version }}"
           
           
           BUILD_DATE=$(date --rfc-3339=seconds --utc)
           echo "build_date=${BUILD_DATE}" >> "$GITHUB_OUTPUT"
           
-          VERSIONA="${{ steps.current_version.version }}"
+          VERSIONA="${{ steps.current_version.output.version }}"
           VERSIONB="1.0.0-dev.$(git rev-parse --short HEAD)"
 
           echo "versiona=${VERSIONA}" >> "$GITHUB_OUTPUT"
