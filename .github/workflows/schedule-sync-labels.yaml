@@ -1,0 +1,25 @@
+---
+name: "Schedule: Sync labels"
+
+on: # yamllint disable-line rule:truthy
+  workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *"
+
+jobs:
+  labels:
+    name: Sync Labels
+    runs-on: ubuntu-latest
+    if: github.repository == 'mikevader/dm-workshop'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sync Labels
+        uses: EndBug/label-sync@v2
+        with:
+          config-file: .github/labels.yaml
+          token: "${{ secrets.GITHUB_TOKEN }}"
+          delete-other-labels: true
