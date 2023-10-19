@@ -74,7 +74,7 @@ gem 'rails_admin', '~> 3.1.2'
 gem 'json', '~> 2.6.3'
 
 # Tagging library for used on any kind of object
-gem 'acts-as-taggable-on', '~> 9.0.1'
+gem 'acts-as-taggable-on', '~> 10.0.0'
 # Ordering library to order traits, actions, etc on monster and other cards
 gem 'acts_as_list', '~> 1.1.0'
 # Google re-captcha for sign-up process
