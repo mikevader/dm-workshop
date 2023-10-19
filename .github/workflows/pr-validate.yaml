@@ -135,6 +135,7 @@ jobs:
           echo "version: ${{ steps.prep.outputs.version }}"
           echo "version_tag: ${{ steps.prep.outputs.version_tag }}"
           echo "is renovate: ${{ needs.pr-metadata.outputs.isRenovatePR }}"
+          echo "should do: ${{ needs.pr-metadata.outputs.isRenovatePR == false }}"
 
   reviewdog-gha:
     name: ReviewDog GHA
@@ -305,6 +306,9 @@ jobs:
       - name: Prepare
         id: prep
         run: |
+          echo "is renovate: ${{ needs.pr-metadata.outputs.isRenovatePR }}"
+          echo "should do: ${{ needs.pr-metadata.outputs.isRenovatePR == false }}"
+          echo "should do2: ${{ needs.pr-metadata.outputs.isRenovatePR == 'false' }}"
           if [ "${{github.ref}}" == "refs/heads/master" ]; then
             PLATFORM="linux/amd64,linux/arm64"
             ROLLING_LABEL="latest"
