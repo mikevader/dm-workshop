@@ -113,18 +113,19 @@ jobs:
           BUILD_DATE=$(date --rfc-3339=seconds --utc)
           echo "build_date=${BUILD_DATE}" >> "$GITHUB_OUTPUT"
           
-          VERSIONA="${{ steps.current_version.output.version }}"
-          VERSIONB="1.0.0-dev.$(git rev-parse --short HEAD)"
+          VERSION="${{ steps.current_version.outputs.major }}.${{ steps.current_version.outputs.minor }}.${{ steps.current_version.outputs.patch }}"
+          PRERELEASE_VERSION="${{ steps.version.current_version.major }}.${{ steps.version.current_version.minor }}.${{ steps.version.current_version.patch }}-dev.${{ steps.version.current_version.increment }}"
+          # PRERELEASE_VERSION="1.0.0-dev.$(git rev-parse --short HEAD)"
 
-          echo "versiona=${VERSIONA}" >> "$GITHUB_OUTPUT"
-          echo "versionb=${VERSIONB}" >> "$GITHUB_OUTPUT"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "prerelease_version=${PRERELEASE_VERSION}" >> "$GITHUB_OUTPUT"
 
 
       - name: Debug
         id: debug
         run: |
-          echo "${{ steps.prep.outputs.versiona }}"
-          echo "${{ steps.prep.outputs.versionb }}"
+          echo "${{ steps.prep.outputs.version }}"
+          echo "${{ steps.prep.outputs.prerelease_version }}"
           echo "${{ steps.prep.outputs.build_date }}"
           echo "${{ steps.current_version.outputs.debug_output }}" | yq -P -o json
 
