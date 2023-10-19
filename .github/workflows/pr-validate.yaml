@@ -134,6 +134,7 @@ jobs:
           echo "changed: ${{ steps.prep.outputs.changed }}"
           echo "version: ${{ steps.prep.outputs.version }}"
           echo "version_tag: ${{ steps.prep.outputs.version_tag }}"
+          echo "is renovate: ${{ needs.pr-metadata.outputs.isRenovatePR }}"
 
   reviewdog-gha:
     name: ReviewDog GHA
@@ -519,7 +520,7 @@ jobs:
           CR_SKIP_EXISTING: "true"
 
       - name: Tag released version
-        if: github.ref == 'refs/heads/master'
+        if: needs.pr-metadata.outputs.isRenovatePR == false && github.ref == 'refs/heads/master'
         uses: rickstaa/action-create-tag@v1
         with:
           tag: ${{ needs.metadata.outputs.version_tag }}
