@@ -521,7 +521,7 @@ jobs:
           CR_SKIP_EXISTING: "true"
 
       - name: Tag released version
-        if: needs.pr-metadata.outputs.isRenovatePR == 'false && github.ref == 'refs/heads/master''
+        if: needs.pr-metadata.outputs.isRenovatePR == 'false' && github.ref == 'refs/heads/master'
         uses: rickstaa/action-create-tag@v1
         with:
           tag: ${{ needs.metadata.outputs.version_tag }}
