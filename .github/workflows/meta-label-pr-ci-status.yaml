@@ -88,7 +88,7 @@ jobs:
           issue-number: ${{ steps.pr_num_reader.outputs.content }}
           prefix: lint
           job-status: |-
-            ${{ fromJSON(steps.get-workflow-jobs.outputs.result).lint-rails-application-run-security-checks || 'skipped' }}
+            ${{ fromJSON(steps.get-workflow-jobs.outputs.result).lint-rails-application || 'skipped' }}
           remove-on-skipped: true
 
       - name: Label test status
@@ -98,7 +98,7 @@ jobs:
           issue-number: ${{ steps.pr_num_reader.outputs.content }}
           prefix: test
           job-status: |-
-            ${{ fromJSON(steps.get-workflow-jobs.outputs.result).test-rails-application-test-publish-code-coverage || 'skipped' }}
+            ${{ fromJSON(steps.get-workflow-jobs.outputs.result).test-rails-application || 'skipped' }}
           remove-on-skipped: true
 
       - name: Label container status
@@ -108,7 +108,7 @@ jobs:
           issue-number: ${{ steps.pr_num_reader.outputs.content }}
           prefix: container
           job-status: |-
-            ${{ fromJSON(steps.get-workflow-jobs.outputs.result).build-docker-image-post-build-and-push || 'skipped' }}
+            ${{ fromJSON(steps.get-workflow-jobs.outputs.result).build-docker-image || 'skipped' }}
           remove-on-skipped: true
 
       - name: Label chart install status
@@ -118,5 +118,5 @@ jobs:
           issue-number: ${{ steps.pr_num_reader.outputs.content }}
           prefix: chart
           job-status: |-
-            ${{ fromJSON(steps.get-workflow-jobs.outputs.result).build-helm-chart-run-chart-releaser || 'skipped' }}
+            ${{ fromJSON(steps.get-workflow-jobs.outputs.result).build-helm-chart || 'skipped' }}
           remove-on-skipped: true
