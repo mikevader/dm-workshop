@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "noreply@dnd-cards.com"
+  default from: ENV['SMTP_DEFAULT_FROM']
   layout 'mailer'
 end
