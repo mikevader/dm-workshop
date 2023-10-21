@@ -4,6 +4,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
 
   setup do
     ActionMailer::Base.deliveries.clear
+    ENV['SMTP_DEFAULT_FROM'] = "noreply@example.com"
   end
   
   test "invalid signup information" do
@@ -22,7 +23,6 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   end
   
   test "valid signup information with account activation" do
-    ENV['SMTP_DEFAULT_FROM'] = "noreply@example.com"
     get signup_path
     assert_difference 'User.count', 1 do
       post users_path, params: {

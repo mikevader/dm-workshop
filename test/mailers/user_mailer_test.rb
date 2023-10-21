@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class UserMailerTest < ActionMailer::TestCase
+  setup do
+    ENV['SMTP_DEFAULT_FROM'] = "noreply@example.com"
+  end
+
   test "account_activation" do
     user = users(:michael)
     user.activation_token = User.new_token

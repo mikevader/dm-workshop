@@ -3,11 +3,11 @@ require 'test_helper'
 class PasswordResetsTest < ActionDispatch::IntegrationTest
   setup do
     ActionMailer::Base.deliveries.clear
+    ENV['SMTP_DEFAULT_FROM'] = "noreply@example.com"
     @user = users(:michael)
   end
 
   test "password resets" do
-    ENV['SMTP_DEFAULT_FROM'] = "noreply@example.com"
     get new_password_reset_path
     assert_template 'password_resets/new'
     # Invalid email
