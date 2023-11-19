@@ -42,3 +42,4 @@ yarn-debug.log*
 /coverage/
 
 /config/master.key
+sendgrid.env
