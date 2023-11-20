@@ -150,3 +150,7 @@ group :production do
   gem 'rails_12factor',         '0.0.3'
   gem 'rails_stdout_logging',   '0.0.5'
 end
+
+gem "opentelemetry-sdk", "~> 1.3"
+gem "opentelemetry-instrumentation-all", "~> 0.51.1"
+gem "opentelemetry-exporter-otlp", "~> 0.26.1"
