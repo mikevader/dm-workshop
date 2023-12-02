@@ -269,7 +269,7 @@
   integrity sha512-bfZ0cQ1uZs2PqpulNL5j/3w+GDhP36k1K5c38QdQg+Swy51jFZWWeIkteNsufkQxp986wnqRRsb/bHbY1WQ7TA==
 
 "@fortawesome/fontawesome-free@>=5.15.0 <7.0.0", "@fortawesome/fontawesome-free@^6.0.0":
-  version "6.5.0"
+  version "6.5.1"
   dependencies:
     "@hotwired/turbo" "^7.3.0"
     "@rails/actioncable" "^7.0"
