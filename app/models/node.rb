@@ -82,11 +82,11 @@ class Node
   end
 
   def card_fits_portrait?(card)
-    (card.width <= width && card.height <= height)
+    card.width <= width && card.height <= height
   end
 
   def card_fits_landscape?(card)
-    (card.height <= width && card.width <= height)
+    card.height <= width && card.width <= height
   end
 
   def to_a
@@ -112,7 +112,7 @@ class Node
     bx2 = node.x + node.width
     by2 = node.y + node.height
 
-    return (ax1 < bx2 && ax2 > bx1 && ay1 < by2 && ay2 > by1)
+    return ax1 < bx2 && ax2 > bx1 && ay1 < by2 && ay2 > by1
   end
 
   def inside?(page)
