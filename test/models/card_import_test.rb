@@ -57,7 +57,7 @@ class CardImportTest < ActiveSupport::TestCase
         description: 'Obgam is a l0th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 16, +7 to hit with s pell attacks). Obgam has the following druid spells prepared:<br> Cantrips (at will): Shillelagh, Thorn Whip, Frostbite<br> lst level (4 slots): Entangle, Cure Wounds, Healing Word, Faerie Fire, Absorb Elements<br> 2nd level (3 slots): Flame Blade, Hold Person, Flaming Sphere<br> 3rd level (3 slots): Meld into Stone, Protection from Energy, Erupting Earth<br> 4th level (3 slots): Blight, Ice Storm, Stoneskin<br> 5th level (2 slots): Conjure Elemental<br> 6th level (1 slot): Bones of the Earth'
     }
 
-    traits.each do |_key, trait|
+    traits.each_value do |trait|
       assert obgam.traits.find_by_title(trait[:name]), "Could not find trait '#{trait[:name]}'"
       assert_equal trait[:description], obgam.traits.find_by_title(trait[:name]).description
     end
