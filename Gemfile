@@ -71,7 +71,7 @@ gem 'net-ssh', '~> 7.2.0'
 # Create general purpose data admin interface
 gem 'remotipart', '~> 1.3'
 gem 'rails_admin', '~> 3.1.2'
-gem 'json', '~> 2.7.0'
+gem 'json', '~> 2.6.3'
 
 # Tagging library for used on any kind of object
 gem 'acts-as-taggable-on', '~> 10.0.0'
