@@ -22,6 +22,15 @@ The final version is accessible under:
 (https://dmw.herokuapp.com).
 
 
+## Local development
+
+```bash
+bundle install
+rails s 
+```
+
+
+
 ### In the final first version the idea is to be able to: ###
 
 * inscribe spells, which list all relevant attributes including required classes :ballot_box_with_check:
