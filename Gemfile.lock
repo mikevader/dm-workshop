@@ -147,7 +147,7 @@ GEM
     eventmachine (1.2.7)
     excon (0.104.0)
     execjs (2.9.1)
-    faker (3.2.2)
+    faker (3.2.3)
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     fog-aws (3.21.0)
