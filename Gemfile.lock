@@ -300,7 +300,7 @@ GEM
     parser (3.3.0.5)
       ast (~> 2.4.1)
       racc
-    pg (1.5.4)
+    pg (1.5.6)
     polyglot (0.3.5)
     pry (0.14.2)
       coderay (~> 1.1)
@@ -510,7 +510,7 @@ DEPENDENCIES
   net-ssh (~> 7.2.0)
   nokogiri (~> 1.15)
   nokogiri-diff (~> 0.2)
-  pg (= 1.5.4)
+  pg (= 1.5.6)
   puma (~> 6.4.0)
   pundit (~> 2.3.1)
   rails (~> 7.1.0)
