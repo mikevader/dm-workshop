@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 ruby '3.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.1.0'
+gem 'rails', '~> 7.1.3'
 # Use bootstrap with sass
 gem 'bootstrap-sass', '~> 3.4.1'
 # Use SCSS for stylesheets
@@ -18,7 +18,7 @@ gem 'coffee-rails', '~> 5.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~> 4.6.0'
-gem 'jquery-ui-rails', '~> 6.0.1'
+gem 'jquery-ui-rails', '~> 7.0.0'
 
 # Simple API to perform paginated queries
 gem 'will_paginate', '~> 3.3.1'
