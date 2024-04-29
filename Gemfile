@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 ruby '3.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.1.0'
+gem 'rails', '~> 7.1.3'
 # Use bootstrap with sass
 gem 'bootstrap-sass', '~> 3.4.1'
 # Use SCSS for stylesheets
@@ -18,7 +18,7 @@ gem 'coffee-rails', '~> 5.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~> 4.6.0'
-gem 'jquery-ui-rails', '~> 6.0.1'
+gem 'jquery-ui-rails', '~> 7.0.0'
 
 # Simple API to perform paginated queries
 gem 'will_paginate', '~> 3.3.1'
@@ -109,10 +109,10 @@ end
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
-  gem 'sqlite3', '>= 1.3'
+  gem 'sqlite3', '~> 1.4'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', '>= 9.0'
+  gem 'debug', '~> 1.9', platforms: %i[mri mingw x64_mingw]
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring', '>= 2.0'
