@@ -57,7 +57,7 @@ jobs:
             yq
           yq: "4.30.7"
 
-      - uses: paulhatch/semantic-version@v5.3.0
+      - uses: paulhatch/semantic-version@v5.4.0
         id: current_version
         with:
           # The prefix to use to identify tags
