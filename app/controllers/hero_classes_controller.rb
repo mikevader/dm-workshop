@@ -3,12 +3,12 @@ class HeroClassesController < ApplicationController
   before_action :admin_user, only: [:edit, :update, :destroy]
 
   def index
-    @hero_classes = HeroClass.paginate(page: params[:page]).order('name')
+    @pagy, @hero_classes = pagy(HeroClass.all) # .order('name')
   end
 
   def show
     @hero_class = HeroClass.find(params[:id])
-    @cards = @hero_class.spells.paginate(page: params[:page])
+    @pagy, @cards = pagy(@hero_class.spells)
   end
 
   def new

@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class MonstersInterfaceTest < ActionDispatch::IntegrationTest
+  include Pagy::Backend
 
   setup do
     @user = users(:michael)
@@ -53,7 +54,8 @@ class MonstersInterfaceTest < ActionDispatch::IntegrationTest
     get monsters_path
     # Delete a post.
     assert_select 'a[aria-label=?]', 'delete'
-    first_item = Monster.paginate(page: 1).first
+    _, items = pagy(Monster.all, page: 1)
+    first_item = items.first
     assert_difference 'Monster.count', -1 do
       delete monster_path(first_item)
     end

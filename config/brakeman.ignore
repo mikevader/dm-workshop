@@ -1,0 +1,63 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Dynamic Render Path",
+      "warning_code": 15,
+      "fingerprint": "8233a56b14999e7ebfba1581becdf8c9efa13540beaec2dd14b5ec4f4837ab13",
+      "check_name": "Render",
+      "message": "Render path contains parameter value",
+      "file": "app/views/cards/show.html.erb",
+      "line": 10,
+      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
+      "code": "render(action => card_model.find(params[:id]), {})",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "CardsController",
+          "method": "show",
+          "line": 92,
+          "file": "app/controllers/cards_controller.rb",
+          "rendered": {
+            "name": "cards/show",
+            "file": "app/views/cards/show.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "cards/show"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "HTTP Verb Confusion",
+      "warning_code": 118,
+      "fingerprint": "95e4df712d56c88643c67d4c37524610855f1409f5159ca6cad07fcdc08d20ad",
+      "check_name": "VerbConfusion",
+      "message": "Potential HTTP verb confusion. `HEAD` is routed like `GET` but `request.get?` will return `false`",
+      "file": "app/helpers/sessions_helper.rb",
+      "line": 78,
+      "link": "https://brakemanscanner.org/docs/warning_types/http_verb_confusion/",
+      "code": "session[:forwarding_url] = request.url if request.get?",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "SessionsHelper",
+        "method": "store_location"
+      },
+      "user_input": "request.get?",
+      "confidence": "Weak",
+      "cwe_id": [
+        352
+      ],
+      "note": ""
+    }
+  ],
+  "updated": "2024-04-29 13:38:22 +0200",
+  "brakeman_version": "6.1.1"
+}

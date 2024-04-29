@@ -1,6 +1,7 @@
 require 'redcarpet'
 
 module ApplicationHelper
+  include Pagy::Frontend
 
   def markdown(text)
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML,

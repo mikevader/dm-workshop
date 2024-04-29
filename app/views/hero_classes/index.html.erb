@@ -4,10 +4,10 @@
 
 <%= link_to "New", new_hero_class_path, class: 'btn btn-default', role: 'button' %>
 
-<%= will_paginate %>
+<%== pagy_bootstrap_nav @pagy %>
 
 <ul class="hero_classes">
   <%= render @hero_classes %>
 </ul>
 
-<%= will_paginate %>
+<%== pagy_bootstrap_nav @pagy %>
