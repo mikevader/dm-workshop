@@ -3,7 +3,7 @@ class HeroClassesController < ApplicationController
   before_action :admin_user, only: [:edit, :update, :destroy]
 
   def index
-    @pagy, @hero_classes = pagy(HeroClass.all) #.order('name')
+    @pagy, @hero_classes = pagy(HeroClass.all) # .order('name')
   end
 
   def show
