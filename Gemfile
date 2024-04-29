@@ -109,10 +109,10 @@ end
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
-  gem 'sqlite3', '>= 1.3'
+  gem 'sqlite3', '~> 1.4'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', '>= 9.0'
+  gem 'debug', '~> 1.9', platforms: %i[mri mingw x64_mingw]
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring', '>= 2.0'
