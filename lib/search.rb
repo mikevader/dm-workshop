@@ -18,7 +18,7 @@ module Search
         else
           result, normalized = search_entities(search_string)
         end
-      rescue Parser::ParseSearchError => e
+      rescue Grammar::Parser::ParseSearchError => e
         error = e.parse_error
       end
 
@@ -29,7 +29,7 @@ module Search
     def search_entities(search)
       if search
         builder = @entity_class.new_search_builder
-        search = Parser.new.parse(search, builder)
+        search = Grammar::Parser::Parser.new.parse(search, builder)
 
         query = @entity_class
         builder.joins.each do |join|

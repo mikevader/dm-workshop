@@ -3,7 +3,7 @@ class Card < ApplicationRecord
 
   has_and_belongs_to_many :hero_classes, join_table: :cards_hero_classes, foreign_key: :card_id, association_foreign_key: :hero_class_id
   has_and_belongs_to_many :spellbooks, join_table: :spellbooks_spells, foreign_key: :spell_id, association_foreign_key: :spellbook_id
-  serialize :badges
+  serialize :badges, coder: JSON
   belongs_to :user
   belongs_to :source, optional: true
 
@@ -46,7 +46,7 @@ class Card < ApplicationRecord
   def self.search(search)
     if search
       builder = new_builder
-      search = Parser.new.parse(search, builder)
+      search = Grammar::Parser::Parser.new.parse(search, builder)
 
       query = self
       builder.joins.each do |join|
@@ -86,7 +86,7 @@ class Card < ApplicationRecord
   end
 
   def self.new_search_builder
-    builder = SearchBuilder.new do
+    builder = Grammar::SearchBuilder::SearchBuilder.new do
       # General
       configure_field 'name', 'cards.name'
       configure_field 'type', 'cards.type'

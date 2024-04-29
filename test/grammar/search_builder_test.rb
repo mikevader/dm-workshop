@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SearchBuilderTest < ActiveSupport::TestCase
   setup do
-    @builder = SearchBuilder.new do
+    @builder = Grammar::SearchBuilder::SearchBuilder.new do
       configure_field 'name'
       configure_field 'level'
       configure_field 'class'

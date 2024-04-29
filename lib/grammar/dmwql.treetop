@@ -1,28 +1,30 @@
 
 grammar Dmwql
+  include Grammar::Dmwql
+
   rule search
-    first:expression second:( s union:union_keyword s next:expression )* sorting:( S orderBy:orderBy )? <Search>
-    / string:string_with_spaces sorting:( S orderBy:orderBy )? <StringSearch>
+    first:expression second:( s union:union_keyword s next:expression )* sorting:( S orderBy:orderBy )? <Grammar::Dmwql::Search>
+    / string:string_with_spaces sorting:( S orderBy:orderBy )? <Grammar::Dmwql::StringSearch>
   end
 
   rule expression
-    '(' s expression:search s ')' <Expression>
-    / query:query <Expression>
+    '(' s expression:search s ')' <Grammar::Dmwql::Expression>
+    / query:query <Grammar::Dmwql::Expression>
   end
 
   rule query
-    comp:query_comparison <Query>
-    / group:query_group <Query>
+    comp:query_comparison <Grammar::Dmwql::Query>
+    / group:query_group <Grammar::Dmwql::Query>
   end
   
   rule query_comparison
-    id:id s op:comp_op s value:number <NumberComparison>
-    / id:id s op:comp_op s value:boolean <BooleanComparison>
-    / id:id s op:comp_op_string s value:string <StringComparison>
+    id:id s op:comp_op s value:number <Grammar::Dmwql::NumberComparison>
+    / id:id s op:comp_op s value:boolean <Grammar::Dmwql::BooleanComparison>
+    / id:id s op:comp_op_string s value:string <Grammar::Dmwql::StringComparison>
   end
 
   rule query_group
-    id S 'IN'i S '(' s literal second:(s ',' s literal )* s ')' <Group>
+    id S 'IN'i S '(' s literal second:(s ',' s literal )* s ')' <Grammar::Dmwql::Group>
   end
   
   rule union_keyword
@@ -36,7 +38,7 @@ grammar Dmwql
   end
 
   rule orderBy
-    'ORDER BY'i S first:order others:(s ',' s order)* <OrderBy>
+    'ORDER BY'i S first:order others:(s ',' s order)* <Grammar::Dmwql::OrderBy>
   end
 
   rule order

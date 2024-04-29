@@ -3,7 +3,7 @@ require 'test_helper'
 class ParserTest < ActiveSupport::TestCase
   
   setup do
-    @builder = SearchBuilder.new
+    @builder = Grammar::SearchBuilder::SearchBuilder.new
     @builder.configure_field 'name'
     @builder.configure_field 'level'
     @builder.configure_field 'class'
@@ -11,7 +11,7 @@ class ParserTest < ActiveSupport::TestCase
     @builder.configure_field 'ritual'
     @builder.configure_field 'type'
     @builder.configure_tag 'tags', Card
-    @parser = Parser.new
+    @parser = Grammar::Parser::Parser.new
   end
   
   test 'should work with empty input' do
@@ -104,7 +104,7 @@ class ParserTest < ActiveSupport::TestCase
   end
 
   test 'should work with relations' do
-    builder = SearchBuilder.new
+    builder = Grammar::SearchBuilder::SearchBuilder.new
     builder.configure_relation "classes", "hero_classes.name", "hero_classes"
     
     assert_equal "LOWER(hero_classes.name) IN ('bard')",
