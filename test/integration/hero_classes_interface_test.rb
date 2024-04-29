@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class HeroClassesInterfaceTest < ActionDispatch::IntegrationTest
+  include Pagy::Backend
 
   setup do
     @user = users(:michael)
@@ -26,7 +27,8 @@ class HeroClassesInterfaceTest < ActionDispatch::IntegrationTest
     assert_match name, response.body
     # Delete a post.
     assert_select 'a', text: 'delete'
-    first_hero_class = HeroClass.paginate(page: 1).first
+    _, hero_classes = pagy(HeroClass.all, page: 1)
+    first_hero_class = hero_classes.first
     assert_difference 'HeroClass.count', -1 do
       delete hero_class_path(first_hero_class)
     end
