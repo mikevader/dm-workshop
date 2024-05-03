@@ -13,7 +13,7 @@ module Grammar
           end
         end
 
-        sorting.orderBy.query_string(builder) if defined? sorting && defined? sorting.orderBy
+        sorting.orderBy.query_string(builder) if sorting.respond_to?(:orderBy) && sorting.orderBy.respond_to?(:query_string)
 
         first_operand
       end
