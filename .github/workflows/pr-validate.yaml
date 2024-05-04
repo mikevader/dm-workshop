@@ -51,7 +51,7 @@ jobs:
           fetch-depth: 0
 
       - name: Install Kubernetes tools
-        uses: yokawasa/action-setup-kube-tools@v0.9.3
+        uses: yokawasa/action-setup-kube-tools@v0.11.1
         with:
           setup-tools: |
             yq
@@ -457,7 +457,7 @@ jobs:
           sed -i "s/^appVersion:.*$/appVersion: $VERSION/" charts/dmw/Chart.yaml
 
       - name: Install Kubernetes tools
-        uses: yokawasa/action-setup-kube-tools@v0.9.3
+        uses: yokawasa/action-setup-kube-tools@v0.11.1
         with:
           setup-tools: |
             helmv3
@@ -479,7 +479,7 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
       - name: Install Kubernetes tools
-        uses: yokawasa/action-setup-kube-tools@v0.9.3
+        uses: yokawasa/action-setup-kube-tools@v0.11.1
         with:
           setup-tools: |
             helmv3
