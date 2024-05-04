@@ -1,7 +1,7 @@
-
 module Grammar
   module SearchBuilder
     class SearchBuilder
+      attr_reader :joins
 
       def initialize(&block)
         @fields = {}
@@ -16,7 +16,7 @@ module Grammar
 
         @normalized_orders = []
 
-        self.instance_eval(&block) if block_given?
+        instance_eval(&block) if block_given?
       end
 
       def configure_field(field_name, substitution = field_name)
@@ -42,10 +42,6 @@ module Grammar
         end
       end
 
-      def joins
-        @joins
-      end
-
       def orders
         if @orders.empty?
           # @orders << {field: 'name', field: 'ASC'}
@@ -54,29 +50,29 @@ module Grammar
       end
 
       def add_str_comp_clause(field, operator, value)
-        value = value.downcase.gsub('\'', '').strip
+        value = value.downcase.delete('\'').strip
 
-        if operator == '~'
-          new_value = "%#{value}%"
-        else
-          new_value = "#{value.gsub(/\*/, '%')}"
-        end
+        new_value = if operator == '~'
+                      "%#{value}%"
+                    else
+                      value.tr('*', '%').to_s
+                    end
 
-        @tree_root = lambda { return "LOWER(#{query_id(field)}) LIKE '#{new_value}'" }
-        @normalized_search = lambda { return "#{field} #{operator} '#{value}'" }
+        @tree_root = -> { return "LOWER(#{query_id(field)}) LIKE '#{new_value}'" }
+        @normalized_search = -> { return "#{field} #{operator} '#{value}'" }
         self
       end
 
       def add_non_str_comp_clause(field, operator, value)
         value = value.sub('true', "'t'").sub('false', "'f'")
 
-        @tree_root = lambda { return "#{query_id(field)} #{operator} #{value}" }
-        @normalized_search = lambda { return "#{field} #{operator} #{value}" }
+        @tree_root = -> { return "#{query_id(field)} #{operator} #{value}" }
+        @normalized_search = -> { return "#{field} #{operator} #{value}" }
         self
       end
 
       def order_by(field, direction)
-        direction_sym = (direction.downcase == 'desc') ? 'desc' : 'asc'
+        direction_sym = direction.downcase == 'desc' ? 'desc' : 'asc'
         @orders << {field: query_id(field), direction: direction_sym}
         @normalized_orders << {field: field, direction: direction_sym}
         self
@@ -86,28 +82,26 @@ module Grammar
         values.tr!('()', '')
 
         query = values.split(',').map(&:strip).map { |x| surround_string_with_quotes_if_necessary(x) }.join(', ')
-        query = '(' + query + ')'
+        query = "(#{query})"
 
-        if is_tag? field.to_sym
+        if tag? field.to_sym
           tags = values.split(',').map(&:strip)
           clazz = @tags[field.to_sym]
           ids = clazz.tagged_with(tags, any: true).to_a.map(&:id)
 
-          if ids.empty?
-            ids << -1
-          end
+          ids << -1 if ids.empty?
 
 
-          @tree_root = lambda { return "id IN (#{ids.join(', ')})" }
+          @tree_root = -> { return "id IN (#{ids.join(', ')})" }
         else
-          if is_string_in_query? query
-            @tree_root = lambda { return "LOWER(#{query_id(field)}) IN #{query.downcase}" }
-          else
-            @tree_root = lambda { return "#{query_id(field)} IN #{query}" }
-          end
+          @tree_root = if string_in_query? query
+                         -> { return "LOWER(#{query_id(field)}) IN #{query.downcase}" }
+                       else
+                         -> { return "#{query_id(field)} IN #{query}" }
+                       end
         end
 
-        @normalized_search = lambda { return "#{field} IN #{query}" }
+        @normalized_search = -> { return "#{field} IN #{query}" }
 
         self
       end
@@ -115,47 +109,47 @@ module Grammar
       def and(second_builder)
         and_first = @tree_root
         and_second = second_builder.instance_variable_get(:@tree_root)
-        @tree_root = lambda { return "#{and_first.call} AND #{and_second.call}" }
+        @tree_root = -> { return "#{and_first.call} AND #{and_second.call}" }
 
         norm_or_first = @normalized_search
         norm_or_second = second_builder.instance_variable_get(:@normalized_search)
-        @normalized_search = lambda { return "#{norm_or_first.call} AND #{norm_or_second.call}" }
+        @normalized_search = -> { return "#{norm_or_first.call} AND #{norm_or_second.call}" }
         self
       end
 
       def or(second_builder)
         or_first = @tree_root
         or_second = second_builder.instance_variable_get(:@tree_root)
-        @tree_root = lambda { return "#{or_first.call} OR #{or_second.call}" }
+        @tree_root = -> { return "#{or_first.call} OR #{or_second.call}" }
 
         norm_or_first = @normalized_search
         norm_or_second = second_builder.instance_variable_get(:@normalized_search)
-        @normalized_search = lambda { return "#{norm_or_first.call} OR #{norm_or_second.call}" }
+        @normalized_search = -> { return "#{norm_or_first.call} OR #{norm_or_second.call}" }
         self
       end
 
       def parenthesis(search)
         search_root = search.instance_variable_get(:@tree_root)
-        @tree_root = lambda { return "( #{search_root.call} )" }
+        @tree_root = -> { return "( #{search_root.call} )" }
 
         normalize_root = search.instance_variable_get(:@normalized_search)
-        @normalized_search = lambda { return "(#{normalize_root.call})" }
+        @normalized_search = -> { return "(#{normalize_root.call})" }
         self
       end
 
       def query
-        unless @tree_root.nil?
-          @tree_root.call
-        else
+        if @tree_root.nil?
           ''
+        else
+          @tree_root.call
         end
       end
 
       def search
-        unless @normalized_search.nil?
-          @normalized_search.call + normalized_order
-        else
+        if @normalized_search.nil?
           ''
+        else
+          @normalized_search.call + normalized_order
         end
       end
 
@@ -164,19 +158,19 @@ module Grammar
       def normalized_order
         return '' if @normalized_orders.empty?
 
-        " ORDER BY #{ @normalized_orders.map { |order| "#{order[:field]} #{order[:direction]}" }.join(', ') }"
+        " ORDER BY #{@normalized_orders.map { |order| "#{order[:field]} #{order[:direction]}" }.join(', ')}"
       end
 
-      def is_tag?(id)
+      def tag?(id)
         @tags.include? id
       end
 
-      def is_string_in_query?(query_string)
+      def string_in_query?(query_string)
         query_string =~ /'/
       end
 
       def surround_string_with_quotes_if_necessary(string)
-        if string =~ /\d/ or string =~ /'.*'/
+        if string =~ /\d/ || string =~ /'.*'/
           string
         else
           "'#{string}'"

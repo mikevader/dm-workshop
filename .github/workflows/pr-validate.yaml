@@ -461,7 +461,7 @@ jobs:
         with:
           setup-tools: |
             helmv3
-          helm: "3.12.1"
+          helm: "3.14.4"
 
       - uses: actions/setup-python@v5
         with:
@@ -484,8 +484,8 @@ jobs:
           setup-tools: |
             helmv3
             yq
-          helm: "3.12.1"
-          yq: "4.16.2"
+          helm: "3.14.4"
+          yq: "4.43.1"
 
       - uses: actions/setup-python@v5
         if: needs.pr-metadata.outputs.isRenovatePR == 'false'
@@ -500,7 +500,8 @@ jobs:
         if: needs.pr-metadata.outputs.isRenovatePR == 'false'
         uses: nolar/setup-k3d-k3s@v1
         with:
-          version: v1.26
+          k3d-name: kube
+          k3d-args: "--no-lb --no-rollback --k3s-arg --disable=traefik,servicelb,metrics-server@server:*"
 
       - name: Remove node taints
         if: needs.pr-metadata.outputs.isRenovatePR == 'false'
