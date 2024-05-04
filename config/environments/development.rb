@@ -4,7 +4,7 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Whitelisted hosts, if empty non is blocked
-  #config.hosts.clear
+  config.hosts.clear
 
   # In the development environment your application's code is reloaded any time
   # it changes. This slows down response time but is perfect for development

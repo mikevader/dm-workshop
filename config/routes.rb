@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post 'login'                    => 'sessions#create'
   delete 'logout'                 => 'sessions#destroy'
 
+  get "up"                        => 'rails/health#show',       as: :rails_health_check
+
   post 'spellbooks/:id/select'    => 'spellbooks#select',       as: :select_spellbook
 
   get 'print/all'                 => 'output_pages#all',        as: :print
