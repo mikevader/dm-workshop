@@ -500,7 +500,6 @@ jobs:
         if: needs.pr-metadata.outputs.isRenovatePR == 'false'
         uses: nolar/setup-k3d-k3s@v1
         with:
-          version: v1.27
           k3d-name: kube
           k3d-args: "--no-lb --no-rollback --k3s-arg --disable=traefik,servicelb,metrics-server@server:*"
 
