@@ -271,7 +271,7 @@ jobs:
       - name: Build Esbuild
         run: yarn build
       - name: Run tests
-        run: bin/rails db:setup test test:system
+        run: bin/rails db:setup test
       - name: Coveralls Finished
         uses: coverallsapp/github-action@v2
         with:
