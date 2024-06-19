@@ -74,9 +74,9 @@ gem 'json', '~> 2.7.0'
 # Tagging library for used on any kind of object
 gem 'acts-as-taggable-on', '~> 10.0.0'
 # Ordering library to order traits, actions, etc on monster and other cards
-gem 'acts_as_list', '~> 1.2.0'
+gem 'acts_as_list', '~> 1.1.0'
 # Google re-captcha for sign-up process
-gem 'recaptcha', '~> 5.17.0', require: 'recaptcha/rails'
+gem 'recaptcha', '~> 5.16.0', require: 'recaptcha/rails'
 
 # Ruby web server built for concurrency and performance
 gem 'puma', '~> 6.4.0'
