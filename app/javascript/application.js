@@ -14,6 +14,6 @@ import "bootstrap"
 
 import "controllers"
 import "custom/menu"
-import "custom/item-properties"
+// import "custom/item-properties"
 
 console.log('hello2')
