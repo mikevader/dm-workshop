@@ -12,16 +12,16 @@
           <div class="input-group-btn">
             <button type="button" class="btn btn-default" data-toggle="popover" data-container="body" data-placement="bottom"
                     data-content="You can search here like this:<pre>(name ~ fire OR level > 5) AND classes in (Bard, Cleric)</pre> For more details look in the <a href='<%= help_path(anchor: 'search') %>'>help</a>">
-              <span class="glyphicon glyphicon-question-sign"></span>
+              <i class="bi bi-question"></i>
             </button>
           </div>
           <%= text_field_tag :search, params[:search], class: "form-control", autocomplete: 'off', placeholder: 'Search for...' %>
           <div class="input-group-btn">
             <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
-                <span class="glyphicon glyphicon-search"></span>
+                <i class="bi-search"></i>
             <% end %>
             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#printDialog">
-              <span class="glyphicon glyphicon-print"></span>
+              <i class="bi bi-printer"></i>
             </button>
           </div>
         </div>
@@ -52,7 +52,7 @@
           <tr>
             <td>
               <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal-<%= index %>" data-size="<%= modal_size %>" data-previd="#myModal-<%= prev_index %>" data-nextid="#myModal-<%= next_index %>" data-card="<%= "/#{card.class.name.underscore.pluralize}/#{card.id}/modal" %>">
-                <span class="glyphicon glyphicon-modal-window"></span>
+                <i class="bi bi-window"></i>
               </button>
             </td>
             <% columns_definition(controller_name, card).each do |column| %>
@@ -63,21 +63,21 @@
                 <% if policy(card).edit? -%>
                     <li>
                       <%= link_to edit_path(card), 'aria-label' => 'edit' do -%>
-                          <span class="glyphicon glyphicon-pencil"></span>
+                          <i class="bi bi-pencil"></i>
                       <% end -%>
                     </li>
                 <% end -%>
                 <% if policy(card).duplicate? -%>
                     <li>
                       <%= link_to duplicate_path(card), method: :post, 'aria-label' => 'duplicate' do -%>
-                          <span class="glyphicon glyphicon-duplicate"></span>
+                          <i class="bi bi-copy"></i>
                       <% end -%>
                     </li>
                 <% end -%>
                 <% if policy(card).destroy? -%>
                     <li>
                       <%= link_to card_path(card), controller: 'cards', action: :destroy, method: :delete, data: {confirm: "You sure?"}, 'aria-label' => 'delete' do -%>
-                          <span class="glyphicon glyphicon-remove"></span>
+                          <i class="bi bi-trash"></i>
                       <% end -%>
                     </li>
                 <% end -%>
@@ -116,7 +116,7 @@
          data-trigger="focus"
          title='<%= link_to 'Spellbooks', spellbooks_path %>'
          data-content='<%= render partial: 'shared/spellbook' %>'>
-        <span class="glyphicon glyphicon-book"></span>
+        <i class="bi bi-book"></i>
       </a>
     </div>
 <% end %>

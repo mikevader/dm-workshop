@@ -13,15 +13,15 @@
               <div class="input-group-btn">
                 <button type="button" class="btn btn-default" data-toggle="popover" data-container="body" data-placement="bottom"
                         data-content="You can search here like this:<pre>(name ~ fire OR level > 5) AND classes in (Bard, Cleric)</pre> For more details look in the <a href='<%= help_path(anchor: 'search') %>'>help</a>">
-                  <span class="glyphicon glyphicon-question-sign"></span></button>
+                  <span class="bi bi-question"></span></button>
               </div>
               <%= text_field_tag :search, params[:search], class: "form-control", autocomplete: 'off', placeholder: 'Search for...' %>
               <div class="input-group-btn">
                 <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
-                    <span class="glyphicon glyphicon-search"></span>
+                    <span class="bi bi-search"></span>
                 <% end %>
                 <%= link_to yield(:print_path), class: 'btn btn-default', target: '_blank' do %>
-                    <span class="glyphicon glyphicon-print"></span>
+                    <span class="bi bi-printer"></span>
                 <% end %>
               </div>
             </div>
@@ -62,19 +62,19 @@
                   <ul class="actions">
                     <% if policy(card).edit? -%>
                         <li><%= link_to edit_path(card), 'aria-label' => 'edit' do -%>
-                              <span class="glyphicon glyphicon-pencil"></span>
+                              <span class="bi bi-pencil"></span>
                           <% end -%>
                         </li>
                     <% end -%>
                     <% if policy(card).duplicate? -%>
                         <li><%= link_to duplicate_path(card), method: :post, 'aria-label' => 'duplicate' do -%>
-                              <span class="glyphicon glyphicon-duplicate"></span>
+                              <span class="bi bi-copy"></span>
                           <% end -%>
                         </li>
                     <% end -%>
                     <% if policy(card).destroy? -%>
                         <li><%= link_to card, method: :delete, data: {confirm: "You sure?"}, 'aria-label' => 'delete' do -%>
-                              <span class="glyphicon glyphicon-remove"></span>
+                              <span class="bi bi-trash"></span>
                           <% end -%>
                         </li>
                     <% end -%>
