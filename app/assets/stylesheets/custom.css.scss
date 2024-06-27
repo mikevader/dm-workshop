@@ -1,9 +1,13 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
+// @import "bootstrap";
 
 /* mixins, variables, etc. */
 
 $gray-medium-light: #eaeaea;
+$gray-lighter: #eaeaea;
+$gray: #838383;
+$gray-light: #d9d9d9;
+$gray-darker: #505050;
+$state-danger-text: red;
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -14,7 +18,7 @@ $gray-medium-light: #eaeaea;
 /* universal */
 
 body {
-  padding-top: 50px;
+  // padding-top: 50px;
 }
 
 section {
@@ -132,6 +136,10 @@ p {
   background-color: #fff;
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
   box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+
+.dropdown-menu.active {
+  display: block;
 }
 
 /* footer */
