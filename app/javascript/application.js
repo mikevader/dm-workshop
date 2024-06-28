@@ -1,6 +1,7 @@
 // Entry point for the build script in your package.json
 
 console.log('hello1')
+Turbo.setFormMode("off")
 
 import "@hotwired/turbo-rails"
 import "jquery"
