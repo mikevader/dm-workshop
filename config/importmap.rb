@@ -2,6 +2,7 @@
 
 # pin "jquery", to: "https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.js"
 pin "application", preload: true
+pin "print", preload: true
 
 pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
 pin "@hotwired/stimulus", to: "stimulus.min.js", preload: true
