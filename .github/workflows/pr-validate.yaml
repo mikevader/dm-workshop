@@ -159,14 +159,6 @@ jobs:
         with:
           ruby-version: 3.3.1
           bundler-cache: true
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: yarn
-      - name: Install packages
-        run: |
-          yarn install --pure-lockfile
 
       #      - name: Review JavaScript
       #        uses: reviewdog/action-eslint@v1
@@ -211,15 +203,6 @@ jobs:
         with:
           ruby-version: 3.3.1
           bundler-cache: true
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: yarn
-
-      - name: Install packages
-        run: |
-          yarn install --pure-lockfile
       # Add or replace any other lints here
       - name: Run linters
         run: |
@@ -259,17 +242,6 @@ jobs:
         with:
           ruby-version: 3.3.1
           bundler-cache: true
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: yarn
-
-      - name: Install packages
-        run: |
-          yarn install --pure-lockfile
-      - name: Build Esbuild
-        run: yarn build
       - name: Run tests
         run: bin/rails db:setup test:all
       - name: Coveralls Finished
