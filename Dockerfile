@@ -14,9 +14,9 @@ FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 WORKDIR /rails
 
 ## Install base packages
-#RUN apt-get update -qq && \
-#    apt-get install --no-install-recommends -y build-essential git libvips pkg-config && \
-#    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y build-essential git libvips pkg-config nodejs libpq-dev && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Set production environment
 ENV RAILS_ENV="production" \
@@ -47,6 +47,7 @@ RUN bundle exec bootsnap precompile app/ lib/
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
+RUN rm -rf node_modules
 
 # Final stage for app image
 FROM base
