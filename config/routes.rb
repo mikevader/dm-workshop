@@ -63,7 +63,9 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
 
-  mount RailsAdmin::Engine => '/super_admin', as: 'rails_admin'
+  # mount RailsAdmin::Engine => '/super_admin', as: 'rails_admin'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

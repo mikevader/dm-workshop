@@ -8,7 +8,7 @@
               <li><span><a href="<%= filter_path(filter) %>"><%= filter.name %></a>
                 <% if policy(filter).destroy? -%>
                     <%= link_to filter, method: :delete, data: {confirm: 'You sure?'}, 'aria-label' => 'delete' do -%>
-                        <span class="glyphicon glyphicon-remove"></span>
+                        <span class="bi bi-trash"></span>
                     <% end -%>
                 <% end -%>
               </span></li>
@@ -74,16 +74,16 @@
               <div class="input-group-btn">
                 <button type="button" class="btn btn-default" data-toggle="popover" data-container="body" data-placement="bottom"
                         data-content="The search works on all card types but might return errors for those types the query is not applicable. For more details look in the <a href='<%= help_path(anchor: 'search') %>'>help</a>">
-                  <span class="glyphicon glyphicon-question-sign"></span></button>
+                  <span class="bi bi-question"></span></button>
               </div>
               <% search = (@filter.nil?) ? params[:search] : @filter.query %>
               <%= text_field_tag :search, search, class: 'form-control', autocomplete: 'off', placeholder: 'Search for...' %>
               <div class="input-group-btn">
                 <%= button_tag(type: 'submit', class: 'btn btn-primary') do %>
-                    <span class="glyphicon glyphicon-search"></span>
+                    <span class="bi bi-search"></span>
                 <% end %>
                 <%= link_to print_path(search: search), class: 'btn btn-default', target: '_blank' do %>
-                    <span class="glyphicon glyphicon-print"></span>
+                    <span class="bi bi-printer"></span>
                 <% end %>
               </div>
             </div>

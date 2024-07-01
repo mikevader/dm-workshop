@@ -99,7 +99,7 @@
     <%= content_tag(:div, f.collection_select(:saving_throws, Monster::ABILITIES, :to_s, :titleize, {}, {class: 'form-control', size: 6, multiple: true}), class: 'col-sm-9') %>
 <% end %>
 
-<%= content_tag :div, class: 'form-group' do -%>
+<%= content_tag :div, class: 'form-group', "data-controller": "attribute" do -%>
     <%= f.label :cards_skills, 'Skills', class: 'control-label col-sm-3' %>
     <%= content_tag(:div, class: 'col-sm-9') do %>
         <%= f.fields_for :cards_skills do |monsters_skill| %>
@@ -156,7 +156,7 @@
     <%= content_tag(:div, f.text_field(:languages, class: 'form-control'), class: 'col-sm-9') %>
 <% end %>
 
-<%= content_tag :div, class: 'form-group' do -%>
+<%= content_tag :div, class: 'form-group', "data-controller": "attribute" do -%>
     <%= f.label :traits, class: 'control-label col-sm-3' %>
     <%= content_tag(:div, class: 'col-sm-9 sortable') do %>
         <%= f.fields_for :traits do |trait| %>
@@ -166,7 +166,7 @@
     <% end %>
 <% end %>
 
-<%= content_tag :div, class: 'form-group' do -%>
+<%= content_tag :div, class: 'form-group', "data-controller": "attribute" do -%>
     <%= f.label :actions, class: 'control-label col-sm-3' %>
     <%= content_tag(:div, class: 'col-sm-9 sortable') do %>
         <%= f.fields_for :actions do |action| %>

@@ -5,7 +5,7 @@
   <%= content_tag(:div, f.text_field(:name, class: 'form-control'), class: 'col-sm-9') %>
 </div>
 
-<div class="form-group">
+<div class="form-group" data-controller="attribute">
   <%= label_tag 'Spells', nil, class: 'control-label col-sm-3' %>
   <div class="col-sm-9">
     <%= f.fields_for :spells do |spell| %>

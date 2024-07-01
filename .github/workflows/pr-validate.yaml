@@ -159,14 +159,6 @@ jobs:
         with:
           ruby-version: 3.3.1
           bundler-cache: true
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: yarn
-      - name: Install packages
-        run: |
-          yarn install --pure-lockfile
 
       #      - name: Review JavaScript
       #        uses: reviewdog/action-eslint@v1
@@ -211,15 +203,6 @@ jobs:
         with:
           ruby-version: 3.3.1
           bundler-cache: true
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: yarn
-
-      - name: Install packages
-        run: |
-          yarn install --pure-lockfile
       # Add or replace any other lints here
       - name: Run linters
         run: |
@@ -259,23 +242,8 @@ jobs:
         with:
           ruby-version: 3.3.1
           bundler-cache: true
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: yarn
-
-      - name: Install packages
-        run: |
-          yarn install --pure-lockfile
-      - name: Build Esbuild
-        run: yarn build
-      # Add or replace database setup steps here
-      - name: Set up database schema
-        run: bin/rails db:schema:load
-      # Add or replace test runners here
       - name: Run tests
-        run: bin/rake
+        run: bin/rails db:setup test:all
       - name: Coveralls Finished
         uses: coverallsapp/github-action@v2
         with:
@@ -488,28 +456,28 @@ jobs:
           yq: "4.43.1"
 
       - uses: actions/setup-python@v5
-        if: needs.pr-metadata.outputs.isRenovatePR == 'false'
+        # if: needs.pr-metadata.outputs.isRenovatePR == 'false'
         with:
           python-version: "3.10"
 
       - name: Set up chart-testing
-        if: needs.pr-metadata.outputs.isRenovatePR == 'false'
+        # if: needs.pr-metadata.outputs.isRenovatePR == 'false'
         uses: helm/chart-testing-action@v2.6.1
 
       - name: Create k3d cluster
-        if: needs.pr-metadata.outputs.isRenovatePR == 'false'
+        # if: needs.pr-metadata.outputs.isRenovatePR == 'false'
         uses: nolar/setup-k3d-k3s@v1
         with:
           k3d-name: kube
           k3d-args: "--no-lb --no-rollback --k3s-arg --disable=traefik,servicelb,metrics-server@server:*"
 
       - name: Remove node taints
-        if: needs.pr-metadata.outputs.isRenovatePR == 'false'
+        # if: needs.pr-metadata.outputs.isRenovatePR == 'false'
         run: |
           kubectl taint --all=true nodes node.cloudprovider.kubernetes.io/uninitialized- || true
 
       - name: Run chart-testing (install)
-        if: needs.pr-metadata.outputs.isRenovatePR == 'false'
+        # if: needs.pr-metadata.outputs.isRenovatePR == 'false'
         run: ct install --config .github/ct-install.yaml --charts charts/dmw
 
       - name: Run chart-releaser

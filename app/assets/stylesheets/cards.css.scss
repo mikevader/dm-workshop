@@ -2,7 +2,7 @@
 
 @import "mixins/flex";
 
-div.cards {
+div.rpg-cards {
   @include flexbox();
   @include align-content(center);
   @include justify-content(center);
@@ -11,7 +11,7 @@ div.cards {
   padding: 0;
 }
 
-.card {
+.rpg-card {
   border: 2mm solid;
   border-radius: 4px;
   box-sizing: border-box;
@@ -20,11 +20,12 @@ div.cards {
   @include flex-direction(column);
   font-family: 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
   font-size: 8pt;
-}
+  text-align: left;
 
-.card p {
-  font-family: 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
-  font-size: 8pt;
+  p {
+    font-family: 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+    font-size: 8pt;
+  }
 }
 
 
@@ -75,7 +76,7 @@ div.cards {
 }
 
 
-.card {
+.rpg-card {
   .card-title-icon {
     width: 12mm;
     height: 12mm;

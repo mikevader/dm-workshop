@@ -11,7 +11,7 @@
           <%= content_tag :div, class: 'col-sm-2' do %>
               <%= content_tag :div, class: 'checkbox' do %>
                   <%= f.label :_destroy do %>
-                      <%= f.check_box(:_destroy) %><span class="glyphicon glyphicon-trash" aria-label="Remove"></span>
+                      <%= f.check_box(:_destroy, "data-action": "attribute#remove") %><i class="bi-trash" aria-label="Remove"></i>
                   <% end -%>
               <% end -%>
           <% end -%>

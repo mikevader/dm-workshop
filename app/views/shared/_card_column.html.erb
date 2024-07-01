@@ -10,7 +10,7 @@
 <tr>
   <td>
     <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal-<%= index %>" data-size="<%= modal_size %>" data-previd="#myModal-<%= prev_index %>" data-nextid="#myModal-<%= next_index %>" data-card="<%= "/#{card.class.name.underscore.pluralize}/#{card.id}/modal" %>">
-      <span class="glyphicon glyphicon-modal-window"></span>
+      <span class="bi bi-window"></span>
     </button>
   </td>
   <% columns_definition(controller_name, card).each do |column| %>
@@ -20,19 +20,19 @@
     <ul class="actions">
       <% if policy(card).edit? -%>
           <li><%= link_to edit_path(card), 'aria-label' => 'edit' do -%>
-                <span class="glyphicon glyphicon-pencil"></span>
+                <span class="bi bi-pencil"></span>
             <% end -%>
           </li>
       <% end -%>
       <% if policy(card).duplicate? -%>
           <li><%= link_to duplicate_path(card), method: :post, 'aria-label' => 'duplicate' do -%>
-                <span class="glyphicon glyphicon-duplicate"></span>
+                <span class="bi bi-copy"></span>
             <% end -%>
           </li>
       <% end -%>
       <% if policy(card).destroy? -%>
           <li><%= link_to card, method: :delete, data: {confirm: "You sure?"}, 'aria-label' => 'delete' do -%>
-                <span class="glyphicon glyphicon-remove"></span>
+                <span class="bi bi-trash"></span>
             <% end -%>
           </li>
       <% end -%>

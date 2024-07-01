@@ -1,6 +1,6 @@
 class SpellbooksController < ApplicationController
   before_action :logged_in_user, only: [:show, :new, :edit, :update, :create, :destroy, :spells, :inscribe, :erase, :select]
-  autocomplete :spell, :name, full: true
+  # autocomplete :spell, :name, full: true
 
   def index
     @spellbooks = policy_scope(Spellbook).all

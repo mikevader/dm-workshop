@@ -2,11 +2,16 @@
 <html>
 <head>
   <title><%= full_title(yield(:title)) %></title>
-  <%= stylesheet_link_tag    'application', params[:controller], media: 'all', "data-turbo-track": "reload", defer: true %>
-  <%= javascript_include_tag 'application', params[:controller], "data-turbo-track": "reload", defer: true %>
-  <%= csrf_meta_tags %>
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'admin', "data-turbo-track": "reload"%>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <%= javascript_importmap_tags 'admin' %>
   <%= render 'layouts/shim' %>
+
   <%#= render 'layouts/livereload' if Rails.env.development?%>
 </head>
 <body>
