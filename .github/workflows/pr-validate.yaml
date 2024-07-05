@@ -378,7 +378,7 @@ jobs:
       # Push if not a PR, otherwise just test the build process for all requested platforms
       - name: Build and Push
         uses: docker/build-push-action@v5
-        if: needs.pr-metadata.outputs.isRenovatePR == 'false'
+#        if: needs.pr-metadata.outputs.isRenovatePR == 'false'
         with:
           build-args: |
             VERSION=${{ needs.metadata.outputs.version }}
