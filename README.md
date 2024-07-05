@@ -234,3 +234,14 @@ We had the following releases:
 ### Dungeon Master Workshop 0.1 ###
 
 * Create Spells
+
+
+## Resources
+
+* https://github.com/learnenough/rails_tutorial_sample_app_7th_ed/blob/main/Gemfile
+* https://www.learnenough.com/blog/migrating-away-from-rails-webpacker#Step%203:%20Migrating%20from%20turbolinks%20to%20Turbo
+* https://www.shakacode.com/blog/upgrade-rails-6-1-to-7/
+* https://medium.com/simform-engineering/a-step-by-step-guide-to-upgrading-a-rails-6-project-to-rails-7-27ae225fdfe9
+* https://www.fastruby.io/blog/rails/upgrades/upgrade-rails-7-0-to-7-1.html
+* https://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#autoloaded-paths-are-no-longer-in-$load-path
+* 
