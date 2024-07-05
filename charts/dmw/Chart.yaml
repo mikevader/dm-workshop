@@ -21,10 +21,6 @@ type: application
 keywords:
   - dnd
 
-dependencies:
-  - name: common
-    repository: https://mikevader.github.io/charts
-    version: 4.5.35
 maintainers:
   - name: mikevader
     email: mikevader@users.noreply.github.com
