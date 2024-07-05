@@ -96,8 +96,6 @@ GEM
     bcrypt (3.1.20)
     bigdecimal (3.1.8)
     bindex (0.8.1)
-    bootsnap (1.18.3)
-      msgpack (~> 1.2)
     bootstrap (5.3.3)
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 2.11.8, < 3)
@@ -246,7 +244,6 @@ GEM
       builder
       minitest (>= 5.0)
       ruby-progressbar
-    msgpack (1.7.2)
     multi_json (1.15.0)
     mutex_m (0.2.0)
     nenv (0.3.0)
@@ -452,7 +449,6 @@ DEPENDENCIES
   acts-as-taggable-on (~> 10.0.0)
   acts_as_list (~> 1.1.0)
   bcrypt (~> 3.1.11)
-  bootsnap (~> 1.16)
   bootstrap (~> 5.3.3)
   bootstrap-colorselector-rails (~> 0.1.0)
   brakeman (>= 6.0.1)
