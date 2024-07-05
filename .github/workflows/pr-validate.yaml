@@ -318,7 +318,7 @@ jobs:
           platforms: amd64,arm64
 
       - name: Login to GHCR
-        if: needs.pr-metadata.outputs.isRenovatePR == 'false'
+#        if: needs.pr-metadata.outputs.isRenovatePR == 'false'
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
