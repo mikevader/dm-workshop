@@ -29,7 +29,7 @@ gem 'bootstrap-colorselector-rails', '~> 0.1.0'
 
 gem 'redcarpet', '~> 3.3'
 
-# gem 'bootsnap', '~> 1.16', require: false
+gem 'bootsnap', '~> 1.16', require: false
 
 gem 'stimulus-rails', '~> 1.2'
 gem 'sprockets-rails', '~> 3.4'
