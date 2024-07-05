@@ -9,7 +9,7 @@
   <%= content_tag :div, class: 'col-xs-3' do %>
       <%= content_tag :div, class: 'checkbox' do %>
           <%= f.label :_destroy do %>
-              <%= f.check_box(:_destroy) %>remove
+              <%= f.check_box(:_destroy, "data-action": "attribute#remove") %>remove
           <% end %>
       <% end %>
   <% end %>

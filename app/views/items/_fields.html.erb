@@ -59,7 +59,7 @@
     <% end %>
 <% end %>
 
-<%= content_tag :div, class: 'form-group' do -%>
+<%= content_tag :div, class: 'form-group', "data-controller": "attribute" do -%>
     <%= f.label :properties, class: 'control-label col-sm-3' %>
     <%= content_tag(:div, class: 'col-sm-9 sortable') do %>
         <%= f.fields_for :properties do |property| %>
