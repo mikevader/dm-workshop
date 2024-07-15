@@ -16,10 +16,6 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 # gem 'coffee-rails', '~> 5.0.0'
 
-# Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 4.6.0'
-# gem 'jquery-ui-rails', '~> 7.0.0'
-
 # Simple API to perform paginated queries
 gem 'pagy', '~> 8.3'
 # Provides bootstrap-colorselector library

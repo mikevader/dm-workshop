@@ -4,10 +4,6 @@ console.log('hello1')
 Turbo.setFormMode("off")
 
 import "@hotwired/turbo-rails"
-import "jquery"
-import "jquery_ujs"
-// import "./jquery_ui"
-// import "jquery-ui"
 
 import "popper"
 import "bootstrap"
