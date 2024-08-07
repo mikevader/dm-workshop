@@ -49,7 +49,7 @@ gem 'faker', '~> 3.0'
 # Upload files to Rails and map them to ORM frameworks
 gem 'carrierwave', '~> 3.0.3'
 # Manipulate images via ImageMagick or GraphicsMagick
-gem 'mini_magick', '~> 4.12'
+gem 'mini_magick', '~> 5.0'
 # Cloud service library which supports most of cloud providers
 gem 'fog-aws', '~> 3.24.0'
 
