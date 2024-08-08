@@ -17,7 +17,7 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'coffee-rails', '~> 5.0.0'
 
 # Simple API to perform paginated queries
-gem 'pagy', '~> 8.3'
+gem 'pagy', '~> 9.0'
 # Provides bootstrap-colorselector library
 gem 'bootstrap-colorselector-rails', '~> 0.1.0'
 # Autocomplete field
