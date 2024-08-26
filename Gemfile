@@ -41,7 +41,7 @@ gem 'sdoc', '~> 2.6.1', group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.11'
 # For the authorization
-gem 'pundit', '~> 2.3.1'
+gem 'pundit', '~> 2.4.0'
 
 # Use Data::Faker from perl to easily generate fake test data
 gem 'faker', '~> 3.0'
