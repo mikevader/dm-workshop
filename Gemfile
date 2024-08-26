@@ -68,7 +68,7 @@ gem 'remotipart', '~> 1.3'
 gem 'json', '~> 2.7.0'
 
 # Tagging library for used on any kind of object
-gem 'acts-as-taggable-on', '~> 10.0.0'
+gem 'acts-as-taggable-on', '~> 11.0.0'
 # Ordering library to order traits, actions, etc on monster and other cards
 gem 'acts_as_list', '~> 1.2.0'
 # Google re-captcha for sign-up process
