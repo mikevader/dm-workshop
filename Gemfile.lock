@@ -418,7 +418,7 @@ GEM
     timeout (0.4.1)
     treetop (1.6.12)
       polyglot (~> 0.3)
-    turbo-rails (2.0.8)
+    turbo-rails (2.0.9)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
     tzinfo (2.0.6)
