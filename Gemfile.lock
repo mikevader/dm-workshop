@@ -278,7 +278,7 @@ GEM
     parser (3.3.5.0)
       ast (~> 2.4.1)
       racc
-    pg (1.5.7)
+    pg (1.5.8)
     polyglot (0.3.5)
     popper_js (2.11.8)
     pry (0.14.2)
@@ -471,7 +471,7 @@ DEPENDENCIES
   nokogiri (~> 1.15)
   nokogiri-diff (~> 0.2)
   pagy (~> 9.0)
-  pg (= 1.5.7)
+  pg (= 1.5.8)
   puma (~> 6.4.0)
   pundit (~> 2.4.0)
   rails (~> 7.1.3)
