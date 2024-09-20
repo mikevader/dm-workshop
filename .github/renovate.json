@@ -9,5 +9,12 @@
   "dependencyDashboardTitle": "Renovate Dashboard",
   "assigneesFromCodeOwners": true,
   "reviewersFromCodeOwners": true,
-  "suppressNotifications": ["prIgnoreNotification"]
+  "suppressNotifications": ["prIgnoreNotification"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["patch"],
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true
+    }
+  ]
 }
