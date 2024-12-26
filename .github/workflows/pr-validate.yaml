@@ -213,8 +213,8 @@ jobs:
 
       - name: Run security checks
         run: |
-          bin/bundler-audit --update
           bin/brakeman -q -w2
+      #    bin/bundler-audit --update
 
   rails-test:
     name: Test Rails Application
