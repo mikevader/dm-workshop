@@ -47,7 +47,7 @@ gem 'pundit', '~> 2.4.0'
 gem 'faker', '~> 3.0'
 
 # Upload files to Rails and map them to ORM frameworks
-gem 'carrierwave', '~> 3.0.3'
+gem 'carrierwave', '~> 3.1.0'
 # Manipulate images via ImageMagick or GraphicsMagick
 gem 'mini_magick', '~> 4.12'
 # Cloud service library which supports most of cloud providers
