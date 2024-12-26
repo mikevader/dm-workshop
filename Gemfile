@@ -60,7 +60,7 @@ gem 'activerecord-session_store', '~> 2.1.0'
 
 # Use for easy parsing the search expression
 gem 'treetop', '~> 1.6.12'
-gem 'net-ssh', '~> 7.2.0'
+gem 'net-ssh', '~> 7.3.0'
 
 # Create general purpose data admin interface
 gem 'remotipart', '~> 1.3'
