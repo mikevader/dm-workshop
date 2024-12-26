@@ -157,7 +157,7 @@ jobs:
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.3.1
+          ruby-version: 3.4.1
           bundler-cache: true
 
       #      - name: Review JavaScript
@@ -201,7 +201,7 @@ jobs:
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.3.1
+          ruby-version: 3.4.1
           bundler-cache: true
       # Add or replace any other lints here
       - name: Run linters
@@ -240,7 +240,7 @@ jobs:
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.3.1
+          ruby-version: 3.4.1
           bundler-cache: true
       - name: Run tests
         run: bin/rails db:setup test:all
