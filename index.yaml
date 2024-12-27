@@ -2,6 +2,22 @@ apiVersion: v1
 entries:
   dmw:
   - apiVersion: v2
+    appVersion: 1.7.18
+    created: "2024-12-27T00:11:54.347129598Z"
+    description: 'DMW: Dungeon Master Workshop. A personal manager for monsters, items
+      and spells with adjacent tools.'
+    digest: 205e9e42f4cffae3528849a473ddaa622178fdbcc70225ba061930f9e1f4144c
+    keywords:
+    - dnd
+    maintainers:
+    - email: mikevader@users.noreply.github.com
+      name: mikevader
+    name: dmw
+    type: application
+    urls:
+    - https://github.com/mikevader/dm-workshop/releases/download/dmw-1.7.18/dmw-1.7.18.tgz
+    version: 1.7.18
+  - apiVersion: v2
     appVersion: 1.7.17
     created: "2024-12-26T22:49:27.378174991Z"
     description: 'DMW: Dungeon Master Workshop. A personal manager for monsters, items
@@ -1337,4 +1353,4 @@ entries:
     urls:
     - https://github.com/mikevader/dm-workshop/releases/download/dmw-1.0.0-dev.138316c/dmw-1.0.0-dev.138316c.tgz
     version: 1.0.0-dev.138316c
-generated: "2024-12-26T22:49:27.378552075Z"
+generated: "2024-12-27T00:11:54.347431724Z"
