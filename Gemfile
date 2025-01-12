@@ -68,11 +68,11 @@ gem 'remotipart', '~> 1.3'
 gem 'json', '~> 2.9.0'
 
 # Tagging library for used on any kind of object
-gem 'acts-as-taggable-on', '~> 12.0.0'
+gem 'acts-as-taggable-on', '~> 11.0.0'
 # Ordering library to order traits, actions, etc on monster and other cards
 gem 'acts_as_list', '~> 1.2.0'
 # Google re-captcha for sign-up process
-gem 'recaptcha', '~> 5.18.0', require: 'recaptcha/rails'
+gem 'recaptcha', '~> 5.17.0', require: 'recaptcha/rails'
 
 # Ruby web server built for concurrency and performance
 gem 'puma', '~> 6.5.0'
@@ -103,7 +103,7 @@ end
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
-  gem 'sqlite3', '~> 2.0'
+  gem 'sqlite3', '~> 1.4'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'debug', '~> 1.9', platforms: %i[mri mingw x64_mingw]
