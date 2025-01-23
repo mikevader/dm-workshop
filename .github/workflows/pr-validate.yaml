@@ -482,7 +482,7 @@ jobs:
 
       - name: Run chart-releaser
         if: needs.pr-metadata.outputs.isRenovatePR == 'false'
-        uses: helm/chart-releaser-action@v1.6.0
+        uses: helm/chart-releaser-action@v1.7.0
         with:
           charts_dir: charts
         env:
