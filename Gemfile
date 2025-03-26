@@ -56,7 +56,7 @@ gem 'fog-aws', '~> 3.30.0'
 # Producing and parsing XML used for import/export of cards
 gem 'nokogiri', '~> 1.15'
 # Store session data in active records aka database
-gem 'activerecord-session_store', '~> 2.1.0'
+gem 'activerecord-session_store', '~> 2.2.0'
 
 # Use for easy parsing the search expression
 gem 'treetop', '~> 1.6.12'
