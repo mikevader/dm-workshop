@@ -51,7 +51,7 @@ gem 'carrierwave', '~> 3.1.0'
 # Manipulate images via ImageMagick or GraphicsMagick
 gem 'mini_magick', '~> 5.0'
 # Cloud service library which supports most of cloud providers
-gem 'fog-aws', '~> 3.30.0'
+gem 'fog-aws', '~> 3.31.0'
 
 # Producing and parsing XML used for import/export of cards
 gem 'nokogiri', '~> 1.15'
