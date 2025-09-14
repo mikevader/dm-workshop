@@ -431,7 +431,7 @@ jobs:
             helmv3
           helm: "3.14.4"
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.13"
 
@@ -455,7 +455,7 @@ jobs:
           helm: "3.14.4"
           yq: "4.43.1"
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         # if: needs.pr-metadata.outputs.isRenovatePR == 'false'
         with:
           python-version: "3.13"
