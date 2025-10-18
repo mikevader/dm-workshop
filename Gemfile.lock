@@ -126,7 +126,7 @@ GEM
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0)
-    erb (5.0.1)
+    erb (5.0.3)
     erubi (1.13.1)
     eventmachine (1.2.7)
     excon (1.2.6)
@@ -349,7 +349,7 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.11.1)
       ffi (~> 1.0)
-    rdoc (6.14.0)
+    rdoc (6.14.2)
       erb
       psych (>= 4.0.0)
     recaptcha (5.19.0)
@@ -395,7 +395,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    sdoc (2.6.1)
+    sdoc (2.6.5)
       rdoc (>= 5.0)
     securerandom (0.4.1)
     shellany (0.0.1)
@@ -514,4 +514,4 @@ RUBY VERSION
    ruby 3.3.1p55
 
 BUNDLED WITH
-   2.6.8
+   2.7.1
